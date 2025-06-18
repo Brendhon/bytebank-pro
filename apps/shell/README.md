@@ -12,9 +12,9 @@ Este projeto é o **Shell (container principal)** do Bytebank Pro. Desenvolvido 
 
 ## 🚀 Stack Tecnológica
 
-* **Angular 17+**
+* **Angular 20**
 * **@angular-architects/module-federation**
-* **Tailwind CSS** (via PostCSS)
+* **Tailwind CSS**
 * **Angular Signals** + Services (para estado global)
 * **CustomEvent** e URL Params para comunicação entre apps
 * **JWT** para autenticação (armazenado em localStorage)

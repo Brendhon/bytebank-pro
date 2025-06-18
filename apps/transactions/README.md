@@ -12,7 +12,7 @@ Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido e
 
 ## 🚀 Stack Tecnológica
 
-* **React 18 + Next.js 15 (App Router)**
+* **React 19 + Next.js 15 (App Router)**
 * **Tailwind CSS** (com design tokens compartilhados)
 * **GraphQL (Apollo Client)** para comunicação com a API
 * **react-hook-form** + **zod** para validação de formulários

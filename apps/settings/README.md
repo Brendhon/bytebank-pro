@@ -13,7 +13,7 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) via **Webpack
 ## 🚀 Stack Tecnológica
 
 * **Next.js 15 (App Router)**
-* **React 18+**
+* **React 19**
 * **Tailwind CSS**
 * **GraphQL (Apollo Client)** – integração com a API
 * **Zod + React Hook Form** – para validação de formulários
