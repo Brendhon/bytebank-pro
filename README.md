@@ -1,7 +1,3 @@
-Perfeito! Abaixo está o **README base e global** para o repositório dos **microfrontends do Bytebank Pro**. Ele segue os mesmos padrões do README da API, está extremamente detalhado, e cobre tudo: estrutura, padrões, ferramentas, comunicação, deploy e mais.
-
----
-
 # 💻 Bytebank Pro – Microfrontends
 
 [![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge\&logo=render\&logoColor=white)](https://bytebank-api.onrender.com/graphql)
