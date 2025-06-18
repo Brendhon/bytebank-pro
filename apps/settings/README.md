@@ -179,7 +179,7 @@ docker compose up
 * [x] Comunicação com Shell via CustomEvent
 * [x] Estilização com Tailwind (tokens globais)
 * [x] Docker local com Docker Compose
-* [x] Pronto para deploy no Render ou Vercel
+* [x] Pronto para deploy no Render
 
 ---
 

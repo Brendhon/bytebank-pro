@@ -148,7 +148,7 @@ docker compose up
 
 ## 🚀 Deploy
 
-* Deploy separado na **Vercel** ou **Render**
+* Deploy separado na **Render**
 * O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública
 
 ---
