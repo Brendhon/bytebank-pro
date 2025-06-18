@@ -1,36 +1,239 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 Transações MFE – Bytebank Pro
 
-## Getting Started
+Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido em **React com Next.js 15 (App Router)**. Ele é responsável por:
 
-First, run the development server:
+* Listar o histórico de transações do usuário
+* Criar, editar e excluir transações
+* Aplicar filtros por tipo, data e categoria
+* Enviar e consumir dados via **GraphQL**
+* Emitir eventos via **CustomEvent** para o Shell
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Stack Tecnológica
+
+* **React 18 + Next.js 15 (App Router)**
+* **Tailwind CSS** (com design tokens compartilhados)
+* **GraphQL (Apollo Client)** para comunicação com a API
+* **react-hook-form** + **zod** para validação de formulários
+* **CustomEvent** + URL Params para comunicação com o Shell
+* **Zustand** para estado global (opcional)
+* **TypeScript**, ESLint, Prettier
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+transactions/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx                      # Listagem de transações
+│   ├── new/page.tsx                  # Criação
+│   └── edit/[id]/page.tsx            # Edição
+│
+├── components/
+│   ├── TransactionForm.tsx
+│   ├── TransactionList.tsx
+│   └── Filters.tsx
+│
+├── lib/
+│   ├── apolloClient.ts               # Apollo Client instância
+│   ├── graphql/                      # Queries e mutations
+│   └── types.ts                      # Tipagens globais
+│
+├── styles/
+│   └── globals.css
+│
+├── tailwind.config.js
+├── module-federation.config.js
+├── webpack.config.js
+├── tsconfig.json
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔌 Comunicação com a API (GraphQL)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Todas as operações são feitas via GraphQL com **Apollo Client**.
 
-## Learn More
+### Queries
 
-To learn more about Next.js, take a look at the following resources:
+* `getTransactions(limit, page)`
+  ```graphql
+  query Query($limit: Int!, $page: Int!) {
+    transactions(limit: $limit, page: $page) {
+      items {,
+        _id
+        date
+        alias
+        type
+        desc
+        value
+      }
+      total
+      page
+      totalPages
+      hasMore
+      totalInPage
+    }
+  }
+  ``` 
+  
+* `getTransactionById(id)`
+  ```graphql
+  query Transaction($transactionId: ID!) {
+    transaction(id: $transactionId) {
+      date
+      alias
+      type
+      desc
+      value
+    }
+  }
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Mutations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* `createTransaction(input)`
+  ```graphql
+    mutation CreateTransaction($input: TransactionInput!) {
+      createTransaction(input: $input) {
+        _id
+      }
+    }
+  ```
+* `updateTransaction(input, id)`
+  ```graphql
+  mutation UpdateTransaction($input: TransactionUpdateInput!, $updateTransactionId: ID!) {
+    updateTransaction(input: $input, id: $updateTransactionId) {
+      alias,
+      date,
+      desc,
+      type,
+      user,
+      value
+    }
+  }
+  ```
 
-## Deploy on Vercel
+* `deleteTransaction(id)`
+  ```graphql
+  mutation DeleteTransaction($deleteTransactionId: ID!) {
+    deleteTransaction(id: $deleteTransactionId)
+  }
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧩 Integração com o Shell
+
+### Via Module Federation
+
+Este microfrontend é exposto como `remote` via `ModuleFederationPlugin`. O Shell Angular carrega a rota `/transactions`.
+
+```js
+// webpack.config.js
+new ModuleFederationPlugin({
+  name: 'transactions',
+  filename: 'remoteEntry.js',
+  exposes: {
+    './App': './app/page.tsx',
+  },
+  shared: ['react', 'react-dom'],
+});
+```
+
+---
+
+## 🔁 Comunicação com o Shell
+
+* Via **CustomEvent**, emitindo eventos como:
+
+  ```ts
+  window.dispatchEvent(new CustomEvent('transactionCreated', { detail: {...} }));
+  ```
+* Rotas e URLs seguem o padrão:
+
+  * `/transactions`
+  * `/transactions/new`
+  * `/transactions/edit/:id`
+
+---
+
+## 🎨 Estilo
+
+* Estilizado com **Tailwind CSS**
+* Usa **tokens de design compartilhados** de `packages/shared-design-tokens`
+* Ícones via [Lucide](https://lucide.dev/)
+
+---
+
+## 📑 Validação de Formulários
+
+* **react-hook-form** para controle de formulário
+* **zod** + `@hookform/resolvers` para validação de schema
+
+```ts
+const schema = z.object({
+  description: z.string().min(1),
+  value: z.number().positive(),
+});
+```
+
+---
+
+## 📦 Estado
+
+* Zustand para estado global
+* Pode ser usado para armazenar filtros, transações carregadas, etc.
+
+---
+
+## 🐳 Desenvolvimento
+
+```bash
+npm install
+npm run dev
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:4202
+```
+
+> Certifique-se de que o Shell Angular está rodando e configurado para consumir esse remote.
+
+---
+
+## 🐳 Docker
+
+Este microfrontend é incluído no `docker-compose.yml` do monorepo para rodar junto com os demais em desenvolvimento local.
+
+---
+
+## 🚀 Deploy
+
+* Deploy individual via **Render** (sem Docker)
+* Exposição do `remoteEntry.js` para o Shell consumir
+
+---
+
+## ✅ Checklist de padrões
+
+* [x] React + Next.js 15 com App Router
+* [x] Tailwind CSS com tokens globais
+* [x] Comunicação via GraphQL
+* [x] Validação com zod + RHF
+* [x] Comunicação com Shell por CustomEvent
+* [x] Roteamento em inglês
+* [x] Deploy individual por app (MFEs)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) • [GitHub](https://github.com/Brendhon)

@@ -1,59 +1,171 @@
-# Dashboard
+# 📊 Dashboard MFE – Bytebank Pro
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+Este projeto é o **Dashboard Microfrontend** do Bytebank Pro. Desenvolvido em **Angular 17+**, é responsável por exibir informações financeiras do usuário, como gráficos de transações, saldo geral, metas e alertas.
 
-## Development server
+Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do **Webpack Module Federation**.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 🚀 Stack Tecnológica
+
+* **Angular 17+**
+* **Tailwind CSS** (via PostCSS)
+* **Module Federation** com `@angular-architects/module-federation`
+* **GraphQL (Apollo Client)** – para comunicação com a API
+* **Angular Signals** + Services – para controle de estado local
+* **CustomEvent** – para notificação do Shell sobre atualizações
+* **TypeScript** + ESLint + Prettier
+
+---
+
+## 🧩 Objetivos do MFE
+
+* Exibir o saldo total do usuário
+* Mostrar gráficos de entradas/saídas por categoria
+* Ser carregado pelo Shell via rota `/dashboard`
+* Utilizar dados reais via API GraphQL
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+dashboard/
+├── src/
+│   ├── app/
+│   │   ├── components/         # Gráficos, cards, widgets
+│   │   ├── services/           # Apollo Client, data layer
+│   │   ├── pages/              # Página principal do dashboard
+│   │   ├── app.routes.ts       # Roteamento local
+│   │   └── app.component.ts
+│   └── assets/
+│
+├── tailwind.config.js
+├── module-federation.config.ts
+├── webpack.config.js
+├── angular.json
+├── tsconfig.json
+└── README.md
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔗 Integração com o Shell
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* Configurado como `remote` no Shell Angular
+* O `remoteEntry.js` é carregado via Module Federation
+* Shell chama a rota `/dashboard` que aciona o carregamento remoto
 
-```bash
-ng generate component component-name
+---
+
+### 📦 Exemplo do `module-federation.config.ts`
+
+```ts
+const { withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+
+module.exports = withModuleFederationPlugin({
+  name: 'dashboard',
+  exposes: {
+    './Module': './src/app/app.module.ts',
+  },
+});
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+## 🔌 Comunicação com o Shell
+
+### Estratégias:
+
+* **CustomEvent** para emitir eventos como `dashboardUpdated`
+* **URL de rota**: `/dashboard` é mapeada no Shell e usada para navegação
+
+---
+
+## 📡 Comunicação com a API (GraphQL)
+
+* Utiliza **Apollo Client Angular** para executar queries como:
+
+```graphql
+query GetTransactionSummary {
+  getTransactionSummary {
+    balance
+    breakdown {
+      deposit
+      transfer
+      withdrawal
+      payment
+    }
+  }
+}
 ```
 
-## Building
+* O JWT armazenado pelo Shell é enviado via `Authorization` no header das requisições.
 
-To build the project run:
+---
+
+## 🎨 Estilo
+
+* Estilizado com **Tailwind CSS**, usando os tokens de design compartilhados da pasta `packages/shared-design-tokens`
+* Padrões visuais consistentes com os outros MFEs e com o Shell
+
+---
+
+## 🧪 Validação e Lint
+
+* ESLint com preset Angular
+* Prettier para formatação
+* Husky + lint-staged integrados ao repositório global via Turborepo
+
+---
+
+## 🐳 Desenvolvimento Local
 
 ```bash
-ng build
+npm install
+npm run start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+A aplicação estará disponível em:
 
 ```bash
-ng test
+http://localhost:4201
 ```
 
-## Running end-to-end tests
+> Certifique-se de que o Shell esteja rodando para consumir o módulo remotamente.
 
-For end-to-end (e2e) testing, run:
+---
+
+## 🐳 Docker (local)
+
+Utilize o Docker Compose do monorepo para rodar o dashboard junto ao Shell, API e demais MFEs:
 
 ```bash
-ng e2e
+docker compose up
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🚀 Deploy
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* Deploy separado na **Vercel** ou **Render**
+* O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública
+
+---
+
+## ✅ Checklist de padrões
+
+* [x] Angular 17 com Tailwind
+* [x] Apollo Client para GraphQL
+* [x] Rota única (`/dashboard`)
+* [x] Comunicação com Shell via CustomEvent
+* [x] JWT via header Authorization
+* [x] Docker local via Docker Compose
+* [x] Build pronto para deploy estático ou containerizado
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) • [GitHub](https://github.com/Brendhon)

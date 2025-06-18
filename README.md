@@ -1,84 +1,176 @@
-# Turborepo starter
+Perfeito! Abaixo está o **README base e global** para o repositório dos **microfrontends do Bytebank Pro**. Ele segue os mesmos padrões do README da API, está extremamente detalhado, e cobre tudo: estrutura, padrões, ferramentas, comunicação, deploy e mais.
 
-This Turborepo starter is maintained by the Turborepo core team.
+---
 
-## Using this example
+# 💻 Bytebank Pro – Microfrontends
 
-Run the following command:
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge\&logo=vercel)](https://vercel.com/)
+[![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge\&logo=render\&logoColor=white)](https://bytebank-api.onrender.com/graphql)
 
-```sh
-npx create-turbo@latest
-```
+Este repositório contém a estrutura completa dos **microfrontends do Bytebank Pro**, criados como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). Utilizando **Turborepo**, o projeto é dividido em aplicações independentes para melhor escalabilidade, manutenção e desempenho.
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## ✨ Visão Geral
 
-### Apps and Packages
+| App                   | Framework       | Descrição                                                                                         | Readme |
+| --------------------- | --------------- | ------------------------------------------------------------------------------------------------- | ------ |
+| **Shell**             | Angular         | App principal (container) responsável pela orquestração dos microfrontends via Module Federation. | [Shell App](./apps/shell/README.md) |
+| **Dashboard MFE**     | Angular         | Painel inicial com gráficos e informações financeiras do usuário.                                 | [Dashboard MFE](./apps/dashboard/README.md) |
+| **Transações MFE**    | React (Next.js) | Cadastro, edição e listagem de transações.                                                        | [Transactions MFE](./apps/transactions/README.md) |
+| **Configurações MFE** | React (Next.js) | Tela de preferências e gerenciamento de conta.                                                    | [Settings MFE](./apps/settings/README.md) |
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+---
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## 📦 Tecnologias Globais
 
-### Utilities
+* [Turborepo](https://turbo.build/) – Orquestração de monorepo
+* [TailwindCSS](https://tailwindcss.com/) – Estilização em todos os apps
+* [Module Federation (Webpack 5)](https://webpack.js.org/concepts/module-federation/) – Carregamento remoto dos MFEs
+* [TypeScript](https://www.typescriptlang.org/) – Tipagem em todos os projetos
+* [GraphQL (Apollo Client)](https://www.apollographql.com/docs/react/) – Comunicação com a API
+* [Docker](https://www.docker.com/) – Desenvolvimento local com Docker Compose
+* [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) – Padrão de código
+* [Husky](https://typicode.github.io/husky/) + lint-staged – Garantia de qualidade nos commits
 
-This Turborepo has some additional tools already setup for you:
+---
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
+## 📁 Estrutura de Pastas
 
 ```
-cd my-turborepo
-pnpm dev
+bytebank-pro/
+├── apps/
+│   ├── shell/               # Angular Shell App
+│   ├── dashboard/           # Angular MFE - Dashboard
+│   ├── transactions/        # React MFE - Transações
+│   └── settings/            # React MFE - Configurações
+│
+├── packages/
+│   └── shared-design-tokens/  # Tokens de design reutilizáveis (cores, spacing, fontes)
+│
+├── .gitignore
+├── turbo.json
+├── package.json
+└── tsconfig.base.json
 ```
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+## 🎨 Design Tokens Compartilhados
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Pasta: `packages/shared-design-tokens`
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+Inclui:
 
+* `colors.ts`
+* `spacing.ts`
+* `typography.ts`
+* `tailwind.tokens.ts` → usado nos `tailwind.config.js` de todos os apps
+
+---
+
+## 🔌 Comunicação entre Microfrontends
+
+### Estratégias utilizadas:
+
+* **Module Federation** com `@angular-architects/module-federation` (Angular) e `ModuleFederationPlugin` (React)
+* **CustomEvent** (ex: `userUpdated`, `transactionCreated`) para eventos locais
+* **Query Params na URL** para sincronização de estado (ex: filtros, navegação)
+
+---
+
+## 🔐 Autenticação
+
+* Implementada via **JWT**, armazenado no localStorage/sessionStorage
+* O Shell Angular gerencia o login e compartilha o token com os MFEs via headers
+* Cada MFE faz chamadas GraphQL à API via Apollo Client com token no `Authorization`
+
+---
+
+## 🧪 Validação e Padrões de Código
+
+* **Prettier**: formatação automática
+* **ESLint**: linting com regras adaptadas para Angular e React
+* **EditorConfig**: para padronizar indentação e finais de linha
+* **Zod + react-hook-form** (nos MFEs React) para validação de formulários
+
+---
+
+## 🐳 Desenvolvimento com Docker Compose
+
+Arquivo: `docker-compose.yml` (fora dos apps)
+
+```bash
+docker compose up
 ```
-cd my-turborepo
-npx turbo login
+
+Isso sobe:
+
+* Shell Angular
+* Todos os MFEs
+
+## API GraphQL (separada, em outro repositório)
+
+Este repositório não contém a API GraphQL, que deve ser gerenciada separadamente. A API é responsável por: 
+* Autenticação
+* Gerenciamento de usuários
+* Gerenciamento de transações
+* Geração de relatórios financeiros
+
+Acesse as informações da API no repositório [bytebank-api](https://github.com/Brendhon/bytebank-api).
+
+Para rodar a API localmente, siga as instruções no README dela.
+
+---
+
+## 🚀 Deploy
+
+### Produção:
+
+| Parte | Plataforma       | Forma de Deploy               |
+| ----- | ---------------- | ----------------------------- |
+| Shell | Render           | Deploy via Git                |
+| MFEs  | Render           | Deploy individual por app     |
+| API   | Render (Docker)  | Container rodando API GraphQL |
+
+---
+
+## 📄 Scripts Globais
+
+Rodar tudo local com Turbo:
+
+```bash
+npm install
+npm run dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Rodar build completo:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+```bash
+npm run build
 ```
 
-## Useful Links
+---
 
-Learn more about the power of Turborepo:
+## 🧪 Testes
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+* Cada app pode conter seus próprios testes com Jest/Vitest.
+* Padronize arquivos de teste com `.spec.ts`.
+
+---
+
+## 🧰 Regras e Boas Práticas
+
+* **Rotas em inglês**, alinhadas com os tópicos dos `CustomEvent` (ex: `/transactions`, `/settings`)
+* Use **Zustand** para estado global nos MFEs React
+* Use `Signals` + `Service` para estado em Angular (sem NgRx)
+* Padronize **ícones com Lucide** (React) ou Heroicons (Angular via SVG)
+* Componentes seguem padrão com **Tailwind** em todos os apps
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[![Linkedin Badge](https://img.shields.io/badge/-Brendhon-blue?style=flat-square\&logo=Linkedin\&logoColor=white\&link=https://www.linkedin.com/in/brendhon-moreira)](https://www.linkedin.com/in/brendhon-moreira)
