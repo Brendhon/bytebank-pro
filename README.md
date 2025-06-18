@@ -4,7 +4,6 @@ Perfeito! Abaixo está o **README base e global** para o repositório dos **micr
 
 # 💻 Bytebank Pro – Microfrontends
 
-[![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge\&logo=vercel)](https://vercel.com/)
 [![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge\&logo=render\&logoColor=white)](https://bytebank-api.onrender.com/graphql)
 
 Este repositório contém a estrutura completa dos **microfrontends do Bytebank Pro**, criados como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). Utilizando **Turborepo**, o projeto é dividido em aplicações independentes para melhor escalabilidade, manutenção e desempenho.

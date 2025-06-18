@@ -166,7 +166,7 @@ docker compose up
 
 ## 🚀 Deploy
 
-* Pode ser deployado como Web App no **Vercel** ou **Render**
+* Pode ser deployado como Web App no **Render**
 * O Shell consome este microfrontend pelo `remoteEntry.js` exposto
 
 ---
