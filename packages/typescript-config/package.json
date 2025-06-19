@@ -1,0 +1,10 @@
+{
+  "name": "@bytebank-pro/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "base.json",
+    "angular.json",
+    "nextjs.json"
+  ]
+}

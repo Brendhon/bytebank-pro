@@ -23,6 +23,7 @@
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4",
     "eslint": "^9",
-    "@bytebank-pro/eslint-config": "*"
+    "@bytebank-pro/eslint-config": "*",
+    "@bytebank-pro/typescript-config": "*"
   }
 }
