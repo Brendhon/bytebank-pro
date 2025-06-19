@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
-import { MainLayoutComponent } from './layout/main-layout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { loadMfe, MfeNames } from './mfe-loader/mfe-registry';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -8,11 +8,11 @@ import { LoginComponent } from './pages/login/login.component';
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
   },
   {
     path: '',
-    component: MainLayoutComponent,
+    component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'not-found',
-    component: NotFoundComponent
+    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
   {
     path: '**',
