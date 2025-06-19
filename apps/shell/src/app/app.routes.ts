@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { loadMfe, MfeNames } from './mfe-loader/mfe-registry';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
