@@ -15,7 +15,7 @@ export interface MfeConfig {
 export const mfeRegistry: Record<MfeNames, MfeConfig> = {
   dashboard: {
     remoteName: 'dashboard',
-    exposedModule: './Routes',
+    exposedModule: './Component',
     remoteEntry: 'http://localhost:4201/remoteEntry.js'
   },
   transactions: {
@@ -38,8 +38,8 @@ export const loadMfe = (mfeName: MfeNames) => {
   }
   
   return loadRemoteModule({
-    type: 'manifest',
-    remoteName: config.remoteName,
+    type: 'module',
+    remoteEntry: config.remoteEntry,
     exposedModule: config.exposedModule
   });
 };

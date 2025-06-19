@@ -15,7 +15,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => loadMfe(MfeNames.DASHBOARD).then(m => m.ROUTES)
+        loadComponent: () => loadMfe(MfeNames.DASHBOARD).then(m => m.App)
       },
       {
         path: 'transactions',
