@@ -1,6 +1,6 @@
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from './auth.service';
 import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 export const AuthGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
@@ -10,10 +10,10 @@ export const AuthGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  // Redirecionar para login e lembrar URL atual para redirecionamento após login
+  // Redirect to login and remember the current URL for redirection after login
   router.navigate(['/login'], {
     queryParams: { returnUrl: state.url }
   });
-  
+
   return false;
 };
