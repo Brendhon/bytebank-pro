@@ -5,7 +5,7 @@ import { APOLLO_OPTIONS, Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 
-import { routes } from './app.routes';
+import { routes } from '@/app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
