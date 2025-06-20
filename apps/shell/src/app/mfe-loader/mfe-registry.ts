@@ -7,24 +7,20 @@ export enum MfeNames {
 }
 
 export interface MfeConfig {
-  remoteName: string;
   exposedModule: string;
   remoteEntry: string;
 }
 
 export const mfeRegistry: Record<MfeNames, MfeConfig> = {
   dashboard: {
-    remoteName: 'dashboard',
     exposedModule: './Component',
     remoteEntry: 'http://localhost:4201/remoteEntry.js'
   },
   transactions: {
-    remoteName: 'transactions',
     exposedModule: './Routes',
     remoteEntry: 'http://localhost:4202/remoteEntry.js'
   },
   settings: {
-    remoteName: 'settings',
     exposedModule: './Routes',
     remoteEntry: 'http://localhost:4203/remoteEntry.js'
   }
