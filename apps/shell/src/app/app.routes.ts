@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './core/guards/auth.guard';
-import { LayoutComponent } from './layout/layout.component';
-import { loadMfe, MfeNames } from './mfe-loader/mfe-registry';
+import { AuthGuard } from '@/core/guards';
+import { LayoutComponent } from '@/layout/layout.component';
+import { loadMfe, MfeNames } from '@/mfe-loader/mfe-registry';
 
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
+    loadComponent: () => import('@/pages/login/login.component').then(m => m.LoginComponent),
   },
   {
     path: '',
@@ -34,7 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'not-found',
-    loadComponent: () => import('./pages/not-found/not-found.component').then(m => m.NotFoundComponent)
+    loadComponent: () => import('@/pages/not-found/not-found.component').then(m => m.NotFoundComponent)
   },
   {
     path: '**',
