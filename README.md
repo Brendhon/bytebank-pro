@@ -58,7 +58,6 @@ Pasta: `packages/shared-design-tokens`
 Inclui:
 
 * `colors.ts`
-* `spacing.ts`
 * `typography.ts`
 * `tailwind.tokens.ts` → usado nos `tailwind.config.js` de todos os apps
 
