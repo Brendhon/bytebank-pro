@@ -19,11 +19,11 @@ export const routes: Routes = [
       },
       {
         path: 'transactions',
-        loadChildren: () => loadMfe(MfeNames.TRANSACTIONS).then(m => m.ROUTES)
+        loadComponent: () => loadMfe(MfeNames.TRANSACTIONS).then(m => m.App)
       },
       {
         path: 'settings',
-        loadChildren: () => loadMfe(MfeNames.SETTINGS).then(m => m.ROUTES)
+        loadComponent: () => loadMfe(MfeNames.SETTINGS).then(m => m.App)
       },
       {
         path: '',
