@@ -17,11 +17,11 @@ export const mfeRegistry: Record<MfeNames, MfeConfig> = {
     remoteEntry: 'http://localhost:4201/remoteEntry.js'
   },
   transactions: {
-    exposedModule: './Routes',
+    exposedModule: './Component',
     remoteEntry: 'http://localhost:4202/remoteEntry.js'
   },
   settings: {
-    exposedModule: './Routes',
+    exposedModule: './Component',
     remoteEntry: 'http://localhost:4203/remoteEntry.js'
   }
 } as const;

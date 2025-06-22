@@ -1,10 +1,10 @@
 const { resolve } = require('node:path');
 
-const project = resolve(process.cwd(), 'tsconfig.app.json');
+const project = resolve(process.cwd(), 'tsconfig.json');
 
 /**
  * This is a custom ESLint configuration for use with
- * Angular applications
+ * Angular libraries
  */
 
 /** @type {import("eslint").Linter.Config} */

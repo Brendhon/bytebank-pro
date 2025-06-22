@@ -1,6 +1,6 @@
 # 💸 Transações MFE – Bytebank Pro
 
-Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido em **React com Next.js 15 (App Router)**. Ele é responsável por:
+Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido em **Angular 20**. Ele é responsável por:
 
 * Listar o histórico de transações do usuário
 * Criar, editar e excluir transações
@@ -12,12 +12,14 @@ Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido e
 
 ## 🚀 Stack Tecnológica
 
-* **React 19 + Next.js 15 (App Router)**
+* **Angular 20**
+* **@angular-architects/module-federation** para integração com o Shell Angular
 * **Tailwind CSS** (com design tokens compartilhados)
-* **GraphQL (Apollo Client)** para comunicação com a API
-* **react-hook-form** + **zod** para validação de formulários
+* **GraphQL (Apollo Client Angular)** para comunicação com a API
+* **Angular Reactive Forms** para formulários
+* **Lucide Angular** para ícones
+* **Angular Signals** + Services (para estado global)
 * **CustomEvent** + URL Params para comunicação com o Shell
-* **Zustand** para estado global (opcional)
 * **TypeScript**, ESLint, Prettier
 
 ---
@@ -26,28 +28,18 @@ Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido e
 
 ```
 transactions/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx                      # Listagem de transações
-│   ├── new/page.tsx                  # Criação
-│   └── edit/[id]/page.tsx            # Edição
-│
-├── components/
-│   ├── TransactionForm.tsx
-│   ├── TransactionList.tsx
-│   └── Filters.tsx
-│
-├── lib/
-│   ├── apolloClient.ts               # Apollo Client instância
-│   ├── graphql/                      # Queries e mutations
-│   └── types.ts                      # Tipagens globais
-│
-├── styles/
-│   └── globals.css
+├── src/
+│   ├── app/
+│   │   ├── components/         \# Formulários, listas, filtros
+│   │   ├── services/           \# Apollo Client, data layer
+│   │   ├── pages/              \# Listagem, criação, edição
+│   │   ├── app.routes.ts       \# Roteamento local
+│   │   └── app.component.ts
+│   └── assets/
 │
 ├── tailwind.config.js
-├── module-federation.config.js
 ├── webpack.config.js
+├── angular.json
 ├── tsconfig.json
 └── README.md
 ```
@@ -56,74 +48,18 @@ transactions/
 
 ## 🔌 Comunicação com a API (GraphQL)
 
-Todas as operações são feitas via GraphQL com **Apollo Client**.
+Todas as operações são feitas via GraphQL com **Apollo Client Angular**. O JWT armazenado pelo Shell é enviado via `Authorization` no header das requisições.
 
 ### Queries
 
 * `getTransactions(limit, page)`
-  ```graphql
-  query Query($limit: Int!, $page: Int!) {
-    transactions(limit: $limit, page: $page) {
-      items {,
-        _id
-        date
-        alias
-        type
-        desc
-        value
-      }
-      total
-      page
-      totalPages
-      hasMore
-      totalInPage
-    }
-  }
-  ``` 
-  
 * `getTransactionById(id)`
-  ```graphql
-  query Transaction($transactionId: ID!) {
-    transaction(id: $transactionId) {
-      date
-      alias
-      type
-      desc
-      value
-    }
-  }
-  ```
 
 ### Mutations
 
 * `createTransaction(input)`
-  ```graphql
-    mutation CreateTransaction($input: TransactionInput!) {
-      createTransaction(input: $input) {
-        _id
-      }
-    }
-  ```
 * `updateTransaction(input, id)`
-  ```graphql
-  mutation UpdateTransaction($input: TransactionUpdateInput!, $updateTransactionId: ID!) {
-    updateTransaction(input: $input, id: $updateTransactionId) {
-      alias,
-      date,
-      desc,
-      type,
-      user,
-      value
-    }
-  }
-  ```
-
 * `deleteTransaction(id)`
-  ```graphql
-  mutation DeleteTransaction($deleteTransactionId: ID!) {
-    deleteTransaction(id: $deleteTransactionId)
-  }
-  ```
 
 ---
 
@@ -131,71 +67,64 @@ Todas as operações são feitas via GraphQL com **Apollo Client**.
 
 ### Via Module Federation
 
-Este microfrontend é exposto como `remote` via `ModuleFederationPlugin`. O Shell Angular carrega a rota `/transactions`.
+Este microfrontend é exposto como `remote` via `@angular-architects/module-federation`. O Shell Angular carrega a rota `/transactions`.
 
-```js
-// webpack.config.js
-new ModuleFederationPlugin({
+```ts
+// module-federation.config.ts
+const { withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+
+module.exports = withModuleFederationPlugin({
   name: 'transactions',
-  filename: 'remoteEntry.js',
   exposes: {
-    './App': './app/page.tsx',
+    './Component': './src/app/app.Component.ts', // Componente principal do MFE
   },
-  shared: ['react', 'react-dom'],
 });
 ```
 
----
+-----
 
 ## 🔁 Comunicação com o Shell
 
-* Via **CustomEvent**, emitindo eventos como:
+  * Via **CustomEvent**, emitindo eventos como:
 
-  ```ts
-  window.dispatchEvent(new CustomEvent('transactionCreated', { detail: {...} }));
-  ```
-* Rotas e URLs seguem o padrão:
+    ```ts
+    window.dispatchEvent(new CustomEvent('transactionCreated', { detail: {...} }));
+    ```
 
-  * `/transactions`
-  * `/transactions/new`
-  * `/transactions/edit/:id`
+  * Rotas e URLs seguem o padrão:
 
----
+      * `/transactions`
+      * `/transactions/new`
+      * `/transactions/edit/:id`
+
+-----
 
 ## 🎨 Estilo
 
-* Estilizado com **Tailwind CSS**
-* Usa **tokens de design compartilhados** de `packages/shared-design-tokens`
-* Ícones via [Lucide](https://lucide.dev/)
+  * Estilizado com **Tailwind CSS**
+  * Usa **tokens de design compartilhados** de `packages/shared-design-tokens`
+  * [Lucide Angular para ícones](https://lucide.dev/guide/packages/lucide-angular)
 
----
+-----
 
-## 📑 Validação de Formulários
+## 📑 Formulários
 
-* **react-hook-form** para controle de formulário
-* **zod** + `@hookform/resolvers` para validação de schema
+  * **Angular Reactive Forms** para controle de formulário
 
-```ts
-const schema = z.object({
-  description: z.string().min(1),
-  value: z.number().positive(),
-});
-```
-
----
+-----
 
 ## 📦 Estado
 
-* Zustand para estado global
-* Pode ser usado para armazenar filtros, transações carregadas, etc.
+  * **Angular Signals** + Services para estado global
+  * Pode ser usado para armazenar filtros, transações carregadas, etc.
 
----
+-----
 
 ## 🐳 Desenvolvimento
 
 ```bash
 npm install
-npm run dev
+npm run start
 ```
 
 A aplicação estará disponível em:
@@ -206,32 +135,32 @@ http://localhost:4202
 
 > Certifique-se de que o Shell Angular está rodando e configurado para consumir esse remote.
 
----
+-----
 
 ## 🐳 Docker
 
 Este microfrontend é incluído no `docker-compose.yml` do monorepo para rodar junto com os demais em desenvolvimento local.
 
----
+-----
 
 ## 🚀 Deploy
 
-* Deploy individual via **Render** (sem Docker)
-* Exposição do `remoteEntry.js` para o Shell consumir
+  * Deploy individual via **Render**
+  * Exposição do `remoteEntry.js` para o Shell consumir
 
----
+-----
 
 ## ✅ Checklist de padrões
 
-* [x] React + Next.js 15 com App Router
-* [x] Tailwind CSS com tokens globais
-* [x] Comunicação via GraphQL
-* [x] Validação com zod + RHF
-* [x] Comunicação com Shell por CustomEvent
-* [x] Roteamento em inglês
-* [x] Deploy individual por app (MFEs)
+  * [x] Angular 20
+  * [x] Tailwind CSS com tokens globais
+  * [x] Comunicação via GraphQL
+  * [x] Validação com Angular Reactive Forms
+  * [x] Comunicação com Shell por CustomEvent
+  * [x] Roteamento em inglês
+  * [x] Deploy individual por app (MFEs)
 
----
+-----
 
 ## 👥 Autor
 

@@ -1,11 +1,11 @@
-// Importa a configuração ESLint compartilhada para Next.js
-import { nextJsConfig } from "@bytebank-pro/eslint-config/next-js";
+// Importa a configuração ESLint compartilhada para Angular
+import { angularConfig } from "@bytebank-pro/eslint-config/angular";
 
 /** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
-  ...nextJsConfig,
+  ...angularConfig,
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts"],
     rules: {
       // Você pode adicionar ou sobrescrever regras específicas para este projeto
     },

@@ -1,6 +1,6 @@
 # 📊 Dashboard MFE – Bytebank Pro
 
-Este projeto é o **Dashboard Microfrontend** do Bytebank Pro. Desenvolvido em **Angular 17+**, é responsável por exibir informações financeiras do usuário, como gráficos de transações, saldo geral, metas e alertas.
+Este projeto é o **Dashboard Microfrontend** do Bytebank Pro. Desenvolvido em **Angular 20**, é responsável por exibir informações financeiras do usuário, como gráficos de transações, saldo geral, metas e alertas.
 
 Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do **Webpack Module Federation**.
 
@@ -66,7 +66,7 @@ const { withModuleFederationPlugin } = require('@angular-architects/module-feder
 module.exports = withModuleFederationPlugin({
   name: 'dashboard',
   exposes: {
-    './Module': './src/app/app.module.ts',
+    './Component': './src/app/app.Component.ts',
   },
 });
 ```
@@ -155,7 +155,7 @@ docker compose up
 
 ## ✅ Checklist de padrões
 
-* [x] Angular 17 com Tailwind
+* [x] Angular 20 com Tailwind
 * [x] Apollo Client para GraphQL
 * [x] Rota única (`/dashboard`)
 * [x] Comunicação com Shell via CustomEvent

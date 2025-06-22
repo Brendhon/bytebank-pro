@@ -1,6 +1,6 @@
 # ⚙️ Settings MFE – Bytebank Pro
 
-Este projeto é o **Configurações Microfrontend (MFE)** do Bytebank Pro, construído com **Next.js 15 (App Router)** e estilizado com **Tailwind CSS**. Ele é responsável pelas funcionalidades de **gerenciamento de conta**, incluindo:
+Este projeto é o **Configurações Microfrontend (MFE)** do Bytebank Pro, construído com **Angular 20** e estilizado com **Tailwind CSS**. Ele é responsável pelas funcionalidades de **gerenciamento de conta**, incluindo:
 
 * Alteração de nome
 * Troca de senha
@@ -12,13 +12,14 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) via **Webpack
 
 ## 🚀 Stack Tecnológica
 
-* **Next.js 15 (App Router)**
-* **React 19**
+* **Angular 20**
+* **@angular-architects/module-federation**
 * **Tailwind CSS**
-* **GraphQL (Apollo Client)** – integração com a API
-* **Zod + React Hook Form** – para validação de formulários
-* **TypeScript**
+* **GraphQL (Apollo Client Angular)** – integração com a API
+* **Angular Reactive Forms** – para formulários
+* **Angular Signals** + Services (para estado global)
 * **CustomEvent** – para comunicação com o Shell (logout, userUpdated)
+* **TypeScript**
 
 ---
 
@@ -36,21 +37,18 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) via **Webpack
 
 ```
 settings/
-├── app/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   ├── profile/              # Página de edição de perfil
-│   ├── preferences/          # Página de preferências
-│   └── delete-account/       # Exclusão de conta
-├── components/
-│   ├── FormField.tsx
-│   └── Button.tsx
-├── lib/
-│   ├── apolloClient.ts       # Apollo setup
-│   └── validators/           # Zod schemas
+├── src/
+│   ├── app/
+│   │   ├── components/         \# Formulários, botões
+│   │   ├── services/           \# Apollo Client, data layer
+│   │   ├── pages/              \# Edição de perfil, preferências, exclusão de conta
+│   │   ├── app.routes.ts       \# Roteamento local
+│   │   └── app.component.ts
+│   └── assets/
+│
 ├── tailwind.config.js
-├── module-federation.config.js
 ├── webpack.config.js
+├── angular.json
 ├── tsconfig.json
 └── README.md
 ```
@@ -63,20 +61,16 @@ settings/
 * Carregado pela rota `/settings` no Shell Angular
 * Usa `CustomEvent` para notificar o Shell:
 
-```tsx
-window.dispatchEvent(new CustomEvent('userUpdated', { detail: updatedUser }));
-```
+    ```ts
+    window.dispatchEvent(new CustomEvent('userUpdated', { detail: updatedUser }));
+    ```
 
 ---
 
 ## 🔐 Autenticação
 
 * O Shell fornece o JWT, armazenado em `localStorage`
-* O Apollo Client envia esse token via `Authorization` header para cada request:
-
-```ts
-Authorization: Bearer <token>
-```
+* O Apollo Client Angular envia esse token via `Authorization` header para cada request.
 
 ---
 
@@ -84,45 +78,28 @@ Authorization: Bearer <token>
 
 ### Queries & Mutations usadas:
 
-```graphql
-query Query {
-  me {
-    email,
-    name
-  }
-}
-
-mutation UpdateUser($input: UserUpdateInput!) {
-  updateUser(input: $input) {
-    name,
-    email,
-  }
-}
-
-mutation Mutation {
-  deleteUser
-}
-```
+* `me`
+* `updateUser(input)`
+* `deleteUser`
 
 ---
 
-## 🧪 Validação de Formulários
+## 📝 Formulários
 
-* Usa `react-hook-form` com `zod` como schema resolver.
-* Zod schemas organizados na pasta `/lib/validators`.
+* Usa **Angular Reactive Forms** para formulários
 
 ---
 
 ## 🎨 Estilo
 
 * Estilizado com **Tailwind CSS**, configurado com tokens globais importados de `packages/shared-design-tokens`.
-* Ícones com **Lucide React**
+* Ícones com **Heroicons** (Angular via SVG) ou Lucide (se houver uma biblioteca Angular para ele)
 
 ---
 
 ## 🧪 Lint e Padrões
 
-* ESLint com presets React + Tailwind
+* ESLint com presets Angular + Tailwind
 * Prettier para formatação automática
 * Husky + lint-staged configurados no repositório global
 
@@ -130,7 +107,7 @@ mutation Mutation {
 
 ## 📦 Estado
 
-* Zustand para estado global
+* **Angular Signals** + Services para estado global
 
 ---
 
@@ -140,19 +117,19 @@ mutation Mutation {
 
 ```bash
 npm install
-```
+````
 
 ### Rodar localmente:
 
 ```bash
-npm run dev
+npm run start
 ```
 
-Disponível em: [http://localhost:4203](http://localhost:4203)
+Disponível em: [http://localhost:4203](https://www.google.com/search?q=http://localhost:4203)
 
 > ⚠️ Certifique-se de que o Shell está rodando para orquestrar a navegação.
 
----
+-----
 
 ## 🐳 Docker (local)
 
@@ -162,26 +139,26 @@ Este microfrontend participa do **Docker Compose** local configurado no monorepo
 docker compose up
 ```
 
----
+-----
 
 ## 🚀 Deploy
 
-* Pode ser deployado como Web App no **Render**
-* O Shell consome este microfrontend pelo `remoteEntry.js` exposto
+  * Pode ser deployado como Web App no **Render**
+  * O Shell consome este microfrontend pelo `remoteEntry.js` exposto
 
----
+-----
 
 ## ✅ Checklist de Padrões
 
-* [x] Next.js App Router com rotas em inglês (`/settings/...`)
-* [x] Apollo Client + JWT
-* [x] Validação com Zod + React Hook Form
-* [x] Comunicação com Shell via CustomEvent
-* [x] Estilização com Tailwind (tokens globais)
-* [x] Docker local com Docker Compose
-* [x] Pronto para deploy no Render
+  * [x] Angular 20 e rotas em inglês (`/settings/...`)
+  * [x] Apollo Client + JWT
+  * [x] Formulários com Angular Reactive Forms
+  * [x] Comunicação com Shell via CustomEvent
+  * [x] Estilização com Tailwind (tokens globais)
+  * [x] Docker local com Docker Compose
+  * [x] Pronto para deploy no Render
 
----
+-----
 
 ## 👥 Autor
 

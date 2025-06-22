@@ -1,11 +1,37 @@
 {
-  "extends": "@bytebank-pro/typescript-config/nextjs.json",
+  "extends": "@bytebank-pro/typescript-config/angular.json",
+  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "paths": {
-      "@/*": ["./src/*"],
-      "@bytebank-pro/shared-design-tokens": ["../../packages/shared-design-tokens"]
+      "@bytebank-pro/shared-design-tokens": [
+        "../../packages/shared-design-tokens"
+      ],
+      "@/*": [
+        "src/app/*",
+      ]
     }
   },
-  "include": ["src", "next-env.d.ts", ".next/types/**/*.ts"],
-  "files": []
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

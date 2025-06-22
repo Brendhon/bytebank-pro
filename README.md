@@ -2,7 +2,7 @@
 
 [![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge\&logo=render\&logoColor=white)](https://bytebank-api.onrender.com/graphql)
 
-Este repositório contém a estrutura completa dos **microfrontends do Bytebank Pro**, criados como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). Utilizando **Turborepo**, o projeto é dividido em aplicações independentes para melhor escalabilidade, manutenção e desempenho.
+Este repositório contém a estrutura completa dos **microfrontends do Bytebank Pro**, criados como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). Utilizando **Turborepo**, o projeto é dividido em aplicações independentes para melhor escalabilidade, manutenção e desempenho, todas desenvolvidas em **Angular**.
 
 ---
 
@@ -10,20 +10,21 @@ Este repositório contém a estrutura completa dos **microfrontends do Bytebank 
 
 | App                   | Framework       | Descrição                                                                                         | Readme |
 | --------------------- | --------------- | ------------------------------------------------------------------------------------------------- | ------ |
-| **Shell**             | Angular         | App principal (container) responsável pela orquestração dos microfrontends via Module Federation. | [Shell App](./apps/shell/README.md) |
-| **Dashboard MFE**     | Angular         | Painel inicial com gráficos e informações financeiras do usuário.                                 | [Dashboard MFE](./apps/dashboard/README.md) |
-| **Transações MFE**    | React (Next.js) | Cadastro, edição e listagem de transações.                                                        | [Transactions MFE](./apps/transactions/README.md) |
-| **Configurações MFE** | React (Next.js) | Tela de preferências e gerenciamento de conta.                                                    | [Settings MFE](./apps/settings/README.md) |
+| **Shell** | Angular         | App principal (container) responsável pela orquestração dos microfrontends via Module Federation. | [Shell App](./apps/shell/README.md) |
+| **Dashboard MFE** | Angular         | Painel inicial com gráficos e informações financeiras do usuário.                                 | [Dashboard MFE](./apps/dashboard/README.md) |
+| **Transações MFE** | Angular         | Cadastro, edição e listagem de transações.                                                        | [Transactions MFE](./apps/transactions/README.md) |
+| **Configurações MFE** | Angular         | Tela de preferências e gerenciamento de conta.                                                    | [Settings MFE](./apps/settings/README.md) |
 
 ---
 
 ## 📦 Tecnologias Globais
 
 * [Turborepo](https://turbo.build/) – Orquestração de monorepo
+* [Angular 20](https://angular.dev/) – Framework principal para todos os apps
+* [@angular-architects/module-federation](https://github.com/angular-architects/module-federation) – Carregamento remoto dos MFEs
 * [TailwindCSS](https://tailwindcss.com/) – Estilização em todos os apps
-* [Module Federation (Webpack 5)](https://webpack.js.org/concepts/module-federation/) – Carregamento remoto dos MFEs
 * [TypeScript](https://www.typescriptlang.org/) – Tipagem em todos os projetos
-* [GraphQL (Apollo Client)](https://www.apollographql.com/docs/react/) – Comunicação com a API
+* [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/) – Comunicação com a API
 * [Docker](https://www.docker.com/) – Desenvolvimento local com Docker Compose
 * [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) – Padrão de código
 * [Husky](https://typicode.github.io/husky/) + lint-staged – Garantia de qualidade nos commits
@@ -32,22 +33,24 @@ Este repositório contém a estrutura completa dos **microfrontends do Bytebank 
 
 ## 📁 Estrutura de Pastas
 
-```
+````
 bytebank-pro/
 ├── apps/
-│   ├── shell/               # Angular Shell App
-│   ├── dashboard/           # Angular MFE - Dashboard
-│   ├── transactions/        # React MFE - Transações
-│   └── settings/            # React MFE - Configurações
+│   ├── shell/               \# Angular Shell App
+│   ├── dashboard/           \# Angular MFE - Dashboard
+│   ├── transactions/        \# Angular MFE - Transações
+│   └── settings/            \# Angular MFE - Configurações
 │
 ├── packages/
-│   └── shared-design-tokens/  # Tokens de design reutilizáveis (cores, spacing, fontes)
+│   └── shared-design-tokens/  \# Tokens de design reutilizáveis (cores, spacing, fontes)
+│   └── ui/                    \# Biblioteca de componentes compartilhados (ex: Botões, Inputs)
 │
 ├── .gitignore
 ├── turbo.json
 ├── package.json
 └── tsconfig.base.json
-```
+
+````
 
 ---
 
@@ -67,7 +70,7 @@ Inclui:
 
 ### Estratégias utilizadas:
 
-* **Module Federation** com `@angular-architects/module-federation` (Angular) e `ModuleFederationPlugin` (React)
+* **Module Federation** com `@angular-architects/module-federation`
 * **CustomEvent** (ex: `userUpdated`, `transactionCreated`) para eventos locais
 * **Query Params na URL** para sincronização de estado (ex: filtros, navegação)
 
@@ -84,9 +87,9 @@ Inclui:
 ## 🧪 Validação e Padrões de Código
 
 * **Prettier**: formatação automática
-* **ESLint**: linting com regras adaptadas para Angular e React
+* **ESLint**: linting com regras adaptadas para Angular
 * **EditorConfig**: para padronizar indentação e finais de linha
-* **Zod + react-hook-form** (nos MFEs React) para validação de formulários
+* **Angular Reactive Forms** (nos MFEs Angular) para formulários
 
 ---
 
@@ -100,22 +103,23 @@ docker compose up
 
 Isso sobe:
 
-* Shell Angular
-* Todos os MFEs
+  * Shell Angular
+  * Todos os MFEs Angular
 
 ## API GraphQL (separada, em outro repositório)
 
-Este repositório não contém a API GraphQL, que deve ser gerenciada separadamente. A API é responsável por: 
-* Autenticação
-* Gerenciamento de usuários
-* Gerenciamento de transações
-* Geração de relatórios financeiros
+Este repositório não contém a API GraphQL, que deve ser gerenciada separadamente. A API é responsável por:
+
+  * Autenticação
+  * Gerenciamento de usuários
+  * Gerenciamento de transações
+  * Geração de relatórios financeiros
 
 Acesse as informações da API no repositório [bytebank-api](https://github.com/Brendhon/bytebank-api).
 
 Para rodar a API localmente, siga as instruções no README dela.
 
----
+-----
 
 ## 🚀 Deploy
 
@@ -127,7 +131,7 @@ Para rodar a API localmente, siga as instruções no README dela.
 | MFEs  | Render           | Deploy individual por app     |
 | API   | Render (Docker)  | Container rodando API GraphQL |
 
----
+-----
 
 ## 📄 Scripts Globais
 
@@ -144,24 +148,23 @@ Rodar build completo:
 npm run build
 ```
 
----
+-----
 
 ## 🧪 Testes
 
-* Cada app pode conter seus próprios testes com Jest/Vitest.
-* Padronize arquivos de teste com `.spec.ts`.
+  * Cada app pode conter seus próprios testes com Jest/Vitest.
+  * Padronize arquivos de teste com `.spec.ts`.
 
----
+-----
 
 ## 🧰 Regras e Boas Práticas
 
-* **Rotas em inglês**, alinhadas com os tópicos dos `CustomEvent` (ex: `/transactions`, `/settings`)
-* Use **Zustand** para estado global nos MFEs React
-* Use `Signals` + `Service` para estado em Angular (sem NgRx)
-* Padronize **ícones com Lucide** (React) ou Heroicons (Angular via SVG)
-* Componentes seguem padrão com **Tailwind** em todos os apps
+  * **Rotas em inglês**, alinhadas com os tópicos dos `CustomEvent` (ex: `/transactions`, `/settings`)
+  * Use `Signals` + `Service` para estado em Angular (sem NgRx)
+  * Angular Lucide Icons para ícones
+  * Componentes seguem padrão com **Tailwind** em todos os apps
 
----
+-----
 
 ## 👥 Autor
 
