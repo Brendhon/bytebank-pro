@@ -5,9 +5,6 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@bytebank-pro/shared-design-tokens": [
-        "../../packages/shared-design-tokens"
-      ],
       "@/*": [
         "src/app/*",
       ]

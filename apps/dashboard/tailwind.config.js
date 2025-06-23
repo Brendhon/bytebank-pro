@@ -5,8 +5,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: require('@bytebank-pro/shared-design-tokens').colors,
-      typography: require('@bytebank-pro/shared-design-tokens').typography,
+      colors: require('@bytebank-pro/shared-design-tokens').tailwindColors,
+      typography: require('@bytebank-pro/shared-design-tokens').tailwindTypography,
     },
   },
   plugins: [],
