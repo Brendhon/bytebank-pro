@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
@@ -9,10 +9,13 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DashboardService {
+  private apollo = inject(Apollo);
+  private httpLink = inject(HttpLink);
+
   private balanceSubject = new BehaviorSubject<number>(0);
   balance$ = this.balanceSubject.asObservable();
 
-  constructor(private apollo: Apollo, private httpLink: HttpLink) {
+  constructor() {
     // Inicialização do Apollo Client
     this.initApollo();
   }

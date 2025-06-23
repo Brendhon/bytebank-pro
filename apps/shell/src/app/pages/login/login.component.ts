@@ -1,6 +1,6 @@
 import { AuthService } from '@/core/services';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ButtonComponent } from '@bytebank-pro/ui';
@@ -12,17 +12,17 @@ import { ButtonComponent } from '@bytebank-pro/ui';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   email = '';
   password = '';
   isLoading = false;
   errorMessage = '';
   returnUrl = '/dashboard';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor() {}
 
   ngOnInit() {
     // Verificar se há um returnUrl na query params
