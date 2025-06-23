@@ -1,13 +1,14 @@
+
+import { tailwindColors, tailwindTypography } from '@bytebank-pro/shared-design-tokens';
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
-  theme: {
-    extend: {
-      colors: require('@bytebank-pro/shared-design-tokens').tailwindColors,
-      typography: require('@bytebank-pro/shared-design-tokens').tailwindTypography,
-    },
+export const content = [
+  "./src/**/*.{html,ts}",
+];
+export const theme = {
+  extend: {
+    colors: tailwindColors,
+    typography: tailwindTypography,
   },
-  plugins: [],
-}
+};
+export const plugins = [];

@@ -2,7 +2,7 @@
   [type]="type"
   [ngClass]="buttonClasses"
   [disabled]="disabled || loading"
-  (click)="click.emit($event)"
+  (click)="buttonClick.emit($event)"
 >
   <span [ngClass]="{'opacity-0': loading}">
     <ng-content></ng-content>

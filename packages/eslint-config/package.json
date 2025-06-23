@@ -2,14 +2,22 @@
   "name": "@bytebank-pro/eslint-config",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "files": [
     "library.js",
     "angular.js"
   ],
+  "exports": {
+    "./angular": "./angular.js",
+    "./library": "./library.js"
+  },
   "description": "",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.9.0",
-    "@typescript-eslint/parser": "^7.9.0",
+    "@angular-eslint/eslint-plugin": "^20.1.1",
+    "@angular-eslint/eslint-plugin-template": "^20.1.1",
+    "@angular-eslint/template-parser": "^20.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-turbo": "^2.3.3",
     "eslint-plugin-only-warn": "^1.1.0",

@@ -19,7 +19,7 @@ export class ButtonComponent {
   @Input() disabled: boolean = false;
   @Input() className: string = ''; // Para classes adicionais passadas de fora
 
-  @Output() click = new EventEmitter<Event>();
+  @Output() buttonClick = new EventEmitter<Event>();
 
   // Método para obter as classes CSS baseadas na variante
   get buttonClasses(): string {

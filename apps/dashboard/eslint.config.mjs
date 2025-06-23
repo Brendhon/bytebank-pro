@@ -1,15 +1,28 @@
-// Importa a configuração ESLint compartilhada para Angular
-import { angularConfig } from "@bytebank-pro/eslint-config/angular";
+/* eslint-env node */
+import angular from '@bytebank-pro/eslint-config/angular';
 
-/** @type {import("eslint").Linter.Config[]} */
-const eslintConfig = [
-  ...angularConfig,
+export default [
+  ...angular,
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     rules: {
       // Você pode adicionar ou sobrescrever regras específicas para este projeto
-    },
-  },
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case'
+        }
+      ],
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase'
+        }
+      ]
+    }
+  }
 ];
-
-export default eslintConfig;
