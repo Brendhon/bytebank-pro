@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // Você pode definir as variantes como um tipo para segurança
 export type ButtonVariant = 'dark' | 'blue' | 'green' | 'orange' | 'outlineGreen' | 'outlineOrange';
@@ -8,10 +8,9 @@ export type ButtonType = HTMLButtonElement['type'];
 @Component({
   selector: 'bb-button', // Seu prefixo personalizado
   templateUrl: './button.component.html',
-  styleUrls: ['../../styles/index.css'], // Certifique-se de ter um arquivo CSS correspondente
+  styleUrls: ['../styles/index.css'], // Certifique-se de ter um arquivo CSS correspondente
   standalone: true,
-  imports: [CommonModule],
-  encapsulation: ViewEncapsulation.None
+  imports: [CommonModule]
 })
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';

@@ -1,6 +1,6 @@
 <button
   [type]="type"
-  class="bg-bytebank-dark text-bytebank-orange hover:bg-gray-700 active:bg-gray-800 focus:ring-gray-500"
+  [ngClass]="buttonClasses"
   [disabled]="disabled || loading"
   (click)="click.emit($event)"
 >
