@@ -3,6 +3,9 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "composite": true
   },
   "include": [

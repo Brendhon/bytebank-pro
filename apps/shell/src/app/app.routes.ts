@@ -15,20 +15,20 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: MfeNames.DASHBOARD,
+        path: 'dashboard',
         loadComponent: () => loadMfe(MfeNames.DASHBOARD).then(m => m.App)
       },
       {
-        path: MfeNames.TRANSACTIONS,
+        path: 'transactions',
         loadComponent: () => loadMfe(MfeNames.TRANSACTIONS).then(m => m.App)
       },
       {
-        path: MfeNames.SETTINGS,
+        path: 'settings',
         loadComponent: () => loadMfe(MfeNames.SETTINGS).then(m => m.App)
       },
       {
         path: '',
-        redirectTo: MfeNames.DASHBOARD,
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       }
     ]

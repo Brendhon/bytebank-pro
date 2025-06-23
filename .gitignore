@@ -40,3 +40,6 @@ yarn-error.log*
 # Visual Studio Code
 .vscode/
 .vscode-test/
+
+# Angular
+.angular/

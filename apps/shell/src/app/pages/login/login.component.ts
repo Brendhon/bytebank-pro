@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ButtonComponent } from '@bytebank-pro/ui';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule, ButtonComponent],
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
