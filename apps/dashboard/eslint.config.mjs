@@ -6,7 +6,6 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      // Você pode adicionar ou sobrescrever regras específicas para este projeto
       '@angular-eslint/component-selector': [
         'error',
         {
