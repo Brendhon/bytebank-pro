@@ -10,18 +10,9 @@ npm install @bytebank-pro/ui
 
 ## Uso
 
-Para usar os componentes, importe o módulo ou os componentes standalone diretamente:
+Para usar os componentes, importe os componentes standalone diretamente:
 
 ```typescript
-// Importando o módulo completo
-import { UiModule } from '@bytebank-pro/ui';
-
-@NgModule({
-  imports: [UiModule],
-  // ...
-})
-export class AppModule {}
-
 // OU importando um componente standalone
 import { ButtonComponent } from '@bytebank-pro/ui/button';
 
@@ -31,14 +22,6 @@ import { ButtonComponent } from '@bytebank-pro/ui/button';
   // ...
 })
 export class YourComponent {}
-```
-
-### Estilos
-
-Importe os estilos no seu arquivo CSS principal ou no arquivo de configuração do Angular:
-
-```css
-@import '@bytebank-pro/ui/styles';
 ```
 
 ## Componentes
