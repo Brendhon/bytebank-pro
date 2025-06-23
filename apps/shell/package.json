@@ -30,8 +30,6 @@
     "@angular/build": "^20.0.2",
     "@angular/cli": "^20.0.2",
     "@angular/compiler-cli": "^20.0.0",
-    "@bytebank-pro/eslint-config": "*",
-    "@bytebank-pro/typescript-config": "*",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",

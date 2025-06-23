@@ -1,17 +1,7 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
+import { IMfeRegistry, MfeNames } from '@bytebank-pro/types';
 
-export enum MfeNames {
-  DASHBOARD = 'dashboard',
-  TRANSACTIONS = 'transactions',
-  SETTINGS = 'settings'
-}
-
-export interface MfeConfig {
-  exposedModule: string;
-  remoteEntry: string;
-}
-
-export const mfeRegistry: Record<MfeNames, MfeConfig> = {
+export const mfeRegistry: IMfeRegistry = {
   dashboard: {
     exposedModule: './Component',
     remoteEntry: 'http://localhost:4201/remoteEntry.js'

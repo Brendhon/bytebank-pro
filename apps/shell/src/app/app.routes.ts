@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from '@/core/guards';
 import { LayoutComponent } from '@/layout/layout.component';
-import { loadMfe, MfeNames } from '@/mfe-loader/mfe-registry';
+import { loadMfe } from '@/mfe-loader/mfe-registry';
+import { MfeNames } from '@bytebank-pro/types';
 
 export const routes: Routes = [
   {
@@ -14,20 +15,20 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'dashboard',
+        path: MfeNames.DASHBOARD,
         loadComponent: () => loadMfe(MfeNames.DASHBOARD).then(m => m.App)
       },
       {
-        path: 'transactions',
+        path: MfeNames.TRANSACTIONS,
         loadComponent: () => loadMfe(MfeNames.TRANSACTIONS).then(m => m.App)
       },
       {
-        path: 'settings',
+        path: MfeNames.SETTINGS,
         loadComponent: () => loadMfe(MfeNames.SETTINGS).then(m => m.App)
       },
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: MfeNames.DASHBOARD,
         pathMatch: 'full'
       }
     ]
