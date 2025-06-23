@@ -7,9 +7,6 @@
     "paths": {
       "@/*": [
         "src/app/*",
-      ],
-      "@bytebank-pro/ui": [
-        "../../packages/ui/dist"
       ]
     }
   },

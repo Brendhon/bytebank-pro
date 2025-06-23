@@ -8,9 +8,6 @@
       "@bytebank-pro/shared-design-tokens": [
         "../../packages/shared-design-tokens"
       ],
-      "@bytebank-pro/ui": [
-        "../../packages/ui/dist"
-      ],
       "@/*": [
         "src/app/*",
       ]
