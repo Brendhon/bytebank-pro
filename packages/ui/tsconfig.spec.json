@@ -8,7 +8,7 @@
     ]
   },
   "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.spec.ts", // Include all spec files
+    "src/**/*.d.ts" // Include all declaration files to ensure type checking
   ]
 }
