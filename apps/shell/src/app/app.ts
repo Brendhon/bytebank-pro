@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-shell',
   imports: [RouterOutlet],
   styleUrl: './app.css',
-  templateUrl: './app.html',
+  templateUrl: './app.html'
 })
 export class App {
   protected title = 'Bytebank Pro';

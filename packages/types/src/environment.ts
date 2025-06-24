@@ -1,4 +1,4 @@
-import { IMfeRegistry } from "./mfe";
+import { IMfeRegistry } from './mfe';
 
 export interface IEnvironment {
   production: boolean;

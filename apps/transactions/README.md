@@ -2,25 +2,25 @@
 
 Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido em **Angular 20**. Ele é responsável por:
 
-* Listar o histórico de transações do usuário
-* Criar, editar e excluir transações
-* Aplicar filtros por tipo, data e categoria
-* Enviar e consumir dados via **GraphQL**
-* Emitir eventos via **CustomEvent** para o Shell
+- Listar o histórico de transações do usuário
+- Criar, editar e excluir transações
+- Aplicar filtros por tipo, data e categoria
+- Enviar e consumir dados via **GraphQL**
+- Emitir eventos via **CustomEvent** para o Shell
 
 ---
 
 ## 🚀 Stack Tecnológica
 
-* **Angular 20**
-* **@angular-architects/module-federation** para integração com o Shell Angular
-* **Tailwind CSS** (com design tokens compartilhados)
-* **GraphQL (Apollo Client Angular)** para comunicação com a API
-* **Angular Reactive Forms** para formulários
-* **Lucide Angular** para ícones
-* **Angular Signals** + Services (para estado global)
-* **CustomEvent** + URL Params para comunicação com o Shell
-* **TypeScript**, ESLint, Prettier
+- **Angular 20**
+- **@angular-architects/module-federation** para integração com o Shell Angular
+- **Tailwind CSS** (com design tokens compartilhados)
+- **GraphQL (Apollo Client Angular)** para comunicação com a API
+- **Angular Reactive Forms** para formulários
+- **Lucide Angular** para ícones
+- **Angular Signals** + Services (para estado global)
+- **CustomEvent** + URL Params para comunicação com o Shell
+- **TypeScript**, ESLint, Prettier
 
 ---
 
@@ -52,14 +52,14 @@ Todas as operações são feitas via GraphQL com **Apollo Client Angular**. O JW
 
 ### Queries
 
-* `getTransactions(limit, page)`
-* `getTransactionById(id)`
+- `getTransactions(limit, page)`
+- `getTransactionById(id)`
 
 ### Mutations
 
-* `createTransaction(input)`
-* `updateTransaction(input, id)`
-* `deleteTransaction(id)`
+- `createTransaction(input)`
+- `updateTransaction(input, id)`
+- `deleteTransaction(id)`
 
 ---
 
@@ -76,49 +76,49 @@ const { withModuleFederationPlugin } = require('@angular-architects/module-feder
 module.exports = withModuleFederationPlugin({
   name: 'transactions',
   exposes: {
-    './Component': './src/app/app.Component.ts', // Componente principal do MFE
-  },
+    './Component': './src/app/app.Component.ts' // Componente principal do MFE
+  }
 });
 ```
 
------
+---
 
 ## 🔁 Comunicação com o Shell
 
-  * Via **CustomEvent**, emitindo eventos como:
+- Via **CustomEvent**, emitindo eventos como:
 
-    ```ts
-    window.dispatchEvent(new CustomEvent('transactionCreated', { detail: {...} }));
-    ```
+  ```ts
+  window.dispatchEvent(new CustomEvent('transactionCreated', { detail: {...} }));
+  ```
 
-  * Rotas e URLs seguem o padrão:
+- Rotas e URLs seguem o padrão:
 
-      * `/transactions`
-      * `/transactions/new`
-      * `/transactions/edit/:id`
+  - `/transactions`
+  - `/transactions/new`
+  - `/transactions/edit/:id`
 
------
+---
 
 ## 🎨 Estilo
 
-  * Estilizado com **Tailwind CSS**
-  * Usa **tokens de design compartilhados** de `packages/shared-design-tokens`
-  * [Lucide Angular para ícones](https://lucide.dev/guide/packages/lucide-angular)
+- Estilizado com **Tailwind CSS**
+- Usa **tokens de design compartilhados** de `packages/shared-design-tokens`
+- [Lucide Angular para ícones](https://lucide.dev/guide/packages/lucide-angular)
 
------
+---
 
 ## 📑 Formulários
 
-  * **Angular Reactive Forms** para controle de formulário
+- **Angular Reactive Forms** para controle de formulário
 
------
+---
 
 ## 📦 Estado
 
-  * **Angular Signals** + Services para estado global
-  * Pode ser usado para armazenar filtros, transações carregadas, etc.
+- **Angular Signals** + Services para estado global
+- Pode ser usado para armazenar filtros, transações carregadas, etc.
 
------
+---
 
 ## 🐳 Desenvolvimento
 
@@ -135,32 +135,32 @@ http://localhost:4202
 
 > Certifique-se de que o Shell Angular está rodando e configurado para consumir esse remote.
 
------
+---
 
 ## 🐳 Docker
 
 Este microfrontend é incluído no `docker-compose.yml` do monorepo para rodar junto com os demais em desenvolvimento local.
 
------
+---
 
 ## 🚀 Deploy
 
-  * Deploy individual via **Render**
-  * Exposição do `remoteEntry.js` para o Shell consumir
+- Deploy individual via **Render**
+- Exposição do `remoteEntry.js` para o Shell consumir
 
------
+---
 
 ## ✅ Checklist de padrões
 
-  * [x] Angular 20
-  * [x] Tailwind CSS com tokens globais
-  * [x] Comunicação via GraphQL
-  * [x] Validação com Angular Reactive Forms
-  * [x] Comunicação com Shell por CustomEvent
-  * [x] Roteamento em inglês
-  * [x] Deploy individual por app (MFEs)
+- [x] Angular 20
+- [x] Tailwind CSS com tokens globais
+- [x] Comunicação via GraphQL
+- [x] Validação com Angular Reactive Forms
+- [x] Comunicação com Shell por CustomEvent
+- [x] Roteamento em inglês
+- [x] Deploy individual por app (MFEs)
 
------
+---
 
 ## 👥 Autor
 

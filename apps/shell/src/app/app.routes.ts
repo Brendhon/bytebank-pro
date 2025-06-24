@@ -7,7 +7,7 @@ import { MfeNames } from '@bytebank-pro/types';
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('@/pages/login/login.component').then(m => m.LoginComponent),
+    loadComponent: () => import('@/pages/login/login.component').then((m) => m.LoginComponent)
   },
   {
     path: '',
@@ -16,15 +16,15 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => loadMfe(MfeNames.DASHBOARD).then(m => m.App)
+        loadComponent: () => loadMfe(MfeNames.DASHBOARD).then((m) => m.App)
       },
       {
         path: 'transactions',
-        loadComponent: () => loadMfe(MfeNames.TRANSACTIONS).then(m => m.App)
+        loadComponent: () => loadMfe(MfeNames.TRANSACTIONS).then((m) => m.App)
       },
       {
         path: 'settings',
-        loadComponent: () => loadMfe(MfeNames.SETTINGS).then(m => m.App)
+        loadComponent: () => loadMfe(MfeNames.SETTINGS).then((m) => m.App)
       },
       {
         path: '',
@@ -35,7 +35,8 @@ export const routes: Routes = [
   },
   {
     path: 'not-found',
-    loadComponent: () => import('@/pages/not-found/not-found.component').then(m => m.NotFoundComponent)
+    loadComponent: () =>
+      import('@/pages/not-found/not-found.component').then((m) => m.NotFoundComponent)
   },
   {
     path: '**',

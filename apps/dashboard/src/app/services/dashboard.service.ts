@@ -1,9 +1,10 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { InMemoryCache } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache } from '@apollo/client/core';
 import { BehaviorSubject } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class DashboardService {
 
     this.apollo.create({
       link: this.httpLink.create({
-        uri: 'http://localhost:4000/graphql',
+        uri: environment.apiUrl,
         headers: new HttpHeaders().set('Authorization', token ? `Bearer ${token}` : '')
       }),
       cache: new InMemoryCache()
@@ -37,7 +38,7 @@ export class DashboardService {
   loadDashboardData(): void {
     // Implementação futura usando Apollo Client GraphQL
     console.log('Carregando dados do dashboard via GraphQL');
-    
+
     // Por enquanto, usando dados fictícios
     this.balanceSubject.next(15750);
   }

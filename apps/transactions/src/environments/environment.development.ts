@@ -1,4 +1,4 @@
-import { IEnvironment } from "@bytebank-pro/types";
+import { IEnvironment } from '@bytebank-pro/types';
 
 export const environment: IEnvironment = {
   production: false,

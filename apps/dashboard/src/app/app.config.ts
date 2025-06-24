@@ -1,11 +1,16 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_OPTIONS, Apollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { InMemoryCache } from '@apollo/client/core';
 
 import { routes } from '@/app.routes';
+import { environment } from 'src/environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,11 +24,11 @@ export const appConfig: ApplicationConfig = {
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: 'http://localhost:4000/graphql',
-          }),
+            uri: environment.apiUrl
+          })
         };
       },
-      deps: [HttpLink],
+      deps: [HttpLink]
     },
     Apollo,
     HttpLink

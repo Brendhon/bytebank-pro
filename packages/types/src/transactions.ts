@@ -1,14 +1,14 @@
 // Enums
 export enum TransactionDesc {
-  deposit = "Depósito",
-  transfer = "Transferência",
-  withdrawal = "Saque",
-  payment = "Pagamento",
+  deposit = 'Depósito',
+  transfer = 'Transferência',
+  withdrawal = 'Saque',
+  payment = 'Pagamento'
 }
 
 export enum TransactionType {
-  outflow = "Entrada",
-  inflow = "Saída"
+  outflow = 'Entrada',
+  inflow = 'Saída'
 }
 
 // Types

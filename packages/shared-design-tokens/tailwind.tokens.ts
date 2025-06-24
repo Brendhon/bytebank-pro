@@ -4,7 +4,7 @@ import { fontFamilies, fontSizes, fontWeights, lineHeights } from './typography'
 
 export const tailwindColors = {
   // This will create tokens like 'bytebank-blue', 'bytebank-orange', etc.
-  ...colors,
+  ...colors
   // Example of how to use colors with shades, if you had them (e.g., 'blue-500')
   // 'bytebank-blue': {
   //    DEFAULT: colors['bytebank-blue'],
@@ -14,23 +14,23 @@ export const tailwindColors = {
 
 export const tailwindTypography = {
   fontFamily: {
-    inter: fontFamilies.inter,
+    inter: fontFamilies.inter
   },
   fontSize: {
     // This creates classes like 'text-14px', 'text-16px'
-    ...fontSizes,
+    ...fontSizes
   },
   fontWeight: {
     // This creates classes like 'font-regular', 'font-semi-bold', 'font-bold'
-    'regular': fontWeights.regular.toString(), // Tailwind expects fontWeight as string
+    regular: fontWeights.regular.toString(), // Tailwind expects fontWeight as string
     'semi-bold': fontWeights['semi-bold'].toString(),
-    'bold': fontWeights.bold.toString(),
+    bold: fontWeights.bold.toString()
   },
   lineHeight: {
     // This creates classes like 'leading-120', 'leading-auto'
     '120': lineHeights['120'],
-    'auto': lineHeights.auto,
-  },
+    auto: lineHeights.auto
+  }
   // Here you can add other typography properties for Tailwind
   // For example, for a specific H1:
   // h1: {

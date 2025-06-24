@@ -8,22 +8,22 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do *
 
 ## 🚀 Stack Tecnológica
 
-* **Angular 20**
-* **@angular-architects/module-federation**
-* **Tailwind CSS**
-* **Angular Signals** + Services (para estado global)
-* **CustomEvent** e URL Params para comunicação entre apps
-* **JWT** para autenticação (armazenado em localStorage)
-* **Apollo Client** (opcional, caso o Shell consuma a API também)
+- **Angular 20**
+- **@angular-architects/module-federation**
+- **Tailwind CSS**
+- **Angular Signals** + Services (para estado global)
+- **CustomEvent** e URL Params para comunicação entre apps
+- **JWT** para autenticação (armazenado em localStorage)
+- **Apollo Client** (opcional, caso o Shell consuma a API também)
 
 ---
 
 ## 🧩 Objetivos do MFE
 
-* Exibir o saldo total do usuário
-* Mostrar gráficos de entradas/saídas por categoria
-* Ser carregado pelo Shell via rota `/dashboard`
-* Utilizar dados reais via API GraphQL
+- Exibir o saldo total do usuário
+- Mostrar gráficos de entradas/saídas por categoria
+- Ser carregado pelo Shell via rota `/dashboard`
+- Utilizar dados reais via API GraphQL
 
 ---
 
@@ -52,9 +52,9 @@ dashboard/
 
 ## 🔗 Integração com o Shell
 
-* Configurado como `remote` no Shell Angular
-* O `remoteEntry.js` é carregado via Module Federation
-* Shell chama a rota `/dashboard` que aciona o carregamento remoto
+- Configurado como `remote` no Shell Angular
+- O `remoteEntry.js` é carregado via Module Federation
+- Shell chama a rota `/dashboard` que aciona o carregamento remoto
 
 ---
 
@@ -66,8 +66,8 @@ const { withModuleFederationPlugin } = require('@angular-architects/module-feder
 module.exports = withModuleFederationPlugin({
   name: 'dashboard',
   exposes: {
-    './Component': './src/app/app.Component.ts',
-  },
+    './Component': './src/app/app.Component.ts'
+  }
 });
 ```
 
@@ -77,14 +77,14 @@ module.exports = withModuleFederationPlugin({
 
 ### Estratégias:
 
-* **CustomEvent** para emitir eventos como `dashboardUpdated`
-* **URL de rota**: `/dashboard` é mapeada no Shell e usada para navegação
+- **CustomEvent** para emitir eventos como `dashboardUpdated`
+- **URL de rota**: `/dashboard` é mapeada no Shell e usada para navegação
 
 ---
 
 ## 📡 Comunicação com a API (GraphQL)
 
-* Utiliza **Apollo Client Angular** para executar queries como:
+- Utiliza **Apollo Client Angular** para executar queries como:
 
 ```graphql
 query GetTransactionSummary {
@@ -100,22 +100,22 @@ query GetTransactionSummary {
 }
 ```
 
-* O JWT armazenado pelo Shell é enviado via `Authorization` no header das requisições.
+- O JWT armazenado pelo Shell é enviado via `Authorization` no header das requisições.
 
 ---
 
 ## 🎨 Estilo
 
-* Estilizado com **Tailwind CSS**, usando os tokens de design compartilhados da pasta `packages/shared-design-tokens`
-* Padrões visuais consistentes com os outros MFEs e com o Shell
+- Estilizado com **Tailwind CSS**, usando os tokens de design compartilhados da pasta `packages/shared-design-tokens`
+- Padrões visuais consistentes com os outros MFEs e com o Shell
 
 ---
 
 ## 🧪 Validação e Lint
 
-* ESLint com preset Angular
-* Prettier para formatação
-* Husky + lint-staged integrados ao repositório global via Turborepo
+- ESLint com preset Angular
+- Prettier para formatação
+- Husky + lint-staged integrados ao repositório global via Turborepo
 
 ---
 
@@ -148,20 +148,20 @@ docker compose up
 
 ## 🚀 Deploy
 
-* Deploy separado na **Render**
-* O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública
+- Deploy separado na **Render**
+- O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública
 
 ---
 
 ## ✅ Checklist de padrões
 
-* [x] Angular 20 com Tailwind
-* [x] Apollo Client para GraphQL
-* [x] Rota única (`/dashboard`)
-* [x] Comunicação com Shell via CustomEvent
-* [x] JWT via header Authorization
-* [x] Docker local via Docker Compose
-* [x] Build pronto para deploy estático ou containerizado
+- [x] Angular 20 com Tailwind
+- [x] Apollo Client para GraphQL
+- [x] Rota única (`/dashboard`)
+- [x] Comunicação com Shell via CustomEvent
+- [x] JWT via header Authorization
+- [x] Docker local via Docker Compose
+- [x] Build pronto para deploy estático ou containerizado
 
 ---
 

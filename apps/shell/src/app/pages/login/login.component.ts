@@ -9,7 +9,7 @@ import { ButtonComponent } from '@bytebank-pro/ui';
   selector: 'app-login',
   standalone: true,
   imports: [RouterModule, FormsModule, CommonModule, ButtonComponent],
-  templateUrl: './login.component.html',
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // Verificar se há um returnUrl na query params
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-    
+
     // Redirecionar se já estiver autenticado
     if (this.authService.isLoggedIn) {
       this.router.navigate([this.returnUrl]);
@@ -37,12 +37,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.isLoading = true;
     this.errorMessage = '';
-    
-    this.authService.login(this.email, this.password)
+
+    this.authService
+      .login(this.email, this.password)
       .then(() => {
         this.router.navigate([this.returnUrl]);
       })
-      .catch(error => {
+      .catch((error) => {
         this.errorMessage = error.message || 'Erro ao fazer login, verifique suas credenciais';
       })
       .finally(() => {

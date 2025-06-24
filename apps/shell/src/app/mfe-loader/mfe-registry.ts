@@ -18,11 +18,11 @@ export const mfeRegistry: IMfeRegistry = {
 
 export const loadMfe = (mfeName: MfeNames) => {
   const config = mfeRegistry[mfeName];
-  
+
   if (!config) {
     throw new Error(`MFE ${mfeName} not found in registry`);
   }
-  
+
   return loadRemoteModule({
     type: 'module',
     remoteEntry: config.remoteEntry,

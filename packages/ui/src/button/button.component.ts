@@ -23,33 +23,42 @@ export class ButtonComponent {
 
   // Método para obter as classes CSS baseadas na variante
   get buttonClasses(): string {
-    const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium px-4 py-2 text-sm transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2';
+    const baseClasses =
+      'inline-flex items-center justify-center rounded-md font-medium px-4 py-2 text-sm transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2';
     let variantClasses = '';
 
     switch (this.variant) {
       case 'dark':
-        variantClasses = 'bg-bytebank-dark text-white hover:bg-gray-700 active:bg-gray-800 focus:ring-gray-500';
+        variantClasses =
+          'bg-bytebank-dark text-white hover:bg-gray-700 active:bg-gray-800 focus:ring-gray-500';
         break;
       case 'blue':
-        variantClasses = 'bg-bytebank-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-500';
+        variantClasses =
+          'bg-bytebank-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-500';
         break;
       case 'green':
-        variantClasses = 'bg-bytebank-green text-white hover:bg-green-600 active:bg-green-700 focus:ring-green-500';
+        variantClasses =
+          'bg-bytebank-green text-white hover:bg-green-600 active:bg-green-700 focus:ring-green-500';
         break;
       case 'orange':
-        variantClasses = 'bg-bytebank-orange text-white hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-500';
+        variantClasses =
+          'bg-bytebank-orange text-white hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-500';
         break;
       case 'outlineGreen':
-        variantClasses = 'bg-transparent border border-bytebank-green text-bytebank-green hover:bg-green-50 focus:ring-green-500';
+        variantClasses =
+          'bg-transparent border border-bytebank-green text-bytebank-green hover:bg-green-50 focus:ring-green-500';
         break;
       case 'outlineOrange':
-        variantClasses = 'bg-transparent border border-bytebank-orange text-bytebank-orange hover:bg-orange-50 focus:ring-orange-500';
+        variantClasses =
+          'bg-transparent border border-bytebank-orange text-bytebank-orange hover:bg-orange-50 focus:ring-orange-500';
         break;
       default:
-        variantClasses = 'bg-bytebank-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-500'; // Default
+        variantClasses =
+          'bg-bytebank-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-500'; // Default
     }
 
-    const disabledClasses = (this.disabled || this.loading) ? 'opacity-60 cursor-not-allowed pointer-events-none' : '';
+    const disabledClasses =
+      this.disabled || this.loading ? 'opacity-60 cursor-not-allowed pointer-events-none' : '';
 
     // Combina todas as classes. O `className` permite sobrescrever ou adicionar classes externas.
     return `${baseClasses} ${variantClasses} ${disabledClasses} ${this.className}`;

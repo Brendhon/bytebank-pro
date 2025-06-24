@@ -50,7 +50,7 @@ describe('ButtonComponent', () => {
       const testType: ButtonType = 'submit';
       component.type = testType;
       fixture.detectChanges();
-      
+
       expect(component.type).toBe(testType);
       expect(buttonElement.type).toBe(testType);
     });
@@ -59,14 +59,14 @@ describe('ButtonComponent', () => {
       const testVariant: ButtonVariant = 'green';
       component.variant = testVariant;
       fixture.detectChanges();
-      
+
       expect(component.variant).toBe(testVariant);
     });
 
     it('should set loading property', () => {
       component.loading = true;
       fixture.detectChanges();
-      
+
       expect(component.loading).toBeTruthy();
       expect(buttonElement.disabled).toBeTruthy();
     });
@@ -74,7 +74,7 @@ describe('ButtonComponent', () => {
     it('should set disabled property', () => {
       component.disabled = true;
       fixture.detectChanges();
-      
+
       expect(component.disabled).toBeTruthy();
       expect(buttonElement.disabled).toBeTruthy();
     });
@@ -83,7 +83,7 @@ describe('ButtonComponent', () => {
       const customClass = 'custom-class';
       component.className = customClass;
       fixture.detectChanges();
-      
+
       expect(component.className).toBe(customClass);
       expect(buttonElement.className).toContain(customClass);
     });
@@ -93,7 +93,7 @@ describe('ButtonComponent', () => {
     it('should have base classes', () => {
       fixture.detectChanges();
       const classes = component.buttonClasses;
-      
+
       expect(classes).toContain('inline-flex');
       expect(classes).toContain('items-center');
       expect(classes).toContain('justify-center');
@@ -104,7 +104,7 @@ describe('ButtonComponent', () => {
     it('should apply dark variant classes', () => {
       component.variant = 'dark';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-bytebank-dark');
       expect(classes).toContain('text-white');
@@ -113,7 +113,7 @@ describe('ButtonComponent', () => {
     it('should apply blue variant classes', () => {
       component.variant = 'blue';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-bytebank-blue');
       expect(classes).toContain('text-white');
@@ -122,7 +122,7 @@ describe('ButtonComponent', () => {
     it('should apply green variant classes', () => {
       component.variant = 'green';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-bytebank-green');
       expect(classes).toContain('text-white');
@@ -131,7 +131,7 @@ describe('ButtonComponent', () => {
     it('should apply orange variant classes', () => {
       component.variant = 'orange';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-bytebank-orange');
       expect(classes).toContain('text-white');
@@ -140,7 +140,7 @@ describe('ButtonComponent', () => {
     it('should apply outlineGreen variant classes', () => {
       component.variant = 'outlineGreen';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-transparent');
       expect(classes).toContain('border-bytebank-green');
@@ -150,7 +150,7 @@ describe('ButtonComponent', () => {
     it('should apply outlineOrange variant classes', () => {
       component.variant = 'outlineOrange';
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('bg-transparent');
       expect(classes).toContain('border-bytebank-orange');
@@ -160,7 +160,7 @@ describe('ButtonComponent', () => {
     it('should apply disabled classes when disabled', () => {
       component.disabled = true;
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('opacity-60');
       expect(classes).toContain('cursor-not-allowed');
@@ -170,7 +170,7 @@ describe('ButtonComponent', () => {
     it('should apply disabled classes when loading', () => {
       component.loading = true;
       fixture.detectChanges();
-      
+
       const classes = component.buttonClasses;
       expect(classes).toContain('opacity-60');
       expect(classes).toContain('cursor-not-allowed');
@@ -182,7 +182,7 @@ describe('ButtonComponent', () => {
     it('should show loading spinner when loading is true', () => {
       component.loading = true;
       fixture.detectChanges();
-      
+
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
       expect(spinner).toBeTruthy();
     });
@@ -190,7 +190,7 @@ describe('ButtonComponent', () => {
     it('should hide loading spinner when loading is false', () => {
       component.loading = false;
       fixture.detectChanges();
-      
+
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
       expect(spinner).toBeFalsy();
     });
@@ -198,7 +198,7 @@ describe('ButtonComponent', () => {
     it('should make content transparent when loading', () => {
       component.loading = true;
       fixture.detectChanges();
-      
+
       const contentSpan = fixture.debugElement.query(By.css('span'));
       expect(contentSpan.nativeElement.className).toContain('opacity-0');
     });
@@ -206,7 +206,7 @@ describe('ButtonComponent', () => {
     it('should make content visible when not loading', () => {
       component.loading = false;
       fixture.detectChanges();
-      
+
       const contentSpan = fixture.debugElement.query(By.css('span'));
       expect(contentSpan.nativeElement.className).not.toContain('opacity-0');
     });
@@ -215,9 +215,9 @@ describe('ButtonComponent', () => {
   describe('Events', () => {
     it('should emit buttonClick event when clicked', () => {
       spyOn(component.buttonClick, 'emit');
-      
+
       buttonElement.click();
-      
+
       expect(component.buttonClick.emit).toHaveBeenCalled();
     });
 
@@ -225,9 +225,9 @@ describe('ButtonComponent', () => {
       spyOn(component.buttonClick, 'emit');
       component.disabled = true;
       fixture.detectChanges();
-      
+
       buttonElement.click();
-      
+
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
@@ -235,18 +235,18 @@ describe('ButtonComponent', () => {
       spyOn(component.buttonClick, 'emit');
       component.loading = true;
       fixture.detectChanges();
-      
+
       buttonElement.click();
-      
+
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
     it('should pass event object to buttonClick emitter', () => {
       spyOn(component.buttonClick, 'emit');
-      
+
       const clickEvent = new Event('click');
       buttonElement.dispatchEvent(clickEvent);
-      
+
       expect(component.buttonClick.emit).toHaveBeenCalledWith(jasmine.any(Event));
     });
   });
@@ -255,11 +255,11 @@ describe('ButtonComponent', () => {
     it('should project content inside button', () => {
       const testContent = 'Test Button';
       fixture = TestBed.createComponent(ButtonComponent);
-      
+
       // Set the content directly on the component's element
       fixture.debugElement.nativeElement.innerHTML = `<bb-button>${testContent}</bb-button>`;
       fixture.detectChanges();
-      
+
       // For content projection testing, we need to create a host component
       // This is a simplified test - in a real scenario, you'd create a test host component
       expect(fixture.debugElement.nativeElement).toBeTruthy();
@@ -270,21 +270,21 @@ describe('ButtonComponent', () => {
     it('should have correct button type attribute', () => {
       component.type = 'submit';
       fixture.detectChanges();
-      
+
       expect(buttonElement.getAttribute('type')).toBe('submit');
     });
 
     it('should be disabled when disabled property is true', () => {
       component.disabled = true;
       fixture.detectChanges();
-      
+
       expect(buttonElement.disabled).toBeTruthy();
     });
 
     it('should be disabled when loading property is true', () => {
       component.loading = true;
       fixture.detectChanges();
-      
+
       expect(buttonElement.disabled).toBeTruthy();
     });
   });

@@ -6,15 +6,15 @@ export const environment: IEnvironment = {
   mfeRegistry: {
     dashboard: {
       remoteEntry: 'http://localhost:4201/remoteEntry.js',
-      exposedModule: './Component',
+      exposedModule: './Component'
     },
     transactions: {
       remoteEntry: 'http://localhost:4202/remoteEntry.js',
-      exposedModule: './Component',
+      exposedModule: './Component'
     },
     settings: {
       remoteEntry: 'http://localhost:4203/remoteEntry.js',
-      exposedModule: './Component',
-    },
+      exposedModule: './Component'
+    }
   }
 };

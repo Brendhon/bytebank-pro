@@ -31,6 +31,30 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        "coverage/**",
+        "dist/**"
+      ]
+    },
+    "format": {
+      "cache": false,
+      "persistent": true
+    },
+    "deploy": {
+      "dependsOn": [
+        "build"
+      ],
+      "cache": false,
+      "persistent": true  
     }
   }
 }
