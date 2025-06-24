@@ -1,28 +1,20 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { IMfeRegistry, MfeNames } from '@bytebank-pro/types';
+import { MfeNames } from '@bytebank-pro/types';
+import { environment } from 'src/environments/environment';
 
-export const mfeRegistry: IMfeRegistry = {
-  dashboard: {
-    exposedModule: './Component',
-    remoteEntry: 'http://localhost:4201/remoteEntry.js'
-  },
-  transactions: {
-    exposedModule: './Component',
-    remoteEntry: 'http://localhost:4202/remoteEntry.js'
-  },
-  settings: {
-    exposedModule: './Component',
-    remoteEntry: 'http://localhost:4203/remoteEntry.js'
-  }
-} as const;
+/**
+ * Loads a micro frontend (MFE) module dynamically based on the provided MFE name.
+ * @param {MfeNames} mfeName - The name of the micro frontend to load
+ * @returns {Promise<any>} A promise that resolves to the loaded MFE module
+ */
+export const loadMfe = (mfeName: MfeNames): Promise<any> => {
+  // Check if the MFE registry is defined in the environment
+  const config = environment.mfeRegistry?.[mfeName];
 
-export const loadMfe = (mfeName: MfeNames) => {
-  const config = mfeRegistry[mfeName];
+  // Check if the MFE configuration exists in the registry
+  if (!config) throw new Error(`MFE ${mfeName} not found in registry`);
 
-  if (!config) {
-    throw new Error(`MFE ${mfeName} not found in registry`);
-  }
-
+  // Load the remote module using the configuration from the registry
   return loadRemoteModule({
     type: 'module',
     remoteEntry: config.remoteEntry,
