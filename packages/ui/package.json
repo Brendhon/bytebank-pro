@@ -10,6 +10,8 @@
   "scripts": {
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:watch": "ng test --browsers=Chrome",
     "lint": "eslint --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .angular"
   },
@@ -32,18 +34,20 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.0.1",
     "postcss": "^8.5.3",
+    "puppeteer": "^24.10.2",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.8.2",
-    "tailwindcss": "^3.4.17"
+    "zone.js": "^0.15.1"
   },
   "peerDependencies": {
-    "@angular/router": "^20.0.0",
+    "@angular/animations": "^20.0.0",
+    "@angular/common": "^20.0.0",
+    "@angular/compiler": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/forms": "^20.0.0",
     "@angular/platform-browser": "^20.0.0",
     "@angular/platform-browser-dynamic": "^20.0.0",
-    "@angular/forms": "^20.0.0",
-    "@angular/compiler": "^20.0.0",
-    "@angular/common": "^20.0.0",
-    "@angular/animations": "^20.0.0",
-    "@angular/core": "^20.0.0",
+    "@angular/router": "^20.0.0",
     "@bytebank-pro/shared-design-tokens": "*",
     "rxjs": "~7.8.0"
   }
