@@ -1,0 +1,36 @@
+# Assets do ByteBank Pro - Estrutura atual
+
+## Logos da marca (SVG)
+logos/
+├── logo.svg              # Logo principal da ByteBank
+└── icon.svg              # Ícone/símbolo da marca
+
+## Ícones customizados e ferramentas (SVG)
+icons/
+├── icon.svg              # Ícone principal da aplicação
+├── logo.svg              # Logo em formato de ícone
+├── figma.svg             # Ícone do Figma
+├── github.svg            # Ícone do GitHub
+└── storybook.svg         # Ícone do Storybook
+
+## Imagens funcionais (PNG)
+images/
+├── box.png               # Imagem de caixa/container
+├── devices.png           # Imagem de dispositivos
+├── star.png              # Imagem de estrela/favorito
+└── withdrawal.png        # Imagem de saque/retirada
+
+## Ilustrações para telas/estados (SVG)
+illustrations/
+├── 404.svg               # Ilustração para página 404
+├── home.svg              # Ilustração da tela inicial
+├── login.svg             # Ilustração da tela de login
+├── register.svg          # Ilustração da tela de cadastro
+├── settings.svg          # Ilustração da tela de configurações
+└── transaction.svg       # Ilustração de transações
+
+# Para adicionar novos assets:
+# 1. Coloque o arquivo na pasta apropriada
+# 2. Atualize src/index.ts com o novo path
+# 3. Execute npm run build para recompilar
+# 4. Atualize a documentação se necessário

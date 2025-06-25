@@ -45,6 +45,7 @@ bytebank-pro/
 ├── docs/                    # Documentação do projeto
 ├── packages/                # Bibliotecas e pacotes reutilizáveis no monorepo
 │   ├── eslint-config/       # Configurações de ESLint compartilhadas
+│   ├── shared-assets/       # Assets compartilhados (logos, ícones, imagens)
 │   ├── shared-design-tokens/# Tokens de design reutilizáveis (cores, spacing, fontes)
 │   ├── types/               # Definições de tipos TypeScript compartilhadas
 │   ├── typescript-config/   # Configurações de TypeScript compartilhadas
@@ -122,6 +123,19 @@ Configurações ESLint centralizadas:
 - **Uso**: Importado em todos os `eslint.config.js` do monorepo
 
 [📖 Ver documentação completa](./packages/eslint-config/README.md)
+
+### 🎨 Shared Assets (`packages/shared-assets`)
+
+Biblioteca de assets compartilhados para todos os microfrontends:
+
+- **`assets/logos/`**: Logos da marca ByteBank (SVG)
+- **`assets/icons/`**: Ícones customizados e de ferramentas (SVG)
+- **`assets/images/`**: Imagens funcionais (PNG) como dispositivos, estrelas, etc.
+- **`assets/illustrations/`**: Ilustrações para telas e estados da aplicação (SVG)
+- **`src/index.ts`**: Constantes e helpers para paths dos assets
+- **Uso**: Importação granular com paths tipados e otimização de imagens
+
+[📖 Ver documentação completa](./packages/shared-assets/README.md) | [📋 Guia de Assets](./docs/guidelines/ASSETS_GUIDELINES.md)
 
 ---
 

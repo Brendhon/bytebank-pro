@@ -1,0 +1,34 @@
+{
+  "name": "@bytebank-pro/shared-assets",
+  "version": "1.0.0",
+  "description": "Shared assets (logos, icons, images) for ByteBank Pro microfrontends",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "private": true,
+  "files": [
+    "dist/**/*",
+    "assets/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./assets/*": "./assets/*"
+  },
+  "scripts": {
+    "build": "tsc && npm run copy:assets",
+    "dev": "tsc --watch",
+    "copy:assets": "cp -r ./assets ./dist/",
+    "clean": "rm -rf dist .turbo",
+    "optimize:images": "imagemin 'assets/**/*.{jpg,jpeg,png}' --out-dir=dist/assets --plugin=imagemin-mozjpeg --plugin=imagemin-pngquant"
+  },
+  "devDependencies": {
+    "@bytebank-pro/typescript-config": "*",
+    "typescript": "^5.6.0",
+    "imagemin": "^8.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0"
+  }
+}

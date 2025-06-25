@@ -20,3 +20,4 @@ Para informações mais específicas, consulte os seguintes documentos:
 - [**Padrões para Storybook**](./guidelines/STORYBOOK_GUIDELINES.md) - Estruturação e documentação no Storybook
 - [**Diretrizes de Documentação**](./guidelines/DOCUMENTATION_GUIDELINES.md) - JSDoc, README e outras documentações
 - [**Diretrizes de Acessibilidade**](./guidelines/ACCESSIBILITY_GUIDELINES.md) - Requisitos e práticas de acessibilidade
+- [**Diretrizes de uso de Assets**](./guidelines/ASSETS_GUIDELINES.md) - Padrões para uso de imagens, ícones e outros recursos estáticos
