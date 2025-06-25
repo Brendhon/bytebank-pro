@@ -2,7 +2,7 @@
 
 [![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge&logo=render&logoColor=white)](https://bytebank-api.onrender.com/graphql)
 
-Este repositório contém a estrutura completa dos **microfrontends do Bytebank Pro**, criados como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). Utilizando **Turborepo**, o projeto é dividido em aplicações independentes para melhor escalabilidade, manutenção e desempenho, todas desenvolvidas em **Angular**.
+Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, desenvolvidos como parte do Tech Challenge (Fase 2) da pós-graduação em Engenharia de Front-end (FIAP). O projeto utiliza **Turborepo** para organizar aplicações Angular independentes, promovendo escalabilidade, manutenção e desempenho.
 
 ---
 
@@ -17,18 +17,16 @@ Este repositório contém a estrutura completa dos **microfrontends do Bytebank 
 
 ---
 
-## 📦 Tecnologias Globais
+## 📦 Tecnologias
 
-- [Turborepo](https://turbo.build/) – Orquestração de monorepo
-- [Angular 20](https://angular.dev/) – Framework principal para todos os apps
-- [@angular-architects/module-federation](https://github.com/angular-architects/module-federation) – Carregamento remoto dos MFEs
-- [TailwindCSS](https://tailwindcss.com/) – Estilização em todos os apps
-- [TypeScript](https://www.typescriptlang.org/) – Tipagem em todos os projetos
-- [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/) – Comunicação com a API
-- [Docker](https://www.docker.com/) – Para rodar a API GraphQL e outras dependências em contêineres
-- [Docker Compose](https://docs.docker.com/compose/) - Para orquestrar múltiplos contêineres Docker (API, MongoDB) em desenvolvimento.
-- [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) – Padrão de código
-- [Husky](https://typicode.github.io/husky/) + lint-staged – Garantia de qualidade nos commits
+- **Monorepo:** [Turborepo](https://turbo.build/)
+- **Framework:** [Angular 20](https://angular.dev/)
+- **Module Federation:** [@angular-architects/module-federation](https://github.com/angular-architects/module-federation)
+- **Estilo:** [TailwindCSS](https://tailwindcss.com/)
+- **Tipagem:** [TypeScript](https://www.typescriptlang.org/)
+- **API:** [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/)
+- **Contêineres:** [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
+- **Qualidade:** [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Husky](https://typicode.github.io/husky/), lint-staged, EditorConfig
 
 ---
 
@@ -37,68 +35,66 @@ Este repositório contém a estrutura completa dos **microfrontends do Bytebank 
 ```
 bytebank-pro/
 ├── apps/
-│   ├── shell/               \# Angular Shell App
-│   ├── dashboard/           \# Angular MFE - Dashboard
-│   ├── transactions/        \# Angular MFE - Transações
-│   └── settings/            \# Angular MFE - Configurações
+│   ├── shell/                # Angular Shell App
+│   ├── dashboard/            # Angular MFE - Dashboard
+│   ├── transactions/         # Angular MFE - Transações
+│   └── settings/             # Angular MFE - Configurações
 │
 ├── packages/
-│   └── shared-design-tokens/  \# Tokens de design reutilizáveis (cores, spacing, fontes)
-│   └── ui/                    \# Biblioteca de componentes compartilhados (ex: Botões, Inputs)
+│   ├── shared-design-tokens/ # Tokens de design reutilizáveis
+│   └── ui/                   # Componentes compartilhados
 │
 ├── .gitignore
 ├── turbo.json
 ├── package.json
-└── tsconfig.base.json
-└── docker-compose.yml       \# Configuração do Docker Compose para desenvolvimento
+├── tsconfig.base.json
+└── docker-compose.yml        # Configuração Docker Compose
 ```
 
 ---
 
 ## 🎨 Design Tokens Compartilhados
 
-Pasta: `packages/shared-design-tokens`
+Local: `packages/shared-design-tokens`
 
-Inclui:
+Inclui arquivos como:
 
 - `colors.ts`
 - `typography.ts`
-- `tailwind.tokens.ts` → usado nos `tailwind.config.js` de todos os apps
+- `tailwind.tokens.ts` (usado nos `tailwind.config.js` dos apps)
 
 ---
 
 ## 🔌 Comunicação entre Microfrontends
 
-### Estratégias utilizadas:
-
 - **Module Federation** com `@angular-architects/module-federation`
 - **CustomEvent** (ex: `userUpdated`, `transactionCreated`) para eventos locais
-- **Query Params na URL** para sincronização de estado (ex: filtros, navegação)
+- **Query Params na URL** para sincronização de estado
 
 ---
 
 ## 🔐 Autenticação
 
-- Implementada via **JWT**, armazenado no localStorage/sessionStorage
-- O Shell Angular gerencia o login e compartilha o token com os MFEs via headers
-- Cada MFE faz chamadas GraphQL à API via Apollo Client com token no `Authorization`
+- JWT armazenado no localStorage/sessionStorage
+- Shell gerencia login e compartilha token com MFEs via headers
+- MFEs usam Apollo Client para chamadas GraphQL autenticadas
 
 ---
 
 ## 🧪 Validação e Padrões de Código
 
-- **Prettier**: formatação automática
-- **ESLint**: linting com regras adaptadas para Angular
-- **EditorConfig**: para padronizar indentação e finais de linha
-- **Angular Reactive Forms** (nos MFEs Angular) para formulários
+- **Prettier:** formatação automática
+- **ESLint:** linting adaptado para Angular
+- **EditorConfig:** padronização de indentação e finais de linha
+- **Angular Reactive Forms:** para formulários
 
 ---
 
 ## 🐳 Desenvolvimento com Docker Compose
 
-Para facilitar o desenvolvimento, o projeto utiliza Docker Compose para subir a API e o MongoDB.
+O projeto utiliza Docker Compose para subir a API e o MongoDB.
 
-Arquivo: `docker-compose.yml` (na raiz do repositório)
+Arquivo: `docker-compose.yml`
 
 ```yaml
 services:
@@ -128,72 +124,64 @@ volumes:
   mongodb_data:
 ```
 
-**Scripts para Desenvolvimento:**
+---
 
-No `package.json` raiz, adicione os seguintes scripts:
+## 🚀 Instruções de Desenvolvimento
 
-```json
-{
-  "scripts": {
-    "dev": "docker-compose up -d && turbo run dev",
-    "dev:stop": "docker-compose down",
-    "dev:frontend": "turbo run dev",
-    "dev:api": "docker-compose up -d"
-  }
-}
-```
+1. **Instalar dependências:**
+   ```bash
+   npm install
+   ```
 
-**Uso:**
+2. **Iniciar ambiente completo (API, MongoDB e MFEs):**
+   ```bash
+   npm run dev
+   ```
 
-1.  **Iniciar o ambiente de desenvolvimento completo (API, MongoDB e MFEs):**
+3. **Iniciar apenas API e MongoDB:**
+   ```bash
+   npm run dev:api
+   ```
 
-    ```bash
-    npm run dev
-    ```
+4. **Iniciar apenas microfrontends:**
+   ```bash
+   npm run dev:frontend
+   ```
 
-    Este comando irá:
+5. **Parar ambiente de desenvolvimento:**
+   ```bash
+   npm run dev:stop
+   ```
 
-    - Subir os contêineres da API e do MongoDB em segundo plano (`docker-compose up -d`).
-    - Iniciar os servidores de desenvolvimento dos microfrontends usando o Turborepo (`turbo run dev`), permitindo hot-reload.
+6. **Gerar build completo:**
+   ```bash
+   npm run build
+   ```
 
-2.  **Iniciar apenas a API e MongoDB:**
+7. **Rodar em produção (apenas MFEs):**
+   ```bash
+   npm run start
+   ```
+   > **Nota:** Este comando executa apenas os microfrontends em modo produção. A API deve estar rodando separadamente.
 
-    ```bash
-    npm run dev:api
-    ```
+---
 
-3.  **Iniciar apenas os microfrontends (sem API):**
+**Observações:**
 
-    ```bash
-    npm run dev:frontend
-    ```
+- Os microfrontends dependem da API para funcionar corretamente.
+- Lembre-se de parar o Docker após o desenvolvimento para liberar recursos.
 
-4.  **Parar o ambiente de desenvolvimento:**
+---
 
-    ```bash
-    npm run dev:stop
-    ```
+## API GraphQL
 
-    Este comando irá parar e remover os contêineres definidos no `docker-compose.yml`.
+A API GraphQL está em outro repositório e é responsável por autenticação, gerenciamento de usuários, transações e relatórios financeiros.
 
-## API GraphQL (separada, em outro repositório)
-
-Este repositório não contém a API GraphQL, que deve ser gerenciada separadamente. A API é responsável por:
-
-- Autenticação
-- Gerenciamento de usuários
-- Gerenciamento de transações
-- Geração de relatórios financeiros
-
-Acesse as informações da API no repositório [bytebank-api](https://github.com/Brendhon/bytebank-api).
-
-Para rodar a API localmente, siga as instruções no README dela.
+Veja: [bytebank-api](https://github.com/Brendhon/bytebank-api)
 
 ---
 
 ## 🚀 Deploy
-
-### Produção:
 
 | Parte  | Plataforma       | Forma de Deploy                |
 | ------ | ---------------- | ------------------------------ |
@@ -203,53 +191,18 @@ Para rodar a API localmente, siga as instruções no README dela.
 
 ---
 
-## 📄 Scripts Globais
-
-Instalação de dependências:
-
-```bash
-npm install
-```
-
-Rodar tudo local com Turbo:
-
-```bash
-npm run dev
-```
-
-Parar o ambiente Docker:
-
-```bash
-npm run dev:stop
-```
-
-Rodar build completo:
-
-```bash
-npm run build
-```
-
-Rodar em modo de produção:
-
-```bash
-npm run start
-```
-
----
-
 ## 🧪 Testes
 
-- Cada app pode conter seus próprios testes.
-- Padronizados com `.spec.ts`.
+- Cada app possui seus próprios testes (`.spec.ts`).
 
 ---
 
-## 🧰 Regras e Boas Práticas
+## 🧰 Boas Práticas
 
-- **Rotas em inglês**, alinhadas com os tópicos dos `CustomEvent` (ex: `/transactions`, `/settings`)
+- **Rotas em inglês**, alinhadas com eventos (`/transactions`, `/settings`)
 - Use `Signals` + `Service` para estado em Angular (sem NgRx)
-- Angular Lucide Icons para ícones
-- Componentes seguem padrão com **Tailwind** em todos os apps
+- Ícones: Angular Lucide Icons
+- Componentes padronizados com **Tailwind**
 
 ---
 
