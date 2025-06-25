@@ -43,3 +43,6 @@ yarn-error.log*
 
 # Angular
 .angular/
+
+*storybook.log
+storybook-static

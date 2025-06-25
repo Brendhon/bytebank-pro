@@ -1,30 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Loader2, LucideAngularModule } from 'lucide-angular';
 
-// Você pode definir as variantes como um tipo para segurança
+// You can define the variants as a type for safety
 export type ButtonVariant = 'dark' | 'blue' | 'green' | 'orange' | 'outlineGreen' | 'outlineOrange';
 export type ButtonType = HTMLButtonElement['type'];
 
 @Component({
-  selector: 'bb-button', // Seu prefixo personalizado
+  selector: 'bb-button', // Your custom prefix
   templateUrl: './button.component.html',
-  styleUrls: ['../styles/index.css'], // Certifique-se de ter um arquivo CSS correspondente
+  styleUrls: ['../styles/index.css'], // Make sure you have a corresponding CSS file
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, LucideAngularModule]
 })
 export class ButtonComponent {
   @Input() type: ButtonType = 'button';
   @Input() variant: ButtonVariant = 'blue';
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() className: string = ''; // Para classes adicionais passadas de fora
-  @Input() ariaLabel?: string; // Label acessível opcional
-  @Input() loadingAriaLabel?: string; // Label durante loading
-  @Input() loadingText: string = 'Carregando...'; // Texto para screen readers
+  @Input() className: string = ''; // For additional classes passed from outside
+  @Input() ariaLabel?: string; // Optional accessible label
+  @Input() loadingAriaLabel?: string; // Label during loading
+  @Input() loadingText: string = 'Carregando...'; // Text for screen readers
 
   @Output() buttonClick = new EventEmitter<Event>();
 
-  // Método para obter as classes CSS baseadas na variante
+  // Loading icon
+  public loadingIcon = Loader2;
+
+  // Method to get CSS classes based on the variant
   get buttonClasses(): string {
     const baseClasses =
       'inline-flex items-center justify-center rounded-md font-medium px-4 py-2 text-sm transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -63,7 +67,7 @@ export class ButtonComponent {
     const disabledClasses =
       this.disabled || this.loading ? 'opacity-60 cursor-not-allowed pointer-events-none' : '';
 
-    // Combina todas as classes. O `className` permite sobrescrever ou adicionar classes externas.
+    // Combine all classes. The `className` allows you to override or add external classes.
     return `${baseClasses} ${variantClasses} ${disabledClasses} ${this.className}`;
   }
 }
