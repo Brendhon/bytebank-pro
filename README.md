@@ -126,6 +126,21 @@ volumes:
 
 ---
 
+## 🌐 Ambientes
+
+Cada projeto Angular possui dois arquivos de ambiente:
+
+- **`environment.ts`**: Configurações de produção
+- **`environment.development.ts`**: Configurações de desenvolvimento
+
+| Comando             | Ambiente utilizado | Descrição                           |
+|---------------------|-------------------|-------------------------------------|
+| `npm run dev`       | Development       | Desenvolvimento com hot-reload      |
+| `npm run start`     | Production        | Produção com otimizações ativadas   |
+| `npm run build`     | Production        | Build otimizado para produção       |
+
+---
+
 ## 🚀 Instruções de Desenvolvimento
 
 1. **Instalar dependências:**
@@ -162,7 +177,7 @@ volumes:
    ```bash
    npm run start
    ```
-   > **Nota:** Este comando executa apenas os microfrontends em modo produção. A API deve estar rodando separadamente.
+   > **Nota:** Este comando executa os microfrontends em modo produção (usando `environment.ts`). A API deve estar rodando separadamente.
 
 ---
 
