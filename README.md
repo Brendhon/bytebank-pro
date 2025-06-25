@@ -62,16 +62,20 @@ bytebank-pro/
 O monorepo inclui vários packages para reutilização de código e padronização:
 
 ### 🎨 Design Tokens (`packages/shared-design-tokens`)
+
 Centraliza todos os tokens de design do sistema:
+
 - **`colors.ts`**: Paleta de cores da marca ByteBank
-- **`typography.ts`**: Configurações tipográficas padronizadas  
+- **`typography.ts`**: Configurações tipográficas padronizadas
 - **`tailwind.tokens.ts`**: Tokens exportados para uso com TailwindCSS
 - **Uso**: Importado em todos os `tailwind.config.js` dos apps
 
 [📖 Ver documentação completa](./packages/shared-design-tokens/README.md)
 
 ### 🧩 UI Components (`packages/ui`)
+
 Biblioteca de componentes Angular reutilizáveis:
+
 - **Standalone Components**: Componentes Angular 20+ standalone
 - **TailwindCSS**: Integração com design tokens
 - **Componentes**: Button (mais componentes em desenvolvimento)
@@ -80,7 +84,9 @@ Biblioteca de componentes Angular reutilizáveis:
 [📖 Ver documentação completa](./packages/ui/README.md)
 
 ### 🔷 Types (`packages/types`)
+
 Definições TypeScript compartilhadas:
+
 - **`users.ts`**: Interfaces de usuários e autenticação
 - **`transactions.ts`**: Tipos para transações financeiras
 - **`environment.ts`**: Configurações de ambiente
@@ -89,7 +95,9 @@ Definições TypeScript compartilhadas:
 [📖 Ver documentação completa](./packages/types/README.md)
 
 ### ⚙️ TypeScript Config (`packages/typescript-config`)
+
 Configurações TypeScript padronizadas:
+
 - **`base.json`**: Configuração fundamental compartilhada
 - **`angular.json`**: Otimizações específicas para Angular
 - **`nextjs.json`**: Para futuros projetos Next.js
@@ -98,7 +106,9 @@ Configurações TypeScript padronizadas:
 [📖 Ver documentação completa](./packages/typescript-config/README.md)
 
 ### 📋 ESLint Config (`packages/eslint-config`)
+
 Configurações ESLint centralizadas:
+
 - **`angular.js`**: Regras específicas para projetos Angular
 - **`library.js`**: Configurações para bibliotecas e packages
 - **Uso**: Importado em todos os `eslint.config.js` do monorepo
@@ -175,42 +185,48 @@ Cada projeto Angular possui dois arquivos de ambiente:
 - **`environment.ts`**: Configurações de produção
 - **`environment.development.ts`**: Configurações de desenvolvimento
 
-| Comando             | Ambiente utilizado | Descrição                           |
-|---------------------|-------------------|-------------------------------------|
-| `npm run dev`       | Development       | Desenvolvimento com hot-reload      |
-| `npm run start`     | Production        | Produção com otimizações ativadas   |
-| `npm run build`     | Production        | Build otimizado para produção       |
+| Comando         | Ambiente utilizado | Descrição                         |
+| --------------- | ------------------ | --------------------------------- |
+| `npm run dev`   | Development        | Desenvolvimento com hot-reload    |
+| `npm run start` | Production         | Produção com otimizações ativadas |
+| `npm run build` | Production         | Build otimizado para produção     |
 
 ---
 
 ## 🚀 Instruções de Desenvolvimento
 
 1. **Instalar dependências:**
+
    ```bash
    npm install
    ```
 
 2. **Iniciar ambiente completo (API, MongoDB e MFEs):**
+
    ```bash
    npm run dev
    ```
 
 3. **Iniciar apenas API e MongoDB:**
+
    ```bash
    npm run dev:api
    ```
 
 4. **Iniciar apenas microfrontends:**
+
    ```bash
    npm run dev:frontend
    ```
 
 5. **Parar ambiente de desenvolvimento:**
+
    ```bash
    npm run dev:stop
    ```
 
 6. **Gerar build completo:**
+
    ```bash
    npm run build
    ```

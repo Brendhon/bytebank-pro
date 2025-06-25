@@ -7,6 +7,7 @@ Este package fornece configurações TypeScript reutilizáveis e otimizadas para
 ## 🎯 Objetivo
 
 Centralizar e padronizar as configurações TypeScript em todos os projetos:
+
 - **Consistência**: Mesmas regras de compilação em todo o monorepo
 - **Manutenibilidade**: Atualizações centralizadas
 - **Otimização**: Configurações específicas para cada tipo de projeto
@@ -15,21 +16,27 @@ Centralizar e padronizar as configurações TypeScript em todos os projetos:
 ## 📦 Configurações Disponíveis
 
 ### Base (`base.json`)
+
 Configuração fundamental compartilhada por todos os projetos:
+
 - Configurações básicas do TypeScript
 - Regras de compilação rigorosas
 - Target e module appropriados
 - Configurações de resolução de módulos
 
 ### Angular (`angular.json`)
+
 Configuração específica para projetos Angular:
+
 - Extends a configuração base
 - Configurações otimizadas para Angular
 - Suporte a decorators
 - Configurações para desenvolvimento e produção
 
 ### Next.js (`nextjs.json`)
+
 Configuração para projetos Next.js (futuro uso):
+
 - Extends a configuração base
 - Configurações específicas do Next.js
 - Suporte a JSX e React
@@ -51,13 +58,8 @@ Crie um `tsconfig.json` no seu projeto:
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
@@ -71,12 +73,8 @@ Crie um `tsconfig.json` no seu projeto:
     "outDir": "./dist/my-app",
     "types": ["node", "@angular/core"]
   },
-  "files": [
-    "src/main.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts"],
+  "include": ["src/**/*.d.ts"]
 }
 ```
 
@@ -91,9 +89,7 @@ Crie um `tsconfig.json` no seu projeto:
     "declarationMap": true,
     "composite": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
 ```
 
@@ -135,16 +131,19 @@ Crie um `tsconfig.json` no seu projeto:
 ## 🔧 Regras Principais
 
 ### Rigor de Tipos
+
 - `strict: true` - Todas as verificações rigorosas ativadas
 - `noImplicitAny: true` - Proíbe tipos `any` implícitos
 - `strictNullChecks: true` - Verificação rigorosa de null/undefined
 
 ### Módulos e Importações
+
 - `moduleResolution: "bundler"` - Resolução moderna de módulos
 - `esModuleInterop: true` - Compatibilidade ES Module
 - `allowSyntheticDefaultImports: true` - Imports default sintéticos
 
 ### Arquivos e Saída
+
 - `declaration: true` - Gera arquivos `.d.ts`
 - `sourceMap: true` - Gera source maps para debug
 - `removeComments: true` - Remove comentários do output
@@ -165,6 +164,7 @@ packages/typescript-config/
 
 1. **Crie o arquivo** com extensão `.json`
 2. **Estenda a configuração base**:
+
 ```json
 {
   "extends": "./base.json",
@@ -173,6 +173,7 @@ packages/typescript-config/
   }
 }
 ```
+
 3. **Adicione ao package.json** na seção `files`
 4. **Documente** o uso no README
 
@@ -188,17 +189,20 @@ npx tsc --noEmit --project tsconfig.json
 ## 📋 Boas Práticas
 
 ### Para Apps Angular
+
 - Sempre estenda `angular.json`
 - Configure `baseUrl` e `paths` adequadamente
 - Use `types` específicos quando necessário
 
 ### Para Bibliotecas
+
 - Estenda `base.json`
 - Ative `declaration: true`
 - Configure `outDir` adequadamente
 - Use `composite: true` para project references
 
 ### Configurações Customizadas
+
 - Evite sobrescrever configurações rigorosas
 - Documente mudanças específicas
 - Teste adequadamente antes de aplicar
@@ -206,6 +210,7 @@ npx tsc --noEmit --project tsconfig.json
 ## 🔗 Integração
 
 Este package é utilizado por:
+
 - **Apps Angular**: `shell`, `dashboard`, `transactions`, `settings`
 - **Bibliotecas**: `@bytebank-pro/ui`, `@bytebank-pro/types`
 - **Packages**: `@bytebank-pro/shared-design-tokens`

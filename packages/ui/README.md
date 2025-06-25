@@ -7,6 +7,7 @@ Uma biblioteca moderna de componentes Angular 20+ desenvolvida especificamente p
 ## 🎯 Objetivo
 
 Fornecer componentes reutilizáveis e consistentes para:
+
 - **Padronização**: UI/UX consistente em todos os microfrontends
 - **Produtividade**: Componentes prontos para uso
 - **Manutenibilidade**: Centralizacão de mudanças de design
@@ -42,11 +43,7 @@ import { ButtonComponent } from '@bytebank-pro/ui/button';
   selector: 'app-example',
   standalone: true,
   imports: [ButtonComponent],
-  template: `
-    <bb-button variant="primary" (buttonClick)="handleClick()">
-      Clique aqui
-    </bb-button>
-  `
+  template: ` <bb-button variant="primary" (buttonClick)="handleClick()"> Clique aqui </bb-button> `
 })
 export class ExampleComponent {
   handleClick() {
@@ -77,9 +74,7 @@ Componente de botão versátil com múltiplas variações visuais.
 #### Uso Básico
 
 ```html
-<bb-button variant="primary" size="md" (buttonClick)="handleClick()">
-  Clique aqui
-</bb-button>
+<bb-button variant="primary" size="md" (buttonClick)="handleClick()"> Clique aqui </bb-button>
 ```
 
 #### Propriedades
@@ -101,6 +96,7 @@ Componente de botão versátil com múltiplas variações visuais.
 ## 🎨 Design System Integration
 
 A biblioteca integra perfeitamente com:
+
 - **@bytebank-pro/shared-design-tokens**: Cores e tipografia
 - **TailwindCSS**: Utilitários de estilo
 
@@ -112,16 +108,14 @@ Certifique-se de incluir a biblioteca no seu `tailwind.config.js`:
 import { tailwindTokens } from '@bytebank-pro/shared-design-tokens/tailwind.tokens';
 
 export default {
-  content: [
-    './src/**/*.{html,ts}'
-  ],
+  content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
-      colors: tailwindTokens.colors,
+      colors: tailwindTokens.colors
       // ... outros tokens
     }
   }
-}
+};
 ```
 
 ## 🛠️ Scripts Disponíveis
@@ -151,6 +145,7 @@ npm run clean
 ### Adicionando Novos Componentes
 
 1. **Crie a estrutura** na pasta `src/`:
+
 ```
 src/
 └── novo-component/
@@ -160,6 +155,7 @@ src/
 ```
 
 2. **Defina o componente**:
+
 ```typescript
 // novo-component.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
@@ -168,7 +164,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   selector: 'bb-novo-component',
   standalone: true,
   templateUrl: './novo-component.component.html',
-  styleUrls: ['../styles/index.css'], // Certifique-se de ter um arquivo CSS correspondente
+  styleUrls: ['../styles/index.css'] // Certifique-se de ter um arquivo CSS correspondente
 })
 export class NovoComponentComponent {
   @Input() propriedade: string = '';
@@ -177,6 +173,7 @@ export class NovoComponentComponent {
 ```
 
 3. **Adicione ao public-api.ts**:
+
 ```typescript
 // src/public-api.ts
 export * from './novo-component';
@@ -220,6 +217,7 @@ describe('NovoComponentComponent', () => {
 ## 🔗 Integração com Microfrontends
 
 A biblioteca é utilizada por:
+
 - **Shell App**: Componentes de layout e navegação
 - **Dashboard MFE**: Componentes de visualização de dados
 - **Transactions MFE**: Formulários e tabelas

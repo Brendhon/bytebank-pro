@@ -7,6 +7,7 @@ Este package centraliza todas as interfaces, types e definições de tipos TypeS
 ## 🎯 Objetivo
 
 Fornecer definições de tipos centralizadas para:
+
 - Modelos de dados da API (usuários, transações, etc.)
 - Interfaces de comunicação entre microfrontends
 - Configurações de ambiente
@@ -40,17 +41,20 @@ interface IUser {
 ```
 
 ### Transações (`transactions.ts`)
+
 - `ITransaction` - Interface principal de transação
 - `TransactionType` - Tipos de transação (receita/despesa)
 - `TransactionCategory` - Categorias de transação
 - `TransactionFilters` - Filtros para busca de transações
 
 ### Ambiente (`environment.ts`)
+
 - `Environment` - Configurações de ambiente
 - `ApiConfig` - Configurações da API
 - `MfeConfig` - Configurações de microfrontends
 
 ### Microfrontends (`mfe.ts`)
+
 - `MfeEventData` - Tipos de dados para eventos entre MFEs
 - `MfeRoutes` - Definições de rotas dos microfrontends
 - `MfeManifest` - Manifest de configuração de MFEs
@@ -111,7 +115,7 @@ export class UserService {
   getUser(id: string): Observable<IUser> {
     // implementação
   }
-  
+
   getUserTransactions(userId: string): Observable<ITransaction[]> {
     // implementação
   }
@@ -176,6 +180,7 @@ export enum ExemploType {
 ## 🔄 Versionamento
 
 Este package segue o versionamento semântico:
+
 - **Major**: Mudanças que quebram compatibilidade
 - **Minor**: Adição de novos tipos sem quebrar existentes
 - **Patch**: Correções e melhorias nos tipos existentes
@@ -183,6 +188,7 @@ Este package segue o versionamento semântico:
 ## 🔗 Integração com Outros Packages
 
 Este package é utilizado por:
+
 - **Apps Angular** (`shell`, `dashboard`, `transactions`, `settings`)
 - **Package UI** (`@bytebank-pro/ui`)
 - **Bibliotecas de serviços** em cada microfrontend

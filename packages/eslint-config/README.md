@@ -7,22 +7,27 @@ Este package fornece configurações ESLint reutilizáveis e padronizadas para t
 ## 🎯 Objetivo
 
 Centralizar e padronizar as regras de linting em todos os projetos do monorepo, garantindo:
+
 - Consistência de código entre diferentes aplicações
-- Melhor manutenibilidade 
+- Melhor manutenibilidade
 - Redução de bugs e problemas de qualidade
 - Conformidade com as melhores práticas do Angular e TypeScript
 
 ## 📋 Configurações Disponíveis
 
 ### Angular (`./angular`)
+
 Configuração específica para projetos Angular, incluindo:
+
 - Regras do `@angular-eslint`
 - Linting para templates Angular
 - Configurações específicas para TypeScript com Angular
 - Regras de acessibilidade e performance
 
-### Library (`./library`) 
+### Library (`./library`)
+
 Configuração para bibliotecas e packages do monorepo:
+
 - Regras básicas do TypeScript
 - Configurações para desenvolvimento de bibliotecas
 - Otimizações para código reutilizável
@@ -32,16 +37,18 @@ Configuração para bibliotecas e packages do monorepo:
 ### Em projetos Angular
 
 1. Instale o package (se não estiver instalado):
+
 ```bash
 npm install @bytebank-pro/eslint-config --save-dev
 ```
 
 2. Configure o `eslint.config.mjs`:
+
 ```javascript
 import angular from '@bytebank-pro/eslint-config/angular';
 
 export default [
-  ...angular,
+  ...angular
   // suas configurações específicas aqui
 ];
 ```
@@ -49,11 +56,12 @@ export default [
 ### Em bibliotecas/packages
 
 1. Configure o `eslint.config.js`:
+
 ```javascript
 import library from '@bytebank-pro/eslint-config/library';
 
 export default [
-  ...library,
+  ...library
   // suas configurações específicas aqui
 ];
 ```
@@ -69,7 +77,7 @@ export default [
 ## 📦 Dependências
 
 - `@angular-eslint/eslint-plugin`
-- `@angular-eslint/eslint-plugin-template` 
+- `@angular-eslint/eslint-plugin-template`
 - `@angular-eslint/template-parser`
 - `@typescript-eslint/eslint-plugin`
 - `@typescript-eslint/parser`
