@@ -27,6 +27,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 - **API:** [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/)
 - **Contêineres:** [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
 - **Qualidade:** [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Husky](https://typicode.github.io/husky/), lint-staged, EditorConfig
+- **Acessibilidade:** Regras de acessibilidade com [@angular-eslint/template](https://www.npmjs.com/package/@angular-eslint/eslint-plugin-template). Para mais detalhes, veja [docs/ACCESSIBILITY.md](./docs/ACCESSIBILITY.md).
 
 ---
 
@@ -49,7 +50,7 @@ bytebank-pro/
 │   ├── typescript-config/   # Configurações de TypeScript compartilhadas
 │   └── ui/                  # Biblioteca de componentes de UI compartilhados (ex: Botões, Inputs)
 ├── .editorconfig            # Configurações de editor para padronização de código
-├── .eslintrc.js             # Configuração raiz do ESLint
+├── .eslint.config.js        # Configuração raiz do ESLint
 ├── .gitignore               # Arquivos e pastas a serem ignorados pelo Git
 ├── .lintstagedrc.json       # Configuração do lint-staged para executar lints em arquivos staged
 ├── .npmrc                   # Configurações do NPM
