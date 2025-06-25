@@ -11,6 +11,16 @@
   "miscellaneous": {
     "variables": [
       {
+        "name": "AccessibilityFocus",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra os recursos de acessibilidade do footer, incluindo navegação por teclado e estrutura semântica.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div>\n        <p style=\"margin-bottom: 1rem; padding: 1rem; background-color: #f3f4f6; border-radius: 0.5rem; color: #374151;\">\n          <strong>Teste de Acessibilidade:</strong><br>\n          Use a tecla Tab para navegar pelos links do footer e verifique o foco visual.\n          O footer possui estrutura semântica adequada com elementos nav, ul, li e landmarks apropriados.\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+      },
+      {
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -39,6 +49,26 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Este toast fechará em 3 segundos.',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+      },
+      {
+        "name": "DarkBackground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  parameters: {\n    backgrounds: {\n      default: 'dark',\n      values: [\n        { name: 'dark', value: '#1f2937' },\n        { name: 'light', value: '#ffffff' }\n      ]\n    },\n    docs: {\n      description: {\n        story: 'Mostra como o footer aparece em um fundo escuro para verificar o contraste.'\n      }\n    }\n  },\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
       },
       {
         "name": "Default",
@@ -104,11 +134,21 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<FooterComponent>",
+        "defaultValue": "{\n  title: 'Components/Footer',\n  component: FooterComponent,\n  parameters: {\n    layout: 'fullscreen',\n    docs: {\n      description: {\n        component: 'Componente de rodapé para a aplicação ByteBank Pro. Exibe informações de contato, logo do ByteBank e links de navegação.'\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ToastComponent>",
-        "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs'] //\n}"
+        "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "OutlineGreen",
@@ -161,6 +201,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Primary Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "ResponsiveDemo",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  parameters: {\n    viewport: {\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '667px'\n          }\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '1024px'\n          }\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1200px',\n            height: '800px'\n          }\n        }\n      }\n    },\n    docs: {\n      description: {\n        story: 'Demonstra como o footer se adapta a diferentes tamanhos de tela. Em dispositivos móveis, as seções ficam empilhadas verticalmente.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div style=\"padding: 1rem 0;\">\n        <p style=\"text-align: center; margin-bottom: 2rem; color: #6b7280;\">\n          Redimensione a viewport para ver o comportamento responsivo\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+      },
+      {
         "name": "Secondary",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -188,7 +238,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
       },
       {
         "name": "Warning",
@@ -199,6 +249,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'orange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Warning Button</bb-button>`\n  })\n}"
+      },
+      {
+        "name": "WithContainer",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"min-height: 100vh; display: flex; flex-direction: column;\">\n        <div style=\"flex: 1; padding: 2rem; background-color: #f9fafb;\">\n          <h1 style=\"margin: 0 0 1rem 0; color: #111827;\">Conteúdo da Página</h1>\n          <p style=\"margin: 0; color: #6b7280;\">\n            Este é um exemplo de como o footer aparece no final de uma página.\n            O footer mantém sua posição na parte inferior e exibe todas as informações necessárias.\n          </p>\n        </div>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
       }
     ],
     "functions": [],
@@ -218,6 +278,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<FooterComponent>",
+        "file": "src/footer/footer.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ToastComponent>",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
@@ -228,6 +299,68 @@
     ],
     "enumerations": [],
     "groupedVariables": {
+      "src/footer/footer.component.stories.ts": [
+        {
+          "name": "AccessibilityFocus",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra os recursos de acessibilidade do footer, incluindo navegação por teclado e estrutura semântica.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div>\n        <p style=\"margin-bottom: 1rem; padding: 1rem; background-color: #f3f4f6; border-radius: 0.5rem; color: #374151;\">\n          <strong>Teste de Acessibilidade:</strong><br>\n          Use a tecla Tab para navegar pelos links do footer e verifique o foco visual.\n          O footer possui estrutura semântica adequada com elementos nav, ul, li e landmarks apropriados.\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+        },
+        {
+          "name": "DarkBackground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  parameters: {\n    backgrounds: {\n      default: 'dark',\n      values: [\n        { name: 'dark', value: '#1f2937' },\n        { name: 'light', value: '#ffffff' }\n      ]\n    },\n    docs: {\n      description: {\n        story: 'Mostra como o footer aparece em um fundo escuro para verificar o contraste.'\n      }\n    }\n  },\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<FooterComponent>",
+          "defaultValue": "{\n  title: 'Components/Footer',\n  component: FooterComponent,\n  parameters: {\n    layout: 'fullscreen',\n    docs: {\n      description: {\n        component: 'Componente de rodapé para a aplicação ByteBank Pro. Exibe informações de contato, logo do ByteBank e links de navegação.'\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        },
+        {
+          "name": "ResponsiveDemo",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  parameters: {\n    viewport: {\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '667px'\n          }\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '1024px'\n          }\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1200px',\n            height: '800px'\n          }\n        }\n      }\n    },\n    docs: {\n      description: {\n        story: 'Demonstra como o footer se adapta a diferentes tamanhos de tela. Em dispositivos móveis, as seções ficam empilhadas verticalmente.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div style=\"padding: 1rem 0;\">\n        <p style=\"text-align: center; margin-bottom: 2rem; color: #6b7280;\">\n          Redimensione a viewport para ver o comportamento responsivo\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+        },
+        {
+          "name": "WithContainer",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/footer/footer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"min-height: 100vh; display: flex; flex-direction: column;\">\n        <div style=\"flex: 1; padding: 2rem; background-color: #f9fafb;\">\n          <h1 style=\"margin: 0 0 1rem 0; color: #111827;\">Conteúdo da Página</h1>\n          <p style=\"margin: 0; color: #6b7280;\">\n            Este é um exemplo de como o footer aparece no final de uma página.\n            O footer mantém sua posição na parte inferior e exibe todas as informações necessárias.\n          </p>\n        </div>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+        }
+      ],
       "src/button/button.component.stories.ts": [
         {
           "name": "AllVariants",
@@ -389,7 +522,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<ToastComponent>",
-          "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs'] //\n}"
+          "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "Playground",
@@ -409,7 +542,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
         }
       ],
       ".storybook/preview.ts": [
@@ -435,6 +568,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ButtonComponent>",
           "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/footer/footer.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<FooterComponent>",
+          "file": "src/footer/footer.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -573,6 +719,76 @@
       },
       {
         "filePath": "src/button/button.component.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AccessibilityFocus",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DarkBackground",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "ResponsiveDemo",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithContainer",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/footer/footer.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",

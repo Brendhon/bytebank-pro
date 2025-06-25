@@ -105,6 +105,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-bytebank-dark');
       expect(classes).toContain('text-white');
     });
@@ -114,6 +115,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-bytebank-blue');
       expect(classes).toContain('text-white');
     });
@@ -123,6 +125,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-bytebank-green');
       expect(classes).toContain('text-white');
     });
@@ -132,6 +135,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-bytebank-orange');
       expect(classes).toContain('text-white');
     });
@@ -141,6 +145,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-transparent');
       expect(classes).toContain('border-bytebank-green');
       expect(classes).toContain('text-bytebank-green');
@@ -151,6 +156,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('bg-transparent');
       expect(classes).toContain('border-bytebank-orange');
       expect(classes).toContain('text-bytebank-orange');
@@ -161,6 +167,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('opacity-60');
       expect(classes).toContain('cursor-not-allowed');
       expect(classes).toContain('pointer-events-none');
@@ -171,6 +178,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
+
       expect(classes).toContain('opacity-60');
       expect(classes).toContain('cursor-not-allowed');
       expect(classes).toContain('pointer-events-none');
@@ -183,6 +191,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
+
       expect(spinner).toBeTruthy();
     });
 
@@ -191,6 +200,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
+
       expect(spinner).toBeFalsy();
     });
 
@@ -199,6 +209,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
+
       expect(contentSpan.nativeElement.className).toContain('opacity-0');
     });
 
@@ -207,6 +218,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
+
       expect(contentSpan.nativeElement.className).not.toContain('opacity-0');
     });
   });
@@ -226,6 +238,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       buttonElement.click();
+
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
@@ -235,6 +248,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       buttonElement.click();
+
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
