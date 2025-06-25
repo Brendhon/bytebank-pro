@@ -108,16 +108,21 @@ services:
       - '27017:27017'
     volumes:
       - mongodb_data:/data/db
-  api:
-    image: sua-imagem-da-api:latest # Substitua pela sua imagem
-    ports:
-      - '3000:3000' # Ajuste a porta se necessário
     environment:
-      - MONGO_URI=mongodb://mongo:27017/bytebankdb
+      - MONGO_INITDB_DATABASE=bytebankdb
+
+  api:
+    image: brendhon/bytebank-api-graphql:latest
+    ports:
+      - '3000:3000'
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/bytebankdb
       - NODE_ENV=development
-      - JWT_SECRET=seu-segredo-aqui # Defina seu segredo JWT
+      - JWT_SECRET=bytebank-pro-jwt-secret-2025
+      - PORT=3000
     depends_on:
-      - mongo
+      - mongodb
+    restart: unless-stopped
 
 volumes:
   mongodb_data:
@@ -131,14 +136,16 @@ No `package.json` raiz, adicione os seguintes scripts:
 {
   "scripts": {
     "dev": "docker-compose up -d && turbo run dev",
-    "dev:stop": "docker-compose down"
+    "dev:stop": "docker-compose down",
+    "dev:frontend": "turbo run dev",
+    "dev:api": "docker-compose up -d"
   }
 }
 ```
 
 **Uso:**
 
-1.  **Iniciar o ambiente de desenvolvimento (API, MongoDB e MFEs):**
+1.  **Iniciar o ambiente de desenvolvimento completo (API, MongoDB e MFEs):**
 
     ```bash
     npm run dev
@@ -149,7 +156,19 @@ No `package.json` raiz, adicione os seguintes scripts:
     - Subir os contêineres da API e do MongoDB em segundo plano (`docker-compose up -d`).
     - Iniciar os servidores de desenvolvimento dos microfrontends usando o Turborepo (`turbo run dev`), permitindo hot-reload.
 
-2.  **Parar o ambiente de desenvolvimento:**
+2.  **Iniciar apenas a API e MongoDB:**
+
+    ```bash
+    npm run dev:api
+    ```
+
+3.  **Iniciar apenas os microfrontends (sem API):**
+
+    ```bash
+    npm run dev:frontend
+    ```
+
+4.  **Parar o ambiente de desenvolvimento:**
 
     ```bash
     npm run dev:stop
