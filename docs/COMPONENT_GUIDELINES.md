@@ -4,6 +4,14 @@
 
 ---
 
+## 🖼️ Ícones
+
+- **Sempre utilize ícones da biblioteca [`lucide-angular`](https://www.npmjs.com/package/lucide-angular)**, que é o equivalente Angular do `lucide-react`.
+- **Não utilize SVGs customizados ou outras bibliotecas de ícones**. Padronize todos os ícones com `lucide-angular` para garantir consistência visual e facilidade de manutenção.
+- **Importação e uso**: Importe apenas os ícones necessários para cada componente, evitando bundles desnecessários.
+
+---
+
 ## 🎯 Visão Geral
 
 Este documento estabelece as boas práticas e padrões para criação de componentes consistentes, acessíveis e reutilizáveis na biblioteca UI do ByteBank Pro. Todos os componentes devem seguir estas diretrizes para garantir qualidade e uniformidade.
@@ -17,10 +25,10 @@ Este documento estabelece as boas práticas e padrões para criação de compone
 ```
 src/
 └── nome-component/
-    ├── nome-component.component.ts      # Lógica do componente
-    ├── nome-component.component.html    # Template
-    ├── nome-component.component.spec.ts # Testes unitários
-    └── nome-component.component.stories.ts # Stories do Storybook
+  ├── nome-component.component.ts      # Lógica do componente
+  ├── nome-component.component.html    # Template
+  ├── nome-component.component.spec.ts # Testes unitários
+  └── nome-component.component.stories.ts # Stories do Storybook
 ```
 
 ### Convenções de Nomenclatura
@@ -196,6 +204,7 @@ describe('Basic Functionality', () => {
 
   it('should have default properties', () => {
     expect(component.variant).toBe('primary');
+
     expect(component.disabled).toBeFalsy();
   });
 });
@@ -696,6 +705,11 @@ export class InputComponent implements ControlValueAccessor {
 </div>
 ```
 
+> **Importante:**  
+> Sempre utilize as novas sintaxes de template do Angular (ex: blocos `@if`, `@for`, etc.) conforme introduzidas nas versões recentes do framework.  
+> **Não utilize mais as sintaxes antigas como `*ngIf`, `*ngFor` e similares.**  
+> Esta regra vale para todos os exemplos e componentes deste guia.
+
 Este exemplo demonstra como aplicar todas as boas práticas estabelecidas para criar um componente robusto, acessível e bem estruturado.
 
 ---
@@ -707,6 +721,7 @@ Este exemplo demonstra como aplicar todas as boas práticas estabelecidas para c
 - [Storybook Documentation](https://storybook.js.org/docs/angular)
 - [TailwindCSS Documentation](https://tailwindcss.com/docs)
 - [Angular Testing Guide](https://angular.dev/guide/testing)
+- [Lucide Angular](https://www.npmjs.com/package/lucide-angular)
 
 ---
 
