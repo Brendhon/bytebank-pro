@@ -18,6 +18,9 @@ export class ButtonComponent {
   @Input() loading: boolean = false;
   @Input() disabled: boolean = false;
   @Input() className: string = ''; // Para classes adicionais passadas de fora
+  @Input() ariaLabel?: string; // Label acessível opcional
+  @Input() loadingAriaLabel?: string; // Label durante loading
+  @Input() loadingText: string = 'Carregando...'; // Texto para screen readers
 
   @Output() buttonClick = new EventEmitter<Event>();
 
