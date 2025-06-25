@@ -23,8 +23,8 @@ describe('ToastComponent', () => {
     fixture = TestBed.createComponent(ToastComponent);
     component = fixture.componentInstance;
 
-    component.show = true;
-    component.message = 'Test message';
+    fixture.componentRef.setInput('show', true);
+    fixture.componentRef.setInput('message', 'Test message');
     fixture.detectChanges();
 
     element = getToastContainer(fixture);
@@ -35,19 +35,17 @@ describe('ToastComponent', () => {
   });
 
   it('should be visible when show is true', () => {
-    component.show = true;
+    fixture.componentRef.setInput('show', true);
     fixture.detectChanges();
     element = getToastContainer(fixture);
 
     expect(element).toBeTruthy();
-
     expect(component.isVisible).toBeTrue();
-
     expect(element!.classList).toContain('opacity-100');
   });
 
   it('should not be visible when show is false', () => {
-    component.show = false;
+    fixture.componentRef.setInput('show', false);
     fixture.detectChanges();
     element = getToastContainer(fixture);
 
@@ -57,8 +55,8 @@ describe('ToastComponent', () => {
 
   it('should display the correct message', () => {
     const testMessage = 'This is a test message.';
-    component.message = testMessage;
-    component.show = true;
+    fixture.componentRef.setInput('message', testMessage);
+    fixture.componentRef.setInput('show', true);
     fixture.detectChanges();
     element = getToastContainer(fixture);
 
@@ -67,37 +65,37 @@ describe('ToastComponent', () => {
 
   describe('Input Properties', () => {
     it('should apply success variant classes correctly', () => {
-      component.variant = 'success';
-      component.show = true;
+      fixture.componentRef.setInput('variant', 'success');
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-green-500');
+      expect(element!.classList).toContain('bg-bytebank-green');
     });
 
     it('should apply error variant classes correctly', () => {
-      component.variant = 'error';
-      component.show = true;
+      fixture.componentRef.setInput('variant', 'error');
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-red-500');
+      expect(element!.classList).toContain('bg-bytebank-red');
     });
 
     it('should apply info variant classes correctly', () => {
-      component.variant = 'info';
-      component.show = true;
+      fixture.componentRef.setInput('variant', 'info');
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-blue-500');
+      expect(element!.classList).toContain('bg-bytebank-blue');
     });
   });
 
   describe('Events', () => {
     it('should emit toastClose when the close button is clicked', () => {
       spyOn(component.toastClose, 'emit');
-      component.show = true;
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
 
       const closeButton = fixture.debugElement.query(
@@ -106,13 +104,12 @@ describe('ToastComponent', () => {
       closeButton.click();
 
       expect(component.toastClose.emit).toHaveBeenCalled();
-
       expect(component.isVisible).toBeFalse();
     });
 
     it('should close automatically after duration', fakeAsync(() => {
-      component.duration = 1000;
-      component.show = true;
+      fixture.componentRef.setInput('duration', 1000);
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
@@ -125,15 +122,13 @@ describe('ToastComponent', () => {
       element = getToastContainer(fixture);
 
       expect(element).toBeFalsy();
-
       expect(component.isVisible).toBeFalse();
-
       expect(component.toastClose.emit).toHaveBeenCalled();
     }));
 
     it('should not close automatically if duration is 0', fakeAsync(() => {
-      component.duration = 0;
-      component.show = true;
+      fixture.componentRef.setInput('duration', 0);
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
@@ -146,17 +141,15 @@ describe('ToastComponent', () => {
       element = getToastContainer(fixture);
 
       expect(element).toBeTruthy();
-
       expect(component.isVisible).toBeTrue();
-
       expect(component.toastClose.emit).not.toHaveBeenCalled();
     }));
   });
 
   describe('Accessibility', () => {
     it('should have role="status" for all variants', () => {
-      component.show = true;
-      component.variant = 'info';
+      fixture.componentRef.setInput('show', true);
+      fixture.componentRef.setInput('variant', 'info');
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
@@ -164,8 +157,8 @@ describe('ToastComponent', () => {
     });
 
     it('should have aria-live="assertive" for error variant', () => {
-      component.show = true;
-      component.variant = 'error';
+      fixture.componentRef.setInput('show', true);
+      fixture.componentRef.setInput('variant', 'error');
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
@@ -173,8 +166,8 @@ describe('ToastComponent', () => {
     });
 
     it('should have aria-live="polite" for success variant', () => {
-      component.show = true;
-      component.variant = 'success';
+      fixture.componentRef.setInput('show', true);
+      fixture.componentRef.setInput('variant', 'success');
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
@@ -182,7 +175,7 @@ describe('ToastComponent', () => {
     });
 
     it('should have aria-label for close button', () => {
-      component.show = true;
+      fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       const closeButton = fixture.debugElement.query(
         By.css('button[aria-label="Fechar notificação"]')

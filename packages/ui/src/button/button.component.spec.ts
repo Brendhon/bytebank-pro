@@ -47,7 +47,7 @@ describe('ButtonComponent', () => {
   describe('Input Properties', () => {
     it('should set type property', () => {
       const testType: ButtonType = 'submit';
-      component.type = testType;
+      fixture.componentRef.setInput('type', testType);
       fixture.detectChanges();
 
       expect(component.type).toBe(testType);
@@ -56,14 +56,14 @@ describe('ButtonComponent', () => {
 
     it('should set variant property', () => {
       const testVariant: ButtonVariant = 'green';
-      component.variant = testVariant;
+      fixture.componentRef.setInput('variant', testVariant);
       fixture.detectChanges();
 
       expect(component.variant).toBe(testVariant);
     });
 
     it('should set loading property', () => {
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       expect(component.loading).toBeTruthy();
@@ -71,7 +71,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should set disabled property', () => {
-      component.disabled = true;
+      fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
       expect(component.disabled).toBeTruthy();
@@ -80,7 +80,7 @@ describe('ButtonComponent', () => {
 
     it('should set className property', () => {
       const customClass = 'custom-class';
-      component.className = customClass;
+      fixture.componentRef.setInput('className', customClass);
       fixture.detectChanges();
 
       expect(component.className).toBe(customClass);
@@ -94,147 +94,119 @@ describe('ButtonComponent', () => {
       const classes = component.buttonClasses;
 
       expect(classes).toContain('inline-flex');
-
       expect(classes).toContain('items-center');
-
       expect(classes).toContain('justify-center');
-
       expect(classes).toContain('rounded-md');
-
       expect(classes).toContain('font-medium');
     });
 
     it('should apply dark variant classes', () => {
-      component.variant = 'dark';
+      fixture.componentRef.setInput('variant', 'dark');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-bytebank-dark');
-
       expect(classes).toContain('text-white');
     });
 
     it('should apply blue variant classes', () => {
-      component.variant = 'blue';
+      fixture.componentRef.setInput('variant', 'blue');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-bytebank-blue');
-
       expect(classes).toContain('text-white');
     });
 
     it('should apply green variant classes', () => {
-      component.variant = 'green';
+      fixture.componentRef.setInput('variant', 'green');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-bytebank-green');
-
       expect(classes).toContain('text-white');
     });
 
     it('should apply orange variant classes', () => {
-      component.variant = 'orange';
+      fixture.componentRef.setInput('variant', 'orange');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-bytebank-orange');
-
       expect(classes).toContain('text-white');
     });
 
     it('should apply outlineGreen variant classes', () => {
-      component.variant = 'outlineGreen';
+      fixture.componentRef.setInput('variant', 'outlineGreen');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-transparent');
-
       expect(classes).toContain('border-bytebank-green');
-
       expect(classes).toContain('text-bytebank-green');
     });
 
     it('should apply outlineOrange variant classes', () => {
-      component.variant = 'outlineOrange';
+      fixture.componentRef.setInput('variant', 'outlineOrange');
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('bg-transparent');
-
       expect(classes).toContain('border-bytebank-orange');
-
       expect(classes).toContain('text-bytebank-orange');
     });
 
     it('should apply disabled classes when disabled', () => {
-      component.disabled = true;
+      fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('opacity-60');
-
       expect(classes).toContain('cursor-not-allowed');
-
       expect(classes).toContain('pointer-events-none');
     });
 
     it('should apply disabled classes when loading', () => {
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       const classes = component.buttonClasses;
-
       expect(classes).toContain('opacity-60');
-
       expect(classes).toContain('cursor-not-allowed');
-
       expect(classes).toContain('pointer-events-none');
     });
   });
 
   describe('Loading State', () => {
     it('should show loading spinner when loading is true', () => {
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
-
       expect(spinner).toBeTruthy();
     });
 
     it('should hide loading spinner when loading is false', () => {
-      component.loading = false;
+      fixture.componentRef.setInput('loading', false);
       fixture.detectChanges();
 
       const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
-
       expect(spinner).toBeFalsy();
     });
 
     it('should make content transparent when loading', () => {
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
-
       expect(contentSpan.nativeElement.className).toContain('opacity-0');
     });
 
     it('should make content visible when not loading', () => {
-      component.loading = false;
+      fixture.componentRef.setInput('loading', false);
       fixture.detectChanges();
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
-
       expect(contentSpan.nativeElement.className).not.toContain('opacity-0');
     });
   });
@@ -250,21 +222,19 @@ describe('ButtonComponent', () => {
 
     it('should not emit buttonClick event when disabled', () => {
       spyOn(component.buttonClick, 'emit');
-      component.disabled = true;
+      fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
       buttonElement.click();
-
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit buttonClick event when loading', () => {
       spyOn(component.buttonClick, 'emit');
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       buttonElement.click();
-
       expect(component.buttonClick.emit).not.toHaveBeenCalled();
     });
 
@@ -295,21 +265,21 @@ describe('ButtonComponent', () => {
 
   describe('Accessibility', () => {
     it('should have correct button type attribute', () => {
-      component.type = 'submit';
+      fixture.componentRef.setInput('type', 'submit');
       fixture.detectChanges();
 
       expect(buttonElement.getAttribute('type')).toBe('submit');
     });
 
     it('should be disabled when disabled property is true', () => {
-      component.disabled = true;
+      fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
       expect(buttonElement.disabled).toBeTruthy();
     });
 
     it('should be disabled when loading property is true', () => {
-      component.loading = true;
+      fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       expect(buttonElement.disabled).toBeTruthy();
