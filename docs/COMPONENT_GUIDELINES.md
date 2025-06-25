@@ -18,6 +18,13 @@ Este documento estabelece as boas práticas e padrões para criação de compone
 
 ---
 
+## 📝 Comentários no Código
+
+- **Todos os comentários em código devem ser escritos em inglês**, independentemente do idioma do restante da documentação ou do projeto.
+- Isso inclui comentários de linha, blocos de documentação (JSDoc), e quaisquer anotações explicativas no código-fonte.
+
+---
+
 ## 📁 Estrutura de Arquivos
 
 ### Estrutura Padrão por Componente
@@ -48,43 +55,45 @@ src/
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-// 1. Definir tipos específicos do componente
+// 1. Define specific types for the component
 export type ComponentVariant = 'primary' | 'secondary' | 'danger';
 export type ComponentSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'bb-nome-component', // 2. Prefixo 'bb-' obrigatório
+  selector: 'bb-nome-component', // 2. 'bb-' prefix is mandatory
   templateUrl: './nome-component.component.html',
-  styleUrls: ['../styles/index.css'], // 3. Estilos compartilhados
-  standalone: true, // 4. Sempre standalone
-  imports: [CommonModule] // 5. Importações necessárias
+  styleUrls: ['../styles/index.css'], // 3. Shared styles
+  standalone: true, // 4. Always standalone
+  imports: [CommonModule] // 5. Required imports
 })
 export class NomeComponentComponent {
-  // 6. Inputs com valores padrão sensatos
+  // 6. Inputs with sensible default values
   @Input() variant: ComponentVariant = 'primary';
   @Input() size: ComponentSize = 'md';
   @Input() disabled: boolean = false;
-  @Input() className: string = ''; // Para classes adicionais
+  @Input() className: string = ''; // For additional classes
 
-  // 7. Acessibilidade sempre presente
+  // 7. Accessibility always present
   @Input() ariaLabel?: string;
   @Input() ariaDescribedBy?: string;
 
-  // 8. Outputs com nomes descritivos
+  // 8. Outputs with descriptive names
   @Output() componentClick = new EventEmitter<Event>();
   @Output() valueChange = new EventEmitter<any>();
 
-  // 9. Getter para classes CSS computadas
+  // 9. Getter for computed CSS classes
   get componentClasses(): string {
     return this.computeClasses();
   }
 
-  // 10. Métodos privados para lógica complexa
+  // 10. Private methods for complex logic
   private computeClasses(): string {
-    // Implementação...
+    // Implementation...
   }
 }
 ```
+
+> **Nota:** Todos os comentários no código acima (e em todos os exemplos deste guia) estão em inglês, conforme a diretriz deste documento.
 
 ---
 
@@ -103,12 +112,12 @@ get componentClasses(): string {
   const baseClasses = 'classe-base tailwind-utilities';
   let variantClasses = '';
 
-  // Switch para variantes
+  // Switch for variants
   switch (this.variant) {
     case 'primary':
       variantClasses = 'bg-bytebank-blue text-white hover:bg-blue-600';
       break;
-    // outros casos...
+    // other cases...
   }
 
   const stateClasses = this.disabled ? 'opacity-60 cursor-not-allowed' : '';
@@ -131,23 +140,23 @@ get componentClasses(): string {
 ### 1. Atributos ARIA Obrigatórios
 
 ```typescript
-// Inputs para acessibilidade
+// Inputs for accessibility
 @Input() ariaLabel?: string;
 @Input() ariaDescribedBy?: string;
-@Input() ariaExpanded?: boolean; // Para componentes expansíveis
-@Input() role?: string; // Quando necessário
+@Input() ariaExpanded?: boolean; // For expandable components
+@Input() role?: string; // When needed
 ```
 
 ### 2. Estados Dinâmicos
 
 ```html
-<!-- Exemplo: Button com loading -->
+<!-- Example: Button with loading -->
 <button
   [attr.aria-busy]="loading ? 'true' : 'false'"
   [attr.aria-label]="loading ? loadingAriaLabel : ariaLabel"
   [disabled]="disabled || loading"
 >
-  <!-- Conteúdo -->
+  <!-- Content -->
 </button>
 ```
 
@@ -170,6 +179,11 @@ get componentClasses(): string {
 
 ## 🧪 Padrões de Teste
 
+> **Importante:**
+>
+> - Todos os comentários nos arquivos de teste devem ser em inglês.
+> - **Antes de cada `expect` em qualquer teste, adicione uma linha em branco** para melhorar a legibilidade e seguir o padrão do projeto.
+
 ### 1. Estrutura de Testes
 
 ```typescript
@@ -188,7 +202,7 @@ describe('ComponenteComponent', () => {
     element = fixture.debugElement.query(By.css('[data-testid="component"]')).nativeElement;
   });
 
-  // Testes obrigatórios...
+  // Required tests...
 });
 ```
 
@@ -280,7 +294,7 @@ const meta: Meta<ComponenteComponent> = {
     }
   },
   argTypes: {
-    // Configuração dos controles...
+    // Controls configuration...
   },
   tags: ['autodocs']
 };
@@ -297,7 +311,7 @@ type Story = StoryObj<ComponenteComponent>;
 export const Default: Story = {
   args: {
     variant: 'primary'
-    // outros valores padrão...
+    // other default values...
   },
   render: (args) => ({
     props: args,
@@ -345,7 +359,7 @@ export const DisabledState: Story = {
 export const Playground: Story = {
   args: {
     variant: 'primary'
-    // Todos os props configuráveis...
+    // All configurable props...
   }
 };
 ```
@@ -359,35 +373,35 @@ export const Playground: Story = {
 #### Props Visuais
 
 ```typescript
-@Input() variant: ComponentVariant = 'primary'; // Variação visual
-@Input() size: ComponentSize = 'md'; // Tamanho
-@Input() className: string = ''; // Classes adicionais
+@Input() variant: ComponentVariant = 'primary'; // Visual variant
+@Input() size: ComponentSize = 'md'; // Size
+@Input() className: string = ''; // Additional classes
 ```
 
 #### Props de Estado
 
 ```typescript
-@Input() disabled: boolean = false; // Estado desabilitado
-@Input() loading: boolean = false; // Estado de carregamento
-@Input() readonly: boolean = false; // Apenas leitura (quando aplicável)
+@Input() disabled: boolean = false; // Disabled state
+@Input() loading: boolean = false; // Loading state
+@Input() readonly: boolean = false; // Read-only (when applicable)
 ```
 
 #### Props de Acessibilidade
 
 ```typescript
-@Input() ariaLabel?: string; // Label acessível
-@Input() ariaDescribedBy?: string; // Descrição
-@Input() ariaExpanded?: boolean; // Estado expandido
-@Input() role?: string; // Role ARIA customizado
+@Input() ariaLabel?: string; // Accessible label
+@Input() ariaDescribedBy?: string; // Description
+@Input() ariaExpanded?: boolean; // Expanded state
+@Input() role?: string; // Custom ARIA role
 ```
 
 ### 2. Outputs Padronizados
 
 ```typescript
-@Output() componentClick = new EventEmitter<Event>(); // Cliques
-@Output() valueChange = new EventEmitter<T>(); // Mudanças de valor
-@Output() focusChange = new EventEmitter<boolean>(); // Mudanças de foco
-@Output() stateChange = new EventEmitter<StateType>(); // Mudanças de estado
+@Output() componentClick = new EventEmitter<Event>(); // Clicks
+@Output() valueChange = new EventEmitter<T>(); // Value changes
+@Output() focusChange = new EventEmitter<boolean>(); // Focus changes
+@Output() stateChange = new EventEmitter<StateType>(); // State changes
 ```
 
 ---
@@ -398,11 +412,11 @@ export const Playground: Story = {
 
 ```typescript
 export class ComponenteComponent {
-  // Estados privados
+  // Private states
   private _isOpen = false;
   private _value: T | null = null;
 
-  // Getters/Setters quando necessário
+  // Getters/Setters when needed
   get isOpen(): boolean {
     return this._isOpen;
   }
@@ -433,10 +447,10 @@ get computedAriaLabel(): string {
 ### 1. Design Tokens
 
 ```typescript
-// Import dos tokens
+// Import tokens
 import { colors, typography, spacing } from '@bytebank-pro/shared-design-tokens';
 
-// Uso nas classes
+// Usage in classes
 const colorClass = `bg-bytebank-${this.variant}`;
 const spacingClass = `p-${spacing.md}`;
 ```
@@ -467,25 +481,25 @@ const COMPONENT_CLASSES = {
 
 ````typescript
 /**
- * Componente de botão flexível com múltiplas variantes e estados.
+ * Flexible button component with multiple variants and states.
  *
  * @example
  * ```html
  * <bb-button variant="primary" (buttonClick)="handleClick()">
- *   Clique aqui
+ *   Click here
  * </bb-button>
  * ```
  */
 @Component({...})
 export class ButtonComponent {
   /**
-   * Variante visual do botão
+   * Visual variant of the button
    * @default 'primary'
    */
   @Input() variant: ButtonVariant = 'primary';
 
   /**
-   * Evento emitido quando o botão é clicado
+   * Event emitted when the button is clicked
    */
   @Output() buttonClick = new EventEmitter<Event>();
 }
@@ -524,7 +538,7 @@ Cada componente deve ter documentação clara incluindo:
 
 ### Testes e Documentação
 
-- [ ] Testes unitários escritos
+- [ ] Testes unitários escritos (com comentários em inglês e linha em branco antes de cada `expect`)
 - [ ] Stories do Storybook criadas
 - [ ] Documentação JSDoc adicionada
 - [ ] Exemplos de uso documentados
@@ -561,6 +575,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+// All comments in this file must be in English
+
 export type InputVariant = 'default' | 'error' | 'success';
 export type InputSize = 'sm' | 'md' | 'lg';
 export type InputType = 'text' | 'email' | 'password' | 'number';
@@ -588,7 +604,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() className: string = '';
 
-  // Acessibilidade
+  // Accessibility
   @Input() ariaLabel?: string;
   @Input() ariaDescribedBy?: string;
   @Input() errorMessage?: string;
@@ -709,8 +725,6 @@ export class InputComponent implements ControlValueAccessor {
 > Sempre utilize as novas sintaxes de template do Angular (ex: blocos `@if`, `@for`, etc.) conforme introduzidas nas versões recentes do framework.  
 > **Não utilize mais as sintaxes antigas como `*ngIf`, `*ngFor` e similares.**  
 > Esta regra vale para todos os exemplos e componentes deste guia.
-
-Este exemplo demonstra como aplicar todas as boas práticas estabelecidas para criar um componente robusto, acessível e bem estruturado.
 
 ---
 
