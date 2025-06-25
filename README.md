@@ -34,25 +34,32 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 ```
 bytebank-pro/
-├── apps/
-│   ├── shell/                # Angular Shell App - Container principal
-│   ├── dashboard/            # Angular MFE - Dashboard
-│   ├── transactions/         # Angular MFE - Transações
-│   └── settings/             # Angular MFE - Configurações
-│
-├── packages/
-│   ├── eslint-config/        # Configurações ESLint padronizadas
-│   ├── shared-design-tokens/ # Tokens de design reutilizáveis
-│   ├── types/                # Definições TypeScript compartilhadas
-│   ├── typescript-config/    # Configurações TypeScript padronizadas
-│   └── ui/                   # Componentes Angular compartilhados
-│
-├── api-docs/                 # Documentação da API
-├── .gitignore
-├── turbo.json                # Configuração Turborepo
-├── package.json              # Dependencies e scripts principais
-├── tsconfig.base.json        # Config TypeScript base do monorepo
-└── docker-compose.yml        # Configuração Docker Compose
+├── .husky/                  # Ganchos Git (pre-commit, etc.) para qualidade de código
+│   └── pre-commit
+├── apps/                    # Aplicações principais do monorepo (Microfrontends e Shell)
+│   ├── dashboard/           # Angular MFE - Dashboard
+│   ├── settings/            # Angular MFE - Configurações
+│   ├── shell/               # Angular Shell App (container principal)
+│   └── transactions/        # Angular MFE - Transações
+├── docs/                    # Documentação do projeto
+├── packages/                # Bibliotecas e pacotes reutilizáveis no monorepo
+│   ├── eslint-config/       # Configurações de ESLint compartilhadas
+│   ├── shared-design-tokens/# Tokens de design reutilizáveis (cores, spacing, fontes)
+│   ├── types/               # Definições de tipos TypeScript compartilhadas
+│   ├── typescript-config/   # Configurações de TypeScript compartilhadas
+│   └── ui/                  # Biblioteca de componentes de UI compartilhados (ex: Botões, Inputs)
+├── .editorconfig            # Configurações de editor para padronização de código
+├── .eslintrc.js             # Configuração raiz do ESLint
+├── .gitignore               # Arquivos e pastas a serem ignorados pelo Git
+├── .lintstagedrc.json       # Configuração do lint-staged para executar lints em arquivos staged
+├── .npmrc                   # Configurações do NPM
+├── .prettierignore          # Arquivos e pastas a serem ignorados pelo Prettier
+├── .prettierrc              # Configuração do Prettier para formatação de código
+├── docker-compose.yml       # Configuração do Docker Compose para ambiente de desenvolvimento
+├── package-lock.json        # Registro das dependências exatas do projeto
+├── package.json             # Definição de pacotes e scripts do monorepo
+├── README.md                # Este arquivo
+└── turbo.json               # Configurações do pipeline do Turborepo
 ```
 
 ---
