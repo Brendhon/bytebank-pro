@@ -1,10 +1,10 @@
 # 📝 Diretrizes de Documentação
 
-Este documento estabelece os padrões para documentação de componentes, serviços e outras partes da biblioteca UI do ByteBank Pro. Uma documentação eficaz é essencial para garantir que todos os membros da equipe entendam e utilizem corretamente os recursos da biblioteca.
+Este documento define os padrões para documentação de componentes, serviços e demais partes do ByteBank Pro. Uma documentação clara garante que toda a equipe compreenda e utilize corretamente os recursos disponíveis.
 
 ## 1. JSDoc Obrigatório
 
-Todo código deve incluir documentação JSDoc completa para melhorar a experiência do desenvolvedor através de autocomplete e informações contextuais.
+Todo código deve conter documentação JSDoc completa para aprimorar a experiência do desenvolvedor, fornecendo autocomplete e informações contextuais.
 
 ````typescript
 /**
@@ -32,35 +32,39 @@ export class ButtonComponent {
 }
 ````
 
-### Elementos Essenciais do JSDoc:
+**Elementos essenciais do JSDoc:**
 
-1. **Descrição Geral**: Uma explicação clara e concisa da funcionalidade
-2. **@example**: Exemplos de código mostrando o uso comum
-3. **@param**: Documentação para cada parâmetro de função/método
-4. **@returns**: O que a função/método retorna
-5. **@default**: Valores padrão para propriedades/parâmetros
-6. **@deprecated**: Marcação para recursos obsoletos (com alternativa)
+- **Descrição geral:** Explicação clara da funcionalidade
+- **@example:** Exemplos de uso
+- **@param:** Documentação de parâmetros de funções/métodos
+- **@returns:** O que a função/método retorna
+- **@default:** Valores padrão
+- **@deprecated:** Indicação de recursos obsoletos (com alternativa)
+
+> **Observação:** Todos os comentários em código devem ser escritos em inglês, independentemente do idioma do restante da documentação.
 
 ## 2. README do Componente
 
-Cada componente deve ter documentação clara incluindo os seguintes elementos:
+Cada componente deve ter um README claro, contendo:
 
-### Estrutura Recomendada
+- **Propósito:** Breve descrição e contexto de uso
+- **Uso Básico:** Exemplo simples para começar
+- **Props:** Tabela de propriedades de input
+- **Eventos:** Tabela de eventos emitidos
+- **Exemplos:** Casos de uso comuns com snippets de código
+- **Acessibilidade:** Considerações especiais
 
-````markdown
 # Button Component
 
 ## Propósito
 
-O componente Button fornece uma interface interativa para ações do usuário,
-com suporte para diferentes variantes visuais, estados, e capacidade de resposta.
+O componente Button fornece uma interface interativa para ações do usuário, com suporte a diferentes variantes visuais, estados e responsividade.
 
 ## Uso Básico
 
 ```html
 <bb-button variant="primary">Click me</bb-button>
 ```
-````
 
 ## Props
 
@@ -97,22 +101,18 @@ com suporte para diferentes variantes visuais, estados, e capacidade de resposta
 - Suporta atributos ARIA (aria-label, aria-disabled)
 - Atende aos requisitos de contraste WCAG AA
 
-````
-
-### Seções Obrigatórias:
-
-- **Propósito**: Uma breve descrição do componente e quando usá-lo
-- **Uso Básico**: Um exemplo simples para começar
-- **Props**: Tabela descrevendo todas as propriedades de input
-- **Eventos**: Tabela descrevendo todos os eventos emitidos
-- **Exemplos**: Casos de uso comuns com snippets de código
-- **Acessibilidade**: Considerações especiais para acessibilidade
-
 ## 3. Documentação de Serviços
 
-Para serviços, a documentação deve focar em funcionalidade, configuração e padrões de uso.
+A documentação de serviços deve abordar:
 
-```typescript
+- **Responsabilidade:** Propósito principal do serviço
+- **Injeção:** Como injetar e utilizar
+- **Configuração:** Opções disponíveis, se houver
+- **Métodos:** Detalhamento de métodos públicos
+- **Fluxos de Dados:** Observables, promises, etc.
+- **Tratamento de Erros:** Como erros são tratados
+
+````typescript
 /**
  * Service for handling authentication and user sessions.
  *
@@ -142,18 +142,16 @@ export class AuthService {
 }
 ````
 
-### Elementos Específicos para Serviços:
+## 4. Documentação de APIs e Interfaces
 
-1. **Responsabilidade**: O propósito principal do serviço
-2. **Injeção**: Como injetar e usar o serviço
-3. **Configuração**: Opções de configuração, se aplicável
-4. **Métodos**: Documentação detalhada para cada método público
-5. **Fluxos de Dados**: Explicação de observables, promises, etc.
-6. **Tratamento de Erros**: Como erros são gerenciados e comunicados
+Foque em clareza e completude:
 
-## 4. Documentação de APIs
-
-Para documentar APIs e interfaces, foque na clareza e completude.
+- **Descrição da Interface:** Propósito e casos de uso
+- **Propriedades:** Documentação de cada propriedade
+- **Tipos:** Definições claras dos tipos
+- **Valores Padrão:** Sempre que aplicável
+- **Restrições:** Limitações ou regras de validação
+- **Exemplos:** Objetos válidos seguindo a interface
 
 ```typescript
 /**
@@ -187,38 +185,15 @@ export interface NotificationConfig {
 }
 ```
 
-### Elementos para Documentação de APIs:
+## 5. Documentação de Tokens de Design
 
-1. **Descrição da Interface**: Propósito geral e casos de uso
-2. **Propriedades**: Documentação para cada propriedade
-3. **Tipos**: Definições claras dos tipos de dados
-4. **Valores Padrão**: Documentar valores padrão
-5. **Restrições**: Quaisquer limitações ou regras de validação
-6. **Exemplos**: Exemplos de objetos válidos que seguem a interface
+Documente claramente:
 
-## 5. Diretrizes Gerais
-
-### A. Consistência de Linguagem
-
-- Use um tom consistente e profissional
-- Evite gírias, humor ou referências culturais específicas
-- Use voz ativa e direta ("Use este componente para..." em vez de "Este componente pode ser usado para...")
-
-### B. Comentários no Código
-
-- **Todos os comentários em código devem ser escritos em inglês**, independentemente do idioma do restante da documentação
-- Use comentários para explicar "por que", não "o quê" (o código deve ser auto-explicativo)
-- Adicione comentários para lógica complexa ou decisões arquiteturais importantes
-
-### C. Manutenção da Documentação
-
-- Atualize a documentação sempre que o código mudar
-- Verifique regularmente a precisão da documentação
-- Mantenha um registro de mudanças (changelog) para alterações significativas
-
-## 6. Documentação de Tokens de Design
-
-Para design tokens, documente claramente seu propósito e uso:
+- **Propósito:** Para que serve o token
+- **Uso:** Como e onde utilizar
+- **Variações:** Escalas ou alternativas
+- **Acessibilidade:** Exemplo: contraste WCAG
+- **Relações:** Relação com outros tokens
 
 ```typescript
 /**
@@ -247,31 +222,23 @@ export const colors = {
 };
 ```
 
-### Informações para Design Tokens:
+## 6. Documentação de Use Cases
 
-1. **Propósito**: Para que serve o token
-2. **Uso**: Como e onde deve ser usado
-3. **Variações**: Qualquer variação ou escala disponível
-4. **Considerações de Acessibilidade**: Como WCAG 2.1 AA/AAA
-5. **Relações**: Como se relaciona com outros tokens
-
-## 7. Documentação de Use Cases
-
-Para padrões e composições mais complexas, documente casos de uso:
+Para padrões e composições complexas, documente casos de uso:
 
 ````markdown
 # Formulário de Login (Padrão)
 
 ## Descrição
 
-Este padrão implementa um formulário de login padrão seguindo as diretrizes de segurança e usabilidade do ByteBank Pro. Inclui validação, tratamento de erros e suporte a multi-fator.
+Este padrão implementa um formulário de login seguindo as diretrizes de segurança e usabilidade do ByteBank Pro. Inclui validação, tratamento de erros e suporte a multi-fator.
 
 ## Componentes Utilizados
 
-- **bb-form**: Contenedor base do formulário
-- **bb-input**: Para campos de email/usuário e senha
-- **bb-button**: Para ação de submissão
-- **bb-alert**: Para mensagens de erro
+- **bb-form**: Contêiner base do formulário
+- **bb-input**: Campos de email/usuário e senha
+- **bb-button**: Ação de submissão
+- **bb-alert**: Mensagens de erro
 
 ## Exemplo de Implementação
 
@@ -286,84 +253,81 @@ Este padrão implementa um formulário de login padrão seguindo as diretrizes d
 
   <div class="flex justify-between items-center mt-4">
     <bb-checkbox [(ngModel)]="rememberMe">Lembrar-me</bb-checkbox>
-    <a href="/forgot-password" class="text-sm text-bytebank-blue"> Esqueceu a senha? </a>
+    <a href="/forgot-password" class="text-sm text-bytebank-blue">Esqueceu a senha?</a>
   </div>
 
-  <bb-button type="submit" variant="primary" class="w-full mt-6"> Entrar </bb-button>
+  <bb-button type="submit" variant="primary" class="w-full mt-6">Entrar</bb-button>
 </bb-form>
 ```
 ````
 
 ## Considerações de Segurança
 
-- Implementar throttling para prevenir ataques de força bruta
-- Usar HTTPS para transmissão segura de credenciais
-- Oferecer opção de autenticação de dois fatores
+- Implemente throttling para prevenir ataques de força bruta
+- Utilize HTTPS para transmissão segura de credenciais
+- Ofereça autenticação de dois fatores
 
 ## Acessibilidade
 
-- Todos os campos têm labels associados
+- Todos os campos possuem labels associados
 - Mensagens de erro são anunciadas por leitores de tela
-- Foco é gerenciado corretamente após submissão
+- Foco gerenciado corretamente após submissão
 
-````
+## 7. Documentação de Contribuição
 
-## 8. Documentação de Contribuição
+Inclua um guia para novos contribuidores:
 
-Inclua diretrizes para novos contribuidores:
-
-```markdown
 # Guia de Contribuição
 
-## Processo de Desenvolvimento
+## Processo
 
-1. **Crie uma branch**:
+1. **Crie uma branch:**  
    `git checkout -b feature/nome-da-feature`
 
-2. **Implemente sua mudança**:
+2. **Implemente sua mudança:**  
    Siga os padrões de código e adicione testes
 
-3. **Documente**:
+3. **Documente:**  
    Atualize ou adicione documentação relacionada
 
-4. **Teste**:
+4. **Teste:**  
    Execute `npm test` para garantir que tudo está funcionando
 
-5. **Envie um Pull Request**:
-   Inclua uma descrição clara do que sua mudança faz
+5. **Envie um Pull Request:**  
+   Inclua uma descrição clara da sua mudança
 
 ## Padrões de Código
 
-- Siga os padrões de estilo Angular
+- Siga o estilo Angular
 - Use TypeScript estrito (strict mode)
 - Mantenha 100% de cobertura de testes
 - Documente com JSDoc
 
 ## Equipe e Suporte
 
-Para dúvidas ou ajuda:
-- **Slack**: #bytebank-ui-library
-- **Email**: ui-team@bytebankpro.com
-````
+Dúvidas ou ajuda:
 
-## 9. Checklist de Documentação
+- **Slack:** #bytebank-ui-library
+- **Email:** ui-team@bytebankpro.com
 
-Use esta checklist para garantir que a documentação esteja completa:
+## 8. Checklist de Documentação
 
-- [ ] JSDoc presente em todas as classes, métodos e propriedades públicas
+Utilize esta checklist para garantir documentação completa:
+
+- [ ] JSDoc em todas as classes, métodos e propriedades públicas
 - [ ] README com descrição clara do componente/serviço
-- [ ] Exemplos de código para todos os casos de uso comuns
+- [ ] Exemplos de código para casos de uso comuns
 - [ ] Tabelas de props/eventos para componentes
-- [ ] Documentação de acessibilidade incluída
+- [ ] Documentação de acessibilidade
 - [ ] Links para documentação relacionada
-- [ ] Imagens/diagramas onde apropriado
+- [ ] Imagens/diagramas quando apropriado
 - [ ] Todos os parâmetros, retornos e erros documentados
-- [ ] Verificado que a documentação está atualizada com o código atual
+- [ ] Documentação atualizada com o código
 
 ## 📚 Recursos Adicionais
 
 - [Angular Docs Style Guide](https://angular.dev/style-guide)
 - [TypeDoc](https://typedoc.org/) - Gerador de documentação TypeScript
 - [JSDoc Reference](https://jsdoc.app/)
-- [Microsoft API Documentation](https://docs.microsoft.com/style-guide/developer-content/) - Boas práticas
+- [Microsoft API Documentation](https://docs.microsoft.com/style-guide/developer-content/)
 - [Google Developer Documentation Style Guide](https://developers.google.com/style)

@@ -3,7 +3,7 @@
 > **Importante:**
 >
 > - Todos os comentários nos arquivos de teste devem ser em inglês.
-> - **Antes de cada `expect` em qualquer teste, adicione uma linha em branco** para melhorar a legibilidade e seguir o padrão do projeto.
+> - **Adicione uma linha em branco antes de cada `expect` em qualquer teste** para melhorar a legibilidade e seguir o padrão do projeto.
 > - **Sempre use `fixture.componentRef.setInput()` para definir propriedades de input nos testes** (abordagem recomendada pelo Angular Team).
 
 ## 1. Estrutura de Testes
@@ -16,7 +16,7 @@ describe('ComponenteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponenteComponent] // Para componentes standalone
+      imports: [ComponenteComponent] // For standalone components
     }).compileComponents();
 
     fixture = TestBed.createComponent(ComponenteComponent);
@@ -41,6 +41,7 @@ describe('Basic Functionality', () => {
 
   it('should have default properties', () => {
     expect(component.variant).toBe('primary');
+
     expect(component.disabled).toBeFalsy();
   });
 });
@@ -100,36 +101,38 @@ describe('Accessibility', () => {
 });
 ```
 
-## 3. Testing Inputs e Outputs
+## 3. Testando Inputs e Outputs
 
-### A. Testing Inputs
+### A. Testando Inputs
 
 ```typescript
 it('should set input properties correctly', () => {
-  // Sempre use setInput(), não atribua diretamente
+  // Always use setInput(), do not assign directly
   fixture.componentRef.setInput('label', 'Test Label');
   fixture.componentRef.setInput('required', true);
   fixture.detectChanges();
 
   expect(component.label).toBe('Test Label');
+
   expect(component.required).toBe(true);
 
   expect(element.textContent).toContain('Test Label');
+
   expect(element.classList).toContain('required');
 });
 ```
 
-### B. Testing Outputs
+### B. Testando Outputs
 
 ```typescript
 it('should emit valueChange event', () => {
-  // Método 1: Spying no EventEmitter
+  // Method 1: Spying on EventEmitter
   spyOn(component.valueChange, 'emit');
   component.updateValue('new value');
 
   expect(component.valueChange.emit).toHaveBeenCalledWith('new value');
 
-  // Método 2: Subscribing ao output
+  // Method 2: Subscribing to output
   let emittedValue: string | null = null;
   component.valueChange.subscribe((value) => (emittedValue = value));
   component.updateValue('another value');
@@ -138,9 +141,9 @@ it('should emit valueChange event', () => {
 });
 ```
 
-## 4. Testing Forms
+## 4. Testando Forms
 
-### A. Testing Template-Driven Forms
+### A. Template-Driven Forms
 
 ```typescript
 it('should update model on input', () => {
@@ -152,30 +155,31 @@ it('should update model on input', () => {
 });
 ```
 
-### B. Testing Reactive Forms
+### B. Reactive Forms
 
 ```typescript
 it('should validate the form', () => {
   const form = component.form;
   const emailControl = form.get('email');
 
-  // Inicialmente inválido pois é required
+  // Initially invalid because it is required
   expect(emailControl?.valid).toBeFalsy();
 
-  // Depois de definir um valor
+  // After setting a valid value
   emailControl?.setValue('test@example.com');
 
   expect(emailControl?.valid).toBeTruthy();
 
-  // Com um valor inválido
+  // With an invalid value
   emailControl?.setValue('invalid-email');
 
   expect(emailControl?.valid).toBeFalsy();
+
   expect(emailControl?.hasError('email')).toBeTruthy();
 });
 ```
 
-## 5. Testing Async Operations
+## 5. Testando Operações Assíncronas
 
 ```typescript
 it('should load data asynchronously', fakeAsync(() => {
@@ -186,14 +190,15 @@ it('should load data asynchronously', fakeAsync(() => {
 
   // Trigger data load
   component.loadData();
-  tick(); // Process all pending async operations
+  tick();
 
   expect(component.items).toEqual(mockData);
+
   expect(component.loading).toBeFalsy();
 }));
 ```
 
-## 6. Testing Comportamento Condicional
+## 6. Testando Comportamento Condicional
 
 ```typescript
 it('should show error message when hasError is true', () => {
@@ -211,11 +216,12 @@ it('should show error message when hasError is true', () => {
   errorMessage = fixture.debugElement.query(By.css('[data-testid="error-message"]'));
 
   expect(errorMessage).not.toBeNull();
+
   expect(errorMessage.nativeElement.textContent).toContain('Test error');
 });
 ```
 
-## 7. Testing State Changes
+## 7. Testando Mudanças de Estado
 
 ```typescript
 it('should update UI when state changes', () => {
@@ -231,7 +237,7 @@ it('should update UI when state changes', () => {
 });
 ```
 
-## 8. Testing Host Bindings
+## 8. Testando Host Bindings
 
 ```typescript
 it('should apply host classes correctly', () => {
@@ -246,25 +252,26 @@ it('should apply host classes correctly', () => {
   fixture.detectChanges();
 
   expect(hostElement.classList).toContain('disabled');
+
   expect(hostElement.hasAttribute('disabled')).toBeTruthy();
 });
 ```
 
-## 9. Testing ViewChild References
+## 9. Testando Referências ViewChild
 
 ```typescript
 it('should access child element with ViewChild', () => {
   fixture.componentRef.setInput('autoFocus', true);
   fixture.detectChanges();
 
-  // O componente deve autofocus no elemento input
+  // The component should autofocus the input element
   const input = component.inputElement.nativeElement;
 
   expect(document.activeElement).toBe(input);
 });
 ```
 
-## 10. Testing Content Projection
+## 10. Testando Content Projection
 
 ```typescript
 it('should project content correctly', () => {
@@ -292,25 +299,29 @@ it('should project content correctly', () => {
   const projectedContent = hostFixture.debugElement.query(
     By.css('[data-testid="projected-content"]')
   ).nativeElement;
+
   const headerContent = hostFixture.debugElement.query(
     By.css('[data-testid="header"]')
   ).nativeElement;
+
   const footerContent = hostFixture.debugElement.query(
     By.css('[data-testid="footer"]')
   ).nativeElement;
 
   expect(projectedContent.textContent).toBe('Projected Content');
+
   expect(headerContent.textContent).toBe('Header Content');
+
   expect(footerContent.textContent).toBe('Footer Content');
 });
 ```
 
-## 11. Testing Acessibilidade Avançada
+## 11. Testando Acessibilidade Avançada
 
 ```typescript
 describe('Accessibility Tests', () => {
   it('should meet WCAG contrast requirements', () => {
-    // Verifique se as cores atendem aos requisitos de contraste
+    // Check if colors meet contrast requirements
     const backgroundColor = getComputedStyle(element).backgroundColor;
     const textColor = getComputedStyle(element).color;
 
@@ -320,16 +331,16 @@ describe('Accessibility Tests', () => {
   it('should be keyboard navigable', () => {
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
 
-    // Simule navegação por teclado
+    // Simulate keyboard navigation
     button.focus();
 
     expect(document.activeElement).toBe(button);
 
-    // Simule pressionamento de tecla
+    // Simulate key press
     const keyEvent = new KeyboardEvent('keydown', { key: 'Enter' });
     button.dispatchEvent(keyEvent);
 
-    // Verifique se a ação foi disparada
+    // Check if the action was triggered
     expect(component.wasActivated).toBeTruthy();
   });
 
@@ -339,12 +350,13 @@ describe('Accessibility Tests', () => {
     fixture.detectChanges();
 
     expect(element.getAttribute('aria-expanded')).toBe('true');
+
     expect(element.getAttribute('aria-controls')).toBe('panel-1');
   });
 });
 ```
 
-## 12. Testing Pipes Personalizados
+## 12. Testando Pipes Personalizados
 
 ```typescript
 describe('CustomPipe', () => {
@@ -356,13 +368,15 @@ describe('CustomPipe', () => {
 
   it('should transform input correctly', () => {
     expect(pipe.transform('hello')).toBe('HELLO');
+
     expect(pipe.transform('')).toBe('');
+
     expect(pipe.transform(null)).toBe('');
   });
 });
 ```
 
-## 13. Testing Diretivas Personalizadas
+## 13. Testando Diretivas Personalizadas
 
 ```typescript
 describe('HighlightDirective', () => {
@@ -398,7 +412,7 @@ describe('HighlightDirective', () => {
 });
 ```
 
-## 14. Testing Serviços Injetados
+## 14. Testando Serviços Injetados
 
 ```typescript
 describe('ComponentWithService', () => {
@@ -407,7 +421,7 @@ describe('ComponentWithService', () => {
   let mockService: jasmine.SpyObj<DataService>;
 
   beforeEach(async () => {
-    // Crie um mock do serviço
+    // Create a mock for the service
     mockService = jasmine.createSpyObj('DataService', ['getData', 'saveData']);
     mockService.getData.and.returnValue(of(['item1', 'item2']));
 
@@ -423,6 +437,7 @@ describe('ComponentWithService', () => {
 
   it('should load data from service on init', () => {
     expect(mockService.getData).toHaveBeenCalled();
+
     expect(component.items).toEqual(['item1', 'item2']);
   });
 
@@ -434,7 +449,7 @@ describe('ComponentWithService', () => {
 });
 ```
 
-## 15. Testing Error Handling
+## 15. Testando Tratamento de Erros
 
 ```typescript
 it('should handle API errors gracefully', fakeAsync(() => {
@@ -446,6 +461,7 @@ it('should handle API errors gracefully', fakeAsync(() => {
   fixture.detectChanges();
 
   expect(component.hasError).toBeTruthy();
+
   expect(component.errorMessage).toContain('Failed to load data');
 
   const errorElement = fixture.debugElement.query(By.css('[data-testid="error-message"]'));
@@ -454,7 +470,7 @@ it('should handle API errors gracefully', fakeAsync(() => {
 }));
 ```
 
-## 16. Testing componentes standalone com dependências
+## 16. Testando Componentes Standalone com Dependências
 
 ```typescript
 describe('StandaloneComponent', () => {
@@ -465,11 +481,15 @@ describe('StandaloneComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         StandaloneComponent,
-        provideHttpClient(), // Forneça dependências necessárias
-        provideRouter([]), // Se necessário
+        provideHttpClient(), // Provide necessary dependencies
+        provideRouter([]) // If needed
       ],
       providers: [
-        provideMockStore({ initialState: { ... } }), // Se usar NgRx
+        provideMockStore({
+          initialState: {
+            /* ... */
+          }
+        }) // If using NgRx
       ]
     }).compileComponents();
 
@@ -478,31 +498,22 @@ describe('StandaloneComponent', () => {
     fixture.detectChanges();
   });
 
-  // Testes...
+  // Tests...
 });
 ```
 
 ## 🏅 Melhores Práticas
 
-1. **Use data-testid para seletores**: Prefira `data-testid="nome"` em elementos que você precisa selecionar nos testes, tornando-os mais resistentes a mudanças de classe ou estrutura
-
-2. **Sempre detecte mudanças**: Use `fixture.detectChanges()` após qualquer operação que deva resultar em atualização da UI
-
-3. **Nunca atribua diretamente às propriedades de input**: Use sempre `fixture.componentRef.setInput()`
-
-4. **Use fakeAsync para operações assíncronas**: Isso torna os testes mais determinísticos e evita timeouts
-
-5. **Mock serviços complexos**: Use jasmine.createSpyObj ou TestBed.inject para configurar mocks
-
-6. **Encadeie expectativas com contexto**: Adicione descrição ao teste e agrupe expectativas relacionadas
-
-7. **Uma linha em branco antes de cada assert**: Melhora a legibilidade e é um padrão do projeto
-
-8. **Teste comportamento, não implementação**: Foque no que o componente deve fazer, não como ele faz
-
-9. **Use beforeEach para configuração**: Para manter o código DRY e garantir um estado inicial limpo
-
-10. **Teste estados limite e casos de erro**: Não teste apenas o caminho "feliz", mas também erros e casos limite
+1. **Use data-testid para seletores**: Prefira `data-testid="nome"` em elementos que você precisa selecionar nos testes, tornando-os mais resistentes a mudanças de classe ou estrutura.
+2. **Sempre detecte mudanças**: Use `fixture.detectChanges()` após qualquer operação que deva resultar em atualização da UI.
+3. **Nunca atribua diretamente às propriedades de input**: Use sempre `fixture.componentRef.setInput()`.
+4. **Use fakeAsync para operações assíncronas**: Isso torna os testes mais determinísticos e evita timeouts.
+5. **Mock serviços complexos**: Use `jasmine.createSpyObj` ou `TestBed.inject` para configurar mocks.
+6. **Encadeie expectativas com contexto**: Adicione descrição ao teste e agrupe expectativas relacionadas.
+7. **Uma linha em branco antes de cada assert**: Melhora a legibilidade e é um padrão do projeto.
+8. **Teste comportamento, não implementação**: Foque no que o componente deve fazer, não como ele faz.
+9. **Use beforeEach para configuração**: Para manter o código DRY e garantir um estado inicial limpo.
+10. **Teste estados limite e casos de erro**: Não teste apenas o caminho "feliz", mas também erros e casos limite.
 
 ## 📚 Recursos
 

@@ -1,46 +1,38 @@
 # ♿ Diretrizes de Acessibilidade
 
-Este documento estabelece os padrões de acessibilidade que devem ser seguidos por todos os componentes da biblioteca UI do ByteBank Pro. Criar componentes acessíveis não é apenas uma boa prática, mas uma necessidade para garantir que nossos produtos sejam utilizáveis por todos os usuários, incluindo pessoas com deficiências.
+Este documento define os padrões de acessibilidade para todos os componentes da biblioteca UI do ByteBank Pro. Componentes acessíveis são essenciais para garantir que nossos produtos sejam utilizáveis por todas as pessoas, incluindo aquelas com deficiência.
 
 ## 1. Princípios Fundamentais
 
-### A. Perceptível
+### Perceptível
 
-Os usuários devem ser capazes de perceber a informação apresentada (não pode ser invisível para todos os seus sentidos)
+- Forneça alternativas textuais para conteúdo não textual.
+- Ofereça legendas e alternativas para multimídia.
+- Permita diferentes formas de apresentação do conteúdo.
+- Facilite a visualização e audição do conteúdo.
 
-- Forneça alternativas textuais para conteúdo não textual
-- Forneça legendas e outras alternativas para multimídia
-- Crie conteúdo que possa ser apresentado de diferentes maneiras
-- Torne fácil para os usuários ver e ouvir o conteúdo
+### Operável
 
-### B. Operável
+- Toda funcionalidade deve ser acessível via teclado.
+- Dê tempo suficiente para leitura e uso do conteúdo.
+- Evite conteúdo que possa causar convulsões.
+- Ajude na navegação e localização de conteúdo.
 
-Os componentes de interface do usuário devem ser operáveis (a interface não pode exigir interação que um usuário não pode realizar)
+### Compreensível
 
-- Torne toda funcionalidade disponível a partir de um teclado
-- Forneça aos usuários tempo suficiente para ler e usar o conteúdo
-- Não projete conteúdo que possa causar convulsões
-- Forneça formas de ajudar os usuários a navegar e encontrar conteúdo
+- O texto deve ser legível e compreensível.
+- As páginas devem ser previsíveis.
+- Ajude a evitar e corrigir erros.
 
-### C. Compreensível
+### Robusto
 
-A informação e operação da interface do usuário devem ser compreensíveis
+- O conteúdo deve ser compatível com diferentes agentes de usuário, incluindo tecnologias assistivas.
 
-- Torne o texto legível e compreensível
-- Faça com que as páginas apareçam e funcionem de maneira previsível
-- Ajude os usuários a evitar e corrigir erros
+## 2. Atributos ARIA
 
-### D. Robusto
+Os atributos ARIA tornam o conteúdo web mais acessível.
 
-O conteúdo deve ser suficientemente robusto para poder ser interpretado por uma ampla variedade de agentes de usuário, incluindo tecnologias assistivas
-
-- Maximize a compatibilidade com agentes de usuário atuais e futuros, incluindo tecnologias assistivas
-
-## 2. Atributos ARIA Obrigatórios
-
-Os Accessible Rich Internet Applications (ARIA) são um conjunto de atributos que definem maneiras de tornar o conteúdo da web e aplicações web mais acessíveis.
-
-### A. Atributos ARIA em Componentes
+### Exemplos de Atributos ARIA em Componentes
 
 ```typescript
 // Inputs for accessibility
@@ -50,7 +42,7 @@ Os Accessible Rich Internet Applications (ARIA) são um conjunto de atributos qu
 @Input() role?: string; // When needed
 ```
 
-### B. Implementação no Template
+### Implementação no Template
 
 ```html
 <button
@@ -66,13 +58,13 @@ Os Accessible Rich Internet Applications (ARIA) são um conjunto de atributos qu
 </button>
 ```
 
-### C. Atributos ARIA Comuns por Tipo de Componente
+### Atributos ARIA Comuns
 
 | Componente      | Atributos ARIA Comuns                                              |
 | --------------- | ------------------------------------------------------------------ |
-| Botões          | `aria-label`, `aria-pressed`, `aria-disabled`                      |
-| Inputs          | `aria-label`, `aria-describedby`, `aria-invalid`                   |
-| Checkboxes      | `aria-checked`, `aria-required`                                    |
+| Botão           | `aria-label`, `aria-pressed`, `aria-disabled`                      |
+| Input           | `aria-label`, `aria-describedby`, `aria-invalid`                   |
+| Checkbox        | `aria-checked`, `aria-required`                                    |
 | Combobox/Select | `aria-expanded`, `aria-activedescendant`, `aria-owns`              |
 | Modal/Dialog    | `aria-modal`, `aria-labelledby`, `aria-describedby`                |
 | Tabs            | `aria-selected`, `role="tablist"`, `role="tab"`, `role="tabpanel"` |
@@ -83,7 +75,7 @@ Os Accessible Rich Internet Applications (ARIA) são um conjunto de atributos qu
 
 Os componentes devem refletir corretamente seus estados para tecnologias assistivas.
 
-### A. Loading States
+### Estado de Carregamento
 
 ```html
 <!-- Example: Button with loading -->
@@ -102,7 +94,7 @@ Os componentes devem refletir corretamente seus estados para tecnologias assisti
 </button>
 ```
 
-### B. Error States
+### Estado de Erro
 
 ```html
 <div class="form-group" [class.has-error]="hasError">
@@ -121,7 +113,7 @@ Os componentes devem refletir corretamente seus estados para tecnologias assisti
 </div>
 ```
 
-### C. Collapsed/Expanded States
+### Estado Expandido/Colapsado
 
 ```html
 <div class="accordion-item">
@@ -148,38 +140,35 @@ Os componentes devem refletir corretamente seus estados para tecnologias assisti
 
 ## 4. Navegação por Teclado
 
-Usuários que dependem de teclado devem poder acessar todas as funcionalidades da interface.
+Usuários de teclado devem acessar todas as funcionalidades.
 
-### A. Foco Visível
+### Foco Visível
 
 ```typescript
-// Classes para indicação de foco visível
+// Classes for visible focus indication
 const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bytebank-blue';
 ```
 
-### B. Ordem de Tabulação Lógica
+### Ordem de Tabulação
 
-- Use ordem de DOM lógica
-- Evite usar `tabindex` maior que 0
-- Use `tabindex="0"` para elementos não focalizáveis que devem receber foco
-- Use `tabindex="-1"` para elementos que devem poder ser focalizados programaticamente, mas não incluídos na ordem de tabulação
+- Use ordem lógica no DOM.
+- Evite `tabindex` maior que 0.
+- Use `tabindex="0"` para elementos customizados que devem receber foco.
+- Use `tabindex="-1"` para foco programático.
 
-### C. Teclas de Atalho
+### Teclas de Atalho
 
 ```typescript
 @HostListener('keydown.enter', ['$event'])
 @HostListener('keydown.space', ['$event'])
 onKeyActivate(event: KeyboardEvent): void {
-  if (this.disabled) {
-    return;
-  }
-
+  if (this.disabled) return;
   event.preventDefault();
   this.activate.emit();
 }
 ```
 
-### D. Trap Focus (para Modais)
+### Trap Focus (para Modais)
 
 ```typescript
 @Component({...})
@@ -199,20 +188,14 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
     this.focusableElements = Array.from(
       this.container.nativeElement.querySelectorAll(focusableSelectors)
     );
-
     this.firstFocusableElement = this.focusableElements[0];
     this.lastFocusableElement = this.focusableElements[this.focusableElements.length - 1];
-
-    // Focus first element
     this.firstFocusableElement.focus();
-
-    // Setup key listeners
     this.container.nativeElement.addEventListener('keydown', this.handleTabKey.bind(this));
   }
 
   private handleTabKey(event: KeyboardEvent): void {
     if (event.key !== 'Tab') return;
-
     if (event.shiftKey && document.activeElement === this.firstFocusableElement) {
       event.preventDefault();
       this.lastFocusableElement.focus();
@@ -230,23 +213,21 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
 
 ## 5. Roles Semânticos
 
-Use os roles ARIA apropriados para garantir que os elementos sejam interpretados corretamente pelas tecnologias assistivas.
+Use roles ARIA apropriados para garantir interpretação correta por tecnologias assistivas.
 
-### A. Exemplos de Roles Comuns
+| Role                         | Uso                                        |
+| ---------------------------- | ------------------------------------------ |
+| `button`                     | Elementos clicáveis não `<button>` nativos |
+| `link`                       | Links customizados                         |
+| `checkbox`                   | Checkboxes customizados                    |
+| `tablist`, `tab`, `tabpanel` | Componentes de abas                        |
+| `dialog`                     | Modais e diálogos                          |
+| `alert`                      | Mensagens de alerta                        |
+| `progressbar`                | Indicadores de progresso                   |
+| `menu`, `menuitem`           | Menus dropdown                             |
+| `combobox`                   | Inputs com autocomplete/dropdown           |
 
-| Role                         | Uso                                                               |
-| ---------------------------- | ----------------------------------------------------------------- |
-| `button`                     | Para elementos clicáveis que não são elementos `<button>` nativos |
-| `link`                       | Para links não nativos                                            |
-| `checkbox`                   | Para checkboxes customizados                                      |
-| `tablist`, `tab`, `tabpanel` | Para componentes de tab                                           |
-| `dialog`                     | Para modals e diálogos                                            |
-| `alert`                      | Para mensagens de alerta                                          |
-| `progressbar`                | Para indicadores de progresso                                     |
-| `menu`, `menuitem`           | Para menus dropdown                                               |
-| `combobox`                   | Para inputs com autocomplete ou dropdown                          |
-
-### B. Implementação
+### Exemplo de Combobox
 
 ```html
 <div
@@ -277,32 +258,29 @@ Use os roles ARIA apropriados para garantir que os elementos sejam interpretados
 </div>
 ```
 
-## 6. Text Alternatives
+## 6. Alternativas Textuais
 
-Forneça alternativas textuais para todos os elementos não textuais.
+Forneça alternativas textuais para elementos não textuais.
 
-### A. Imagens e Ícones
+### Imagens e Ícones
 
 ```html
-<!-- Imagem informativa -->
+<!-- Informative image -->
 <img src="chart.png" alt="Gráfico mostrando crescimento de 25% nas vendas em 2023" />
 
-<!-- Ícone decorativo -->
+<!-- Decorative icon -->
 <LucideIcon name="chevron-right" aria-hidden="true" />
 
-<!-- Ícone funcional -->
+<!-- Functional icon -->
 <button aria-label="Fechar diálogo">
   <LucideIcon name="x" aria-hidden="true" />
 </button>
 ```
 
-### B. Classes Utilitárias para Texto Escondido
+### Texto Escondido para Leitores de Tela
 
 ```html
-<!-- Visível apenas para leitores de tela -->
 <span class="sr-only">Instruções adicionais para leitores de tela</span>
-
-<!-- CSS para sr-only -->
 <style>
   .sr-only {
     position: absolute;
@@ -320,21 +298,12 @@ Forneça alternativas textuais para todos os elementos não textuais.
 
 ## 7. Live Regions
 
-Use live regions para anunciar conteúdo dinâmico para usuários de leitores de tela.
-
-### A. Simple Live Region
+Use live regions para anunciar conteúdo dinâmico a leitores de tela.
 
 ```html
 <div role="status" aria-live="polite" [class.sr-only]="!message">{{ message }}</div>
-```
-
-### B. Alert Live Region
-
-```html
 <div role="alert" aria-live="assertive" [class.hidden]="!errorMessage">{{ errorMessage }}</div>
 ```
-
-### C. Implementação Programática
 
 ```typescript
 @Component({...})
@@ -347,11 +316,8 @@ export class NotificationService {
 
   announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
     if (!this.liveRegion) return;
-
     this.liveRegion.textContent = '';
     this.liveRegion.setAttribute('aria-live', priority);
-
-    // Use setTimeout to ensure screen readers register the change
     setTimeout(() => {
       this.liveRegion!.textContent = message;
     }, 100);
@@ -368,34 +334,27 @@ export class NotificationService {
 
 ## 8. Contraste e Legibilidade
 
-Garanta que o texto e os elementos interativos tenham contraste suficiente para serem percebidos por usuários com baixa visão.
+Garanta contraste suficiente para textos e elementos interativos.
 
-### A. Requisitos de Contraste WCAG
-
-- **Text normal (menor que 18pt)**: Contraste mínimo de 4.5:1 (AA)
-- **Text grande (18pt ou maior)**: Contraste mínimo de 3:1 (AA)
-- **Componentes de UI e informações gráficas**: Contraste mínimo de 3:1 (AA)
-
-### B. Classes de Cores Acessíveis
+- **Texto normal (<18pt):** mínimo 4.5:1 (AA)
+- **Texto grande (≥18pt):** mínimo 3:1 (AA)
+- **Componentes de UI/gráficos:** mínimo 3:1 (AA)
 
 ```typescript
-// Exemplo de classes de cor com contraste acessível
+// Example of accessible color classes
 const TEXT_COLORS = {
-  default: 'text-gray-900', // Escuro o suficiente para fundos claros
-  inverted: 'text-white', // Para fundos escuros
-  muted: 'text-gray-600', // Ainda com contraste adequado (4.5:1)
-  error: 'text-red-700', // Vermelho com contraste adequado
-  success: 'text-green-700' // Verde com contraste adequado
+  default: 'text-gray-900',
+  inverted: 'text-white',
+  muted: 'text-gray-600',
+  error: 'text-red-700',
+  success: 'text-green-700'
 };
-
-// Evite cores como text-gray-400 em fundos claros (contraste insuficiente)
+// Avoid text-gray-400 on light backgrounds (insufficient contrast)
 ```
 
-## 9. Forms Acessíveis
+## 9. Formulários Acessíveis
 
-Formulários são áreas críticas para acessibilidade. Certifique-se de que todos os controles de formulário sejam acessíveis.
-
-### A. Labels Explícitos
+### Labels Explícitos
 
 ```html
 <div class="form-group">
@@ -404,7 +363,7 @@ Formulários são áreas críticas para acessibilidade. Certifique-se de que tod
 </div>
 ```
 
-### B. Feedback de Validação
+### Feedback de Validação
 
 ```html
 <div class="form-group" [class.has-error]="hasError">
@@ -422,17 +381,15 @@ Formulários são áreas críticas para acessibilidade. Certifique-se de que tod
 </div>
 ```
 
-### C. Agrupamento de Campos
+### Agrupamento de Campos
 
 ```html
 <fieldset>
   <legend>Informações de Contato</legend>
-
   <div class="form-group">
     <label for="first-name">Nome</label>
     <input id="first-name" type="text" />
   </div>
-
   <div class="form-group">
     <label for="last-name">Sobrenome</label>
     <input id="last-name" type="text" />
@@ -442,20 +399,10 @@ Formulários são áreas críticas para acessibilidade. Certifique-se de que tod
 
 ## 10. Touch Targets
 
-Certifique-se de que os elementos interativos sejam grandes o suficiente para usuários com deficiências motoras.
-
-### A. Tamanhos Mínimos
-
-- **Elementos interativos**: No mínimo 44x44 pixels
-- **Espaçamento**: No mínimo 8px entre elementos interativos
-
-### B. Implementação
+Elementos interativos devem ter área mínima de 44x44px e espaçamento de pelo menos 8px.
 
 ```html
-<!-- Botão com área de toque adequada -->
 <button class="min-h-[44px] min-w-[44px] p-2">Salvar</button>
-
-<!-- Espaçamento adequado entre controles -->
 <div class="flex gap-4">
   <button class="btn">Cancelar</button>
   <button class="btn">Confirmar</button>
@@ -464,80 +411,49 @@ Certifique-se de que os elementos interativos sejam grandes o suficiente para us
 
 ## 11. Checklist de Acessibilidade
 
-Use esta checklist ao desenvolver ou revisar componentes:
-
-### A. Elementos Estruturais
-
-- [ ] Estrutura semântica (uso apropriado de elementos HTML)
-- [ ] Landmarks (role="navigation", role="main", etc.) quando apropriado
-- [ ] Cabeçalhos em ordem hierárquica lógica
-
-### B. Teclado e Foco
-
-- [ ] Todos os controles interativos são acessíveis por teclado
-- [ ] A ordem de tabulação é lógica
-- [ ] O indicador de foco é visível (estilo :focus)
-- [ ] Nenhuma armadilha de teclado (exceto quando necessário, como em modais)
-
-### C. ARIA e Semântica
-
-- [ ] Roles ARIA apropriados
-- [ ] Estados e propriedades ARIA corretos
-- [ ] Todos os elementos não textuais têm alternativas textuais
+- [ ] Estrutura semântica e landmarks apropriados
+- [ ] Cabeçalhos em ordem lógica
+- [ ] Todos os controles acessíveis por teclado
+- [ ] Ordem de tabulação lógica
+- [ ] Indicador de foco visível
+- [ ] Sem armadilhas de teclado (exceto modais)
+- [ ] Roles e estados ARIA corretos
+- [ ] Alternativas textuais para elementos não textuais
 - [ ] Live regions para conteúdo dinâmico
-
-### D. Formulários
-
-- [ ] Labels explícitos para todos os campos
+- [ ] Labels explícitos em formulários
 - [ ] Mensagens de erro acessíveis
-- [ ] Validação apropriada e feedback
-- [ ] Agrupamento lógico de campos relacionados
-
-### E. Visual
-
+- [ ] Feedback e agrupamento lógico de campos
 - [ ] Contraste de cor adequado
-- [ ] Não depende apenas de cor para transmitir informações
+- [ ] Não depender apenas de cor para transmitir informação
 - [ ] Texto redimensionável sem perda de funcionalidade
-- [ ] Tamanhos de toque adequados para interfaces móveis
-
-### F. Conteúdo Dinâmico
-
+- [ ] Tamanhos de toque adequados
 - [ ] Notificações acessíveis para alterações de conteúdo
-- [ ] Modais e overlays gerenciam o foco corretamente
-- [ ] Animações podem ser pausadas ou desativadas
+- [ ] Modais e overlays gerenciam foco corretamente
+- [ ] Animações podem ser pausadas/desativadas
 
 ## 12. Testes de Acessibilidade
 
-### A. Ferramentas Automatizadas
+### Ferramentas Automatizadas
 
-- **Lighthouse**: Auditoria integrada no Chrome DevTools
-- **axe**: Biblioteca de testes de acessibilidade automatizados
-- **Angular A11y Codelyzer**: Regras estáticas para código Angular
+- **Lighthouse** (Chrome DevTools)
+- **axe**
+- **Angular A11y Codelyzer**
 
-### B. Testes Manuais
+### Testes Manuais
 
-- **Navegação por Teclado**: Tab, Shift+Tab, Enter, Space, Arrow keys
-- **Screen Reader**: NVDA (Windows), VoiceOver (macOS), JAWS
-- **High Contrast Mode**: Teste no modo de alto contraste
-- **Zoom**: Teste com zoom de 200%
-
-### C. Teste de Keyboard-Only
+- Navegação por teclado (Tab, Shift+Tab, Enter, Space, setas)
+- Leitores de tela: NVDA, VoiceOver, JAWS
+- Modo de alto contraste
+- Zoom de até 200%
 
 ```typescript
-// Exemplo de teste para navegação por teclado
+// Example: Keyboard navigation test
 it('should support keyboard navigation', async () => {
-  // Tab to focused state
   await userEvent.tab();
   expect(document.activeElement).toBe(buttonElement);
-
-  // Activate with Enter key
   await userEvent.keyboard('{Enter}');
   expect(onClickSpy).toHaveBeenCalled();
-
-  // Reset spy
   onClickSpy.calls.reset();
-
-  // Activate with Space key
   await userEvent.keyboard(' ');
   expect(onClickSpy).toHaveBeenCalled();
 });
@@ -545,26 +461,18 @@ it('should support keyboard navigation', async () => {
 
 ## 13. Recursos e Padrões
 
-### A. Especificações e Diretrizes
+- [WCAG 2.1](https://www.w3.org/TR/WCAG21/)
+- [WAI-ARIA](https://www.w3.org/TR/wai-aria/)
+- [Inclusive Components](https://inclusive-components.design/)
+- [axe DevTools](https://www.deque.com/axe/)
+- [Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [Accessibility Insights](https://accessibilityinsights.io/)
+- [Angular CDK a11y](https://material.angular.io/cdk/a11y/overview)
+- [ngx-a11y](https://github.com/tilmanpotthof/ngx-a11y)
 
-- [WCAG 2.1](https://www.w3.org/TR/WCAG21/) - Web Content Accessibility Guidelines
-- [WAI-ARIA](https://www.w3.org/TR/wai-aria/) - Accessible Rich Internet Applications
-- [Inclusive Components](https://inclusive-components.design/) - Padrões de design acessível
+## 14. Exemplos de Componentes Acessíveis
 
-### B. Ferramentas
-
-- [axe DevTools](https://www.deque.com/axe/) - Teste de acessibilidade automatizado
-- [Contrast Checker](https://webaim.org/resources/contrastchecker/) - Verificação de contraste de cor
-- [Accessibility Insights](https://accessibilityinsights.io/) - Extensão para visualização de problemas de acessibilidade
-
-### C. Bibliotecas Angular
-
-- [Angular CDK a11y](https://material.angular.io/cdk/a11y/overview) - Utilitários de acessibilidade
-- [ngx-a11y](https://github.com/tilmanpotthof/ngx-a11y) - Ferramentas de acessibilidade para Angular
-
-## 14. Exemplos Específicos para Componentes Comuns
-
-### A. Modal Acessível
+### Modal
 
 ```typescript
 @Component({
@@ -591,17 +499,14 @@ it('should support keyboard navigation', async () => {
             <LucideIcon name="x" aria-hidden="true" />
           </button>
         </div>
-
         @if (description) {
           <div [id]="descriptionId" class="modal-description">
             {{ description }}
           </div>
         }
-
         <div class="modal-content">
           <ng-content></ng-content>
         </div>
-
         <div class="modal-footer">
           <ng-content select="[slot=footer]"></ng-content>
         </div>
@@ -615,9 +520,7 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   @Input() description?: string;
   @Input() closeOnOverlayClick = true;
   @Output() close = new EventEmitter<void>();
-
   @ViewChild('modalContainer') modalContainer!: ElementRef<HTMLElement>;
-
   private headerId = `modal-title-${uniqueId()}`;
   private descriptionId = `modal-desc-${uniqueId()}`;
   private previouslyFocusedElement?: HTMLElement;
@@ -628,13 +531,8 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
 
   private setupFocusTrap(): void {
     if (this.isOpen) {
-      // Store current focus
       this.previouslyFocusedElement = document.activeElement as HTMLElement;
-
-      // Set up focus trap
-      // ... (implementação do trapFocus como mostrado anteriormente)
-
-      // Focus the first element
+      // Trap focus implementation
       setTimeout(() => {
         this.focusFirstElement();
       });
@@ -646,7 +544,6 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Restore focus when component is destroyed
     if (this.previouslyFocusedElement) {
       this.previouslyFocusedElement.focus();
     }
@@ -658,7 +555,7 @@ function uniqueId(): string {
 }
 ```
 
-### B. Dropdown Acessível
+### Dropdown
 
 ```typescript
 @Component({
@@ -677,7 +574,6 @@ function uniqueId(): string {
         {{ label }}
         <LucideIcon name="chevron-down" aria-hidden="true" />
       </button>
-
       <div
         [id]="menuId"
         class="dropdown-menu"
@@ -693,7 +589,6 @@ function uniqueId(): string {
 export class DropdownComponent {
   @Input() label = 'Menu';
   @Input() isOpen = false;
-
   private triggerId = `dropdown-trigger-${uniqueId()}`;
   private menuId = `dropdown-menu-${uniqueId()}`;
 
@@ -703,9 +598,7 @@ export class DropdownComponent {
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
-    if (this.isOpen) {
-      this.isOpen = false;
-    }
+    if (this.isOpen) this.isOpen = false;
   }
 
   @HostListener('document:click', ['$event'])
@@ -714,7 +607,6 @@ export class DropdownComponent {
   }
 }
 
-// DropdownItemComponent
 @Component({
   selector: 'bb-dropdown-item',
   template: `
@@ -725,14 +617,13 @@ export class DropdownComponent {
 })
 export class DropdownItemComponent {
   @Output() select = new EventEmitter<void>();
-
   onClick(): void {
     this.select.emit();
   }
 }
 ```
 
-### C. Tabs Acessíveis
+### Tabs
 
 ```typescript
 @Component({
@@ -756,7 +647,6 @@ export class DropdownItemComponent {
           </button>
         }
       </div>
-
       @for (tab of tabs; track tab; let i = $index) {
         <div
           role="tabpanel"
@@ -801,17 +691,15 @@ export class TabsComponent implements AfterContentInit {
   }
 
   private focusCurrentTab(): void {
-    // Implementation to focus the current tab
+    // Focus logic
   }
 }
 
-// Tab Directive
 @Directive({
   selector: '[bbTab]'
 })
 export class TabDirective {
   @Input() label = '';
-
   constructor(public templateRef: TemplateRef<any>) {}
 }
 ```
@@ -826,63 +714,60 @@ export class TabDirective {
 
 ## 🛠️ Regras de ESLint de Acessibilidade
 
-Este anexo consolida as regras de ESLint implementadas no ByteBank Pro para garantir conformidade com práticas de acessibilidade.
-
-### 1. Alt Text em Imagens (`@angular-eslint/template/alt-text`)
+### 1. Alt Text em Imagens
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <img src="chart.png" />
 <img src="user-avatar.jpg" alt="" />
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <img src="chart.png" alt="Gráfico de gastos mensais mostrando aumento de 15%" />
 <img src="user-avatar.jpg" alt="Avatar do usuário João Silva" />
 <img src="decorative-icon.svg" alt="" role="presentation" />
 ```
 
-### 2. Conteúdo em Elementos (`@angular-eslint/template/elements-content`)
+### 2. Conteúdo em Elementos
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <button (click)="delete()"></button>
 <a href="/profile"></a>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <button (click)="delete()">Excluir transação</button>
 <a href="/profile">Ver perfil</a>
 <button (click)="close()" aria-label="Fechar modal">×</button>
 ```
 
-### 3. Labels Associados (`@angular-eslint/template/label-has-associated-control`)
+### 3. Labels Associados
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <label>Nome</label>
 <input type="text" [(ngModel)]="name" />
 
 <label for="nonexistent">Email</label>
 <input type="email" id="email" [(ngModel)]="email" />
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <label for="name">Nome</label>
 <input type="text" id="name" [(ngModel)]="name" />
 
-<!-- Ou usando nesting -->
 <label>
   Email
   <input type="email" [(ngModel)]="email" />
 </label>
 ```
 
-### 4. Eventos de Teclado (`@angular-eslint/template/click-events-have-key-events`)
+### 4. Eventos de Teclado
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <div (click)="toggleMenu()">Menu</div>
 <span (click)="selectItem()">Item</span>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <div
   (click)="toggleMenu()"
   (keydown.enter)="toggleMenu()"
@@ -892,14 +777,13 @@ Este anexo consolida as regras de ESLint implementadas no ByteBank Pro para gara
 >
   Menu
 </div>
-
 <button (click)="selectItem()">Item</button>
 ```
 
-### 5. Scope em Tabelas (`@angular-eslint/template/table-scope`)
+### 5. Scope em Tabelas
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <table>
   <tr>
     <th>Data</th>
@@ -913,7 +797,7 @@ Este anexo consolida as regras de ESLint implementadas no ByteBank Pro para gara
   </tr>
 </table>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <table>
   <thead>
     <tr>
@@ -932,40 +816,40 @@ Este anexo consolida as regras de ESLint implementadas no ByteBank Pro para gara
 </table>
 ```
 
-### 6. Aria Válido (`@angular-eslint/template/valid-aria`)
+### 6. Aria Válido
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <div aria-labelledby="nonexistent">Conteúdo</div>
 <button aria-expanded="yes">Toggle</button>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <div aria-labelledby="section-title">Conteúdo</div>
 <h2 id="section-title">Título da Seção</h2>
 <button aria-expanded="true">Toggle</button>
 ```
 
-### 7. Foco em Elementos Interativos (`@angular-eslint/template/interactive-supports-focus`)
+### 7. Foco em Elementos Interativos
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <div role="button" (click)="action()">Clique aqui</div>
 <span role="link" (click)="navigate()">Navegar</span>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <div role="button" tabindex="0" (click)="action()" (keydown.enter)="action()">Clique aqui</div>
 <button (click)="action()">Clique aqui</button>
 <a href="/page" (click)="navigate()">Navegar</a>
 ```
 
-### 8. Tabindex Negativo (`@angular-eslint/template/no-positive-tabindex`)
+### 8. Tabindex Negativo
 
 ```html
-<!-- ❌ Incorreto -->
+<!-- Incorrect -->
 <input type="text" tabindex="1" />
 <button tabindex="2">Submit</button>
 
-<!-- ✅ Correto -->
+<!-- Correct -->
 <input type="text" />
 <button>Submit</button>
 <div tabindex="-1">Foco programático</div>

@@ -1,45 +1,43 @@
 # 🎨 Diretrizes para Componentes e Estilo
 
-Este documento estabelece as boas práticas e padrões para a criação de componentes na biblioteca UI do ByteBank Pro, incluindo estrutura, estilo e organização.
+Este documento define boas práticas para criação de componentes no ByteBank Pro, incluindo estrutura, estilo e organização.
 
 ## 🖼️ Ícones
 
-- **Sempre utilize ícones da biblioteca [`lucide-angular`](https://www.npmjs.com/package/lucide-angular)**, que é o equivalente Angular do `lucide-react`.
-- **Não utilize SVGs customizados ou outras bibliotecas de ícones**. Padronize todos os ícones com `lucide-angular` para garantir consistência visual e facilidade de manutenção.
-- **Importação e uso**: Importe apenas os ícones necessários para cada componente, evitando bundles desnecessários.
+- **Sempre utilize ícones da biblioteca [`lucide-angular`](https://www.npmjs.com/package/lucide-angular`)**.
+- **Não utilize SVGs customizados ou outras bibliotecas de ícones**.
+- **Importe apenas os ícones necessários** para cada componente.
 
 ## 📁 Estrutura de Arquivos
 
-### Estrutura Padrão por Componente
+### Estrutura Padrão
 
 ```
 src/
-└── nome-component/
-  ├── nome-component.component.ts      # Lógica do componente
-  └── nome-component.component.stories.ts # Stories do Storybook
+└── nome-do-componente/
+  ├── nome-do-componente.component.ts
+  └── nome-do-componente.component.stories.ts
 ```
 
 ### Convenções de Nomenclatura
 
-- **Pasta**: `kebab-case` (ex: `date-picker`, `form-input`)
-- **Arquivos**: `kebab-case.component.{ext}` (ex: `date-picker.component.ts`)
-- **Classe**: `PascalCase + Component` (ex: `DatePickerComponent`)
+- **Pasta**: `kebab-case` (ex: `date-picker`)
+- **Arquivo**: `kebab-case.component.{ext}` (ex: `date-picker.component.ts`)
+- **Classe**: `PascalCaseComponent` (ex: `DatePickerComponent`)
 - **Seletor**: `bb-kebab-case` (ex: `bb-date-picker`)
 
 ## 🔧 Estrutura do Componente TypeScript
 
-### Template Base
-
 ```typescript
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 // 1. Define specific types for the component
 export type ComponentVariant = 'primary' | 'secondary' | 'danger';
 export type ComponentSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'bb-nome-component', // 2. 'bb-' prefix is mandatory
+  selector: 'bb-nome-componente', // 2. 'bb-' prefix is mandatory
   standalone: true, // 3. Always use standalone components
   imports: [CommonModule], // 4. Required imports
   changeDetection: ChangeDetectionStrategy.OnPush, // 5. OnPush for better performance
@@ -49,7 +47,7 @@ export type ComponentSize = 'sm' | 'md' | 'lg';
     </div>
   `
 })
-export class NomeComponentComponent {
+export class NomeComponenteComponent {
   // 6. Inputs with sensible default values
   @Input() variant: ComponentVariant = 'primary';
   @Input() size: ComponentSize = 'md';
@@ -78,7 +76,6 @@ export class NomeComponentComponent {
       event.preventDefault();
       return;
     }
-
     this.componentClick.emit(event);
   }
 }
@@ -86,13 +83,13 @@ export class NomeComponentComponent {
 
 ## 🎨 Padrões de Estilo e CSS
 
-### 1. Uso do TailwindCSS
+### Uso do TailwindCSS
 
-- **Sempre usar classes Tailwind** quando possível
-- **Evitar CSS customizado** desnecessário
-- **Utilizar design tokens** do `@bytebank-pro/shared-design-tokens`
+- **Sempre use classes Tailwind**.
+- **Evite CSS customizado** desnecessário.
+- **Utilize design tokens** do `@bytebank-pro/shared-design-tokens`.
 
-### 2. Estrutura de Classes
+### Estrutura de Classes
 
 ```typescript
 get componentClasses(): string {
@@ -117,16 +114,14 @@ private sizeClasses: Record<ComponentSize, string> = {
 };
 ```
 
-### 3. Design Tokens Obrigatórios
+### Design Tokens
 
 - **Cores**: `bg-bytebank-blue`, `text-bytebank-green`, etc.
-- **Espaçamentos**: Classes Tailwind padrão (`p-4`, `m-2`)
-- **Tipografia**: Classes definidas nos design tokens
-- **Border radius**: `rounded-md` como padrão
+- **Espaçamentos**: Classes Tailwind (`p-4`, `m-2`)
+- **Tipografia**: Classes dos design tokens
+- **Border radius**: `rounded-md` padrão
 
-### 4. Variáveis CSS
-
-Quando necessário, utilize variáveis CSS para valores que precisam ser referenciados em múltiplos lugares:
+### Variáveis CSS
 
 ```css
 :root {
@@ -141,19 +136,17 @@ Quando necessário, utilize variáveis CSS para valores que precisam ser referen
 }
 ```
 
-### 5. Estilos Responsivos
+### Estilos Responsivos
 
-Utilize os breakpoints do Tailwind para criar componentes responsivos:
+Utilize breakpoints do Tailwind para responsividade:
 
 ```html
 <div class="flex flex-col md:flex-row lg:items-center">
-  <!-- Conteúdo responsivo -->
+  <!-- Responsive content -->
 </div>
 ```
 
-### 6. Estados de Interação
-
-Implemente estilos consistentes para estados de interação:
+### Estados de Interação
 
 ```typescript
 const buttonClasses = {
@@ -169,53 +162,53 @@ const buttonClasses = {
 
 ## 🎛️ Configuração de Props
 
-### 1. Inputs Recomendados
+### Inputs Recomendados
 
-#### Props Visuais
+#### Visuais
 
 ```typescript
-@Input() variant: ComponentVariant = 'primary'; // Visual variant
-@Input() size: ComponentSize = 'md'; // Size
-@Input() className: string = ''; // Additional classes
-@Input() showIcon: boolean = false; // Optional icon display
-@Input() position: 'left' | 'right' | 'top' | 'bottom' = 'left'; // Positioning
+@Input() variant: ComponentVariant = 'primary';
+@Input() size: ComponentSize = 'md';
+@Input() className: string = '';
+@Input() showIcon: boolean = false;
+@Input() position: 'left' | 'right' | 'top' | 'bottom' = 'left';
 ```
 
-#### Props de Estado
+#### Estado
 
 ```typescript
-@Input() disabled: boolean = false; // Disabled state
-@Input() loading: boolean = false; // Loading state
-@Input() readonly: boolean = false; // Read-only (when applicable)
-@Input() selected: boolean = false; // Selected state
-@Input() expanded: boolean = false; // Expanded state
+@Input() disabled: boolean = false;
+@Input() loading: boolean = false;
+@Input() readonly: boolean = false;
+@Input() selected: boolean = false;
+@Input() expanded: boolean = false;
 ```
 
-#### Props de Acessibilidade
+#### Acessibilidade
 
 ```typescript
-@Input() ariaLabel?: string; // Accessible label
-@Input() ariaDescribedBy?: string; // Description
-@Input() ariaExpanded?: boolean; // Expanded state
-@Input() role?: string; // Custom ARIA role
-@Input() ariaRequired?: boolean; // Required state
-@Input() ariaInvalid?: boolean; // Invalid state
+@Input() ariaLabel?: string;
+@Input() ariaDescribedBy?: string;
+@Input() ariaExpanded?: boolean;
+@Input() role?: string;
+@Input() ariaRequired?: boolean;
+@Input() ariaInvalid?: boolean;
 ```
 
-### 2. Outputs Padronizados
+### Outputs Padronizados
 
 ```typescript
-@Output() componentClick = new EventEmitter<Event>(); // Clicks
-@Output() valueChange = new EventEmitter<T>(); // Value changes
-@Output() focusChange = new EventEmitter<boolean>(); // Focus changes
-@Output() stateChange = new EventEmitter<StateType>(); // State changes
-@Output() selectionChange = new EventEmitter<T>(); // Selection changes
-@Output() submit = new EventEmitter<FormData>(); // Form submissions
+@Output() componentClick = new EventEmitter<Event>();
+@Output() valueChange = new EventEmitter<T>();
+@Output() focusChange = new EventEmitter<boolean>();
+@Output() stateChange = new EventEmitter<StateType>();
+@Output() selectionChange = new EventEmitter<T>();
+@Output() submit = new EventEmitter<FormData>();
 ```
 
 ## 🔄 Gerenciamento de Estado
 
-### 1. Estados Internos
+### Estados Internos
 
 ```typescript
 export class ComponenteComponent {
@@ -225,11 +218,10 @@ export class ComponenteComponent {
   private _selectedItems: T[] = [];
   private _currentPage = 1;
 
-  // Getters/Setters when needed
+  // Getters/Setters
   get isOpen(): boolean {
     return this._isOpen;
   }
-
   set isOpen(value: boolean) {
     if (this._isOpen !== value) {
       this._isOpen = value;
@@ -237,7 +229,6 @@ export class ComponenteComponent {
     }
   }
 
-  // Methods to update state
   toggle(): void {
     this.isOpen = !this.isOpen;
   }
@@ -249,7 +240,7 @@ export class ComponenteComponent {
 }
 ```
 
-### 2. Estados Computados
+### Estados Computados
 
 ```typescript
 get isInteractive(): boolean {
@@ -269,73 +260,71 @@ get displayValue(): string {
 }
 ```
 
-### 3. Computed Styles
+### Computed Styles
 
 ```typescript
 get inputClasses(): string {
   return this.classBuilder
-    .base('form-input rounded-md shadow-sm')
-    .state({
-      'border-red-300 focus:border-red-500 focus:ring-red-500': this.hasError,
-      'opacity-50 bg-gray-100': this.disabled,
-      'border-green-300': this.variant === 'success'
-    })
-    .size(this.size, {
-      sm: 'px-2 py-1 text-sm',
-      md: 'px-3 py-2',
-      lg: 'px-4 py-3 text-lg'
-    })
-    .custom(this.className)
-    .build();
+  .base('form-input rounded-md shadow-sm')
+  .state({
+    'border-red-300 focus:border-red-500 focus:ring-red-500': this.hasError,
+    'opacity-50 bg-gray-100': this.disabled,
+    'border-green-300': this.variant === 'success'
+  })
+  .size(this.size, {
+    sm: 'px-2 py-1 text-sm',
+    md: 'px-3 py-2',
+    lg: 'px-4 py-3 text-lg'
+  })
+  .custom(this.className)
+  .build();
 }
 
-// Helper class para organizar classes
+// Helper class for organizing classes
 private classBuilder = {
   classes: [] as string[],
 
   base(classes: string): typeof this {
-    this.classes = [classes];
-    return this;
+  this.classes = [classes];
+  return this;
   },
 
   state(conditions: Record<string, boolean>): typeof this {
-    Object.entries(conditions)
-      .filter(([_, condition]) => condition)
-      .forEach(([className]) => this.classes.push(className));
-    return this;
+  Object.entries(conditions)
+    .filter(([_, condition]) => condition)
+    .forEach(([className]) => this.classes.push(className));
+  return this;
   },
 
   size<T extends string>(size: T, sizeMap: Record<T, string>): typeof this {
-    this.classes.push(sizeMap[size] || '');
-    return this;
+  this.classes.push(sizeMap[size] || '');
+  return this;
   },
 
   custom(className: string): typeof this {
-    if (className) this.classes.push(className);
-    return this;
+  if (className) this.classes.push(className);
+  return this;
   },
 
   build(): string {
-    return this.classes.filter(Boolean).join(' ');
+  return this.classes.filter(Boolean).join(' ');
   }
 };
 ```
 
 ## 🔗 Integração com Design System
 
-### 1. Design Tokens
+### Design Tokens
 
 ```typescript
-// Import tokens
 import { colors, typography, spacing } from '@bytebank-pro/shared-design-tokens';
 
-// Usage in classes
 const colorClass = `bg-bytebank-${this.variant}`;
 const spacingClass = `p-${spacing.md}`;
 const typographyClass = typography.body;
 ```
 
-### 2. Classes CSS Consistentes
+### Classes CSS Consistentes
 
 ```typescript
 const COMPONENT_CLASSES = {
@@ -360,9 +349,9 @@ const COMPONENT_CLASSES = {
 
 ## 📱 Design Responsivo
 
-### 1. Breakpoints
+### Breakpoints
 
-Siga os breakpoints definidos pelo Tailwind:
+Siga os breakpoints do Tailwind:
 
 ```
 'sm': '640px',
@@ -372,19 +361,16 @@ Siga os breakpoints definidos pelo Tailwind:
 '2xl': '1536px',
 ```
 
-### 2. Estratégias Mobile-First
+### Estratégia Mobile-First
 
 ```html
-<!-- Mobile-first layout -->
 <div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
-  <div class="w-full md:w-1/2"><!-- Conteúdo --></div>
-  <div class="w-full md:w-1/2"><!-- Conteúdo --></div>
+  <div class="w-full md:w-1/2"><!-- Content --></div>
+  <div class="w-full md:w-1/2"><!-- Content --></div>
 </div>
 ```
 
-### 3. Container Queries
-
-Para layouts avançados, considere o uso de container queries quando disponível no browser:
+### Container Queries
 
 ```css
 .card-container {
@@ -401,7 +387,7 @@ Para layouts avançados, considere o uso de container queries quando disponível
 
 ## ⚡ Performance
 
-### 1. Otimização de Renderização
+### Otimização de Renderização
 
 ```typescript
 @Component({
@@ -413,37 +399,35 @@ export class OptimizedComponent {
 }
 ```
 
-### 2. Memoização
+### Memoização
 
 ```typescript
 private _memoizedResults: Map<string, any> = new Map();
 
 getComputedValue(input: string): any {
   if (this._memoizedResults.has(input)) {
-    return this._memoizedResults.get(input);
+  return this._memoizedResults.get(input);
   }
-
   const result = this.expensiveComputation(input);
   this._memoizedResults.set(input, result);
-
   return result;
 }
 ```
 
-### 3. Lazy Loading
+### Lazy Loading
 
 ```typescript
-// Carregamento lazy de componente pesado
+// Lazy load heavy component
 private loadHeavyComponent() {
   if (this.shouldShowHeavy) {
-    import('./heavy-component').then(module => {
-      // Use o componente pesado quando necessário
-    });
+  import('./heavy-component').then(module => {
+    // Use heavy component when needed
+  });
   }
 }
 ```
 
-### 4. Virtual Scrolling
+### Virtual Scrolling
 
 ```html
 <cdk-virtual-scroll-viewport itemSize="50" class="h-[400px]">
@@ -455,7 +439,7 @@ private loadHeavyComponent() {
 
 ## 🧩 Composição de Componentes
 
-### 1. Content Projection
+### Content Projection
 
 ```typescript
 @Component({
@@ -475,7 +459,7 @@ private loadHeavyComponent() {
 })
 export class CardComponent {}
 
-// Uso:
+// Usage:
 // <bb-card>
 //   <h2 slot="header">Card Title</h2>
 //   <p>Card content</p>
@@ -483,7 +467,7 @@ export class CardComponent {}
 // </bb-card>
 ```
 
-### 2. Composição com Diretivas
+### Composição com Diretivas
 
 ```typescript
 @Directive({
@@ -494,17 +478,16 @@ export class TooltipDirective {
   @Input('bbTooltip') tooltipText = '';
   @Input() tooltipPosition: 'top' | 'right' | 'bottom' | 'left' = 'top';
 
-  // Implementação
+  // Implementation
 }
 
-// Uso:
+// Usage:
 // <button bbTooltip="Ajuda" tooltipPosition="right">?</button>
 ```
 
-### 3. Componentes Compostos
+### Componentes Compostos
 
 ```typescript
-// Arquivo: form-field.component.ts
 @Component({
   selector: 'bb-form-field',
   template: `
@@ -515,15 +498,12 @@ export class TooltipDirective {
           <span class="text-red-500">*</span>
         }
       </label>
-
       <div class="input-container">
         <ng-content></ng-content>
       </div>
-
       @if (hint) {
         <div class="form-hint">{{ hint }}</div>
       }
-
       @if (errorMessage) {
         <div class="form-error">{{ errorMessage }}</div>
       }
@@ -538,15 +518,15 @@ export class FormFieldComponent {
   @Input() inputId = `field-${uniqueId()}`;
 }
 
-// Uso:
+// Usage:
 // <bb-form-field label="Email" required="true" errorMessage="Email inválido">
 //   <bb-input type="email" [id]="inputId"></bb-input>
 // </bb-form-field>
 ```
 
-## 🌟 Exemplos por Tipo de Componente
+## 🌟 Exemplos de Componentes
 
-### 1. Botões
+### Botão
 
 ```typescript
 @Component({
@@ -564,7 +544,6 @@ export class FormFieldComponent {
         <span class="spinner" aria-hidden="true"></span>
         <span class="sr-only">Carregando...</span>
       }
-
       <ng-content></ng-content>
     </button>
   `,
@@ -581,7 +560,8 @@ export class ButtonComponent {
   @Output() buttonClick = new EventEmitter<MouseEvent>();
 
   get buttonClasses(): string {
-    // Composição de classes
+    // Compose classes
+    return '';
   }
 
   handleClick(event: MouseEvent): void {
@@ -589,13 +569,12 @@ export class ButtonComponent {
       event.preventDefault();
       return;
     }
-
     this.buttonClick.emit(event);
   }
 }
 ```
 
-### 2. Inputs
+### Input
 
 ```typescript
 @Component({
@@ -621,11 +600,11 @@ export class ButtonComponent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent {
-  // Inputs, outputs e métodos
+  // Inputs, outputs and methods
 }
 ```
 
-### 3. Card
+### Card
 
 ```typescript
 @Component({
@@ -641,11 +620,9 @@ export class InputComponent {
           }
         </div>
       }
-
       <div class="card-body">
         <ng-content></ng-content>
       </div>
-
       @if (footer) {
         <div class="card-footer">
           {{ footer }}
@@ -665,7 +642,8 @@ export class CardComponent {
   @Input() className = '';
 
   get cardClasses(): string {
-    // Classes do card
+    // Card classes
+    return '';
   }
 }
 ```
@@ -674,7 +652,7 @@ export class CardComponent {
 
 ### Antes de Começar
 
-- [ ] Nome do componente definido (kebab-case)
+- [ ] Nome do componente definido (`kebab-case`)
 - [ ] Propósito e funcionalidade claros
 - [ ] Design tokens identificados
 - [ ] Requisitos de acessibilidade mapeados
@@ -688,11 +666,11 @@ export class CardComponent {
 - [ ] Props e eventos definidos
 - [ ] Acessibilidade implementada
 - [ ] Componente standalone configurado
-- [ ] **OnPush change detection strategy configurada**
-- [ ] **Host bindings implementados quando apropriado**
-- [ ] **TrackBy functions adicionadas aos loops**
-- [ ] **Error handling implementado**
-- [ ] **Type safety com generics (se aplicável)**
+- [ ] Estratégia de detecção de mudanças OnPush aplicada
+- [ ] Host bindings implementados quando apropriado
+- [ ] Funções trackBy adicionadas aos loops
+- [ ] Tratamento de erros implementado
+- [ ] Type safety com generics (se aplicável)
 
 ### Finalização
 
@@ -701,9 +679,9 @@ export class CardComponent {
 - [ ] Storybook funcionando
 - [ ] Build da biblioteca bem-sucedido
 - [ ] Revisão de código realizada
-- [ ] **Performance checklist validado**
-- [ ] **Acessibilidade checklist validado**
-- [ ] **Bundle size analisado**
+- [ ] Performance validada
+- [ ] Acessibilidade validada
+- [ ] Bundle size analisado
 
 ## 📚 Recursos Adicionais
 
