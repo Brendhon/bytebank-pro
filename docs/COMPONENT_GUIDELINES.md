@@ -177,12 +177,210 @@ get componentClasses(): string {
 
 ---
 
+## 🏗️ Abordagens Recomendadas pelo Angular Team
+
+> **Sempre utilize as práticas e APIs mais recentes recomendadas pela equipe oficial do Angular.**
+
+### 1. Testing: Use `fixture.componentRef.setInput()`
+
+**✅ Abordagem Moderna (Angular 14+):**
+
+```typescript
+it('should set variant property', () => {
+  fixture.componentRef.setInput('variant', 'success');
+  fixture.detectChanges();
+
+  expect(component.variant).toBe('success');
+});
+
+it('should handle disabled state', () => {
+  fixture.componentRef.setInput('disabled', true);
+  fixture.detectChanges();
+
+  expect(component.disabled).toBeTruthy();
+});
+```
+
+**❌ Abordagem Antiga (evitar):**
+
+```typescript
+it('should set variant property', () => {
+  component.variant = 'success'; // Direct property assignment
+  fixture.detectChanges();
+
+  expect(component.variant).toBe('success');
+});
+```
+
+**Vantagens do `setInput()`:**
+
+- Simula o comportamento real do Angular
+- Chama automaticamente `ngOnChanges` quando necessário
+- Mais limpo e legível
+- Abordagem oficial recomendada pela equipe Angular
+
+### 2. Template Syntax: Use Control Flow Blocks
+
+**✅ Sintaxe Moderna (Angular 17+):**
+
+```html
+<!-- Conditional rendering -->
+@if (isVisible) {
+<div class="content">Conteúdo visível</div>
+} @else {
+<div class="placeholder">Conteúdo oculto</div>
+}
+
+<!-- Loops -->
+@for (item of items; track item.id) {
+<div class="item">{{ item.name }}</div>
+} @empty {
+<div class="no-items">Nenhum item encontrado</div>
+}
+
+<!-- Switch statements -->
+@switch (variant) { @case ('primary') {
+<span class="text-blue-600">Primary</span>
+} @case ('secondary') {
+<span class="text-gray-600">Secondary</span>
+} @default {
+<span class="text-black">Default</span>
+} }
+```
+
+**❌ Sintaxe Antiga (evitar):**
+
+```html
+<!-- Não usar mais *ngIf, *ngFor, ngSwitch -->
+<div *ngIf="isVisible" class="content">Conteúdo</div>
+<div *ngFor="let item of items" class="item">{{ item.name }}</div>
+<div [ngSwitch]="variant">
+  <span *ngSwitchCase="'primary'">Primary</span>
+</div>
+```
+
+### 3. Standalone Components
+
+**✅ Sempre use componentes standalone:**
+
+```typescript
+@Component({
+  selector: 'bb-component',
+  templateUrl: './component.component.html',
+  standalone: true, // Sempre true
+  imports: [CommonModule, LucideAngularModule] // Direct imports
+})
+export class ComponentComponent {
+  // Implementation...
+}
+```
+
+**❌ Evitar NgModules para novos componentes:**
+
+```typescript
+// Não criar NgModules desnecessários
+@NgModule({
+  declarations: [ComponentComponent],
+  imports: [CommonModule],
+  exports: [ComponentComponent]
+})
+export class ComponentModule {} // Evitar
+```
+
+### 4. Signal-based APIs
+
+**Preparação para Signals (Angular 16+):**
+
+```typescript
+// Quando signals estiverem estáveis, migrar para:
+export class ComponentComponent {
+  // Reactive state with signals
+  count = signal(0);
+  isVisible = signal(true);
+
+  // Computed values
+  doubleCount = computed(() => this.count() * 2);
+
+  // Effects
+  constructor() {
+    effect(() => {
+      console.log('Count changed to:', this.count());
+    });
+  }
+}
+```
+
+### 5. Dependency Injection com `inject()`
+
+**✅ Função `inject()` (Angular 14+):**
+
+```typescript
+export class ComponentComponent {
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private destroyRef = inject(DestroyRef);
+
+  navigateToHome(): void {
+    this.router.navigate(['/home']);
+  }
+}
+```
+
+**❌ Constructor injection (ainda válido, mas prefer `inject()`):**
+
+```typescript
+export class ComponentComponent {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
+}
+```
+
+### 6. Required Inputs
+
+**✅ Use `input.required()` quando aplicável:**
+
+```typescript
+export class ComponentComponent {
+  // Required input with new API
+  title = input.required<string>();
+
+  // Optional input with default
+  variant = input<ButtonVariant>('primary');
+
+  // Transform input
+  disabled = input(false, {
+    transform: booleanAttribute
+  });
+}
+```
+
+### 7. Output Functions
+
+**✅ Use output functions:**
+
+```typescript
+export class ComponentComponent {
+  // Modern output declaration
+  buttonClick = output<Event>();
+  valueChange = output<string>();
+
+  handleClick(event: Event): void {
+    this.buttonClick.emit(event);
+  }
+}
+```
+
+---
+
 ## 🧪 Padrões de Teste
 
 > **Importante:**
 >
 > - Todos os comentários nos arquivos de teste devem ser em inglês.
 > - **Antes de cada `expect` em qualquer teste, adicione uma linha em branco** para melhorar a legibilidade e seguir o padrão do projeto.
+> - **Sempre use `fixture.componentRef.setInput()` para definir propriedades de input nos testes** (abordagem recomendada pelo Angular Team).
 
 ### 1. Estrutura de Testes
 
@@ -229,17 +427,26 @@ describe('Basic Functionality', () => {
 ```typescript
 describe('Input Properties', () => {
   it('should apply variant classes correctly', () => {
-    component.variant = 'secondary';
+    fixture.componentRef.setInput('variant', 'secondary');
     fixture.detectChanges();
 
     expect(element.classList).toContain('expected-class');
   });
 
   it('should handle disabled state', () => {
-    component.disabled = true;
+    fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
 
     expect(element.disabled).toBeTruthy();
+  });
+
+  it('should update loading state', () => {
+    fixture.componentRef.setInput('loading', true);
+    fixture.detectChanges();
+
+    expect(component.loading).toBeTruthy();
+
+    expect(element.classList).toContain('loading-class');
   });
 });
 ```
@@ -531,14 +738,16 @@ Cada componente deve ter documentação clara incluindo:
 
 - [ ] Estrutura de arquivos criada
 - [ ] Componente TypeScript implementado
-- [ ] Template HTML criado
+- [ ] Template HTML criado (usando sintaxe moderna: `@if`, `@for`, `@switch`)
 - [ ] Estilos com TailwindCSS aplicados
 - [ ] Props e eventos definidos
 - [ ] Acessibilidade implementada
+- [ ] Componente standalone configurado
 
 ### Testes e Documentação
 
 - [ ] Testes unitários escritos (com comentários em inglês e linha em branco antes de cada `expect`)
+- [ ] **Uso obrigatório de `fixture.componentRef.setInput()` nos testes**
 - [ ] Stories do Storybook criadas
 - [ ] Documentação JSDoc adicionada
 - [ ] Exemplos de uso documentados
@@ -573,7 +782,7 @@ src/
 ```typescript
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'; // If needed for forms
 
 // All comments in this file must be in English
 
@@ -721,6 +930,83 @@ export class InputComponent implements ControlValueAccessor {
 </div>
 ```
 
+### 4. Testes (input.component.spec.ts)
+
+```typescript
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { InputComponent } from './input.component';
+
+describe('InputComponent', () => {
+  let component: InputComponent;
+  let fixture: ComponentFixture<InputComponent>;
+  let inputElement: HTMLInputElement;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [InputComponent] // Standalone component
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(InputComponent);
+    component = fixture.componentInstance;
+    inputElement = fixture.debugElement.query(By.css('[data-testid="input-field"]')).nativeElement;
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('Input Properties', () => {
+    it('should apply variant styles correctly', () => {
+      fixture.componentRef.setInput('variant', 'error');
+      fixture.detectChanges();
+
+      expect(inputElement.classList).toContain('ring-red-300');
+    });
+
+    it('should handle disabled state', () => {
+      fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+
+      expect(inputElement.disabled).toBeTruthy();
+
+      expect(inputElement.classList).toContain('opacity-60');
+    });
+
+    it('should set placeholder text', () => {
+      const placeholderText = 'Enter your email';
+      fixture.componentRef.setInput('placeholder', placeholderText);
+      fixture.detectChanges();
+
+      expect(inputElement.placeholder).toBe(placeholderText);
+    });
+  });
+
+  describe('Events', () => {
+    it('should emit inputChange when value changes', () => {
+      spyOn(component.inputChange, 'emit');
+
+      inputElement.value = 'test value';
+      inputElement.dispatchEvent(new Event('input'));
+
+      expect(component.inputChange.emit).toHaveBeenCalledWith('test value');
+    });
+  });
+
+  describe('Accessibility', () => {
+    it('should have proper aria attributes', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Email input');
+      fixture.componentRef.setInput('variant', 'error');
+      fixture.detectChanges();
+
+      expect(inputElement.getAttribute('aria-label')).toBe('Email input');
+
+      expect(inputElement.getAttribute('aria-invalid')).toBe('true');
+    });
+  });
+});
+```
+
 > **Importante:**  
 > Sempre utilize as novas sintaxes de template do Angular (ex: blocos `@if`, `@for`, etc.) conforme introduzidas nas versões recentes do framework.  
 > **Não utilize mais as sintaxes antigas como `*ngIf`, `*ngFor` e similares.**  
@@ -730,12 +1016,30 @@ export class InputComponent implements ControlValueAccessor {
 
 ## 📚 Recursos Adicionais
 
+### Documentação Oficial Angular
+
 - [Angular Component Development Best Practices](https://angular.dev/best-practices)
+- [Angular Testing Guide](https://angular.dev/guide/testing)
+- [Angular Control Flow Blocks (@if, @for, @switch)](https://angular.dev/guide/templates/control-flow)
+- [Angular Standalone Components](https://angular.dev/guide/components/importing)
+- [Modern Testing with setInput()](https://angular.dev/guide/testing/components-scenarios#setting-component-inputs)
+
+### Recursos Complementares
+
 - [Web Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Storybook Documentation](https://storybook.js.org/docs/angular)
 - [TailwindCSS Documentation](https://tailwindcss.com/docs)
-- [Angular Testing Guide](https://angular.dev/guide/testing)
 - [Lucide Angular](https://www.npmjs.com/package/lucide-angular)
+
+### Atualizações Importantes
+
+**🚨 Práticas Descontinuadas:**
+
+- `*ngIf`, `*ngFor`, `*ngSwitch` → Use `@if`, `@for`, `@switch`
+- `component.property = value` nos testes → Use `fixture.componentRef.setInput()`
+- NgModules para novos componentes → Use standalone components
+- Use signals quando disponíveis → Use `signal()`, `computed()`, `effect()`
+- Constructor injection → Prefira `inject()` function
 
 ---
 
