@@ -6,22 +6,28 @@ import { ToastComponent } from './toast.component';
 describe('ToastComponent', () => {
   let component: ToastComponent;
   let fixture: ComponentFixture<ToastComponent>;
-  let element: HTMLElement;
+  let element: HTMLElement | null;
+
+  // Function to get the toast container element
+  const getToastContainer = (fixture: ComponentFixture<ToastComponent>): HTMLElement | null => {
+    return (
+      fixture.debugElement.query(By.css('[data-testid="toast-container"]'))?.nativeElement ?? null
+    );
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToastComponent, LucideAngularModule] // Importe o componente standalone e o módulo Lucide
+      imports: [ToastComponent, LucideAngularModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ToastComponent);
     component = fixture.componentInstance;
 
-    // Initialize component properties before first change detection
     component.show = true;
     component.message = 'Test message';
     fixture.detectChanges();
 
-    element = fixture.debugElement.query(By.css('[data-testid="toast-container"]'))?.nativeElement;
+    element = getToastContainer(fixture);
   });
 
   it('should create', () => {
@@ -31,22 +37,21 @@ describe('ToastComponent', () => {
   it('should be visible when show is true', () => {
     component.show = true;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+    element = getToastContainer(fixture);
 
     expect(element).toBeTruthy();
 
     expect(component.isVisible).toBeTrue();
 
-    expect(element.classList).toContain('opacity-100');
+    expect(element!.classList).toContain('opacity-100');
   });
 
   it('should not be visible when show is false', () => {
     component.show = false;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="toast-container"]'))?.nativeElement;
+    element = getToastContainer(fixture);
 
-    expect(element).toBeFalsy(); // Element should not be rendered if not visible
-
+    expect(element).toBeFalsy();
     expect(component.isVisible).toBeFalse();
   });
 
@@ -55,9 +60,9 @@ describe('ToastComponent', () => {
     component.message = testMessage;
     component.show = true;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+    element = getToastContainer(fixture);
 
-    expect(element.textContent).toContain(testMessage);
+    expect(element!.textContent).toContain(testMessage);
   });
 
   describe('Input Properties', () => {
@@ -65,27 +70,27 @@ describe('ToastComponent', () => {
       component.variant = 'success';
       component.show = true;
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.classList).toContain('bg-bytebank-green-500');
+      expect(element!.classList).toContain('bg-bytebank-green-500');
     });
 
     it('should apply error variant classes correctly', () => {
       component.variant = 'error';
       component.show = true;
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.classList).toContain('bg-bytebank-red-500');
+      expect(element!.classList).toContain('bg-bytebank-red-500');
     });
 
     it('should apply info variant classes correctly', () => {
       component.variant = 'info';
       component.show = true;
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.classList).toContain('bg-bytebank-blue-500');
+      expect(element!.classList).toContain('bg-bytebank-blue-500');
     });
   });
 
@@ -106,10 +111,10 @@ describe('ToastComponent', () => {
     });
 
     it('should close automatically after duration', fakeAsync(() => {
-      component.duration = 1000; // 1 second
+      component.duration = 1000;
       component.show = true;
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
       expect(component.isVisible).toBeTrue();
 
@@ -117,11 +122,9 @@ describe('ToastComponent', () => {
 
       tick(1000);
       fixture.detectChanges();
-      element = fixture.debugElement.query(
-        By.css('[data-testid="toast-container"]')
-      )?.nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element).toBeFalsy(); // Element should be removed
+      expect(element).toBeFalsy();
 
       expect(component.isVisible).toBeFalse();
 
@@ -132,17 +135,17 @@ describe('ToastComponent', () => {
       component.duration = 0;
       component.show = true;
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
       expect(component.isVisible).toBeTrue();
 
       spyOn(component.toastClose, 'emit');
 
-      tick(5000); // Wait for a long time
+      tick(5000);
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element).toBeTruthy(); // Element should still be present
+      expect(element).toBeTruthy();
 
       expect(component.isVisible).toBeTrue();
 
@@ -155,27 +158,27 @@ describe('ToastComponent', () => {
       component.show = true;
       component.variant = 'info';
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.getAttribute('role')).toBe('status');
+      expect(element!.getAttribute('role')).toBe('status');
     });
 
     it('should have aria-live="assertive" for error variant', () => {
       component.show = true;
       component.variant = 'error';
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.getAttribute('aria-live')).toBe('assertive');
+      expect(element!.getAttribute('aria-live')).toBe('assertive');
     });
 
     it('should have aria-live="polite" for success variant', () => {
       component.show = true;
       component.variant = 'success';
       fixture.detectChanges();
-      element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+      element = getToastContainer(fixture);
 
-      expect(element.getAttribute('aria-live')).toBe('polite');
+      expect(element!.getAttribute('aria-live')).toBe('polite');
     });
 
     it('should have aria-label for close button', () => {
