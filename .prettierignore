@@ -12,3 +12,28 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 package-lock.json
 yarn.lock
+
+# Build outputs
+dist/
+out/
+out-tsc/
+
+# Generated files
+*.generated.ts
+*.d.ts
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+
+# Angular specific
+.angular/
+
+# Turbo
+.turbo/
+
+# Docker
+Dockerfile
+docker-compose*.yml

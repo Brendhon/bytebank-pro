@@ -13,9 +13,7 @@
         "build": {
           "builder": "ngx-build-plus:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "@angular-architects/module-federation"
-            ],
+            "allowedCommonJsDependencies": ["@angular-architects/module-federation"],
             "tsConfig": "./tsconfig.app.json",
             "assets": [
               {
@@ -24,9 +22,7 @@
                 "output": "."
               }
             ],
-            "styles": [
-              "./src/styles.css"
-            ],
+            "styles": ["./src/styles.css"],
             "main": "./src/main.ts",
             "outputPath": "dist/shell",
             "index": "src/index.html",
@@ -95,9 +91,7 @@
                 "input": "./public"
               }
             ],
-            "styles": [
-              "./src/styles.css"
-            ]
+            "styles": ["./src/styles.css"]
           }
         }
       }

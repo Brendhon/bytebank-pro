@@ -5,9 +5,7 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@/*": [
-        "src/app/*",
-      ]
+      "@/*": ["src/app/*"]
     }
   },
   "angularCompilerOptions": {
@@ -16,13 +14,8 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "./tsconfig.app.json"

@@ -1,0 +1,5 @@
+# Executa lint-staged para formatar e fazer lint dos arquivos staged
+npx lint-staged
+
+# Executa verificação de tipos em todo o projeto
+npm run check-types
