@@ -27,7 +27,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 - **API:** [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/)
 - **Contêineres:** [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
 - **Qualidade:** [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Husky](https://typicode.github.io/husky/), lint-staged, EditorConfig
-- **Acessibilidade:** Regras de acessibilidade com [@angular-eslint/template](https://www.npmjs.com/package/@angular-eslint/eslint-plugin-template). Para mais detalhes, veja [docs/ACCESSIBILITY.md](./docs/ACCESSIBILITY.md).
+- **Acessibilidade:** Regras de acessibilidade com [@angular-eslint/template](https://www.npmjs.com/package/@angular-eslint/eslint-plugin-template). Para mais detalhes, veja [ACCESSIBILITY_GUIDELINES.md](./docs/guidelines/ACCESSIBILITY_GUIDELINES.md).
 
 ---
 

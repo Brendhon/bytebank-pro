@@ -175,4 +175,4 @@ Antes de fazer commit, verifique:
 - [Angular ESLint](https://github.com/angular-eslint/angular-eslint)
 - [TypeScript ESLint](https://typescript-eslint.io/)
 - [ESLint](https://eslint.org/)
-- [Guia Detalhado de Acessibilidade](./ACCESSIBILITY.md) 📋
+- [Guia Detalhado de Acessibilidade](./docs/guidelines/ACCESSIBILITY_GUIDELINES.md)
