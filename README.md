@@ -35,33 +35,75 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 ```
 bytebank-pro/
 ├── apps/
-│   ├── shell/                # Angular Shell App
+│   ├── shell/                # Angular Shell App - Container principal
 │   ├── dashboard/            # Angular MFE - Dashboard
 │   ├── transactions/         # Angular MFE - Transações
 │   └── settings/             # Angular MFE - Configurações
 │
 ├── packages/
+│   ├── eslint-config/        # Configurações ESLint padronizadas
 │   ├── shared-design-tokens/ # Tokens de design reutilizáveis
-│   └── ui/                   # Componentes compartilhados
+│   ├── types/                # Definições TypeScript compartilhadas
+│   ├── typescript-config/    # Configurações TypeScript padronizadas
+│   └── ui/                   # Componentes Angular compartilhados
 │
+├── api-docs/                 # Documentação da API
 ├── .gitignore
-├── turbo.json
-├── package.json
-├── tsconfig.base.json
+├── turbo.json                # Configuração Turborepo
+├── package.json              # Dependencies e scripts principais
+├── tsconfig.base.json        # Config TypeScript base do monorepo
 └── docker-compose.yml        # Configuração Docker Compose
 ```
 
 ---
 
-## 🎨 Design Tokens Compartilhados
+## 📦 Packages Compartilhados
 
-Local: `packages/shared-design-tokens`
+O monorepo inclui vários packages para reutilização de código e padronização:
 
-Inclui arquivos como:
+### 🎨 Design Tokens (`packages/shared-design-tokens`)
+Centraliza todos os tokens de design do sistema:
+- **`colors.ts`**: Paleta de cores da marca ByteBank
+- **`typography.ts`**: Configurações tipográficas padronizadas  
+- **`tailwind.tokens.ts`**: Tokens exportados para uso com TailwindCSS
+- **Uso**: Importado em todos os `tailwind.config.js` dos apps
 
-- `colors.ts`
-- `typography.ts`
-- `tailwind.tokens.ts` (usado nos `tailwind.config.js` dos apps)
+[📖 Ver documentação completa](./packages/shared-design-tokens/README.md)
+
+### 🧩 UI Components (`packages/ui`)
+Biblioteca de componentes Angular reutilizáveis:
+- **Standalone Components**: Componentes Angular 20+ standalone
+- **TailwindCSS**: Integração com design tokens
+- **Componentes**: Button (mais componentes em desenvolvimento)
+- **Uso**: Importação granular nos microfrontends
+
+[📖 Ver documentação completa](./packages/ui/README.md)
+
+### 🔷 Types (`packages/types`)
+Definições TypeScript compartilhadas:
+- **`users.ts`**: Interfaces de usuários e autenticação
+- **`transactions.ts`**: Tipos para transações financeiras
+- **`environment.ts`**: Configurações de ambiente
+- **`mfe.ts`**: Tipos específicos da arquitetura de microfrontends
+
+[📖 Ver documentação completa](./packages/types/README.md)
+
+### ⚙️ TypeScript Config (`packages/typescript-config`)
+Configurações TypeScript padronizadas:
+- **`base.json`**: Configuração fundamental compartilhada
+- **`angular.json`**: Otimizações específicas para Angular
+- **`nextjs.json`**: Para futuros projetos Next.js
+- **Uso**: Extendido em todos os `tsconfig.json` do monorepo
+
+[📖 Ver documentação completa](./packages/typescript-config/README.md)
+
+### 📋 ESLint Config (`packages/eslint-config`)
+Configurações ESLint centralizadas:
+- **`angular.js`**: Regras específicas para projetos Angular
+- **`library.js`**: Configurações para bibliotecas e packages
+- **Uso**: Importado em todos os `eslint.config.js` do monorepo
+
+[📖 Ver documentação completa](./packages/eslint-config/README.md)
 
 ---
 
