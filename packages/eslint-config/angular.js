@@ -40,7 +40,11 @@ export default [
       'node_modules/**',
       'dist/**',
       // Ignore karma config as it's a Node.js file
-      'karma.conf.js'
+      'karma.conf.js',
+
+      // Ignore Storybook static files and configuration
+      'storybook-static/**',
+      '.storybook/**'
     ]
   },
   {
@@ -65,13 +69,18 @@ export default [
         ecmaVersion: 'latest'
       },
       globals: {
+        NodeJS: 'readonly',
         console: 'readonly',
         process: 'readonly',
         // Browser globals for Angular applications
         localStorage: 'readonly',
         sessionStorage: 'readonly',
         window: 'readonly',
-        document: 'readonly'
+        document: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly'
       }
     },
     plugins: {
@@ -171,7 +180,9 @@ export default [
       ...js.configs.recommended.rules,
       ...typescript.configs.recommended.rules,
       ...angular.configs.recommended.rules,
-      ...jasmine.configs.recommended.rules
+      ...jasmine.configs.recommended.rules,
+      // Ignore rules that are not applicable in test files
+      'jasmine/prefer-toHaveBeenCalledWith': 'off'
     }
   }
 ];

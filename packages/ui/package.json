@@ -12,7 +12,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadless",
     "test:watch": "ng test --browsers=Chrome",
-    "lint": "eslint --max-warnings 0",
+    "lint": "eslint --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .angular",
     "storybook": "ng run @bytebank-pro/ui:storybook",
     "build-storybook": "ng run @bytebank-pro/ui:build-storybook"

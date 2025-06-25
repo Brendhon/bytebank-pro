@@ -32,8 +32,11 @@ describe('ToastComponent', () => {
     component.show = true;
     fixture.detectChanges();
     element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
     expect(element).toBeTruthy();
+
     expect(component.isVisible).toBeTrue();
+
     expect(element.classList).toContain('opacity-100');
   });
 
@@ -41,7 +44,9 @@ describe('ToastComponent', () => {
     component.show = false;
     fixture.detectChanges();
     element = fixture.debugElement.query(By.css('[data-testid="toast-container"]'))?.nativeElement;
+
     expect(element).toBeFalsy(); // Element should not be rendered if not visible
+
     expect(component.isVisible).toBeFalse();
   });
 
@@ -51,6 +56,7 @@ describe('ToastComponent', () => {
     component.show = true;
     fixture.detectChanges();
     element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
     expect(element.textContent).toContain(testMessage);
   });
 
@@ -60,6 +66,7 @@ describe('ToastComponent', () => {
       component.show = true;
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.classList).toContain('bg-bytebank-green-500');
     });
 
@@ -68,6 +75,7 @@ describe('ToastComponent', () => {
       component.show = true;
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.classList).toContain('bg-bytebank-red-500');
     });
 
@@ -76,6 +84,7 @@ describe('ToastComponent', () => {
       component.show = true;
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.classList).toContain('bg-bytebank-blue-500');
     });
   });
@@ -92,6 +101,7 @@ describe('ToastComponent', () => {
       closeButton.click();
 
       expect(component.toastClose.emit).toHaveBeenCalled();
+
       expect(component.isVisible).toBeFalse();
     });
 
@@ -100,6 +110,7 @@ describe('ToastComponent', () => {
       component.show = true;
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(component.isVisible).toBeTrue();
 
       spyOn(component.toastClose, 'emit');
@@ -109,8 +120,11 @@ describe('ToastComponent', () => {
       element = fixture.debugElement.query(
         By.css('[data-testid="toast-container"]')
       )?.nativeElement;
+
       expect(element).toBeFalsy(); // Element should be removed
+
       expect(component.isVisible).toBeFalse();
+
       expect(component.toastClose.emit).toHaveBeenCalled();
     }));
 
@@ -119,6 +133,7 @@ describe('ToastComponent', () => {
       component.show = true;
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(component.isVisible).toBeTrue();
 
       spyOn(component.toastClose, 'emit');
@@ -126,8 +141,11 @@ describe('ToastComponent', () => {
       tick(5000); // Wait for a long time
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element).toBeTruthy(); // Element should still be present
+
       expect(component.isVisible).toBeTrue();
+
       expect(component.toastClose.emit).not.toHaveBeenCalled();
     }));
   });
@@ -138,6 +156,7 @@ describe('ToastComponent', () => {
       component.variant = 'info';
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.getAttribute('role')).toBe('status');
     });
 
@@ -146,6 +165,7 @@ describe('ToastComponent', () => {
       component.variant = 'error';
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.getAttribute('aria-live')).toBe('assertive');
     });
 
@@ -154,6 +174,7 @@ describe('ToastComponent', () => {
       component.variant = 'success';
       fixture.detectChanges();
       element = fixture.debugElement.query(By.css('[data-testid="toast-container"]')).nativeElement;
+
       expect(element.getAttribute('aria-live')).toBe('polite');
     });
 
@@ -163,6 +184,7 @@ describe('ToastComponent', () => {
       const closeButton = fixture.debugElement.query(
         By.css('button[aria-label="Fechar notificação"]')
       ).nativeElement;
+
       expect(closeButton.getAttribute('aria-label')).toBe('Fechar notificação');
     });
   });

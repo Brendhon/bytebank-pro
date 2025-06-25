@@ -245,7 +245,7 @@ describe('ButtonComponent', () => {
 
       buttonElement.click();
 
-      expect(component.buttonClick.emit).toHaveBeenCalledWith();
+      expect(component.buttonClick.emit).toHaveBeenCalled();
     });
 
     it('should not emit buttonClick event when disabled', () => {

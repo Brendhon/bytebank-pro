@@ -3,14 +3,20 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output,
   OnChanges,
-  SimpleChanges,
   OnDestroy,
-  OnInit
+  OnInit,
+  Output,
+  SimpleChanges
 } from '@angular/core';
-import { LucideCheckCircle, LucideInfo, LucideXCircle, LucideX } from 'lucide-angular'; // Import specific icons
-import { LucideAngularModule } from 'lucide-angular'; // Import Lucide Angular module
+import {
+  LucideAngularModule,
+  LucideCheckCircle,
+  LucideIconData,
+  LucideInfo,
+  LucideX,
+  LucideXCircle
+} from 'lucide-angular'; // Import specific icons
 
 export type ToastVariant = 'success' | 'error' | 'info';
 
@@ -57,7 +63,7 @@ export class ToastComponent implements OnInit, OnChanges, OnDestroy {
   @Output() toastClose = new EventEmitter<void>();
 
   isVisible: boolean = false;
-  private autoCloseTimeout: any;
+  private autoCloseTimeout: NodeJS.Timeout | null = null; // Timeout for auto close
 
   // Icon mapping
   readonly icons = {
@@ -70,7 +76,7 @@ export class ToastComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Getter to obtain the Lucide icon corresponding to the variant.
    */
-  get currentIcon(): any {
+  get currentIcon(): LucideIconData {
     return this.icons[this.variant];
   }
 
