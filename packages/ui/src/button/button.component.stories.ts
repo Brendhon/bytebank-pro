@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate } from '@storybook/angular';
+import { argsToTemplate, componentWrapperDecorator } from '@storybook/angular';
 import { ButtonComponent, ButtonVariant } from './button.component';
 
 const meta: Meta<ButtonComponent> = {

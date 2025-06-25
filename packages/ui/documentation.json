@@ -21,6 +21,36 @@
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;\">\n        <bb-button variant=\"dark\">Dark</bb-button>\n        <bb-button variant=\"blue\">Blue</bb-button>\n        <bb-button variant=\"green\">Green</bb-button>\n        <bb-button variant=\"orange\">Orange</bb-button>\n        <bb-button variant=\"outlineGreen\">Outline Green</bb-button>\n        <bb-button variant=\"outlineOrange\">Outline Orange</bb-button>\n      </div>\n    `\n  })\n}"
       },
       {
+        "name": "AllVariants",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
+      },
+      {
+        "name": "AutoClosing",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Este toast fechará em 3 segundos.',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
+      },
+      {
         "name": "Disabled",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -29,6 +59,26 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: false,\n    disabled: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Disabled Button</bb-button>`\n  })\n}"
+      },
+      {
+        "name": "Error",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Ocorreu um erro ao processar a solicitação.',\n    variant: 'error'\n  }\n}"
+      },
+      {
+        "name": "Info",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
       },
       {
         "name": "Loading",
@@ -48,7 +98,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ButtonComponent>",
-        "defaultValue": "{\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['dark', 'blue', 'green', 'orange', 'outlineGreen', 'outlineOrange'] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<ToastComponent>",
+        "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs'] //\n}"
       },
       {
         "name": "OutlineGreen",
@@ -71,6 +131,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'outlineOrange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Outline Orange</bb-button>`\n  })\n}"
       },
       {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
+      },
+      {
         "name": "preview",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -78,7 +148,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Preview",
-        "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+        "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i\n      }\n    }\n  }\n}"
       },
       {
         "name": "Primary",
@@ -111,6 +181,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'green',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Success Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "Success",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+      },
+      {
         "name": "Warning",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -129,6 +209,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ButtonComponent>",
         "file": "src/button/button.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ToastComponent>",
+        "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -176,7 +267,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<ButtonComponent>",
-          "defaultValue": "{\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['dark', 'blue', 'green', 'orange', 'outlineGreen', 'outlineOrange'] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "OutlineGreen",
@@ -239,6 +330,88 @@
           "defaultValue": "{\n  args: {\n    variant: 'orange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Warning Button</bb-button>`\n  })\n}"
         }
       ],
+      "src/toast/toast.component.stories.ts": [
+        {
+          "name": "AllVariants",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
+        },
+        {
+          "name": "AutoClosing",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Este toast fechará em 3 segundos.',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
+        },
+        {
+          "name": "Error",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Ocorreu um erro ao processar a solicitação.',\n    variant: 'error'\n  }\n}"
+        },
+        {
+          "name": "Info",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<ToastComponent>",
+          "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs'] //\n}"
+        },
+        {
+          "name": "Playground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
+        },
+        {
+          "name": "Success",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+        }
+      ],
       ".storybook/preview.ts": [
         {
           "name": "preview",
@@ -248,7 +421,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Preview",
-          "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+          "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/i\n      }\n    }\n  }\n}"
         }
       ]
     },
@@ -262,6 +435,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ButtonComponent>",
           "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/toast/toast.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ToastComponent>",
+          "file": "src/toast/toast.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -387,6 +573,96 @@
       },
       {
         "filePath": "src/button/button.component.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AllVariants",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AutoClosing",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Error",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Info",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Playground",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Success",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/toast/toast.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
