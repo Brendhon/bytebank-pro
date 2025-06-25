@@ -109,7 +109,6 @@ export class HeaderComponent {
 - `npm run build`: Compila TypeScript e copia assets
 - `npm run dev`: Modo desenvolvimento com watch
 - `npm run copy:assets`: Copia assets para dist/
-- `npm run optimize:images`: Otimiza imagens (requer imagemin)
 - `npm run clean`: Limpa arquivos gerados
 
 ## 🎯 Exemplo Rápido

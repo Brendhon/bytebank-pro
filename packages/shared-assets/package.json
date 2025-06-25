@@ -21,14 +21,9 @@
     "build": "tsc && npm run copy:assets",
     "dev": "tsc --watch",
     "copy:assets": "cp -r ./assets ./dist/",
-    "clean": "rm -rf dist .turbo",
-    "optimize:images": "imagemin 'assets/**/*.{jpg,jpeg,png}' --out-dir=dist/assets --plugin=imagemin-mozjpeg --plugin=imagemin-pngquant"
+    "clean": "rm -rf dist .turbo"
   },
   "devDependencies": {
-    "@bytebank-pro/typescript-config": "*",
-    "typescript": "^5.6.0",
-    "imagemin": "^8.0.1",
-    "imagemin-mozjpeg": "^10.0.0",
-    "imagemin-pngquant": "^10.0.0"
+    "typescript": "^5.6.0"
   }
 }
