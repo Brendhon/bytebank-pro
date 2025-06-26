@@ -1,0 +1,96 @@
+<div [class]="wrapperClasses" data-testid="checkbox-wrapper">
+  <!-- Hidden native input for form integration -->
+  <input
+    #checkboxElement
+    type="checkbox"
+    [checked]="checked()"
+    [indeterminate]="indeterminate()"
+    [disabled]="disabled()"
+    [readonly]="readonly()"
+    [required]="required()"
+    [id]="checkboxId"
+    class="sr-only"
+    data-testid="checkbox-input"
+  />
+
+  <!-- Visual checkbox -->
+  <div
+    [class]="checkboxClasses"
+    [attr.data-testid]="'checkbox-visual'"
+    [attr.data-state]="checkboxState"
+  >
+    <!-- Check icon for checked state -->
+    @if (showCheckIcon) {
+      <lucide-icon
+        [img]="checkIcon"
+        [size]="iconSize"
+        class="absolute flex justify-center items-center h-full w-full"
+        [attr.aria-hidden]="true"
+        data-testid="checkbox-check-icon"
+      />
+    }
+
+    <!-- Minus icon for indeterminate state -->
+    @if (showIndeterminateIcon) {
+      <lucide-icon
+        [img]="minusIcon"
+        [size]="iconSize"
+        class="absolute flex justify-center items-center h-full w-full"
+        [attr.aria-hidden]="true"
+        data-testid="checkbox-indeterminate-icon"
+      />
+    }
+  </div>
+
+  <!-- Label and content wrapper -->
+  @if (label() || helperText() || errorMessage() || successMessage()) {
+    <div class="flex-1 min-w-0">
+      <!-- Label -->
+      @if (label()) {
+        <label [for]="checkboxId" [class]="labelClasses" data-testid="checkbox-label">
+          {{ label() }}
+          @if (required()) {
+            <span class="text-red-500 ml-1" aria-label="Required field">*</span>
+          }
+        </label>
+      }
+
+      <!-- Helper text -->
+      @if (helperText() && variant() !== 'error' && variant() !== 'success') {
+        <div
+          [id]="checkboxId + '-helper'"
+          [class]="helperTextClasses"
+          data-testid="checkbox-helper-text"
+        >
+          {{ helperText() }}
+        </div>
+      }
+
+      <!-- Success message -->
+      @if (successMessage() && variant() === 'success') {
+        <div
+          [id]="checkboxId + '-success'"
+          [class]="helperTextClasses"
+          role="status"
+          aria-live="polite"
+          data-testid="checkbox-success-message"
+        >
+          {{ successMessage() }}
+        </div>
+      }
+
+      <!-- Error message -->
+      @if (errorMessage() && variant() === 'error') {
+        <div
+          [id]="checkboxId + '-error'"
+          [class]="helperTextClasses"
+          role="alert"
+          aria-live="assertive"
+          data-testid="checkbox-error-message"
+        >
+          {{ errorMessage() }}
+        </div>
+      }
+    </div>
+  }
+</div>
