@@ -113,20 +113,18 @@ export class LogoComponent implements OnInit {
    */
   private async loadLogoAsset(): Promise<void> {
     try {
+      // Set loading state to true while fetching the logo
       this.isLoading = true;
+
+      // Fetch the logo asset content based on the logoSrc
       const asset = await getAssetContent(this.logoSrc);
 
       // Depending on the asset type, set the logoHtml property
-      if (asset.type === 'svg') {
+      if (asset.type === 'svg')
         this.logoHtml = this.sanitizer.bypassSecurityTrustHtml(asset.content);
-      } else {
-        this.logoHtml = asset.content; // This will be the image path
-      }
-
-      console.log('Logo asset loaded:', asset.content);
     } catch (error: unknown) {
-      console.error('Error loading logo asset:', error);
       // Fallback to direct logoSrc if loading fails
+      console.error('Error loading logo asset:', error);
       this.logoHtml = '';
     } finally {
       this.isLoading = false;

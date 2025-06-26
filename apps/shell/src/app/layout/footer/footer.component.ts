@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LogoComponent } from '../logo/logo.component';
+import { LogoComponent } from '@bytebank-pro/ui';
 
 /**
  * Footer component for the ByteBank Pro application.
@@ -8,16 +8,15 @@ import { LogoComponent } from '../logo/logo.component';
  *
  * @example
  * ```html
- * <bb-footer></bb-footer>
+ * <app-footer></app-footer>
  * ```
  */
 @Component({
-  selector: 'bb-footer', // 'bb-' prefix is mandatory
+  selector: 'app-footer', // 'app-' prefix is mandatory
   standalone: true, // Always use standalone components
   imports: [CommonModule, LogoComponent], // Required imports
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
-  templateUrl: './footer.component.html', // Separated template for clarity
-  styleUrls: ['../styles/index.css']
+  templateUrl: './footer.component.html' // Separated template for clarity
 })
 export class FooterComponent {
   // The content structure is now directly in the template.

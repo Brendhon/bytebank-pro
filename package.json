@@ -18,7 +18,8 @@
     "check-types": "turbo run check-types",
     "pre-commit": "lint-staged",
     "prepare": "husky",
-    "clean": "rm -rf dist .turbo node_modules && turbo run clean"
+    "clean": "rm -rf dist .turbo node_modules && turbo run clean",
+    "reset": "npm run clean && npm install && npm run build"
   },
   "devDependencies": {
     "@bytebank-pro/eslint-config": "*",
