@@ -103,14 +103,14 @@
           "options": {
             "tsConfig": "./tsconfig.spec.json",
             "karmaConfig": "karma.conf.cjs",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "assets": [
               {
                 "glob": "**/*",
                 "input": "./public"
               }
             ],
-            "styles": ["./src/styles.css"],
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "styles": ["./src/styles.css"]
           }
         }
       }
