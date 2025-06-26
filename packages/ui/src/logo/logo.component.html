@@ -1,9 +1,27 @@
-<img
-  [src]="logoSrc"
-  [alt]="logoAltText"
-  [class]="logoClasses"
-  [attr.aria-hidden]="shouldHideFromScreenReaders ? 'true' : null"
-  [attr.aria-label]="ariaLabel && !isDecorative ? ariaLabel : null"
-  role="img"
-  data-testid="logo"
-/>
+@if (!isLoading) {
+  @if (logoHtml) {
+    <span
+      [class]="logoClasses"
+      [innerHTML]="logoHtml"
+      data-testid="logo"
+      [attr.aria-hidden]="shouldHideFromScreenReaders ? 'true' : null"
+      [attr.aria-label]="ariaLabel && !isDecorative ? ariaLabel : null"
+      role="img"
+    ></span>
+  } @else {
+    <img
+      [src]="logoSrc"
+      [alt]="logoAltText"
+      [class]="logoClasses"
+      [attr.aria-hidden]="shouldHideFromScreenReaders ? 'true' : null"
+      [attr.aria-label]="ariaLabel && !isDecorative ? ariaLabel : null"
+      role="img"
+      data-testid="logo"
+    />
+  }
+} @else {
+  <i-lucide
+    [img]="loadingIcon"
+    class="animate-spin text-white absolute flex items-center justify-center"
+  ></i-lucide>
+}

@@ -1,7 +1,15 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LOGOS } from '@bytebank-pro/shared-assets';
-
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  inject
+} from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { LOGOS, getAssetContent } from '@bytebank-pro/shared-assets';
+import { Loader2, LucideAngularModule } from 'lucide-angular';
 /**
  * Defines the possible visual variants for the Logo component.
  * 'full' displays the full ByteBank logo, 'icon' displays only the icon part.
@@ -28,12 +36,12 @@ export type LogoSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'bb-logo', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule], // Required imports
+  imports: [CommonModule, LucideAngularModule], // Required imports for Angular and Lucide icons
   templateUrl: './logo.component.html', // Separated template for clarity
   styleUrls: ['../styles/index.css'], // Shared styles for consistency
   changeDetection: ChangeDetectionStrategy.OnPush // OnPush for better performance
 })
-export class LogoComponent {
+export class LogoComponent implements OnInit {
   /**
    * The visual variant of the logo. 'full' for the complete logo, 'icon' for just the icon.
    * @default 'full'
@@ -71,6 +79,61 @@ export class LogoComponent {
     md: 'w-32',
     lg: 'w-42'
   };
+
+  // Injecting DomSanitizer to handle any potential HTML content safely
+  private sanitizer = inject(DomSanitizer);
+  private cdr = inject(ChangeDetectorRef);
+
+  /**
+   * Icon for loading state, using Lucide icons.
+   * This will be displayed while the logo is being loaded.
+   */
+  public loadingIcon = Loader2;
+
+  /**
+   * Stores the loaded and sanitized logo HTML or image path.
+   */
+  public logoHtml: SafeHtml | string = '';
+
+  /**
+   * Indicates if the logo is currently loading
+   */
+  public isLoading: boolean = true;
+
+  /**
+   * Initializes the component and performs any necessary setup.
+   * Loads and sanitizes the logo asset.
+   */
+  ngOnInit(): void {
+    this.loadLogoAsset();
+  }
+
+  /**
+   * Loads the logo asset asynchronously and updates the component state
+   */
+  private async loadLogoAsset(): Promise<void> {
+    try {
+      this.isLoading = true;
+      const asset = await getAssetContent(this.logoSrc);
+
+      // Depending on the asset type, set the logoHtml property
+      if (asset.type === 'svg') {
+        this.logoHtml = this.sanitizer.bypassSecurityTrustHtml(asset.content);
+      } else {
+        this.logoHtml = asset.content; // This will be the image path
+      }
+
+      console.log('Logo asset loaded:', asset.content);
+    } catch (error: unknown) {
+      console.error('Error loading logo asset:', error);
+      // Fallback to direct logoSrc if loading fails
+      this.logoHtml = '';
+    } finally {
+      this.isLoading = false;
+      // Trigger change detection since we're using OnPush
+      this.cdr.markForCheck();
+    }
+  }
 
   /**
    * Computes the appropriate alt text for the logo based on variant and accessibility settings.

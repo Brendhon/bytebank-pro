@@ -1,15 +1,15 @@
 /**
- * Paths para assets compartilhados do ByteBank Pro
+ * Paths for ByteBank Pro shared assets
  *
- * Este arquivo centraliza todos os caminhos dos assets para facilitar
- * a importação e manutenção em todos os microfrontends.
+ * This file centralizes all asset paths to facilitate
+ * import and maintenance across all microfrontends.
  *
- * Oferece duas formas de importação:
- * 1. Paths relativos (padrão) - funciona em qualquer ambiente
- * 2. Imports diretos (opcional) - para bundlers com configuração específica
+ * Offers two import approaches:
+ * 1. Relative paths (default) - works in any environment
+ * 2. Direct imports (optional) - for bundlers with specific configuration
  */
 
-// Paths dos assets - ABORDAGEM PRINCIPAL
+// Asset paths - MAIN APPROACH
 export const ASSET_PATHS = {
   LOGOS: {
     MAIN: '/assets/logos/logo.svg',
@@ -38,13 +38,32 @@ export const ASSET_PATHS = {
   }
 } as const;
 
-// Exports principais - usando paths (RECOMENDADO para Angular)
+// Main exports - using paths (RECOMMENDED for Angular)
 export const LOGOS = ASSET_PATHS.LOGOS;
 export const ICONS = ASSET_PATHS.ICONS;
 export const IMAGES = ASSET_PATHS.IMAGES;
 export const ILLUSTRATIONS = ASSET_PATHS.ILLUSTRATIONS;
+// Re-export all assets for compatibility
+export const ASSETS = {
+  LOGOS,
+  ICONS,
+  IMAGES,
+  ILLUSTRATIONS
+} as const;
 
-// Função helper para construir URLs completas em diferentes ambientes
+// Re-export paths for compatibility
+export const ASSET_URLS = ASSET_PATHS;
+
+// Direct exports - for bundlers with specific configuration (optional)
+export type AssetType = 'svg' | 'image';
+
+// Interface for asset content
+export interface AssetContent {
+  type: AssetType;
+  content: string;
+}
+
+// Helper function to build full URLs in different environments
 export function getAssetUrl(assetPath: string, baseUrl?: string): string {
   const cleanPath = assetPath.indexOf('/') === 0 ? assetPath.slice(1) : assetPath;
   const cleanBaseUrl =
@@ -53,20 +72,61 @@ export function getAssetUrl(assetPath: string, baseUrl?: string): string {
   return cleanBaseUrl ? `${cleanBaseUrl}/${cleanPath}` : `/${cleanPath}`;
 }
 
-// Re-export de todos os assets para compatibilidade
-export const ASSETS = {
-  LOGOS,
-  ICONS,
-  IMAGES,
-  ILLUSTRATIONS
-} as const;
-
-// Re-export dos paths para compatibilidade
-export const ASSET_URLS = ASSET_PATHS;
+/**
+ * Utility function to detect if an asset is an SVG file
+ * @param assetPath - The path to the asset
+ * @returns true if the asset is an SVG, false otherwise
+ */
+export function isSvgAsset(assetPath: string): boolean {
+  return assetPath.toLowerCase().endsWith('.svg');
+}
 
 /**
- * Hook para usar assets com base URL customizada
- * Útil para ambientes com CDN ou paths diferentes
+ * Gets the appropriate asset content based on file type
+ * For SVG files, returns the SVG content string for currentColor support
+ * For other files, returns the asset path for traditional img loading
+ * @param assetPath - The path to the asset
+ * @param svgContentKey - The key to lookup SVG content in SVG_CONTENT (e.g., 'LOGOS.MAIN')
+ * @returns Object with type and content for rendering
+ */
+export async function getAssetContent(assetPath: string): Promise<AssetContent> {
+  // Default return object for non-SVG assets
+  const returnDefault: AssetContent = { type: 'image', content: assetPath };
+
+  if (isSvgAsset(assetPath)) {
+    // Fetch SVG content asynchronously using fetch
+    let svgContent: string = '';
+
+    // Try to fetch the SVG content from the asset path
+    // If fetch fails, fallback to traditional image loading
+    try {
+      // Attempt to fetch the SVG content from the asset path
+
+      // Use fetch to get the SVG content
+      const response = await fetch(assetPath);
+
+      // Check if the response is ok (status in the range 200-299)
+      // If ok, read the response text as SVG content
+      // If not ok, throw an error to fallback to traditional image loading
+      // Note: This assumes the assetPath is a valid URL or relative path accessible by fetch
+      if (response.ok) svgContent = await response.text();
+      else throw new Error(`Failed to load SVG: ${response.statusText}`);
+    } catch (error) {
+      // Fallback to traditional image loading
+      return returnDefault;
+    }
+
+    // Return the SVG content or the asset path if fetch failed
+    return { type: 'svg', content: svgContent };
+  }
+
+  // Fallback to traditional image loading
+  return returnDefault;
+}
+
+/**
+ * Hook to use assets with a custom base URL
+ * Useful for environments with CDN or different paths
  */
 export function createAssetResolver(baseUrl: string) {
   return {
