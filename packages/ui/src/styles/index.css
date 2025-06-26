@@ -9,7 +9,6 @@
   }
 }
 
-// Lets add sr-only styles
 @layer utilities {
   .sr-only {
     position: absolute;

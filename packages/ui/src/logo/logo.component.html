@@ -1,0 +1,9 @@
+<img
+  [src]="logoSrc"
+  [alt]="logoAltText"
+  [class]="logoClasses"
+  [attr.aria-hidden]="shouldHideFromScreenReaders ? 'true' : null"
+  [attr.aria-label]="ariaLabel && !isDecorative ? ariaLabel : null"
+  role="img"
+  data-testid="logo"
+/>
