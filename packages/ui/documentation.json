@@ -148,7 +148,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: 'mail'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: Mail\n  }\n}"
       },
       {
         "name": "Error",
@@ -248,7 +248,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<InputComponent>",
-        "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the start'\n    },\n    suffixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
+        "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
       },
       {
         "name": "meta",
@@ -388,7 +388,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: 'search'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
       },
       {
         "name": "Secondary",
@@ -518,7 +518,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: 'user'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: UserRoundIcon\n  }\n}"
       },
       {
         "name": "WithSuffixIcon",
@@ -528,7 +528,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: 'external-link'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
       }
     ],
     "functions": [],
@@ -915,7 +915,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: 'mail'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: Mail\n  }\n}"
         },
         {
           "name": "Error",
@@ -965,7 +965,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<InputComponent>",
-          "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the start'\n    },\n    suffixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
+          "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
         },
         {
           "name": "Number",
@@ -1015,7 +1015,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: 'search'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
         },
         {
           "name": "Small",
@@ -1085,7 +1085,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: 'user'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: UserRoundIcon\n  }\n}"
         },
         {
           "name": "WithSuffixIcon",
@@ -1095,7 +1095,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: 'external-link'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
         }
       ],
       ".storybook/preview.ts": [

@@ -8,14 +8,15 @@ Este guia define os padrões e melhores práticas para a escrita de testes unit�
 
 **Observações Importantes:**
 
-- Todos os testes e comentários dentro dos códigos devem ser escritos em english.
-- Utilize Jasmine e Karma para todos os testes.
-- Os testes podem ser executados com o comando `npm run test` a partir da pasta do projeto.
-- Para rodar testes de um componente específico (por exemplo, `input`), execute:
+- Os testes e comentários dentro dos códigos devem ser escritos em english.
+- Foque em testes unitários básicos e essenciais para componentes Angular, evitando testes de integração ou e2e neste guia.
+- Utilize Jasmine e Karma para execução dos testes.
+- Os testes podem ser executados com o comando `npm run test` a partir da raiz do projeto.
+- Para testar um componente específico (ex: `input`), execute:
 
   npm run test -- --include="\*\*/input.component.spec.ts"
 
-  Isso deve ser feito na pasta `packages/ui`, onde os testes estão localizados.
+  Esse comando deve ser executado na pasta `packages/ui`, onde os testes estão localizados.
 
 - **Use `data-testid` para seletores de teste** para garantir robustez frente a mudanças no DOM.
 - **Adicione uma linha em branco antes de cada `expect`** para melhorar a legibilidade.

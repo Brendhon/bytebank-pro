@@ -29,7 +29,7 @@ describe('InputComponent', () => {
 
       expect(component.variant()).toBe('default');
 
-      expect(component.size()).toBe('md');
+      expect(component.size()).toBe('sm');
 
       expect(component.disabled()).toBeFalsy();
 

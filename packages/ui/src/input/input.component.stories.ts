@@ -93,7 +93,8 @@ const meta: Meta<InputComponent> = {
     readonly: false,
     required: false,
     showPasswordToggle: false
-  }
+  },
+  tags: ['autodocs']
 };
 
 export default meta;

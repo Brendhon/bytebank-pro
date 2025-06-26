@@ -38,7 +38,7 @@ export class InputComponent {
   // Core input properties using modern input() API
   type = input<InputType>('text');
   variant = input<InputVariant>('default');
-  size = input<InputSize>('md');
+  size = input<InputSize>('sm');
   placeholder = input<string>('');
   value = input<string>('');
   disabled = input<boolean>(false);
