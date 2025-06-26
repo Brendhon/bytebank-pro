@@ -130,7 +130,7 @@ describe('LogoComponent', () => {
 
       expect(loadingElement).not.toBeNull();
 
-      expect(loadingElement.nativeElement.querySelector('.animate-pulse')).not.toBeNull();
+      expect(loadingElement.nativeElement.classList).toContain('animate-spin');
     });
 
     it('should show logo when loading is complete', () => {
