@@ -8,11 +8,18 @@ Este guia define os padrões e melhores práticas para a escrita de testes unit�
 
 **Observações Importantes:**
 
-- Todos os testes e comentários nos arquivos de teste devem ser escritos em **inglês**.
+- Todos os testes e comentários dentro dos códigos devem ser escritos em english.
 - Utilize Jasmine e Karma para todos os testes.
-- Os testes devem ser executados com `npm run test`.
-- **Adicione uma linha em branco antes de cada `expect`** para melhorar a legibilidade e seguir o padrão do projeto.
-- **Sempre use `fixture.componentRef.setInput()` para definir propriedades de input nos testes**.
+- Os testes podem ser executados com o comando `npm run test` a partir da pasta do projeto.
+- Para rodar testes de um componente específico (por exemplo, `input`), execute:
+
+  npm run test -- --include="\*\*/input.component.spec.ts"
+
+  Isso deve ser feito na pasta `packages/ui`, onde os testes estão localizados.
+
+- **Use `data-testid` para seletores de teste** para garantir robustez frente a mudanças no DOM.
+- **Adicione uma linha em branco antes de cada `expect`** para melhorar a legibilidade.
+- **Sempre use `fixture.componentRef.setInput()` para definir os inputs nos testes**.
 
 ---
 

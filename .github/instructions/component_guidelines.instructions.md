@@ -28,7 +28,10 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
   src/
   └── nome-do-componente/
     ├── nome-do-componente.component.ts
-    └── nome-do-componente.component.stories.ts
+    ├── nome-do-componente.component.spec.ts // create a simple test file - with one basic test
+    ├── nome-do-componente.component.stories.ts // create a simple Storybook story file - with one basic story
+    ├── nome-do-componente.component.html
+    └── nome-do-componente.component.css // include if necessary – normally not required
   ```
 - **Convenções de Nomenclatura:**
   - **Pasta**: `kebab-case` (ex: `date-picker`)
