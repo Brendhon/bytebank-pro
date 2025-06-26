@@ -94,6 +94,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -119,6 +129,36 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: false,\n    disabled: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Disabled Button</bb-button>`\n  })\n}"
+      },
+      {
+        "name": "Disabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
+      },
+      {
+        "name": "Email",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: 'mail'\n  }\n}"
+      },
+      {
+        "name": "Error",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'error',\n    label: 'Campo com erro',\n    value: 'dados-incorretos',\n    errorMessage: 'Por favor, verifique os dados informados.'\n  }\n}"
       },
       {
         "name": "Error",
@@ -151,6 +191,16 @@
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
       },
       {
+        "name": "Large",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
+      },
+      {
         "name": "Loading",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -161,6 +211,26 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingText: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "LoginForm",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          prefixIcon=\"mail\"\n          required=\"true\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "Medium",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    size: 'md',\n    label: 'Tamanho médio',\n    placeholder: 'Input médio (padrão)'\n  }\n}"
+      },
+      {
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -168,7 +238,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ButtonComponent>",
-        "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<InputComponent>",
+        "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the start'\n    },\n    suffixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
       },
       {
         "name": "meta",
@@ -191,6 +271,16 @@
         "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
+        "name": "Number",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: '25'\n  }\n}"
+      },
+      {
         "name": "OutlineGreen",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -209,6 +299,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'outlineOrange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Outline Orange</bb-button>`\n  })\n}"
+      },
+      {
+        "name": "Password",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true,\n    helperText: 'A senha deve ter pelo menos 8 caracteres'\n  }\n}"
       },
       {
         "name": "Playground",
@@ -251,6 +351,26 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Primary Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "Readonly",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
+      },
+      {
+        "name": "Required",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Campo obrigatório',\n    placeholder: 'Este campo é obrigatório',\n    required: true,\n    helperText: 'Este campo deve ser preenchido'\n  }\n}"
+      },
+      {
         "name": "ResponsiveLayout",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -259,6 +379,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "Search",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: 'search'\n  }\n}"
       },
       {
         "name": "Secondary",
@@ -271,6 +401,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'dark',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Secondary Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "Small",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
+      },
+      {
         "name": "Success",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -279,6 +419,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'green',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Success Button</bb-button>`\n  })\n}"
+      },
+      {
+        "name": "Success",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'success',\n    label: 'Campo válido',\n    value: 'Dados corretos',\n    successMessage: 'Perfeito! Os dados estão corretos.'\n  }\n}"
       },
       {
         "name": "Success",
@@ -301,6 +451,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaPressed: false,\n    ariaLabel: 'Toggle notifications'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`\n  })\n}"
       },
       {
+        "name": "ValidationStates",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+      },
+      {
         "name": "Warning",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -311,6 +471,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'orange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Warning Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "Warning",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
+      },
+      {
         "name": "WithAccessibility",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -319,6 +489,46 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "WithHelperText",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    helperText: 'Utilizaremos este email para entrar em contato'\n  }\n}"
+      },
+      {
+        "name": "WithLabel",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Nome completo',\n    placeholder: 'Digite seu nome completo'\n  }\n}"
+      },
+      {
+        "name": "WithPrefixIcon",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: 'user'\n  }\n}"
+      },
+      {
+        "name": "WithSuffixIcon",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: 'external-link'\n  }\n}"
       }
     ],
     "functions": [],
@@ -329,6 +539,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ButtonComponent>",
         "file": "src/button/button.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<InputComponent>",
+        "file": "src/input/input.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -500,7 +721,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<ButtonComponent>",
-          "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "OutlineGreen",
@@ -665,6 +886,218 @@
           "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
         }
       ],
+      "src/input/input.component.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
+        },
+        {
+          "name": "Disabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
+        },
+        {
+          "name": "Email",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: 'mail'\n  }\n}"
+        },
+        {
+          "name": "Error",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    variant: 'error',\n    label: 'Campo com erro',\n    value: 'dados-incorretos',\n    errorMessage: 'Por favor, verifique os dados informados.'\n  }\n}"
+        },
+        {
+          "name": "Large",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
+        },
+        {
+          "name": "LoginForm",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          prefixIcon=\"mail\"\n          required=\"true\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+        },
+        {
+          "name": "Medium",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    size: 'md',\n    label: 'Tamanho médio',\n    placeholder: 'Input médio (padrão)'\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<InputComponent>",
+          "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the start'\n    },\n    suffixIcon: {\n      control: 'text',\n      description: 'Icon name from Lucide to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  }\n}"
+        },
+        {
+          "name": "Number",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: '25'\n  }\n}"
+        },
+        {
+          "name": "Password",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true,\n    helperText: 'A senha deve ter pelo menos 8 caracteres'\n  }\n}"
+        },
+        {
+          "name": "Readonly",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
+        },
+        {
+          "name": "Required",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Campo obrigatório',\n    placeholder: 'Este campo é obrigatório',\n    required: true,\n    helperText: 'Este campo deve ser preenchido'\n  }\n}"
+        },
+        {
+          "name": "Search",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: 'search'\n  }\n}"
+        },
+        {
+          "name": "Small",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
+        },
+        {
+          "name": "Success",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    variant: 'success',\n    label: 'Campo válido',\n    value: 'Dados corretos',\n    successMessage: 'Perfeito! Os dados estão corretos.'\n  }\n}"
+        },
+        {
+          "name": "ValidationStates",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+        },
+        {
+          "name": "Warning",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
+        },
+        {
+          "name": "WithHelperText",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    helperText: 'Utilizaremos este email para entrar em contato'\n  }\n}"
+        },
+        {
+          "name": "WithLabel",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Nome completo',\n    placeholder: 'Digite seu nome completo'\n  }\n}"
+        },
+        {
+          "name": "WithPrefixIcon",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: 'user'\n  }\n}"
+        },
+        {
+          "name": "WithSuffixIcon",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: 'external-link'\n  }\n}"
+        }
+      ],
       ".storybook/preview.ts": [
         {
           "name": "preview",
@@ -688,6 +1121,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ButtonComponent>",
           "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/input/input.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<InputComponent>",
+          "file": "src/input/input.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -869,6 +1315,226 @@
       },
       {
         "filePath": "src/button/button.component.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Disabled",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Email",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Error",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Large",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "LoginForm",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Medium",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Number",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Password",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Readonly",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Required",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Search",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Small",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Success",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "ValidationStates",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Warning",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithHelperText",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithLabel",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithPrefixIcon",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithSuffixIcon",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/input/input.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
