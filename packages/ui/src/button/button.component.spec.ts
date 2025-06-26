@@ -24,23 +24,31 @@ describe('ButtonComponent', () => {
 
   describe('Default Properties', () => {
     it('should have default type as button', () => {
-      expect(component.type).toBe('button');
+      expect(component.type()).toBe('button');
     });
 
     it('should have default variant as blue', () => {
-      expect(component.variant).toBe('blue');
+      expect(component.variant()).toBe('blue');
     });
 
     it('should have loading as false by default', () => {
-      expect(component.loading).toBeFalsy();
+      expect(component.loading()).toBeFalsy();
     });
 
     it('should have disabled as false by default', () => {
-      expect(component.disabled).toBeFalsy();
+      expect(component.disabled()).toBeFalsy();
     });
 
     it('should have empty className by default', () => {
-      expect(component.className).toBe('');
+      expect(component.className()).toBe('');
+    });
+
+    it('should have default size as md', () => {
+      expect(component.size()).toBe('md');
+    });
+
+    it('should have default loadingText', () => {
+      expect(component.loadingText()).toBe('Carregando...');
     });
   });
 
@@ -50,7 +58,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('type', testType);
       fixture.detectChanges();
 
-      expect(component.type).toBe(testType);
+      expect(component.type()).toBe(testType);
       expect(buttonElement.type).toBe(testType);
     });
 
@@ -59,14 +67,14 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('variant', testVariant);
       fixture.detectChanges();
 
-      expect(component.variant).toBe(testVariant);
+      expect(component.variant()).toBe(testVariant);
     });
 
     it('should set loading property', () => {
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
-      expect(component.loading).toBeTruthy();
+      expect(component.loading()).toBeTruthy();
       expect(buttonElement.disabled).toBeTruthy();
     });
 
@@ -74,7 +82,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
-      expect(component.disabled).toBeTruthy();
+      expect(component.disabled()).toBeTruthy();
       expect(buttonElement.disabled).toBeTruthy();
     });
 
@@ -83,8 +91,26 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('className', customClass);
       fixture.detectChanges();
 
-      expect(component.className).toBe(customClass);
+      expect(component.className()).toBe(customClass);
       expect(buttonElement.className).toContain(customClass);
+    });
+
+    it('should set size property', () => {
+      fixture.componentRef.setInput('size', 'lg');
+      fixture.detectChanges();
+
+      expect(component.size()).toBe('lg');
+    });
+
+    it('should set accessibility properties', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('ariaDescribedBy', 'help-text');
+      fixture.componentRef.setInput('ariaPressed', true);
+      fixture.detectChanges();
+
+      expect(component.ariaLabel()).toBe('Test button');
+      expect(component.ariaDescribedBy()).toBe('help-text');
+      expect(component.ariaPressed()).toBe(true);
     });
   });
 
@@ -182,6 +208,102 @@ describe('ButtonComponent', () => {
       expect(classes).toContain('opacity-60');
       expect(classes).toContain('cursor-not-allowed');
       expect(classes).toContain('pointer-events-none');
+    });
+
+    it('should apply size classes', () => {
+      // Test small size
+      fixture.componentRef.setInput('size', 'sm');
+      fixture.detectChanges();
+      expect(component.buttonClasses).toContain('px-3 py-1.5 text-sm');
+
+      // Test medium size (default)
+      fixture.componentRef.setInput('size', 'md');
+      fixture.detectChanges();
+      expect(component.buttonClasses).toContain('px-4 py-2 text-sm');
+
+      // Test large size
+      fixture.componentRef.setInput('size', 'lg');
+      fixture.detectChanges();
+      expect(component.buttonClasses).toContain('px-6 py-3 text-base');
+    });
+  });
+
+  describe('Computed Properties', () => {
+    it('should return correct isInteractive value', () => {
+      // Should be interactive by default
+      expect(component.isInteractive).toBe(true);
+
+      // Should not be interactive when disabled
+      fixture.componentRef.setInput('disabled', true);
+      expect(component.isInteractive).toBe(false);
+
+      // Should not be interactive when loading
+      fixture.componentRef.setInput('disabled', false);
+      fixture.componentRef.setInput('loading', true);
+      expect(component.isInteractive).toBe(false);
+    });
+
+    it('should return correct computedAriaLabel', () => {
+      // Should return empty string by default
+      expect(component.computedAriaLabel).toBe('');
+
+      // Should return custom aria label
+      fixture.componentRef.setInput('ariaLabel', 'Custom label');
+      expect(component.computedAriaLabel).toBe('Custom label');
+
+      // Should return loading text when loading
+      fixture.componentRef.setInput('loading', true);
+      expect(component.computedAriaLabel).toBe('Carregando...');
+    });
+
+    it('should return correct computedRole', () => {
+      // Should return button by default
+      expect(component.computedRole).toBe('button');
+
+      // Should return custom role
+      fixture.componentRef.setInput('role', 'switch');
+      expect(component.computedRole).toBe('switch');
+    });
+  });
+
+  describe('Event Handling', () => {
+    it('should emit buttonClick when clicked and interactive', () => {
+      spyOn(component.buttonClick, 'emit');
+
+      const mockEvent = new Event('click');
+      component.handleClick(mockEvent);
+
+      expect(component.buttonClick.emit).toHaveBeenCalledWith(mockEvent);
+    });
+
+    it('should not emit buttonClick when disabled', () => {
+      spyOn(component.buttonClick, 'emit');
+      spyOn(Event.prototype, 'preventDefault');
+      spyOn(Event.prototype, 'stopPropagation');
+
+      fixture.componentRef.setInput('disabled', true);
+
+      const mockEvent = new Event('click');
+      component.handleClick(mockEvent);
+
+      expect(component.buttonClick.emit).not.toHaveBeenCalled();
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
+      expect(mockEvent.stopPropagation).toHaveBeenCalled();
+    });
+
+    it('should not emit buttonClick when loading', () => {
+      spyOn(component.buttonClick, 'emit');
+      spyOn(Event.prototype, 'preventDefault');
+      spyOn(Event.prototype, 'stopPropagation');
+
+      fixture.componentRef.setInput('loading', true);
+
+      const mockEvent = new Event('click');
+      component.handleClick(mockEvent);
+
+      expect(component.buttonClick.emit).not.toHaveBeenCalled();
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
+      expect(mockEvent.stopPropagation).toHaveBeenCalled();
     });
   });
 
@@ -297,6 +419,76 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       expect(buttonElement.disabled).toBeTruthy();
+    });
+
+    it('should set aria-busy attribute when loading', () => {
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-busy')).toBe('true');
+
+      fixture.componentRef.setInput('loading', false);
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-busy')).toBe('false');
+    });
+
+    it('should set aria-label attribute', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Custom button label');
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-label')).toBe('Custom button label');
+    });
+
+    it('should set aria-describedby attribute', () => {
+      fixture.componentRef.setInput('ariaDescribedBy', 'help-text-id');
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-describedby')).toBe('help-text-id');
+    });
+
+    it('should set aria-pressed attribute', () => {
+      fixture.componentRef.setInput('ariaPressed', true);
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('should set aria-disabled attribute', () => {
+      fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-disabled')).toBe('true');
+
+      fixture.componentRef.setInput('disabled', false);
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('aria-disabled')).toBe('true');
+    });
+
+    it('should set role attribute', () => {
+      fixture.componentRef.setInput('role', 'switch');
+      fixture.detectChanges();
+
+      expect(buttonElement.getAttribute('role')).toBe('switch');
+    });
+
+    it('should have screen reader text for loading state', () => {
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      const srText = fixture.debugElement.query(By.css('.sr-only'));
+      expect(srText).toBeTruthy();
+      expect(srText.nativeElement.textContent.trim()).toBe('Carregando...');
+    });
+
+    it('should hide loading icon from screen readers', () => {
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      const loadingIcon = fixture.debugElement.query(By.css('i-lucide'));
+      expect(loadingIcon.nativeElement.getAttribute('aria-hidden')).toBe('true');
     });
   });
 });

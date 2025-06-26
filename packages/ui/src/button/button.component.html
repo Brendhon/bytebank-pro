@@ -1,18 +1,25 @@
 <button
-  [type]="type"
+  [type]="type()"
   [ngClass]="buttonClasses"
-  [disabled]="disabled || loading"
-  [attr.aria-busy]="loading ? 'true' : 'false'"
-  [attr.aria-label]="loading ? loadingAriaLabel : ariaLabel"
-  (click)="buttonClick.emit($event)"
+  [disabled]="disabled() || loading()"
+  [attr.aria-busy]="loading() ? 'true' : 'false'"
+  [attr.aria-label]="computedAriaLabel || null"
+  [attr.aria-describedby]="ariaDescribedBy() || null"
+  [attr.aria-pressed]="ariaPressed() || null"
+  [attr.aria-disabled]="disabled() || loading() ? 'true' : 'false'"
+  [attr.role]="computedRole"
+  (click)="handleClick($event)"
 >
-  <span [ngClass]="{ 'opacity-0': loading }" [attr.aria-hidden]="loading ? 'true' : 'false'">
+  <span [ngClass]="{ 'opacity-0': loading() }" [attr.aria-hidden]="loading() ? 'true' : 'false'">
     <ng-content></ng-content>
   </span>
-  @if (loading) {
+
+  @if (loading()) {
     <i-lucide
       [img]="loadingIcon"
       class="animate-spin text-white absolute flex items-center justify-center"
+      [attr.aria-hidden]="'true'"
     ></i-lucide>
+    <span class="sr-only">{{ loadingText() }}</span>
   }
 </button>

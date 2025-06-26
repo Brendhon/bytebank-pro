@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
-import { ButtonComponent, ButtonVariant } from './button.component';
+import { ButtonComponent, ButtonVariant, ButtonSize } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Components/Button',
@@ -9,7 +9,8 @@ const meta: Meta<ButtonComponent> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Um componente de botão flexível com múltiplas variantes e estados.'
+        component:
+          'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'
       }
     }
   },
@@ -25,6 +26,11 @@ const meta: Meta<ButtonComponent> = {
         'outlineOrange'
       ] as ButtonVariant[],
       description: 'Variante visual do botão'
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'] as ButtonSize[],
+      description: 'Tamanho do botão'
     },
     type: {
       control: 'select',
@@ -47,9 +53,21 @@ const meta: Meta<ButtonComponent> = {
       control: 'text',
       description: 'Label acessível do botão'
     },
-    loadingAriaLabel: {
+    ariaDescribedBy: {
       control: 'text',
-      description: 'Label acessível durante carregamento'
+      description: 'ID do elemento que descreve o botão'
+    },
+    ariaPressed: {
+      control: 'boolean',
+      description: 'Estado pressionado para botões toggle'
+    },
+    role: {
+      control: 'text',
+      description: 'Role ARIA customizado'
+    },
+    loadingText: {
+      control: 'text',
+      description: 'Texto para leitores de tela durante carregamento'
     },
     buttonClick: {
       action: 'clicked',
@@ -146,7 +164,7 @@ export const Loading: Story = {
     type: 'button',
     loading: true,
     disabled: false,
-    loadingAriaLabel: 'Carregando, aguarde...'
+    loadingText: 'Carregando, aguarde...'
   },
   render: (args) => ({
     props: args,
@@ -179,5 +197,48 @@ export const AllVariants: Story = {
         <bb-button variant="outlineOrange">Outline Orange</bb-button>
       </div>
     `
+  })
+};
+
+export const AllSizes: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+        <bb-button size="sm" variant="blue">Small</bb-button>
+        <bb-button size="md" variant="blue">Medium</bb-button>
+        <bb-button size="lg" variant="blue">Large</bb-button>
+      </div>
+    `
+  })
+};
+
+export const WithAccessibility: Story = {
+  args: {
+    variant: 'blue',
+    ariaLabel: 'Save document',
+    ariaDescribedBy: 'save-help-text'
+  },
+  render: (args) => ({
+    props: args,
+    template: `
+      <div>
+        <bb-button ${argsToTemplate(args)}>Save</bb-button>
+        <p id="save-help-text" style="margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;">
+          This will save your current document to the cloud
+        </p>
+      </div>
+    `
+  })
+};
+
+export const ToggleButton: Story = {
+  args: {
+    variant: 'blue',
+    ariaPressed: false,
+    ariaLabel: 'Toggle notifications'
+  },
+  render: (args) => ({
+    props: args,
+    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`
   })
 };

@@ -11,16 +11,6 @@
   "miscellaneous": {
     "variables": [
       {
-        "name": "AccessibilityFocus",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/footer/footer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra os recursos de acessibilidade do footer, incluindo navegação por teclado e estrutura semântica.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div>\n        <p style=\"margin-bottom: 1rem; padding: 1rem; background-color: #f3f4f6; border-radius: 0.5rem; color: #374151;\">\n          <strong>Teste de Acessibilidade:</strong><br>\n          Use a tecla Tab para navegar pelos links do footer e verifique o foco visual.\n          O footer possui estrutura semântica adequada com elementos nav, ul, li e landmarks apropriados.\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
-      },
-      {
         "name": "AccessibilityStates",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -29,6 +19,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n        <bb-logo variant=\"full\" size=\"md\" ariaLabel=\"Logo ByteBank Pro\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"sm\" [isDecorative]=\"true\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "AllSizes",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/button/button.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;\">\n        <bb-button size=\"sm\" variant=\"blue\">Small</bb-button>\n        <bb-button size=\"md\" variant=\"blue\">Medium</bb-button>\n        <bb-button size=\"lg\" variant=\"blue\">Large</bb-button>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "AllSizes",
@@ -89,16 +89,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n        <bb-logo variant=\"full\" size=\"md\" className=\"opacity-75\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"lg\" className=\"drop-shadow-lg\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"md\" className=\"w-24 md:w-32 lg:w-40\"></bb-logo>\n      </div>\n    `\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/footer/footer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
       },
       {
         "name": "Default",
@@ -168,7 +158,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingAriaLabel: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
+        "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingText: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
       },
       {
         "name": "meta",
@@ -178,17 +168,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ButtonComponent>",
-        "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/footer/footer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<FooterComponent>",
-        "defaultValue": "{\n  title: 'Components/Footer',\n  component: FooterComponent,\n  parameters: {\n    layout: 'fullscreen',\n    docs: {\n      description: {\n        component:\n          'Componente de rodapé para a aplicação ByteBank Pro. Exibe informações de contato, logo do ByteBank e links de navegação.'\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -271,16 +251,6 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Primary Button</bb-button>`\n  })\n}"
       },
       {
-        "name": "ResponsiveDemo",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/footer/footer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  parameters: {\n    viewport: {\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '667px'\n          }\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '1024px'\n          }\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1200px',\n            height: '800px'\n          }\n        }\n      }\n    },\n    docs: {\n      description: {\n        story:\n          'Demonstra como o footer se adapta a diferentes tamanhos de tela. Em dispositivos móveis, as seções ficam empilhadas verticalmente.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div style=\"padding: 1rem 0;\">\n        <p style=\"text-align: center; margin-bottom: 2rem; color: #6b7280;\">\n          Redimensione a viewport para ver o comportamento responsivo\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
-      },
-      {
         "name": "ResponsiveLayout",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -321,6 +291,16 @@
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
       },
       {
+        "name": "ToggleButton",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/button/button.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaPressed: false,\n    ariaLabel: 'Toggle notifications'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`\n  })\n}"
+      },
+      {
         "name": "Warning",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -331,14 +311,14 @@
         "defaultValue": "{\n  args: {\n    variant: 'orange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Warning Button</bb-button>`\n  })\n}"
       },
       {
-        "name": "WithContainer",
+        "name": "WithAccessibility",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/footer/footer.component.stories.ts",
+        "file": "src/button/button.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"min-height: 100vh; display: flex; flex-direction: column;\">\n        <div style=\"flex: 1; padding: 2rem; background-color: #f9fafb;\">\n          <h1 style=\"margin: 0 0 1rem 0; color: #111827;\">Conteúdo da Página</h1>\n          <p style=\"margin: 0; color: #6b7280;\">\n            Este é um exemplo de como o footer aparece no final de uma página.\n            O footer mantém sua posição na parte inferior e exibe todas as informações necessárias.\n          </p>\n        </div>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
+        "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
       }
     ],
     "functions": [],
@@ -349,17 +329,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ButtonComponent>",
         "file": "src/button/button.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<FooterComponent>",
-        "file": "src/footer/footer.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -390,58 +359,6 @@
     ],
     "enumerations": [],
     "groupedVariables": {
-      "src/footer/footer.component.stories.ts": [
-        {
-          "name": "AccessibilityFocus",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra os recursos de acessibilidade do footer, incluindo navegação por teclado e estrutura semântica.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div>\n        <p style=\"margin-bottom: 1rem; padding: 1rem; background-color: #f3f4f6; border-radius: 0.5rem; color: #374151;\">\n          <strong>Teste de Acessibilidade:</strong><br>\n          Use a tecla Tab para navegar pelos links do footer e verifique o foco visual.\n          O footer possui estrutura semântica adequada com elementos nav, ul, li e landmarks apropriados.\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
-        },
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `<bb-footer></bb-footer>`\n  })\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<FooterComponent>",
-          "defaultValue": "{\n  title: 'Components/Footer',\n  component: FooterComponent,\n  parameters: {\n    layout: 'fullscreen',\n    docs: {\n      description: {\n        component:\n          'Componente de rodapé para a aplicação ByteBank Pro. Exibe informações de contato, logo do ByteBank e links de navegação.'\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-        },
-        {
-          "name": "ResponsiveDemo",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  parameters: {\n    viewport: {\n      viewports: {\n        mobile: {\n          name: 'Mobile',\n          styles: {\n            width: '375px',\n            height: '667px'\n          }\n        },\n        tablet: {\n          name: 'Tablet',\n          styles: {\n            width: '768px',\n            height: '1024px'\n          }\n        },\n        desktop: {\n          name: 'Desktop',\n          styles: {\n            width: '1200px',\n            height: '800px'\n          }\n        }\n      }\n    },\n    docs: {\n      description: {\n        story:\n          'Demonstra como o footer se adapta a diferentes tamanhos de tela. Em dispositivos móveis, as seções ficam empilhadas verticalmente.'\n      }\n    }\n  },\n  render: () => ({\n    template: `\n      <div style=\"padding: 1rem 0;\">\n        <p style=\"text-align: center; margin-bottom: 2rem; color: #6b7280;\">\n          Redimensione a viewport para ver o comportamento responsivo\n        </p>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
-        },
-        {
-          "name": "WithContainer",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"min-height: 100vh; display: flex; flex-direction: column;\">\n        <div style=\"flex: 1; padding: 2rem; background-color: #f9fafb;\">\n          <h1 style=\"margin: 0 0 1rem 0; color: #111827;\">Conteúdo da Página</h1>\n          <p style=\"margin: 0; color: #6b7280;\">\n            Este é um exemplo de como o footer aparece no final de uma página.\n            O footer mantém sua posição na parte inferior e exibe todas as informações necessárias.\n          </p>\n        </div>\n        <bb-footer></bb-footer>\n      </div>\n    `\n  })\n}"
-        }
-      ],
       "src/logo/logo.component.stories.ts": [
         {
           "name": "AccessibilityStates",
@@ -536,6 +453,16 @@
       ],
       "src/button/button.component.stories.ts": [
         {
+          "name": "AllSizes",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;\">\n        <bb-button size=\"sm\" variant=\"blue\">Small</bb-button>\n        <bb-button size=\"md\" variant=\"blue\">Medium</bb-button>\n        <bb-button size=\"lg\" variant=\"blue\">Large</bb-button>\n      </div>\n    `\n  })\n}"
+        },
+        {
           "name": "AllVariants",
           "ctype": "miscellaneous",
           "subtype": "variable",
@@ -563,7 +490,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingAriaLabel: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
+          "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingText: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
         },
         {
           "name": "meta",
@@ -573,7 +500,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<ButtonComponent>",
-          "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes e estados.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    loadingAriaLabel: {\n      control: 'text',\n      description: 'Label acessível durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "OutlineGreen",
@@ -626,6 +553,16 @@
           "defaultValue": "{\n  args: {\n    variant: 'green',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Success Button</bb-button>`\n  })\n}"
         },
         {
+          "name": "ToggleButton",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaPressed: false,\n    ariaLabel: 'Toggle notifications'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`\n  })\n}"
+        },
+        {
           "name": "Warning",
           "ctype": "miscellaneous",
           "subtype": "variable",
@@ -634,6 +571,16 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  args: {\n    variant: 'orange',\n    type: 'button',\n    loading: false,\n    disabled: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Warning Button</bb-button>`\n  })\n}"
+        },
+        {
+          "name": "WithAccessibility",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
         }
       ],
       "src/toast/toast.component.stories.ts": [
@@ -747,19 +694,6 @@
           "kind": 183
         }
       ],
-      "src/footer/footer.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<FooterComponent>",
-          "file": "src/footer/footer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/logo/logo.component.stories.ts": [
         {
           "name": "Story",
@@ -799,6 +733,16 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "preview",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/button/button.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AllSizes",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -898,6 +842,16 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
+        "name": "ToggleButton",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/button/button.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
         "name": "Warning",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -905,66 +859,16 @@
       },
       {
         "filePath": "src/button/button.component.stories.ts",
-        "type": "type alias",
-        "linktype": "miscellaneous",
-        "linksubtype": "typealias",
-        "name": "Story",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/footer/footer.component.stories.ts",
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "AccessibilityFocus",
+        "name": "WithAccessibility",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
       },
       {
-        "filePath": "src/footer/footer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Default",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/footer/footer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "meta",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/footer/footer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "ResponsiveDemo",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/footer/footer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "WithContainer",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/footer/footer.component.stories.ts",
+        "filePath": "src/button/button.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
