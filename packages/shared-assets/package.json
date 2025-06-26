@@ -21,7 +21,7 @@
     "build": "tsc && npm run copy:assets",
     "dev": "tsc --watch",
     "copy:assets": "cp -r ./assets ./dist/",
-    "clean": "rm -rf dist .turbo"
+    "clean": "rm -rf dist .turbo node_modules .angular coverage out-tsc .cache storybook-static .storybook-cache"
   },
   "devDependencies": {
     "typescript": "^5.6.0"

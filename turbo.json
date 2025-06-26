@@ -13,7 +13,8 @@
       "dependsOn": ["^check-types"]
     },
     "clean": {
-      "cache": false
+      "cache": false,
+      "dependsOn": ["^clean"]
     },
     "dev": {
       "cache": false,

@@ -45,7 +45,14 @@
             "browserTarget": "@bytebank-pro/ui:build",
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "."],
-            "port": 6006
+            "port": 6006,
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "../../packages/shared-assets/assets",
+                "output": "/assets/"
+              }
+            ]
           }
         },
         "build-storybook": {

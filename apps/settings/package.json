@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint \"src/**/*.ts\" --fix",
+    "clean": "rm -rf dist .turbo node_modules .angular coverage out-tsc .cache storybook-static .storybook-cache",
     "check-types": "tsc --project ./tsconfig.app.json --noEmit",
     "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },

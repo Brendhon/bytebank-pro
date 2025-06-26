@@ -32,27 +32,48 @@ Atualize o `package.json` do seu app:
 
 ### 2. Configure o `angular.json`
 
-Inclua os assets compartilhados na configuração de build:
+### Configuração Base (Development)
+
+Para desenvolvimento, usamos path relativo que aponta diretamente para o package:
 
 ```json
 {
-  "projects": {
-    "your-app": {
-      "architect": {
-        "build": {
-          "options": {
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "node_modules/@bytebank-pro/shared-assets/assets",
-                "output": "/assets/"
-              }
-            ]
-          }
+  "assets": [
+    {
+      "glob": "**/*",
+      "input": "./public",
+      "output": "."
+    },
+    {
+      "glob": "**/*",
+      "input": "../../packages/shared-assets/assets",
+      "output": "/assets/"
+    }
+  ]
+}
+```
+
+### Configuração de Produção
+
+Para produção, sobrescrevemos os assets para usar o `node_modules`:
+
+```json
+{
+  "configurations": {
+    "production": {
+      "assets": [
+        {
+          "glob": "**/*",
+          "input": "./public",
+          "output": "."
+        },
+        {
+          "glob": "**/*",
+          "input": "./node_modules/@bytebank-pro/shared-assets/dist/assets",
+          "output": "/assets/"
         }
-      }
+      ]
+      // ...other production configs
     }
   }
 }

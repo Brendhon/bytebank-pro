@@ -5,69 +5,11 @@
  * a importação e manutenção em todos os microfrontends.
  *
  * Oferece duas formas de importação:
- * 1. Imports diretos (recomendado) - para bundlers modernos
- * 2. Paths relativos - para sistemas que precisam de URLs dinâmicas
+ * 1. Paths relativos (padrão) - funciona em qualquer ambiente
+ * 2. Imports diretos (opcional) - para bundlers com configuração específica
  */
 
-// Importação direta dos assets como módulos (melhor para bundlers)
-import logoMainSvg from '../assets/logos/logo.svg';
-import logoIconSvg from '../assets/logos/icon.svg';
-
-// Imports diretos para ícones
-import figmaIcon from '../assets/icons/figma.svg';
-import githubIcon from '../assets/icons/github.svg';
-import storybookIcon from '../assets/icons/storybook.svg';
-import mainIcon from '../assets/icons/icon.svg';
-import mainLogo from '../assets/icons/logo.svg';
-
-// Imports diretos para imagens
-import boxImage from '../assets/images/box.png';
-import devicesImage from '../assets/images/devices.png';
-import starImage from '../assets/images/star.png';
-import withdrawalImage from '../assets/images/withdrawal.png';
-
-// Imports diretos para ilustrações
-import error404Illustration from '../assets/illustrations/404.svg';
-import homeIllustration from '../assets/illustrations/home.svg';
-import loginIllustration from '../assets/illustrations/login.svg';
-import registerIllustration from '../assets/illustrations/register.svg';
-import settingsIllustration from '../assets/illustrations/settings.svg';
-import transactionIllustration from '../assets/illustrations/transaction.svg';
-
-// Logos da marca ByteBank - usando imports diretos (RECOMENDADO)
-export const LOGOS = {
-  MAIN: logoMainSvg,
-  ICON: logoIconSvg
-} as const;
-
-// Ícones customizados e ferramentas - usando imports diretos (RECOMENDADO)
-export const ICONS = {
-  MAIN_ICON: mainIcon,
-  MAIN_LOGO: mainLogo,
-  FIGMA: figmaIcon,
-  GITHUB: githubIcon,
-  STORYBOOK: storybookIcon
-} as const;
-
-// Imagens funcionais - usando imports diretos (RECOMENDADO)
-export const IMAGES = {
-  BOX: boxImage,
-  DEVICES: devicesImage,
-  STAR: starImage,
-  WITHDRAWAL: withdrawalImage
-} as const;
-
-// Ilustrações para diferentes telas/estados - usando imports diretos (RECOMENDADO)
-export const ILLUSTRATIONS = {
-  ERROR_404: error404Illustration,
-  HOME: homeIllustration,
-  LOGIN: loginIllustration,
-  REGISTER: registerIllustration,
-  SETTINGS: settingsIllustration,
-  TRANSACTION: transactionIllustration
-} as const;
-
-// Para compatibilidade com sistemas que ainda precisam de paths dinâmicos
+// Paths dos assets - ABORDAGEM PRINCIPAL
 export const ASSET_PATHS = {
   LOGOS: {
     MAIN: '/assets/logos/logo.svg',
@@ -95,6 +37,12 @@ export const ASSET_PATHS = {
     TRANSACTION: '/assets/illustrations/transaction.svg'
   }
 } as const;
+
+// Exports principais - usando paths (RECOMENDADO para Angular)
+export const LOGOS = ASSET_PATHS.LOGOS;
+export const ICONS = ASSET_PATHS.ICONS;
+export const IMAGES = ASSET_PATHS.IMAGES;
+export const ILLUSTRATIONS = ASSET_PATHS.ILLUSTRATIONS;
 
 // Função helper para construir URLs completas em diferentes ambientes
 export function getAssetUrl(assetPath: string, baseUrl?: string): string {
