@@ -108,7 +108,7 @@ export class LogoComponent {
 
   /**
    * Computes the source URL for the logo based on the variant.
-   * Uses the LOGOS constant from shared assets.
+   * Uses the LOGOS constant from shared assets with direct imports.
    */
   get logoSrc(): string {
     return this.variant === 'full' ? LOGOS.MAIN : LOGOS.ICON;

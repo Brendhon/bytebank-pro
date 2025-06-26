@@ -37,7 +37,7 @@ Inclua os assets compartilhados na configuração de build:
 ```json
 {
   "projects": {
-    "seu-app": {
+    "your-app": {
       "architect": {
         "build": {
           "options": {
@@ -46,8 +46,8 @@ Inclua os assets compartilhados na configuração de build:
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "../../packages/shared-assets/assets",
-                "output": "/assets"
+                "input": "node_modules/@bytebank-pro/shared-assets/assets",
+                "output": "/assets/"
               }
             ]
           }
@@ -56,22 +56,6 @@ Inclua os assets compartilhados na configuração de build:
     }
   }
 }
-```
-
-### 3. Configure os ambientes
-
-```typescript
-// environment.ts (production)
-export const environment = {
-  production: true,
-  cdnUrl: 'https://cdn.bytebank.com'
-};
-
-// environment.development.ts (development)
-export const environment = {
-  production: false,
-  cdnUrl: undefined // use relative paths
-};
 ```
 
 ---
