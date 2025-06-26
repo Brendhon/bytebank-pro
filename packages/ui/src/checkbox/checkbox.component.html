@@ -1,4 +1,16 @@
-<div [class]="wrapperClasses" data-testid="checkbox-wrapper">
+<div
+  [class]="wrapperClasses"
+  data-testid="checkbox-wrapper"
+  role="checkbox"
+  [attr.aria-checked]="ariaChecked"
+  [attr.aria-disabled]="disabled()"
+  [attr.aria-describedby]="computedAriaDescribedBy || null"
+  [attr.aria-label]="computedAriaLabel"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.aria-required]="computedAriaRequired"
+  [attr.aria-invalid]="computedAriaInvalid"
+  [attr.tabindex]="disabled() ? -1 : 0"
+>
   <!-- Hidden native input for form integration -->
   <input
     #checkboxElement
@@ -10,6 +22,8 @@
     [required]="required()"
     [id]="checkboxId"
     class="sr-only"
+    tabindex="-1"
+    aria-hidden="true"
     data-testid="checkbox-input"
   />
 
@@ -18,6 +32,8 @@
     [class]="checkboxClasses"
     [attr.data-testid]="'checkbox-visual'"
     [attr.data-state]="checkboxState"
+    [attr.aria-hidden]="true"
+    role="presentation"
   >
     <!-- Check icon for checked state -->
     @if (showCheckIcon) {

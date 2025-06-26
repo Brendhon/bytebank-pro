@@ -26,16 +26,7 @@ export type CheckboxState = 'checked' | 'unchecked' | 'indeterminate';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.bb-checkbox-wrapper]': 'true',
-    '[class.disabled]': 'disabled()',
-    '[attr.role]': '"checkbox"',
-    '[attr.aria-checked]': 'ariaChecked',
-    '[attr.aria-disabled]': 'disabled()',
-    '[attr.aria-describedby]': 'computedAriaDescribedBy',
-    '[attr.aria-label]': 'computedAriaLabel',
-    '[attr.aria-labelledby]': 'ariaLabelledBy()',
-    '[attr.aria-required]': 'computedAriaRequired',
-    '[attr.aria-invalid]': 'computedAriaInvalid',
-    '[tabindex]': 'disabled() ? -1 : 0'
+    '[class.disabled]': 'disabled()'
   }
 })
 export class CheckboxComponent {
