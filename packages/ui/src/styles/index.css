@@ -3,9 +3,91 @@
 @tailwind utilities;
 
 @layer components {
-  /* You can add custom component styles here */
   .bb-focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500;
+  }
+
+  .card {
+    @apply bg-bytebank-light-gray rounded-sm p-7 shadow-sm;
+    @apply text-bytebank-dark;
+  }
+
+  .button {
+    @apply w-[150px] h-[40px] rounded-sm relative transition-colors;
+    @apply disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer;
+    @apply text-white text-sm font-semibold flex items-center justify-center;
+  }
+
+  .button-dark {
+    @apply bg-bytebank-dark hover:bg-bytebank-dark-gray;
+  }
+
+  .button-blue {
+    @apply bg-bytebank-blue hover:bg-bytebank-dark;
+  }
+
+  .button-green {
+    @apply bg-bytebank-green hover:bg-blue;
+  }
+
+  .button-orange {
+    @apply bg-orange hover:bg-dark;
+  }
+
+  .button-outline-green {
+    @apply bg-transparent border-2 border-green text-green hover:bg-bytebank-green hover:text-white;
+  }
+
+  .button-outline-orange {
+    @apply bg-transparent border-2 border-orange text-orange hover:bg-orange hover:text-white;
+  }
+
+  .content {
+    @apply flex-1 flex flex-row;
+  }
+
+  .popover-trigger {
+    @apply text-orange cursor-pointer hover:bg-orange/30 transition-all duration-200 ease-in-out outline-none focus:outline-none;
+  }
+
+  .popover-li {
+    @apply hover:text-orange cursor-pointer p-2 w-full text-left;
+  }
+
+  .text-14 {
+    @apply text-sm font-normal;
+  }
+
+  .text-14-semi {
+    @apply text-sm font-semibold;
+  }
+
+  .text-16 {
+    @apply text-base font-normal;
+  }
+
+  .text-16-bold {
+    @apply text-base font-bold;
+  }
+
+  .text-16-semi {
+    @apply text-base font-semibold;
+  }
+
+  .text-20 {
+    @apply text-xl font-normal;
+  }
+
+  .text-20-bold {
+    @apply text-xl font-bold;
+  }
+
+  .text-24 {
+    @apply text-2xl font-normal;
+  }
+
+  .text-24-bold {
+    @apply text-2xl font-bold;
   }
 }
 
