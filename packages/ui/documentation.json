@@ -31,6 +31,16 @@
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n        <bb-logo variant=\"full\" size=\"md\" ariaLabel=\"Logo ByteBank Pro\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"sm\" [isDecorative]=\"true\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
       },
       {
+        "name": "AllFeatures",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, and clear functionality',\n  },\n}"
+      },
+      {
         "name": "AllSizes",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -68,7 +78,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Visual Variants</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Default variant\" variant=\"default\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Success variant\" variant=\"success\" [checked]=\"true\" successMessage=\"Validated successfully\"></bb-checkbox>\n            <bb-checkbox label=\"Error variant\" variant=\"error\" [checked]=\"false\" [required]=\"true\" errorMessage=\"This field is required\"></bb-checkbox>\n            <bb-checkbox label=\"Warning variant\" variant=\"warning\" [checked]=\"true\" helperText=\"Proceed with caution\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Sizes</h3>\n          <div class=\"flex items-center gap-6\">\n            <bb-checkbox label=\"Small\" size=\"sm\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Medium\" size=\"md\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Large\" size=\"lg\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">States</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Unchecked\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Checked\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Indeterminate\" [indeterminate]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled Checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Readonly\" [readonly]=\"true\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'This story displays all available variants, sizes, and states of the checkbox component for easy comparison.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Visual Variants</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Default variant\" variant=\"default\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Success variant\" variant=\"success\" [checked]=\"true\" successMessage=\"Validated successfully\"></bb-checkbox>\n            <bb-checkbox label=\"Error variant\" variant=\"error\" [checked]=\"false\" [required]=\"true\" errorMessage=\"This field is required\"></bb-checkbox>\n            <bb-checkbox label=\"Warning variant\" variant=\"warning\" [checked]=\"true\" helperText=\"Proceed with caution\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Sizes</h3>\n          <div class=\"flex items-center gap-6\">\n            <bb-checkbox label=\"Small\" size=\"sm\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Medium\" size=\"md\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Large\" size=\"lg\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">States</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Unchecked\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Checked\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Indeterminate\" [indeterminate]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled Checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Readonly\" [readonly]=\"true\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'This story displays all available variants, sizes, and states of the checkbox component for easy comparison.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllVariants",
@@ -144,6 +154,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list',\n  },\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -171,6 +191,16 @@
         "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
       },
       {
+        "name": "Disabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled',\n  },\n}"
+      },
+      {
         "name": "DisabledState",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -178,7 +208,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox label=\"Disabled unchecked\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled indeterminate\" [disabled]=\"true\" [indeterminate]=\"true\"></bb-checkbox>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows disabled checkboxes in different states. Disabled checkboxes cannot be interacted with.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox label=\"Disabled unchecked\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled indeterminate\" [disabled]=\"true\" [indeterminate]=\"true\"></bb-checkbox>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Shows disabled checkboxes in different states. Disabled checkboxes cannot be interacted with.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Email",
@@ -204,6 +234,16 @@
         "name": "Error",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list.',\n  },\n}"
+      },
+      {
+        "name": "Error",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -218,7 +258,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Required agreement',\n    errorMessage: 'You must accept the terms to continue',\n    checked: false,\n    variant: 'error',\n    size: 'md',\n    required: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstrates error state with validation message. Used when user input is invalid or required field is empty.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Required agreement',\n    errorMessage: 'You must accept the terms to continue',\n    checked: false,\n    variant: 'error',\n    size: 'md',\n    required: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstrates error state with validation message. Used when user input is invalid or required field is empty.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "FormIntegration",
@@ -261,6 +301,16 @@
         "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
       },
       {
+        "name": "Large",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Priority',\n    size: 'lg',\n    options: [\n      { value: 'low', label: 'Low Priority' },\n      { value: 'medium', label: 'Medium Priority' },\n      { value: 'high', label: 'High Priority' },\n      { value: 'urgent', label: 'Urgent' },\n    ],\n    helperText: 'Large size select',\n  },\n}"
+      },
+      {
         "name": "Loading",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -271,6 +321,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingText: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
       },
       {
+        "name": "Loading",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries...',\n  },\n}"
+      },
+      {
         "name": "LoadingState",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -278,7 +338,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Processing selection...',\n    disabled: true,\n    helperText: 'Please wait while we validate your choice',\n    variant: 'default',\n    size: 'md'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Represents a checkbox in a loading/processing state where user interaction is temporarily disabled.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Processing selection...',\n    disabled: true,\n    helperText: 'Please wait while we validate your choice',\n    variant: 'default',\n    size: 'md'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Represents a checkbox in a loading/processing state where user interaction is temporarily disabled.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "LoginForm",
@@ -318,7 +378,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<CheckboxComponent>",
-        "defaultValue": "{\n  title: 'Components/Inputs/Checkbox',\n  component: CheckboxComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Checkbox component provides a selectable input for binary choices or multiple selections in forms and interfaces.\n\n## When to Use\n\n- For binary choices (agree/disagree, yes/no)\n- For multiple selections from a list of options\n- To confirm actions or acknowledge terms\n- In forms requiring user consent or preference selection\n\n## Features\n\n- Support for checked, unchecked, and indeterminate states\n- Multiple visual variants (default, success, error, warning)\n- Different sizes (sm, md, lg)\n- Accessibility compliant with ARIA attributes\n- Form integration with validation states\n- Helper text and error message support\n\n## Accessibility\n\n- Supports keyboard navigation (Space to toggle)\n- Implements proper ARIA attributes and roles\n- Screen reader friendly with descriptive labels\n- Visual focus indicators for keyboard users\n- Color contrast compliant in all states\n- Live regions for dynamic state announcements\n        `\n      }\n    }\n  },\n  argTypes: {\n    checked: {\n      description: 'Whether the checkbox is checked',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    indeterminate: {\n      description: 'Whether the checkbox is in indeterminate state (partially checked)',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    variant: {\n      description: 'Visual variant of the checkbox',\n      options: ['default', 'success', 'error', 'warning'],\n      control: { \n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxVariant' },\n        defaultValue: { summary: 'default' }\n      }\n    },\n    size: {\n      description: 'Size of the checkbox',\n      options: ['sm', 'md', 'lg'],\n      control: { \n        type: 'radio',\n        labels: {\n          sm: '📦 Small',\n          md: '📋 Medium',\n          lg: '📊 Large'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxSize' },\n        defaultValue: { summary: 'md' }\n      }\n    },\n    disabled: {\n      description: 'Whether the checkbox is disabled',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    readonly: {\n      description: 'Whether the checkbox is readonly',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    required: {\n      description: 'Whether the checkbox is required',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    label: {\n      description: 'Label text for the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Inputs/Checkbox',\n  component: CheckboxComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Checkbox component provides a selectable input for binary choices or multiple selections in forms and interfaces.\n\n## When to Use\n\n- For binary choices (agree/disagree, yes/no)\n- For multiple selections from a list of options\n- To confirm actions or acknowledge terms\n- In forms requiring user consent or preference selection\n\n## Features\n\n- Support for checked, unchecked, and indeterminate states\n- Multiple visual variants (default, success, error, warning)\n- Different sizes (sm, md, lg)\n- Accessibility compliant with ARIA attributes\n- Form integration with validation states\n- Helper text and error message support\n\n## Accessibility\n\n- Supports keyboard navigation (Space to toggle)\n- Implements proper ARIA attributes and roles\n- Screen reader friendly with descriptive labels\n- Visual focus indicators for keyboard users\n- Color contrast compliant in all states\n- Live regions for dynamic state announcements\n        `\n      }\n    }\n  },\n  argTypes: {\n    checked: {\n      description: 'Whether the checkbox is checked',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    indeterminate: {\n      description: 'Whether the checkbox is in indeterminate state (partially checked)',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    variant: {\n      description: 'Visual variant of the checkbox',\n      options: ['default', 'success', 'error', 'warning'],\n      control: {\n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxVariant' },\n        defaultValue: { summary: 'default' }\n      }\n    },\n    size: {\n      description: 'Size of the checkbox',\n      options: ['sm', 'md', 'lg'],\n      control: {\n        type: 'radio',\n        labels: {\n          sm: '📦 Small',\n          md: '📋 Medium',\n          lg: '📊 Large'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxSize' },\n        defaultValue: { summary: 'md' }\n      }\n    },\n    disabled: {\n      description: 'Whether the checkbox is disabled',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    readonly: {\n      description: 'Whether the checkbox is readonly',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    required: {\n      description: 'Whether the checkbox is required',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    label: {\n      description: 'Label text for the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -328,7 +388,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<InputComponent>",
-        "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Inputs/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -344,11 +404,61 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<SelectComponent>",
+        "defaultValue": "{\n  title: 'Components/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible select component with support for single/multiple selection, search, and various variants.',\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['default', 'success', 'error', 'warning'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n    },\n    options: {\n      control: { type: 'object' },\n    },\n    value: {\n      control: { type: 'text' },\n    },\n    multiple: {\n      control: { type: 'boolean' },\n    },\n    searchable: {\n      control: { type: 'boolean' },\n    },\n    clearable: {\n      control: { type: 'boolean' },\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    readonly: {\n      control: { type: 'boolean' },\n    },\n    required: {\n      control: { type: 'boolean' },\n    },\n    loading: {\n      control: { type: 'boolean' },\n    },\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'md',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n  },\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ToastComponent>",
         "defaultValue": "{\n  title: 'Components/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "mockOptions",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "SelectOption[]",
+        "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' },\n]"
+      },
+      {
+        "name": "mockOptionsWithDisabled",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "SelectOption[]",
+        "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' },\n]"
+      },
+      {
+        "name": "Multiple",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries',\n  },\n}"
+      },
+      {
+        "name": "NoOptions",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available',\n    helperText: 'This select has no options',\n  },\n}"
       },
       {
         "name": "Number",
@@ -398,7 +508,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Playground checkbox',\n    helperText: 'Customize all properties using the controls below',\n    checked: false,\n    indeterminate: false,\n    variant: 'default',\n    size: 'md',\n    disabled: false,\n    readonly: false,\n    required: false,\n    errorMessage: '',\n    successMessage: ''\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-checkbox ${argsToTemplate(args)}></bb-checkbox>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Interactive playground to test all checkbox properties and configurations. Use the controls panel to experiment with different combinations.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Playground checkbox',\n    helperText: 'Customize all properties using the controls below',\n    checked: false,\n    indeterminate: false,\n    variant: 'default',\n    size: 'md',\n    disabled: false,\n    readonly: false,\n    required: false,\n    errorMessage: '',\n    successMessage: ''\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-checkbox ${argsToTemplate(args)}></bb-checkbox>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Interactive playground to test all checkbox properties and configurations. Use the controls panel to experiment with different combinations.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Playground",
@@ -451,6 +561,16 @@
         "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
       },
       {
+        "name": "Readonly",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly',\n  },\n}"
+      },
+      {
         "name": "Required",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -491,6 +611,16 @@
         "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
       },
       {
+        "name": "Searchable",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options',\n  },\n}"
+      },
+      {
         "name": "Secondary",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -511,6 +641,16 @@
         "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
       },
       {
+        "name": "Small",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Status',\n    size: 'sm',\n    options: mockOptionsWithDisabled,\n    helperText: 'Small size select',\n  },\n}"
+      },
+      {
         "name": "Success",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -529,6 +669,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'success',\n    label: 'Campo válido',\n    value: 'Dados corretos',\n    successMessage: 'Perfeito! Os dados estão corretos.'\n  }\n}"
+      },
+      {
+        "name": "Success",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully.',\n  },\n}"
       },
       {
         "name": "Success",
@@ -581,6 +731,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
       },
       {
+        "name": "Warning",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding.',\n  },\n}"
+      },
+      {
         "name": "WithAccessibility",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -599,16 +759,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    helperText: 'Utilizaremos este email para entrar em contato'\n  }\n}"
-      },
-      {
-        "name": "WithInteractions",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/checkbox/checkbox.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    props: {\n      items: [\n        { id: 1, label: 'Item 1', checked: false },\n        { id: 2, label: 'Item 2', checked: true },\n        { id: 3, label: 'Item 3', checked: false }\n      ],\n      selectAll: false,\n      onItemChange(index: number) {\n        this['items'][index].checked = !this['items'][index].checked;\n        this['updateSelectAll']();\n      },\n      onSelectAllChange() {\n        this['selectAll'] = !this['selectAll'];\n        this['items'].forEach((item: any) => item.checked = this['selectAll']);\n      },\n      updateSelectAll() {\n        const checkedCount = this['items'].filter((item: any) => item.checked).length;\n        this['selectAll'] = checkedCount === this['items'].length;\n      }\n    },\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox \n          label=\"Select All\" \n          [checked]=\"selectAll\"\n          [indeterminate]=\"items.filter(item => item.checked).length > 0 && items.filter(item => item.checked).length < items.length\"\n          (click)=\"onSelectAllChange()\"\n          class=\"font-medium\">\n        </bb-checkbox>\n        \n        <div class=\"pl-6 space-y-2\">\n          @for (item of items; track item.id) {\n            <bb-checkbox \n              [label]=\"item.label\"\n              [checked]=\"item.checked\"\n              (click)=\"onItemChange($index)\">\n            </bb-checkbox>\n          }\n        </div>\n        \n        <div class=\"text-sm text-gray-600 mt-4\">\n          Selected: {{ items.filter(item => item.checked).length }} of {{ items.length }}\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Interactive Multi-Selection\n\nThis story demonstrates a complex interaction pattern with a \"Select All\" checkbox that:\n- Shows checked state when all items are selected\n- Shows indeterminate state when some items are selected\n- Shows unchecked state when no items are selected\n- Updates child checkboxes when toggled\n\nPerfect for implementing bulk actions or grouped selections.\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithLabel",
@@ -639,6 +789,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
+      },
+      {
+        "name": "WithValue",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n  },\n}"
       }
     ],
     "functions": [],
@@ -691,6 +851,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<SelectComponent>",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ToastComponent>",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
@@ -720,7 +891,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Visual Variants</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Default variant\" variant=\"default\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Success variant\" variant=\"success\" [checked]=\"true\" successMessage=\"Validated successfully\"></bb-checkbox>\n            <bb-checkbox label=\"Error variant\" variant=\"error\" [checked]=\"false\" [required]=\"true\" errorMessage=\"This field is required\"></bb-checkbox>\n            <bb-checkbox label=\"Warning variant\" variant=\"warning\" [checked]=\"true\" helperText=\"Proceed with caution\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Sizes</h3>\n          <div class=\"flex items-center gap-6\">\n            <bb-checkbox label=\"Small\" size=\"sm\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Medium\" size=\"md\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Large\" size=\"lg\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">States</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Unchecked\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Checked\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Indeterminate\" [indeterminate]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled Checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Readonly\" [readonly]=\"true\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'This story displays all available variants, sizes, and states of the checkbox component for easy comparison.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Visual Variants</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Default variant\" variant=\"default\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Success variant\" variant=\"success\" [checked]=\"true\" successMessage=\"Validated successfully\"></bb-checkbox>\n            <bb-checkbox label=\"Error variant\" variant=\"error\" [checked]=\"false\" [required]=\"true\" errorMessage=\"This field is required\"></bb-checkbox>\n            <bb-checkbox label=\"Warning variant\" variant=\"warning\" [checked]=\"true\" helperText=\"Proceed with caution\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">Sizes</h3>\n          <div class=\"flex items-center gap-6\">\n            <bb-checkbox label=\"Small\" size=\"sm\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Medium\" size=\"md\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Large\" size=\"lg\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n        \n        <div class=\"flex flex-col gap-3\">\n          <h3 class=\"text-sm font-medium text-gray-700\">States</h3>\n          <div class=\"grid grid-cols-2 gap-4\">\n            <bb-checkbox label=\"Unchecked\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Checked\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Indeterminate\" [indeterminate]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Disabled Checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Readonly\" [readonly]=\"true\" [checked]=\"true\"></bb-checkbox>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'This story displays all available variants, sizes, and states of the checkbox component for easy comparison.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "Default",
@@ -740,7 +911,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox label=\"Disabled unchecked\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled indeterminate\" [disabled]=\"true\" [indeterminate]=\"true\"></bb-checkbox>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows disabled checkboxes in different states. Disabled checkboxes cannot be interacted with.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox label=\"Disabled unchecked\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled indeterminate\" [disabled]=\"true\" [indeterminate]=\"true\"></bb-checkbox>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Shows disabled checkboxes in different states. Disabled checkboxes cannot be interacted with.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "ErrorState",
@@ -750,7 +921,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Required agreement',\n    errorMessage: 'You must accept the terms to continue',\n    checked: false,\n    variant: 'error',\n    size: 'md',\n    required: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstrates error state with validation message. Used when user input is invalid or required field is empty.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Required agreement',\n    errorMessage: 'You must accept the terms to continue',\n    checked: false,\n    variant: 'error',\n    size: 'md',\n    required: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstrates error state with validation message. Used when user input is invalid or required field is empty.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "FormIntegration",
@@ -770,7 +941,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Processing selection...',\n    disabled: true,\n    helperText: 'Please wait while we validate your choice',\n    variant: 'default',\n    size: 'md'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Represents a checkbox in a loading/processing state where user interaction is temporarily disabled.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Processing selection...',\n    disabled: true,\n    helperText: 'Please wait while we validate your choice',\n    variant: 'default',\n    size: 'md'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Represents a checkbox in a loading/processing state where user interaction is temporarily disabled.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "meta",
@@ -780,7 +951,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<CheckboxComponent>",
-          "defaultValue": "{\n  title: 'Components/Inputs/Checkbox',\n  component: CheckboxComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Checkbox component provides a selectable input for binary choices or multiple selections in forms and interfaces.\n\n## When to Use\n\n- For binary choices (agree/disagree, yes/no)\n- For multiple selections from a list of options\n- To confirm actions or acknowledge terms\n- In forms requiring user consent or preference selection\n\n## Features\n\n- Support for checked, unchecked, and indeterminate states\n- Multiple visual variants (default, success, error, warning)\n- Different sizes (sm, md, lg)\n- Accessibility compliant with ARIA attributes\n- Form integration with validation states\n- Helper text and error message support\n\n## Accessibility\n\n- Supports keyboard navigation (Space to toggle)\n- Implements proper ARIA attributes and roles\n- Screen reader friendly with descriptive labels\n- Visual focus indicators for keyboard users\n- Color contrast compliant in all states\n- Live regions for dynamic state announcements\n        `\n      }\n    }\n  },\n  argTypes: {\n    checked: {\n      description: 'Whether the checkbox is checked',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    indeterminate: {\n      description: 'Whether the checkbox is in indeterminate state (partially checked)',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    variant: {\n      description: 'Visual variant of the checkbox',\n      options: ['default', 'success', 'error', 'warning'],\n      control: { \n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxVariant' },\n        defaultValue: { summary: 'default' }\n      }\n    },\n    size: {\n      description: 'Size of the checkbox',\n      options: ['sm', 'md', 'lg'],\n      control: { \n        type: 'radio',\n        labels: {\n          sm: '📦 Small',\n          md: '📋 Medium',\n          lg: '📊 Large'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxSize' },\n        defaultValue: { summary: 'md' }\n      }\n    },\n    disabled: {\n      description: 'Whether the checkbox is disabled',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    readonly: {\n      description: 'Whether the checkbox is readonly',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    required: {\n      description: 'Whether the checkbox is required',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    label: {\n      description: 'Label text for the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Inputs/Checkbox',\n  component: CheckboxComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Checkbox component provides a selectable input for binary choices or multiple selections in forms and interfaces.\n\n## When to Use\n\n- For binary choices (agree/disagree, yes/no)\n- For multiple selections from a list of options\n- To confirm actions or acknowledge terms\n- In forms requiring user consent or preference selection\n\n## Features\n\n- Support for checked, unchecked, and indeterminate states\n- Multiple visual variants (default, success, error, warning)\n- Different sizes (sm, md, lg)\n- Accessibility compliant with ARIA attributes\n- Form integration with validation states\n- Helper text and error message support\n\n## Accessibility\n\n- Supports keyboard navigation (Space to toggle)\n- Implements proper ARIA attributes and roles\n- Screen reader friendly with descriptive labels\n- Visual focus indicators for keyboard users\n- Color contrast compliant in all states\n- Live regions for dynamic state announcements\n        `\n      }\n    }\n  },\n  argTypes: {\n    checked: {\n      description: 'Whether the checkbox is checked',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    indeterminate: {\n      description: 'Whether the checkbox is in indeterminate state (partially checked)',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    variant: {\n      description: 'Visual variant of the checkbox',\n      options: ['default', 'success', 'error', 'warning'],\n      control: {\n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxVariant' },\n        defaultValue: { summary: 'default' }\n      }\n    },\n    size: {\n      description: 'Size of the checkbox',\n      options: ['sm', 'md', 'lg'],\n      control: {\n        type: 'radio',\n        labels: {\n          sm: '📦 Small',\n          md: '📋 Medium',\n          lg: '📊 Large'\n        }\n      },\n      table: {\n        type: { summary: 'CheckboxSize' },\n        defaultValue: { summary: 'md' }\n      }\n    },\n    disabled: {\n      description: 'Whether the checkbox is disabled',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    readonly: {\n      description: 'Whether the checkbox is readonly',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    required: {\n      description: 'Whether the checkbox is required',\n      control: { type: 'boolean' },\n      table: {\n        type: { summary: 'boolean' },\n        defaultValue: { summary: 'false' }\n      }\n    },\n    label: {\n      description: 'Label text for the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the checkbox',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "Playground",
@@ -790,7 +961,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Playground checkbox',\n    helperText: 'Customize all properties using the controls below',\n    checked: false,\n    indeterminate: false,\n    variant: 'default',\n    size: 'md',\n    disabled: false,\n    readonly: false,\n    required: false,\n    errorMessage: '',\n    successMessage: ''\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-checkbox ${argsToTemplate(args)}></bb-checkbox>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Interactive playground to test all checkbox properties and configurations. Use the controls panel to experiment with different combinations.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Playground checkbox',\n    helperText: 'Customize all properties using the controls below',\n    checked: false,\n    indeterminate: false,\n    variant: 'default',\n    size: 'md',\n    disabled: false,\n    readonly: false,\n    required: false,\n    errorMessage: '',\n    successMessage: ''\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-checkbox ${argsToTemplate(args)}></bb-checkbox>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Interactive playground to test all checkbox properties and configurations. Use the controls panel to experiment with different combinations.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "ResponsiveLayout",
@@ -801,16 +972,6 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"w-full max-w-4xl mx-auto\">\n        <div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6\">\n          <div class=\"space-y-3\">\n            <h4 class=\"font-medium text-gray-900\">Basic Options</h4>\n            <bb-checkbox label=\"Enable notifications\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Auto-save changes\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Show preview\" [checked]=\"true\"></bb-checkbox>\n          </div>\n          \n          <div class=\"space-y-3\">\n            <h4 class=\"font-medium text-gray-900\">Privacy Settings</h4>\n            <bb-checkbox label=\"Make profile public\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Allow contact from others\" [checked]=\"true\"></bb-checkbox>\n            <bb-checkbox label=\"Show online status\" [checked]=\"false\"></bb-checkbox>\n          </div>\n          \n          <div class=\"space-y-3\">\n            <h4 class=\"font-medium text-gray-900\">Advanced Features</h4>\n            <bb-checkbox label=\"Enable beta features\" variant=\"warning\" [checked]=\"false\" helperText=\"May be unstable\"></bb-checkbox>\n            <bb-checkbox label=\"Developer mode\" [checked]=\"false\"></bb-checkbox>\n            <bb-checkbox label=\"Debug logging\" [checked]=\"false\"></bb-checkbox>\n          </div>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'responsive'\n    },\n    docs: {\n      description: {\n        story: `\n### Responsive Layout\n\nThis story demonstrates how checkboxes adapt to different screen sizes using responsive grid layouts.\nThe layout automatically adjusts from single column on mobile to three columns on larger screens.\n        `\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "WithInteractions",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/checkbox/checkbox.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    props: {\n      items: [\n        { id: 1, label: 'Item 1', checked: false },\n        { id: 2, label: 'Item 2', checked: true },\n        { id: 3, label: 'Item 3', checked: false }\n      ],\n      selectAll: false,\n      onItemChange(index: number) {\n        this['items'][index].checked = !this['items'][index].checked;\n        this['updateSelectAll']();\n      },\n      onSelectAllChange() {\n        this['selectAll'] = !this['selectAll'];\n        this['items'].forEach((item: any) => item.checked = this['selectAll']);\n      },\n      updateSelectAll() {\n        const checkedCount = this['items'].filter((item: any) => item.checked).length;\n        this['selectAll'] = checkedCount === this['items'].length;\n      }\n    },\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox \n          label=\"Select All\" \n          [checked]=\"selectAll\"\n          [indeterminate]=\"items.filter(item => item.checked).length > 0 && items.filter(item => item.checked).length < items.length\"\n          (click)=\"onSelectAllChange()\"\n          class=\"font-medium\">\n        </bb-checkbox>\n        \n        <div class=\"pl-6 space-y-2\">\n          @for (item of items; track item.id) {\n            <bb-checkbox \n              [label]=\"item.label\"\n              [checked]=\"item.checked\"\n              (click)=\"onItemChange($index)\">\n            </bb-checkbox>\n          }\n        </div>\n        \n        <div class=\"text-sm text-gray-600 mt-4\">\n          Selected: {{ items.filter(item => item.checked).length }} of {{ items.length }}\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Interactive Multi-Selection\n\nThis story demonstrates a complex interaction pattern with a \"Select All\" checkbox that:\n- Shows checked state when all items are selected\n- Shows indeterminate state when some items are selected\n- Shows unchecked state when no items are selected\n- Updates child checkboxes when toggled\n\nPerfect for implementing bulk actions or grouped selections.\n        `\n      }\n    }\n  }\n}"
         }
       ],
       "src/logo/logo.component.stories.ts": [
@@ -903,6 +1064,178 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
+        }
+      ],
+      "src/select/select.component.stories.ts": [
+        {
+          "name": "AllFeatures",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, and clear functionality',\n  },\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list',\n  },\n}"
+        },
+        {
+          "name": "Disabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled',\n  },\n}"
+        },
+        {
+          "name": "Error",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list.',\n  },\n}"
+        },
+        {
+          "name": "Large",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Priority',\n    size: 'lg',\n    options: [\n      { value: 'low', label: 'Low Priority' },\n      { value: 'medium', label: 'Medium Priority' },\n      { value: 'high', label: 'High Priority' },\n      { value: 'urgent', label: 'Urgent' },\n    ],\n    helperText: 'Large size select',\n  },\n}"
+        },
+        {
+          "name": "Loading",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries...',\n  },\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<SelectComponent>",
+          "defaultValue": "{\n  title: 'Components/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible select component with support for single/multiple selection, search, and various variants.',\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['default', 'success', 'error', 'warning'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n    },\n    options: {\n      control: { type: 'object' },\n    },\n    value: {\n      control: { type: 'text' },\n    },\n    multiple: {\n      control: { type: 'boolean' },\n    },\n    searchable: {\n      control: { type: 'boolean' },\n    },\n    clearable: {\n      control: { type: 'boolean' },\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    readonly: {\n      control: { type: 'boolean' },\n    },\n    required: {\n      control: { type: 'boolean' },\n    },\n    loading: {\n      control: { type: 'boolean' },\n    },\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'md',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n  },\n}"
+        },
+        {
+          "name": "mockOptions",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "SelectOption[]",
+          "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' },\n]"
+        },
+        {
+          "name": "mockOptionsWithDisabled",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "SelectOption[]",
+          "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' },\n]"
+        },
+        {
+          "name": "Multiple",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries',\n  },\n}"
+        },
+        {
+          "name": "NoOptions",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available',\n    helperText: 'This select has no options',\n  },\n}"
+        },
+        {
+          "name": "Readonly",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly',\n  },\n}"
+        },
+        {
+          "name": "Searchable",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options',\n  },\n}"
+        },
+        {
+          "name": "Small",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Status',\n    size: 'sm',\n    options: mockOptionsWithDisabled,\n    helperText: 'Small size select',\n  },\n}"
+        },
+        {
+          "name": "Success",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully.',\n  },\n}"
+        },
+        {
+          "name": "Warning",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding.',\n  },\n}"
+        },
+        {
+          "name": "WithValue",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n  },\n}"
         }
       ],
       "src/button/button.component.stories.ts": [
@@ -1198,7 +1531,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<InputComponent>",
-          "defaultValue": "{\n  title: 'Components/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Inputs/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "Number",
@@ -1393,6 +1726,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<LogoComponent>",
           "file": "src/logo/logo.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/select/select.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<SelectComponent>",
+          "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -1665,16 +2011,6 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "ResponsiveLayout",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/checkbox/checkbox.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "WithInteractions",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2001,6 +2337,186 @@
       },
       {
         "filePath": "src/logo/logo.component.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AllFeatures",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Disabled",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Error",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Large",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Loading",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "mockOptions",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "mockOptionsWithDisabled",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Multiple",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "NoOptions",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Readonly",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Searchable",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Small",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Success",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Warning",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "WithValue",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",
