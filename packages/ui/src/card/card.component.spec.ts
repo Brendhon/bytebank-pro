@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CardComponent, CardVariant } from './card.component';
-import { LucideAngularModule, Loader2 } from 'lucide-angular';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -10,7 +9,7 @@ describe('CardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardComponent, LucideAngularModule.pick({ Loader2 })]
+      imports: [CardComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);
@@ -38,7 +37,7 @@ describe('CardComponent', () => {
       fixture.componentRef.setInput('variant', 'blue');
       fixture.detectChanges();
 
-      expect(element.classList).toContain('bg-blue');
+      expect(element.classList).toContain('bg-bytebank-blue');
     });
 
     it('should apply all variant classes correctly', () => {
@@ -48,7 +47,7 @@ describe('CardComponent', () => {
         fixture.componentRef.setInput('variant', variant);
         fixture.detectChanges();
 
-        expect(element.classList).toContain(`bg-${variant}`);
+        expect(element.classList).toContain(`bg-bytebank-${variant}`);
       });
     });
 
@@ -255,7 +254,7 @@ describe('CardComponent', () => {
 
       const classes = component['cardClasses']();
 
-      expect(classes).toContain('bg-green');
+      expect(classes).toContain('bg-bytebank-green');
 
       expect(classes).toContain('extra-class');
 

@@ -194,21 +194,21 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    isDecorative: false\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
       },
       {
         "name": "Default",
@@ -484,21 +484,21 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<InputComponent>",
-        "defaultValue": "{\n  title: 'Components/Inputs/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<LogoComponent>",
         "defaultValue": "{\n  title: 'Components/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<InputComponent>",
+        "defaultValue": "{\n  title: 'Components/Inputs/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -960,8 +960,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<InputComponent>",
-        "file": "src/input/input.component.stories.ts",
+        "rawtype": "StoryObj<LogoComponent>",
+        "file": "src/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -971,8 +971,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<LogoComponent>",
-        "file": "src/logo/logo.component.stories.ts",
+        "rawtype": "StoryObj<InputComponent>",
+        "file": "src/input/input.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1972,19 +1972,6 @@
           "kind": 183
         }
       ],
-      "src/input/input.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<InputComponent>",
-          "file": "src/input/input.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/logo/logo.component.stories.ts": [
         {
           "name": "Story",
@@ -1992,6 +1979,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<LogoComponent>",
           "file": "src/logo/logo.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/input/input.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<InputComponent>",
+          "file": "src/input/input.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
