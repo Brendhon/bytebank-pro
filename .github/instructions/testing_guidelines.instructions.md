@@ -624,3 +624,14 @@ describe('ComponenteComponent', () => {
 8.  **Teste comportamento, não implementação**: Concentre-se no que o componente deve fazer, em vez de como ele faz.
 9.  **Use `beforeEach` para configuração**: Mantenha o código DRY (Don't Repeat Yourself) e garanta um estado inicial limpo para cada teste.
 10. **Teste estados limite e casos de erro**: Não teste apenas o "caminho feliz"; inclua cenários de erro e casos de borda.
+
+---
+
+## Observações
+
+- **Cuidado ao testar `Intl.NumberFormat`**: O resultado pode conter caracteres invisíveis que causam falhas nos testes. Para evitar problemas, utilize uma expressão regular como no exemplo abaixo:
+
+  ```typescript
+  const result = formatCurrency(1000000);
+  expect(result).toMatch(/^R\$\s1\.000\.000,00$/);
+  ```

@@ -1,0 +1,31 @@
+<div [class]="cardClasses()" data-testid="card-component">
+  @if (isNumber(value())) {
+    <span
+      class="text-20-bold"
+      data-testid="card-value"
+      [attr.aria-label]="'Value: ' + formatCurrency(value()!)"
+    >
+      {{ formatCurrency(value()!) }}
+    </span>
+  } @else {
+    <div
+      role="status"
+      aria-live="polite"
+      [attr.aria-label]="'Loading ' + label()"
+      class="flex items-center justify-center"
+      data-testid="card-loading"
+    >
+      <lucide-icon
+        name="loader-2"
+        class="animate-spin text-white"
+        [size]="40"
+        aria-hidden="true"
+        data-testid="card-loader"
+      ></lucide-icon>
+      <span class="sr-only">Loading {{ label() }}...</span>
+    </div>
+  }
+  <span class="text-14" data-testid="card-label" [attr.aria-label]="'Label: ' + label()">
+    {{ label() }}
+  </span>
+</div>

@@ -7,3 +7,4 @@ export * from './input/input.component';
 export * from './select/select.component';
 export * from './toast/toast.component';
 export * from './logo/logo.component';
+export * from './card/card.component';
