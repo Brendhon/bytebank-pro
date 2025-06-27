@@ -3,7 +3,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { CardComponent, CardVariant } from './card.component';
 
 const meta: Meta<CardComponent> = {
-  title: 'Components/Data Display/Card',
+  title: 'Components/Card',
   component: CardComponent,
   parameters: {
     layout: 'centered',

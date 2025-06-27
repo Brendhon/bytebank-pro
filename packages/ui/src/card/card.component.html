@@ -1,4 +1,4 @@
-<div [class]="cardClasses()" data-testid="card-component">
+<div [ngClass]="cardClasses()" data-testid="card-component">
   @if (isNumber(value())) {
     <span
       class="text-20-bold"
@@ -15,13 +15,13 @@
       class="flex items-center justify-center"
       data-testid="card-loading"
     >
-      <lucide-icon
-        name="loader-2"
+      <i-lucide
+        [img]="loadingIcon"
         class="animate-spin text-white"
         [size]="40"
         aria-hidden="true"
         data-testid="card-loader"
-      ></lucide-icon>
+      ></i-lucide>
       <span class="sr-only">Loading {{ label() }}...</span>
     </div>
   }

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
+import { Loader2, LucideAngularModule } from 'lucide-angular';
 import { formatCurrency, isNumber } from '@bytebank-pro/utils';
 
 /**
@@ -24,6 +24,7 @@ export type CardVariant = 'dark' | 'blue' | 'green' | 'orange';
   imports: [CommonModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card.component.html',
+  styleUrls: ['../styles/index.css'],
   host: {
     role: 'article',
     '[attr.aria-label]': 'ariaLabel()'
@@ -52,6 +53,12 @@ export class CardComponent {
    * @default 'Pagamentos'
    */
   label = input<string>('Pagamentos');
+
+  /**
+   * Icon for loading state, using Lucide icons.
+   * This will be displayed while the logo is being loaded.
+   */
+  loadingIcon = Loader2;
 
   /**
    * Provides the `formatCurrency` utility function to the template.
@@ -88,14 +95,14 @@ export class CardComponent {
   protected cardClasses = computed(() => {
     // Base classes for the card
     const baseClasses =
-      'w-[200px] h-[160px] rounded-sm text-white transition-colors flex flex-col gap-7 items-center justify-center shadow-sm';
+      'w-[200px] h-[160px] rounded-sm text-white transition-colors flex flex-col gap-7 items-center justify-center shadow-sm text-sm font-normal rounded-sm p-7 shadow-sm';
 
     // Variant classes, mapping to the global CSS variables via Tailwind
     const variantClasses: Record<CardVariant, string> = {
-      dark: 'bg-dark',
-      blue: 'bg-blue',
-      green: 'bg-green',
-      orange: 'bg-orange'
+      dark: 'bg-bytebank-dark',
+      blue: 'bg-bytebank-blue',
+      green: 'bg-bytebank-green',
+      orange: 'bg-bytebank-orange'
     };
 
     const currentVariant = this.variant();
