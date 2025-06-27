@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { argsToTemplate } from '@storybook/angular';
 import { SelectComponent, SelectOption } from './select.component';
 
 const mockOptions: SelectOption[] = [
@@ -20,59 +21,220 @@ const mockOptionsWithDisabled: SelectOption[] = [
 ];
 
 const meta: Meta<SelectComponent> = {
-  title: 'Components/Select',
+  title: 'Components/Inputs/Select',
   component: SelectComponent,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component:
-          'A flexible select component with support for single/multiple selection, search, and various variants.'
+        component: `
+## Description
+
+The Select component provides a dropdown interface for selecting one or multiple options from a list. It supports advanced features like search, clear functionality, and various visual states.
+
+## When to Use
+
+- For choosing options from a predefined list
+- When you need to save space compared to radio buttons
+- For filtering or categorizing data
+- When users need to select multiple items from a list
+
+## Features
+
+- Single and multiple selection modes
+- Searchable options with filtering
+- Keyboard navigation support
+- Loading and disabled states
+- Clear functionality
+- Custom placeholder and helper text
+- Accessibility compliant with ARIA attributes
+
+## Accessibility
+
+- Full keyboard navigation support (Arrow keys, Enter, Escape)
+- Screen reader compatible with proper ARIA attributes
+- Focus management and visual indicators
+- Semantic HTML structure with proper roles
+        `
+      }
+    },
+    a11y: {
+      config: {
+        rules: [{ id: 'color-contrast', enabled: true }]
       }
     }
   },
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['default', 'success', 'error', 'warning']
+      description: 'Visual style variant of the select component',
+      options: ['default', 'success', 'error', 'warning'],
+      control: {
+        type: 'select',
+        labels: {
+          default: '🔵 Default',
+          success: '✅ Success',
+          error: '❌ Error',
+          warning: '⚠️ Warning'
+        }
+      },
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'SelectVariant' }
+      }
     },
     size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg']
+      description: 'Size of the select component',
+      options: ['sm', 'md', 'lg'],
+      control: {
+        type: 'radio',
+        labels: {
+          sm: 'Small',
+          md: 'Medium',
+          lg: 'Large'
+        }
+      },
+      table: {
+        defaultValue: { summary: 'sm' },
+        type: { summary: 'SelectSize' }
+      }
     },
     options: {
-      control: { type: 'object' }
+      description: 'Array of options to display in the dropdown',
+      control: { type: 'object' },
+      table: {
+        type: { summary: 'SelectOption[]' }
+      }
     },
     value: {
-      control: { type: 'text' }
+      description: 'Currently selected value(s)',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'T | T[] | undefined' }
+      }
     },
     multiple: {
-      control: { type: 'boolean' }
+      description: 'Enable multiple selection mode',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     searchable: {
-      control: { type: 'boolean' }
+      description: 'Enable search functionality to filter options',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     clearable: {
-      control: { type: 'boolean' }
+      description: 'Show clear button to reset selection',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     disabled: {
-      control: { type: 'boolean' }
+      description: 'Disable the select component',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     readonly: {
-      control: { type: 'boolean' }
+      description: 'Make the select read-only',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     required: {
-      control: { type: 'boolean' }
+      description: 'Mark the field as required',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
     },
     loading: {
-      control: { type: 'boolean' }
+      description: 'Show loading state',
+      control: { type: 'boolean' },
+      table: {
+        defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' }
+      }
+    },
+    label: {
+      description: 'Label text for the select field',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' }
+      }
+    },
+    placeholder: {
+      description: 'Placeholder text when no option is selected',
+      control: { type: 'text' },
+      table: {
+        defaultValue: { summary: 'Select an option' },
+        type: { summary: 'string' }
+      }
+    },
+    helperText: {
+      description: 'Helper text displayed below the select',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' }
+      }
+    },
+    errorMessage: {
+      description: 'Error message displayed when variant is error',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' }
+      }
+    },
+    successMessage: {
+      description: 'Success message displayed when variant is success',
+      control: { type: 'text' },
+      table: {
+        type: { summary: 'string' }
+      }
+    },
+    // Hide event outputs from controls
+    valueChange: {
+      table: { disable: true }
+    },
+    selectFocus: {
+      table: { disable: true }
+    },
+    selectBlur: {
+      table: { disable: true }
+    },
+    selectKeydown: {
+      table: { disable: true }
+    },
+    searchChange: {
+      table: { disable: true }
+    },
+    optionSelect: {
+      table: { disable: true }
+    },
+    dropdownOpen: {
+      table: { disable: true }
+    },
+    dropdownClose: {
+      table: { disable: true }
     }
   },
   args: {
     options: mockOptions,
     placeholder: 'Select a country',
     variant: 'default',
-    size: 'md',
+    size: 'sm',
     multiple: false,
     searchable: false,
     clearable: false,
@@ -80,136 +242,336 @@ const meta: Meta<SelectComponent> = {
     readonly: false,
     required: false,
     loading: false
-  }
+  },
+  tags: ['autodocs']
 };
 
 export default meta;
 type Story = StoryObj<SelectComponent>;
 
-// Basic select story
+// Default story - most common usage
 export const Default: Story = {
   args: {
     label: 'Country',
     helperText: 'Choose your country from the list'
+  },
+  render: (args) => ({
+    props: args,
+    template: `<bb-select ${argsToTemplate(args)}></bb-select>`
+  })
+};
+
+// All variants displayed side by side
+export const AllVariants: Story = {
+  render: () => ({
+    template: `
+      <div class="flex flex-col gap-6 w-full max-w-md">
+        <bb-select 
+          [options]="options" 
+          variant="default" 
+          label="Default Variant" 
+          placeholder="Select an option"
+        ></bb-select>
+        <bb-select 
+          [options]="options" 
+          variant="success" 
+          label="Success Variant" 
+          value="br"
+          successMessage="Selection confirmed successfully"
+        ></bb-select>
+        <bb-select 
+          [options]="options" 
+          variant="error" 
+          label="Error Variant" 
+          required="true"
+          errorMessage="This field is required"
+        ></bb-select>
+        <bb-select 
+          [options]="options" 
+          variant="warning" 
+          label="Warning Variant" 
+          value="us"
+          helperText="Please verify your selection"
+        ></bb-select>
+      </div>
+    `,
+    props: {
+      options: mockOptions
+    }
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Displays all available visual variants of the select component for easy comparison.'
+      }
+    }
   }
 };
+
+// All sizes displayed side by side
+export const AllSizes: Story = {
+  render: () => ({
+    template: `
+      <div class="flex flex-col gap-4 w-full max-w-md">
+        <bb-select 
+          [options]="options" 
+          size="sm" 
+          label="Small Size" 
+          placeholder="Small select"
+        ></bb-select>
+        <bb-select 
+          [options]="options" 
+          size="md" 
+          label="Medium Size" 
+          placeholder="Medium select"
+        ></bb-select>
+        <bb-select 
+          [options]="options" 
+          size="lg" 
+          label="Large Size" 
+          placeholder="Large select"
+        ></bb-select>
+      </div>
+    `,
+    props: {
+      options: mockOptions
+    }
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the select component in all available sizes (small, medium, large).'
+      }
+    }
+  }
+};
+
+// Interactive playground with all configurable properties
+export const Playground: Story = {
+  args: {
+    label: 'Interactive Select',
+    helperText: 'Try different configurations using the controls below',
+    variant: 'default',
+    size: 'sm',
+    multiple: false,
+    searchable: false,
+    clearable: false,
+    disabled: false,
+    readonly: false,
+    required: false,
+    loading: false,
+    placeholder: 'Select an option',
+    options: mockOptions
+  },
+  render: (args) => ({
+    props: args,
+    template: `<bb-select ${argsToTemplate(args)}></bb-select>`
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive playground to experiment with all select component properties. Use the controls panel to test different configurations.'
+      }
+    }
+  }
+};
+
+// === FEATURE STORIES ===
 
 // Select with pre-selected value
 export const WithValue: Story = {
   args: {
     label: 'Country',
     value: 'br',
-    helperText: 'Brazil is pre-selected'
+    helperText: 'Brazil is pre-selected',
+    clearable: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Shows a select with a pre-selected value. Notice the clear button appears when clearable is enabled.'
+      }
+    }
   }
 };
 
-// Multiple selection
-export const Multiple: Story = {
+// Multiple selection mode
+export const MultipleSelection: Story = {
   args: {
     label: 'Countries',
     multiple: true,
     value: ['br', 'us'],
     clearable: true,
-    helperText: 'You can select multiple countries'
+    helperText: 'You can select multiple countries. Selected items appear as tags.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Multiple Selection
+
+Enables selection of multiple options. Selected items are displayed as removable tags.
+
+\`\`\`html
+<bb-select 
+  [options]="countries" 
+  [multiple]="true" 
+  [value]="['br', 'us']"
+  [clearable]="true"
+  label="Countries">
+</bb-select>
+\`\`\`
+        `
+      }
+    }
   }
 };
 
-// Searchable select
-export const Searchable: Story = {
+// Searchable select with filtering
+export const SearchableSelect: Story = {
   args: {
     label: 'Country',
     searchable: true,
     clearable: true,
     searchPlaceholder: 'Type to search countries...',
-    helperText: 'Start typing to filter options'
+    helperText: 'Start typing to filter options dynamically'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Searchable select allows users to filter options by typing. Perfect for large lists of options.'
+      }
+    }
   }
 };
 
-// Small size
-export const Small: Story = {
-  args: {
-    label: 'Status',
-    size: 'sm',
-    options: mockOptionsWithDisabled,
-    helperText: 'Small size select'
-  }
-};
+// === SPECIAL STATES ===
 
-// Large size
-export const Large: Story = {
-  args: {
-    label: 'Priority',
-    size: 'lg',
-    options: [
-      { value: 'low', label: 'Low Priority' },
-      { value: 'medium', label: 'Medium Priority' },
-      { value: 'high', label: 'High Priority' },
-      { value: 'urgent', label: 'Urgent' }
-    ],
-    helperText: 'Large size select'
-  }
-};
-
-// Success variant
-export const Success: Story = {
-  args: {
-    label: 'Selection',
-    variant: 'success',
-    value: 'br',
-    successMessage: 'Great choice! Brazil selected successfully.'
-  }
-};
-
-// Error variant
-export const Error: Story = {
-  args: {
-    label: 'Required Field',
-    variant: 'error',
-    required: true,
-    errorMessage: 'Please select a country from the list.'
-  }
-};
-
-// Warning variant
-export const Warning: Story = {
+// Loading state
+export const LoadingState: Story = {
   args: {
     label: 'Country',
-    variant: 'warning',
-    value: 'us',
-    helperText: 'Please verify your selection before proceeding.'
+    loading: true,
+    helperText: 'Loading countries from server...'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Shows the loading state with a spinner indicator. Use this while fetching options from an API.'
+      }
+    }
   }
 };
 
 // Disabled state
-export const Disabled: Story = {
+export const DisabledState: Story = {
   args: {
     label: 'Country',
     disabled: true,
     value: 'br',
-    helperText: 'This field is currently disabled'
+    helperText: 'This field is currently disabled and cannot be modified'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled state prevents any interaction with the select component.'
+      }
+    }
   }
 };
 
 // Readonly state
-export const Readonly: Story = {
+export const ReadonlyState: Story = {
   args: {
     label: 'Country',
     readonly: true,
     value: 'br',
-    helperText: 'This field is readonly'
+    helperText: 'This field is readonly - value can be seen but not changed'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Readonly state displays the current value but prevents changes.'
+      }
+    }
   }
 };
 
-// Loading state
-export const Loading: Story = {
+// Error state with validation
+export const ErrorState: Story = {
+  args: {
+    label: 'Required Field',
+    variant: 'error',
+    required: true,
+    errorMessage: 'Please select a country from the list'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Error state for form validation. Shows error styling and message.'
+      }
+    }
+  }
+};
+
+// Success state
+export const SuccessState: Story = {
+  args: {
+    label: 'Selection',
+    variant: 'success',
+    value: 'br',
+    successMessage: 'Great choice! Brazil selected successfully'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Success state provides positive feedback after a valid selection.'
+      }
+    }
+  }
+};
+
+// Warning state
+export const WarningState: Story = {
   args: {
     label: 'Country',
-    loading: true,
-    helperText: 'Loading countries...'
+    variant: 'warning',
+    value: 'us',
+    helperText: 'Please verify your selection before proceeding'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Warning state draws attention to selections that may need verification.'
+      }
+    }
   }
 };
 
-// With all features enabled
+// === ADVANCED EXAMPLES ===
+
+// Select with disabled options
+export const WithDisabledOptions: Story = {
+  args: {
+    label: 'Status',
+    options: mockOptionsWithDisabled,
+    helperText: 'Some options are disabled and cannot be selected'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstrates how disabled options appear in the dropdown. They are visually distinct and not selectable.'
+      }
+    }
+  }
+};
+
+// All features enabled
 export const AllFeatures: Story = {
   args: {
     label: 'Countries',
@@ -218,16 +580,103 @@ export const AllFeatures: Story = {
     clearable: true,
     required: true,
     value: ['br', 'us'],
-    helperText: 'A fully-featured select with multiple selection, search, and clear functionality'
+    helperText:
+      'A fully-featured select with multiple selection, search, clear functionality, and validation'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### All Features Combined
+
+This example shows the select component with all features enabled:
+- Multiple selection with tag display
+- Search functionality for filtering
+- Clear button to reset selection
+- Required field validation
+- Comprehensive helper text
+
+Perfect for complex form scenarios where users need maximum flexibility.
+        `
+      }
+    }
   }
 };
 
-// No options available
-export const NoOptions: Story = {
+// Empty state
+export const EmptyState: Story = {
   args: {
     label: 'Empty Select',
     options: [],
-    noOptionsText: 'No options available',
-    helperText: 'This select has no options'
+    noOptionsText: 'No options available at this time',
+    helperText: 'This select has no options to display'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Shows how the select behaves when no options are available. Displays a custom "no options" message.'
+      }
+    }
+  }
+};
+
+// === COMPOSITION EXAMPLES ===
+
+// Form composition example
+export const InFormContext: Story = {
+  render: () => ({
+    template: `
+      <form class="space-y-4 w-full max-w-md">
+        <bb-select 
+          [options]="countries" 
+          label="Country" 
+          required="true"
+          helperText="Select your country of residence"
+        ></bb-select>
+        
+        <bb-select 
+          [options]="states" 
+          label="State/Province" 
+          searchable="true"
+          clearable="true"
+          helperText="Search and select your state or province"
+        ></bb-select>
+        
+        <bb-select 
+          [options]="priorities" 
+          label="Priority Level" 
+          variant="warning"
+          value="medium"
+          helperText="Current priority level - change if needed"
+        ></bb-select>
+      </form>
+    `,
+    props: {
+      countries: mockOptions,
+      states: [
+        { value: 'ca', label: 'California' },
+        { value: 'ny', label: 'New York' },
+        { value: 'tx', label: 'Texas' },
+        { value: 'fl', label: 'Florida' },
+        { value: 'sp', label: 'São Paulo' },
+        { value: 'rj', label: 'Rio de Janeiro' }
+      ],
+      priorities: [
+        { value: 'low', label: 'Low Priority' },
+        { value: 'medium', label: 'Medium Priority' },
+        { value: 'high', label: 'High Priority' },
+        { value: 'urgent', label: 'Urgent' }
+      ]
+    }
+  }),
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        story:
+          'Example of multiple select components working together in a form context with different configurations.'
+      }
+    }
   }
 };

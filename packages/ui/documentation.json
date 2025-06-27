@@ -38,7 +38,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, and clear functionality',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, clear functionality, and validation'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### All Features Combined\n\nThis example shows the select component with all features enabled:\n- Multiple selection with tag display\n- Search functionality for filtering\n- Clear button to reset selection\n- Required field validation\n- Comprehensive helper text\n\nPerfect for complex form scenarios where users need maximum flexibility.\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllSizes",
@@ -59,6 +59,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"sm\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"lg\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"lg\"></bb-logo>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "AllSizes",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 w-full max-w-md\">\n        <bb-select \n          [options]=\"options\" \n          size=\"sm\" \n          label=\"Small Size\" \n          placeholder=\"Small select\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          size=\"md\" \n          label=\"Medium Size\" \n          placeholder=\"Medium select\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          size=\"lg\" \n          label=\"Large Size\" \n          placeholder=\"Large select\"\n        ></bb-select>\n      </div>\n    `,\n    props: {\n      options: mockOptions\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows the select component in all available sizes (small, medium, large).'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllVariants",
@@ -89,6 +99,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "AllVariants",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-6 w-full max-w-md\">\n        <bb-select \n          [options]=\"options\" \n          variant=\"default\" \n          label=\"Default Variant\" \n          placeholder=\"Select an option\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"success\" \n          label=\"Success Variant\" \n          value=\"br\"\n          successMessage=\"Selection confirmed successfully\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"error\" \n          label=\"Error Variant\" \n          required=\"true\"\n          errorMessage=\"This field is required\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"warning\" \n          label=\"Warning Variant\" \n          value=\"us\"\n          helperText=\"Please verify your selection\"\n        ></bb-select>\n      </div>\n    `,\n    props: {\n      options: mockOptions\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Displays all available visual variants of the select component for easy comparison.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllVariants",
@@ -158,7 +178,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-select ${argsToTemplate(args)}></bb-select>`\n  })\n}"
       },
       {
         "name": "Default",
@@ -191,16 +211,6 @@
         "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
       },
       {
-        "name": "Disabled",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled',\n  },\n}"
-      },
-      {
         "name": "DisabledState",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -209,6 +219,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4\">\n        <bb-checkbox label=\"Disabled unchecked\" [disabled]=\"true\" [checked]=\"false\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled checked\" [disabled]=\"true\" [checked]=\"true\"></bb-checkbox>\n        <bb-checkbox label=\"Disabled indeterminate\" [disabled]=\"true\" [indeterminate]=\"true\"></bb-checkbox>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Shows disabled checkboxes in different states. Disabled checkboxes cannot be interacted with.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "DisabledState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled and cannot be modified'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Disabled state prevents any interaction with the select component.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Email",
@@ -221,6 +241,16 @@
         "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: Mail\n  }\n}"
       },
       {
+        "name": "EmptyState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available at this time',\n    helperText: 'This select has no options to display'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows how the select behaves when no options are available. Displays a custom \"no options\" message.'\n      }\n    }\n  }\n}"
+      },
+      {
         "name": "Error",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -229,16 +259,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'error',\n    label: 'Campo com erro',\n    value: 'dados-incorretos',\n    errorMessage: 'Por favor, verifique os dados informados.'\n  }\n}"
-      },
-      {
-        "name": "Error",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list.',\n  },\n}"
       },
       {
         "name": "Error",
@@ -259,6 +279,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Required agreement',\n    errorMessage: 'You must accept the terms to continue',\n    checked: false,\n    variant: 'error',\n    size: 'md',\n    required: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstrates error state with validation message. Used when user input is invalid or required field is empty.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "ErrorState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Error state for form validation. Shows error styling and message.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "FormIntegration",
@@ -291,6 +321,16 @@
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
       },
       {
+        "name": "InFormContext",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <form class=\"space-y-4 w-full max-w-md\">\n        <bb-select \n          [options]=\"countries\" \n          label=\"Country\" \n          required=\"true\"\n          helperText=\"Select your country of residence\"\n        ></bb-select>\n        \n        <bb-select \n          [options]=\"states\" \n          label=\"State/Province\" \n          searchable=\"true\"\n          clearable=\"true\"\n          helperText=\"Search and select your state or province\"\n        ></bb-select>\n        \n        <bb-select \n          [options]=\"priorities\" \n          label=\"Priority Level\" \n          variant=\"warning\"\n          value=\"medium\"\n          helperText=\"Current priority level - change if needed\"\n        ></bb-select>\n      </form>\n    `,\n    props: {\n      countries: mockOptions,\n      states: [\n        { value: 'ca', label: 'California' },\n        { value: 'ny', label: 'New York' },\n        { value: 'tx', label: 'Texas' },\n        { value: 'fl', label: 'Florida' },\n        { value: 'sp', label: 'São Paulo' },\n        { value: 'rj', label: 'Rio de Janeiro' }\n      ],\n      priorities: [\n        { value: 'low', label: 'Low Priority' },\n        { value: 'medium', label: 'Medium Priority' },\n        { value: 'high', label: 'High Priority' },\n        { value: 'urgent', label: 'Urgent' }\n      ]\n    }\n  }),\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        story: 'Example of multiple select components working together in a form context with different configurations.'\n      }\n    }\n  }\n}"
+      },
+      {
         "name": "Large",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -299,16 +339,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
-      },
-      {
-        "name": "Large",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Priority',\n    size: 'lg',\n    options: [\n      { value: 'low', label: 'Low Priority' },\n      { value: 'medium', label: 'Medium Priority' },\n      { value: 'high', label: 'High Priority' },\n      { value: 'urgent', label: 'Urgent' },\n    ],\n    helperText: 'Large size select',\n  },\n}"
       },
       {
         "name": "Loading",
@@ -321,16 +351,6 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    type: 'button',\n    loading: true,\n    disabled: false,\n    loadingText: 'Carregando, aguarde...'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>Loading Button</bb-button>`\n  })\n}"
       },
       {
-        "name": "Loading",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries...',\n  },\n}"
-      },
-      {
         "name": "LoadingState",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -339,6 +359,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Processing selection...',\n    disabled: true,\n    helperText: 'Please wait while we validate your choice',\n    variant: 'default',\n    size: 'md'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Represents a checkbox in a loading/processing state where user interaction is temporarily disabled.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "LoadingState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries from server...'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows the loading state with a spinner indicator. Use this while fetching options from an API.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "LoginForm",
@@ -408,7 +438,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<SelectComponent>",
-        "defaultValue": "{\n  title: 'Components/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible select component with support for single/multiple selection, search, and various variants.',\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['default', 'success', 'error', 'warning'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n    },\n    options: {\n      control: { type: 'object' },\n    },\n    value: {\n      control: { type: 'text' },\n    },\n    multiple: {\n      control: { type: 'boolean' },\n    },\n    searchable: {\n      control: { type: 'boolean' },\n    },\n    clearable: {\n      control: { type: 'boolean' },\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    readonly: {\n      control: { type: 'boolean' },\n    },\n    required: {\n      control: { type: 'boolean' },\n    },\n    loading: {\n      control: { type: 'boolean' },\n    },\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'md',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n  },\n}"
+        "defaultValue": "{\n  title: 'Components/Inputs/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Select component provides a dropdown interface for selecting one or multiple options from a list. It supports advanced features like search, clear functionality, and various visual states.\n\n## When to Use\n\n- For choosing options from a predefined list\n- When you need to save space compared to radio buttons\n- For filtering or categorizing data\n- When users need to select multiple items from a list\n\n## Features\n\n- Single and multiple selection modes\n- Searchable options with filtering\n- Keyboard navigation support\n- Loading and disabled states\n- Clear functionality\n- Custom placeholder and helper text\n- Accessibility compliant with ARIA attributes\n\n## Accessibility\n\n- Full keyboard navigation support (Arrow keys, Enter, Escape)\n- Screen reader compatible with proper ARIA attributes\n- Focus management and visual indicators\n- Semantic HTML structure with proper roles\n        `\n      }\n    },\n    a11y: {\n      config: {\n        rules: [{ id: 'color-contrast', enabled: true }]\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      description: 'Visual style variant of the select component',\n      options: ['default', 'success', 'error', 'warning'],\n      control: { \n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        defaultValue: { summary: 'default' },\n        type: { summary: 'SelectVariant' }\n      }\n    },\n    size: {\n      description: 'Size of the select component',\n      options: ['sm', 'md', 'lg'],\n      control: { \n        type: 'radio',\n        labels: {\n          sm: 'Small',\n          md: 'Medium',\n          lg: 'Large'\n        }\n      },\n      table: {\n        defaultValue: { summary: 'sm' },\n        type: { summary: 'SelectSize' }\n      }\n    },\n    options: {\n      description: 'Array of options to display in the dropdown',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'SelectOption[]' }\n      }\n    },\n    value: {\n      description: 'Currently selected value(s)',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'T | T[] | undefined' }\n      }\n    },\n    multiple: {\n      description: 'Enable multiple selection mode',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    searchable: {\n      description: 'Enable search functionality to filter options',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    clearable: {\n      description: 'Show clear button to reset selection',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    disabled: {\n      description: 'Disable the select component',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    readonly: {\n      description: 'Make the select read-only',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    required: {\n      description: 'Mark the field as required',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    loading: {\n      description: 'Show loading state',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    label: {\n      description: 'Label text for the select field',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    placeholder: {\n      description: 'Placeholder text when no option is selected',\n      control: { type: 'text' },\n      table: {\n        defaultValue: { summary: 'Select an option' },\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the select',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    // Hide event outputs from controls\n    valueChange: {\n      table: { disable: true }\n    },\n    selectFocus: {\n      table: { disable: true }\n    },\n    selectBlur: {\n      table: { disable: true }\n    },\n    selectKeydown: {\n      table: { disable: true }\n    },\n    searchChange: {\n      table: { disable: true }\n    },\n    optionSelect: {\n      table: { disable: true }\n    },\n    dropdownOpen: {\n      table: { disable: true }\n    },\n    dropdownClose: {\n      table: { disable: true }\n    }\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'sm',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -428,7 +458,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "SelectOption[]",
-        "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' },\n]"
+        "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' }\n]"
       },
       {
         "name": "mockOptionsWithDisabled",
@@ -438,27 +468,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "SelectOption[]",
-        "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' },\n]"
+        "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' }\n]"
       },
       {
-        "name": "Multiple",
+        "name": "MultipleSelection",
         "ctype": "miscellaneous",
         "subtype": "variable",
         "file": "src/select/select.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries',\n  },\n}"
-      },
-      {
-        "name": "NoOptions",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available',\n    helperText: 'This select has no options',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries. Selected items appear as tags.'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Multiple Selection\n\nEnables selection of multiple options. Selected items are displayed as removable tags.\n\n\\`\\`\\`html\n<bb-select \n  [options]=\"countries\" \n  [multiple]=\"true\" \n  [value]=\"['br', 'us']\"\n  [clearable]=\"true\"\n  label=\"Countries\">\n</bb-select>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "Number",
@@ -524,6 +544,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Interactive Select',\n    helperText: 'Try different configurations using the controls below',\n    variant: 'default',\n    size: 'sm',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n    placeholder: 'Select an option',\n    options: mockOptions\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-select ${argsToTemplate(args)}></bb-select>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Interactive playground to experiment with all select component properties. Use the controls panel to test different configurations.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -561,14 +591,14 @@
         "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
       },
       {
-        "name": "Readonly",
+        "name": "ReadonlyState",
         "ctype": "miscellaneous",
         "subtype": "variable",
         "file": "src/select/select.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly - value can be seen but not changed'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Readonly state displays the current value but prevents changes.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Required",
@@ -611,14 +641,14 @@
         "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
       },
       {
-        "name": "Searchable",
+        "name": "SearchableSelect",
         "ctype": "miscellaneous",
         "subtype": "variable",
         "file": "src/select/select.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options dynamically'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Searchable select allows users to filter options by typing. Perfect for large lists of options.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Secondary",
@@ -639,16 +669,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
-      },
-      {
-        "name": "Small",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Status',\n    size: 'sm',\n    options: mockOptionsWithDisabled,\n    helperText: 'Small size select',\n  },\n}"
       },
       {
         "name": "Success",
@@ -674,21 +694,21 @@
         "name": "Success",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/select/select.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully.',\n  },\n}"
-      },
-      {
-        "name": "Success",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
+      },
+      {
+        "name": "SuccessState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Success state provides positive feedback after a valid selection.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "ToggleButton",
@@ -731,14 +751,14 @@
         "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
       },
       {
-        "name": "Warning",
+        "name": "WarningState",
         "ctype": "miscellaneous",
         "subtype": "variable",
         "file": "src/select/select.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding.',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Warning state draws attention to selections that may need verification.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithAccessibility",
@@ -749,6 +769,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "WithDisabledOptions",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/select/select.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    label: 'Status',\n    options: mockOptionsWithDisabled,\n    helperText: 'Some options are disabled and cannot be selected'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstrates how disabled options appear in the dropdown. They are visually distinct and not selectable.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithHelperText",
@@ -798,7 +828,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n  },\n}"
+        "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n    clearable: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows a select with a pre-selected value. Notice the clear button appears when clearable is enabled.'\n      }\n    }\n  }\n}"
       }
     ],
     "functions": [],
@@ -1075,7 +1105,27 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, and clear functionality',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText: 'A fully-featured select with multiple selection, search, clear functionality, and validation'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### All Features Combined\n\nThis example shows the select component with all features enabled:\n- Multiple selection with tag display\n- Search functionality for filtering\n- Clear button to reset selection\n- Required field validation\n- Comprehensive helper text\n\nPerfect for complex form scenarios where users need maximum flexibility.\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "AllSizes",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 w-full max-w-md\">\n        <bb-select \n          [options]=\"options\" \n          size=\"sm\" \n          label=\"Small Size\" \n          placeholder=\"Small select\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          size=\"md\" \n          label=\"Medium Size\" \n          placeholder=\"Medium select\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          size=\"lg\" \n          label=\"Large Size\" \n          placeholder=\"Large select\"\n        ></bb-select>\n      </div>\n    `,\n    props: {\n      options: mockOptions\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows the select component in all available sizes (small, medium, large).'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "AllVariants",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-6 w-full max-w-md\">\n        <bb-select \n          [options]=\"options\" \n          variant=\"default\" \n          label=\"Default Variant\" \n          placeholder=\"Select an option\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"success\" \n          label=\"Success Variant\" \n          value=\"br\"\n          successMessage=\"Selection confirmed successfully\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"error\" \n          label=\"Error Variant\" \n          required=\"true\"\n          errorMessage=\"This field is required\"\n        ></bb-select>\n        <bb-select \n          [options]=\"options\" \n          variant=\"warning\" \n          label=\"Warning Variant\" \n          value=\"us\"\n          helperText=\"Please verify your selection\"\n        ></bb-select>\n      </div>\n    `,\n    props: {\n      options: mockOptions\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Displays all available visual variants of the select component for easy comparison.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "Default",
@@ -1085,47 +1135,57 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    helperText: 'Choose your country from the list'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-select ${argsToTemplate(args)}></bb-select>`\n  })\n}"
         },
         {
-          "name": "Disabled",
+          "name": "DisabledState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled and cannot be modified'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Disabled state prevents any interaction with the select component.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Error",
+          "name": "EmptyState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list.',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available at this time',\n    helperText: 'This select has no options to display'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows how the select behaves when no options are available. Displays a custom \"no options\" message.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Large",
+          "name": "ErrorState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Priority',\n    size: 'lg',\n    options: [\n      { value: 'low', label: 'Low Priority' },\n      { value: 'medium', label: 'Medium Priority' },\n      { value: 'high', label: 'High Priority' },\n      { value: 'urgent', label: 'Urgent' },\n    ],\n    helperText: 'Large size select',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Required Field',\n    variant: 'error',\n    required: true,\n    errorMessage: 'Please select a country from the list'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Error state for form validation. Shows error styling and message.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Loading",
+          "name": "InFormContext",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries...',\n  },\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <form class=\"space-y-4 w-full max-w-md\">\n        <bb-select \n          [options]=\"countries\" \n          label=\"Country\" \n          required=\"true\"\n          helperText=\"Select your country of residence\"\n        ></bb-select>\n        \n        <bb-select \n          [options]=\"states\" \n          label=\"State/Province\" \n          searchable=\"true\"\n          clearable=\"true\"\n          helperText=\"Search and select your state or province\"\n        ></bb-select>\n        \n        <bb-select \n          [options]=\"priorities\" \n          label=\"Priority Level\" \n          variant=\"warning\"\n          value=\"medium\"\n          helperText=\"Current priority level - change if needed\"\n        ></bb-select>\n      </form>\n    `,\n    props: {\n      countries: mockOptions,\n      states: [\n        { value: 'ca', label: 'California' },\n        { value: 'ny', label: 'New York' },\n        { value: 'tx', label: 'Texas' },\n        { value: 'fl', label: 'Florida' },\n        { value: 'sp', label: 'São Paulo' },\n        { value: 'rj', label: 'Rio de Janeiro' }\n      ],\n      priorities: [\n        { value: 'low', label: 'Low Priority' },\n        { value: 'medium', label: 'Medium Priority' },\n        { value: 'high', label: 'High Priority' },\n        { value: 'urgent', label: 'Urgent' }\n      ]\n    }\n  }),\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        story: 'Example of multiple select components working together in a form context with different configurations.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "LoadingState",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/select/select.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    loading: true,\n    helperText: 'Loading countries from server...'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows the loading state with a spinner indicator. Use this while fetching options from an API.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "meta",
@@ -1135,7 +1195,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<SelectComponent>",
-          "defaultValue": "{\n  title: 'Components/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: 'A flexible select component with support for single/multiple selection, search, and various variants.',\n      },\n    },\n  },\n  argTypes: {\n    variant: {\n      control: { type: 'select' },\n      options: ['default', 'success', 'error', 'warning'],\n    },\n    size: {\n      control: { type: 'select' },\n      options: ['sm', 'md', 'lg'],\n    },\n    options: {\n      control: { type: 'object' },\n    },\n    value: {\n      control: { type: 'text' },\n    },\n    multiple: {\n      control: { type: 'boolean' },\n    },\n    searchable: {\n      control: { type: 'boolean' },\n    },\n    clearable: {\n      control: { type: 'boolean' },\n    },\n    disabled: {\n      control: { type: 'boolean' },\n    },\n    readonly: {\n      control: { type: 'boolean' },\n    },\n    required: {\n      control: { type: 'boolean' },\n    },\n    loading: {\n      control: { type: 'boolean' },\n    },\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'md',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n  },\n}"
+          "defaultValue": "{\n  title: 'Components/Inputs/Select',\n  component: SelectComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Description\n\nThe Select component provides a dropdown interface for selecting one or multiple options from a list. It supports advanced features like search, clear functionality, and various visual states.\n\n## When to Use\n\n- For choosing options from a predefined list\n- When you need to save space compared to radio buttons\n- For filtering or categorizing data\n- When users need to select multiple items from a list\n\n## Features\n\n- Single and multiple selection modes\n- Searchable options with filtering\n- Keyboard navigation support\n- Loading and disabled states\n- Clear functionality\n- Custom placeholder and helper text\n- Accessibility compliant with ARIA attributes\n\n## Accessibility\n\n- Full keyboard navigation support (Arrow keys, Enter, Escape)\n- Screen reader compatible with proper ARIA attributes\n- Focus management and visual indicators\n- Semantic HTML structure with proper roles\n        `\n      }\n    },\n    a11y: {\n      config: {\n        rules: [{ id: 'color-contrast', enabled: true }]\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      description: 'Visual style variant of the select component',\n      options: ['default', 'success', 'error', 'warning'],\n      control: { \n        type: 'select',\n        labels: {\n          default: '🔵 Default',\n          success: '✅ Success',\n          error: '❌ Error',\n          warning: '⚠️ Warning'\n        }\n      },\n      table: {\n        defaultValue: { summary: 'default' },\n        type: { summary: 'SelectVariant' }\n      }\n    },\n    size: {\n      description: 'Size of the select component',\n      options: ['sm', 'md', 'lg'],\n      control: { \n        type: 'radio',\n        labels: {\n          sm: 'Small',\n          md: 'Medium',\n          lg: 'Large'\n        }\n      },\n      table: {\n        defaultValue: { summary: 'sm' },\n        type: { summary: 'SelectSize' }\n      }\n    },\n    options: {\n      description: 'Array of options to display in the dropdown',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'SelectOption[]' }\n      }\n    },\n    value: {\n      description: 'Currently selected value(s)',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'T | T[] | undefined' }\n      }\n    },\n    multiple: {\n      description: 'Enable multiple selection mode',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    searchable: {\n      description: 'Enable search functionality to filter options',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    clearable: {\n      description: 'Show clear button to reset selection',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    disabled: {\n      description: 'Disable the select component',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    readonly: {\n      description: 'Make the select read-only',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    required: {\n      description: 'Mark the field as required',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    loading: {\n      description: 'Show loading state',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    label: {\n      description: 'Label text for the select field',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    placeholder: {\n      description: 'Placeholder text when no option is selected',\n      control: { type: 'text' },\n      table: {\n        defaultValue: { summary: 'Select an option' },\n        type: { summary: 'string' }\n      }\n    },\n    helperText: {\n      description: 'Helper text displayed below the select',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    errorMessage: {\n      description: 'Error message displayed when variant is error',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    successMessage: {\n      description: 'Success message displayed when variant is success',\n      control: { type: 'text' },\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    // Hide event outputs from controls\n    valueChange: {\n      table: { disable: true }\n    },\n    selectFocus: {\n      table: { disable: true }\n    },\n    selectBlur: {\n      table: { disable: true }\n    },\n    selectKeydown: {\n      table: { disable: true }\n    },\n    searchChange: {\n      table: { disable: true }\n    },\n    optionSelect: {\n      table: { disable: true }\n    },\n    dropdownOpen: {\n      table: { disable: true }\n    },\n    dropdownClose: {\n      table: { disable: true }\n    }\n  },\n  args: {\n    options: mockOptions,\n    placeholder: 'Select a country',\n    variant: 'default',\n    size: 'sm',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false\n  },\n  tags: ['autodocs']\n}"
         },
         {
           "name": "mockOptions",
@@ -1145,7 +1205,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "SelectOption[]",
-          "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' },\n]"
+          "defaultValue": "[\n  { value: 'br', label: 'Brazil' },\n  { value: 'us', label: 'United States' },\n  { value: 'ca', label: 'Canada' },\n  { value: 'mx', label: 'Mexico' },\n  { value: 'ar', label: 'Argentina' },\n  { value: 'cl', label: 'Chile' },\n  { value: 'pe', label: 'Peru' },\n  { value: 'co', label: 'Colombia' }\n]"
         },
         {
           "name": "mockOptionsWithDisabled",
@@ -1155,77 +1215,77 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "SelectOption[]",
-          "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' },\n]"
+          "defaultValue": "[\n  { value: 'active', label: 'Active' },\n  { value: 'inactive', label: 'Inactive' },\n  { value: 'pending', label: 'Pending', disabled: true },\n  { value: 'suspended', label: 'Suspended' }\n]"
         },
         {
-          "name": "Multiple",
+          "name": "MultipleSelection",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    value: ['br', 'us'],\n    clearable: true,\n    helperText: 'You can select multiple countries. Selected items appear as tags.'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Multiple Selection\n\nEnables selection of multiple options. Selected items are displayed as removable tags.\n\n\\`\\`\\`html\n<bb-select \n  [options]=\"countries\" \n  [multiple]=\"true\" \n  [value]=\"['br', 'us']\"\n  [clearable]=\"true\"\n  label=\"Countries\">\n</bb-select>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
         },
         {
-          "name": "NoOptions",
+          "name": "Playground",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Empty Select',\n    options: [],\n    noOptionsText: 'No options available',\n    helperText: 'This select has no options',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Interactive Select',\n    helperText: 'Try different configurations using the controls below',\n    variant: 'default',\n    size: 'sm',\n    multiple: false,\n    searchable: false,\n    clearable: false,\n    disabled: false,\n    readonly: false,\n    required: false,\n    loading: false,\n    placeholder: 'Select an option',\n    options: mockOptions\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-select ${argsToTemplate(args)}></bb-select>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Interactive playground to experiment with all select component properties. Use the controls panel to test different configurations.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Readonly",
+          "name": "ReadonlyState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    readonly: true,\n    value: 'br',\n    helperText: 'This field is readonly - value can be seen but not changed'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Readonly state displays the current value but prevents changes.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Searchable",
+          "name": "SearchableSelect",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    searchable: true,\n    clearable: true,\n    searchPlaceholder: 'Type to search countries...',\n    helperText: 'Start typing to filter options dynamically'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Searchable select allows users to filter options by typing. Perfect for large lists of options.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Small",
+          "name": "SuccessState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Status',\n    size: 'sm',\n    options: mockOptionsWithDisabled,\n    helperText: 'Small size select',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Success state provides positive feedback after a valid selection.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Success",
+          "name": "WarningState",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Selection',\n    variant: 'success',\n    value: 'br',\n    successMessage: 'Great choice! Brazil selected successfully.',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Warning state draws attention to selections that may need verification.'\n      }\n    }\n  }\n}"
         },
         {
-          "name": "Warning",
+          "name": "WithDisabledOptions",
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/select/select.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    variant: 'warning',\n    value: 'us',\n    helperText: 'Please verify your selection before proceeding.',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Status',\n    options: mockOptionsWithDisabled,\n    helperText: 'Some options are disabled and cannot be selected'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstrates how disabled options appear in the dropdown. They are visually distinct and not selectable.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "WithValue",
@@ -1235,7 +1295,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n  },\n}"
+          "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n    clearable: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Shows a select with a pre-selected value. Notice the clear button appears when clearable is enabled.'\n      }\n    }\n  }\n}"
         }
       ],
       "src/button/button.component.stories.ts": [
@@ -2360,6 +2420,26 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
+        "name": "AllSizes",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AllVariants",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
         "name": "Default",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -2370,7 +2450,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Disabled",
+        "name": "DisabledState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2380,7 +2460,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Error",
+        "name": "EmptyState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2390,7 +2470,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Large",
+        "name": "ErrorState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2400,7 +2480,17 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Loading",
+        "name": "InFormContext",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/select/select.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "LoadingState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2440,7 +2530,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Multiple",
+        "name": "MultipleSelection",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2450,7 +2540,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "NoOptions",
+        "name": "Playground",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2460,7 +2550,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Readonly",
+        "name": "ReadonlyState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2470,7 +2560,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Searchable",
+        "name": "SearchableSelect",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2480,7 +2570,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Small",
+        "name": "SuccessState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2490,7 +2580,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Success",
+        "name": "WarningState",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -2500,7 +2590,7 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Warning",
+        "name": "WithDisabledOptions",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"

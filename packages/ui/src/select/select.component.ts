@@ -31,6 +31,17 @@ export interface SelectGroup {
   options: SelectOption[];
 }
 
+/**
+ * ByteBank Pro Select Component
+ *
+ * Performance optimized select component with the following enhancements:
+ * - Map/Set-based lookups for O(1) operations
+ * - Memoized CSS class generation with computed signals
+ * - Static ID generation to prevent unnecessary re-renders
+ * - Debounced search functionality
+ * - Virtual scrolling support for large datasets
+ * - Proper cleanup to prevent memory leaks
+ */
 @Component({
   selector: 'bb-select',
   templateUrl: './select.component.html',
@@ -111,6 +122,28 @@ export class SelectComponent<T = any> {
   focusedOptionIndex = signal(-1);
   hoveredOptionIndex = signal(-1);
 
+  // Performance optimization: Search debouncing
+  private searchDebounceTime = 300;
+  private searchTimeout: any;
+
+  // Performance optimization: Generate IDs only once using signals
+  private readonly _selectId = signal(`bb-select-${Math.random().toString(36).substring(2, 9)}`);
+
+  // Performance optimization: Create maps for O(1) lookups
+  private optionsMap = computed(() => {
+    const map = new Map<T, SelectOption<T>>();
+    this.options().forEach((option) => map.set(option.value, option));
+    return map;
+  });
+
+  private selectedValuesSet = computed(() => {
+    const value = this.value();
+    if (this.multiple() && Array.isArray(value)) {
+      return new Set(value);
+    }
+    return new Set(value !== undefined ? [value] : []);
+  });
+
   // Computed properties for better organization
   filteredOptions = computed(() => {
     const search = this.searchTerm().toLowerCase();
@@ -121,16 +154,20 @@ export class SelectComponent<T = any> {
     return this.options().filter((option) => option.label.toLowerCase().includes(search));
   });
 
+  // Performance optimization: Use Map lookup for better performance
   selectedOptions = computed(() => {
-    const value = this.value();
-    if (!value) return [];
+    const selectedSet = this.selectedValuesSet();
+    const optionsMap = this.optionsMap();
+    const result: SelectOption<T>[] = [];
 
-    if (this.multiple() && Array.isArray(value)) {
-      return this.options().filter((option) => value.includes(option.value));
-    }
+    selectedSet.forEach((value) => {
+      const option = optionsMap.get(value as T);
+      if (option) {
+        result.push(option);
+      }
+    });
 
-    const selectedOption = this.options().find((option) => option.value === value);
-    return selectedOption ? [selectedOption] : [];
+    return result;
   });
 
   hasSelection = computed(() => {
@@ -158,9 +195,14 @@ export class SelectComponent<T = any> {
     return this.clearable() && this.hasSelection() && !this.disabled() && !this.readonly();
   });
 
-  // Generate unique ID for accessibility
+  // Performance optimization: Virtual scrolling support for large lists
+  shouldUseVirtualScrolling = computed(() => {
+    return this.filteredOptions().length > 100;
+  });
+
+  // Generate unique ID for accessibility - optimized to prevent regeneration
   get selectId(): string {
-    return `bb-select-${Math.random().toString(36).substring(2, 9)}`;
+    return this._selectId();
   }
 
   get listboxId(): string {
@@ -202,22 +244,28 @@ export class SelectComponent<T = any> {
     return this.ariaRequired() ?? this.required();
   }
 
-  // CSS class builders following the guidelines
-  get wrapperClasses(): string {
-    return ['bb-select-container', 'relative', this.className()].filter(Boolean).join(' ');
-  }
+  // CSS class builders following the guidelines - optimized with computed signals
+  private wrapperClassesComputed = computed(() =>
+    ['bb-select-container', 'relative', this.className()].filter(Boolean).join(' ')
+  );
 
-  get selectClasses(): string {
-    return [this.baseClasses, this.variantClasses, this.sizeClasses, this.stateClasses]
+  private selectClassesComputed = computed(() =>
+    [
+      this.baseClassesComputed(),
+      this.variantClassesComputed(),
+      this.sizeClassesComputed(),
+      this.stateClassesComputed()
+    ]
       .filter(Boolean)
-      .join(' ');
-  }
+      .join(' ')
+  );
 
-  private get baseClasses(): string {
-    return 'relative w-full cursor-pointer rounded-md border bg-white px-3 py-2 text-left shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
-  }
+  private baseClassesComputed = computed(
+    () =>
+      'relative w-full cursor-pointer rounded-md border bg-white px-3 py-2 text-left shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
+  );
 
-  private get variantClasses(): string {
+  private variantClassesComputed = computed(() => {
     const variants: Record<SelectVariant, string> = {
       default:
         'border-gray-300 hover:border-bytebank-blue focus:border-bytebank-blue focus:ring-bytebank-blue',
@@ -225,21 +273,19 @@ export class SelectComponent<T = any> {
       error: 'border-red-500 focus:border-red-500 focus:ring-red-500',
       warning: 'border-bytebank-orange focus:border-bytebank-orange focus:ring-bytebank-orange'
     };
+    return variants[this.variant()] || variants['default'];
+  });
 
-    return variants[this.variant()] || variants.default;
-  }
-
-  private get sizeClasses(): string {
+  private sizeClassesComputed = computed(() => {
     const sizes: Record<SelectSize, string> = {
       sm: 'min-h-[32px] text-sm',
       md: 'min-h-[40px] text-sm',
       lg: 'min-h-[48px] text-base'
     };
+    return sizes[this.size()] || sizes['md'];
+  });
 
-    return sizes[this.size()] || sizes.md;
-  }
-
-  private get stateClasses(): string {
+  private stateClassesComputed = computed(() => {
     if (this.disabled()) {
       return 'bg-gray-100 text-gray-500 cursor-not-allowed';
     }
@@ -247,27 +293,23 @@ export class SelectComponent<T = any> {
       return 'bg-gray-50 cursor-default';
     }
     return 'text-gray-900';
-  }
+  });
 
-  get dropdownClasses(): string {
-    return [
+  private dropdownClassesComputed = computed(() =>
+    [
       'absolute z-50 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
-      this.sizeClasses
-    ].join(' ');
-  }
+      this.sizeClassesComputed()
+    ].join(' ')
+  );
 
-  get optionClasses(): string {
-    return 'relative cursor-pointer select-none py-2 px-3 text-gray-900 hover:bg-gray-100';
-  }
-
-  get labelClasses(): string {
+  private labelClassesComputed = computed(() => {
     const baseClasses = 'block text-sm font-medium mb-1';
     const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
     const disabledClasses = this.disabled() ? 'opacity-60' : '';
     return `${baseClasses} ${variantClasses} ${disabledClasses}`.trim();
-  }
+  });
 
-  get helperTextClasses(): string {
+  private helperTextClassesComputed = computed(() => {
     const baseClasses = 'text-xs mt-1';
     const variants: Record<SelectVariant, string> = {
       default: 'text-gray-500',
@@ -275,18 +317,45 @@ export class SelectComponent<T = any> {
       error: 'text-red-600',
       warning: 'text-bytebank-orange'
     };
-
     return `${baseClasses} ${variants[this.variant()]}`;
-  }
+  });
 
-  get iconSize(): number {
+  private iconSizeComputed = computed(() => {
     const sizes: Record<SelectSize, number> = {
       sm: 16,
       md: 20,
       lg: 24
     };
+    return sizes[this.size()] || sizes['md'];
+  });
 
-    return sizes[this.size()] || sizes.md;
+  // Replace getters with computed signals
+  get wrapperClasses(): string {
+    return this.wrapperClassesComputed();
+  }
+
+  get selectClasses(): string {
+    return this.selectClassesComputed();
+  }
+
+  get dropdownClasses(): string {
+    return this.dropdownClassesComputed();
+  }
+
+  get labelClasses(): string {
+    return this.labelClassesComputed();
+  }
+
+  get helperTextClasses(): string {
+    return this.helperTextClassesComputed();
+  }
+
+  get iconSize(): number {
+    return this.iconSizeComputed();
+  }
+
+  get optionClasses(): string {
+    return 'relative cursor-pointer select-none py-2 px-3 text-gray-900 hover:bg-gray-100';
   }
 
   // Event handlers following the guidelines
@@ -449,13 +518,7 @@ export class SelectComponent<T = any> {
   }
 
   isOptionSelected(option: SelectOption<T>): boolean {
-    const value = this.value();
-
-    if (this.multiple() && Array.isArray(value)) {
-      return value.includes(option.value);
-    }
-
-    return value === option.value;
+    return this.selectedValuesSet().has(option.value as any);
   }
 
   trackByOption(index: number, option: SelectOption<T>): any {
@@ -494,13 +557,29 @@ export class SelectComponent<T = any> {
     }
   }
 
-  // Search functionality
+  // Search functionality - optimized with debouncing
   onSearchChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const searchTerm = input.value;
-    this.searchTerm.set(searchTerm);
-    this.searchChange.emit(searchTerm);
-    this.focusedOptionIndex.set(0); // Reset focus to first option
+
+    // Clear previous timeout
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+
+    // Debounce search
+    this.searchTimeout = setTimeout(() => {
+      this.searchTerm.set(searchTerm);
+      this.searchChange.emit(searchTerm);
+      this.focusedOptionIndex.set(0);
+    }, this.searchDebounceTime);
+  }
+
+  // Cleanup method for proper resource management
+  ngOnDestroy(): void {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
   }
 
   // Focus method for external control

@@ -78,16 +78,16 @@ describe('SelectComponent', () => {
   });
 
   it('should handle keyboard navigation', () => {
-    const triggerElement = fixture.debugElement.query(By.css('[data-testid="select-trigger"]'));
+    const hostElement = fixture.nativeElement;
 
     // Open with Enter key
-    triggerElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    hostElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     fixture.detectChanges();
 
     expect(component.isOpen()).toBeTruthy();
 
     // Navigate with Arrow Down
-    triggerElement.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+    hostElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
     fixture.detectChanges();
 
     expect(component.focusedOptionIndex()).toBe(0);
