@@ -1,0 +1,35 @@
+{
+  "name": "@bytebank-pro/utils",
+  "version": "1.0.0",
+  "description": "Utility functions for ByteBank Pro microfrontends",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rm -rf dist .turbo node_modules .angular coverage out-tsc .cache storybook-static .storybook-cache"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.14.0",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.5"
+  }
+}
