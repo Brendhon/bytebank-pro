@@ -22,11 +22,7 @@ Fornecer componentes reutilizáveis e consistentes para:
 ```
 packages/ui/
 ├── src/                  # Componentes
-│   └── button/           # Exemplo: Button component
-│       ├── button.component.ts
-│       ├── button.component.html
-│       ├── button.component.spec.ts
-│       └── button.component.stories.ts
+│
 ├── styles/               # Estilos globais
 ├── .storybook/           # Configuração do Storybook
 └── public-api.ts         # Exportações principais
