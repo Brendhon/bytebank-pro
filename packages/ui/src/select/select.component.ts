@@ -503,11 +503,10 @@ export class SelectComponent<T = any> {
       const currentValue = (this.value() as T[]) || [];
       const isSelected = currentValue.includes(option.value);
 
-      if (isSelected) {
-        newValue = currentValue.filter((v) => v !== option.value);
-      } else {
-        newValue = [...currentValue, option.value];
-      }
+      // Get new value based on selection state
+      newValue = isSelected
+        ? currentValue.filter((v) => v !== option.value)
+        : [...currentValue, option.value];
     } else {
       newValue = option.value;
       this.close();
@@ -579,20 +578,6 @@ export class SelectComponent<T = any> {
   ngOnDestroy(): void {
     if (this.searchTimeout) {
       clearTimeout(this.searchTimeout);
-    }
-  }
-
-  // Focus method for external control
-  focus(): void {
-    if (this.selectElement?.nativeElement) {
-      this.selectElement.nativeElement.focus();
-    }
-  }
-
-  // Blur method for external control
-  blur(): void {
-    if (this.selectElement?.nativeElement) {
-      this.selectElement.nativeElement.blur();
     }
   }
 }
