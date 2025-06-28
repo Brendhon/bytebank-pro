@@ -38,7 +38,7 @@ export type LogoSize = 'sm' | 'md' | 'lg';
   standalone: true, // Always use standalone components
   imports: [CommonModule, LucideAngularModule], // Required imports for Angular and Lucide icons
   templateUrl: './logo.component.html', // Separated template for clarity
-  styleUrls: ['../styles/index.css'], // Shared styles for consistency
+  styleUrls: ['./logo.component.css'], // Separated styles for better organization
   changeDetection: ChangeDetectionStrategy.OnPush // OnPush for better performance
 })
 export class LogoComponent implements OnInit {

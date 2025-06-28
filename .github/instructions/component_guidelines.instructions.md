@@ -31,13 +31,38 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
     ├── nome-do-componente.component.spec.ts // create a simple test file - with one basic test
     ├── nome-do-componente.component.stories.ts // create a simple Storybook story file - with one basic story
     ├── nome-do-componente.component.html
-    └── nome-do-componente.component.css // include if necessary – normally not required
+    └── nome-do-componente.component.css
   ```
 - **Convenções de Nomenclatura:**
+
   - **Pasta**: `kebab-case` (ex: `date-picker`)
   - **Arquivo**: `kebab-case.component.{ext}` (ex: `date-picker.component.ts`)
   - **Classe**: `PascalCaseComponent` (ex: `DatePickerComponent`)
   - **Seletor**: `bb-kebab-case` (ex: `bb-date-picker`)
+
+- **Arquivo de Estilo**: Sempre crie um arquivo CSS separado para estilos específicos do componente, evitando o uso de estilos globais. Utilize `styleUrls` no decorator `@Component` para referenciar o arquivo CSS.
+
+  ```typescript
+  @Component({
+    selector: 'bb-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.component.css'], // Use CSS específico do componente
+    standalone: true,
+    imports: [CommonModule, LucideAngularModule],
+    changeDetection: ChangeDetectionStrategy.OnPush
+  })
+  export class DatePickerComponent {
+    // Lógica do componente
+  }
+  ```
+
+  Esse aquivo de estilo SEMPRE deve importar os estilos globais do ByteBank Pro, garantindo que o componente esteja estilizado de acordo com a identidade visual da marca.
+
+  ```css
+  @import '@styles/global.css';
+
+  /* Component-specific styles - If necessary (avoid if possible) */
+  ```
 
 ---
 

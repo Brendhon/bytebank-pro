@@ -21,7 +21,7 @@ const mockOptionsWithDisabled: SelectOption[] = [
 ];
 
 const meta: Meta<SelectComponent> = {
-  title: 'Components/Inputs/Select',
+  title: 'Components/Form/Select',
   component: SelectComponent,
   parameters: {
     layout: 'centered',

@@ -40,6 +40,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.0.1",
     "postcss": "^8.5.3",
+    "postcss-import": "^16.1.1",
     "puppeteer": "^24.10.2",
     "storybook": "^9.0.13",
     "tailwindcss": "^3.4.17",
@@ -55,8 +56,8 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/platform-browser-dynamic": "^20.0.0",
     "@angular/router": "^20.0.0",
-    "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/shared-assets": "*",
+    "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/utils": "*",
     "lucide-angular": "^0.523.0",
     "rxjs": "~7.8.0"

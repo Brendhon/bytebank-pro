@@ -24,7 +24,7 @@ export type CardVariant = 'dark' | 'blue' | 'green' | 'orange';
   imports: [CommonModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./card.component.css'],
   host: {
     role: 'article',
     '[attr.aria-label]': 'ariaLabel()'

@@ -45,7 +45,7 @@ export interface SelectGroup {
 @Component({
   selector: 'bb-select',
   templateUrl: './select.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./select.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

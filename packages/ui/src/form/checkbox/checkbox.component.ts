@@ -20,7 +20,7 @@ export type CheckboxState = 'checked' | 'unchecked' | 'indeterminate';
 @Component({
   selector: 'bb-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./checkbox.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

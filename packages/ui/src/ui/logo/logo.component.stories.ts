@@ -3,7 +3,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { LogoComponent } from './logo.component';
 
 const meta: Meta<LogoComponent> = {
-  title: 'Components/Logo',
+  title: 'Components/UI/Logo',
   component: LogoComponent,
   parameters: {
     layout: 'centered',

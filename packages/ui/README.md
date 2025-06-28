@@ -169,6 +169,7 @@ npm run clean           # Limpeza
    src/
    └── novo-component/
        ├── novo-component.component.ts
+       ├── novo-component.component.css
        ├── novo-component.component.html
        ├── novo-component.component.spec.ts
        └── novo-component.component.stories.ts
@@ -184,7 +185,8 @@ npm run clean           # Limpeza
      selector: 'bb-novo-component',
      standalone: true,
      templateUrl: './novo-component.component.html',
-     styleUrls: ['../styles/index.css']
+     styleUrls: ['./novo-component.component.css'],
+     changeDetection: ChangeDetectionStrategy.OnPush
    })
    export class NovoComponentComponent {
      @Input() propriedade: string = '';
@@ -255,7 +257,16 @@ npm run clean           # Limpeza
    export * from './novo-component';
    ```
 
-5. **Teste no Storybook**:
+5. **Estilos do componente**:
+
+```css
+/* import the global styles */
+@import '@styles/global.css';
+
+/* Component-specific styles */
+```
+
+6. **Teste no Storybook**:
 
    ```bash
    npm run storybook

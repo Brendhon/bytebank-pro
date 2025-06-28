@@ -3,7 +3,7 @@ import { InputComponent } from './input.component';
 import { Link, Mail, SearchIcon, UserRoundIcon } from 'lucide-angular';
 
 const meta: Meta<InputComponent> = {
-  title: 'Components/Inputs/Input',
+  title: 'Components/Form/Input',
   component: InputComponent,
   parameters: {
     layout: 'centered',

@@ -1,3 +1,5 @@
+@import '@styles/global.css';
+
 /* Focus styles for better accessibility */
 .bb-checkbox-wrapper:focus-visible {
   outline: 2px solid transparent;

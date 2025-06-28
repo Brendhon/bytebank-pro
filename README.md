@@ -238,7 +238,7 @@ Cada projeto Angular possui dois arquivos de ambiente:
 4. **Iniciar apenas microfrontends:**
 
    ```bash
-   npm run dev:frontend
+   npm run dev:front
    ```
 
 5. **Parar ambiente de desenvolvimento:**

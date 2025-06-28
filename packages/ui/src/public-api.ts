@@ -1,10 +1,10 @@
 /*
  * Public API Surface of ui
  */
-export * from './button/button.component';
-export * from './checkbox/checkbox.component';
-export * from './input/input.component';
-export * from './select/select.component';
-export * from './toast/toast.component';
-export * from './logo/logo.component';
-export * from './card/card.component';
+export * from './ui/button/button.component';
+export * from './form/checkbox/checkbox.component';
+export * from './form/input/input.component';
+export * from './form/select/select.component';
+export * from './ui/toast/toast.component';
+export * from './ui/logo/logo.component';
+export * from './ui/card/card.component';

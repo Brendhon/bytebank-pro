@@ -3,7 +3,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { ButtonComponent, ButtonVariant, ButtonSize } from './button.component';
 
 const meta: Meta<ButtonComponent> = {
-  title: 'Components/Button',
+  title: 'Components/UI/Button',
   component: ButtonComponent,
   parameters: {
     layout: 'centered',

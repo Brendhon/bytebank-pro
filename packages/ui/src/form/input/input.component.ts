@@ -26,7 +26,7 @@ export type InputSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'bb-input',
   templateUrl: './input.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./input.component.css'],
   standalone: true,
   imports: [CommonModule, FormsModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

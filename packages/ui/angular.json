@@ -43,7 +43,7 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "@bytebank-pro/ui:build",
-            "styles": ["src/styles/index.css"],
+            "styles": ["styles/global.css"],
             "compodoc": true,
             "compodocArgs": ["-e", "json", "-d", "."],
             "port": 6006,

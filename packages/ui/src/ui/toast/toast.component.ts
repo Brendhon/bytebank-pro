@@ -31,7 +31,7 @@ export type ToastVariant = 'success' | 'error' | 'info';
 @Component({
   selector: 'bb-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./toast.component.css'],
   standalone: true,
   imports: [CommonModule, LucideAngularModule]
 })

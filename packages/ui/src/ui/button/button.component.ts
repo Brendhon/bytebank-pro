@@ -10,7 +10,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'bb-button',
   templateUrl: './button.component.html',
-  styleUrls: ['../styles/index.css'],
+  styleUrls: ['./button.component.css'],
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush

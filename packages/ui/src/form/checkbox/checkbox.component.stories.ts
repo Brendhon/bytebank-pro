@@ -3,7 +3,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { CheckboxComponent } from './checkbox.component';
 
 const meta: Meta<CheckboxComponent> = {
-  title: 'Components/Inputs/Checkbox',
+  title: 'Components/Form/Checkbox',
   component: CheckboxComponent,
   parameters: {
     layout: 'centered',

@@ -3,7 +3,7 @@ import { argsToTemplate, componentWrapperDecorator } from '@storybook/angular';
 import { ToastComponent } from './toast.component'; //
 
 const meta: Meta<ToastComponent> = {
-  title: 'Components/Toast', //
+  title: 'Components/UI/Toast', //
   component: ToastComponent, //
   parameters: {
     layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context
