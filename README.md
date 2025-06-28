@@ -137,6 +137,12 @@ Biblioteca de assets compartilhados para todos os microfrontends:
 
 [📖 Ver documentação completa](./packages/shared-assets/README.md)
 
+### 🔧 Utils (`packages/utils`)
+
+Biblioteca de utilitários e helpers compartilhados
+
+[📖 Ver documentação completa](./packages/utils/README.md)
+
 ---
 
 ## 🛠️ Qualidade de Código e Padronização
