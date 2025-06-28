@@ -86,8 +86,9 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
   }
   ```
 
-  Esse aquivo de estilo SEMPRE deve importar os estilos globais do ByteBank Pro, garantindo que o componente esteja estilizado de acordo com a identidade visual da marca.
-  Coloque o caminho relativo até o arquivo `global.css` que fica na raiz do diretório `styles` do projeto.
+  Sempre importe os estilos globais do ByteBank Pro no arquivo de estilos do componente.  
+  Isso garante que o componente siga a identidade visual da marca.  
+  Utilize o caminho relativo correto até o arquivo `global.css`, localizado na raiz do diretório `styles` do projeto.
 
   ```css
   @import '../../../styles/global.css';
