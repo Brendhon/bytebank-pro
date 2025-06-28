@@ -15,6 +15,36 @@ Este guia abrangente define as diretrizes e boas práticas para o desenvolviment
 - **Utilize apenas ícones da biblioteca `lucide-angular`**.
 - **Não utilize SVGs customizados ou outras bibliotecas de ícones**.
 - **Importe somente os ícones necessários** para cada componente.
+- **Exemplo de Importação:**
+
+  ```typescript
+  import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
+
+  @Component({
+    selector: 'i-lucide',
+    templateUrl: './i-lucide.component.html',
+    standalone: true,
+    imports: [LucideAngularModule],
+    changeDetection: ChangeDetectionStrategy.OnPush
+  })
+  export class ILucideComponent {
+    // ..
+
+    arrowLeft = ArrowLeft; // Left arrow icon
+    arrowRight = ArrowRight; // Right arrow icon
+
+    // ...
+  }
+  ```
+
+- **Exemplo de Uso no Template:**
+
+  ```html
+  <i-lucide [img]="ArrowLeft" [size]="20" aria-hidden="true"></i-lucide>
+  <i-lucide [img]="ArrowRight" [size]="20" aria-hidden="true"></i-lucide>
+  ```
+
+### 📏 Tamanho dos Componentes
 
 ### 🌈 Cores
 

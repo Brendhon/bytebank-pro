@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
+import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
 import { isNumber } from '@bytebank-pro/utils';
 
 /**
@@ -45,6 +45,13 @@ export class PaginatorComponent {
    * Provides the `isNumber` utility function to the template.
    */
   protected isNumber = isNumber;
+
+  /**
+   * Icons for navigation arrows.
+   * These are used in the template for previous and next buttons
+   */
+  arrowLeftIcon = ArrowLeft; // Icon for the previous page button
+  arrowRightIcon = ArrowRight; // Icon for the next page button
 
   /**
    * Generates an array of page numbers or ellipses for display in the paginator.

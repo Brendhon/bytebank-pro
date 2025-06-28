@@ -8,7 +8,7 @@
     [attr.aria-disabled]="currentPage() === 1 ? 'true' : 'false'"
     data-testid="previous-page-button"
   >
-    <lucide-icon name="arrow-left" [size]="20" aria-hidden="true"></lucide-icon>
+    <i-lucide [img]="arrowLeftIcon" [size]="20" aria-hidden="true"></i-lucide>
   </button>
 
   @for (page of generatePages(); track page) {
@@ -35,6 +35,6 @@
     [attr.aria-disabled]="currentPage() === totalPages() ? 'true' : 'false'"
     data-testid="next-page-button"
   >
-    <lucide-icon name="arrow-right" [size]="20" aria-hidden="true"></lucide-icon>
+    <i-lucide [img]="arrowRightIcon" [size]="20" aria-hidden="true"></i-lucide>
   </button>
 </div>
