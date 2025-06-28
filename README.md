@@ -8,12 +8,12 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 ## ✨ Visão Geral
 
-| App                    | Framework | Descrição                                                                                          | Readme                                             |
-| ---------------------- | --------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| **Shell**              | Angular   | App principal (container) responsável pela orquestração dos microfrontends via Module Federation.  | [Shell App](./apps/shell/README.md)                |
-| **Dashboard MFE**      | Angular   | Painel inicial com gráficos e informações financeiras do usuário.                                  | [Dashboard MFE](./apps/dashboard/README.md)        |
-| **Transações MFE**     | Angular   | Cadastro, edição e listagem de transações.                                                         | [Transactions MFE](./apps/transactions/README.md)  |
-| **Configurações MFE**  | Angular   | Tela de preferências e gerenciamento de conta.                                                     | [Settings MFE](./apps/settings/README.md)          |
+| App                   | Framework | Descrição                                                                                         | Readme                                            |
+| :-------------------- | :-------- | :------------------------------------------------------------------------------------------------ | :------------------------------------------------ |
+| **Shell**             | Angular   | App principal (container) responsável pela orquestração dos microfrontends via Module Federation. | [Shell App](./apps/shell/README.md)               |
+| **Dashboard MFE**     | Angular   | Painel inicial com gráficos e informações financeiras do usuário.                                 | [Dashboard MFE](./apps/dashboard/README.md)       |
+| **Transações MFE**    | Angular   | Cadastro, edição e listagem de transações.                                                        | [Transactions MFE](./apps/transactions/README.md) |
+| **Configurações MFE** | Angular   | Tela de preferências e gerenciamento de conta.                                                    | [Settings MFE](./apps/settings/README.md)         |
 
 ---
 
@@ -26,7 +26,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 - **Tipagem:** [TypeScript](https://www.typescriptlang.org/)
 - **API:** [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/)
 - **Contêineres:** [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
-- **Qualidade:** [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Husky](https://typicode.github.io/husky/), lint-staged, EditorConfig
+- **Qualidade de Código:** [Prettier](https://prettier.io/), [ESLint](https://eslint.org/), [Husky](https://typicode.github.io/husky/), lint-staged, EditorConfig
 - **Acessibilidade:** Regras de acessibilidade com [@angular-eslint/template](https://www.npmjs.com/package/@angular-eslint/eslint-plugin-template).
 
 ---
@@ -35,33 +35,33 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 ```
 bytebank-pro/
-├── .husky/                  # Ganchos Git (pre-commit, etc.) para qualidade de código
+├── .husky/                  \# Ganchos Git (pre-commit, etc.) para qualidade de código
 │   └── pre-commit
-├── apps/                    # Aplicações principais do monorepo (Microfrontends e Shell)
-│   ├── dashboard/           # Angular MFE - Dashboard
-│   ├── settings/            # Angular MFE - Configurações
-│   ├── shell/               # Angular Shell App (container principal)
-│   └── transactions/        # Angular MFE - Transações
-├── docs/                    # Documentação do projeto
-├── packages/                # Bibliotecas e pacotes reutilizáveis no monorepo
-│   ├── eslint-config/       # Configurações de ESLint compartilhadas
-│   ├── shared-assets/       # Assets compartilhados (logos, ícones, imagens)
-│   ├── shared-design-tokens/# Tokens de design reutilizáveis (cores, spacing, fontes)
-│   ├── types/               # Definições de tipos TypeScript compartilhadas
-│   ├── typescript-config/   # Configurações de TypeScript compartilhadas
-│   └── ui/                  # Biblioteca de componentes de UI compartilhados (ex: Botões, Inputs)
-├── .editorconfig            # Configurações de editor para padronização de código
-├── .eslint.config.js        # Configuração raiz do ESLint
-├── .gitignore               # Arquivos e pastas a serem ignorados pelo Git
-├── .lintstagedrc.json       # Configuração do lint-staged para executar lints em arquivos staged
-├── .npmrc                   # Configurações do NPM
-├── .prettierignore          # Arquivos e pastas a serem ignorados pelo Prettier
-├── .prettierrc              # Configuração do Prettier para formatação de código
-├── docker-compose.yml       # Configuração do Docker Compose para ambiente de desenvolvimento
-├── package-lock.json        # Registro das dependências exatas do projeto
-├── package.json             # Definição de pacotes e scripts do monorepo
-├── README.md                # Este arquivo
-└── turbo.json               # Configurações do pipeline do Turborepo
+├── apps/                    \# Aplicações principais do monorepo (Microfrontends e Shell)
+│   ├── dashboard/           \# Angular MFE - Dashboard
+│   ├── settings/            \# Angular MFE - Configurações
+│   ├── shell/               \# Angular Shell App (container principal)
+│   └── transactions/        \# Angular MFE - Transações
+├── docs/                    \# Documentação do projeto
+├── packages/                \# Bibliotecas e pacotes reutilizáveis no monorepo
+│   ├── eslint-config/       \# Configurações de ESLint compartilhadas
+│   ├── shared-assets/       \# Assets compartilhados (logos, ícones, imagens)
+│   ├── shared-design-tokens/\# Tokens de design reutilizáveis (cores, spacing, fontes)
+│   ├── types/               \# Definições de tipos TypeScript compartilhadas
+│   ├── typescript-config/   \# Configurações de TypeScript compartilhadas
+│   └── ui/                  \# Biblioteca de componentes de UI compartilhados (ex: Botões, Inputs)
+├── .editorconfig            \# Configurações de editor para padronização de código
+├── .eslint.config.js        \# Configuração raiz do ESLint
+├── .gitignore               \# Arquivos e pastas a serem ignorados pelo Git
+├── .lintstagedrc.json       \# Configuração do lint-staged para executar lints em arquivos staged
+├── .npmrc                   \# Configurações do NPM
+├── .prettierignore          \# Arquivos e pastas a serem ignorados pelo Prettier
+├── .prettierrc              \# Configuração do Prettier para formatação de código
+├── docker-compose.yml       \# Configuração do Docker Compose para ambiente de desenvolvimento
+├── package-lock.json        \# Registro das dependências exatas do projeto
+├── package.json             \# Definição de pacotes e scripts do monorepo
+├── README.md                \# Este arquivo
+└── turbo.json               \# Configurações do pipeline do Turborepo
 ```
 
 ---
@@ -135,7 +135,56 @@ Biblioteca de assets compartilhados para todos os microfrontends:
 - **`src/index.ts`**: Constantes e helpers para paths dos assets
 - **Uso**: Importação granular com paths tipados e otimização de imagens
 
-[📖 Ver documentação completa](./packages/shared-assets/README.md) | [📋 Guia de Assets](./docs/guidelines/ASSETS_GUIDELINES.md)
+[📖 Ver documentação completa](./packages/shared-assets/README.md)
+
+---
+
+## 🛠️ Qualidade de Código e Padronização
+
+O projeto Bytebank Pro utiliza um conjunto de ferramentas para garantir a consistência, qualidade e padronização do código, facilitando a colaboração e minimizando erros.
+
+### Ferramentas Configuradas
+
+1.  **Prettier**: Ferramenta para formatação automática de código. Garante que todos os arquivos (TypeScript, JavaScript, JSON, Markdown, HTML, CSS/SCSS) sigam um estilo consistente, conforme definido em `.prettierrc`.
+2.  **ESLint**: Realiza a análise estática do código para identificar e corrigir problemas, potenciais bugs e padrões de codificação não recomendados. As configurações são compartilhadas através de `packages/eslint-config`.
+3.  **Husky**: Permite configurar hooks Git, executando scripts automaticamente em eventos como `pre-commit` e `pre-push`.
+4.  **lint-staged**: Em conjunto com o Husky, executa as ferramentas de qualidade de código (Prettier e ESLint) apenas nos arquivos que foram modificados e adicionados ao _stage_ do Git, otimizando o processo. A configuração está em `.lintstagedrc.json`.
+5.  **EditorConfig**: Garante configurações de editor/IDE consistentes (como indentação, quebra de linha) para todos os desenvolvedores, através do arquivo `.editorconfig`.
+
+### Como Funciona
+
+Antes de cada `git commit`, um _hook_ `pre-commit` é executado automaticamente:
+
+1.  `lint-staged` atua nos arquivos modificados:
+    - **Prettier** formata os arquivos relevantes.
+    - **ESLint** analisa e corrige problemas de código.
+    - As correções são automaticamente adicionadas ao commit (`git add`).
+2.  Uma verificação de tipos (`npm run check-types`) é executada em todo o projeto para garantir a integridade da tipagem.
+
+Se hierros críticos de lint ou tipagem forem encontrados, o commit é rejeitado, permitindo que o desenvolvedor revise e corrija os problemas antes de prosseguir.
+
+### Scripts Úteis
+
+Para gerenciar a qualidade de código manualmente, utilize os seguintes scripts NPM:
+
+- `npm run format`: Formata todos os arquivos do projeto usando Prettier.
+- `npm run format:check`: Verifica se todos os arquivos estão formatados corretamente, sem aplicar correções.
+- `npm run lint`: Executa o ESLint em todos os arquivos para identificar problemas.
+- `npm run lint:fix`: Executa o ESLint e tenta corrigir automaticamente os problemas encontrados.
+- `npm run check-types`: Executa a verificação de tipos em todo o projeto.
+- `npm run pre-commit`: Simula a execução do hook `pre-commit` manualmente.
+
+#### Bypass (Não Recomendado)
+
+Em situações de emergência, é possível pular os hooks do Git usando `git commit --no-verify -m "sua mensagem"`. **Este comando deve ser usado com extrema cautela**, pois o código não verificado pode introduzir problemas na base de código.
+
+### Benefícios
+
+- **Código Consistente**: Todos os desenvolvedores seguem os mesmos padrões de estilo e qualidade.
+- **Menos Bugs**: Problemas e padrões não recomendados são identificados antes mesmo do commit.
+- **Reviews Mais Focados**: Revisões de código podem se concentrar na lógica de negócio, e não em discussões de formatação.
+- **Automação**: O processo é automático, integrado ao fluxo de trabalho Git.
+- **Eficiência**: Processa apenas os arquivos modificados, garantindo rapidez.
 
 ---
 
@@ -152,15 +201,6 @@ Biblioteca de assets compartilhados para todos os microfrontends:
 - JWT armazenado no localStorage/sessionStorage
 - Shell gerencia login e compartilha token com MFEs via headers
 - MFEs usam Apollo Client para chamadas GraphQL autenticadas
-
----
-
-## 🧪 Validação e Padrões de Código
-
-- **Prettier:** formatação automática
-- **ESLint:** linting adaptado para Angular
-- **EditorConfig:** padronização de indentação e finais de linha
-- **Angular Reactive Forms:** para formulários
 
 ---
 
@@ -208,7 +248,7 @@ Cada projeto Angular possui dois arquivos de ambiente:
 - **`environment.development.ts`**: Configurações de desenvolvimento
 
 | Comando         | Ambiente utilizado | Descrição                         |
-| --------------- | ------------------ | --------------------------------- |
+| :-------------- | :----------------- | :-------------------------------- |
 | `npm run dev`   | Development        | Desenvolvimento com hot-reload    |
 | `npm run start` | Production         | Produção com otimizações ativadas |
 | `npm run build` | Production         | Build otimizado para produção     |
@@ -217,49 +257,49 @@ Cada projeto Angular possui dois arquivos de ambiente:
 
 ## 🚀 Instruções de Desenvolvimento
 
-1. **Instalar dependências:**
+1.  **Instalar dependências:**
 
-   ```bash
-   npm install
-   ```
+    ```bash
+    npm install
+    ```
 
-2. **Iniciar ambiente completo (API, MongoDB e MFEs):**
+2.  **Iniciar ambiente completo (API, MongoDB e MFEs):**
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+    npm run dev
+    ```
 
-3. **Iniciar apenas API e MongoDB:**
+3.  **Iniciar apenas API e MongoDB:**
 
-   ```bash
-   npm run dev:api
-   ```
+    ```bash
+    npm run dev:api
+    ```
 
-4. **Iniciar apenas microfrontends:**
+4.  **Iniciar apenas microfrontends:**
 
-   ```bash
-   npm run dev:front
-   ```
+    ```bash
+    npm run dev:front
+    ```
 
-5. **Parar ambiente de desenvolvimento:**
+5.  **Parar ambiente de desenvolvimento:**
 
-   ```bash
-   npm run dev:stop
-   ```
+    ```bash
+    npm run dev:stop
+    ```
 
-6. **Gerar build completo:**
+6.  **Gerar build completo:**
 
-   ```bash
-   npm run build
-   ```
+    ```bash
+    npm run build
+    ```
 
-7. **Rodar em produção (apenas MFEs):**
-   ```bash
-   npm run start
-   ```
-   > **Nota:** Este comando executa os microfrontends em modo produção (usando `environment.ts`). A API deve estar rodando separadamente.
+7.  **Rodar em produção (apenas MFEs):**
 
----
+    ```bash
+    npm run start
+    ```
+
+    > **Nota:** Este comando executa os microfrontends em modo produção (usando `environment.ts`). A API deve estar rodando separadamente.
 
 **Observações:**
 
@@ -278,11 +318,11 @@ Veja: [bytebank-api](https://github.com/Brendhon/bytebank-api)
 
 ## 🚀 Deploy
 
-| Parte  | Plataforma       | Forma de Deploy                |
-| ------ | ---------------- | ------------------------------ |
-| Shell  | Render           | Deploy via Git                 |
-| MFEs   | Render           | Deploy individual por app      |
-| API    | Render (Docker)  | Container rodando API GraphQL  |
+| Parte | Plataforma | Forma de Deploy               |
+| :---- | :--------- | :---------------------------- |
+| Shell | Render     | Deploy via Git                |
+| MFEs  | Render     | Deploy individual por app     |
+| API   | Render     | Container rodando API GraphQL |
 
 ---
 
@@ -305,4 +345,8 @@ Veja: [bytebank-api](https://github.com/Brendhon/bytebank-api)
 
 **Brendhon Moreira**
 
-[![Linkedin Badge](https://img.shields.io/badge/-Brendhon-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brendhon-moreira)](https://www.linkedin.com/in/brendhon-moreira)
+[](https://www.linkedin.com/in/brendhon-moreira)
+
+```
+
+```
