@@ -6,6 +6,40 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 ---
 
+## 📝 Sumário
+
+- [💻 Bytebank Pro – Microfrontends](#-bytebank-pro--microfrontends)
+  - [📝 Sumário](#-sumário)
+  - [✨ Visão Geral](#-visão-geral)
+  - [📦 Tecnologias](#-tecnologias)
+  - [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [📦 Packages Compartilhados](#-packages-compartilhados)
+    - [🎨 Design Tokens (`packages/shared-design-tokens`)](#-design-tokens-packagesshared-design-tokens)
+    - [🧩 UI Components (`packages/ui`)](#-ui-components-packagesui)
+    - [🔷 Types (`packages/types`)](#-types-packagestypes)
+    - [⚙️ TypeScript Config (`packages/typescript-config`)](#️-typescript-config-packagestypescript-config)
+    - [📋 ESLint Config (`packages/eslint-config`)](#-eslint-config-packageseslint-config)
+    - [🎨 Shared Assets (`packages/shared-assets`)](#-shared-assets-packagesshared-assets)
+    - [🔧 Utils (`packages/utils`)](#-utils-packagesutils)
+  - [🛠️ Qualidade de Código e Padronização](#️-qualidade-de-código-e-padronização)
+    - [Ferramentas Configuradas](#ferramentas-configuradas)
+    - [Como Funciona](#como-funciona)
+    - [Scripts Úteis](#scripts-úteis)
+      - [Bypass (Não Recomendado)](#bypass-não-recomendado)
+    - [Benefícios](#benefícios)
+  - [🔌 Comunicação entre Microfrontends](#-comunicação-entre-microfrontends)
+  - [🔐 Autenticação](#-autenticação)
+  - [🐳 Desenvolvimento com Docker Compose](#-desenvolvimento-com-docker-compose)
+  - [🌐 Ambientes](#-ambientes)
+  - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
+  - [API GraphQL](#api-graphql)
+  - [🚀 Deploy](#-deploy)
+  - [🧪 Testes](#-testes)
+  - [🧰 Boas Práticas](#-boas-práticas)
+  - [👥 Autor](#-autor)
+
+---
+
 ## ✨ Visão Geral
 
 | App                   | Framework | Descrição                                                                                         | Readme                                            |
@@ -352,7 +386,3 @@ Veja: [bytebank-api](https://github.com/Brendhon/bytebank-api)
 **Brendhon Moreira**
 
 [](https://www.linkedin.com/in/brendhon-moreira)
-
-```
-
-```
