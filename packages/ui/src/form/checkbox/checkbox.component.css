@@ -1,4 +1,4 @@
-@import '@styles/global.css';
+@import '../../../styles/global.css';
 
 /* Focus styles for better accessibility */
 .bb-checkbox-wrapper:focus-visible {
