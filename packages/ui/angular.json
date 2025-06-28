@@ -35,7 +35,8 @@
           "options": {
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.cjs",
-            "polyfills": ["zone.js", "zone.js/testing"]
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "styles": ["styles/global.css"]
           }
         },
         "storybook": {

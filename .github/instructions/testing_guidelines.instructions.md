@@ -635,3 +635,5 @@ describe('ComponenteComponent', () => {
   const result = formatCurrency(1000000);
   expect(result).toMatch(/^R\$\s1\.000\.000,00$/);
   ```
+
+- No final do teste, me forneça o comando para executar os testes do componente específico, como mencionado no início deste guia.

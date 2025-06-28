@@ -1,0 +1,40 @@
+<div class="paginator-container" data-testid="paginator-component">
+  <button
+    type="button"
+    [class]="getArrowButtonClasses()"
+    (click)="onPageChange.emit(currentPage() - 1)"
+    [disabled]="currentPage() === 1"
+    [attr.aria-label]="'Previous page'"
+    [attr.aria-disabled]="currentPage() === 1 ? 'true' : 'false'"
+    data-testid="previous-page-button"
+  >
+    <lucide-icon name="arrow-left" [size]="20" aria-hidden="true"></lucide-icon>
+  </button>
+
+  @for (page of generatePages(); track page) {
+    <button
+      type="button"
+      [class]="getPageButtonClasses(page)"
+      (click)="handlePageClick(page)"
+      [disabled]="page === '...'"
+      [attr.aria-label]="page === '...' ? 'More pages' : 'Page ' + page"
+      [attr.aria-current]="currentPage() === page ? 'page' : null"
+      [attr.aria-disabled]="page === '...' ? 'true' : 'false'"
+      [attr.data-testid]="page === '...' ? 'ellipsis-button' : 'page-button-' + page"
+    >
+      {{ page }}
+    </button>
+  }
+
+  <button
+    type="button"
+    [class]="getArrowButtonClasses()"
+    (click)="onPageChange.emit(currentPage() + 1)"
+    [disabled]="currentPage() === totalPages()"
+    [attr.aria-label]="'Next page'"
+    [attr.aria-disabled]="currentPage() === totalPages() ? 'true' : 'false'"
+    data-testid="next-page-button"
+  >
+    <lucide-icon name="arrow-right" [size]="20" aria-hidden="true"></lucide-icon>
+  </button>
+</div>

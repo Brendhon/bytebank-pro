@@ -1,0 +1,18 @@
+@import '@styles/global.css';
+
+/* Component-specific styles */
+.paginator-container {
+  @apply flex items-center gap-2 bg-white shadow-lg rounded-sm p-2;
+}
+
+.arrow-button {
+  @apply px-2 text-bytebank-gray cursor-pointer disabled:cursor-not-allowed hover:opacity-70 transition-opacity duration-200;
+}
+
+.page-button {
+  @apply w-7 h-7 text-bytebank-gray cursor-pointer disabled:cursor-not-allowed hover:opacity-70 transition-opacity duration-200 flex items-center justify-center;
+}
+
+.page-button--active {
+  @apply bg-bytebank-blue text-white rounded-sm;
+}

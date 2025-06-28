@@ -1,3 +1,5 @@
+const postcssNestingPlugin = 'postcss-nesting';
+
 /** @type {import('postcss').Config} */
 export default {
   plugins: {
@@ -10,6 +12,7 @@ export default {
         return id;
       }
     },
+    '@tailwindcss/nesting': require(postcssNestingPlugin),
     tailwindcss: {},
     autoprefixer: {}
   }

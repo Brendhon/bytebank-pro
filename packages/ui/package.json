@@ -29,6 +29,8 @@
     "@storybook/addon-docs": "^9.0.13",
     "@storybook/angular": "^9.0.13",
     "@types/jasmine": "~5.1.0",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "postcss-nesting": "^13.0.2",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-plugin-storybook": "^9.0.13",
