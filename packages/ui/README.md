@@ -49,7 +49,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@bytebank-pro/ui/button';
 
 @Component({
-  selector: 'app-example',
+  selector: 'bb-example',
   standalone: true,
   imports: [ButtonComponent],
   template: `<bb-button variant="primary" (buttonClick)="handleClick()">Clique aqui</bb-button>`

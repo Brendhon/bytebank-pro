@@ -92,7 +92,7 @@ import { Component } from '@angular/core';
 import { formatCurrency, formatDateToShort } from '@bytebank-pro/utils';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'bb-dashboard',
   template: `
     <p>Saldo: {{ formattedValue }}</p>
     <p>Data: {{ formattedDate }}</p>

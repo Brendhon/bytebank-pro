@@ -6,8 +6,6 @@ applyTo: '**/*.component.ts,**/*.component.html'
 
 Este guia abrangente define as diretrizes e boas práticas para o desenvolvimento de componentes no ByteBank Pro, abrangendo estrutura, estilo, organização, práticas modernas do Angular e acessibilidade.
 
----
-
 ## 🎨 Diretrizes Gerais de Componentes e Estilo
 
 ### 🖼️ Ícones
@@ -59,7 +57,6 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
   └── nome-do-componente/
     ├── nome-do-componente.component.ts
     ├── nome-do-componente.component.spec.ts // create a simple test file - with one basic test
-    ├── nome-do-componente.component.stories.ts // create a simple Storybook story file - with one basic story
     ├── nome-do-componente.component.html
     └── nome-do-componente.component.css
   ```
@@ -84,16 +81,6 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
   export class DatePickerComponent {
     // Lógica do componente
   }
-  ```
-
-  Sempre importe os estilos globais do ByteBank Pro no arquivo de estilos do componente.  
-  Isso garante que o componente siga a identidade visual da marca.  
-  Utilize o caminho relativo correto até o arquivo `global.css`, localizado na raiz do diretório `styles` do projeto.
-
-  ```css
-  @import '../../../styles/global.css';
-
-  /* Component-specific styles - If necessary (avoid if possible) */
   ```
 
 ---
@@ -346,3 +333,67 @@ export class DropdownComponent {}
 })
 export class TabsComponent {}
 ```
+
+---
+
+## 📦 Diretrizes Específicas para o Pacote ByteBank UI (`@bytebank-pro/ui`)
+
+> ⚠️ **IMPORTANTE**: As diretrizes desta seção aplicam-se **EXCLUSIVAMENTE** aos componentes desenvolvidos dentro do pacote `@bytebank-pro/ui` (localizado em `packages/ui/`).
+>
+> **Não se aplicam aos componentes dos aplicativos** (`apps/dashboard`, `apps/settings`, `apps/shell`, `apps/transactions`).
+
+### 📖 Documentação com Storybook
+
+Para componentes do pacote UI, **obrigatoriamente** inclua um arquivo de story do Storybook na estrutura do componente:
+
+```
+src/
+└── nome-do-componente/
+  ├── nome-do-componente.component.ts
+  ├── nome-do-componente.component.spec.ts
+  ├── nome-do-componente.component.html
+  ├── nome-do-componente.component.css
+  └── nome-do-componente.component.stories.ts // create a simple story file
+```
+
+**Exemplo básico de story:**
+
+```typescript
+import type { Meta, StoryObj } from '@storybook/angular';
+import { NomeDoComponenteComponent } from './nome-do-componente.component';
+
+const meta: Meta<NomeDoComponenteComponent> = {
+  title: 'Components/NomeDoComponente',
+  component: NomeDoComponenteComponent
+};
+
+export default meta;
+type Story = StoryObj<NomeDoComponenteComponent>;
+
+export const Default: Story = {
+  args: {
+    // propriedades padrão do componente
+  }
+};
+```
+
+### 🎨 Importação de Estilos Globais
+
+**Sempre importe os estilos globais** do ByteBank Pro UI no início do arquivo CSS do componente (`nome-do-componente.component.css`):
+
+```css
+@import '../../../styles/global.css';
+
+/* 
+ * Estilos específicos do componente (evite quando possível)
+ * Prefira utilizar classes utilitárias do TailwindCSS
+ */
+```
+
+Esta importação garante que:
+
+- O componente mantenha a identidade visual da marca ByteBank
+- As variáveis CSS e design tokens estejam disponíveis
+- A consistência visual seja mantida em toda a biblioteca de componentes
+
+---

@@ -1,7 +1,3 @@
----
-applyTo: '**/*.service.ts'
----
-
 # 🚀 Bytebank API GraphQL - Documentação de Uso
 
 Bem-vindo à documentação de uso da API GraphQL do Bytebank. Este guia detalha como interagir com a API, incluindo todas as queries e mutations disponíveis, e os dados esperados para cada operação.
