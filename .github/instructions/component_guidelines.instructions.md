@@ -396,4 +396,12 @@ Esta importação garante que:
 - As variáveis CSS e design tokens estejam disponíveis
 - A consistência visual seja mantida em toda a biblioteca de componentes
 
+### 📦 Exportação do componente
+
+Para garantir que o componente esteja disponível para uso em outros aplicativos e pacotes, **exporte-o no arquivo `public-api.ts` do pacote `@bytebank-pro/ui`**:
+
+```typescript
+export * from './nome-do-componente/nome-do-componente.component';
+```
+
 ---
