@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { DialogComponent } from './dialog.component';
 
 const meta: Meta<DialogComponent> = {
-  title: 'Components/Dialog',
+  title: 'Components/UI/Dialog',
   component: DialogComponent,
   parameters: {
     layout: 'centered',
