@@ -302,3 +302,61 @@ export const ResponsiveLayout: Story = {
     }
   }
 };
+
+export const WithCustomRender: Story = {
+  render: () => ({
+    template: `
+      <div>
+        <ng-template #statusTemplate let-value let-row="row">
+          <span class="px-2 py-1 rounded-full text-xs" 
+                [ngClass]="{
+                  'bg-green-100 text-green-800': value === 'active',
+                  'bg-red-100 text-red-800': value === 'inactive'
+                }">
+            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}
+          </span>
+        </ng-template>
+
+        <bb-generic-table 
+          [data]="customData" 
+          [columns]="getCustomColumns(statusTemplate)">
+        </bb-generic-table>
+      </div>
+    `,
+    props: {
+      customData: [
+        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },
+        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },
+        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },
+        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }
+      ],
+      getCustomColumns: (statusTemplate: any) => [
+        { label: 'ID', accessor: 'id' },
+        { label: 'Name', accessor: 'name' },
+        { label: 'Email', accessor: 'email' },
+        { label: 'Status', accessor: 'status', render: statusTemplate }
+      ]
+    }
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Tabela com Renderização Customizada
+
+Esta story demonstra como usar a propriedade \`render\` das colunas com templates Angular para customizar a exibição dos dados:
+
+- **Status**: Exibe badges coloridos com ícones para status ativo/inativo
+\`\`\`
+<!-- Uso na tabela -->
+<bb-generic-table 
+  [data]="data" 
+  [columns]="[{ label: 'Status', accessor: 'status', render: statusTemplate }]">
+</bb-generic-table>
+\`\`\`
+        `
+      }
+    }
+  }
+};
