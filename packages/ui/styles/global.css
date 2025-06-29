@@ -7,11 +7,6 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500;
   }
 
-  .card {
-    @apply bg-bytebank-light-gray rounded-sm p-7 shadow-sm;
-    @apply text-bytebank-dark;
-  }
-
   .button {
     @apply w-[150px] h-[40px] rounded-sm relative transition-colors;
     @apply disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer;

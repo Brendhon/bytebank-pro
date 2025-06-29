@@ -7,4 +7,3 @@ export * from './form/input/input.component';
 export * from './form/select/select.component';
 export * from './ui/toast/toast.component';
 export * from './ui/logo/logo.component';
-export * from './ui/card/card.component';

@@ -25,6 +25,7 @@
     "@angular/router": "^20.0.0",
     "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/ui": "*",
+    "lucide-angular": "^0.523.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.15.1"
