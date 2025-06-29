@@ -1,18 +1,16 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  input,
-  output,
-  signal,
-  computed,
-  inject,
-  HostListener,
-  ViewChild,
-  ElementRef,
-  OnInit,
-  AfterViewInit
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  HostListener,
+  input,
+  OnInit,
+  output,
+  ViewChild
+} from '@angular/core';
 import { LucideAngularModule, X } from 'lucide-angular';
 
 @Component({
