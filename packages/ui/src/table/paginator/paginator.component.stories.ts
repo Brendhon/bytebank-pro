@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginatorComponent } from './paginator.component';
 
 const meta: Meta<PaginatorComponent> = {
-  title: 'Components/Paginator',
+  title: 'Components/Table/Paginator',
   component: PaginatorComponent,
   parameters: {
     layout: 'centered',

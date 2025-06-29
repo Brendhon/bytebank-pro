@@ -1,0 +1,79 @@
+<div class="flex flex-col gap-4" data-testid="generic-table-container">
+  <div
+    class="overflow-x-auto bg-white border border-bytebank-gray rounded-sm"
+    data-testid="table-wrapper"
+  >
+    <table class="w-full" role="table" aria-label="Generic data table">
+      <thead
+        class="bg-bytebank-light-green border-b border-bytebank-gray"
+        data-testid="table-header"
+      >
+        <tr role="row">
+          @for (col of columns(); track trackByColumnIndex($index, col)) {
+            <th
+              [attr.scope]="'col'"
+              [class]="
+                getCellClasses(
+                  'px-8 w-[200px] h-[50px] text-bytebank-dark text-left',
+                  'text-16-semi h-[40px]'
+                )
+              "
+            >
+              {{ col.label }}
+            </th>
+          }
+        </tr>
+      </thead>
+
+      <tbody data-testid="table-body">
+        @if (data().length === 0) {
+          <tr role="row" data-testid="no-data-row">
+            <td [attr.colSpan]="columns().length" class="text-center py-4">
+              <span class="text-bytebank-gray" data-testid="no-data-message">
+                Nenhum dado encontrado
+              </span>
+            </td>
+          </tr>
+        } @else {
+          @for (row of pagedData(); track trackByRowIndex($index, row)) {
+            <tr role="row" class="hover:opacity-70 transition-opacity duration-200">
+              @for (col of columns(); track trackByColumnIndex($index, col)) {
+                <td
+                  [class]="
+                    getCellClasses(
+                      'px-8 w-[200px] h-[50px] text-bytebank-dark text-left',
+                      'text-14'
+                    )
+                  "
+                >
+                  @if (col.render) {
+                    <ng-container
+                      [ngTemplateOutlet]="col.render"
+                      [ngTemplateOutletContext]="{
+                        $implicit: row[col.accessor],
+                        row: row,
+                        index: $index
+                      }"
+                    ></ng-container>
+                  } @else {
+                    {{ row[col.accessor] }}
+                  }
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (pageSize() && totalPages() > 1) {
+    <div class="flex justify-end" data-testid="paginator-wrapper">
+      <bb-paginator
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        (onPageChange)="onPageChange($event)"
+      ></bb-paginator>
+    </div>
+  }
+</div>

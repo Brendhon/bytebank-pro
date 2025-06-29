@@ -30,15 +30,15 @@ packages/shared-design-tokens/
 
 #### Cores Primárias
 
-- `bytebank-blue`: #004061 - Azul institucional
+- `bytebank-blue`: #004D61 - Azul institucional
 - `bytebank-orange`: #FF5031 - Laranja de destaque
 - `bytebank-green`: #47A13B - Verde para confirmações
 
 #### Cores Neutras
 
-- `bytebank-light-green`: #E4E3E3 - Verde claro
-- `bytebank-light-gray`: #F5F5F5 - Cinza claro
-- `bytebank-gray`: #888888 - Cinza médio
+- `bytebank-light-green`: #E4EDE3 - Verde claro
+- `bytebank-light-gray`: #F9F9F9 - Cinza claro
+- `bytebank-gray`: #8B8B8B - Cinza médio
 - `bytebank-dark-gray`: #444444 - Cinza escuro
 - `bytebank-dark`: #212121 - Escuro principal
 
