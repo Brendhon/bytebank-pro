@@ -11,7 +11,7 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do *
 - **Angular 20**
 - **@angular-architects/module-federation**
 - **Tailwind CSS**
-- **Angular Signals** + Services (para estado global)
+- **Angular Signals + RxJS** para controle de estado
 - **CustomEvent** e URL Params para comunicação entre apps
 - **JWT** para autenticação (armazenado em localStorage)
 - **Apollo Client** (opcional, caso o Shell consuma a API também)

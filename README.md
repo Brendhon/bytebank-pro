@@ -375,7 +375,9 @@ Veja: [bytebank-api](https://github.com/Brendhon/bytebank-api)
 ## 🧰 Boas Práticas
 
 - **Rotas em inglês**, alinhadas com eventos (`/transactions`, `/settings`)
-- Use `Signals` + `Service` para estado em Angular (sem NgRx)
+- Para controle de estado usaremos:
+  - **RxJS**: Para estados complexos e reativos
+  - **Signals**: Para estados simples e locais (ex: contadores, flags)
 - Ícones: Angular Lucide Icons
 - Componentes padronizados com **Tailwind**
 

@@ -18,7 +18,7 @@ Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido e
 - **GraphQL (Apollo Client Angular)** para comunicação com a API
 - **Angular Reactive Forms** para formulários
 - **Lucide Angular** para ícones
-- **Angular Signals** + Services (para estado global)
+- **Angular Signals + RxJS** para controle de estado
 - **CustomEvent** + URL Params para comunicação com o Shell
 - **TypeScript**, ESLint, Prettier
 
@@ -115,8 +115,9 @@ module.exports = withModuleFederationPlugin({
 
 ## 📦 Estado
 
-- **Angular Signals** + Services para estado global
-- Pode ser usado para armazenar filtros, transações carregadas, etc.
+- Para controle de estado usaremos:
+  - **RxJS**: Para estados complexos e reativos
+  - **Signals**: Para estados simples e locais (ex: contadores, flags)
 
 ---
 

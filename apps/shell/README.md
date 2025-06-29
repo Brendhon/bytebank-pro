@@ -15,7 +15,7 @@ Este projeto é o **Shell (container principal)** do Bytebank Pro. Desenvolvido 
 - **Angular 20**
 - **@angular-architects/module-federation**
 - **Tailwind CSS**
-- **Angular Signals** + Services (para estado global)
+- **Angular Signals + RxJS** para controle de estado
 - **CustomEvent** e URL Params para comunicação entre apps
 - **JWT** para autenticação (armazenado em localStorage)
 - **Apollo Client Angular** (para consumo de API GraphQL)
@@ -163,7 +163,7 @@ CMD ["npx", "http-server", "dist/shell"]
 - [x] Comunicação com MFEs via CustomEvent e URL
 - [x] Module Federation via `@angular-architects/module-federation`
 - [x] Tailwind configurado com tokens compartilhados
-- [x] Estado com Signals + Services
+- [x] Estado com Signals + RxJS
 - [x] Docker local e build de produção funcional
 
 ---
