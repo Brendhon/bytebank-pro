@@ -1,0 +1,43 @@
+<!-- Dialog Overlay with Backdrop Blur -->
+<div class="bb-dialog-backdrop" (click)="onBackdropClick($event)" data-testid="dialog-backdrop">
+  <!-- Dialog Container -->
+  <div
+    #dialogElement
+    class="bb-dialog-container"
+    role="dialog"
+    [attr.aria-modal]="'true'"
+    [attr.aria-label]="ariaLabelValue()"
+    [style.max-width]="maxWidth()"
+    data-testid="dialog-container"
+    tabindex="-1"
+  >
+    <!-- Dialog Header -->
+    @if (title() || showCloseButton()) {
+      <div class="bb-dialog-header" data-testid="dialog-header">
+        @if (title()) {
+          <h2 class="bb-dialog-title" data-testid="dialog-title">
+            {{ title() }}
+          </h2>
+        }
+
+        @if (showCloseButton()) {
+          <button
+            #closeButton
+            type="button"
+            class="bb-dialog-close-button bb-focus-ring"
+            [attr.aria-label]="closeButtonAriaLabel()"
+            (click)="onCloseClick()"
+            data-testid="dialog-close-button"
+          >
+            <i-lucide [img]="xIcon" [size]="20" aria-hidden="true"></i-lucide>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Dialog Content -->
+    <div class="bb-dialog-content" data-testid="dialog-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

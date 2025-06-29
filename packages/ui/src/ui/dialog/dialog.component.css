@@ -1,0 +1,100 @@
+@import '../../../styles/global.css';
+
+/* Dialog Overlay - covers the entire screen */
+.bb-dialog-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+}
+
+/* Dialog Backdrop - provides blur effect */
+.bb-dialog-backdrop {
+  @apply absolute inset-0 bg-black/20 backdrop-blur-sm;
+  @apply flex items-center justify-center p-4;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Dialog Container - the actual dialog box */
+.bb-dialog-container {
+  @apply relative bg-white rounded-lg shadow-2xl;
+  @apply w-full max-w-md mx-auto;
+  @apply transform transition-all duration-300 ease-in-out;
+  @apply border border-gray-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Dialog Header */
+.bb-dialog-header {
+  @apply flex items-center justify-between p-6 pb-4;
+  @apply border-b border-gray-100;
+}
+
+/* Dialog Title */
+.bb-dialog-title {
+  @apply text-xl font-semibold text-gray-900;
+  @apply flex-1 pr-4;
+}
+
+/* Close Button */
+.bb-dialog-close-button {
+  @apply flex items-center justify-center;
+  @apply w-8 h-8 rounded-full;
+  @apply text-gray-400 hover:text-gray-600 hover:bg-gray-100;
+  @apply transition-colors duration-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* Dialog Content */
+.bb-dialog-content {
+  @apply p-6;
+}
+
+/* Animation states */
+.bb-dialog-overlay[style*='display: flex'] .bb-dialog-container {
+  @apply scale-100 opacity-100;
+}
+
+.bb-dialog-overlay[style*='display: none'] .bb-dialog-container {
+  @apply scale-95 opacity-0;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .bb-dialog-backdrop {
+    @apply p-2;
+  }
+
+  .bb-dialog-container {
+    @apply mx-2;
+  }
+
+  .bb-dialog-header {
+    @apply p-4 pb-3;
+  }
+
+  .bb-dialog-content {
+    @apply p-4;
+  }
+
+  .bb-dialog-title {
+    @apply text-lg;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bb-dialog-container {
+    @apply border-2 border-black;
+  }
+
+  .bb-dialog-close-button {
+    @apply border border-gray-400;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .bb-dialog-backdrop,
+  .bb-dialog-container,
+  .bb-dialog-close-button {
+    @apply transition-none;
+  }
+}
