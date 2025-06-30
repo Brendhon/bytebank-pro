@@ -1,0 +1,21 @@
+<div class="flex md:hidden" data-testid="menu-popover-container">
+  <bb-popover class="relative" [attr.popoverClassName]="'p-4'" data-testid="main-menu-popover">
+    <ng-template #popoverTrigger>
+      <button
+        type="button"
+        class="popover-trigger rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
+        aria-label="Open navigation menu"
+        data-testid="menu-button"
+      >
+        <i-lucide [img]="menuIcon" [size]="40" aria-hidden="true"></i-lucide>
+      </button>
+    </ng-template>
+
+    <bb-nav-menu
+      [current]="currentNavLabel()"
+      [className]="'flex p-0'"
+      (onNavigate)="handleNavigation($event)"
+      data-testid="nav-menu-inside-popover"
+    ></bb-nav-menu>
+  </bb-popover>
+</div>

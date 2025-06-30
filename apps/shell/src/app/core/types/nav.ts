@@ -11,3 +11,9 @@ export interface NavMenuItem {
   href: string;
   icon: any; // Type for Lucide icon
 }
+
+export enum NavMenuItemLabel {
+  dashboard = 'Dashboard',
+  transactions = 'Transações',
+  settings = 'Configurações'
+}

@@ -118,6 +118,7 @@ describe('authGuard', () => {
     );
 
     expect(router.createUrlTree).toHaveBeenCalledWith(['/login']);
+
     expect(result).toBeInstanceOf(UrlTree);
   });
 });
@@ -184,8 +185,7 @@ describe('HighlightDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HighlightDirective], // Importar a diretiva standalone
-      declarations: [TestHostComponent] // Declarar o componente host
+      imports: [HighlightDirective, TestHostComponent] // Importar a diretiva standalone
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -588,8 +588,7 @@ describe('authInterceptor', () => {
     class TestHostComponent {}
 
     TestBed.configureTestingModule({
-      imports: [CardComponent],
-      declarations: [TestHostComponent]
+      imports: [CardComponent, TestHostComponent]
     }).compileComponents();
 
     const hostFixture = TestBed.createComponent(TestHostComponent);
@@ -702,8 +701,7 @@ describe('authInterceptor', () => {
 
     beforeEach(async () => {
       await TestBed.configureTestingModule({
-        imports: [HighlightDirective],
-        declarations: [TestComponent]
+        imports: [HighlightDirective, TestComponent]
       }).compileComponents();
 
       fixture = TestBed.createComponent(TestComponent);
@@ -751,6 +749,7 @@ describe('authInterceptor', () => {
 
     it('should load data from service on init', () => {
       expect(mockService.getData).toHaveBeenCalled();
+
       expect(component.items).toEqual(['item1', 'item2']);
     });
 
@@ -778,6 +777,7 @@ describe('authInterceptor', () => {
     fixture.detectChanges();
 
     expect(component.hasError).toBeTruthy();
+
     expect(component.errorMessage).toContain('Failed to load data');
 
     const errorElement = fixture.debugElement.query(By.css('[data-testid="error-message"]'));
@@ -808,6 +808,7 @@ describe('authInterceptor', () => {
       next: () => fail('should have failed'),
       error: (err) => {
         expect(err.status).toBe(401);
+
         expect(notificationServiceSpy.showError).toHaveBeenCalledWith(
           'Sessão expirada. Por favor, faça login novamente.'
         );
@@ -895,7 +896,3 @@ npm run test -- --include="\*\*/meu-componente.component.spec.ts"
 ```
 
 Lembre-se de adaptar o caminho do arquivo `*\*/meu-componente.component.spec.ts` para o local real do seu arquivo de teste dentro da pasta `packages/ui` ou da raiz do seu projeto, conforme sua estrutura.
-
-```
-
-```
