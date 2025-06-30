@@ -1,10 +1,10 @@
 ---
-applyTo: '**/*.service.ts,**/*.guard.ts,**/*.resolver.ts'
+applyTo: '**/*.service.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Serviços, Guards e Resolvers no ByteBank Pro
+# 📋 Guia de Boas Práticas para Criação de Serviços no ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de serviços, guards e resolvers no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+Este guia define as diretrizes e boas práticas para o desenvolvimento de serviços no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
 
 ## 📁 Estrutura e Convenções de Nomenclatura
 
@@ -25,41 +25,7 @@ Serviços devem ser colocados em uma pasta `services` dentro do módulo ou recur
   - **Arquivo**: `kebab-case.service.{ext}` (ex: `user.service.ts`)
   - **Classe**: `PascalCaseService` (ex: `UserService`)
 
-### 🛡️ Guards
-
-Guards devem ser colocados em uma pasta `guards` dentro do módulo ou recurso que eles protegem.
-
-- **Estrutura Padrão:**
-  ```
-  src/
-  └── nome-do-recurso/
-    └── guards/
-      ├── nome-do-guard.guard.ts
-      └── nome-do-guard.guard.spec.ts // Crie um arquivo de teste simples com um teste básico
-  ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `auth`)
-  - **Arquivo**: `kebab-case.guard.{ext}` (ex: `auth.guard.ts`)
-  - **Classe/Função**: `CanActivateFn`, `CanMatchFn`, etc. (ex: `AuthGuard`)
-
-### 🔄 Resolvers
-
-Resolvers devem ser colocados em uma pasta `resolvers` dentro do módulo ou recurso onde são utilizados.
-
-- **Estrutura Padrão:**
-  ```
-  src/
-  └── nome-do-recurso/
-    └── resolvers/
-      ├── nome-do-resolver.resolver.ts
-      └── nome-do-resolver.resolver.spec.ts // Crie um arquivo de teste simples com um teste básico
-  ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `user-profile`)
-  - **Arquivo**: `kebab-case.resolver.{ext}` (ex: `user-data.resolver.ts`)
-  - **Classe/Função**: `ResolveFn` (ex: `UserDataResolver`)
-
-## 🏗️ Angular Modern Best Practices (Angular 20) para Serviços, Guards e Resolvers
+## 🏗️ Angular Modern Best Practices (Angular 20) para Serviços
 
 Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
 
@@ -77,40 +43,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-3.  **Guards e Resolvers Baseados em Funções (Angular 15+)**: Prefira funções para Guards (`CanActivateFn`, `CanMatchFn`, `CanDeactivateFn`, `CanLoadFn`, `CanActivateChildFn`) e Resolvers (`ResolveFn`) para um código mais conciso e "treeshakeable".
-
-    ```typescript
-    // auth.guard.ts
-    import { CanActivateFn, Router } from '@angular/router';
-    import { inject } from '@angular/core';
-    import { AuthService } from './auth.service';
-
-    export const authGuard: CanActivateFn = (route, state) => {
-      const authService = inject(AuthService);
-      const router = inject(Router);
-
-      if (authService.isAuthenticated()) {
-        return true;
-      } else {
-        return router.createUrlTree(['/login']);
-      }
-    };
-
-    // user-data.resolver.ts
-    import { ResolveFn } from '@angular/router';
-    import { inject } from '@angular/core';
-    import { UserService } from '../services/user.service';
-    import { User } from '../models/user.model';
-    import { Observable } from 'rxjs';
-
-    export const userDataResolver: ResolveFn<User> = (route, state): Observable<User> => {
-      const userService = inject(UserService);
-      const userId = route.paramMap.get('id');
-      return userService.getUser(userId!);
-    };
-    ```
-
-4.  **Gerenciamento de Estado em Serviços**:
+3.  **Gerenciamento de Estado em Serviços**:
 
     - **Para estados complexos e reativos (dados assíncronos, coleções de dados, estados globais/compartilhados)**: Utilize `Observables` (`BehaviorSubject`, `ReplaySubject`) do RxJS para garantir um fluxo de dados reativo e poderoso.
 
@@ -177,7 +110,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       - **Use Observables**: Quando a origem dos dados é assíncrona (HTTP, WebSockets), para transformações complexas de dados (map, filter, debounce), para operações encadeadas ou para gerenciar um fluxo contínuo de eventos. Eles são ideais para a maioria dos dados de negócio.
       - **Use Signals**: Para dados síncronos simples, estado de UI local que não requer a orquestração do RxJS, ou quando a reatividade granular do Angular Signals é estritamente necessária para otimização de performance em cenários específicos. **Não os utilize para substituir a gestão robusta de fluxos de dados que o RxJS oferece.**
 
-5.  **Serviços `providedIn: 'root'`**: Sempre que possível, declare serviços com `providedIn: 'root'` para que sejam _singleton_ e _tree-shakable_. Isso reduz o tamanho do _bundle_ final da aplicação.
+4.  **Serviços `providedIn: 'root'`**: Sempre que possível, declare serviços com `providedIn: 'root'` para que sejam _singleton_ e _tree-shakable_. Isso reduz o tamanho do _bundle_ final da aplicação.
     ```typescript
     @Injectable({
       providedIn: 'root'
@@ -186,7 +119,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       /* ... */
     }
     ```
-6.  **Gerenciamento de Erros**: Implemente estratégias robustas de tratamento de erros em serviços, especialmente para chamadas HTTP, utilizando operadores RxJS como `catchError` e `retry`.
+5.  **Gerenciamento de Erros**: Implemente estratégias robustas de tratamento de erros em serviços, especialmente para chamadas HTTP, utilizando operadores RxJS como `catchError` e `retry`.
 
     ```typescript
     import { catchError, retry } from 'rxjs/operators';
@@ -205,7 +138,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       .subscribe();
     ```
 
-7.  **Limpeza de Subscrições (Cleanup)**: Em serviços com lógica que cria subscrições (ex: Observables de WebSockets, timers), utilize `takeUntilDestroyed` (se o serviço for injetado em um contexto com `DestroyRef`) ou gerencie subscrições manualmente com `Subscription.add()` e `Subscription.unsubscribe()` no `ngOnDestroy`.
+6.  **Limpeza de Subscrições (Cleanup)**: Em serviços com lógica que cria subscrições (ex: Observables de WebSockets, timers), utilize `takeUntilDestroyed` (se o serviço for injetado em um contexto com `DestroyRef`) ou gerencie subscrições manualmente com `Subscription.add()` e `Subscription.unsubscribe()` no `ngOnDestroy`.
 
     ```typescript
     import { Injectable, DestroyRef, inject, OnDestroy } from '@angular/core';
@@ -236,7 +169,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-8.  **Tipagem Forte**: Sempre use tipagem forte (`interface`, `type`) para dados retornados por APIs ou manipulados em serviços, guards e resolvers.
+7.  **Tipagem Forte**: Sempre use tipagem forte (`interface`, `type`) para dados retornados por APIs ou manipulados em serviços.
     ```typescript
     export interface Product {
       id: string;
@@ -246,9 +179,9 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     // ...
     getProduct(id: string): Observable<Product> { /* ... */ }
     ```
-9.  **Reutilização**: Crie serviços genéricos ou abstratos quando a lógica puder ser compartilhada entre diferentes entidades (ex: `CrudService<T>`).
-10. **Single Responsibility Principle (SRP)**: Cada serviço deve ter uma única responsabilidade bem definida. Evite serviços "faz-tudo".
-11. **Imutabilidade**: Sempre que possível, trabalhe com dados de forma imutável, especialmente ao atualizar estados complexos em serviços.
+8.  **Reutilização**: Crie serviços genéricos ou abstratos quando a lógica puder ser compartilhada entre diferentes entidades (ex: `CrudService<T>`).
+9.  **Single Responsibility Principle (SRP)**: Cada serviço deve ter uma única responsabilidade bem definida. Evite serviços "faz-tudo".
+10. **Imutabilidade**: Sempre que possível, trabalhe com dados de forma imutável, especialmente ao atualizar estados complexos em serviços.
 
 ## 📚 Exemplos Modernos
 
@@ -297,48 +230,4 @@ export class AuthService {
     return this._currentUser() !== null;
   }
 }
-```
-
-### Guard de Autenticação (Auth Guard)
-
-```typescript
-// auth.guard.ts
-import { CanActivateFn, Router } from '@angular/router';
-import { inject } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-
-export const authGuard: CanActivateFn = (route, state) => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
-
-  if (authService.isAuthenticated()) {
-    return true;
-  } else {
-    // Redireciona para a página de login se não estiver autenticado
-    return router.createUrlTree(['/login']);
-  }
-};
-```
-
-### Resolver de Dados do Usuário (User Data Resolver)
-
-```typescript
-// user-data.resolver.ts
-import { ResolveFn } from '@angular/router';
-import { inject } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
-
-export const userDataResolver: ResolveFn<User> = (route, state): Observable<User> => {
-  const userService = inject(UserService);
-  const userId = route.paramMap.get('id'); // Pega o ID da rota
-
-  if (!userId) {
-    // Lidar com o caso de ID ausente, talvez redirecionar ou lançar um erro
-    throw new Error('User ID not provided in route parameters.');
-  }
-
-  return userService.getUser(userId);
-};
 ```
