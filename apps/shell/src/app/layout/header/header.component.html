@@ -1,6 +1,11 @@
 <header [class]="headerClasses" data-testid="app-header">
   <div data-testid="header-left-section">
-    <bb-logo [variant]="logoVariant" [className]="logoClasses" data-testid="header-logo"></bb-logo>
+    <bb-logo
+      size="lg"
+      [variant]="logoVariant"
+      [class]="logoClasses"
+      data-testid="header-logo"
+    ></bb-logo>
 
     @if (variant() === 'user' && pathname()) {
       <bb-menu-popover
