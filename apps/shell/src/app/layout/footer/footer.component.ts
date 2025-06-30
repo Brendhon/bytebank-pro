@@ -8,15 +8,16 @@ import { LogoComponent } from '@bytebank-pro/ui';
  *
  * @example
  * ```html
- * <app-footer></app-footer>
+ * <bb-footer></bb-footer>
  * ```
  */
 @Component({
-  selector: 'app-footer', // 'app-' prefix is mandatory
+  selector: 'bb-footer', // 'bb-' prefix for ByteBank components
   standalone: true, // Always use standalone components
   imports: [CommonModule, LogoComponent], // Required imports
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
-  templateUrl: './footer.component.html' // Separated template for clarity
+  templateUrl: './footer.component.html', // Separated template for clarity
+  styleUrls: ['./footer.component.css'] // Use CSS específico do componente
 })
 export class FooterComponent {
   // The content structure is now directly in the template.
