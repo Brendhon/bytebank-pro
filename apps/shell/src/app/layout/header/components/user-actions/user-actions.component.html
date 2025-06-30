@@ -1,0 +1,41 @@
+<bb-popover class="relative" [attr.popoverClassName]="'p-4'" data-testid="user-actions-popover">
+  <ng-template #popoverTrigger>
+    <button
+      type="button"
+      class="popover-trigger rounded-full border border-orange p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
+      aria-label="User menu"
+      data-testid="user-icon-button"
+    >
+      <i-lucide name="user" [size]="40" aria-hidden="true"></i-lucide>
+    </button>
+  </ng-template>
+
+  <div class="flex flex-col gap-2 justify-center items-center" data-testid="user-menu-content">
+    <button
+      type="button"
+      class="popover-li inline-flex items-center w-full text-left"
+      (click)="handleNavigate(githubUrl)"
+      data-testid="github-link-button"
+    >
+      <i-lucide name="github" class="inline mr-2 h-auto w-6" aria-hidden="true"></i-lucide>
+      Github
+    </button>
+    <button
+      type="button"
+      class="popover-li inline-flex items-center w-full text-left"
+      (click)="handleNavigate(figmaUrl)"
+      data-testid="figma-link-button"
+    >
+      <i-lucide name="figma" class="inline mr-2 h-auto w-6" aria-hidden="true"></i-lucide>
+      Figma
+    </button>
+    <button
+      type="button"
+      (click)="handleLogout()"
+      class="border-t border-t-dark-gray p-0 pt-6 w-full text-center popover-li"
+      data-testid="logout-button"
+    >
+      Sair
+    </button>
+  </div>
+</bb-popover>

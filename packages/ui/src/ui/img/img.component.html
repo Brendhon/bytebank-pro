@@ -1,0 +1,63 @@
+<!-- Loading state -->
+@if (isLoading) {
+  <div
+    [class]="imageClasses"
+    class="flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded"
+    [attr.aria-busy]="true"
+    [attr.aria-label]="loadingText"
+    data-testid="img-loading"
+  >
+    <lucide-angular
+      [img]="loadingIcon"
+      [size]="16"
+      class="animate-spin text-gray-400"
+      aria-hidden="true"
+    ></lucide-angular>
+    <span class="sr-only">{{ loadingText }}</span>
+  </div>
+}
+
+<!-- Error state -->
+@else if (hasError) {
+  <div
+    [class]="imageClasses"
+    class="flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded border-2 border-dashed border-gray-300 dark:border-gray-600"
+    [attr.aria-label]="errorText"
+    role="img"
+    data-testid="img-error"
+  >
+    <lucide-angular
+      [img]="errorIcon"
+      [size]="16"
+      class="text-gray-400"
+      aria-hidden="true"
+    ></lucide-angular>
+    <span class="sr-only">{{ errorText }}</span>
+  </div>
+}
+
+<!-- SVG content -->
+@else if (isSvg && imageContent) {
+  <div
+    [class]="imageClasses"
+    [innerHTML]="imageContent"
+    [attr.alt]="imageAltText"
+    [attr.aria-hidden]="shouldHideFromScreenReaders"
+    role="img"
+    data-testid="img-svg"
+  ></div>
+}
+
+<!-- Standard image -->
+@else if (!isSvg && imageContent) {
+  <img
+    [src]="imageContent"
+    [alt]="imageAltText"
+    [class]="imageClasses"
+    [attr.aria-hidden]="shouldHideFromScreenReaders"
+    (load)="onImageLoad()"
+    (error)="onImageError()"
+    loading="lazy"
+    data-testid="img-standard"
+  />
+}

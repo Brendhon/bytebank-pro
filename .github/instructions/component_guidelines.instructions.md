@@ -10,10 +10,10 @@ Este guia abrangente define as diretrizes e boas práticas para o desenvolviment
 
 ### 🖼️ Ícones
 
-- **Utilize apenas ícones da biblioteca `lucide-angular`**.
+- **Utilize apenas ícones da biblioteca `lucide-angular` por meio do componente `i-lucide`, sempre usando a propriedade `[img]`**. Isso garante consistência visual, acessibilidade e melhor performance em todos os componentes. Veja o exemplo logo abaixo.
 - **Não utilize SVGs customizados ou outras bibliotecas de ícones**.
 - **Importe somente os ícones necessários** para cada componente.
-- **Exemplo de Importação:**
+- **Exemplo de uso:**
 
   ```typescript
   import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
