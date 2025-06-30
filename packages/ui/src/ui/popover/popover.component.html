@@ -1,0 +1,31 @@
+<div class="bb-popover-container" data-testid="popover-container">
+  <!-- Trigger element -->
+  <div
+    #triggerElement
+    class="bb-popover-trigger"
+    (click)="onTriggerClick($event)"
+    [attr.aria-expanded]="isOpenState()"
+    [attr.aria-label]="ariaLabel() || 'Open menu'"
+    [attr.aria-disabled]="disabled()"
+    data-testid="popover-trigger"
+  >
+    <ng-content select="[slot=trigger]"></ng-content>
+  </div>
+
+  <!-- Popover content -->
+  @if (isOpenState()) {
+    <div
+      #popoverContent
+      [class]="popoverClasses()"
+      role="menu"
+      [attr.aria-hidden]="!isOpenState()"
+      data-testid="popover-content"
+    >
+      <!-- Content slot -->
+      <ng-content select="[slot=content]"></ng-content>
+
+      <!-- Default content if no slot is provided -->
+      <ng-content></ng-content>
+    </div>
+  }
+</div>

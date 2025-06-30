@@ -72,7 +72,78 @@
   "interceptors": [],
   "classes": [],
   "directives": [],
-  "components": [],
+  "components": [
+    {
+      "name": "DemoTriggerButtonComponent",
+      "id": "component-DemoTriggerButtonComponent-59599029e1a1db617f98fd0d229bf409e0c7c52acf665b64e903afc9fec0c2e2eedcfcec9fbb74ffb8a080cee052995822b98e3fc56c189388a331c613657064",
+      "file": "src/ui/popover/popover.component.stories.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "demo-trigger-button",
+      "styleUrls": [],
+      "styles": [],
+      "template": "<button class=\"flex items-center space-x-2 px-3 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n  <div class=\"w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-xs font-medium\">\n    U\n  </div>\n  <span class=\"text-sm\">User Profile</span>\n</button>\n",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { argsToTemplate } from '@storybook/angular';\nimport { PopoverComponent, PopoverPosition } from './popover.component';\nimport { Component } from '@angular/core';\n\n@Component({\n  selector: 'demo-user-menu',\n  template: `\n    <div class=\"p-4 space-y-2\">\n      <div class=\"flex items-center space-x-3 pb-2 border-b border-gray-200\">\n        <div class=\"w-8 h-8 bg-bytebank-blue rounded-full flex items-center justify-center text-white text-sm font-medium\">\n          U\n        </div>\n        <div>\n          <p class=\"text-sm font-medium text-gray-900\">John Doe</p>\n          <p class=\"text-xs text-gray-500\">john@example.com</p>\n        </div>\n      </div>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Profile Settings\n      </button>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Account\n      </button>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Help & Support\n      </button>\n      <hr class=\"my-2\">\n      <button class=\"w-full text-left px-2 py-1 text-sm text-red-600 hover:bg-red-50 rounded\">\n        Sign Out\n      </button>\n    </div>\n  `\n})\nclass DemoUserMenuComponent {}\n\n@Component({\n  selector: 'demo-trigger-button',\n  template: `\n    <button class=\"flex items-center space-x-2 px-3 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n      <div class=\"w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-xs font-medium\">\n        U\n      </div>\n      <span class=\"text-sm\">User Profile</span>\n    </button>\n  `\n})\nclass DemoTriggerButtonComponent {}\n\nconst meta: Meta<PopoverComponent> = {\n  title: 'Components/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles sem navegar para uma nova página.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n- Para menus de perfil do usuário\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n- Suporta leitores de tela com ARIA adequado\n        `\n      }\n    }\n  },\n  decorators: [\n    (story) => ({\n      template: `\n        <div class=\"p-8 min-h-[400px] flex items-center justify-center\">\n          ${story()}\n        </div>\n      `,\n    }),\n  ],\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: ['top', 'bottom', 'left', 'right', 'top-start', 'top-end', 'bottom-start', 'bottom-end'] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' },\n        type: { summary: 'PopoverPosition' }\n      }\n    },\n    isOpen: {\n      description: 'Controla se o popover está aberto ou fechado',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n};\n\nexport default meta;\ntype Story = StoryObj<PopoverComponent>;\n\nexport const Default: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This is a simple popover content.</p>\n          <button class=\"mt-2 px-3 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-gray-200\">\n            Action\n          </button>\n        </div>\n      </bb-popover>\n    `\n  })\n};\n\nexport const UserProfileMenu: Story = {\n  args: {\n    position: 'bottom-end',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    moduleMetadata: {\n      declarations: [DemoUserMenuComponent, DemoTriggerButtonComponent]\n    },\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <demo-trigger-button slot=\"trigger\"></demo-trigger-button>\n        <demo-user-menu slot=\"content\"></demo-user-menu>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Perfil do Usuário\n\nExemplo prático de uso do popover para um menu de perfil do usuário, mostrando informações do usuário e opções de conta.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-end\">\n  <button slot=\"trigger\">User Profile</button>\n  <div slot=\"content\">\n    <!-- Menu content -->\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const MenuWithActions: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors\">\n          Menu ⋮\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[140px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Edit\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Duplicate\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Share\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors\">\n            Delete\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Ações Contextuais\n\nDemonstra o uso do popover como menu de ações contextuais, ideal para operações como editar, duplicar, compartilhar e deletar items.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-start\">\n  <button slot=\"trigger\">Menu ⋮</button>\n  <div slot=\"content\">\n    <button>Edit</button>\n    <button>Duplicate</button>\n    <button>Share</button>\n    <hr>\n    <button class=\"text-red-600\">Delete</button>\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const AllPositions: Story = {\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-8 p-8\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on top</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on bottom</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on left</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on right</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Todas as Posições\n\nEsta story demonstra todas as posições disponíveis para o popover, incluindo as variações de alinhamento (start/end).\n\n\\`\\`\\`html\n<bb-popover position=\"top\">\n  <button slot=\"trigger\">Trigger</button>\n  <div slot=\"content\">Content</div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const DisabledState: Story = {\n  args: {\n    disabled: true,\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed\">\n          Disabled Popover\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This should not appear.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra o comportamento do popover quando está desabilitado. O trigger não deve responder a cliques ou interações de teclado.'\n      }\n    }\n  }\n};\n\nexport const Playground: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Interactive Popover\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Playground Content</h3>\n          <p class=\"text-xs text-gray-600 mb-3\">Experimente diferentes configurações usando os controles abaixo.</p>\n          <div class=\"space-y-2\">\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 1\n            </button>\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 2\n            </button>\n          </div>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Playground Interativo\n\nUse os controles abaixo para experimentar diferentes configurações do popover:\n\n- **Position**: Altere a posição do popover\n- **Disabled**: Desabilite/habilite o componente\n- **Close on Click Outside**: Configure se fecha ao clicar fora\n- **Close on Escape**: Configure se fecha com a tecla Escape\n- **Offset**: Ajuste a distância entre trigger e popover\n        `\n      }\n    }\n  }\n};\n",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "extends": []
+    },
+    {
+      "name": "DemoUserMenuComponent",
+      "id": "component-DemoUserMenuComponent-59599029e1a1db617f98fd0d229bf409e0c7c52acf665b64e903afc9fec0c2e2eedcfcec9fbb74ffb8a080cee052995822b98e3fc56c189388a331c613657064",
+      "file": "src/ui/popover/popover.component.stories.ts",
+      "encapsulation": [],
+      "entryComponents": [],
+      "inputs": [],
+      "outputs": [],
+      "providers": [],
+      "selector": "demo-user-menu",
+      "styleUrls": [],
+      "styles": [],
+      "template": "<div class=\"p-4 space-y-2\">\n  <div class=\"flex items-center space-x-3 pb-2 border-b border-gray-200\">\n    <div class=\"w-8 h-8 bg-bytebank-blue rounded-full flex items-center justify-center text-white text-sm font-medium\">\n      U\n    </div>\n    <div>\n      <p class=\"text-sm font-medium text-gray-900\">John Doe</p>\n      <p class=\"text-xs text-gray-500\">john@example.com</p>\n    </div>\n  </div>\n  <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n    Profile Settings\n  </button>\n  <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n    Account\n  </button>\n  <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n    Help & Support\n  </button>\n  <hr class=\"my-2\">\n  <button class=\"w-full text-left px-2 py-1 text-sm text-red-600 hover:bg-red-50 rounded\">\n    Sign Out\n  </button>\n</div>\n",
+      "templateUrl": [],
+      "viewProviders": [],
+      "hostDirectives": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "propertiesClass": [],
+      "methodsClass": [],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "hostBindings": [],
+      "hostListeners": [],
+      "standalone": false,
+      "imports": [],
+      "description": "",
+      "rawdescription": "\n",
+      "type": "component",
+      "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { argsToTemplate } from '@storybook/angular';\nimport { PopoverComponent, PopoverPosition } from './popover.component';\nimport { Component } from '@angular/core';\n\n@Component({\n  selector: 'demo-user-menu',\n  template: `\n    <div class=\"p-4 space-y-2\">\n      <div class=\"flex items-center space-x-3 pb-2 border-b border-gray-200\">\n        <div class=\"w-8 h-8 bg-bytebank-blue rounded-full flex items-center justify-center text-white text-sm font-medium\">\n          U\n        </div>\n        <div>\n          <p class=\"text-sm font-medium text-gray-900\">John Doe</p>\n          <p class=\"text-xs text-gray-500\">john@example.com</p>\n        </div>\n      </div>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Profile Settings\n      </button>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Account\n      </button>\n      <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n        Help & Support\n      </button>\n      <hr class=\"my-2\">\n      <button class=\"w-full text-left px-2 py-1 text-sm text-red-600 hover:bg-red-50 rounded\">\n        Sign Out\n      </button>\n    </div>\n  `\n})\nclass DemoUserMenuComponent {}\n\n@Component({\n  selector: 'demo-trigger-button',\n  template: `\n    <button class=\"flex items-center space-x-2 px-3 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n      <div class=\"w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-xs font-medium\">\n        U\n      </div>\n      <span class=\"text-sm\">User Profile</span>\n    </button>\n  `\n})\nclass DemoTriggerButtonComponent {}\n\nconst meta: Meta<PopoverComponent> = {\n  title: 'Components/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles sem navegar para uma nova página.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n- Para menus de perfil do usuário\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n- Suporta leitores de tela com ARIA adequado\n        `\n      }\n    }\n  },\n  decorators: [\n    (story) => ({\n      template: `\n        <div class=\"p-8 min-h-[400px] flex items-center justify-center\">\n          ${story()}\n        </div>\n      `,\n    }),\n  ],\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: ['top', 'bottom', 'left', 'right', 'top-start', 'top-end', 'bottom-start', 'bottom-end'] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' },\n        type: { summary: 'PopoverPosition' }\n      }\n    },\n    isOpen: {\n      description: 'Controla se o popover está aberto ou fechado',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n};\n\nexport default meta;\ntype Story = StoryObj<PopoverComponent>;\n\nexport const Default: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This is a simple popover content.</p>\n          <button class=\"mt-2 px-3 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-gray-200\">\n            Action\n          </button>\n        </div>\n      </bb-popover>\n    `\n  })\n};\n\nexport const UserProfileMenu: Story = {\n  args: {\n    position: 'bottom-end',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    moduleMetadata: {\n      declarations: [DemoUserMenuComponent, DemoTriggerButtonComponent]\n    },\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <demo-trigger-button slot=\"trigger\"></demo-trigger-button>\n        <demo-user-menu slot=\"content\"></demo-user-menu>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Perfil do Usuário\n\nExemplo prático de uso do popover para um menu de perfil do usuário, mostrando informações do usuário e opções de conta.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-end\">\n  <button slot=\"trigger\">User Profile</button>\n  <div slot=\"content\">\n    <!-- Menu content -->\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const MenuWithActions: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors\">\n          Menu ⋮\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[140px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Edit\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Duplicate\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Share\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors\">\n            Delete\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Ações Contextuais\n\nDemonstra o uso do popover como menu de ações contextuais, ideal para operações como editar, duplicar, compartilhar e deletar items.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-start\">\n  <button slot=\"trigger\">Menu ⋮</button>\n  <div slot=\"content\">\n    <button>Edit</button>\n    <button>Duplicate</button>\n    <button>Share</button>\n    <hr>\n    <button class=\"text-red-600\">Delete</button>\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const AllPositions: Story = {\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-8 p-8\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on top</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on bottom</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on left</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on right</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Todas as Posições\n\nEsta story demonstra todas as posições disponíveis para o popover, incluindo as variações de alinhamento (start/end).\n\n\\`\\`\\`html\n<bb-popover position=\"top\">\n  <button slot=\"trigger\">Trigger</button>\n  <div slot=\"content\">Content</div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const DisabledState: Story = {\n  args: {\n    disabled: true,\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed\">\n          Disabled Popover\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This should not appear.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra o comportamento do popover quando está desabilitado. O trigger não deve responder a cliques ou interações de teclado.'\n      }\n    }\n  }\n};\n\nexport const Playground: Story = {\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Interactive Popover\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Playground Content</h3>\n          <p class=\"text-xs text-gray-600 mb-3\">Experimente diferentes configurações usando os controles abaixo.</p>\n          <div class=\"space-y-2\">\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 1\n            </button>\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 2\n            </button>\n          </div>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Playground Interativo\n\nUse os controles abaixo para experimentar diferentes configurações do popover:\n\n- **Position**: Altere a posição do popover\n- **Disabled**: Desabilite/habilite o componente\n- **Close on Click Outside**: Configure se fecha ao clicar fora\n- **Close on Escape**: Configure se fecha com a tecla Escape\n- **Offset**: Ajuste a distância entre trigger e popover\n        `\n      }\n    }\n  }\n};\n",
+      "assetsDirs": [],
+      "styleUrlsData": "",
+      "stylesData": "",
+      "extends": []
+    }
+  ],
   "modules": [],
   "miscellaneous": {
     "variables": [
@@ -105,6 +176,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Countries',\n    multiple: true,\n    searchable: true,\n    clearable: true,\n    required: true,\n    value: ['br', 'us'],\n    helperText:\n      'A fully-featured select with multiple selection, search, clear functionality, and validation'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### All Features Combined\n\nThis example shows the select component with all features enabled:\n- Multiple selection with tag display\n- Search functionality for filtering\n- Clear button to reset selection\n- Required field validation\n- Comprehensive helper text\n\nPerfect for complex form scenarios where users need maximum flexibility.\n        `\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "AllPositions",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-8 p-8\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on top</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on bottom</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on left</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on right</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Todas as Posições\n\nEsta story demonstra todas as posições disponíveis para o popover, incluindo as variações de alinhamento (start/end).\n\n\\`\\`\\`html\n<bb-popover position=\"top\">\n  <button slot=\"trigger\">Trigger</button>\n  <div slot=\"content\">Content</div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllSizes",
@@ -160,11 +241,11 @@
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    props: {\n      dialogOpen: signal(true),\n      handleClose: () => console.log('Dialog closed')\n    },\n    template: `\n      <div class=\"grid gap-8\">\n        <!-- Small Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Small Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Small Dialog\"\n            maxWidth=\"20rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-sm text-gray-600\">This is a small dialog for brief messages.</p>\n            <div class=\"flex gap-2 justify-end mt-4\">\n              <button class=\"px-3 py-1 text-sm bg-blue-600 text-white rounded\">OK</button>\n            </div>\n          </bb-dialog>\n        </div>\n\n        <!-- Medium Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Medium Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Medium Dialog\"\n            maxWidth=\"32rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-gray-600 mb-4\">This is a medium-sized dialog for standard content.</p>\n            <div class=\"flex gap-3 justify-end\">\n              <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">Cancel</button>\n              <button class=\"px-4 py-2 bg-blue-600 text-white rounded\">Confirm</button>\n            </div>\n          </bb-dialog>\n        </div>\n\n        <!-- Large Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Large Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Large Dialog\"\n            maxWidth=\"48rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-gray-600 mb-4\">This is a large dialog for complex content or forms.</p>\n            <div class=\"grid grid-cols-2 gap-4 mb-4\">\n              <input type=\"text\" placeholder=\"Field 1\" class=\"border rounded px-3 py-2\" />\n              <input type=\"text\" placeholder=\"Field 2\" class=\"border rounded px-3 py-2\" />\n            </div>\n            <div class=\"flex gap-3 justify-end\">\n              <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">Cancel</button>\n              <button class=\"px-4 py-2 bg-blue-600 text-white rounded\">Save</button>\n            </div>\n          </bb-dialog>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Displays all dialog size variants side by side for easy comparison.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table \n            [data]=\"data\" \n            [columns]=\"columns\" \n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table \n            [data]=\"smallData\" \n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table \n            [data]=\"[]\" \n            [columns]=\"columns\" \n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllVariants",
@@ -195,16 +276,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
-      },
-      {
-        "name": "AllVariants",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table \n            [data]=\"data\" \n            [columns]=\"columns\" \n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table \n            [data]=\"smallData\" \n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table \n            [data]=\"[]\" \n            [columns]=\"columns\" \n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AutoClosing",
@@ -260,6 +331,26 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/table/paginator/paginator.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -280,31 +371,21 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This is a simple popover content.</p>\n          <button class=\"mt-2 px-3 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-gray-200\">\n            Action\n          </button>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/paginator/paginator.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
       },
       {
         "name": "Disabled",
@@ -345,6 +426,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Country',\n    disabled: true,\n    value: 'br',\n    helperText: 'This field is currently disabled and cannot be modified'\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Disabled state prevents any interaction with the select component.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "DisabledState",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    disabled: true,\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed\">\n          Disabled Popover\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This should not appear.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra o comportamento do popover quando está desabilitado. O trigger não deve responder a cliques ou interações de teclado.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Email",
@@ -557,6 +648,16 @@
         "defaultValue": "{\n  args: {\n    size: 'md',\n    label: 'Tamanho médio',\n    placeholder: 'Input médio (padrão)'\n  }\n}"
       },
       {
+        "name": "MenuWithActions",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors\">\n          Menu ⋮\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[140px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Edit\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Duplicate\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Share\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors\">\n            Delete\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Ações Contextuais\n\nDemonstra o uso do popover como menu de ações contextuais, ideal para operações como editar, duplicar, compartilhar e deletar items.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-start\">\n  <button slot=\"trigger\">Menu ⋮</button>\n  <div slot=\"content\">\n    <button>Edit</button>\n    <button>Duplicate</button>\n    <button>Share</button>\n    <hr>\n    <button class=\"text-red-600\">Delete</button>\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+      },
+      {
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -590,41 +691,11 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "file": "src/table/paginator/paginator.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
-        "type": "Meta<DialogComponent>",
-        "defaultValue": "{\n  title: 'Components/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/button/button.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<ButtonComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<LogoComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<ToastComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
+        "type": "Meta<PaginatorComponent>",
+        "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
       },
       {
         "name": "meta",
@@ -640,11 +711,51 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/table/paginator/paginator.component.stories.ts",
+        "file": "src/ui/button/button.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
-        "type": "Meta<PaginatorComponent>",
-        "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
+        "type": "Meta<ButtonComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Button',\n  component: ButtonComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Um componente de botão flexível com múltiplas variantes, tamanhos e estados, seguindo as diretrizes de acessibilidade.'\n      }\n    }\n  },\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: [\n        'dark',\n        'blue',\n        'green',\n        'orange',\n        'outlineGreen',\n        'outlineOrange'\n      ] as ButtonVariant[],\n      description: 'Variante visual do botão'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'] as ButtonSize[],\n      description: 'Tamanho do botão'\n    },\n    type: {\n      control: 'select',\n      options: ['button', 'submit', 'reset'],\n      description: 'Tipo HTML do botão'\n    },\n    loading: {\n      control: 'boolean',\n      description: 'Estado de carregamento do botão'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Se o botão está desabilitado'\n    },\n    className: {\n      control: 'text',\n      description: 'Classes CSS adicionais'\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Label acessível do botão'\n    },\n    ariaDescribedBy: {\n      control: 'text',\n      description: 'ID do elemento que descreve o botão'\n    },\n    ariaPressed: {\n      control: 'boolean',\n      description: 'Estado pressionado para botões toggle'\n    },\n    role: {\n      control: 'text',\n      description: 'Role ARIA customizado'\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Texto para leitores de tela durante carregamento'\n    },\n    buttonClick: {\n      action: 'clicked',\n      description: 'Evento emitido quando o botão é clicado'\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<DialogComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<LogoComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<PopoverComponent>",
+        "defaultValue": "{\n  title: 'Components/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles sem navegar para uma nova página.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n- Para menus de perfil do usuário\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n- Suporta leitores de tela com ARIA adequado\n        `\n      }\n    }\n  },\n  decorators: [\n    (story) => ({\n      template: `\n        <div class=\"p-8 min-h-[400px] flex items-center justify-center\">\n          ${story()}\n        </div>\n      `,\n    }),\n  ],\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: ['top', 'bottom', 'left', 'right', 'top-start', 'top-end', 'bottom-start', 'bottom-end'] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' },\n        type: { summary: 'PopoverPosition' }\n      }\n    },\n    isOpen: {\n      description: 'Controla se o popover está aberto ou fechado',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<ToastComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "MiddlePage",
@@ -694,7 +805,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Cannot Close on Backdrop',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: false,\n    maxWidth: '24rem',\n    ariaLabel: 'Modal dialog requiring explicit closure'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog cannot be closed by clicking outside or pressing Escape. You must use the close button.\n        </p>\n        <div class=\"flex justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Close\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Dialog that requires explicit closure via the close button, useful for important forms or confirmations.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Cannot Close on Backdrop',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: false,\n    maxWidth: '24rem',\n    ariaLabel: 'Modal dialog requiring explicit closure'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog cannot be closed by clicking outside or pressing Escape. You must use the close button.\n        </p>\n        <div class=\"flex justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Close\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Dialog that requires explicit closure via the close button, useful for important forms or confirmations.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Number",
@@ -760,6 +871,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -780,21 +901,21 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
+        "file": "src/ui/popover/popover.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Interactive Popover\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Playground Content</h3>\n          <p class=\"text-xs text-gray-600 mb-3\">Experimente diferentes configurações usando os controles abaixo.</p>\n          <div class=\"space-y-2\">\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 1\n            </button>\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 2\n            </button>\n          </div>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Playground Interativo\n\nUse os controles abaixo para experimentar diferentes configurações do popover:\n\n- **Position**: Altere a posição do popover\n- **Disabled**: Desabilite/habilite o componente\n- **Close on Click Outside**: Configure se fecha ao clicar fora\n- **Close on Escape**: Configure se fecha com a tecla Escape\n- **Offset**: Ajuste a distância entre trigger e popover\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
       },
       {
         "name": "preview",
@@ -870,21 +991,21 @@
         "name": "ResponsiveLayout",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
-      },
-      {
-        "name": "ResponsiveLayout",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/table/generic-table/generic-table.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "ResponsiveLayout",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "sampleColumns",
@@ -997,6 +1118,16 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaPressed: false,\n    ariaLabel: 'Toggle notifications'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`\n  })\n}"
       },
       {
+        "name": "UserProfileMenu",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-end',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    moduleMetadata: {\n      declarations: [DemoUserMenuComponent, DemoTriggerButtonComponent]\n    },\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <demo-trigger-button slot=\"trigger\"></demo-trigger-button>\n        <demo-user-menu slot=\"content\"></demo-user-menu>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Perfil do Usuário\n\nExemplo prático de uso do popover para um menu de perfil do usuário, mostrando informações do usuário e opções de conta.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-end\">\n  <button slot=\"trigger\">User Profile</button>\n  <div slot=\"content\">\n    <!-- Menu content -->\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+      },
+      {
         "name": "ValidationStates",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -1094,7 +1225,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Dialog Without Close Button',\n    showCloseButton: false,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Important notification dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog doesn't show a close button. It can only be closed by clicking outside or pressing Escape.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Acknowledge\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Dialog variant without the close button, useful for critical notifications that require user acknowledgment.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Dialog Without Close Button',\n    showCloseButton: false,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Important notification dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog doesn't show a close button. It can only be closed by clicking outside or pressing Escape.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Acknowledge\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Dialog variant without the close button, useful for critical notifications that require user acknowledgment.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithoutPagination",
@@ -1196,41 +1327,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<DialogComponent>",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<ButtonComponent>",
-        "file": "src/ui/button/button.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<LogoComponent>",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<ToastComponent>",
-        "file": "src/ui/toast/toast.component.stories.ts",
+        "rawtype": "StoryObj<PaginatorComponent>",
+        "file": "src/table/paginator/paginator.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1251,8 +1349,52 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<PaginatorComponent>",
-        "file": "src/table/paginator/paginator.component.stories.ts",
+        "rawtype": "StoryObj<ButtonComponent>",
+        "file": "src/ui/button/button.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<DialogComponent>",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<LogoComponent>",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<PopoverComponent>",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<ToastComponent>",
+        "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1657,6 +1799,78 @@
           "defaultValue": "{\n  args: {\n    label: 'Country',\n    value: 'br',\n    helperText: 'Brazil is pre-selected',\n    clearable: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Shows a select with a pre-selected value. Notice the clear button appears when clearable is enabled.'\n      }\n    }\n  }\n}"
         }
       ],
+      "src/ui/popover/popover.component.stories.ts": [
+        {
+          "name": "AllPositions",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-8 p-8\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on top</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"top-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover top-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on bottom</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-start\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom Start</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-start</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom-end\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom End</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover bottom-end</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on left</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm min-w-[120px]\">Popover on right</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Todas as Posições\n\nEsta story demonstra todas as posições disponíveis para o popover, incluindo as variações de alinhamento (start/end).\n\n\\`\\`\\`html\n<bb-popover position=\"top\">\n  <button slot=\"trigger\">Trigger</button>\n  <div slot=\"content\">Content</div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This is a simple popover content.</p>\n          <button class=\"mt-2 px-3 py-1 bg-gray-100 text-gray-700 rounded text-xs hover:bg-gray-200\">\n            Action\n          </button>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
+        },
+        {
+          "name": "DisabledState",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    disabled: true,\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed\">\n          Disabled Popover\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">This should not appear.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra o comportamento do popover quando está desabilitado. O trigger não deve responder a cliques ou interações de teclado.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "MenuWithActions",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors\">\n          Menu ⋮\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[140px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Edit\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Duplicate\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors\">\n            Share\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors\">\n            Delete\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Ações Contextuais\n\nDemonstra o uso do popover como menu de ações contextuais, ideal para operações como editar, duplicar, compartilhar e deletar items.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-start\">\n  <button slot=\"trigger\">Menu ⋮</button>\n  <div slot=\"content\">\n    <button>Edit</button>\n    <button>Duplicate</button>\n    <button>Share</button>\n    <hr>\n    <button class=\"text-red-600\">Delete</button>\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<PopoverComponent>",
+          "defaultValue": "{\n  title: 'Components/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles sem navegar para uma nova página.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n- Para menus de perfil do usuário\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n- Suporta leitores de tela com ARIA adequado\n        `\n      }\n    }\n  },\n  decorators: [\n    (story) => ({\n      template: `\n        <div class=\"p-8 min-h-[400px] flex items-center justify-center\">\n          ${story()}\n        </div>\n      `,\n    }),\n  ],\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: ['top', 'bottom', 'left', 'right', 'top-start', 'top-end', 'bottom-start', 'bottom-end'] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' },\n        type: { summary: 'PopoverPosition' }\n      }\n    },\n    isOpen: {\n      description: 'Controla se o popover está aberto ou fechado',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        },
+        {
+          "name": "Playground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90 transition-colors\">\n          Interactive Popover\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Playground Content</h3>\n          <p class=\"text-xs text-gray-600 mb-3\">Experimente diferentes configurações usando os controles abaixo.</p>\n          <div class=\"space-y-2\">\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 1\n            </button>\n            <button class=\"w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded\">\n              Action 2\n            </button>\n          </div>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Playground Interativo\n\nUse os controles abaixo para experimentar diferentes configurações do popover:\n\n- **Position**: Altere a posição do popover\n- **Disabled**: Desabilite/habilite o componente\n- **Close on Click Outside**: Configure se fecha ao clicar fora\n- **Close on Escape**: Configure se fecha com a tecla Escape\n- **Offset**: Ajuste a distância entre trigger e popover\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "UserProfileMenu",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    position: 'bottom-end',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    moduleMetadata: {\n      declarations: [DemoUserMenuComponent, DemoTriggerButtonComponent]\n    },\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <demo-trigger-button slot=\"trigger\"></demo-trigger-button>\n        <demo-user-menu slot=\"content\"></demo-user-menu>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Menu de Perfil do Usuário\n\nExemplo prático de uso do popover para um menu de perfil do usuário, mostrando informações do usuário e opções de conta.\n\n\\`\\`\\`html\n<bb-popover position=\"bottom-end\">\n  <button slot=\"trigger\">User Profile</button>\n  <div slot=\"content\">\n    <!-- Menu content -->\n  </div>\n</bb-popover>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        }
+      ],
       "src/ui/button/button.component.stories.ts": [
         {
           "name": "AllSizes",
@@ -1789,180 +2003,6 @@
           "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
         }
       ],
-      "src/ui/dialog/dialog.component.stories.ts": [
-        {
-          "name": "AllVariants",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    props: {\n      dialogOpen: signal(true),\n      handleClose: () => console.log('Dialog closed')\n    },\n    template: `\n      <div class=\"grid gap-8\">\n        <!-- Small Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Small Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Small Dialog\"\n            maxWidth=\"20rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-sm text-gray-600\">This is a small dialog for brief messages.</p>\n            <div class=\"flex gap-2 justify-end mt-4\">\n              <button class=\"px-3 py-1 text-sm bg-blue-600 text-white rounded\">OK</button>\n            </div>\n          </bb-dialog>\n        </div>\n\n        <!-- Medium Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Medium Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Medium Dialog\"\n            maxWidth=\"32rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-gray-600 mb-4\">This is a medium-sized dialog for standard content.</p>\n            <div class=\"flex gap-3 justify-end\">\n              <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">Cancel</button>\n              <button class=\"px-4 py-2 bg-blue-600 text-white rounded\">Confirm</button>\n            </div>\n          </bb-dialog>\n        </div>\n\n        <!-- Large Dialog -->\n        <div>\n          <h3 class=\"text-sm font-medium mb-2\">Large Dialog</h3>\n          <bb-dialog \n            [isOpen]=\"dialogOpen()\"\n            title=\"Large Dialog\"\n            maxWidth=\"48rem\"\n            (close)=\"handleClose()\"\n          >\n            <p class=\"text-gray-600 mb-4\">This is a large dialog for complex content or forms.</p>\n            <div class=\"grid grid-cols-2 gap-4 mb-4\">\n              <input type=\"text\" placeholder=\"Field 1\" class=\"border rounded px-3 py-2\" />\n              <input type=\"text\" placeholder=\"Field 2\" class=\"border rounded px-3 py-2\" />\n            </div>\n            <div class=\"flex gap-3 justify-end\">\n              <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">Cancel</button>\n              <button class=\"px-4 py-2 bg-blue-600 text-white rounded\">Save</button>\n            </div>\n          </bb-dialog>\n        </div>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Displays all dialog size variants side by side for easy comparison.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
-        },
-        {
-          "name": "LoginForm",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Login to ByteBank',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Login form dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Login dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <form class=\"space-y-4\">\n          <div>\n            <label for=\"email\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Email\n            </label>\n            <input \n              id=\"email\"\n              type=\"email\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Enter your email\"\n            />\n          </div>\n          <div>\n            <label for=\"password\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Password\n            </label>\n            <input \n              id=\"password\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Enter your password\"\n            />\n          </div>\n          <div class=\"flex items-center justify-between pt-4\">\n            <a href=\"#\" class=\"text-sm text-blue-600 hover:text-blue-800\">\n              Forgot password?\n            </a>\n            <div class=\"flex gap-3\">\n              <button type=\"button\" class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n                Cancel\n              </button>\n              <button type=\"submit\" class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n                Login\n              </button>\n            </div>\n          </div>\n        </form>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Login Form Dialog\n\nEsta variante demonstra como usar o Dialog para formulários de autenticação. \nNote que o fechamento por clique no backdrop está desabilitado para evitar perda acidental de dados.\n\n**Características:**\n- Não permite fechamento por clique no backdrop\n- Permite fechamento via Escape\n- Tamanho otimizado para formulários de login\n- Inclui link para recuperação de senha\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isLoginOpen\"\n  title=\"Login to ByteBank\"\n  [closeOnBackdropClick]=\"false\"\n  maxWidth=\"28rem\"\n  (close)=\"handleLoginClose()\"\n>\n  <!-- Form content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<DialogComponent>",
-          "defaultValue": "{\n  title: 'Components/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-        },
-        {
-          "name": "NoBackdropClose",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Cannot Close on Backdrop',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: false,\n    maxWidth: '24rem',\n    ariaLabel: 'Modal dialog requiring explicit closure'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog cannot be closed by clicking outside or pressing Escape. You must use the close button.\n        </p>\n        <div class=\"flex justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Close\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Dialog that requires explicit closure via the close button, useful for important forms or confirmations.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "Playground",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
-        },
-        {
-          "name": "RegisterForm",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Create Account',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: 'Registration form dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Registration dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <form class=\"space-y-4\">\n          <div class=\"grid grid-cols-2 gap-4\">\n            <div>\n              <label for=\"firstName\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n                First Name\n              </label>\n              <input \n                id=\"firstName\"\n                type=\"text\" \n                class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n                placeholder=\"John\"\n              />\n            </div>\n            <div>\n              <label for=\"lastName\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n                Last Name\n              </label>\n              <input \n                id=\"lastName\"\n                type=\"text\" \n                class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n                placeholder=\"Doe\"\n              />\n            </div>\n          </div>\n          <div>\n            <label for=\"regEmail\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Email\n            </label>\n            <input \n              id=\"regEmail\"\n              type=\"email\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"john.doe@example.com\"\n            />\n          </div>\n          <div>\n            <label for=\"regPassword\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Password\n            </label>\n            <input \n              id=\"regPassword\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Create a strong password\"\n            />\n          </div>\n          <div>\n            <label for=\"confirmPassword\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Confirm Password\n            </label>\n            <input \n              id=\"confirmPassword\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Confirm your password\"\n            />\n          </div>\n          <div class=\"flex items-center justify-end gap-3 pt-4\">\n            <button type=\"button\" class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n              Cancel\n            </button>\n            <button type=\"submit\" class=\"px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded\">\n              Create Account\n            </button>\n          </div>\n        </form>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Registration Form Dialog\n\nDemonstra o uso do Dialog para formulários de registro com múltiplos campos.\nUtiliza um layout responsivo em grade para otimizar o espaço.\n\n**Características:**\n- Layout em grade para campos de nome\n- Validação visual via focus rings\n- Tamanho maior para acomodar mais campos\n- Botão de ação diferenciado (verde para registro)\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isRegisterOpen\"\n  title=\"Create Account\"\n  [closeOnBackdropClick]=\"false\"\n  maxWidth=\"32rem\"\n  (close)=\"handleRegisterClose()\"\n>\n  <!-- Registration form content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "WithoutCloseButton",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Dialog Without Close Button',\n    showCloseButton: false,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Important notification dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog doesn't show a close button. It can only be closed by clicking outside or pressing Escape.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Acknowledge\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Dialog variant without the close button, useful for critical notifications that require user acknowledgment.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "WithoutTitle",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: '',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '24rem',\n    ariaLabel: 'Confirmation dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Confirmation dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <div class=\"text-center\">\n          <div class=\"w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center\">\n            <svg class=\"w-6 h-6 text-red-600\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n              <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"></path>\n            </svg>\n          </div>\n          <h3 class=\"text-lg font-medium text-gray-900 mb-2\">Delete Account</h3>\n          <p class=\"text-gray-600 mb-6\">\n            Are you sure you want to delete your account? This action cannot be undone.\n          </p>\n          <div class=\"flex gap-3 justify-center\">\n            <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n              Cancel\n            </button>\n            <button class=\"px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded\">\n              Delete\n            </button>\n          </div>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Dialog Without Header Title\n\nDemonstra um dialog sem título no cabeçalho, útil para confirmações visuais onde o conteúdo é auto-explicativo.\n\n**Características:**\n- Sem título no cabeçalho\n- Conteúdo centralizado\n- Ícone visual para comunicação rápida\n- aria-label obrigatório para acessibilidade\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isDeleteOpen\"\n  title=\"\"\n  ariaLabel=\"Delete confirmation dialog\"\n  maxWidth=\"24rem\"\n  (close)=\"handleDeleteClose()\"\n>\n  <!-- Centered confirmation content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
-        }
-      ],
-      "src/ui/toast/toast.component.stories.ts": [
-        {
-          "name": "AllVariants",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
-        },
-        {
-          "name": "AutoClosing",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Este toast fechará em 3 segundos.',\n    variant: 'success',\n    duration: 3000\n  }\n}"
-        },
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
-        },
-        {
-          "name": "Error",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Ocorreu um erro ao processar a solicitação.',\n    variant: 'error'\n  }\n}"
-        },
-        {
-          "name": "Info",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<ToastComponent>",
-          "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
-        },
-        {
-          "name": "Playground",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
-        },
-        {
-          "name": "Success",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
-        }
-      ],
       "src/table/generic-table/generic-table.component.stories.ts": [
         {
           "name": "AllVariants",
@@ -2083,6 +2123,88 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\" \n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        }
+      ],
+      "src/ui/toast/toast.component.stories.ts": [
+        {
+          "name": "AllVariants",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
+        },
+        {
+          "name": "AutoClosing",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Este toast fechará em 3 segundos.',\n    variant: 'success',\n    duration: 3000\n  }\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
+        },
+        {
+          "name": "Error",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Ocorreu um erro ao processar a solicitação.',\n    variant: 'error'\n  }\n}"
+        },
+        {
+          "name": "Info",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Informação importante para o usuário.',\n    variant: 'info'\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<ToastComponent>",
+          "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
+        },
+        {
+          "name": "Playground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
+        },
+        {
+          "name": "Success",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
         }
       ],
       "src/form/input/input.component.stories.ts": [
@@ -2349,6 +2471,88 @@
           "defaultValue": "{\n  args: {\n    currentPage: 15,\n    totalPages: 30\n  }\n}"
         }
       ],
+      "src/ui/dialog/dialog.component.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
+        },
+        {
+          "name": "LoginForm",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Login to ByteBank',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Login form dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Login dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <form class=\"space-y-4\">\n          <div>\n            <label for=\"email\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Email\n            </label>\n            <input \n              id=\"email\"\n              type=\"email\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Enter your email\"\n            />\n          </div>\n          <div>\n            <label for=\"password\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Password\n            </label>\n            <input \n              id=\"password\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Enter your password\"\n            />\n          </div>\n          <div class=\"flex items-center justify-between pt-4\">\n            <a href=\"#\" class=\"text-sm text-blue-600 hover:text-blue-800\">\n              Forgot password?\n            </a>\n            <div class=\"flex gap-3\">\n              <button type=\"button\" class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n                Cancel\n              </button>\n              <button type=\"submit\" class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n                Login\n              </button>\n            </div>\n          </div>\n        </form>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Login Form Dialog\n\nEsta variante demonstra como usar o Dialog para formulários de autenticação. \nNote que o fechamento por clique no backdrop está desabilitado para evitar perda acidental de dados.\n\n**Características:**\n- Não permite fechamento por clique no backdrop\n- Permite fechamento via Escape\n- Tamanho otimizado para formulários de login\n- Inclui link para recuperação de senha\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isLoginOpen\"\n  title=\"Login to ByteBank\"\n  [closeOnBackdropClick]=\"false\"\n  maxWidth=\"28rem\"\n  (close)=\"handleLoginClose()\"\n>\n  <!-- Form content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<DialogComponent>",
+          "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "NoBackdropClose",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Cannot Close on Backdrop',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: false,\n    maxWidth: '24rem',\n    ariaLabel: 'Modal dialog requiring explicit closure'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog cannot be closed by clicking outside or pressing Escape. You must use the close button.\n        </p>\n        <div class=\"flex justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Close\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Dialog that requires explicit closure via the close button, useful for important forms or confirmations.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "Playground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
+        },
+        {
+          "name": "RegisterForm",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Create Account',\n    showCloseButton: true,\n    closeOnBackdropClick: false,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: 'Registration form dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Registration dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <form class=\"space-y-4\">\n          <div class=\"grid grid-cols-2 gap-4\">\n            <div>\n              <label for=\"firstName\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n                First Name\n              </label>\n              <input \n                id=\"firstName\"\n                type=\"text\" \n                class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n                placeholder=\"John\"\n              />\n            </div>\n            <div>\n              <label for=\"lastName\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n                Last Name\n              </label>\n              <input \n                id=\"lastName\"\n                type=\"text\" \n                class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n                placeholder=\"Doe\"\n              />\n            </div>\n          </div>\n          <div>\n            <label for=\"regEmail\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Email\n            </label>\n            <input \n              id=\"regEmail\"\n              type=\"email\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"john.doe@example.com\"\n            />\n          </div>\n          <div>\n            <label for=\"regPassword\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Password\n            </label>\n            <input \n              id=\"regPassword\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Create a strong password\"\n            />\n          </div>\n          <div>\n            <label for=\"confirmPassword\" class=\"block text-sm font-medium text-gray-700 mb-1\">\n              Confirm Password\n            </label>\n            <input \n              id=\"confirmPassword\"\n              type=\"password\" \n              class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\n              placeholder=\"Confirm your password\"\n            />\n          </div>\n          <div class=\"flex items-center justify-end gap-3 pt-4\">\n            <button type=\"button\" class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n              Cancel\n            </button>\n            <button type=\"submit\" class=\"px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded\">\n              Create Account\n            </button>\n          </div>\n        </form>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Registration Form Dialog\n\nDemonstra o uso do Dialog para formulários de registro com múltiplos campos.\nUtiliza um layout responsivo em grade para otimizar o espaço.\n\n**Características:**\n- Layout em grade para campos de nome\n- Validação visual via focus rings\n- Tamanho maior para acomodar mais campos\n- Botão de ação diferenciado (verde para registro)\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isRegisterOpen\"\n  title=\"Create Account\"\n  [closeOnBackdropClick]=\"false\"\n  maxWidth=\"32rem\"\n  (close)=\"handleRegisterClose()\"\n>\n  <!-- Registration form content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "WithoutCloseButton",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Dialog Without Close Button',\n    showCloseButton: false,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '28rem',\n    ariaLabel: 'Important notification dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This dialog doesn't show a close button. It can only be closed by clicking outside or pressing Escape.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Acknowledge\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Dialog variant without the close button, useful for critical notifications that require user acknowledgment.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "WithoutTitle",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: '',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '24rem',\n    ariaLabel: 'Confirmation dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Confirmation dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <div class=\"text-center\">\n          <div class=\"w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center\">\n            <svg class=\"w-6 h-6 text-red-600\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n              <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"></path>\n            </svg>\n          </div>\n          <h3 class=\"text-lg font-medium text-gray-900 mb-2\">Delete Account</h3>\n          <p class=\"text-gray-600 mb-6\">\n            Are you sure you want to delete your account? This action cannot be undone.\n          </p>\n          <div class=\"flex gap-3 justify-center\">\n            <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n              Cancel\n            </button>\n            <button class=\"px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded\">\n              Delete\n            </button>\n          </div>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Dialog Without Header Title\n\nDemonstra um dialog sem título no cabeçalho, útil para confirmações visuais onde o conteúdo é auto-explicativo.\n\n**Características:**\n- Sem título no cabeçalho\n- Conteúdo centralizado\n- Ícone visual para comunicação rápida\n- aria-label obrigatório para acessibilidade\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isDeleteOpen\"\n  title=\"\"\n  ariaLabel=\"Delete confirmation dialog\"\n  maxWidth=\"24rem\"\n  (close)=\"handleDeleteClose()\"\n>\n  <!-- Centered confirmation content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        }
+      ],
       ".storybook/preview.ts": [
         {
           "name": "preview",
@@ -2404,52 +2608,13 @@
           "kind": 183
         }
       ],
-      "src/ui/dialog/dialog.component.stories.ts": [
+      "src/table/paginator/paginator.component.stories.ts": [
         {
           "name": "Story",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "StoryObj<DialogComponent>",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/button/button.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ButtonComponent>",
-          "file": "src/ui/button/button.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/logo/logo.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<LogoComponent>",
-          "file": "src/ui/logo/logo.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/toast/toast.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ToastComponent>",
-          "file": "src/ui/toast/toast.component.stories.ts",
+          "rawtype": "StoryObj<PaginatorComponent>",
+          "file": "src/table/paginator/paginator.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -2469,13 +2634,65 @@
           "kind": 183
         }
       ],
-      "src/table/paginator/paginator.component.stories.ts": [
+      "src/ui/button/button.component.stories.ts": [
         {
           "name": "Story",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "StoryObj<PaginatorComponent>",
-          "file": "src/table/paginator/paginator.component.stories.ts",
+          "rawtype": "StoryObj<ButtonComponent>",
+          "file": "src/ui/button/button.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/dialog/dialog.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<DialogComponent>",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/logo/logo.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<LogoComponent>",
+          "file": "src/ui/logo/logo.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/popover/popover.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<PopoverComponent>",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/toast/toast.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ToastComponent>",
+          "file": "src/ui/toast/toast.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -3383,16 +3600,6 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "AllVariants",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/ui/dialog/dialog.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
         "name": "Default",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -3570,6 +3777,104 @@
       },
       {
         "filePath": "src/ui/logo/logo.component.stories.ts",
+        "type": "type alias",
+        "linktype": "miscellaneous",
+        "linksubtype": "typealias",
+        "name": "Story",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "DemoTriggerButtonComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "component",
+        "linktype": "component",
+        "name": "DemoUserMenuComponent",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "AllPositions",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Default",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DisabledState",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "MenuWithActions",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "meta",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "Playground",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "UserProfileMenu",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/ui/popover/popover.component.stories.ts",
         "type": "type alias",
         "linktype": "miscellaneous",
         "linksubtype": "typealias",

@@ -1,0 +1,126 @@
+@import '../../../styles/global.css';
+
+/* Popover container */
+.bb-popover-container {
+  @apply relative inline-block;
+}
+
+/* Trigger element */
+.bb-popover-trigger {
+  @apply cursor-pointer;
+  @apply focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:ring-offset-2;
+  @apply transition-all duration-200;
+}
+
+.bb-popover-trigger[aria-disabled='true'] {
+  @apply cursor-not-allowed opacity-50;
+}
+
+/* Popover content base styles */
+.bb-popover-content {
+  @apply absolute z-50;
+  @apply bg-white border border-gray-200 rounded-lg shadow-lg;
+  @apply min-w-48 max-w-sm;
+  @apply py-2;
+  animation: popover-in 0.15s ease-out;
+}
+
+/* Position variants */
+.bb-popover-top {
+  @apply bottom-full left-1/2 transform -translate-x-1/2;
+  margin-bottom: 8px;
+}
+
+.bb-popover-bottom {
+  @apply top-full left-1/2 transform -translate-x-1/2;
+  margin-top: 8px;
+}
+
+.bb-popover-left {
+  @apply right-full top-1/2 transform -translate-y-1/2;
+  margin-right: 8px;
+}
+
+.bb-popover-right {
+  @apply left-full top-1/2 transform -translate-y-1/2;
+  margin-left: 8px;
+}
+
+.bb-popover-top-start {
+  @apply bottom-full left-0;
+  margin-bottom: 8px;
+}
+
+.bb-popover-top-end {
+  @apply bottom-full right-0;
+  margin-bottom: 8px;
+}
+
+.bb-popover-bottom-start {
+  @apply top-full left-0;
+  margin-top: 8px;
+}
+
+.bb-popover-bottom-end {
+  @apply top-full right-0;
+  margin-top: 8px;
+}
+
+/* Arrow styles (optional enhancement) */
+.bb-popover-content::before {
+  content: '';
+  @apply absolute w-0 h-0;
+  @apply border-4 border-solid border-transparent;
+}
+
+.bb-popover-top::before,
+.bb-popover-top-start::before,
+.bb-popover-top-end::before {
+  @apply top-full left-1/2 transform -translate-x-1/2;
+  @apply border-t-white border-b-0;
+}
+
+.bb-popover-bottom::before,
+.bb-popover-bottom-start::before,
+.bb-popover-bottom-end::before {
+  @apply bottom-full left-1/2 transform -translate-x-1/2;
+  @apply border-b-white border-t-0;
+}
+
+.bb-popover-left::before {
+  @apply left-full top-1/2 transform -translate-y-1/2;
+  @apply border-l-white border-r-0;
+}
+
+.bb-popover-right::before {
+  @apply right-full top-1/2 transform -translate-y-1/2;
+  @apply border-r-white border-l-0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .bb-popover-content {
+    @apply max-w-xs;
+  }
+}
+
+/* Focus management */
+.bb-popover-content:focus-within {
+  @apply ring-2 ring-bytebank-blue ring-offset-2;
+}
+
+/* Animation enhancements */
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bb-popover-content {
+  animation: popover-in 0.15s ease-out;
+}
