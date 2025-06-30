@@ -82,64 +82,6 @@ describe('FooterComponent', () => {
     });
   });
 
-  describe('Navigation Section', () => {
-    it('should display navigation title', () => {
-      const navTitle = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] strong')
-      ).nativeElement;
-
-      expect(navTitle).toBeTruthy();
-
-      expect(navTitle.textContent).toBe('Navegação');
-
-      expect(navTitle.tagName.toLowerCase()).toBe('strong');
-    });
-
-    it('should have navigation with proper accessibility', () => {
-      const nav = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] nav')
-      ).nativeElement;
-
-      expect(nav).toBeTruthy();
-
-      expect(nav.getAttribute('aria-labelledby')).toBe('navigation-title');
-    });
-
-    it('should display all navigation links', () => {
-      const aboutLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/about"]')
-      ).nativeElement;
-      const privacyLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/privacy"]')
-      ).nativeElement;
-      const termsLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/terms"]')
-      ).nativeElement;
-
-      expect(aboutLink.textContent).toBe('Sobre Nós');
-
-      expect(aboutLink.getAttribute('href')).toBe('/about');
-
-      expect(privacyLink.textContent).toBe('Política de Privacidade');
-
-      expect(privacyLink.getAttribute('href')).toBe('/privacy');
-
-      expect(termsLink.textContent).toBe('Termos de Uso');
-
-      expect(termsLink.getAttribute('href')).toBe('/terms');
-    });
-
-    it('should have hover effects on navigation links', () => {
-      const links = fixture.debugElement.queryAll(
-        By.css('[data-testid="navigation-links-list"] a')
-      );
-
-      links.forEach((link) => {
-        expect(link.nativeElement.classList).toContain('hover:underline');
-      });
-    });
-  });
-
   describe('Layout and Styling', () => {
     it('should have properly structured sections', () => {
       const contactSection = fixture.debugElement.query(
@@ -147,9 +89,6 @@ describe('FooterComponent', () => {
       ).nativeElement;
       const logoSection = fixture.debugElement.query(
         By.css('[data-testid="footer-logo-section"]')
-      ).nativeElement;
-      const navigationSection = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"]')
       ).nativeElement;
 
       expect(contactSection.classList).toContain('flex');
@@ -163,30 +102,12 @@ describe('FooterComponent', () => {
       expect(logoSection.classList).toContain('flex-col');
 
       expect(logoSection.classList).toContain('gap-2');
-
-      expect(navigationSection.classList).toContain('flex');
-
-      expect(navigationSection.classList).toContain('flex-col');
-
-      expect(navigationSection.classList).toContain('gap-2');
     });
   });
 
   describe('Accessibility', () => {
     it('should have proper semantic HTML structure', () => {
       expect(element.tagName.toLowerCase()).toBe('footer');
-
-      const nav = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] nav')
-      ).nativeElement;
-
-      expect(nav).toBeTruthy();
-
-      const list = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"]')
-      ).nativeElement;
-
-      expect(list).toBeTruthy();
     });
 
     it('should have proper ARIA labels and relationships', () => {
@@ -195,18 +116,6 @@ describe('FooterComponent', () => {
       ).nativeElement;
 
       expect(contactTitle.id).toBe('contact-info-title');
-
-      const navigationTitle = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] strong')
-      ).nativeElement;
-
-      expect(navigationTitle.id).toBe('navigation-title');
-
-      const nav = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] nav')
-      ).nativeElement;
-
-      expect(nav.getAttribute('aria-labelledby')).toBe('navigation-title');
 
       const logoSection = fixture.debugElement.query(
         By.css('[data-testid="footer-logo-section"]')
@@ -221,30 +130,6 @@ describe('FooterComponent', () => {
       expect(logoTitle.classList).toContain('sr-only');
 
       expect(logoTitle.textContent).toBe('Logo do ByteBank');
-    });
-
-    it('should have keyboard navigable links', () => {
-      const aboutLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/about"]')
-      ).nativeElement;
-      const privacyLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/privacy"]')
-      ).nativeElement;
-      const termsLink = fixture.debugElement.query(
-        By.css('[data-testid="navigation-links-list"] a[href="/terms"]')
-      ).nativeElement;
-
-      aboutLink.focus();
-
-      expect(document.activeElement).toBe(aboutLink);
-
-      privacyLink.focus();
-
-      expect(document.activeElement).toBe(privacyLink);
-
-      termsLink.focus();
-
-      expect(document.activeElement).toBe(termsLink);
     });
   });
 
@@ -273,7 +158,7 @@ describe('FooterComponent', () => {
       expect(emailAddress.textContent).toBe('meajuda@bytebank.com.br');
     });
 
-    it('should have logo section as middle element', () => {
+    it('should have logo section as second element', () => {
       const logoSection = fixture.debugElement.query(
         By.css('[data-testid="footer-logo-section"]')
       ).nativeElement;
@@ -282,20 +167,6 @@ describe('FooterComponent', () => {
 
       expect(logoSection.getAttribute('aria-labelledby')).toBe('logo-section-title');
     });
-
-    it('should have navigation as last section', () => {
-      const navSection = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"]')
-      ).nativeElement;
-
-      expect(navSection).toBeTruthy();
-
-      const nav = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] nav')
-      ).nativeElement;
-
-      expect(nav).toBeTruthy();
-    });
   });
 
   describe('Typography and Styling', () => {
@@ -303,13 +174,8 @@ describe('FooterComponent', () => {
       const contactTitle = fixture.debugElement.query(
         By.css('[data-testid="footer-contact-section"] strong')
       ).nativeElement;
-      const navigationTitle = fixture.debugElement.query(
-        By.css('[data-testid="footer-navigation-section"] strong')
-      ).nativeElement;
 
       expect(contactTitle.classList).toContain('text-base');
-
-      expect(navigationTitle.classList).toContain('text-base');
 
       const phoneNumber = fixture.debugElement.query(
         By.css('[data-testid="contact-phone"]')

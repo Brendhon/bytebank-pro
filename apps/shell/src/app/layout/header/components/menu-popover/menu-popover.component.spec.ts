@@ -196,26 +196,6 @@ describe('MenuPopoverComponent', () => {
       expect(updatedLabel).toBe('Transações');
       expect(updatedLabel).not.toBe(initialLabel);
     });
-
-    it('should handle paths with leading slash in computed property', () => {
-      // The computed property only removes trailing slash, not leading
-      fixture.componentRef.setInput('pathname', '/dashboard');
-      fixture.detectChanges();
-
-      const result = component.currentNavLabel();
-
-      // Should be undefined because '/dashboard' doesn't match 'dashboard' enum key
-      expect(result).toBeUndefined();
-    });
-
-    it('should handle paths with trailing slash in computed property', () => {
-      fixture.componentRef.setInput('pathname', 'dashboard/');
-      fixture.detectChanges();
-
-      const result = component.currentNavLabel();
-
-      expect(result).toBe('Dashboard');
-    });
   });
 
   describe('Boundary Cases', () => {

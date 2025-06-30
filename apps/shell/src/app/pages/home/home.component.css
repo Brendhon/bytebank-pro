@@ -1,0 +1,19 @@
+/* 
+ * Home Component Styles
+ * Specific styles for the component
+ * Most styling should use TailwindCSS utilities when possible
+ */
+
+.home-container {
+  @apply min-h-screen flex flex-col;
+}
+
+/* Ensure main content area takes remaining space */
+main[role='main'] {
+  @apply flex-1;
+}
+
+/* Ensure proper spacing and layout for pages */
+.home-container > main {
+  @apply container mx-auto;
+}
