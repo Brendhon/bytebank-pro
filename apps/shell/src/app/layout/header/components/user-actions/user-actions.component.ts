@@ -1,9 +1,8 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
-import { User } from 'lucide-angular'; // Import specific Lucide icons
-import { ICONS, getAssetContent } from '@bytebank-pro/shared-assets';
-import { PopoverComponent } from '@bytebank-pro/ui';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ICONS } from '@bytebank-pro/shared-assets';
+import { ImgComponent, PopoverComponent } from '@bytebank-pro/ui';
+import { LucideAngularModule, User } from 'lucide-angular';
 
 /**
  * UserActions component provides a dropdown menu with navigation links to external resources
@@ -17,27 +16,35 @@ import { PopoverComponent } from '@bytebank-pro/ui';
 @Component({
   selector: 'bb-user-actions', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule, LucideAngularModule, PopoverComponent], // Required imports
+  imports: [CommonModule, LucideAngularModule, PopoverComponent, ImgComponent], // Required imports
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
-  templateUrl: './user-actions.component.html' // Separated template for clarity
+  templateUrl: './user-actions.component.html', // Separated template for clarity
+  styleUrls: ['./user-actions.component.css'] // Always include CSS file
 })
 export class UserActionsComponent {
   /**
    * Event emitted when a navigation link (Github, Figma, Storybook) is clicked.
    * Emits the URL to navigate to.
    */
-  @Output() onNavigate = new EventEmitter<string>();
+  onNavigate = output<string>();
 
   /**
    * Event emitted when the "Sair" (Logout) button is clicked.
    */
-  @Output() onLogout = new EventEmitter<void>();
+  onLogout = output<void>();
 
   // Assuming these URLs would be provided via environment variables or a configuration service in Angular
   // For this example, hardcoding them for direct conversion. In a real app, use environment.ts or similar.
   githubUrl: string = 'https://github.com/Brendhon/bytebank-pro';
   figmaUrl: string =
     'https://www.figma.com/design/E9UFSc9LUXlL88hIvIcuLd/Modelo-Fase-1---P%C3%93S-FIAP?node-id=503-4264';
+
+  // Icons used in the component, imported from shared assets
+  icons = {
+    user: User,
+    github: ICONS.GITHUB,
+    figma: ICONS.FIGMA
+  };
 
   /**
    * Handles the click on a navigation link.

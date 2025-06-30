@@ -10,8 +10,8 @@ Este guia abrangente define as diretrizes e boas práticas para o desenvolviment
 
 ### 🖼️ Ícones
 
-- **Utilize apenas ícones da biblioteca `lucide-angular` por meio do componente `i-lucide`, sempre usando a propriedade `[img]`**. Isso garante consistência visual, acessibilidade e melhor performance em todos os componentes. Veja o exemplo logo abaixo.
-- **Não utilize SVGs customizados ou outras bibliotecas de ícones**.
+- **Sempre utilize apenas ícones da biblioteca `lucide-angular` através do componente `i-lucide` (nativo do Lucide para Angular), utilizando obrigatoriamente a propriedade `[img]`**. Isso garante padronização visual, acessibilidade e melhor performance em todos os componentes. Veja o exemplo abaixo.
+- **Não utilize SVGs customizados nem outras bibliotecas de ícones** — apenas os ícones oficiais do Lucide.
 - **Importe somente os ícones necessários** para cada componente.
 - **Exemplo de uso:**
 

@@ -1,38 +1,50 @@
-<bb-popover class="relative" [attr.popoverClassName]="'p-4'" data-testid="user-actions-popover">
-  <ng-template #popoverTrigger>
-    <button
-      type="button"
-      class="popover-trigger rounded-full border border-orange p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
-      aria-label="User menu"
-      data-testid="user-icon-button"
-    >
-      <i-lucide name="user" [size]="40" aria-hidden="true"></i-lucide>
-    </button>
-  </ng-template>
+<bb-popover
+  position="bottom-end"
+  [closeOnClickOutside]="true"
+  [closeOnEscape]="true"
+  data-testid="user-actions-popover"
+>
+  <button
+    slot="trigger"
+    type="button"
+    class="rounded-full border border-bytebank-orange p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bytebank-orange focus:ring-opacity-50"
+    aria-label="User menu"
+    data-testid="user-icon-button"
+  >
+    <i-lucide [img]="icons.user" [size]="40" aria-hidden="true"></i-lucide>
+  </button>
 
-  <div class="flex flex-col gap-2 justify-center items-center" data-testid="user-menu-content">
+  <div
+    slot="content"
+    class="flex flex-col gap-2 justify-center items-center p-4 min-w-[150px]"
+    data-testid="user-menu-content"
+  >
     <button
       type="button"
-      class="popover-li inline-flex items-center w-full text-left"
+      class="inline-flex items-center w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md gap-2"
       (click)="handleNavigate(githubUrl)"
       data-testid="github-link-button"
     >
-      <i-lucide name="github" class="inline mr-2 h-auto w-6" aria-hidden="true"></i-lucide>
+      <bb-img [src]="icons.github" alt="Github" size="sm" className="rounded-full"></bb-img>
       Github
     </button>
+
     <button
       type="button"
-      class="popover-li inline-flex items-center w-full text-left"
+      class="inline-flex items-center w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md gap-2"
       (click)="handleNavigate(figmaUrl)"
       data-testid="figma-link-button"
     >
-      <i-lucide name="figma" class="inline mr-2 h-auto w-6" aria-hidden="true"></i-lucide>
+      <bb-img [src]="icons.figma" alt="Figma" size="sm" className="rounded-full"></bb-img>
       Figma
     </button>
+
+    <hr class="w-full my-2 border-gray-200" />
+
     <button
       type="button"
       (click)="handleLogout()"
-      class="border-t border-t-dark-gray p-0 pt-6 w-full text-center popover-li"
+      class="w-full text-center px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md"
       data-testid="logout-button"
     >
       Sair
