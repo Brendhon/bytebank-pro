@@ -3,9 +3,9 @@
     <span
       class="text-20-bold"
       data-testid="card-value"
-      [attr.aria-label]="'Value: ' + formatCurrency(value()!)"
+      [attr.aria-label]="'Value: ' + (value() | currencyFormat)"
     >
-      {{ formatCurrency(value()!) }}
+      {{ value() | currencyFormat }}
     </span>
   } @else {
     <div

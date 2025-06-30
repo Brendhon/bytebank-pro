@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, computed, input } from '@angular/core';
+import { CurrencyFormatPipe } from '@/pipes/currency-format.pipe';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { isNumber } from '@bytebank-pro/utils';
 import { Loader2, LucideAngularModule } from 'lucide-angular';
-import { formatCurrency, isNumber } from '@bytebank-pro/utils';
 
 /**
  * Defines the possible visual variants for the Card component.
@@ -21,7 +22,7 @@ export type CardVariant = 'dark' | 'blue' | 'green' | 'orange';
 @Component({
   selector: 'bb-card',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, CurrencyFormatPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
@@ -61,14 +62,14 @@ export class CardComponent {
   loadingIcon = Loader2;
 
   /**
-   * Provides the `formatCurrency` utility function to the template.
-   */
-  protected formatCurrency = formatCurrency;
-
-  /**
    * Provides the `isNumber` utility function to the template.
    */
   protected isNumber = isNumber;
+
+  /**
+   * Instance of CurrencyFormatPipe for use in TypeScript code
+   */
+  private currencyPipe = new CurrencyFormatPipe();
 
   /**
    * Computed aria-label for accessibility
@@ -78,7 +79,7 @@ export class CardComponent {
     const currentLabel = this.label();
 
     if (this.isNumber(currentValue)) {
-      return `${currentLabel}: ${this.formatCurrency(currentValue!)}`;
+      return `${currentLabel}: ${this.currencyPipe.transform(currentValue!)}`;
     }
     return `${currentLabel}: Loading`;
   });
