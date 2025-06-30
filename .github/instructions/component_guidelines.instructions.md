@@ -363,7 +363,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { NomeDoComponenteComponent } from './nome-do-componente.component';
 
 const meta: Meta<NomeDoComponenteComponent> = {
-  title: 'Components/NomeDoComponente',
+  title: 'Components/NomeDaPastaQueOComponenteEsta/NomeDoComponente',
   component: NomeDoComponenteComponent
 };
 

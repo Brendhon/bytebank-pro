@@ -203,7 +203,7 @@ npm run clean           # Limpeza
    import { NovoComponentComponent } from './novo-component.component';
 
    const meta: Meta<NovoComponentComponent> = {
-     title: 'Components/NovoComponent',
+     title: 'Components/NomeDaPastaQueOComponenteEsta/NovoComponent',
      component: NovoComponentComponent,
      parameters: {
        layout: 'centered',

@@ -18,7 +18,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { ComponenteComponent } from './componente.component';
 
 const meta: Meta<ComponenteComponent> = {
-  title: 'Components/Componente', // Categoria na hierarquia do Storybook
+  title: 'Components/NomeDaPastaQueOComponenteEsta/Componente', // Categoria na hierarquia do Storybook
   component: ComponenteComponent, // Componente principal documentado
   parameters: {
     layout: 'centered',

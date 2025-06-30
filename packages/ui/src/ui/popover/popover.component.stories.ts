@@ -3,7 +3,7 @@ import { argsToTemplate } from '@storybook/angular';
 import { PopoverComponent, PopoverPosition } from './popover.component';
 
 const meta: Meta<PopoverComponent> = {
-  title: 'Components/Popover',
+  title: 'Components/UI/Popover',
   component: PopoverComponent,
   parameters: {
     layout: 'centered',
