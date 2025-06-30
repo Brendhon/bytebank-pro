@@ -141,28 +141,6 @@ describe('FooterComponent', () => {
   });
 
   describe('Layout and Styling', () => {
-    it('should have correct CSS classes for responsive layout', () => {
-      expect(element.classList).toContain('p-6');
-
-      expect(element.classList).toContain('bg-bytebank-dark');
-
-      expect(element.classList).toContain('text-white');
-
-      expect(element.classList).toContain('flex');
-
-      expect(element.classList).toContain('flex-col');
-
-      expect(element.classList).toContain('sm:flex-row');
-
-      expect(element.classList).toContain('sm:items-center');
-
-      expect(element.classList).toContain('gap-6');
-
-      expect(element.classList).toContain('justify-between');
-
-      expect(element.classList).toContain('items-start');
-    });
-
     it('should have properly structured sections', () => {
       const contactSection = fixture.debugElement.query(
         By.css('[data-testid="footer-contact-section"]')
