@@ -10,22 +10,23 @@ Este guia abrangente define as diretrizes e boas práticas para o desenvolviment
 
 ### 🖼️ Ícones
 
-- **Sempre utilize apenas ícones da biblioteca `lucide-angular` através do componente `i-lucide` (nativo do Lucide para Angular), utilizando obrigatoriamente a propriedade `[img]`**. Isso garante padronização visual, acessibilidade e melhor performance em todos os componentes. Veja o exemplo abaixo.
 - **Não utilize SVGs customizados nem outras bibliotecas de ícones** — apenas os ícones oficiais do Lucide.
 - **Importe somente os ícones necessários** para cada componente.
+- **Utilize exclusivamente os ícones da biblioteca `lucide-angular` por meio do componente oficial `i-lucide`, sempre usando a propriedade `[img]`**. Isso garante padronização visual, acessibilidade e performance em todos os componentes.
+- Não crie componentes customizados para ícones. Basta importar o ícone desejado do `lucide-angular` e usá-lo diretamente no template com o componente `i-lucide`, conforme o exemplo abaixo.
 - **Exemplo de uso:**
 
   ```typescript
   import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
 
   @Component({
-    selector: 'i-lucide',
-    templateUrl: './i-lucide.component.html',
+    selector: 'bb-component-name',
+    templateUrl: './component-name.component.html',
     standalone: true,
     imports: [LucideAngularModule],
     changeDetection: ChangeDetectionStrategy.OnPush
   })
-  export class ILucideComponent {
+  export class ComponentNameComponent {
     // ..
 
     arrowLeft = ArrowLeft; // Left arrow icon
