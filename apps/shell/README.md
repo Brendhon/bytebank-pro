@@ -53,7 +53,7 @@ Todas as rotas do Shell seguem o padrão em **inglês**, por exemplo:
 
 | Rota            | Responsável                 |
 | --------------- | --------------------------- |
-| `/login`        | Shell (rota própria)        |
+| `/home`         | Shell (rota própria)        |
 | `/dashboard`    | MFE Angular (Dashboard)     |
 | `/transactions` | MFE Angular (Transações)    |
 | `/settings`     | MFE Angular (Configurações) |
@@ -92,7 +92,7 @@ window.dispatchEvent(event);
 
 ## 🔐 Autenticação
 
-- Login é feito no próprio Shell (`/login`) com envio de `email + senha` para a API GraphQL.
+- Login é feito no próprio Shell (`/home`) no modal de Login com envio de `email + senha` para a API GraphQL.
 - O JWT retornado é armazenado em `localStorage` e enviado via headers nos MFEs.
 - Guards e interceptors são usados para proteger rotas privadas.
 
