@@ -6,12 +6,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ButtonComponent } from '@bytebank-pro/ui';
 
 @Component({
-  selector: 'app-login',
+  selector: 'bb-home',
   standalone: true,
   imports: [RouterModule, FormsModule, CommonModule, ButtonComponent],
-  templateUrl: './login.component.html'
+  templateUrl: './home.component.html'
 })
-export class LoginComponent implements OnInit {
+export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);

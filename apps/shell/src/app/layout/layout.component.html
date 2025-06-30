@@ -1,9 +1,31 @@
 <div class="flex flex-col min-h-screen">
-  <app-header></app-header>
+  <bb-header
+    [variant]="'user'"
+    [userName]="(userName$ | async) || ''"
+    (onNavigate)="handleNavigation($event)"
+    [pathname]="(pathname$ | async) || ''"
+    (onLogout)="handleLogout()"
+    (onLogin)="handleLogin()"
+    (onOpenAccount)="handleOpenAccount()"
+    data-testid="app-header"
+  ></bb-header>
 
-  <div class="flex flex-1">
-    <app-sidebar></app-sidebar>
-    <main class="flex-1 bg-gray-100 p-6">
+  <div class="flex-1 flex flex-row">
+    @if (pathname$ | async; as pathname) {
+      <bb-nav-menu
+        class="hidden md:flex"
+        [current]="pathname"
+        (onNavigate)="handleNavigation($event)"
+        data-testid="app-sidebar"
+      >
+      </bb-nav-menu>
+    }
+
+    <main
+      role="main"
+      class="p-6 overflow-x-auto w-auto inline-block m-auto"
+      data-testid="main-content-outlet"
+    >
       <router-outlet></router-outlet>
     </main>
   </div>

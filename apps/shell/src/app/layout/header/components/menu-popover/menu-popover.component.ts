@@ -5,6 +5,7 @@ import { Menu } from 'lucide-angular'; // Import specific icon
 import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
 import { PopoverComponent } from '@bytebank-pro/ui';
 import { NavItemLabel, NavMenuItemLabel } from '@/core/types/nav';
+import { getLabelFromPath } from '@/core/utils/nav';
 /**
  * MenuPopover component provides a collapsible navigation menu, typically for smaller screens.
  * It uses a popover to display the navigation items.
@@ -46,10 +47,7 @@ export class MenuPopoverComponent {
    * Maps the current path to the corresponding NavItemLabel.
    * Used to determine which navigation item should be highlighted as active.
    */
-  currentNavLabel = computed<NavItemLabel>(() => {
-    const pathname = this.currentPath.replace(/\/$/, '') as keyof typeof NavMenuItemLabel;
-    return NavMenuItemLabel[pathname];
-  });
+  currentNavLabel = computed<NavItemLabel>(() => getLabelFromPath(this.currentPath));
 
   /**
    * The icon used for the menu toggle button.
