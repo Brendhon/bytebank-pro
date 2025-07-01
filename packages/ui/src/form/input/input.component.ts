@@ -231,7 +231,7 @@ export class InputComponent {
   }
 
   get labelClasses(): string {
-    const baseClasses = 'block text-sm font-medium mb-1';
+    const baseClasses = 'block text-base font-semibold mb-3 text-bytebank-dark-gray';
     const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
     return `${baseClasses} ${variantClasses}`;
   }

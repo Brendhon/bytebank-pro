@@ -12,13 +12,11 @@
 <div class="relative">
   <!-- Prefix Icon -->
   @if (prefixIcon()) {
-    <div
-      class="absolute left-0 pl-3 pb-1 h-full justify-center flex items-center pointer-events-none"
-    >
+    <div class="absolute left-0 pl-3 h-full justify-center flex items-center pointer-events-none">
       <lucide-angular
         size="16"
         [name]="prefixIcon()!"
-        class="h-4 w-4 text-gray-400"
+        class="h-4 w-4 text-bytebank-blue"
         aria-hidden="true"
       >
       </lucide-angular>
@@ -55,7 +53,7 @@
   <div class="absolute inset-y-0 right-0">
     <!-- Success Icon -->
     @if (showSuccessIcon) {
-      <div class="pr-3 pb-1 h-full justify-center flex items-center">
+      <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
           [name]="checkIcon"
@@ -68,7 +66,7 @@
 
     <!-- Error Icon -->
     @if (showErrorIcon) {
-      <div class="pr-3 pb-1 h-full justify-center flex items-center">
+      <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
           [name]="alertIcon"
@@ -81,11 +79,11 @@
 
     <!-- Custom Suffix Icon -->
     @if (suffixIcon() && !showSuccessIcon && !showErrorIcon) {
-      <div class="pr-3 pb-1 h-full justify-center flex items-center">
+      <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
           [name]="suffixIcon()!"
-          class="h-4 w-4 text-gray-400"
+          class="h-4 w-4 text-bytebank-blue"
           aria-hidden="true"
         >
         </lucide-angular>
@@ -96,12 +94,16 @@
     @if (showPasswordButton) {
       <button
         type="button"
-        class="pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200 pb-1 h-full justify-center flex items-center"
+        class="pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200 h-full justify-center flex items-center"
         [attr.aria-label]="passwordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
         data-testid="password-toggle"
         (click)="togglePasswordVisibility()"
       >
-        <lucide-angular size="16" [name]="passwordVisible() ? eyeOffIcon : eyeIcon" class="h-4 w-4">
+        <lucide-angular
+          size="18"
+          [name]="passwordVisible() ? eyeOffIcon : eyeIcon"
+          class="h-4 w-4 text-bytebank-blue"
+        >
         </lucide-angular>
       </button>
     }
