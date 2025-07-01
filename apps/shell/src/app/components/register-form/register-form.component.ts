@@ -328,5 +328,5 @@ export class RegisterFormComponent {
   passwordConfirmationVariant = computed(() =>
     this.passwordConfirmationError() ? 'error' : 'default'
   );
-  privacyVariant = computed(() => (this.privacyError() ? 'error' : 'default'));
+  privacyVariant = computed(() => (this.privacyError() ? 'error' : 'success'));
 }
