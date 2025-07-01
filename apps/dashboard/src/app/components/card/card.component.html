@@ -25,7 +25,11 @@
       <span class="sr-only">Loading {{ label() }}...</span>
     </div>
   }
-  <span class="text-14" data-testid="card-label" [attr.aria-label]="'Label: ' + label()">
+  <span
+    class="text-sm font-normal"
+    data-testid="card-label"
+    [attr.aria-label]="'Label: ' + label()"
+  >
     {{ label() }}
   </span>
 </div>

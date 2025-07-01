@@ -1,11 +1,19 @@
-import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router'; // For routing
-import { signal } from '@angular/core'; // For signals
-import { HeaderComponent } from '@/components/header/header.component';
-import { FooterComponent } from '@/components/footer/footer.component';
-import { LoginFormData, RegisterFormData } from '@/core/types/form';
 import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { IMAGES, ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ImgComponent } from '@bytebank-pro/ui';
+
+/**
+ * Defines the structure for a single benefit item.
+ */
+interface BenefitItem {
+  iconSrc: string; // Changed from ReactNode to string for image source
+  iconAlt: string; // Alt text for the icon illustration
+  iconWidth: number;
+  title: string;
+  description: string;
+}
 
 /**
  * Home component provides the layout for non-authenticated users
@@ -24,49 +32,61 @@ import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
   standalone: true, // Always use standalone components
   imports: [
     CommonModule,
+    ImgComponent, // Import ImgComponent for image handling
     GuestLayoutComponent // Use GuestLayoutComponent for layout
   ],
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
   templateUrl: './home.component.html', // Separated template for clarity
   styleUrls: ['./home.component.css'] // Use CSS specific to component
 })
-export class HomeComponent implements OnInit {
-  // Inject services
-  private router = inject(Router);
+export class HomeComponent {
   /**
-   * Signal to control the visibility of the registration modal.
+   * Array defining the individual benefit items to be displayed.
    */
-  isRegisterOpen = signal(false);
+  benefits: BenefitItem[] = [
+    {
+      iconSrc: IMAGES.BOX,
+      iconAlt: 'Gift box icon',
+      iconWidth: 60,
+      title: 'Conta e cartão gratuitos',
+      description: 'Nossa conta é digital, sem custo fixo e sem tarifa de manutenção.'
+    },
+    {
+      iconSrc: IMAGES.WITHDRAWAL,
+      iconAlt: 'Hand withdrawing money icon',
+      iconWidth: 60,
+      title: 'Saques sem custo',
+      description: 'Você pode sacar gratuitamente 4x por mês de qualquer Banco 24h.'
+    },
+    {
+      iconSrc: IMAGES.STAR,
+      iconAlt: 'Star icon',
+      iconWidth: 60,
+      title: 'Programa de pontos',
+      description: 'Acumule pontos com compras no crédito sem pagar mensalidade!'
+    },
+    {
+      iconSrc: IMAGES.DEVICES,
+      iconAlt: 'Mobile devices icon',
+      iconWidth: 60,
+      title: 'Seguro Dispositivos',
+      description: 'Proteja seus dispositivos móveis por uma mensalidade simbólica.'
+    }
+  ];
 
   /**
-   * Signal to control the visibility of the login modal.
+   * Icon to home page illustration.
+   * This image is displayed on the home page.
    */
-  isLoginOpen = signal(false);
+  readonly homeIllustrationSrc = ILLUSTRATIONS.HOME;
 
   /**
-   * Lifecycle hook called after component initialization.
-   * Ensures initial state setup.
+   * Tracks benefit items in the ngFor loop for better performance.
+   * @param index The index of the item.
+   * @param item The benefit item itself.
+   * @returns A unique identifier for the item (its index).
    */
-  ngOnInit(): void {
-    // Any initial setup for the guest layout if needed
-  }
-
-  /**
-   * Handles the submission of the login form. [cite: DOCUMENTATION_GUIDELINES.md]
-   * Attempts to log in the user and handles success/failure with toasts and navigation.
-   * @param data The login form data.
-   * @param hideToast Optional. If true, suppresses success toast on login.
-   */
-  onLoginSubmit(data: LoginFormData, hideToast: boolean = false): void {
-    console.log('Logging in user:', data);
-  }
-
-  /**
-   * Handles the submission of the registration form. [cite: DOCUMENTATION_GUIDELINES.md]
-   * Registers the user and attempts to log them in automatically upon successful registration.
-   * @param formData The registration form data.
-   */
-  onRegisterSubmit(formData: RegisterFormData): void {
-    console.log('Registering user:', formData);
+  trackByBenefitIndex(index: number, item: BenefitItem): number {
+    return index;
   }
 }
