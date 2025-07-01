@@ -132,8 +132,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-bytebank-dark');
-      expect(classes).toContain('text-white');
+      expect(classes).toContain('button-dark');
     });
 
     it('should apply blue variant classes', () => {
@@ -142,8 +141,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-bytebank-blue');
-      expect(classes).toContain('text-white');
+      expect(classes).toContain('button-blue');
     });
 
     it('should apply green variant classes', () => {
@@ -152,8 +150,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-bytebank-green');
-      expect(classes).toContain('text-white');
+      expect(classes).toContain('button-green');
     });
 
     it('should apply orange variant classes', () => {
@@ -162,8 +159,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-bytebank-orange');
-      expect(classes).toContain('text-white');
+      expect(classes).toContain('button-orange');
     });
 
     it('should apply outlineGreen variant classes', () => {
@@ -172,9 +168,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-transparent');
-      expect(classes).toContain('border-bytebank-green');
-      expect(classes).toContain('text-bytebank-green');
+      expect(classes).toContain('button-outline-green');
     });
 
     it('should apply outlineOrange variant classes', () => {
@@ -183,9 +177,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('bg-transparent');
-      expect(classes).toContain('border-bytebank-orange');
-      expect(classes).toContain('text-bytebank-orange');
+      expect(classes).toContain('button-outline-orange');
     });
 
     it('should apply disabled classes when disabled', () => {

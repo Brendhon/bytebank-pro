@@ -244,7 +244,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    size: 'md',\n    isDecorative: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Decorative images are hidden from screen readers and don\\'t require alt text.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    size: 'md',\n    isDecorative: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: \"Decorative images are hidden from screen readers and don't require alt text.\"\n      }\n    }\n  }\n}"
       },
       {
         "name": "Default",
@@ -255,16 +255,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    label: 'Accept terms and conditions',\n    checked: false,\n    variant: 'default',\n    size: 'md'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-checkbox ${argsToTemplate(args)}></bb-checkbox>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
       },
       {
         "name": "Default",
@@ -295,6 +285,16 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
       },
       {
         "name": "Default",
@@ -670,16 +670,6 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<InputComponent>",
-        "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/form/select/select.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -705,6 +695,16 @@
         "deprecationMessage": "",
         "type": "Meta<PaginatorComponent>",
         "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<InputComponent>",
+        "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -1344,17 +1344,6 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<InputComponent>",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
         "rawtype": "StoryObj<SelectComponent>",
         "file": "src/form/select/select.component.stories.ts",
         "deprecated": false,
@@ -1379,6 +1368,17 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<PaginatorComponent>",
         "file": "src/table/paginator/paginator.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<InputComponent>",
+        "file": "src/form/input/input.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2184,7 +2184,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    size: 'md',\n    isDecorative: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: 'Decorative images are hidden from screen readers and don\\'t require alt text.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    size: 'md',\n    isDecorative: true\n  },\n  parameters: {\n    docs: {\n      description: {\n        story: \"Decorative images are hidden from screen readers and don't require alt text.\"\n      }\n    }\n  }\n}"
         },
         {
           "name": "Default",
@@ -2367,6 +2367,58 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
+        }
+      ],
+      "src/table/paginator/paginator.component.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
+        },
+        {
+          "name": "FewPages",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 2,\n    totalPages: 5\n  }\n}"
+        },
+        {
+          "name": "LastPage",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 10,\n    totalPages: 10\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<PaginatorComponent>",
+          "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
+        },
+        {
+          "name": "MiddlePage",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 15,\n    totalPages: 30\n  }\n}"
         }
       ],
       "src/form/input/input.component.stories.ts": [
@@ -2581,58 +2633,6 @@
           "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
         }
       ],
-      "src/table/paginator/paginator.component.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
-        },
-        {
-          "name": "FewPages",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 2,\n    totalPages: 5\n  }\n}"
-        },
-        {
-          "name": "LastPage",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 10,\n    totalPages: 10\n  }\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<PaginatorComponent>",
-          "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
-        },
-        {
-          "name": "MiddlePage",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 15,\n    totalPages: 30\n  }\n}"
-        }
-      ],
       "src/ui/dialog/dialog.component.stories.ts": [
         {
           "name": "Default",
@@ -2744,19 +2744,6 @@
           "kind": 183
         }
       ],
-      "src/form/input/input.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<InputComponent>",
-          "file": "src/form/input/input.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/form/select/select.component.stories.ts": [
         {
           "name": "Story",
@@ -2790,6 +2777,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<PaginatorComponent>",
           "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/form/input/input.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<InputComponent>",
+          "file": "src/form/input/input.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

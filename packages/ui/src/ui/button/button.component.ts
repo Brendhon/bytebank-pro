@@ -67,21 +67,17 @@ export class ButtonComponent {
   }
 
   private get baseClasses(): string {
-    return 'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 relative';
+    return 'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 relative button';
   }
 
   private get variantClasses(): string {
     const variants: Record<ButtonVariant, string> = {
-      dark: 'bg-bytebank-dark text-white hover:bg-gray-700 active:bg-gray-800 focus:ring-gray-500',
-      blue: 'bg-bytebank-blue text-white hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-500',
-      green:
-        'bg-bytebank-green text-white hover:bg-green-600 active:bg-green-700 focus:ring-green-500',
-      orange:
-        'bg-bytebank-orange text-white hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-500',
-      outlineGreen:
-        'bg-transparent border border-bytebank-green text-bytebank-green hover:bg-green-50 focus:ring-green-500',
-      outlineOrange:
-        'bg-transparent border border-bytebank-orange text-bytebank-orange hover:bg-orange-50 focus:ring-orange-500'
+      dark: 'button-dark',
+      blue: 'button-blue',
+      green: 'button-green',
+      orange: 'button-orange',
+      outlineGreen: 'button-outline-green',
+      outlineOrange: 'button-outline-orange'
     };
 
     return variants[this.variant()] || variants.blue;
