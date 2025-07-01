@@ -15,7 +15,7 @@
 /* Dialog Container - the actual dialog box */
 .bb-dialog-container {
   @apply relative bg-white rounded-lg shadow-2xl;
-  @apply w-full max-w-md mx-auto;
+  @apply w-full max-w-lg mx-auto;
   @apply transform transition-all duration-300 ease-in-out;
   @apply border border-gray-200;
   @apply focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:ring-offset-2;

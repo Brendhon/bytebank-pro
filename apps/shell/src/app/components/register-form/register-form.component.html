@@ -1,0 +1,145 @@
+<bb-dialog
+  [isOpen]="isOpen()"
+  (close)="onDialogClose()"
+  [showCloseButton]="false"
+  maxWidth="850px"
+  data-testid="register-dialog"
+  class="h-full"
+>
+  <div class="flex flex-col items-center space-y-6 p-6">
+    <!-- Header with illustration -->
+    <bb-img
+      [src]="illustrationSrc"
+      alt="Ilustração de cadastro"
+      size="full"
+      data-testid="register-illustration"
+    />
+
+    <h2 class="text-2xl font-bold text-gray-900 mb-2">
+      Preencha os dados abaixo para criar sua conta no ByteBank Pro
+    </h2>
+
+    <!-- Registration Form -->
+    <form
+      class="w-full flex flex-col gap-4"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      data-testid="register-form"
+    >
+      <!-- Name Field -->
+      <bb-input
+        label="Nome completo"
+        type="text"
+        [value]="formData().name"
+        [variant]="nameVariant()"
+        [errorMessage]="nameError()"
+        [prefixIcon]="userIcon"
+        placeholder="Digite seu nome completo"
+        [required]="true"
+        [disabled]="isLoading()"
+        autocomplete="name"
+        ariaLabel="Digite seu nome completo"
+        (valueChange)="onNameChange($event)"
+        data-testid="name-input"
+      />
+
+      <!-- Email Field -->
+      <bb-input
+        label="Email"
+        type="email"
+        [value]="formData().email"
+        [variant]="emailVariant()"
+        [errorMessage]="emailError()"
+        [prefixIcon]="mailIcon"
+        placeholder="Digite seu email"
+        [required]="true"
+        [disabled]="isLoading()"
+        autocomplete="email"
+        ariaLabel="Digite seu endereço de email"
+        (valueChange)="onEmailChange($event)"
+        data-testid="email-input"
+      />
+
+      <!-- Password Field -->
+      <bb-input
+        label="Senha"
+        type="password"
+        [value]="formData().password"
+        [variant]="passwordVariant()"
+        [errorMessage]="passwordError()"
+        [prefixIcon]="lockIcon"
+        placeholder="Digite sua senha"
+        [required]="true"
+        [disabled]="isLoading()"
+        [showPasswordToggle]="true"
+        autocomplete="new-password"
+        ariaLabel="Digite sua senha"
+        (valueChange)="onPasswordChange($event)"
+        data-testid="password-input"
+      />
+
+      <!-- Password Confirmation Field -->
+      <bb-input
+        label="Confirme sua senha"
+        type="password"
+        [value]="passwordConfirmation()"
+        [variant]="passwordConfirmationVariant()"
+        [errorMessage]="passwordConfirmationError()"
+        [prefixIcon]="lockIcon"
+        placeholder="Confirme sua senha"
+        [required]="true"
+        [disabled]="isLoading()"
+        [showPasswordToggle]="true"
+        autocomplete="new-password"
+        ariaLabel="Confirme sua senha"
+        (valueChange)="onPasswordConfirmationChange($event)"
+        data-testid="password-confirmation-input"
+      />
+
+      <!-- Privacy Policy Checkbox -->
+      <bb-checkbox
+        label="Li e estou ciente quanto às condições de tratamento dos meus dados conforme descrito na Política de Privacidade do banco."
+        [checked]="formData().acceptPrivacy"
+        [variant]="privacyVariant()"
+        [errorMessage]="privacyError()"
+        [required]="true"
+        [disabled]="isLoading()"
+        size="sm"
+        ariaLabel="Aceitar a Política de Privacidade"
+        (checkedChange)="onPrivacyChange($event)"
+        data-testid="privacy-checkbox"
+      />
+
+      <!-- Submit Button -->
+      <div class="dialog-actions">
+        <bb-button
+          type="button"
+          [variant]="'dark'"
+          [size]="'md'"
+          [disabled]="isLoading()"
+          [ariaLabel]="'Cancelar login'"
+          (click)="onDialogClose()"
+          data-testid="login-cancel-button"
+        >
+          Cancelar
+        </bb-button>
+
+        <bb-button
+          type="submit"
+          variant="orange"
+          size="lg"
+          [disabled]="!isFormValid() || isLoading()"
+          [loading]="isLoading()"
+          ariaLabel="Criar conta no ByteBank Pro"
+          data-testid="register-submit-button"
+        >
+          @if (isLoading()) {
+            Criando conta...
+          } @else {
+            Criar Conta
+          }
+        </bb-button>
+      </div>
+    </form>
+  </div>
+</bb-dialog>

@@ -5,6 +5,7 @@ import { LoginFormComponent } from '@/components/login-form/login-form.component
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router'; // For routing
+import { RegisterFormComponent } from '@/components/register-form/register-form.component';
 
 /**
  * Guest layout component provides the layout for non-authenticated users
@@ -21,7 +22,13 @@ import { Router } from '@angular/router'; // For routing
 @Component({
   selector: 'bb-guest-layout', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule, HeaderComponent, FooterComponent, LoginFormComponent],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    FooterComponent,
+    LoginFormComponent,
+    RegisterFormComponent
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
   templateUrl: './guest-layout.component.html', // Separated template for clarity
   styleUrls: ['./guest-layout.component.css'] // Use CSS specific to component

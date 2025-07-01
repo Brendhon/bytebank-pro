@@ -1,0 +1,41 @@
+/* Component-specific styles for register form */
+
+/* Focus management for accessibility */
+.bb-register-form-wrapper {
+  @apply outline-none;
+}
+
+/* Enhanced focus styles for form elements */
+.bb-register-form-wrapper input:focus,
+.bb-register-form-wrapper button:focus {
+  @apply ring-2 ring-bytebank-blue ring-offset-2;
+}
+
+/* Loading state overlay */
+.bb-register-form-loading {
+  @apply pointer-events-none opacity-60;
+}
+
+/* Custom styling for privacy policy checkbox text */
+.bb-register-form-wrapper .bb-checkbox-container label {
+  @apply text-xs leading-relaxed;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .bb-register-form-wrapper form {
+    @apply space-y-3;
+  }
+
+  .bb-register-form-wrapper h2 {
+    @apply text-xl;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bb-register-form-wrapper {
+    @apply border-2 border-gray-900;
+  }
+}

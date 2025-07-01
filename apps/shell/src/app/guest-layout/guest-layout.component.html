@@ -27,4 +27,13 @@
     data-testid="guest-layout-login-form"
   >
   </bb-login-form>
+
+  <!-- Register Form Dialog -->
+  <bb-register-form
+    [isOpen]="isRegisterOpen()"
+    (registerSubmit)="onRegisterSubmit($event)"
+    (dialogClose)="closeRegisterModal()"
+    data-testid="guest-layout-register-form"
+  >
+  </bb-register-form>
 </div>
