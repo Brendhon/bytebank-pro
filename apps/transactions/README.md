@@ -16,7 +16,7 @@ Este projeto é o **Transações Microfrontend** do Bytebank Pro, desenvolvido e
 - **@angular-architects/module-federation** para integração com o Shell Angular
 - **Tailwind CSS** (com design tokens compartilhados)
 - **GraphQL (Apollo Client Angular)** para comunicação com a API
-- **Angular Reactive Forms** para formulários
+- **Angular Reactive Forms** – para formulários mais complexos e **Angular Signals** para estados simples
 - **Lucide Angular** para ícones
 - **Angular Signals + RxJS** para controle de estado
 - **CustomEvent** + URL Params para comunicação com o Shell
@@ -109,7 +109,7 @@ module.exports = withModuleFederationPlugin({
 
 ## 📑 Formulários
 
-- **Angular Reactive Forms** para controle de formulário
+- **Angular Reactive Forms** – para formulários mais complexos e **Angular Signals** para estados simples
 
 ---
 
@@ -148,18 +148,6 @@ Este microfrontend é incluído no `docker-compose.yml` do monorepo para rodar j
 
 - Deploy individual via **Render**
 - Exposição do `remoteEntry.js` para o Shell consumir
-
----
-
-## ✅ Checklist de padrões
-
-- [x] Angular 20
-- [x] Tailwind CSS com tokens globais
-- [x] Comunicação via GraphQL
-- [x] Validação com Angular Reactive Forms
-- [x] Comunicação com Shell por CustomEvent
-- [x] Roteamento em inglês
-- [x] Deploy individual por app (MFEs)
 
 ---
 

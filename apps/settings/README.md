@@ -16,7 +16,7 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) via **Webpack
 - **@angular-architects/module-federation**
 - **Tailwind CSS**
 - **GraphQL (Apollo Client Angular)** – integração com a API
-- **Angular Reactive Forms** – para formulários
+- **Angular Reactive Forms** – para formulários mais complexos e **Angular Signals** para estados simples
 - **Angular Signals + RxJS** – para controle de estado
 - **CustomEvent** – para comunicação com o Shell (logout, userUpdated)
 - **TypeScript**
