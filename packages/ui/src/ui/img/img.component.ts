@@ -35,7 +35,8 @@ export type ImgSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
   standalone: true, // Always use standalone components
   imports: [CommonModule, LucideAngularModule], // Required imports for Angular and Lucide icons
   templateUrl: './img.component.html', // Separated template for clarity
-  styleUrls: ['./img.component.css'] // Separated styles for better organization
+  styleUrls: ['./img.component.css'], // Separated styles for better organization
+  changeDetection: ChangeDetectionStrategy.OnPush // OnPush for better performance
 })
 export class ImgComponent implements OnInit {
   /**
