@@ -1,21 +1,6 @@
-<div class="home-container" data-testid="home-container">
-  <!-- Header for guest users -->
-  <bb-header
-    variant="guest"
-    (onOpenAccount)="isRegisterOpen.set(true)"
-    (onLogin)="isLoginOpen.set(true)"
-    data-testid="guest-layout-header"
-  ></bb-header>
-
-  <!-- Main content area for guest pages -->
-  <main
-    role="main"
-    class="p-6 overflow-x-auto w-auto inline-block m-auto"
-    data-testid="guest-layout-main-content"
-  >
-    <router-outlet></router-outlet>
-  </main>
-
-  <!-- Footer -->
-  <bb-footer data-testid="guest-layout-footer" />
-</div>
+<bb-guest-layout>
+  <section class="flex flex-col items-center justify-center flex-1">
+    <h1 class="text-4xl font-bold mb-4">Welcome to ByteBank</h1>
+    <p class="text-lg mb-6">Your financial journey starts here.</p>
+  </section>
+</bb-guest-layout>

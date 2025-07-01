@@ -1,36 +1,31 @@
-import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router'; // For routing
-import { signal } from '@angular/core'; // For signals
-import { HeaderComponent } from '@/components/header/header.component';
-import { FooterComponent } from '@/components/footer/footer.component';
 import { LoginFormData, RegisterFormData } from '@/core/types/form';
-import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
+import { FooterComponent } from '@/components/footer/footer.component';
+import { HeaderComponent } from '@/components/header/header.component';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router'; // For routing
 
 /**
- * Home component provides the layout for non-authenticated users
+ * Guest layout component provides the layout for non-authenticated users
  * including a header, main content area, footer, and modals for login and registration.
  *
  * @example
  * ```html
  * <!-- In your app.component.html or a specific route's component -->
- * <bb-home>
+ * <bb-guest-layout>
  * <router-outlet></router-outlet>
- * </bb-home>
+ * </bb-guest-layout>
  * ```
  */
 @Component({
-  selector: 'bb-home', // 'bb-' prefix is mandatory
+  selector: 'bb-guest-layout', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [
-    CommonModule,
-    GuestLayoutComponent // Use GuestLayoutComponent for layout
-  ],
+  imports: [CommonModule, HeaderComponent, FooterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
-  templateUrl: './home.component.html', // Separated template for clarity
-  styleUrls: ['./home.component.css'] // Use CSS specific to component
+  templateUrl: './guest-layout.component.html', // Separated template for clarity
+  styleUrls: ['./guest-layout.component.css'] // Use CSS specific to component
 })
-export class HomeComponent implements OnInit {
+export class GuestLayoutComponent implements OnInit {
   // Inject services
   private router = inject(Router);
   /**

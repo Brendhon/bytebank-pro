@@ -1,0 +1,21 @@
+<div class="guest-layout-container" data-testid="guest-layout-container">
+  <!-- Header for guest users -->
+  <bb-header
+    variant="guest"
+    (onOpenAccount)="isRegisterOpen.set(true)"
+    (onLogin)="isLoginOpen.set(true)"
+    data-testid="guest-layout-header"
+  ></bb-header>
+
+  <!-- Main content area for guest pages -->
+  <main
+    role="main"
+    class="p-6 overflow-x-auto w-auto inline-block m-auto"
+    data-testid="guest-layout-main-content"
+  >
+    <ng-content></ng-content>
+  </main>
+
+  <!-- Footer -->
+  <bb-footer data-testid="guest-layout-footer" />
+</div>

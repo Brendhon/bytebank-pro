@@ -1,13 +1,13 @@
 import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
 import { NavItemLabel } from '@/core/types/nav';
 import { getLabelFromPath } from '@/core/utils/nav';
-import { HeaderComponent } from '@/layout/header/header.component';
+import { HeaderComponent } from '@/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Observable, filter, map, startWith, delay, of } from 'rxjs';
-import { FooterComponent } from './footer/footer.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   selector: 'app-layout',

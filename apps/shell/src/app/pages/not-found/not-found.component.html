@@ -1,13 +1,29 @@
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-  <div class="text-center">
-    <h1 class="text-6xl font-bold text-gray-800 mb-4">404</h1>
-    <h2 class="text-2xl font-medium text-gray-600 mb-6">Página não encontrada</h2>
-    <p class="text-gray-500 mb-8">A página que você está procurando não existe ou foi removida.</p>
+<bb-guest-layout>
+  <div class="w-full text-center p-8 gap-6 flex flex-col items-center justify-center">
+    <h1 class="text-2xl font-bold text-bytebank-dark">Ops! Não encontramos a página…</h1>
+    <p class="text-dark text-base font-normal mt-2">
+      E olha que exploramos o universo procurando por ela!
+      <br />
+      Que tal voltar e tentar novamente?
+    </p>
+
     <a
-      routerLink="/dashboard"
-      class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      routerLink="/home"
+      class="button min-h-[44px] min-w-[44px]"
+      role="button"
+      aria-label="Voltar para a página inicial"
+      data-testid="back-to-home-button"
     >
-      Voltar para Dashboard
+      Voltar ao início
     </a>
+
+    <div class="mt-6">
+      <bb-img
+        [src]="imageSrc"
+        alt="Ilustração de erro 404 - página não encontrada"
+        size="full"
+        data-testid="not-found-illustration"
+      ></bb-img>
+    </div>
   </div>
-</div>
+</bb-guest-layout>
