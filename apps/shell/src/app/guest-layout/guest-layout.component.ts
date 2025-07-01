@@ -1,6 +1,7 @@
 import { LoginFormData, RegisterFormData } from '@/core/types/form';
 import { FooterComponent } from '@/components/footer/footer.component';
 import { HeaderComponent } from '@/components/header/header.component';
+import { LoginFormComponent } from '@/components/login-form/login-form.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router'; // For routing
@@ -20,7 +21,7 @@ import { Router } from '@angular/router'; // For routing
 @Component({
   selector: 'bb-guest-layout', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, LoginFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
   templateUrl: './guest-layout.component.html', // Separated template for clarity
   styleUrls: ['./guest-layout.component.css'] // Use CSS specific to component
@@ -28,6 +29,7 @@ import { Router } from '@angular/router'; // For routing
 export class GuestLayoutComponent implements OnInit {
   // Inject services
   private router = inject(Router);
+
   /**
    * Signal to control the visibility of the registration modal.
    */
@@ -47,21 +49,55 @@ export class GuestLayoutComponent implements OnInit {
   }
 
   /**
-   * Handles the submission of the login form. [cite: DOCUMENTATION_GUIDELINES.md]
+   * Handles the submission of the login form.
    * Attempts to log in the user and handles success/failure with toasts and navigation.
-   * @param data The login form data.
-   * @param hideToast Optional. If true, suppresses success toast on login.
+   * @param loginData The login form data with remember me option.
    */
-  onLoginSubmit(data: LoginFormData, hideToast: boolean = false): void {
-    console.log('Logging in user:', data);
+  onLoginSubmit(loginData: LoginFormData): void {
+    console.log('Logging in user:', loginData);
+
+    // Here you would typically call an authentication service
+    // For now, we'll just close the modal and show success
+    this.closeLoginModal();
+
+    // Navigate to dashboard or show success message
+    // this.router.navigate(['/dashboard']);
   }
 
   /**
-   * Handles the submission of the registration form. [cite: DOCUMENTATION_GUIDELINES.md]
+   * Handles the submission of the registration form.
    * Registers the user and attempts to log them in automatically upon successful registration.
    * @param formData The registration form data.
    */
   onRegisterSubmit(formData: RegisterFormData): void {
     console.log('Registering user:', formData);
+  }
+
+  /**
+   * Opens the login modal
+   */
+  openLoginModal(): void {
+    this.isLoginOpen.set(true);
+  }
+
+  /**
+   * Closes the login modal
+   */
+  closeLoginModal(): void {
+    this.isLoginOpen.set(false);
+  }
+
+  /**
+   * Opens the registration modal
+   */
+  openRegisterModal(): void {
+    this.isRegisterOpen.set(true);
+  }
+
+  /**
+   * Closes the registration modal
+   */
+  closeRegisterModal(): void {
+    this.isRegisterOpen.set(false);
   }
 }

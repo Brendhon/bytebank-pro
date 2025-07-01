@@ -184,7 +184,13 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     ```typescript
     export function customEmailValidator(): ValidatorFn { ... }
     ```
-21. **Memoization**: Utilize memoization para computações caras, evitando recálculos desnecessários e otimizando a performance.
+21. Use reactive forms para formulários complexos, aproveitando a reatividade e a validação avançada.
+    ```typescript
+    this.form = this.fb.group({
+      email: ['', [Validators.required, customEmailValidator()]]
+    });
+    ```
+22. **Memoization**: Utilize memoization para computações caras, evitando recálculos desnecessários e otimizando a performance.
     ```typescript
     get expensiveComputation() { ... }
     ```

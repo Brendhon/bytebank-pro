@@ -2,8 +2,8 @@
   <!-- Header for guest users -->
   <bb-header
     variant="guest"
-    (onOpenAccount)="isRegisterOpen.set(true)"
-    (onLogin)="isLoginOpen.set(true)"
+    (onOpenAccount)="openRegisterModal()"
+    (onLogin)="openLoginModal()"
     data-testid="guest-layout-header"
   ></bb-header>
 
@@ -18,4 +18,13 @@
 
   <!-- Footer -->
   <bb-footer data-testid="guest-layout-footer" />
+
+  <!-- Login Form Dialog -->
+  <bb-login-form
+    [isOpen]="isLoginOpen()"
+    (loginSubmit)="onLoginSubmit($event)"
+    (dialogClose)="closeLoginModal()"
+    data-testid="guest-layout-login-form"
+  >
+  </bb-login-form>
 </div>

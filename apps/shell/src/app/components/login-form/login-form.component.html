@@ -1,0 +1,90 @@
+<!-- Login Dialog -->
+<bb-dialog
+  [isOpen]="isOpen()"
+  [showCloseButton]="false"
+  [closeOnBackdropClick]="true"
+  [closeOnEscape]="true"
+  [maxWidth]="'28rem'"
+  [ariaLabel]="'Login form dialog'"
+  (close)="onDialogClose()"
+  data-testid="login-dialog"
+>
+  <bb-img [src]="illustrationSrc" size="full" className="flex" alt="Ilustração do Login"></bb-img>
+
+  <h2 class="my-3 text-xl font-bold text-bytebank-dark text-center">Login</h2>
+
+  <!-- Login Form -->
+  <form class="space-y-6" (ngSubmit)="onSubmit()" data-testid="login-form">
+    <!-- Email Field -->
+    <div>
+      <bb-input
+        type="email"
+        [label]="'Email'"
+        [placeholder]="'Digite seu email'"
+        [value]="formData().email"
+        [variant]="emailVariant()"
+        [errorMessage]="emailError()"
+        [required]="true"
+        [suffixIcon]="mailIcon"
+        [disabled]="isLoading()"
+        [ariaLabel]="'Digite seu email para login'"
+        [ariaDescribedBy]="emailError() ? 'email-error' : undefined"
+        (valueChange)="onEmailChange($event)"
+        data-testid="email-input"
+      >
+      </bb-input>
+    </div>
+
+    <!-- Password Field -->
+    <div>
+      <bb-input
+        type="password"
+        [label]="'Senha'"
+        [placeholder]="'Digite sua senha'"
+        [value]="formData().password"
+        [variant]="passwordVariant()"
+        [errorMessage]="passwordError()"
+        [required]="true"
+        [disabled]="isLoading()"
+        [showPasswordToggle]="true"
+        [ariaLabel]="'Digite sua senha para login'"
+        [ariaDescribedBy]="passwordError() ? 'password-error' : undefined"
+        (valueChange)="onPasswordChange($event)"
+        data-testid="password-input"
+      >
+      </bb-input>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="dialog-actions">
+      <bb-button
+        type="button"
+        [variant]="'dark'"
+        [size]="'md'"
+        [disabled]="isLoading()"
+        [ariaLabel]="'Cancelar login'"
+        (click)="onDialogClose()"
+        data-testid="login-cancel-button"
+      >
+        Cancelar
+      </bb-button>
+
+      <bb-button
+        type="submit"
+        [variant]="'green'"
+        [size]="'md'"
+        [loading]="isLoading()"
+        [disabled]="!isFormValid() || isLoading()"
+        [loadingText]="'Entrando...'"
+        [ariaLabel]="isLoading() ? 'Fazendo login, aguarde...' : 'Fazer login'"
+        data-testid="login-submit-button"
+      >
+        @if (isLoading()) {
+          Entrando...
+        } @else {
+          Entrar
+        }
+      </bb-button>
+    </div>
+  </form>
+</bb-dialog>

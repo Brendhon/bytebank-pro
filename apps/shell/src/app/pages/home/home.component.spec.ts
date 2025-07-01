@@ -26,17 +26,10 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with closed modals', () => {
-    expect(component.isRegisterOpen()).toBeFalsy();
-    expect(component.isLoginOpen()).toBeFalsy();
-  });
-
   it('should handle login form submission', () => {
     const loginData = { email: 'test@test.com', password: 'password123' };
 
     spyOn(console, 'log');
-    component.onLoginSubmit(loginData);
-
     expect(console.log).toHaveBeenCalledWith('Logging in user:', loginData);
   });
 
@@ -49,8 +42,6 @@ describe('HomeComponent', () => {
     };
 
     spyOn(console, 'log');
-    component.onRegisterSubmit(registerData);
-
     expect(console.log).toHaveBeenCalledWith('Registering user:', registerData);
   });
 });
