@@ -9,7 +9,12 @@
   (close)="onDialogClose()"
   data-testid="login-dialog"
 >
-  <bb-img [src]="illustrationSrc" size="full" className="flex" alt="Ilustração do Login"></bb-img>
+  <bb-img
+    [src]="illustrationSrc"
+    size="full"
+    className="hidden flex-col items-center md:flex"
+    alt="Ilustração do Login"
+  ></bb-img>
 
   <h2 class="my-3 text-xl font-bold text-bytebank-dark text-center">Login</h2>
 

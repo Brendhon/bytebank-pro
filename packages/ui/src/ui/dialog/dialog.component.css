@@ -2,20 +2,23 @@
 
 /* Dialog Overlay - covers the entire screen */
 .bb-dialog-overlay {
-  @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  @apply fixed inset-0 z-50;
+  @apply min-h-screen w-full;
 }
 
 /* Dialog Backdrop - provides blur effect */
 .bb-dialog-backdrop {
-  @apply absolute inset-0 bg-black/20 backdrop-blur-sm;
+  @apply fixed inset-0 bg-black/20 backdrop-blur-sm;
   @apply flex items-center justify-center p-4;
   @apply transition-all duration-300 ease-in-out;
+  @apply min-h-screen w-full;
+  @apply overflow-y-auto;
 }
 
 /* Dialog Container - the actual dialog box */
 .bb-dialog-container {
   @apply relative bg-white rounded-lg shadow-2xl;
-  @apply w-full max-w-lg mx-auto;
+  @apply w-full max-w-lg mx-auto my-8;
   @apply transform transition-all duration-300 ease-in-out;
   @apply border border-gray-200;
   @apply focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:ring-offset-2;
@@ -63,7 +66,8 @@
   }
 
   .bb-dialog-container {
-    @apply mx-2;
+    @apply mx-2 my-4;
+    @apply max-h-[calc(100vh-2rem)];
   }
 
   .bb-dialog-header {

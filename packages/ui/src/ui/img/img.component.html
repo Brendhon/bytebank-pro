@@ -1,10 +1,10 @@
 <!-- Loading state -->
 @if (isLoading) {
   <div
-    [class]="imageClasses"
+    [class]="imageClasses()"
     class="flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded"
     [attr.aria-busy]="true"
-    [attr.aria-label]="loadingText"
+    [attr.aria-label]="loadingText()"
     data-testid="img-loading"
   >
     <i-lucide
@@ -13,31 +13,31 @@
       class="animate-spin text-gray-400"
       aria-hidden="true"
     ></i-lucide>
-    <span class="sr-only">{{ loadingText }}</span>
+    <span class="sr-only">{{ loadingText() }}</span>
   </div>
 }
 
 <!-- Error state -->
 @else if (hasError) {
   <div
-    [class]="imageClasses"
+    [class]="imageClasses()"
     class="flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded border-2 border-dashed border-gray-300 dark:border-gray-600"
-    [attr.aria-label]="errorText"
+    [attr.aria-label]="errorText()"
     role="img"
     data-testid="img-error"
   >
     <i-lucide [img]="errorIcon" [size]="16" class="text-gray-400" aria-hidden="true"></i-lucide>
-    <span class="sr-only">{{ errorText }}</span>
+    <span class="sr-only">{{ errorText() }}</span>
   </div>
 }
 
 <!-- SVG content -->
 @else if (isSvg && imageContent) {
   <div
-    [class]="imageClasses"
+    [class]="imageClasses()"
     [innerHTML]="imageContent"
-    [attr.alt]="imageAltText"
-    [attr.aria-hidden]="shouldHideFromScreenReaders"
+    [attr.alt]="imageAltText()"
+    [attr.aria-hidden]="shouldHideFromScreenReaders()"
     role="img"
     data-testid="img-svg"
   ></div>
@@ -47,9 +47,9 @@
 @else if (!isSvg && imageContent) {
   <img
     [src]="imageContent"
-    [alt]="imageAltText"
-    [class]="imageClasses"
-    [attr.aria-hidden]="shouldHideFromScreenReaders"
+    [alt]="imageAltText()"
+    [class]="imageClasses()"
+    [attr.aria-hidden]="shouldHideFromScreenReaders()"
     (load)="onImageLoad()"
     (error)="onImageError()"
     loading="lazy"

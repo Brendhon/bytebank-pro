@@ -47,7 +47,7 @@ describe('DialogComponent', () => {
       fixture.componentRef.setInput('isOpen', true);
       fixture.detectChanges();
 
-      expect(element.style.display).toBe('flex');
+      expect(element.style.display).toBe('block');
 
       expect(element.getAttribute('aria-hidden')).toBe('false');
     });
@@ -276,7 +276,7 @@ describe('DialogComponent', () => {
 
       expect(element.getAttribute('aria-hidden')).toBe('false');
 
-      expect(element.style.display).toBe('flex');
+      expect(element.style.display).toBe('block');
     });
 
     it('should apply host classes correctly when closed', () => {

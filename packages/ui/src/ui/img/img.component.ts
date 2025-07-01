@@ -3,8 +3,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
   OnInit,
+  computed,
   inject,
   input
 } from '@angular/core';
@@ -35,8 +35,7 @@ export type ImgSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
   standalone: true, // Always use standalone components
   imports: [CommonModule, LucideAngularModule], // Required imports for Angular and Lucide icons
   templateUrl: './img.component.html', // Separated template for clarity
-  styleUrls: ['./img.component.css'], // Separated styles for better organization
-  changeDetection: ChangeDetectionStrategy.OnPush // OnPush for better performance
+  styleUrls: ['./img.component.css'] // Separated styles for better organization
 })
 export class ImgComponent implements OnInit {
   /**
@@ -54,32 +53,32 @@ export class ImgComponent implements OnInit {
    * The size of the image. Determines width and height classes.
    * @default 'md'
    */
-  @Input() size: ImgSize = 'md';
+  size = input<ImgSize>('md');
 
   /**
    * Additional CSS classes to apply to the image element.
    * @default ''
    */
-  @Input() className: string = '';
+  className = input<string>('');
 
   /**
    * Indicates if the image is purely decorative and should be hidden from screen readers.
    * When true, aria-hidden="true" and alt="" will be applied.
    * @default false
    */
-  @Input() isDecorative: boolean = false;
+  isDecorative = input<boolean>(false);
 
   /**
    * Custom loading text for screen readers.
    * @default 'Carregando imagem...'
    */
-  @Input() loadingText: string = 'Carregando imagem...';
+  loadingText = input<string>('Carregando imagem...');
 
   /**
    * Custom error text for screen readers when image fails to load.
    * @default 'Erro ao carregar imagem'
    */
-  @Input() errorText: string = 'Erro ao carregar imagem';
+  errorText = input<string>('Erro ao carregar imagem');
 
   // Internal map for size classes
   private sizeClasses: Record<ImgSize, string> = {
@@ -194,48 +193,45 @@ export class ImgComponent implements OnInit {
   /**
    * Computes the appropriate alt text for the image based on accessibility settings.
    */
-  get imageAltText(): string {
-    if (this.isDecorative) {
-      return '';
+  imageAltText = computed(() => {
+    switch (true) {
+      case this.isDecorative():
+        return '';
+      case this.hasError:
+        return this.errorText();
+      default:
+        return this.alt() || '';
     }
-
-    if (this.hasError) {
-      return this.errorText;
-    }
-
-    return this.alt() || '';
-  }
+  });
 
   /**
    * Determines if the image should be hidden from screen readers.
    */
-  get shouldHideFromScreenReaders(): boolean {
-    return this.isDecorative;
-  }
+  shouldHideFromScreenReaders = computed(() => this.isDecorative());
 
   /**
    * Computes the combined CSS classes for the image element.
    */
-  get imageClasses(): string {
-    const sizeClass = this.sizeClasses[this.size];
-    return `${sizeClass} ${this.className}`.trim();
-  }
+  imageClasses = computed(() => {
+    const sizeClass = this.sizeClasses[this.size()];
+    return `${sizeClass} ${this.className()}`.trim();
+  });
 
   /**
    * Gets the appropriate ARIA attributes for the current state
    */
-  get ariaAttributes(): Record<string, string | boolean> {
+  ariaAttributes = computed(() => {
     const attributes: Record<string, string | boolean> = {};
 
-    if (this.shouldHideFromScreenReaders) {
+    if (this.shouldHideFromScreenReaders()) {
       attributes['aria-hidden'] = true;
     }
 
     if (this.isLoading) {
       attributes['aria-busy'] = true;
-      attributes['aria-label'] = this.loadingText;
+      attributes['aria-label'] = this.loadingText();
     }
 
     return attributes;
-  }
+  });
 }

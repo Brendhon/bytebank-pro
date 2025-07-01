@@ -28,11 +28,11 @@ describe('ImgComponent', () => {
     });
 
     it('should have default properties', () => {
-      expect(component.size).toBe('md');
+      expect(component.size()).toBe('md');
 
-      expect(component.className).toBe('');
+      expect(component.className()).toBe('');
 
-      expect(component.isDecorative).toBeFalsy();
+      expect(component.isDecorative()).toBeFalsy();
       // Note: Component may have finished loading the test image and be in error state
       // This is expected behavior for a non-existent test image
     });
@@ -56,23 +56,23 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
 
-      expect(component.imageClasses).toContain('w-32 h-32');
+      expect(component.imageClasses()).toContain('w-32 h-32');
     });
 
     it('should handle decorative images correctly', () => {
       fixture.componentRef.setInput('isDecorative', true);
       fixture.detectChanges();
 
-      expect(component.shouldHideFromScreenReaders).toBe(true);
+      expect(component.shouldHideFromScreenReaders()).toBe(true);
 
-      expect(component.imageAltText).toBe('');
+      expect(component.imageAltText()).toBe('');
     });
 
     it('should apply custom className', () => {
       fixture.componentRef.setInput('className', 'custom-class');
       fixture.detectChanges();
 
-      expect(component.imageClasses).toContain('custom-class');
+      expect(component.imageClasses()).toContain('custom-class');
     });
 
     it('should set alt text correctly when component is not in error state', () => {
@@ -81,7 +81,7 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('alt', 'Test alt text');
       fixture.detectChanges();
 
-      expect(component.imageAltText).toBe('Test alt text');
+      expect(component.imageAltText()).toBe('Test alt text');
     });
 
     it('should apply different size variants correctly', () => {
@@ -97,7 +97,7 @@ describe('ImgComponent', () => {
         fixture.componentRef.setInput('size', size);
         fixture.detectChanges();
 
-        expect(component.imageClasses).toContain(expectedClass);
+        expect(component.imageClasses()).toContain(expectedClass);
       });
     });
 
@@ -106,9 +106,9 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('errorText', 'Custom error message');
       fixture.detectChanges();
 
-      expect(component.loadingText).toBe('Custom loading...');
+      expect(component.loadingText()).toBe('Custom loading...');
 
-      expect(component.errorText).toBe('Custom error message');
+      expect(component.errorText()).toBe('Custom error message');
     });
   });
 
@@ -210,9 +210,9 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('isDecorative', true);
       fixture.detectChanges();
 
-      expect(component.shouldHideFromScreenReaders).toBe(true);
+      expect(component.shouldHideFromScreenReaders()).toBe(true);
 
-      expect(component.imageAltText).toBe('');
+      expect(component.imageAltText()).toBe('');
     });
 
     it('should have proper aria attributes for error state', () => {
@@ -233,7 +233,7 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('isDecorative', false);
       fixture.detectChanges();
 
-      expect(component.imageAltText).toBe('Descriptive alt text');
+      expect(component.imageAltText()).toBe('Descriptive alt text');
     });
   });
 
@@ -300,7 +300,7 @@ describe('ImgComponent', () => {
       component.hasError = true;
       fixture.detectChanges();
 
-      expect(component.imageAltText).toBe('Custom error message');
+      expect(component.imageAltText()).toBe('Custom error message');
     });
 
     it('should handle successful image load', () => {

@@ -7,6 +7,7 @@ import {
   ElementRef,
   HostListener,
   input,
+  OnDestroy,
   OnInit,
   output,
   ViewChild
@@ -23,10 +24,10 @@ import { LucideAngularModule, X } from 'lucide-angular';
   host: {
     '[class.bb-dialog-overlay]': 'isOpen()',
     '[attr.aria-hidden]': '!isOpen()',
-    '[style.display]': 'isOpen() ? "flex" : "none"'
+    '[style.display]': 'isOpen() ? "block" : "none"'
   }
 })
-export class DialogComponent implements OnInit, AfterViewInit {
+export class DialogComponent implements OnInit, AfterViewInit, OnDestroy {
   // Icons
   readonly xIcon = X;
 
@@ -65,6 +66,7 @@ export class DialogComponent implements OnInit, AfterViewInit {
     // Store the currently focused element when dialog opens
     if (this.isOpen()) {
       this.focusedElementBeforeOpen = document.activeElement as HTMLElement;
+      this.preventBodyScroll();
     }
   }
 
@@ -73,6 +75,11 @@ export class DialogComponent implements OnInit, AfterViewInit {
     if (this.isOpen()) {
       this.focusDialog();
     }
+  }
+
+  ngOnDestroy(): void {
+    // Restore body scroll when component is destroyed
+    this.allowBodyScroll();
   }
 
   /**
@@ -134,6 +141,7 @@ export class DialogComponent implements OnInit, AfterViewInit {
    * Handle dialog close
    */
   private handleClose(): void {
+    this.allowBodyScroll();
     this.close.emit();
     this.restoreFocus();
   }
@@ -178,5 +186,19 @@ export class DialogComponent implements OnInit, AfterViewInit {
     return Array.from(
       this.dialogElement.nativeElement.querySelectorAll(focusableSelectors)
     ) as HTMLElement[];
+  }
+
+  /**
+   * Prevent body scroll when dialog is open
+   */
+  private preventBodyScroll(): void {
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Allow body scroll when dialog is closed
+   */
+  private allowBodyScroll(): void {
+    document.body.style.overflow = '';
   }
 }
