@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Observable, filter, map, startWith, delay, of } from 'rxjs';
 import { FooterComponent } from '../components/footer/footer.component';
+import { AuthService } from '@/core/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,6 +21,7 @@ import { FooterComponent } from '../components/footer/footer.component';
 export class LayoutComponent implements OnInit {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
+  private authService = inject(AuthService);
 
   /**
    * Observable that emits the current pathname as `NavItemLabel`.
@@ -82,7 +84,7 @@ export class LayoutComponent implements OnInit {
    * Handles user logout, clearing the session.
    */
   handleLogout(): void {
-    console.log('Logout clicked!');
+    this.authService.logout();
   }
 
   /**

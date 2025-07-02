@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router'; // For routing
 import { RegisterFormComponent } from '@/components/register-form/register-form.component';
+import { AuthService } from '@/core/services/auth.service';
+import { catchError, finalize, of } from 'rxjs';
 
 /**
  * Guest layout component provides the layout for non-authenticated users
@@ -36,6 +38,7 @@ import { RegisterFormComponent } from '@/components/register-form/register-form.
 export class GuestLayoutComponent implements OnInit {
   // Inject services
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   /**
    * Signal to control the visibility of the registration modal.
@@ -63,12 +66,26 @@ export class GuestLayoutComponent implements OnInit {
   onLoginSubmit(loginData: LoginFormData): void {
     console.log('Logging in user:', loginData);
 
-    // Here you would typically call an authentication service
-    // For now, we'll just close the modal and show success
-    this.closeLoginModal();
+    this.authService
+      .login(loginData.email, loginData.password)
+      .pipe(
+        catchError((error) => {
+          console.error('Login error:', error.message);
+          return of(null);
+        })
+      )
+      .subscribe((user) => {
+        if (user) {
+          // Successful login
+          this.closeLoginModal();
 
-    // Navigate to dashboard or show success message
-    // this.router.navigate(['/dashboard']);
+          // Navigate to dashboard or another protected page
+          this.router.navigate(['/dashboard']);
+
+          // You could also show a success message here
+          console.log('User logged in successfully:', user);
+        }
+      });
   }
 
   /**
@@ -78,6 +95,31 @@ export class GuestLayoutComponent implements OnInit {
    */
   onRegisterSubmit(formData: RegisterFormData): void {
     console.log('Registering user:', formData);
+
+    this.authService
+      .register(formData.name, formData.email, formData.password)
+      .pipe(
+        catchError((error) => {
+          console.error('Error registering user:', error.message);
+          return of(null);
+        }),
+        finalize(() => {
+          // Regardless of the result, finalize any loading state in the child component
+          // If using refs for child components, you could reset here
+        })
+      )
+      .subscribe((user) => {
+        if (user) {
+          // Registration successful
+          this.closeRegisterModal();
+
+          // Navigate to dashboard or another protected page
+          this.router.navigate(['/dashboard']);
+
+          // You could also show a success message here
+          console.log('User registered successfully:', user);
+        }
+      });
   }
 
   /**

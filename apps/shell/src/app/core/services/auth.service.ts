@@ -1,11 +1,12 @@
 import { Injectable, inject } from '@angular/core';
+import { IUser } from '@bytebank-pro/types';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { LOGIN_MUTATION, ME_QUERY, REGISTER_MUTATION } from '../graphql/auth.queries';
 import { AuthPayload, LoginInput, RegisterInput } from '../models/auth.model';
 import { StoredUser } from '../models/user.model';
-import { IUser } from '@bytebank-pro/types';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   private readonly USER_KEY = 'bytebank_user';
 
   private apollo = inject(Apollo);
+  private router = inject(Router);
 
   // User state management with BehaviorSubject following project guidelines
   private _currentUser = new BehaviorSubject<StoredUser | null>(null);
@@ -46,12 +48,12 @@ export class AuthService {
   }
 
   /**
-   * Realiza login do usuário usando a API GraphQL
-   * @returns Observable que emite o StoredUser em caso de sucesso
+   * Logs in the user using the GraphQL API
+   * @returns Observable that emits StoredUser on success
    */
   login(email: string, password: string): Observable<StoredUser> {
     if (!email || !password) {
-      return throwError(() => new Error('Email e senha são obrigatórios'));
+      return throwError(() => new Error('Email and password are required'));
     }
 
     // Create login input
@@ -69,7 +71,7 @@ export class AuthService {
           const authPayload = result.data?.login;
 
           if (!authPayload) {
-            throw new Error('Falha na autenticação');
+            throw new Error('Authentication failed');
           }
 
           const storedUser: StoredUser = {
@@ -83,19 +85,19 @@ export class AuthService {
           return storedUser;
         }),
         catchError((error) => {
-          console.error('Erro ao fazer login:', error);
-          return throwError(() => new Error(error.message || 'Erro na autenticação'));
+          console.error('Error during login:', error);
+          return throwError(() => new Error(error.message || 'Authentication error'));
         })
       );
   }
 
   /**
-   * Registra um novo usuário usando a API GraphQL
-   * @returns Observable que emite o StoredUser em caso de sucesso
+   * Registers a new user using the GraphQL API
+   * @returns Observable that emits StoredUser on success
    */
   register(name: string, email: string, password: string): Observable<StoredUser> {
     if (!name || !email || !password) {
-      return throwError(() => new Error('Nome, email e senha são obrigatórios'));
+      return throwError(() => new Error('Name, email, and password are required'));
     }
 
     // Create register input
@@ -118,7 +120,7 @@ export class AuthService {
           const authPayload = result.data?.register;
 
           if (!authPayload) {
-            throw new Error('Falha no registro');
+            throw new Error('Registration failed');
           }
 
           const storedUser: StoredUser = {
@@ -132,15 +134,15 @@ export class AuthService {
           return storedUser;
         }),
         catchError((error) => {
-          console.error('Erro ao registrar usuário:', error);
-          return throwError(() => new Error(error.message || 'Erro no registro'));
+          console.error('Error during registration:', error);
+          return throwError(() => new Error(error.message || 'Registration error'));
         })
       );
   }
 
   /**
-   * Busca informações do usuário atual na API
-   * @returns Observable que emite o User em caso de sucesso ou null se não estiver autenticado
+   * Fetches the current user's information from the API
+   * @returns Observable that emits User on success or null if not authenticated
    */
   getCurrentUser(): Observable<IUser | null> {
     return this.apollo
@@ -151,9 +153,12 @@ export class AuthService {
       .pipe(
         map((result) => result.data?.me || null),
         catchError((error) => {
-          console.error('Erro ao buscar usuário atual:', error);
-          // Se houver erro de autenticação, faz logout
-          if (error.message.includes('não autenticado') || error.message.includes('unauthorized')) {
+          console.error('Error fetching current user:', error);
+          // If authentication error, log out
+          if (
+            error.message.includes('not authenticated') ||
+            error.message.includes('unauthorized')
+          ) {
             this.logout();
           }
           return throwError(() => error);
@@ -162,19 +167,23 @@ export class AuthService {
   }
 
   /**
-   * Encerra a sessão do usuário
+   * Ends the user session
    */
   logout(): void {
+    console.log('Logout successful');
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     this._currentUser.next(null);
 
-    // Limpa o cache do Apollo
+    // Clear Apollo cache
     this.apollo.client.resetStore();
+
+    // Redirect to home page
+    this.router.navigate(['/home']);
   }
 
   /**
-   * Armazena os dados do usuário no localStorage e atualiza o BehaviorSubject
+   * Stores user data in localStorage and updates the BehaviorSubject
    */
   private setUser(user: StoredUser): void {
     localStorage.setItem(this.TOKEN_KEY, user.token);
@@ -183,7 +192,7 @@ export class AuthService {
   }
 
   /**
-   * Carrega o usuário do localStorage
+   * Loads the user from localStorage
    */
   private loadUserFromStorage(): void {
     const storedToken = localStorage.getItem(this.TOKEN_KEY);
@@ -194,7 +203,7 @@ export class AuthService {
         const user = JSON.parse(storedUser) as StoredUser;
         this._currentUser.next(user);
       } catch (error) {
-        console.error('Erro ao carregar usuário do localStorage', error);
+        console.error('Error loading user from localStorage', error);
         this.logout();
       }
     }
