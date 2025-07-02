@@ -1,13 +1,23 @@
-import { LoginFormData, RegisterFormData } from '@/core/types/form';
 import { FooterComponent } from '@/components/footer/footer.component';
 import { HeaderComponent } from '@/components/header/header.component';
 import { LoginFormComponent } from '@/components/login-form/login-form.component';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router'; // For routing
 import { RegisterFormComponent } from '@/components/register-form/register-form.component';
+import { StoredUser } from '@/core/models/user.model';
 import { AuthService } from '@/core/services/auth.service';
-import { catchError, finalize, of } from 'rxjs';
+import { ToastService } from '@/core/services/toast.service';
+import { LoginFormData, RegisterFormData } from '@/core/types/form';
+import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router'; // For routing
+import { catchError, Observable, of } from 'rxjs';
 
 /**
  * Guest layout component provides the layout for non-authenticated users
@@ -39,6 +49,8 @@ export class GuestLayoutComponent implements OnInit {
   // Inject services
   private router = inject(Router);
   private authService = inject(AuthService);
+  private toast = inject(ToastService);
+  private destroyRef = inject(DestroyRef);
 
   /**
    * Signal to control the visibility of the registration modal.
@@ -54,9 +66,7 @@ export class GuestLayoutComponent implements OnInit {
    * Lifecycle hook called after component initialization.
    * Ensures initial state setup.
    */
-  ngOnInit(): void {
-    // Any initial setup for the guest layout if needed
-  }
+  ngOnInit(): void {}
 
   /**
    * Handles the submission of the login form.
@@ -64,28 +74,13 @@ export class GuestLayoutComponent implements OnInit {
    * @param loginData The login form data with remember me option.
    */
   onLoginSubmit(loginData: LoginFormData): void {
-    console.log('Logging in user:', loginData);
-
     this.authService
       .login(loginData.email, loginData.password)
       .pipe(
-        catchError((error) => {
-          console.error('Login error:', error.message);
-          return of(null);
-        })
+        catchError((error) => this.handleError(error, 'Credenciais inválidas.')),
+        takeUntilDestroyed(this.destroyRef) // Automatically unsubscribe on destroy
       )
-      .subscribe((user) => {
-        if (user) {
-          // Successful login
-          this.closeLoginModal();
-
-          // Navigate to dashboard or another protected page
-          this.router.navigate(['/dashboard']);
-
-          // You could also show a success message here
-          console.log('User logged in successfully:', user);
-        }
-      });
+      .subscribe((user) => this.handleSuccess(user, 'Login realizado com sucesso!'));
   }
 
   /**
@@ -94,32 +89,50 @@ export class GuestLayoutComponent implements OnInit {
    * @param formData The registration form data.
    */
   onRegisterSubmit(formData: RegisterFormData): void {
-    console.log('Registering user:', formData);
-
     this.authService
       .register(formData.name, formData.email, formData.password)
       .pipe(
-        catchError((error) => {
-          console.error('Error registering user:', error.message);
-          return of(null);
-        }),
-        finalize(() => {
-          // Regardless of the result, finalize any loading state in the child component
-          // If using refs for child components, you could reset here
-        })
+        catchError((error) => this.handleError(error, 'Erro ao registrar usuário.')),
+        takeUntilDestroyed(this.destroyRef) // Automatically unsubscribe on destroy
       )
-      .subscribe((user) => {
-        if (user) {
-          // Registration successful
-          this.closeRegisterModal();
+      .subscribe((user) => this.handleSuccess(user, 'Usuário registrado com sucesso!'));
+  }
 
-          // Navigate to dashboard or another protected page
-          this.router.navigate(['/dashboard']);
+  /**
+   * Handles successful authentication (login or register)
+   * @param {StoredUser | null} user The authenticated user
+   * @param {string} message The success message to display
+   */
+  private handleSuccess(user: StoredUser | null, message: string): void {
+    // Check if user is valid
+    if (!user) return;
 
-          // You could also show a success message here
-          console.log('User registered successfully:', user);
-        }
-      });
+    // Close the appropriate modal
+    this.closeLoginModal();
+    this.closeRegisterModal();
+
+    // Show success toast message
+    this.toast.showSuccess(message);
+
+    // Navigate to dashboard or another protected page
+    this.router.navigate(['/dashboard']);
+  }
+
+  /**
+   * Handles authentication errors (login or register)
+   * @param error The error object
+   * @returns An Observable of null to continue the rxjs chain
+   */
+  private handleError(error: any, message: string): Observable<null> {
+    // Get the error message or use a default one
+    const errorMessage = message || 'Ocorreu um erro. Tente novamente.';
+
+    // User feedback
+    this.toast.showError(errorMessage);
+    console.error(errorMessage, error);
+
+    // Return an observable of null to continue the rxjs chain
+    return of(null);
   }
 
   /**
