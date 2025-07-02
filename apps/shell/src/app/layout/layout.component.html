@@ -5,8 +5,6 @@
     (onNavigate)="handleNavigation($event)"
     [pathname]="(pathname$ | async) || ''"
     (onLogout)="handleLogout()"
-    (onLogin)="handleLogin()"
-    (onOpenAccount)="handleOpenAccount()"
     data-testid="app-header"
   ></bb-header>
 

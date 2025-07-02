@@ -38,25 +38,39 @@ export class LayoutComponent implements OnInit {
    * Initializes observables for pathname and user name.
    */
   ngOnInit(): void {
-    // Get the current pathname from Router events
-    this.pathname$ = this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event) => {
-        // Map the URL to a NavItemLabel. This mapping might need refinement based on your exact routing setup.
-        // Example: /dashboard -> 'Dashboard', /transactions -> 'Transações', etc.
-        const path = event.urlAfterRedirects.split('?')[0]; // Remove query params
-        return getLabelFromPath(path); // Use utility function to get NavItemLabel
-      }),
-      startWith(this.getInitialPathname()), // Provide an initial value
-      takeUntilDestroyed(this.destroyRef)
-    ) as Observable<NavItemLabel>;
+    // Initialize pathname observable based on the current router state
+    this.pathname$ = this.initPathname();
 
     // Get user name from auth service session mock using modern approach
-    this.userName$ = of('Jane Doe').pipe(
-      delay(1000), // Simulate network delay
-      startWith(''), // Provide an initial empty value
+    this.userName$ = this.initUserName();
+  }
+
+  /**
+   * Init pathname based on the current router state.
+   * This method is used to set the initial value of the pathname observable.
+   */
+  private initPathname(): Observable<NavItemLabel> {
+    return this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => {
+        const path = event.urlAfterRedirects.split('?')[0];
+        return getLabelFromPath(path);
+      }),
+      startWith(this.getInitialPathname()),
       takeUntilDestroyed(this.destroyRef)
-    ) as Observable<string>;
+    );
+  }
+
+  /**
+   * Init user name observable.
+   * This method is used to set the initial value of the userName observable.
+   */
+  private initUserName(): Observable<string> {
+    return this.authService.getCurrentUser().pipe(
+      map((user) => user?.name || ''),
+      startWith(''),
+      takeUntilDestroyed(this.destroyRef)
+    );
   }
 
   /**
@@ -73,11 +87,7 @@ export class LayoutComponent implements OnInit {
    * @param link The URL or path to navigate to.
    */
   handleNavigation(link: string): void {
-    if (link?.startsWith('http')) {
-      window.open(link, '_blank');
-    } else {
-      this.router.navigateByUrl(link || '/');
-    }
+    this.router.navigateByUrl(link || '/');
   }
 
   /**
@@ -85,23 +95,5 @@ export class LayoutComponent implements OnInit {
    */
   handleLogout(): void {
     this.authService.logout();
-  }
-
-  /**
-   * Handles user login action.
-   * In this simulated example, it just logs in a user. In a real app, this would redirect to a login form.
-   */
-  handleLogin(): void {
-    console.log('Login clicked!');
-  }
-
-  /**
-   * Handles open account action.
-   * In this simulated example, it just logs to console. In a real app, this would redirect to an account creation form.
-   */
-  handleOpenAccount(): void {
-    console.log('Open Account clicked!');
-    // In a real app, you would navigate to an account creation route, e.g.:
-    // this.router.navigate(['/register']);
   }
 }
