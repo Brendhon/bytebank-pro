@@ -12,6 +12,14 @@ import {
 } from '@bytebank-pro/ui';
 import { Eye, EyeOff, Lock, Mail, User, LucideAngularModule } from 'lucide-angular';
 
+interface FormData extends RegisterFormData {
+  passwordConfirmation: string;
+}
+
+interface FormErrors extends Omit<FormData, 'acceptPrivacy'> {
+  acceptPrivacy: string;
+}
+
 /**
  * Register form component that provides a complete registration interface
  * with name, email, password, password confirmation fields and privacy policy checkbox.
@@ -53,22 +61,22 @@ export class RegisterFormComponent {
   isOpen = input.required<boolean>();
 
   // Form state using signals
-  formData = signal<RegisterFormData>({
+  formData = signal<FormData>({
     name: '',
     email: '',
     password: '',
-    acceptPrivacy: false
+    acceptPrivacy: false,
+    passwordConfirmation: ''
   });
 
-  // Additional password confirmation state
-  passwordConfirmation = signal<string>('');
-
-  // Form validation state
-  nameError = signal<string>('');
-  emailError = signal<string>('');
-  passwordError = signal<string>('');
-  passwordConfirmationError = signal<string>('');
-  privacyError = signal<string>('');
+  // Form error state using signals
+  formErrors = signal<FormErrors>({
+    name: '',
+    email: '',
+    password: '',
+    acceptPrivacy: '',
+    passwordConfirmation: ''
+  });
 
   // Loading state
   isLoading = signal(false);
@@ -76,6 +84,22 @@ export class RegisterFormComponent {
   // Event emitters using modern output() API
   registerSubmit = output<RegisterFormData>();
   dialogClose = output<void>();
+
+  /**
+   * Function to update errors
+   * @param { key: keyof FormErrors, message: string } - Key of the error to update and the message
+   */
+  private updateError(key: keyof FormErrors, message: string): void {
+    this.formErrors.update((errors) => ({ ...errors, [key]: message }));
+  }
+
+  /**
+   * Function to update form data
+   * @param { key: keyof FormData, value: string | boolean } - Key of the form data to update and the new value
+   */
+  private updateFormData(key: keyof FormData, value: string | boolean): void {
+    this.formData.update((data) => ({ ...data, [key]: value }));
+  }
 
   /**
    * Handles dialog close event
@@ -89,7 +113,7 @@ export class RegisterFormComponent {
    * Handles name input changes
    */
   onNameChange(name: string): void {
-    this.formData.update((data) => ({ ...data, name }));
+    this.updateFormData('name', name);
     this.validateName();
   }
 
@@ -97,7 +121,7 @@ export class RegisterFormComponent {
    * Handles email input changes
    */
   onEmailChange(email: string): void {
-    this.formData.update((data) => ({ ...data, email }));
+    this.updateFormData('email', email);
     this.validateEmail();
   }
 
@@ -105,10 +129,10 @@ export class RegisterFormComponent {
    * Handles password input changes
    */
   onPasswordChange(password: string): void {
-    this.formData.update((data) => ({ ...data, password }));
+    this.updateFormData('password', password);
     this.validatePassword();
     // Re-validate password confirmation if it has been entered
-    if (this.passwordConfirmation()) {
+    if (this.formData().passwordConfirmation) {
       this.validatePasswordConfirmation();
     }
   }
@@ -117,7 +141,7 @@ export class RegisterFormComponent {
    * Handles password confirmation input changes
    */
   onPasswordConfirmationChange(passwordConfirmation: string): void {
-    this.passwordConfirmation.set(passwordConfirmation);
+    this.updateFormData('passwordConfirmation', passwordConfirmation);
     this.validatePasswordConfirmation();
   }
 
@@ -125,7 +149,7 @@ export class RegisterFormComponent {
    * Handles privacy policy checkbox changes
    */
   onPrivacyChange(acceptPrivacy: boolean): void {
-    this.formData.update((data) => ({ ...data, acceptPrivacy }));
+    this.updateFormData('acceptPrivacy', acceptPrivacy);
     this.validatePrivacy();
   }
 
@@ -133,51 +157,43 @@ export class RegisterFormComponent {
    * Handles form submission
    */
   onSubmit(): void {
-    if (!this.validateForm()) {
-      return;
-    }
+    if (!this.validateForm()) return;
 
+    // Set loading state to true
     this.isLoading.set(true);
 
+    // Extract RegisterFormData from FormData (remove passwordConfirmation)
+    const { passwordConfirmation, ...registerData } = this.formData();
+
     // Emit the registration data
-    this.registerSubmit.emit(this.formData());
+    this.registerSubmit.emit(registerData);
 
     // Reset loading state after a short delay (parent component should handle this)
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 1000);
+    setTimeout(() => this.isLoading.set(false), 1000);
   }
-
   /**
    * Validates the name field
    */
   private validateName(): boolean {
     const name = this.formData().name.trim();
 
-    if (!name) {
-      this.nameError.set('Nome é obrigatório');
-      return false;
+    switch (true) {
+      case !name:
+        this.updateError('name', 'Nome é obrigatório');
+        return false;
+      case name.length < 6:
+        this.updateError('name', 'Nome deve ter pelo menos 6 caracteres');
+        return false;
+      case name.length > 50:
+        this.updateError('name', 'Nome deve ter no máximo 50 caracteres');
+        return false;
+      case !/^[a-zA-ZÀ-ÿ\s]+$/.test(name):
+        this.updateError('name', 'Nome deve conter apenas letras e espaços');
+        return false;
+      default:
+        this.updateError('name', '');
+        return true;
     }
-
-    if (name.length < 2) {
-      this.nameError.set('Nome deve ter pelo menos 2 caracteres');
-      return false;
-    }
-
-    if (name.length > 100) {
-      this.nameError.set('Nome deve ter no máximo 100 caracteres');
-      return false;
-    }
-
-    // Basic name validation (letters, spaces, and common accented characters)
-    const nameRegex = /^[a-zA-ZÀ-ÿ\s]+$/;
-    if (!nameRegex.test(name)) {
-      this.nameError.set('Nome deve conter apenas letras e espaços');
-      return false;
-    }
-
-    this.nameError.set('');
-    return true;
   }
 
   /**
@@ -186,19 +202,17 @@ export class RegisterFormComponent {
   private validateEmail(): boolean {
     const email = this.formData().email.trim();
 
-    if (!email) {
-      this.emailError.set('Email é obrigatório');
-      return false;
+    switch (true) {
+      case !email:
+        this.updateError('email', 'Email é obrigatório');
+        return false;
+      case !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email):
+        this.updateError('email', 'Digite um email válido');
+        return false;
+      default:
+        this.updateError('email', '');
+        return true;
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      this.emailError.set('Digite um email válido');
-      return false;
-    }
-
-    this.emailError.set('');
-    return true;
   }
 
   /**
@@ -207,72 +221,60 @@ export class RegisterFormComponent {
   private validatePassword(): boolean {
     const password = this.formData().password;
 
-    if (!password) {
-      this.passwordError.set('Senha é obrigatória');
-      return false;
+    switch (true) {
+      case !password:
+        this.updateError('password', 'Senha é obrigatória');
+        return false;
+      case password.length < 6:
+        this.updateError('password', 'Senha deve ter pelo menos 6 caracteres');
+        return false;
+      default:
+        this.updateError('password', '');
+        return true;
     }
-
-    if (password.length < 8) {
-      this.passwordError.set('Senha deve ter pelo menos 8 caracteres');
-      return false;
-    }
-
-    if (password.length > 128) {
-      this.passwordError.set('Senha deve ter no máximo 128 caracteres');
-      return false;
-    }
-
-    // Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/;
-    if (!passwordRegex.test(password)) {
-      this.passwordError.set(
-        'Senha deve conter ao menos: 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial'
-      );
-      return false;
-    }
-
-    this.passwordError.set('');
-    return true;
   }
 
   /**
    * Validates the password confirmation field
    */
   private validatePasswordConfirmation(): boolean {
-    const passwordConfirmation = this.passwordConfirmation();
-    const password = this.formData().password;
+    const { passwordConfirmation, password } = this.formData();
 
-    if (!passwordConfirmation) {
-      this.passwordConfirmationError.set('Confirmação de senha é obrigatória');
-      return false;
+    switch (true) {
+      case !passwordConfirmation:
+        this.updateError('passwordConfirmation', 'Confirmação de senha é obrigatória');
+        return false;
+      case passwordConfirmation !== password:
+        this.updateError('passwordConfirmation', 'As senhas não coincidem');
+        return false;
+      default:
+        this.updateError('passwordConfirmation', '');
+        return true;
     }
-
-    if (passwordConfirmation !== password) {
-      this.passwordConfirmationError.set('As senhas não coincidem');
-      return false;
-    }
-
-    this.passwordConfirmationError.set('');
-    return true;
   }
 
   /**
    * Validates the privacy policy checkbox
    */
   private validatePrivacy(): boolean {
-    if (!this.formData().acceptPrivacy) {
-      this.privacyError.set('Você deve aceitar a Política de Privacidade para continuar');
-      return false;
+    switch (true) {
+      case !this.formData().acceptPrivacy:
+        this.updateError(
+          'acceptPrivacy',
+          'Você deve aceitar a Política de Privacidade para continuar'
+        );
+        return false;
+      default:
+        this.updateError('acceptPrivacy', '');
+        return true;
     }
-
-    this.privacyError.set('');
-    return true;
   }
 
   /**
    * Validates the entire form
    */
   private validateForm(): boolean {
+    // Execute all validations to update all error messages at once
     const isNameValid = this.validateName();
     const isEmailValid = this.validateEmail();
     const isPasswordValid = this.validatePassword();
@@ -292,13 +294,21 @@ export class RegisterFormComponent {
    * Resets the form to initial state
    */
   private resetForm(): void {
-    this.formData.set({ name: '', email: '', password: '', acceptPrivacy: false });
-    this.passwordConfirmation.set('');
-    this.nameError.set('');
-    this.emailError.set('');
-    this.passwordError.set('');
-    this.passwordConfirmationError.set('');
-    this.privacyError.set('');
+    this.formData.set({
+      name: '',
+      email: '',
+      password: '',
+      acceptPrivacy: false,
+      passwordConfirmation: ''
+    });
+
+    // Reset all errors
+    this.updateError('name', '');
+    this.updateError('email', '');
+    this.updateError('password', '');
+    this.updateError('acceptPrivacy', '');
+    this.updateError('passwordConfirmation', '');
+
     this.isLoading.set(false);
   }
 
@@ -307,26 +317,18 @@ export class RegisterFormComponent {
    */
   isFormValid = computed(() => {
     const data = this.formData();
-    const passwordConfirmation = this.passwordConfirmation();
+    const errors = this.formErrors();
     return (
-      data.name.length > 0 &&
-      data.email.length > 0 &&
-      data.password.length > 0 &&
-      passwordConfirmation.length > 0 &&
-      data.acceptPrivacy &&
-      !this.nameError() &&
-      !this.emailError() &&
-      !this.passwordError() &&
-      !this.passwordConfirmationError() &&
-      !this.privacyError()
+      Object.values(errors).every((error) => !error) &&
+      Object.values(data).every((value) => !!value)
     );
   });
 
-  nameVariant = computed(() => (this.nameError() ? 'error' : 'default'));
-  emailVariant = computed(() => (this.emailError() ? 'error' : 'default'));
-  passwordVariant = computed(() => (this.passwordError() ? 'error' : 'default'));
+  nameVariant = computed(() => (this.formErrors().name ? 'error' : 'default'));
+  emailVariant = computed(() => (this.formErrors().email ? 'error' : 'default'));
+  passwordVariant = computed(() => (this.formErrors().password ? 'error' : 'default'));
   passwordConfirmationVariant = computed(() =>
-    this.passwordConfirmationError() ? 'error' : 'default'
+    this.formErrors().passwordConfirmation ? 'error' : 'default'
   );
-  privacyVariant = computed(() => (this.privacyError() ? 'error' : 'success'));
+  privacyVariant = computed(() => (this.formErrors().acceptPrivacy ? 'error' : 'success'));
 }
