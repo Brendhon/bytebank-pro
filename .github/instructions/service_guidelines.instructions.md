@@ -182,6 +182,25 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
 8.  **Reutilização**: Crie serviços genéricos ou abstratos quando a lógica puder ser compartilhada entre diferentes entidades (ex: `CrudService<T>`).
 9.  **Single Responsibility Principle (SRP)**: Cada serviço deve ter uma única responsabilidade bem definida. Evite serviços "faz-tudo".
 10. **Imutabilidade**: Sempre que possível, trabalhe com dados de forma imutável, especialmente ao atualizar estados complexos em serviços.
+11. **Documentação**: Use JSDoc para documentar métodos e propriedades públicas dos serviços, explicando o propósito, parâmetros e retornos.
+
+```typescript
+/**
+ * Service for managing users.
+ */
+export class UserService {
+  /**
+   * Retrieves a user by ID.
+   * @param id - The ID of the user to retrieve.
+   * @returns Observable with the user data.
+   */
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`/api/users/${id}`);
+  }
+}
+```
+
+Comentários devem ser claros, concisos e escritos em inglês.
 
 ## 📚 Exemplos Modernos
 

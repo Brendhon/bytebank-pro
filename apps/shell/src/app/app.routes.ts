@@ -2,7 +2,7 @@ import { LayoutComponent } from '@/layout/layout.component';
 import { loadMfe } from '@/mfe-loader/mfe-registry';
 import { Routes } from '@angular/router';
 import { MfeNames } from '@bytebank-pro/types';
-import { authGuard } from './core/guards';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {

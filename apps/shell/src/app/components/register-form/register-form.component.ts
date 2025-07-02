@@ -87,7 +87,8 @@ export class RegisterFormComponent {
 
   /**
    * Function to update errors
-   * @param { key: keyof FormErrors, message: string } - Key of the error to update and the message
+   * @param {keyof FormErrors} key - Key of the error to update
+   * @param {string} message Message to set for the error
    */
   private updateError(key: keyof FormErrors, message: string): void {
     this.formErrors.update((errors) => ({ ...errors, [key]: message }));
@@ -95,7 +96,8 @@ export class RegisterFormComponent {
 
   /**
    * Function to update form data
-   * @param { key: keyof FormData, value: string | boolean } - Key of the form data to update and the new value
+   * @param {keyof FormData} key Key of the form data to update
+   * @param {string|boolean} value value to set for the form data key
    */
   private updateFormData(key: keyof FormData, value: string | boolean): void {
     this.formData.update((data) => ({ ...data, [key]: value }));

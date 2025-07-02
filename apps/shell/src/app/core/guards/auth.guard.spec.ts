@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router, UrlTree } from '@angular/router';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { authGuard } from './auth.guard';
-import { AuthService } from '@/core/services';
+import { AuthService } from '@/core/services/auth.service';
 
 describe('authGuard', () => {
   let authService: jasmine.SpyObj<AuthService>;
