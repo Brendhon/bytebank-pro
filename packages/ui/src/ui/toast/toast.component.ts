@@ -21,11 +21,19 @@ import {
 export type ToastVariant = 'success' | 'error' | 'info';
 
 /**
- * Toast component to display notification messages.
+ * Toast component for displaying notification messages to users.
+ *
+ * AIDEV-NOTE: After making ANY changes to this component, update the `docs/toast_usage.md` file with usage examples and documentation.
  *
  * @example
  * ```html
- * <bb-toast message="Operation completed successfully!" variant="success" [show]="true" [duration]="3000" (toastClose)="handleClose()"></bb-toast>
+ * <bb-toast
+ *   message="Operation completed successfully!"
+ *   variant="success"
+ *   [show]="true"
+ *   [duration]="3000"
+ *   (toastClose)="handleClose()">
+ * </bb-toast>
  * ```
  */
 @Component({
