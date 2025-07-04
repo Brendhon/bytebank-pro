@@ -2,52 +2,52 @@
 applyTo: '**/*.spec.ts'
 ---
 
-# 🧪 Padrões de Teste para Aplicações Angular (Jasmine e Karma)
+# 🧪 Angular Testing Patterns (Jasmine and Karma)
 
-Este guia define os padrões e melhores práticas para a escrita de testes unitários para componentes, serviços, guards, resolvers, pipes e diretivas Angular, utilizando Jasmine e Karma.
+This guide defines the patterns and best practices for writing unit tests for Angular components, services, guards, resolvers, pipes, and directives, using Jasmine and Karma.
 
-**Observações Importantes:**
+**Important Notes:**
 
-- Os testes e comentários dentro dos códigos devem ser escritos em english.
-- Foque em testes unitários básicos e essenciais para cada tipo de construção Angular, evitando testes de integração ou e2e neste guia.
-- Utilize Jasmine e Karma para execução dos testes.
-- Os testes podem ser executados com o comando `npm run test` a partir da raiz do projeto.
-- Para testar um arquivo específico (ex: `input.component.spec.ts`), execute:
+- Tests and comments within the code must be written in English.
+- Focus on basic and essential unit tests for each type of Angular construct, avoiding integration or e2e tests in this guide.
+- Use Jasmine and Karma for test execution.
+- Tests can be run with the command `npm run test` from the project root.
+- To test a specific file (e.g., `input.component.spec.ts`), run:
 
   ```bash
   npm run test -- --include="\*\*/input.component.spec.ts"
   ```
 
-  Esse comando deve ser executado na pasta `packages/ui` (ou na raiz do projeto, dependendo da sua configuração), onde os testes estão localizados.
+  This command should be executed in the `packages/ui` folder (or at the project root, depending on your configuration), where the tests are located.
 
-- **Use `data-testid` para seletores de teste** para garantir robustez frente a mudanças no DOM.
-- **Adicione uma linha em branco antes de cada `expect`** para melhorar a legibilidade.
-- **Sempre use `fixture.componentRef.setInput()` para definir os inputs nos testes de componente**.
+- **Use `data-testid` for test selectors** to ensure robustness against DOM changes.
+- **Add a blank line before each `expect`** to improve readability.
+- **Always use `fixture.componentRef.setInput()` to set inputs in component tests**.
 
 ---
 
-## 1\. Estrutura de Testes
+## 1. Test Structure
 
-Todos os testes devem seguir uma estrutura básica apropriada para o tipo que está sendo testado.
+All tests must follow a basic structure appropriate for the type being tested.
 
-### A. Estrutura de Testes para Componentes
+### A. Component Test Structure
 
 ```typescript
-describe('ComponenteComponent', () => {
-  let component: ComponenteComponent;
-  let fixture: ComponentFixture<ComponenteComponent>;
+describe('ComponentComponent', () => {
+  let component: ComponentComponent;
+  let fixture: ComponentFixture<ComponentComponent>;
   let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComponenteComponent] // For standalone components
+      imports: [ComponentComponent] // For standalone components
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ComponenteComponent);
+    fixture = TestBed.createComponent(ComponentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    // Element para componentes pode ser null se o componente não renderizar um elemento imediatamente.
-    // Adapte o seletor [data-testid="component"] para o seletor raiz do seu componente.
+    // Element for components can be null if the component does not render an element immediately.
+    // Adapt the selector [data-testid="component"] to the root selector of your component.
     element = fixture.debugElement.query(By.css('[data-testid="component"]'))?.nativeElement;
   });
 
@@ -55,34 +55,34 @@ describe('ComponenteComponent', () => {
 });
 ```
 
-### B. Estrutura de Testes para Serviços
+### B. Service Test Structure
 
 ```typescript
-describe('MeuServicoService', () => {
-  let service: MeuServicoService;
+describe('MyServiceService', () => {
+  let service: MyServiceService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    // Cria um mock para HttpClient se o serviço depender dele
+    // Create a mock for HttpClient if the service depends on it
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
 
     TestBed.configureTestingModule({
       providers: [
-        MeuServicoService,
-        { provide: HttpClient, useValue: httpClientSpy } // Fornece o mock
+        MyServiceService,
+        { provide: HttpClient, useValue: httpClientSpy } // Provide the mock
       ]
     });
-    service = TestBed.inject(MeuServicoService);
+    service = TestBed.inject(MyServiceService);
   });
 
   // Required tests...
 });
 ```
 
-### C. Estrutura de Testes para Guards e Resolvers (Baseados em Função)
+### C. Guard and Resolver Test Structure (Function-Based)
 
 ```typescript
-// Exemplo para um Guard
+// Example for a Guard
 describe('authGuard', () => {
   let router: Router;
   let authService: jasmine.SpyObj<AuthService>;
@@ -111,7 +111,7 @@ describe('authGuard', () => {
 
   it('should redirect to login for an unauthenticated user', () => {
     authService.isAuthenticated.and.returnValue(false);
-    (router.createUrlTree as jasmine.Spy).and.returnValue(new UrlTree()); // Mocka o retorno
+    (router.createUrlTree as jasmine.Spy).and.returnValue(new UrlTree()); // Mock the return
 
     const result = TestBed.runInInjectionContext(() =>
       authGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot)
@@ -123,7 +123,7 @@ describe('authGuard', () => {
   });
 });
 
-// Exemplo para um Resolver
+// Example for a Resolver
 describe('userDataResolver', () => {
   let userService: jasmine.SpyObj<UserService>;
 
@@ -154,7 +154,7 @@ describe('userDataResolver', () => {
 });
 ```
 
-### D. Estrutura de Testes para Pipes
+### D. Pipe Test Structure
 
 ```typescript
 describe('CustomPipe', () => {
@@ -168,7 +168,7 @@ describe('CustomPipe', () => {
 });
 ```
 
-### E. Estrutura de Testes para Diretivas
+### E. Directive Test Structure
 
 ```typescript
 describe('HighlightDirective', () => {
@@ -176,7 +176,7 @@ describe('HighlightDirective', () => {
     template: `<div [bbHighlight]="color">Test</div>`
   })
   class TestHostComponent {
-    // Componente host para testar a diretiva
+    // Host component to test the directive
     color = 'yellow';
   }
 
@@ -185,7 +185,7 @@ describe('HighlightDirective', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HighlightDirective, TestHostComponent] // Importar a diretiva standalone
+      imports: [HighlightDirective, TestHostComponent] // Import the standalone directive
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -197,7 +197,7 @@ describe('HighlightDirective', () => {
 });
 ```
 
-### F. Estrutura de Testes para Interceptors
+### F. Interceptor Test Structure
 
 ```typescript
 describe('authInterceptor', () => {
@@ -208,17 +208,17 @@ describe('authInterceptor', () => {
     authService = jasmine.createSpyObj('AuthService', ['getAuthToken']);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule], // Importa para testar o HttpClient
+      imports: [HttpClientTestingModule], // Import to test HttpClient
       providers: [
         { provide: AuthService, useValue: authService },
-        { provide: HTTP_INTERCEPTORS, useValue: authInterceptor, multi: true } // Fornece o interceptor
+        { provide: HTTP_INTERCEPTORS, useValue: authInterceptor, multi: true } // Provide the interceptor
       ]
     });
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpTestingController.verify(); // Garante que não há requisições pendentes
+    httpTestingController.verify(); // Ensures no pending requests
   });
 
   // Required tests...
@@ -227,15 +227,15 @@ describe('authInterceptor', () => {
 
 ---
 
-## 2\. Categorias de Testes Obrigatórios
+## 2. Mandatory Test Categories
 
-É essencial cobrir as seguintes categorias de testes para garantir a robustez de cada tipo de construção Angular:
+It is essential to cover the following test categories to ensure the robustness of each type of Angular construct:
 
-### A. Testes Básicos
+### A. Basic Tests
 
-- Verificar se a entidade é criada com sucesso.
+- Verify that the entity is successfully created.
 
-- Confirmar que as propriedades padrão são inicializadas corretamente.
+- Confirm that default properties are correctly initialized.
 
   ```typescript
   describe('Basic Functionality', () => {
@@ -262,11 +262,11 @@ describe('authInterceptor', () => {
   });
   ```
 
-### B. Testes de Propriedades (Inputs - para Componentes/Diretivas)
+### B. Property Tests (Inputs - for Components/Directives)
 
-- Verificar se as classes CSS são aplicadas corretamente com base nos inputs.
+- Verify that CSS classes are correctly applied based on inputs.
 
-- Testar o comportamento em diferentes estados de input (ex: `disabled`, `loading`).
+- Test behavior in different input states (e.g., `disabled`, `loading`).
 
   ```typescript
   describe('Input Properties (Component/Directive)', () => {
@@ -293,9 +293,9 @@ describe('authInterceptor', () => {
   });
   ```
 
-### C. Testes de Eventos (Outputs - para Componentes/Diretivas)
+### C. Event Tests (Outputs - for Components/Directives)
 
-- Verificar se os eventos são emitidos corretamente quando as ações apropriadas são realizadas (ex: clique).
+- Verify that events are correctly emitted when appropriate actions are performed (e.g., click).
 
   ```typescript
   describe('Events (Component/Directive)', () => {
@@ -309,9 +309,9 @@ describe('authInterceptor', () => {
   });
   ```
 
-### D. Testes de Acessibilidade (para Componentes/Diretivas)
+### D. Accessibility Tests (for Components/Directives)
 
-- Garantir que os atributos ARIA e outras propriedades de acessibilidade são definidos corretamente.
+- Ensure that ARIA attributes and other accessibility properties are correctly defined.
 
   ```typescript
   describe('Accessibility (Component/Directive)', () => {
@@ -326,13 +326,13 @@ describe('authInterceptor', () => {
 
 ---
 
-## 3\. Testando Inputs e Outputs (para Componentes/Diretivas)
+## 3. Testing Inputs and Outputs (for Components/Directives)
 
-### A. Testando Inputs
+### A. Testing Inputs
 
-- Sempre use `fixture.componentRef.setInput()` para atribuir valores às propriedades de input.
+- Always use `fixture.componentRef.setInput()` to assign values to input properties.
 
-- Verifique se as propriedades são refletidas corretamente no componente e no DOM.
+- Verify that properties are correctly reflected in the component and the DOM.
 
   ```typescript
   it('should set input properties correctly', () => {
@@ -348,11 +348,11 @@ describe('authInterceptor', () => {
   });
   ```
 
-### B. Testando Outputs
+### B. Testing Outputs
 
-- Utilize `spyOn(output, 'emit')` para verificar se o evento foi emitido.
+- Use `spyOn(output, 'emit')` to verify that the event was emitted.
 
-- Alternativamente, pode-se subscrever ao output para capturar o valor emitido.
+- Alternatively, you can subscribe to the output to capture the emitted value.
 
   ```typescript
   it('should emit valueChange event', () => {
@@ -373,11 +373,11 @@ describe('authInterceptor', () => {
 
 ---
 
-## 4\. Testando Formulários (para Componentes)
+## 4. Testing Forms (for Components)
 
 ### A. Template-Driven Forms
 
-- Simule a interação do usuário com o elemento do formulário para verificar a atualização do modelo.
+- Simulate user interaction with the form element to verify model updates.
 
   ```typescript
   it('should update model on input', () => {
@@ -391,7 +391,7 @@ describe('authInterceptor', () => {
 
 ### B. Reactive Forms
 
-- Acesse os controles do formulário e defina valores para testar a validação e os estados do formulário.
+- Access form controls and set values to test form validation and states.
 
   ```typescript
   it('should validate the form', () => {
@@ -416,11 +416,11 @@ describe('authInterceptor', () => {
 
 ---
 
-## 5\. Testando Operações Assíncronas (para Componentes/Serviços/Resolvers/Guards)
+## 5. Testing Asynchronous Operations (for Components/Services/Resolvers/Guards)
 
-- Use `fakeAsync` e `tick()` para controlar o tempo e simular operações assíncronas de forma determinística.
+- Use `fakeAsync` and `tick()` to control time and simulate asynchronous operations deterministically.
 
-- Mocke os serviços que realizam chamadas assíncronas para controlar as respostas.
+- Mock services that make asynchronous calls to control responses.
 
   ```typescript
   it('should load data asynchronously (component)', fakeAsync(() => {
@@ -448,15 +448,15 @@ describe('authInterceptor', () => {
 
     const req = httpTestingController.expectOne('/api/users');
     expect(req.request.method).toEqual('GET');
-    req.flush(mockUsers); // Responde a requisição
+    req.flush(mockUsers); // Respond to the request
   });
   ```
 
 ---
 
-## 6\. Testando Comportamento Condicional (para Componentes/Diretivas)
+## 6. Testing Conditional Behavior (for Components/Directives)
 
-- Verifique se os elementos são exibidos ou ocultos com base nas condições do componente.
+- Verify that elements are displayed or hidden based on component conditions.
 
   ```typescript
   it('should show error message when hasError is true', () => {
@@ -480,11 +480,11 @@ describe('authInterceptor', () => {
 
 ---
 
-## 7\. Testando Mudanças de Estado (para Componentes/Serviços)
+## 7. Testing State Changes (for Components/Services)
 
-- Verifique se a UI é atualizada corretamente quando o estado do componente muda.
+- Verify that the UI is correctly updated when the component's state changes.
 
-- Verifique se o estado em um serviço (via Observable ou Signal) é atualizado corretamente.
+- Verify that the state in a service (via Observable or Signal) is correctly updated.
 
   ```typescript
   it('should update UI when state changes (component)', () => {
@@ -504,15 +504,15 @@ describe('authInterceptor', () => {
     httpClientSpy.get.and.returnValue(of(mockUser));
 
     service.currentUser$.subscribe((user) => {
-      // Primeira emissão (null)
-      // Segunda emissão após loadCurrentUser()
+      // First emission (null)
+      // Second emission after loadCurrentUser()
       if (user) {
         expect(user).toEqual(mockUser);
         done();
       }
     });
 
-    // Se o loadCurrentUser for chamado no construtor
+    // If loadCurrentUser is called in the constructor
     const req = httpTestingController.expectOne('/api/current-user');
     req.flush(mockUser);
   });
@@ -527,9 +527,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 8\. Testando Host Bindings (para Componentes/Diretivas)
+## 8. Testing Host Bindings (for Components/Directives)
 
-- Verifique se as classes ou atributos são aplicados ao elemento host do componente.
+- Verify that classes or attributes are applied to the component's host element.
 
   ```typescript
   it('should apply host classes correctly', () => {
@@ -550,9 +550,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 9\. Testando Referências ViewChild (para Componentes)
+## 9. Testing ViewChild References (for Components)
 
-- Verifique se o componente acessa e interage corretamente com os elementos filhos referenciados por `ViewChild`.
+- Verify that the component correctly accesses and interacts with child elements referenced by `ViewChild`.
 
   ```typescript
   it('should access child element with ViewChild', () => {
@@ -568,9 +568,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 10\. Testando Content Projection (para Componentes)
+## 10. Testing Content Projection (for Components)
 
-- Crie um componente host para testar se o conteúdo é projetado corretamente nos slots definidos.
+- Create a host component to test if content is correctly projected into the defined slots.
 
   ```typescript
   it('should project content correctly', () => {
@@ -614,13 +614,13 @@ describe('authInterceptor', () => {
 
 ---
 
-## 11\. Testando Acessibilidade Avançada (para Componentes/Diretivas)
+## 11. Testing Advanced Accessibility (for Components/Directives)
 
-- Verificar requisitos de contraste (WCAG).
+- Verify contrast requirements (WCAG).
 
-- Testar a navegabilidade por teclado e o foco.
+- Test keyboard navigability and focus.
 
-- Confirmar a presença e os valores corretos de todos os atributos ARIA necessários.
+- Confirm the presence and correct values of all necessary ARIA attributes.
 
   ```typescript
   describe('Accessibility Tests', () => {
@@ -661,9 +661,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 12\. Testando Pipes Personalizados
+## 12. Testing Custom Pipes
 
-- Crie uma instância do pipe e teste seu método `transform` com diferentes inputs.
+- Create an instance of the pipe and test its `transform` method with different inputs.
 
   ```typescript
   describe('CustomPipe', () => {
@@ -683,9 +683,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 13\. Testando Diretivas Personalizadas
+## 13. Testing Custom Directives
 
-- Crie um componente de teste que utilize a diretiva e verifique se a diretiva aplica as mudanças esperadas no DOM.
+- Create a test component that uses the directive and verify that the directive applies the expected changes to the DOM.
 
   ```typescript
   describe('HighlightDirective', () => {
@@ -722,9 +722,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 14\. Testando Serviços Injetados (em Componentes/Diretivas/Guards/Resolvers)
+## 14. Testing Injected Services (in Components/Directives/Guards/Resolvers)
 
-- Crie mocks (usando `jasmine.createSpyObj`) para os serviços injetados e forneça-os via `TestBed.configureTestingModule` para controlar seu comportamento.
+- Create mocks (using `jasmine.createSpyObj`) for injected services and provide them via `TestBed.configureTestingModule` to control their behavior.
 
   ```typescript
   describe('ComponentWithService', () => {
@@ -763,9 +763,9 @@ describe('authInterceptor', () => {
 
 ---
 
-## 15\. Testando Tratamento de Erros (em Componentes/Serviços/Interceptors)
+## 15. Testing Error Handling (in Components/Services/Interceptors)
 
-- Simule cenários de erro (ex: falha de API) e verifique se o componente/serviço/interceptor reage e exibe mensagens de erro adequadas.
+- Simulate error scenarios (e.g., API failure) and verify that the component/service/interceptor reacts and displays appropriate error messages.
 
   ```typescript
   it('should handle API errors gracefully (component)', fakeAsync(() => {
@@ -797,6 +797,7 @@ describe('authInterceptor', () => {
     });
 
     const req = httpTestingController.expectOne('/api/users');
+    expect(req.request.method).toEqual('GET');
     req.flush('Server Error', { status: 500, statusText: 'Server Error' });
   });
 
@@ -810,7 +811,7 @@ describe('authInterceptor', () => {
         expect(err.status).toBe(401);
 
         expect(notificationServiceSpy.showError).toHaveBeenCalledWith(
-          'Sessão expirada. Por favor, faça login novamente.'
+          'Session expired. Please log in again.'
         );
         done();
       }

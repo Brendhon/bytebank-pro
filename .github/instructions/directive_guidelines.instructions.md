@@ -2,54 +2,54 @@
 applyTo: '**/*.directive.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Diretivas no ByteBank Pro
+# 📋 Directive Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de diretivas no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for directive development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
-### ⚙️ Diretivas Personalizadas (Custom Directives)
+### ⚙️ Custom Directives
 
-Diretivas devem ser colocadas em uma pasta `directives` dentro do módulo ou recurso que elas atendem, ou em uma pasta `shared/directives` se forem de uso mais amplo.
+Directives should be placed in a `directives` folder within the module or feature they serve, or in a `shared/directives` folder if they are for broader use.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-recurso/
+  └── feature-name/
     └── directives/
-      ├── nome-da-diretiva.directive.ts
-      └── nome-da-diretiva.directive.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── directive-name.directive.ts
+      └── directive-name.directive.spec.ts // Create a simple test file with a basic test
   ```
-  Ou, para diretivas compartilhadas:
+  Or, for shared directives:
   ```
   src/
   └── shared/
     └── directives/
-      ├── nome-da-diretiva.directive.ts
-      └── nome-da-diretiva.directive.spec.ts
+      ├── directive-name.directive.ts
+      └── directive-name.directive.spec.ts
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `click-outside`)
-  - **Arquivo**: `kebab-case.directive.{ext}` (ex: `highlight.directive.ts`)
-  - **Classe**: `PascalCaseDirective` (ex: `HighlightDirective`)
-  - **Seletor**: Prefira prefixos específicos do projeto para evitar conflitos. Use `camelCase` para seletores de atributo (ex: `[bbHighlight]`) ou `kebab-case` para seletores de elemento (se a diretiva for usada como um elemento próprio, o que é menos comum para diretivas de atributo). Ex: `bb-tooltip` ou `[bbTooltip]`.
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `click-outside`)
+  - **File**: `kebab-case.directive.{ext}` (e.g., `highlight.directive.ts`)
+  - **Class**: `PascalCaseDirective` (e.g., `HighlightDirective`)
+  - **Selector**: Prefer project-specific prefixes to avoid conflicts. Use `camelCase` for attribute selectors (e.g., `[bbHighlight]`) or `kebab-case` for element selectors (if the directive is used as its own element, which is less common for attribute directives). E.g., `bb-tooltip` or `[bbTooltip]`.
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Diretivas
+## 🏗️ Angular Modern Best Practices (Angular 20) for Directives
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
-2.  **Diretivas Standalone**: **Sempre use diretivas standalone** para eliminar `NgModules` desnecessários, reduzir boilerplate e melhorar o tree-shaking.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
+2.  **Standalone Directives**: **Always use standalone directives** to eliminate unnecessary `NgModules`, reduce boilerplate, and improve tree-shaking.
     ```typescript
     @Directive({
-      selector: '[bbHighlight]', // Seletor de atributo é o mais comum
+      selector: '[bbHighlight]', // Attribute selector is most common
       standalone: true
     })
     export class HighlightDirective {
       /* ... */
     }
     ```
-3.  **Injeção de Dependências com `inject()` (Angular 14+)**: Utilize `inject()` para injetar serviços e outras dependências no construtor.
+3.  **Dependency Injection with `inject()` (Angular 14+)**: Use `inject()` to inject services and other dependencies in the constructor.
 
     ```typescript
     import { Directive, ElementRef, inject } from '@angular/core';
@@ -60,7 +60,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     })
     export class HighlightDirective {
       private el = inject(ElementRef);
-      // private renderer = inject(Renderer2); // Se precisar manipular o DOM de forma mais segura
+      // private renderer = inject(Renderer2); // If you need to manipulate the DOM more safely
 
       constructor() {
         this.el.nativeElement.style.backgroundColor = 'yellow';
@@ -68,7 +68,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-4.  **Entradas (`@Input()`) e Saídas (`output()`)**: Use as sintaxes modernas para `Input` e `Output`.
+4.  **Inputs (`@Input()`) and Outputs (`output()`)**: Use modern syntaxes for `Input` and `Output`.
 
     ```typescript
     import { Directive, Input, output, HostListener } from '@angular/core';
@@ -78,10 +78,10 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       standalone: true
     })
     export class ClickOutsideDirective {
-      // Input moderno
+      // Modern Input
       @Input({ required: true }) bbClickOutsideEnabled!: boolean;
 
-      // Output moderno
+      // Modern Output
       clickOutside = output<MouseEvent>();
 
       @HostListener('document:click', ['$event'])
@@ -92,16 +92,16 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       }
 
       private isInside(target: Node): boolean {
-        // Lógica para verificar se o clique foi dentro do elemento da diretiva
-        return false; // Implementar de acordo com a necessidade
+        // Logic to check if the click was inside the directive's element
+        return false; // Implement as needed
       }
     }
     ```
 
-5.  **Manipulação do DOM**:
+5.  **DOM Manipulation**:
 
-    - **Prefira `Renderer2`**: Para manipular o DOM de forma segura e independente da plataforma, utilize `Renderer2`.
-    - **Use `ElementRef` com cautela**: `ElementRef` permite acesso direto ao elemento nativo do DOM, mas deve ser usado com moderação e apenas quando `Renderer2` não for suficiente, pois pode dificultar a testabilidade e a portabilidade (ex: renderização em servidor, web workers).
+    - **Prefer `Renderer2`**: To manipulate the DOM safely and platform-independently, use `Renderer2`.
+    - **Use `ElementRef` with caution**: `ElementRef` allows direct access to the native DOM element, but should be used sparingly and only when `Renderer2` is not sufficient, as it can hinder testability and portability (e.g., server-side rendering, web workers).
     <!-- end list -->
 
     ```typescript
@@ -127,7 +127,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-6.  **Host Bindings (`host` property ou `@HostBinding`/`@HostListener`)**: Utilize a propriedade `host` no decorator `@Directive` para vincular propriedades, atributos ou eventos diretamente ao elemento host da diretiva. Isso é mais conciso e "treeshakeable" do que usar `@HostBinding` e `@HostListener` individualmente, embora estes ainda sejam válidos.
+6.  **Host Bindings (`host` property or `@HostBinding`/`@HostListener`)**: Use the `host` property in the `@Directive` decorator to bind properties, attributes, or events directly to the directive's host element. This is more concise and "treeshakeable" than using `@HostBinding` and `@HostListener` individually, although these are still valid.
 
     ```typescript
     import { Directive, Input } from '@angular/core';
@@ -136,8 +136,8 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       selector: '[bbToggleClass]',
       standalone: true,
       host: {
-        '[class.active]': 'isActive', // Binda a classe 'active' baseada na propriedade 'isActive'
-        '(click)': 'onClick()' // Binda o evento 'click' ao método 'onClick'
+        '[class.active]': 'isActive', // Binds the 'active' class based on the 'isActive' property
+        '(click)': 'onClick()' // Binds the 'click' event to the 'onClick' method
       }
     })
     export class ToggleClassDirective {
@@ -150,7 +150,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-7.  **Limpeza de Subscrições (Cleanup)**: Se sua diretiva se subscrever a Observables ou configurar listeners que precisam ser limpos, utilize `takeUntilDestroyed(this.destroyRef)` (disponível através do `DestroyRef` injetável) para gerenciamento automático do ciclo de vida.
+7.  **Subscription Cleanup**: If your directive subscribes to Observables or sets up listeners that need to be cleaned up, use `takeUntilDestroyed(this.destroyRef)` (available via the injectable `DestroyRef`) for automatic lifecycle management.
 
     ```typescript
     import { Directive, OnInit, OnDestroy, inject, DestroyRef } from '@angular/core';
@@ -167,7 +167,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       ngOnInit(): void {
         fromEvent<MouseEvent>(document, 'mousemove')
           .pipe(
-            takeUntilDestroyed(this.destroyRef) // Limpa automaticamente quando a diretiva é destruída
+            takeUntilDestroyed(this.destroyRef) // Automatically cleans up when the directive is destroyed
           )
           .subscribe((event) => {
             console.log(`Mouse at: ${event.clientX}, ${event.clientY}`);
@@ -176,11 +176,11 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-8.  **Reutilização e Simplicidade**: Diretivas devem ser pequenas, focadas em uma única funcionalidade e altamente reutilizáveis. Se a lógica for muito complexa, considere se não seria melhor um componente ou um serviço.
+8.  **Reusability and Simplicity**: Directives should be small, focused on a single functionality, and highly reusable. If the logic is too complex, consider whether a component or a service would be better.
 
-## 📚 Exemplos Modernos
+## 📚 Modern Examples
 
-### Diretiva de Foco Automático (AutoFocus Directive)
+### AutoFocus Directive
 
 ```typescript
 // auto-focus.directive.ts
@@ -194,7 +194,7 @@ export class AutoFocusDirective implements OnInit {
   private el = inject(ElementRef);
 
   ngOnInit(): void {
-    // Garante que o foco seja aplicado após a renderização inicial
+    // Ensures focus is applied after initial rendering
     setTimeout(() => {
       this.el.nativeElement.focus();
     });
@@ -202,13 +202,13 @@ export class AutoFocusDirective implements OnInit {
 }
 ```
 
-**Exemplo de Uso no Template:**
+**Usage Example in Template:**
 
 ```html
-<input type="text" bbAutoFocus placeholder="Este campo terá foco automático" />
+<input type="text" bbAutoFocus placeholder="This field will autofocus" />
 ```
 
-### Diretiva de Validação Visual de Input (Input Validation Directive)
+### Input Validation Directive
 
 ```typescript
 // input-validation.directive.ts
@@ -222,17 +222,17 @@ import {
   SimpleChanges,
   inject
 } from '@angular/core';
-import { NgControl } from '@angular/forms'; // Para acessar o estado do FormControl
+import { NgControl } from '@angular/forms'; // To access FormControl state
 
 @Directive({
   selector: '[bbInputValidation]',
   standalone: true
 })
 export class InputValidationDirective implements OnInit, OnChanges {
-  @Input() bbInputValidation: boolean = false; // Input para controlar a validação externa, se necessário
+  @Input() bbInputValidation: boolean = false; // Input to control external validation, if needed
 
   private el = inject(ElementRef);
-  private ngControl = inject(NgControl, { optional: true }); // Injeta NgControl, pode ser nulo
+  private ngControl = inject(NgControl, { optional: true }); // Injects NgControl, can be null
 
   @HostBinding('class.is-invalid') isValid = false;
 
@@ -248,7 +248,7 @@ export class InputValidationDirective implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['bbInputValidation']) {
-      // Atualiza o estado da classe se o input externo mudar
+      // Updates class state if external input changes
       this.isValid =
         (this.ngControl?.invalid && (this.ngControl?.dirty || this.ngControl?.touched)) ||
         this.bbInputValidation;
@@ -257,16 +257,16 @@ export class InputValidationDirective implements OnInit, OnChanges {
 }
 ```
 
-**Exemplo de Uso no Template (com Reactive Forms):**
+**Usage Example in Template (with Reactive Forms):**
 
 ```html
 <form [formGroup]="myForm">
-  <input type="email" formControlName="email" bbInputValidation placeholder="E-mail" />
+  <input type="email" formControlName="email" bbInputValidation placeholder="Email" />
   <div
     *ngIf="myForm.get('email')?.invalid && (myForm.get('email')?.dirty || myForm.get('email')?.touched)"
     class="error-message"
   >
-    E-mail inválido.
+    Invalid email.
   </div>
 </form>
 ```

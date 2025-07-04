@@ -2,19 +2,19 @@
 applyTo: '**/*.component.ts,**/*.component.html'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Componentes no ByteBank Pro
+# 📋 Component Creation Best Practices Guide for ByteBank Pro
 
-Este guia abrangente define as diretrizes e boas práticas para o desenvolvimento de componentes no ByteBank Pro, abrangendo estrutura, estilo, organização, práticas modernas do Angular e acessibilidade.
+This comprehensive guide defines the guidelines and best practices for component development in ByteBank Pro, covering structure, style, organization, modern Angular practices, and accessibility.
 
-## 🎨 Diretrizes Gerais de Componentes e Estilo
+## 🎨 General Component and Style Guidelines
 
-### 🖼️ Ícones
+### 🖼️ Icons
 
-- **Não utilize SVGs customizados nem outras bibliotecas de ícones** — apenas os ícones oficiais do Lucide.
-- **Importe somente os ícones necessários** para cada componente.
-- **Utilize exclusivamente os ícones da biblioteca `lucide-angular` por meio do componente oficial `i-lucide`, sempre usando a propriedade `[img]`**. Isso garante padronização visual, acessibilidade e performance em todos os componentes.
-- Não crie componentes customizados para ícones. Basta importar o ícone desejado do `lucide-angular` e usá-lo diretamente no template com o componente `i-lucide`, conforme o exemplo abaixo.
-- **Exemplo de uso:**
+- **Only use official Lucide icons.** Do not use custom SVGs or other icon libraries.
+- **Import only necessary icons** for each component.
+- **Use `lucide-angular` via the `i-lucide` component with the `[img]` property.** This ensures visual standardization, accessibility, and performance.
+- Do not create custom icon components. Import the desired icon from `lucide-angular` and use it directly in the template with `i-lucide`.
+- **Usage Example (TypeScript):**
 
   ```typescript
   import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
@@ -36,51 +36,51 @@ Este guia abrangente define as diretrizes e boas práticas para o desenvolviment
   }
   ```
 
-- **Exemplo de Uso no Template:**
+- **Usage Example (Template):**
 
   ```html
   <i-lucide [img]="ArrowLeft" [size]="20" aria-hidden="true"></i-lucide>
   <i-lucide [img]="ArrowRight" [size]="20" aria-hidden="true"></i-lucide>
   ```
 
-### 📏 Tamanho dos Componentes
+### 📏 Component Size
 
-### 🌈 Cores
+### 🌈 Colors
 
-Para garantir a consistência visual e a padronização da marca ByteBank, **sempre utilize as cores definidas nos design tokens compartilhados**.
-Você pode importar e usar essas cores diretamente em seus componentes TypeScript ou integrá-las via TailwindCSS. Para detalhes completos sobre a paleta de cores e como utilizá-las, consulte o arquivo [`README.md`](packages/shared-design-tokens/README.md) do pacote `@bytebank-pro/shared-design-tokens`.
+To ensure visual consistency and ByteBank brand standardization, **always use colors defined in shared design tokens**.
+You can import and use these colors directly in your TypeScript components or integrate them via TailwindCSS. For complete details on the color palette and how to use them, consult the [`README.md`](packages/shared-design-tokens/README.md) file of the `@bytebank-pro/shared-design-tokens` package.
 
-### 📁 Estrutura e Convenções de Nomenclatura
+### 📁 Structure and Naming Conventions
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-componente/
-    ├── nome-do-componente.component.ts
-    ├── nome-do-componente.component.spec.ts // create a simple test file - with one basic test
-    ├── nome-do-componente.component.html
-    └── nome-do-componente.component.css
+  └── component-name/
+    ├── component-name.component.ts
+    ├── component-name.component.spec.ts // Create a simple test file with one basic test
+    ├── component-name.component.html
+    └── component-name.component.css
   ```
-- **Convenções de Nomenclatura:**
+- **Naming Conventions:**
 
-  - **Pasta**: `kebab-case` (ex: `date-picker`)
-  - **Arquivo**: `kebab-case.component.{ext}` (ex: `date-picker.component.ts`)
-  - **Classe**: `PascalCaseComponent` (ex: `DatePickerComponent`)
-  - **Seletor**: `bb-kebab-case` (ex: `bb-date-picker`)
+  - **Folder**: `kebab-case` (e.g., `date-picker`)
+  - **File**: `kebab-case.component.{ext}` (e.g., `date-picker.component.ts`)
+  - **Class**: `PascalCaseComponent` (e.g., `DatePickerComponent`)
+  - **Selector**: `bb-kebab-case` (e.g., `bb-date-picker`)
 
-- **Arquivo de Estilo**: Sempre crie um arquivo CSS separado para estilos específicos do componente, evitando o uso de estilos globais. Utilize `styleUrls` no decorator `@Component` para referenciar o arquivo CSS.
+- **Style File**: Always create a separate CSS file for component-specific styles, avoiding global styles. Use `styleUrls` in the `@Component` decorator to reference the CSS file.
 
   ```typescript
   @Component({
     selector: 'bb-date-picker',
     templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.css'], // Use CSS específico do componente
+    styleUrls: ['./date-picker.component.css'], // Use component-specific CSS
     standalone: true,
     imports: [CommonModule, LucideAngularModule],
     changeDetection: ChangeDetectionStrategy.OnPush
   })
   export class DatePickerComponent {
-    // Lógica do componente
+    // Component logic
   }
   ```
 
@@ -88,12 +88,12 @@ Você pode importar e usar essas cores diretamente em seus componentes TypeScrip
 
 ## 🏗️ Angular Modern Best Practices (Angular 20)
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
-2.  **Testes**: Use `data-testid="nome"` em elementos para facilitar a seleção em testes, tornando-os mais resilientes a mudanças de classe ou estrutura.
-3.  **Sintaxe de Template (Angular 17+)**: Prefira blocos de controle `@if`, `@for`, `@empty`, `@switch` para maior clareza, performance e type safety. **Evite `*ngIf`, `*ngFor`, `ngSwitch`**.
-4.  **Componentes Standalone**: **Sempre use componentes standalone** para eliminar `NgModules` desnecessários, reduzir boilerplate e melhorar o tree-shaking.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
+2.  **Tests**: Use `data-testid="name"` on elements to facilitate selection in tests, making them more resilient to class or structure changes.
+3.  **Template Syntax (Angular 17+)**: Prefer `@if`, `@for`, `@empty`, `@switch` control flow blocks for better clarity, performance, and type safety. **Avoid `*ngIf`, `*ngFor`, `ngSwitch`**.
+4.  **Standalone Components**: **Always use standalone components** to eliminate unnecessary `NgModules`, reduce boilerplate, and improve tree-shaking.
     ```typescript
     @Component({
       selector: 'bb-component',
@@ -101,51 +101,51 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     })
     export class ComponentComponent {}
     ```
-5.  **APIs Baseadas em Signals (Angular 16+)**: Utilize `signal()` e `computed()` para estado reativo, melhor performance e código mais declarativo.
+5.  **Signal-Based APIs (Angular 16+)**: Use `signal()` and `computed()` for reactive state, better performance, and more declarative code.
     ```typescript
     counter = signal(0);
     doubled = computed(() => this.counter() * 2);
     ```
-6.  **Injeção de Dependências com `inject()` (Angular 14+)**: Para um código mais limpo e testável, utilize `inject()`.
+6.  **Dependency Injection with `inject()` (Angular 14+)**: For cleaner and more testable code, use `inject()`.
     ```typescript
     private router = inject(Router);
     ```
-7.  **Inputs Requeridos**: Use `input.required<Type>()` para inputs obrigatórios, garantindo segurança e concisão.
+7.  **Required Inputs**: Use `input.required<Type>()` for mandatory inputs, ensuring safety and conciseness.
     ```typescript
     name = input.required<string>();
     ```
-8.  **Outputs Modernos**: Prefira `output<Type>()` em vez de `@Output() EventEmitter` para maior simplicidade e type-safety.
+8.  **Modern Outputs**: Prefer `output<Type>()` instead of `@Output() EventEmitter` for greater simplicity and type-safety.
     ```typescript
     click = output<MouseEvent>();
     ```
-9.  **Estratégia de Detecção de Mudanças OnPush**: Defina `changeDetection: ChangeDetectionStrategy.OnPush` para otimizar a performance, reduzindo verificações desnecessárias.
+9.  **OnPush Change Detection Strategy**: Set `changeDetection: ChangeDetectionStrategy.OnPush` to optimize performance, reducing unnecessary checks.
     ```typescript
     @Component({
       changeDetection: ChangeDetectionStrategy.OnPush
     })
     ```
-10. **Funções TrackBy em Loops**: Sempre utilize `trackBy` em loops `@for` para melhorar a performance em listas dinâmicas.
+10. **TrackBy Functions in Loops**: Always use `trackBy` in `@for` loops to improve performance in dynamic lists.
     ```html
     @for (item of items; track trackById(item)) { ... }
     ```
-11. **Async Pipe e Padrões Reativos**: Utilize `async pipe` (`| async`) no template para gerenciar subscriptions de observables automaticamente.
+11. **Async Pipe and Reactive Patterns**: Use `async pipe` (`| async`) in the template to automatically manage observable subscriptions.
     ```typescript
     data$ = this.service.getData();
     // {{ data$ | async }}
     ```
-12. **Cleanup com DestroyRef (Angular 16+)**: Use `takeUntilDestroyed(this.destroyRef)` para limpar subscriptions automaticamente.
+12. **Cleanup with DestroyRef (Angular 16+)**: Use `takeUntilDestroyed(this.destroyRef)` to automatically clean up subscriptions.
     ```typescript
     .pipe(takeUntilDestroyed(this.destroyRef))
     ```
-13. **Type Safety com Generics**: Empregue generics em componentes para torná-los mais reutilizáveis e seguros.
+13. **Type Safety with Generics**: Employ generics in components to make them more reusable and safe.
     ```typescript
     export class SelectComponent<T = any> { ... }
     ```
-14. **Content Projection**: Utilize `ng-content` com seletores (`[slot=header]`) para permitir múltiplos pontos de projeção de conteúdo.
+14. **Content Projection**: Use `ng-content` with selectors (`[slot=header]`) to allow multiple content projection points.
     ```typescript
     <ng-content select="[slot=header]"></ng-content>
     ```
-15. **Host Bindings**: Use a propriedade `host` no `@Component` para aplicar propriedades e eventos diretamente ao elemento host.
+15. **Host Bindings**: Use the `host` property in `@Component` to apply properties and events directly to the host element.
     ```typescript
     @Component({
       host: {
@@ -154,11 +154,11 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       }
     })
     ```
-16. **Lazy Loading**: Reduza o bundle inicial com importações dinâmicas (`import().then(...)`).
+16. **Lazy Loading**: Reduce the initial bundle with dynamic imports (`import().then(...)`).
     ```typescript
     private heavyComponent = import('./heavy-component').then(m => m.HeavyComponent);
     ```
-17. **Error Handling (Error Boundaries)**: Implemente componentes `error-boundary` para exibir uma UI de fallback em caso de erros, melhorando a experiência do usuário.
+17. **Error Handling (Error Boundaries)**: Implement `error-boundary` components to display a fallback UI in case of errors, improving user experience.
     ```typescript
     @Component({
       selector: 'bb-error-boundary',
@@ -172,45 +172,45 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       `
     })
     ```
-18. **Internacionalização (i18n)**: Prepare os componentes para i18n utilizando `$localize` e atributos `i18n`.
+18. **Internationalization (i18n)**: Prepare components for i18n using `$localize` and `i18n` attributes.
     ```typescript
     closeButtonLabel = $localize`:@@close-button-aria:Close date picker`;
     ```
-19. **ViewChild com Type Safety**: Acesse elementos do DOM de forma segura usando `ElementRef` tipado com `@ViewChild`.
+19. **ViewChild with Type Safety**: Safely access DOM elements using typed `ElementRef` with `@ViewChild`.
     ```typescript
     @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
     ```
-20. **Custom Validators**: Crie funções de validação reutilizáveis para formulários.
+20. **Custom Validators**: Create reusable validation functions for forms.
     ```typescript
     export function customEmailValidator(): ValidatorFn { ... }
     ```
-21. Use reactive forms para formulários complexos, aproveitando a reatividade e a validação avançada.
+21. Use reactive forms for complex forms, leveraging reactivity and advanced validation.
     ```typescript
     this.form = this.fb.group({
       email: ['', [Validators.required, customEmailValidator()]]
     });
     ```
-22. **Memoization**: Utilize memoization para computações caras, evitando recálculos desnecessários e otimizando a performance.
+22. **Memoization**: Use memoization for expensive computations, avoiding unnecessary recalculations and optimizing performance.
     ```typescript
     get expensiveComputation() { ... }
     ```
 
 ---
 
-## ♿ Diretrizes de Acessibilidade
+## ♿ Accessibility Guidelines
 
-Garanta que todos os componentes da UI do ByteBank Pro sejam usáveis por todas as pessoas, incluindo aquelas com deficiência.
+Ensure that all ByteBank Pro UI components are usable by everyone, including people with disabilities.
 
-### 1\. Princípios Fundamentais
+### 1. Fundamental Principles
 
-- **Perceptível**: Forneça alternativas textuais, legendas e apresentação flexível do conteúdo.
-- **Operável**: Assegure acesso via teclado, tempo suficiente para interações e navegação facilitada.
-- **Compreensível**: Utilize texto claro, crie páginas previsíveis e implemente prevenção/correção de erros.
-- **Robusto**: Garanta compatibilidade com diferentes agentes de usuário e tecnologias assistivas.
+- **Perceivable**: Provide text alternatives, captions, and flexible content presentation.
+- **Operable**: Ensure keyboard access, sufficient time for interactions, and easy navigation.
+- **Understandable**: Use clear text, create predictable pages, and implement error prevention/correction.
+- **Robust**: Ensure compatibility with different user agents and assistive technologies.
 
-### 2\. Implementação de Acessibilidade
+### 2. Accessibility Implementation
 
-- **Atributos ARIA**: Use `aria-label`, `aria-describedby`, `aria-expanded`, `role` para tornar o conteúdo acessível a tecnologias assistivas.
+- **ARIA Attributes**: Use `aria-label`, `aria-describedby`, `aria-expanded`, `role` to make content accessible to assistive technologies.
   ```html
   <button
     [attr.aria-label]="ariaLabel"
@@ -218,18 +218,18 @@ Garanta que todos os componentes da UI do ByteBank Pro sejam usáveis por todas 
     [role]="role || 'button'"
   ></button>
   ```
-- **Estados Dinâmicos**: Reflita corretamente os estados dos componentes (ex: carregando) para tecnologias assistivas.
+- **Dynamic States**: Correctly reflect component states (e.g., loading) for assistive technologies.
   ```html
   <button [attr.aria-busy]="loading ? 'true' : 'false'">
     @if (loading) {
-    <span class="sr-only">Carregando...</span>
+    <span class="sr-only">Loading...</span>
     }
   </button>
   ```
-- **Navegação por Teclado**:
-  - Mantenha uma ordem lógica no DOM.
-  - Use `tabindex="0"` para elementos customizados interativos.
-  - Garanta um indicador de foco visível.
+- **Keyboard Navigation**:
+  - Maintain a logical DOM order.
+  - Use `tabindex="0"` for interactive custom elements.
+  - Ensure a visible focus indicator.
   <!-- end list -->
   ```typescript
   @HostListener('keydown.enter', ['$event'])
@@ -238,62 +238,62 @@ Garanta que todos os componentes da UI do ByteBank Pro sejam usáveis por todas 
     this.activate.emit();
   }
   ```
-- **Roles Semânticos**: Utilize roles ARIA apropriados (`button`, `dialog`, `tablist`, `alert`, `combobox`, `listbox`, `tabpanel`).
+- **Semantic Roles**: Use appropriate ARIA roles (`button`, `dialog`, `tablist`, `alert`, `combobox`, `listbox`, `tabpanel`).
   ```html
   <div role="combobox" [attr.aria-expanded]="isOpen">
     <input type="text" [attr.aria-controls]="listboxId" />
     <div [id]="listboxId" role="listbox"></div>
   </div>
   ```
-- **Alternativas Textuais**: Forneça textos alternativos (`alt`) para imagens e ícones. Utilize `aria-hidden="true"` para elementos puramente decorativos.
+- **Text Alternatives**: Provide alternative texts (`alt`) for images and icons. Use `aria-hidden="true"` for purely decorative elements.
   ```html
-  <img src="chart.png" alt="Gráfico de vendas" />
+  <img src="chart.png" alt="Sales chart" />
   <LucideIcon name="chevron-right" aria-hidden="true" />
-  <button aria-label="Fechar diálogo"></button>
+  <button aria-label="Close dialog"></button>
   ```
-- **Live Regions**: Use `role="status"` ou `role="alert"` com `aria-live="polite"`/`assertive` para anunciar atualizações de conteúdo dinâmico.
+- **Live Regions**: Use `role="status"` or `role="alert"` with `aria-live="polite"`/`assertive` to announce dynamic content updates.
   ```html
   <div role="status" aria-live="polite">{{ message }}</div>
   ```
-- **Contraste e Legibilidade**:
-  - Texto normal: mínimo 4.5:1
-  - Texto grande: mínimo 3:1
-- **Formulários Acessíveis**:
-  - Sempre utilize `<label>` explícitos associados a inputs.
-  - Forneça feedback de validação claro.
-  - Agrupe campos relacionados.
+- **Contrast and Readability**:
+  - Normal text: minimum 4.5:1
+  - Large text: minimum 3:1
+- **Accessible Forms**:
+  - Always use explicit `<label>` associated with inputs.
+  - Provide clear validation feedback.
+  - Group related fields.
   <!-- end list -->
   ```html
-  <label for="username">Nome de usuário</label> <input id="username" type="text" />
+  <label for="username">Username</label> <input id="username" type="text" />
   ```
-- **Touch Targets**: Elementos interativos devem ter um tamanho mínimo de 44x44px.
+- **Touch Targets**: Interactive elements must have a minimum size of 44x44px.
   ```html
-  <button class="min-h-[44px] min-w-[44px]">Salvar</button>
+  <button class="min-h-[44px] min-w-[44px]">Save</button>
   ```
 
-### 3\. Checklist e Testes de Acessibilidade
+### 3. Accessibility Checklist and Tests
 
-#### Checklist Rápido
+#### Quick Checklist
 
-- Estrutura semântica (`<header>`, `<nav>`, `<main>`, etc.).
-- Controles acessíveis por teclado (todos os elementos interativos).
-- Indicador de foco visível e claro.
-- Alternativas textuais para imagens e ícones.
-- Contraste adequado entre texto e fundo.
-- Labels explícitos para todos os campos de formulário.
-- Uso de live regions para conteúdo dinâmico.
+- Semantic structure (`<header>`, `<nav>`, `<main>`, etc.).
+- Keyboard-accessible controls (all interactive elements).
+- Visible and clear focus indicator.
+- Text alternatives for images and icons.
+- Adequate contrast between text and background.
+- Explicit labels for all form fields.
+- Use of live regions for dynamic content.
 
-#### Ferramentas e Métodos de Teste
+#### Tools and Testing Methods
 
-- **Ferramentas Automatizadas**: Lighthouse, axe (extensão de navegador).
-- **Testes Manuais**:
-  - Navegação apenas com teclado.
-  - Uso de leitores de tela (NVDA, VoiceOver).
-  - Verificação de contraste e zoom.
+- **Automated Tools**: Lighthouse, axe (browser extension).
+- **Manual Tests**:
+  - Keyboard-only navigation.
+  - Use of screen readers (NVDA, VoiceOver).
+  - Contrast and zoom verification.
 
 ---
 
-## 📚 Exemplos de Componentes Acessíveis
+## 📚 Accessible Component Examples
 
 ### Modal
 
@@ -303,7 +303,7 @@ Garanta que todos os componentes da UI do ByteBank Pro sejam usáveis por todas 
   template: `
     <div role="dialog" [attr.aria-modal]="'true'">
       <h2>{{ title }}</h2>
-      <button aria-label="Fechar diálogo"></button>
+      <button aria-label="Close dialog"></button>
       <ng-content></ng-content>
     </div>
   `
@@ -343,72 +343,72 @@ export class TabsComponent {}
 
 ---
 
-## 📦 Diretrizes Específicas para o Pacote ByteBank UI (`@bytebank-pro/ui`)
+## 📦 Specific Guidelines for ByteBank UI Package (`@bytebank-pro/ui`)
 
-> ⚠️ **IMPORTANTE**: As diretrizes desta seção aplicam-se **EXCLUSIVAMENTE** aos componentes desenvolvidos dentro do pacote `@bytebank-pro/ui` (localizado em `packages/ui/`).
->
-> **Não se aplicam aos componentes dos aplicativos** (`apps/dashboard`, `apps/settings`, `apps/shell`, `apps/transactions`).
+> ⚠️ **IMPORTANT**: The guidelines in this section apply **EXCLUSIVELY** to components developed within the `@bytebank-pro/ui` package (located in `packages/ui/`).
+> 
+> **They do not apply to application components** (`apps/dashboard`, `apps/settings`, `apps/shell`, `apps/transactions`).
 
-### 📖 Documentação com Storybook
+### 📖 Storybook Documentation
 
-Para componentes do pacote UI, **obrigatoriamente** inclua um arquivo de story do Storybook na estrutura do componente:
+For UI package components, **always** include a Storybook story file in the component structure:
 
 ```
 src/
-└── nome-do-componente/
-  ├── nome-do-componente.component.ts
-  ├── nome-do-componente.component.spec.ts
-  ├── nome-do-componente.component.html
-  ├── nome-do-componente.component.css
-  └── nome-do-componente.component.stories.ts // create a simple story file
+└── component-name/
+  ├── component-name.component.ts
+  ├── component-name.component.spec.ts
+  ├── component-name.component.html
+  ├── component-name.component.css
+  └── component-name.component.stories.ts // create a simple story file
 ```
 
-**Exemplo básico de story:**
+**Basic story example:**
 
 ```typescript
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NomeDoComponenteComponent } from './nome-do-componente.component';
+import { ComponentNameComponent } from './component-name.component';
 
-const meta: Meta<NomeDoComponenteComponent> = {
-  title: 'Components/NomeDaPastaQueOComponenteEsta/NomeDoComponente',
-  component: NomeDoComponenteComponent
+const meta: Meta<ComponentNameComponent> = {
+  title: 'Components/ComponentNameFolder/ComponentName',
+  component: ComponentNameComponent
 };
 
 export default meta;
-type Story = StoryObj<NomeDoComponenteComponent>;
+type Story = StoryObj<ComponentNameComponent>;
 
 export const Default: Story = {
   args: {
-    // propriedades padrão do componente
+    // default component properties
   }
 };
 ```
 
-### 🎨 Importação de Estilos Globais
+### 🎨 Global Style Import
 
-**Sempre importe os estilos globais** do ByteBank Pro UI no início do arquivo CSS do componente (`nome-do-componente.component.css`):
+**Always import global styles** from ByteBank Pro UI at the beginning of the component's CSS file (`component-name.component.css`):
 
 ```css
 @import '../../../styles/global.css';
 
 /* 
- * Estilos específicos do componente (evite quando possível)
- * Prefira utilizar classes utilitárias do TailwindCSS
+ * Component-specific styles (avoid when possible)
+ * Prefer using TailwindCSS utility classes
  */
 ```
 
-Esta importação garante que:
+This import ensures that:
 
-- O componente mantenha a identidade visual da marca ByteBank
-- As variáveis CSS e design tokens estejam disponíveis
-- A consistência visual seja mantida em toda a biblioteca de componentes
+- The component maintains the ByteBank brand visual identity
+- CSS variables and design tokens are available
+- Visual consistency is maintained throughout the component library
 
-### 📦 Exportação do componente
+### 📦 Component Export
 
-Para garantir que o componente esteja disponível para uso em outros aplicativos e pacotes, **exporte-o no arquivo `public-api.ts` do pacote `@bytebank-pro/ui`**:
+To ensure the component is available for use in other applications and packages, **export it in the `public-api.ts` file of the `@bytebank-pro/ui` package**:
 
 ```typescript
-export * from './nome-do-componente/nome-do-componente.component';
+export * from './component-name/component-name.component';
 ```
 
 ---

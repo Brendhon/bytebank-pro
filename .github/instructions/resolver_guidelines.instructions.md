@@ -2,36 +2,36 @@
 applyTo: '**/*.resolver.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Resolvers no ByteBank Pro
+# 📋 Resolver Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de resolvers no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for resolver development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
 ### 🔄 Resolvers
 
-Resolvers devem ser colocados em uma pasta `resolvers` dentro do módulo ou recurso onde são utilizados.
+Resolvers should be placed in a `resolvers` folder within the module or feature where they are used.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-recurso/
+  └── feature-name/
     └── resolvers/
-      ├── nome-do-resolver.resolver.ts
-      └── nome-do-resolver.resolver.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── resolver-name.resolver.ts
+      └── resolver-name.resolver.spec.ts // Create a simple test file with a basic test
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `user-profile`)
-  - **Arquivo**: `kebab-case.resolver.{ext}` (ex: `user-data.resolver.ts`)
-  - **Classe/Função**: `ResolveFn` (ex: `UserDataResolver`)
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `user-profile`)
+  - **File**: `kebab-case.resolver.{ext}` (e.g., `user-data.resolver.ts`)
+  - **Class/Function**: `ResolveFn` (e.g., `UserDataResolver`)
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Resolvers
+## 🏗️ Angular Modern Best Practices (Angular 20) for Resolvers
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
 
-2.  **Injeção de Dependências com `inject()` (Angular 14+)**: Para um código mais limpo e testável, utilize `inject()` em vez de construtores.
+2.  **Dependency Injection with `inject()` (Angular 14+)**: For cleaner and more testable code, use `inject()` instead of constructors.
 
     ```typescript
     import { inject } from '@angular/core';
@@ -44,7 +44,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-3.  **Resolvers Baseados em Funções (Angular 15+)**: Prefira funções para Resolvers (`ResolveFn`) para um código mais conciso e "treeshakeable".
+3.  **Function-Based Resolvers (Angular 15+)**: Prefer functions for Resolvers (`ResolveFn`) for more concise and "treeshakeable" code.
 
     ```typescript
     // user-data.resolver.ts
@@ -61,7 +61,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     };
     ```
 
-4.  **Gerenciamento de Erros**: Implemente estratégias robustas de tratamento de erros em resolvers, especialmente para chamadas HTTP, utilizando operadores RxJS como `catchError` e `retry`.
+4.  **Error Management**: Implement robust error handling strategies in resolvers, especially for HTTP calls, using RxJS operators like `catchError` and `retry`.
 
     ```typescript
     import { catchError, retry } from 'rxjs/operators';
@@ -71,16 +71,16 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     this.http
       .get<User>('/api/users/1')
       .pipe(
-        retry(3), // Tenta 3 vezes em caso de erro
+        retry(3), // Retry 3 times in case of error
         catchError((error) => {
-          console.error('Erro ao buscar usuário:', error);
-          return throwError(() => new Error('Não foi possível carregar o usuário.'));
+          console.error('Error fetching user:', error);
+          return throwError(() => new Error('Could not load user.'));
         })
       )
       .subscribe();
     ```
 
-5.  **Tipagem Forte**: Sempre use tipagem forte (`interface`, `type`) para dados retornados por APIs ou manipulados em resolvers.
+5.  **Strong Typing**: Always use strong typing (`interface`, `type`) for data returned by APIs or manipulated in resolvers.
 
     ```typescript
     export interface Product {
@@ -92,9 +92,9 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     getProduct(id: string): Observable<Product> { /* ... */ }
     ```
 
-## 📚 Exemplo Moderno
+## 📚 Modern Example
 
-### Resolver de Dados do Usuário (User Data Resolver)
+### User Data Resolver
 
 ```typescript
 // user-data.resolver.ts
@@ -106,10 +106,10 @@ import { Observable } from 'rxjs';
 
 export const userDataResolver: ResolveFn<User> = (route, state): Observable<User> => {
   const userService = inject(UserService);
-  const userId = route.paramMap.get('id'); // Pega o ID da rota
+  const userId = route.paramMap.get('id'); // Get ID from route
 
   if (!userId) {
-    // Lidar com o caso de ID ausente, talvez redirecionar ou lançar um erro
+    // Handle missing ID, perhaps redirect or throw an error
     throw new Error('User ID not provided in route parameters.');
   }
 

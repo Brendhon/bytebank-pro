@@ -2,35 +2,35 @@
 applyTo: '**/*.service.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Serviços no ByteBank Pro
+# 📋 Service Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de serviços no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for service development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
-### 📦 Serviços (Services)
+### 📦 Services
 
-Serviços devem ser colocados em uma pasta `services` dentro do módulo ou recurso que eles atendem.
+Services should be placed in a `services` folder within the module or feature they serve.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-recurso/
+  └── feature-name/
     └── services/
-      ├── nome-do-servico.service.ts
-      └── nome-do-servico.service.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── service-name.service.ts
+      └── service-name.service.spec.ts // Create a simple test file with a basic test
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `user-management`)
-  - **Arquivo**: `kebab-case.service.{ext}` (ex: `user.service.ts`)
-  - **Classe**: `PascalCaseService` (ex: `UserService`)
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `user-management`)
+  - **File**: `kebab-case.service.{ext}` (e.g., `user.service.ts`)
+  - **Class**: `PascalCaseService` (e.g., `UserService`)
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Serviços
+## 🏗️ Angular Modern Best Practices (Angular 20) for Services
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
-2.  **Injeção de Dependências com `inject()` (Angular 14+)**: Para um código mais limpo e testável, utilize `inject()` em vez de construtores.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
+2.  **Dependency Injection with `inject()` (Angular 14+)**: For cleaner and more testable code, use `inject()` instead of constructors.
 
     ```typescript
     import { inject } from '@angular/core';
@@ -43,9 +43,9 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     }
     ```
 
-3.  **Gerenciamento de Estado em Serviços**:
+3.  **State Management in Services**:
 
-    - **Para estados complexos e reativos (dados assíncronos, coleções de dados, estados globais/compartilhados)**: Utilize `Observables` (`BehaviorSubject`, `ReplaySubject`) do RxJS para garantir um fluxo de dados reativo e poderoso.
+    - **For complex and reactive states (asynchronous data, data collections, global/shared states)**: Use RxJS `Observables` (`BehaviorSubject`, `ReplaySubject`) to ensure a reactive and powerful data flow.
 
       ```typescript
       // user.service.ts
@@ -60,15 +60,15 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       export class UserService {
         private http = inject(HttpClient);
         private _currentUser = new BehaviorSubject<User | null>(null);
-        readonly currentUser$ = this._currentUser.asObservable(); // Expor como Observable público
+        readonly currentUser$ = this._currentUser.asObservable(); // Expose as public Observable
 
         constructor() {
-          // Carregar usuário ao inicializar o serviço, se necessário
+          // Load user on service initialization, if necessary
           this.loadCurrentUser();
         }
 
         private loadCurrentUser(): void {
-          // Exemplo: buscar usuário logado
+          // Example: fetch logged-in user
           this.http
             .get<User>('/api/current-user')
             .pipe(tap((user) => this._currentUser.next(user)))
@@ -77,13 +77,13 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
 
         updateUser(user: User): Observable<User> {
           return this.http.put<User>(`/api/users/${user.id}`, user).pipe(
-            tap((updatedUser) => this._currentUser.next(updatedUser)) // Atualiza o estado
+            tap((updatedUser) => this._currentUser.next(updatedUser)) // Update state
           );
         }
       }
       ```
 
-    - **Para estados locais simples, síncronos, ou de UI (ex: contador, flag booleana em um serviço pequeno)**: `Signals` podem ser utilizados para concisão e reatividade fina. **Evite usar Signals para dados assíncronos que precisam de transformações complexas do RxJS.**
+    - **For simple, synchronous, or UI local states (e.g., counter, boolean flag in a small service)**: `Signals` can be used for conciseness and fine-grained reactivity. **Avoid using Signals for asynchronous data that requires complex RxJS transformations.**
 
       ```typescript
       // counter.service.ts
@@ -106,11 +106,11 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       }
       ```
 
-    - **Diretrizes de Escolha de Estado**:
-      - **Use Observables**: Quando a origem dos dados é assíncrona (HTTP, WebSockets), para transformações complexas de dados (map, filter, debounce), para operações encadeadas ou para gerenciar um fluxo contínuo de eventos. Eles são ideais para a maioria dos dados de negócio.
-      - **Use Signals**: Para dados síncronos simples, estado de UI local que não requer a orquestração do RxJS, ou quando a reatividade granular do Angular Signals é estritamente necessária para otimização de performance em cenários específicos. **Não os utilize para substituir a gestão robusta de fluxos de dados que o RxJS oferece.**
+    - **State Choice Guidelines**:
+      - **Use Observables**: When the data source is asynchronous (HTTP, WebSockets), for complex data transformations (map, filter, debounce), for chained operations, or to manage a continuous flow of events. They are ideal for most business data.
+      - **Use Signals**: For simple synchronous data, local UI state that does not require RxJS orchestration, or when Angular Signals' granular reactivity is strictly necessary for performance optimization in specific scenarios. **Do not use them to replace the robust data flow management that RxJS offers.**
 
-4.  **Serviços `providedIn: 'root'`**: Sempre que possível, declare serviços com `providedIn: 'root'` para que sejam _singleton_ e _tree-shakable_. Isso reduz o tamanho do _bundle_ final da aplicação.
+4.  **`providedIn: 'root'` Services**: Whenever possible, declare services with `providedIn: 'root'` to make them singletons and tree-shakable. This reduces the final application bundle size.
     ```typescript
     @Injectable({
       providedIn: 'root'
@@ -119,7 +119,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       /* ... */
     }
     ```
-5.  **Gerenciamento de Erros**: Implemente estratégias robustas de tratamento de erros em serviços, especialmente para chamadas HTTP, utilizando operadores RxJS como `catchError` e `retry`.
+5.  **Error Management**: Implement robust error handling strategies in services, especially for HTTP calls, using RxJS operators like `catchError` and `retry`.
 
     ```typescript
     import { catchError, retry } from 'rxjs/operators';
@@ -129,16 +129,16 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     this.http
       .get<User>('/api/users/1')
       .pipe(
-        retry(3), // Tenta 3 vezes em caso de erro
+        retry(3), // Retry 3 times in case of error
         catchError((error) => {
-          console.error('Erro ao buscar usuário:', error);
-          return throwError(() => new Error('Não foi possível carregar o usuário.'));
+          console.error('Error fetching user:', error);
+          return throwError(() => new Error('Could not load user.'));
         })
       )
       .subscribe();
     ```
 
-6.  **Limpeza de Subscrições (Cleanup)**: Em serviços com lógica que cria subscrições (ex: Observables de WebSockets, timers), utilize `takeUntilDestroyed` (se o serviço for injetado em um contexto com `DestroyRef`) ou gerencie subscrições manualmente com `Subscription.add()` e `Subscription.unsubscribe()` no `ngOnDestroy`.
+6.  **Subscription Cleanup**: In services with logic that creates subscriptions (e.g., WebSockets Observables, timers), use `takeUntilDestroyed` (if the service is injected in a context with `DestroyRef`) or manually manage subscriptions with `Subscription.add()` and `Subscription.unsubscribe()` in `ngOnDestroy`.
 
     ```typescript
     import { Injectable, DestroyRef, inject, OnDestroy } from '@angular/core';
@@ -153,23 +153,23 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       private subscription: Subscription | undefined;
 
       constructor() {
-        // Exemplo com takeUntilDestroyed (se o serviço tem um ciclo de vida ligado a um injetor pai)
+        // Example with takeUntilDestroyed (if the service has a lifecycle tied to a parent injector)
         interval(1000)
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe((value) => console.log('Data stream:', value));
 
-        // Exemplo de gerenciamento manual para serviços singletons ou de longa duração
+        // Example of manual management for singletons or long-lived services
         // this.subscription = interval(1000).subscribe(value => console.log('Manual stream:', value));
       }
 
       ngOnDestroy(): void {
-        // Se usar gerenciamento manual, descomente:
+        // If using manual management, uncomment:
         // this.subscription?.unsubscribe();
       }
     }
     ```
 
-7.  **Tipagem Forte**: Sempre use tipagem forte (`interface`, `type`) para dados retornados por APIs ou manipulados em serviços.
+7.  **Strong Typing**: Always use strong typing (`interface`, `type`) for data returned by APIs or manipulated in services.
     ```typescript
     export interface Product {
       id: string;
@@ -179,10 +179,10 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     // ...
     getProduct(id: string): Observable<Product> { /* ... */ }
     ```
-8.  **Reutilização**: Crie serviços genéricos ou abstratos quando a lógica puder ser compartilhada entre diferentes entidades (ex: `CrudService<T>`).
-9.  **Single Responsibility Principle (SRP)**: Cada serviço deve ter uma única responsabilidade bem definida. Evite serviços "faz-tudo".
-10. **Imutabilidade**: Sempre que possível, trabalhe com dados de forma imutável, especialmente ao atualizar estados complexos em serviços.
-11. **Documentação**: Use JSDoc para documentar métodos e propriedades públicas dos serviços, explicando o propósito, parâmetros e retornos.
+8.  **Reusability**: Create generic or abstract services when logic can be shared between different entities (e.g., `CrudService<T>`).
+9.  **Single Responsibility Principle (SRP)**: Each service should have a single, well-defined responsibility. Avoid "do-it-all" services.
+10. **Immutability**: Whenever possible, work with data immutably, especially when updating complex states in services.
+11. **Documentation**: Use JSDoc to document public methods and properties of services, explaining the purpose, parameters, and returns.
 
 ```typescript
 /**
@@ -200,11 +200,11 @@ export class UserService {
 }
 ```
 
-Comentários devem ser claros, concisos e escritos em inglês.
+Comments should be clear, concise, and written in English.
 
-## 📚 Exemplos Modernos
+## 📚 Modern Examples
 
-### Serviço de Autenticação (Authentication Service)
+### Authentication Service
 
 ```typescript
 // auth.service.ts
@@ -218,12 +218,12 @@ import { User, AuthCredentials } from '../models/auth.model';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private _currentUser = signal<User | null>(null); // Usando signal para o estado do usuário logado
+  private _currentUser = signal<User | null>(null); // Using signal for logged-in user state
 
-  readonly currentUser = this._currentUser.asReadonly(); // Expor como readonly signal
+  readonly currentUser = this._currentUser.asReadonly(); // Expose as readonly signal
 
   constructor() {
-    // Tenta carregar o usuário do localStorage ao iniciar o serviço
+    // Try to load user from localStorage on service start
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       this._currentUser.set(JSON.parse(storedUser));
@@ -242,7 +242,7 @@ export class AuthService {
   logout(): void {
     this._currentUser.set(null);
     localStorage.removeItem('currentUser');
-    // Chamar API de logout se necessário
+    // Call logout API if necessary
   }
 
   isAuthenticated(): boolean {

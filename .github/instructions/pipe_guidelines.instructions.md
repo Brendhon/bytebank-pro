@@ -2,64 +2,64 @@
 applyTo: '**/*.pipe.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Pipes no ByteBank Pro
+# 📋 Pipe Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de pipes no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for pipe development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
 ### ⚙️ Pipes
 
-Pipes devem ser colocados em uma pasta `pipes` dentro do módulo ou recurso que eles atendem.
+Pipes should be placed in a `pipes` folder within the module or feature they serve.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-recurso/
+  └── feature-name/
     └── pipes/
-      ├── nome-do-pipe.pipe.ts
-      └── nome-do-pipe.pipe.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── pipe-name.pipe.ts
+      └── pipe-name.pipe.spec.ts // Create a simple test file with a basic test
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `currency-format`)
-  - **Arquivo**: `kebab-case.pipe.{ext}` (ex: `currency-format.pipe.ts`)
-  - **Classe**: `PascalCasePipe` (ex: `CurrencyFormatPipe`)
-  - **Nome do Pipe (no decorator `@Pipe`)**: `camelCase` (ex: `currencyFormat`)
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `currency-format`)
+  - **File**: `kebab-case.pipe.{ext}` (e.g., `currency-format.pipe.ts`)
+  - **Class**: `PascalCasePipe` (e.g., `CurrencyFormatPipe`)
+  - **Pipe Name (in `@Pipe` decorator)**: `camelCase` (e.g., `currencyFormat`)
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Pipes
+## 🏗️ Angular Modern Best Practices (Angular 20) for Pipes
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
-2.  **Pipes Puros por Padrão**: Por padrão, os pipes são "puros" (`pure: true`). Isso significa que o Angular só reexecutará o pipe se a entrada do pipe mudar. Para a maioria dos casos, mantenha esta configuração para otimização de performance.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
+2.  **Pure Pipes by Default**: By default, pipes are "pure" (`pure: true`). This means Angular will only re-execute the pipe if the pipe's input changes. For most cases, keep this setting for performance optimization.
     ```typescript
     @Pipe({
       name: 'myPurePipe',
-      standalone: true, // Sempre use standalone
-      pure: true // Padrão, mas pode ser explícito
+      standalone: true, // Always use standalone
+      pure: true // Default, but can be explicit
     })
     export class MyPurePipe implements PipeTransform {
       transform(value: any): any {
-        // Lógica do pipe
+        // Pipe logic
         return value;
       }
     }
     ```
-3.  **Pipes Impuros (Use com Cautela)**: Se o pipe precisar ser reexecutado em cada ciclo de detecção de mudanças (ex: para dados mutáveis ou que dependem de um estado externo que não é uma entrada direta), defina `pure: false`. **Use pipes impuros com extrema cautela**, pois podem impactar negativamente a performance.
+3.  **Impure Pipes (Use with Caution)**: If the pipe needs to be re-executed on every change detection cycle (e.g., for mutable data or data that depends on an external state that is not a direct input), set `pure: false`. **Use impure pipes with extreme caution**, as they can negatively impact performance.
     ```typescript
     @Pipe({
       name: 'myImpurePipe',
       standalone: true,
-      pure: false // Reexecuta em cada ciclo de detecção de mudanças
+      pure: false // Re-executes on every change detection cycle
     })
     export class MyImpurePipe implements PipeTransform {
       transform(value: any): any {
-        // Lógica do pipe que pode depender de algo externo ou de mutação
-        return Math.random(); // Exemplo de algo que muda a cada ciclo
+        // Pipe logic that may depend on something external or mutation
+        return Math.random(); // Example of something that changes every cycle
       }
     }
     ```
-4.  **Pipes Standalone**: **Sempre use pipes standalone** para eliminar `NgModules` desnecessários, reduzir boilerplate e melhorar o tree-shaking.
+4.  **Standalone Pipes**: **Always use standalone pipes** to eliminate unnecessary `NgModules`, reduce boilerplate, and improve tree-shaking.
     ```typescript
     @Pipe({
       name: 'myPipe',
@@ -69,25 +69,25 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       /* ... */
     }
     ```
-5.  **Tipagem Forte**: Sempre use tipagem forte para as entradas e saídas do pipe.
+5.  **Strong Typing**: Always use strong typing for pipe inputs and outputs.
     ```typescript
     transform(value: string, maxLength: number): string { /* ... */ }
     ```
-6.  **Simplicidade e Reutilização**: Pipes devem ser pequenos, focados em uma única transformação e altamente reutilizáveis. Se a lógica for complexa, considere mover parte dela para um serviço.
-7.  **Performance**: Evite operações computacionalmente caras dentro do pipe, especialmente se for um pipe impuro. Se for inevitável, considere memoização.
-8.  **Tratamento de Valores Nulos/Indefinidos**: Sempre adicione verificações para `null` ou `undefined` nas entradas do pipe para evitar erros.
+6.  **Simplicity and Reusability**: Pipes should be small, focused on a single transformation, and highly reusable. If the logic is complex, consider moving part of it to a service.
+7.  **Performance**: Avoid computationally expensive operations within the pipe, especially if it's an impure pipe. If unavoidable, consider memoization.
+8.  **Handling Null/Undefined Values**: Always add checks for `null` or `undefined` in pipe inputs to prevent errors.
     ```typescript
     transform(value: string | null | undefined): string {
       if (value === null || value === undefined) {
-        return ''; // Ou um valor padrão apropriado
+        return ''; // Or an appropriate default value
       }
       // ...
     }
     ```
 
-## 📚 Exemplos Modernos
+## 📚 Modern Examples
 
-### Pipe de Formatação de Moeda (Currency Format Pipe)
+### Currency Format Pipe
 
 ```typescript
 // currency-format.pipe.ts
@@ -107,17 +107,17 @@ export class CurrencyFormatPipe implements PipeTransform {
       return '';
     }
 
-    // Usar Intl.NumberFormat para formatação robusta e internacionalizada
+    // Use Intl.NumberFormat for robust and internationalized formatting
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: currencyCode,
-      currencyDisplay: display as 'symbol' | 'code' | 'name' // Type assertion para display
+      currencyDisplay: display as 'symbol' | 'code' | 'name' // Type assertion for display
     }).format(value);
   }
 }
 ```
 
-**Exemplo de Uso no Template:**
+**Usage Example in Template:**
 
 ```html
 <p>{{ 1234.56 | currencyFormat }}</p>
@@ -125,7 +125,7 @@ export class CurrencyFormatPipe implements PipeTransform {
 <p>{{ 1234.56 | currencyFormat:'USD':'code' }}</p>
 ```
 
-### Pipe de Truncamento de Texto (Truncate Text Pipe)
+### Truncate Text Pipe
 
 ```typescript
 // truncate-text.pipe.ts
@@ -154,10 +154,10 @@ export class TruncateTextPipe implements PipeTransform {
 }
 ```
 
-**Exemplo de Uso no Template:**
+**Usage Example in Template:**
 
 ```html
-<p>{{ 'Este é um texto longo que será truncado.' | truncateText:30 }}</p>
+<p>{{ 'This is a long text that will be truncated.' | truncateText:30 }}</p>
 
-<p>{{ 'Este é um texto longo que será truncado.' | truncateText:30:' ##' }}</p>
+<p>{{ 'This is a long text that will be truncated.' | truncateText:30:' ##' }}</p>
 ```

@@ -2,15 +2,15 @@
 applyTo: '**/*.component.stories.ts'
 ---
 
-# 📖 Padrões para Storybook
+# 📖 Storybook Patterns
 
-Este documento define os padrões e as práticas recomendadas para criar e documentar componentes utilizando o Storybook no ByteBank Pro.
+This document defines the patterns and recommended practices for creating and documenting components using Storybook in ByteBank Pro.
 
 ---
 
-## 1\. Estrutura Base da Story
+## 1. Base Story Structure
 
-A estrutura base para um arquivo de story deve incluir `Meta` e `StoryObj`, definindo o componente, sua categorização (`title`), parâmetros globais, tipos de argumentos (`argTypes`) e tags para documentação automática.
+The base structure for a story file should include `Meta` and `StoryObj`, defining the component, its categorization (`title`), global parameters, argument types (`argTypes`), and tags for automatic documentation.
 
 ```typescript
 import type { Meta, StoryObj } from '@storybook/angular';
@@ -18,13 +18,13 @@ import { argsToTemplate } from '@storybook/angular';
 import { ComponenteComponent } from './componente.component';
 
 const meta: Meta<ComponenteComponent> = {
-  title: 'Components/NomeDaPastaQueOComponenteEsta/Componente', // Categoria na hierarquia do Storybook
-  component: ComponenteComponent, // Componente principal documentado
+  title: 'Components/ComponentNameFolder/Component', // Category in the Storybook hierarchy
+  component: ComponenteComponent, // Main documented component
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A detailed description of the component purpose and usage.' // Descrição do componente na documentação
+        component: 'A detailed description of the component purpose and usage.' // Component description in the documentation
       }
     }
   },
@@ -45,7 +45,7 @@ const meta: Meta<ComponenteComponent> = {
     }
     // Other controls...
   },
-  tags: ['autodocs'] // Habilita documentação automática
+  tags: ['autodocs'] // Enables automatic documentation
 };
 
 export default meta;
@@ -54,13 +54,13 @@ type Story = StoryObj<ComponenteComponent>;
 
 ---
 
-## 2\. Stories Essenciais (Obrigatórias)
+## 2. Essential Stories (Mandatory)
 
-Para cada componente, as seguintes stories são mandatórias para garantir uma documentação e teste abrangentes:
+For each component, the following stories are mandatory to ensure comprehensive documentation and testing:
 
 ### A. Default
 
-Exibe o componente em seu estado mais comum, com valores padrão típicos, representando seu uso fundamental.
+Displays the component in its most common state, with typical default values, representing its fundamental use.
 
 ```typescript
 export const Default: Story = {
@@ -71,14 +71,14 @@ export const Default: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<bb-componente ${argsToTemplate(args)}>Conteúdo</bb-componente>`
+    template: `<bb-componente ${argsToTemplate(args)}>Content</bb-componente>`
   })
 };
 ```
 
-### B. Todas as Variantes
+### B. All Variants
 
-Mostra todas as variações visuais do componente lado a lado, facilitando a visualização e comparação.
+Shows all visual variations of the component side by side, facilitating visualization and comparison.
 
 ```typescript
 export const AllVariants: Story = {
@@ -94,15 +94,15 @@ export const AllVariants: Story = {
 };
 ```
 
-### C. Estados Especiais
+### C. Special States
 
-Inclua stories para cada estado especial relevante que o componente pode assumir (ex: carregamento, desabilitado, erro).
+Include stories for each relevant special state the component can assume (e.g., loading, disabled, error).
 
 ```typescript
 export const LoadingState: Story = {
   args: {
     loading: true,
-    loadingText: 'Carregando...'
+    loadingText: 'Loading...'
   }
 };
 
@@ -115,14 +115,14 @@ export const DisabledState: Story = {
 export const ErrorState: Story = {
   args: {
     variant: 'error',
-    errorMessage: 'Este campo é obrigatório'
+    errorMessage: 'This field is required'
   }
 };
 ```
 
 ### D. Playground
 
-Permite a experimentação interativa com todas as propriedades configuráveis do componente através dos controles do Storybook.
+Allows interactive experimentation with all configurable properties of the component through Storybook controls.
 
 ```typescript
 export const Playground: Story = {
@@ -139,13 +139,13 @@ export const Playground: Story = {
 
 ---
 
-## 3\. Padrões Avançados de Stories
+## 3. Advanced Story Patterns
 
-Estas stories demonstram comportamentos mais complexos ou cenários de uso específicos.
+These stories demonstrate more complex behaviors or specific use cases.
 
-### A. Interações Complexas
+### A. Complex Interactions
 
-Use `action()` para capturar e exibir eventos emitidos pelo componente, facilitando a depuração e demonstração de interatividade.
+Use `action()` to capture and display events emitted by the component, facilitating debugging and interactivity demonstration.
 
 ```typescript
 export const WithInteractions: Story = {
@@ -170,9 +170,9 @@ export const WithInteractions: Story = {
 };
 ```
 
-### B. Composição de Componentes
+### B. Component Composition
 
-Demonstra como o componente pode ser utilizado em conjunto com outros componentes da biblioteca para formar estruturas mais complexas.
+Demonstrates how the component can be used in conjunction with other library components to form more complex structures.
 
 ```typescript
 export const ComposedComponents: Story = {
@@ -180,12 +180,12 @@ export const ComposedComponents: Story = {
     template: `
       <bb-card>
         <div slot="header">
-          <bb-heading>Card com Componentes Compostos</bb-heading>
+          <bb-heading>Card with Composed Components</bb-heading>
         </div>
-        <bb-input placeholder="Digite algo"></bb-input>
+        <bb-input placeholder="Type something"></bb-input>
         <div slot="footer">
-          <bb-button variant="primary">Salvar</bb-button>
-          <bb-button variant="secondary">Cancelar</bb-button>
+          <bb-button variant="primary">Save</bb-button>
+          <bb-button variant="secondary">Cancel</bb-button>
         </div>
       </bb-card>
     `
@@ -195,14 +195,14 @@ export const ComposedComponents: Story = {
 
 ### C. Responsive Design
 
-Mostra o comportamento do componente em diferentes tamanhos de tela, utilizando o addon `viewport` do Storybook.
+Shows the component's behavior on different screen sizes, using Storybook's `viewport` addon.
 
 ```typescript
 export const ResponsiveLayout: Story = {
   render: () => ({
     template: `
       <div class="w-full">
-        <bb-componente class="w-full">Componente Responsivo</bb-componente>
+        <bb-componente class="w-full">Responsive Component</bb-componente>
       </div>
     `
   }),
@@ -214,9 +214,9 @@ export const ResponsiveLayout: Story = {
 };
 ```
 
-### D. Estados Dinâmicos
+### D. Dynamic States
 
-Demonstra a interatividade e as mudanças de estado do componente ao longo do tempo.
+Demonstrates the component's interactivity and state changes over time.
 
 ```typescript
 export const DynamicState: Story = {
@@ -230,10 +230,10 @@ export const DynamicState: Story = {
     template: `
       <div>
         <bb-button (click)="toggle()">
-          {{ isOpen ? 'Fechar' : 'Abrir' }}
+          {{ isOpen ? 'Close' : 'Open' }}
         </bb-button>
         <div [class.hidden]="!isOpen" class="mt-4 p-4 border rounded">
-          Conteúdo visível quando aberto
+          Content visible when open
         </div>
       </div>
     `
@@ -311,9 +311,9 @@ O ícone deve sempre reforçar a mensagem do texto, nunca contradizê-la.
 };
 ```
 
-### C. Controles Personalizados (`argTypes`)
+### C. Custom Controls (`argTypes`)
 
-Personalize os controles para melhorar a experiência do usuário, adicionando descrições, opções e labels customizados, e configurando como as propriedades são exibidas na tabela de `props`.
+Customize controls to improve user experience by adding descriptions, options, and custom labels, and configuring how properties are displayed in the `props` table.
 
 ```typescript
 argTypes: {
@@ -345,45 +345,45 @@ argTypes: {
 
 ---
 
-## 5\. Organização e Hierarquia
+## 5. Organization and Hierarchy
 
-Mantenha uma estrutura de pastas e nomenclatura consistentes para facilitar a navegação e a descoberta dos componentes.
+Maintain a consistent folder structure and naming convention to facilitate navigation and component discovery.
 
-### A. Estrutura de Pastas
+### A. Folder Structure
 
-Organize as stories de forma lógica, espelhando a estrutura do Design System.
+Organize stories logically, mirroring the Design System structure.
 
 - **Design System/**
-  - **Tokens/**: Design tokens, cores, tipografia
-  - **Foundation/**: Primitivos de UI, layouts base
+  - **Tokens/**: Design tokens, colors, typography
+  - **Foundation/**: UI primitives, base layouts
 - **Components/**
-  - **Inputs/**: Campos de formulário
+  - **Inputs/**: Form fields
   - **Navigation/**: Menus, tabs, breadcrumbs
-  - **Feedback/**: Alertas, toasts, modais
+  - **Feedback/**: Alerts, toasts, modals
   - **Data Display/**: Tables, cards, lists
 - **Patterns/**
-  - **Forms/**: Padrões de formulário
-  - **Layouts/**: Layouts de página
-  - **Authentication/**: Padrões de autenticação
+  - **Forms/**: Form patterns
+  - **Layouts/**: Page layouts
+  - **Authentication/**: Authentication patterns
 
-### B. Nomenclatura de Stories
+### B. Story Naming
 
-- Use `PascalCase` para os nomes das stories (ex: `Default`, `WithIcon`, `LoadingState`).
-- Utilize nomes descritivos que indiquem o propósito da story (ex: `CompactLayout`, `ExpandedView`).
-- Prefixe variações de estado (ex: `DisabledState`, `ErrorState`, `SuccessState`).
+- Use `PascalCase` for story names (e.g., `Default`, `WithIcon`, `LoadingState`).
+- Use descriptive names that indicate the story's purpose (e.g., `CompactLayout`, `ExpandedView`).
+- Prefix state variations (e.g., `DisabledState`, `ErrorState`, `SuccessState`).
 
 ---
 
-## 6\. Controle de Versão e Mudanças
+## 6. Version Control and Changes
 
-Documente o histórico de versões e as mudanças relevantes diretamente nas stories, utilizando `parameters.badges`, `componentSubtitle` e `changelog`.
+Document the version history and relevant changes directly in the stories, using `parameters.badges`, `componentSubtitle`, and `changelog`.
 
 ```typescript
 const meta: Meta<ComponenteComponent> = {
   // ...
   parameters: {
     badges: ['stable', 'accessible'],
-    componentSubtitle: 'Versão: 1.2.0',
+    componentSubtitle: 'Version: 1.2.0',
     changelog: {
       versions: [
         {
@@ -402,9 +402,9 @@ const meta: Meta<ComponenteComponent> = {
 
 ---
 
-## 7\. Testes de Acessibilidade
+## 7. Accessibility Tests
 
-Configure o addon `@storybook/addon-a11y` para realizar testes de acessibilidade automáticos nas stories, garantindo conformidade.
+Configure the `@storybook/addon-a11y` addon to perform automatic accessibility tests on stories, ensuring compliance.
 
 ```typescript
 const meta: Meta<ComponenteComponent> = {
@@ -421,31 +421,31 @@ const meta: Meta<ComponenteComponent> = {
 
 ---
 
-## 8\. Addons Recomendados
+## 8. Recommended Addons
 
-Aproveite os addons do Storybook para estender sua funcionalidade e melhorar a experiência de desenvolvimento e documentação:
+Leverage Storybook addons to extend its functionality and improve the development and documentation experience:
 
-- **`@storybook/addon-a11y`**: Testes de acessibilidade.
-- **`@storybook/addon-actions`**: Captura e exibição de eventos.
-- **`@storybook/addon-controls`**: Manipulação interativa de propriedades (props).
-- **`@storybook/addon-docs`**: Geração de documentação MDX automatizada.
-- **`@storybook/addon-viewport`**: Visualização responsiva em diferentes viewports.
-- **`@storybook/addon-measure`**: Ferramentas para medição de UI e layouts.
-- **`@storybook/addon-designs`**: Vinculação de designs de ferramentas como Figma ou Sketch.
+- **`@storybook/addon-a11y`**: Accessibility tests.
+- **`@storybook/addon-actions`**: Event capture and display.
+- **`@storybook/addon-controls`**: Interactive property (props) manipulation.
+- **`@storybook/addon-docs`**: Automated MDX documentation generation.
+- **`@storybook/addon-viewport`**: Responsive viewing in different viewports.
+- **`@storybook/addon-measure`**: UI measurement and layout tools.
+- **`@storybook/addon-designs`**: Linking designs from tools like Figma or Sketch.
 
 ---
 
-## 9\. Checklist para Stories de Alta Qualidade
+## 9. High-Quality Story Checklist
 
-Utilize este checklist para garantir que as stories de seus componentes atendem aos padrões de qualidade:
+Use this checklist to ensure your component stories meet quality standards:
 
-- [ ] Story `Default` implementada com valores sensatos.
-- [ ] Todas as variantes visuais documentadas.
-- [ ] Estados especiais (disabled, loading, error) apresentados.
-- [ ] Playground com controles para todas as propriedades relevantes.
-- [ ] Descrição do componente com propósito e casos de uso.
-- [ ] Exemplos de código úteis na documentação.
-- [ ] Testes de acessibilidade configurados.
-- [ ] Eventos/interações documentados com actions.
-- [ ] Layout responsivo testado em múltiplos viewports.
-- [ ] Design tokens e estilos consistentes com o Design System.
+- [ ] `Default` story implemented with sensible values.
+- [ ] All visual variants documented.
+- [ ] Special states (disabled, loading, error) presented.
+- [ ] Playground with controls for all relevant properties.
+- [ ] Component description with purpose and use cases.
+- [ ] Useful code examples in the documentation.
+- [ ] Accessibility tests configured.
+- [ ] Events/interactions documented with actions.
+- [ ] Responsive layout tested in multiple viewports.
+- [ ] Design tokens and styles consistent with the Design System.

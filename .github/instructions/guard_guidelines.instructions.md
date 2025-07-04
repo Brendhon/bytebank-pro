@@ -2,36 +2,36 @@
 applyTo: '**/*.guard.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Guards no ByteBank Pro
+# 📋 Guard Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de guards no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for guard development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
 ### 🛡️ Guards
 
-Guards devem ser colocados em uma pasta `guards` dentro do módulo ou recurso que eles protegem.
+Guards should be placed in a `guards` folder within the module or feature they protect.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
-  └── nome-do-recurso/
+  └── feature-name/
     └── guards/
-      ├── nome-do-guard.guard.ts
-      └── nome-do-guard.guard.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── guard-name.guard.ts
+      └── guard-name.guard.spec.ts // Create a simple test file with a basic test
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `auth`)
-  - **Arquivo**: `kebab-case.guard.{ext}` (ex: `auth.guard.ts`)
-  - **Classe/Função**: `CanActivateFn`, `CanMatchFn`, etc. (ex: `AuthGuard`)
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `auth`)
+  - **File**: `kebab-case.guard.{ext}` (e.g., `auth.guard.ts`)
+  - **Class/Function**: `CanActivateFn`, `CanMatchFn`, etc. (e.g., `AuthGuard`)
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Guards
+## 🏗️ Angular Modern Best Practices (Angular 20) for Guards
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
 
-2.  **Injeção de Dependências com `inject()` (Angular 14+)**: Para um código mais limpo e testável, utilize `inject()` em vez de construtores.
+2.  **Dependency Injection with `inject()` (Angular 14+)**: For cleaner and more testable code, use `inject()` instead of constructors.
 
     ```typescript
     import { inject } from '@angular/core';
@@ -43,7 +43,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     };
     ```
 
-3.  **Guards Baseados em Funções (Angular 15+)**: Prefira funções para Guards (`CanActivateFn`, `CanMatchFn`, `CanDeactivateFn`, `CanLoadFn`, `CanActivateChildFn`) para um código mais conciso e "treeshakeable".
+3.  **Function-Based Guards (Angular 15+)**: Prefer functions for Guards (`CanActivateFn`, `CanMatchFn`, `CanDeactivateFn`, `CanLoadFn`, `CanActivateChildFn`) for more concise and "treeshakeable" code.
 
     ```typescript
     // auth.guard.ts
@@ -63,19 +63,19 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     };
     ```
 
-4.  **Lógica Clara e Concisa**: Mantenha a lógica do guard o mais simples e direta possível. Guards devem focar em uma única responsabilidade (ex: autenticação, autorização).
+4.  **Clear and Concise Logic**: Keep the guard logic as simple and direct as possible. Guards should focus on a single responsibility (e.g., authentication, authorization).
 
-5.  **Retorno de Valores**: Guards podem retornar:
+5.  **Return Values**: Guards can return:
 
-    - `boolean`: `true` para permitir a navegação, `false` para bloqueá-la.
-    - `UrlTree`: Para redirecionar o usuário para outra URL.
-    - `Observable<boolean | UrlTree>` ou `Promise<boolean | UrlTree>`: Para lógica assíncrona (ex: verificar autenticação em um serviço).
+    - `boolean`: `true` to allow navigation, `false` to block it.
+    - `UrlTree`: To redirect the user to another URL.
+    - `Observable<boolean | UrlTree>` or `Promise<boolean | UrlTree>`: For asynchronous logic (e.g., checking authentication in a service).
 
-6.  **Gerenciamento de Erros**: Embora guards geralmente não lidem diretamente com erros de API (isso é responsabilidade dos serviços e interceptors), eles devem ser robustos o suficiente para lidar com estados inesperados dos dados que consultam.
+6.  **Error Management**: Although guards generally do not directly handle API errors (this is the responsibility of services and interceptors), they must be robust enough to handle unexpected states of the data they query.
 
-## 📚 Exemplo Moderno
+## 📚 Modern Example
 
-### Guard de Autenticação (Auth Guard)
+### Authentication Guard (Auth Guard)
 
 ```typescript
 // auth.guard.ts
@@ -90,7 +90,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (authService.isAuthenticated()) {
     return true;
   } else {
-    // Redireciona para a página de login se não estiver autenticado
+    // Redirect to the login page if not authenticated
     return router.createUrlTree(['/login']);
   }
 };

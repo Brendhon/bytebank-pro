@@ -2,36 +2,36 @@
 applyTo: '**/*.interceptor.ts'
 ---
 
-# 📋 Guia de Boas Práticas para Criação de Interceptors no ByteBank Pro
+# 📋 Interceptor Creation Best Practices Guide for ByteBank Pro
 
-Este guia define as diretrizes e boas práticas para o desenvolvimento de interceptors no ByteBank Pro, abrangendo estrutura, estilo, organização e práticas modernas do Angular.
+This guide defines the guidelines and best practices for interceptor development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
-## 📁 Estrutura e Convenções de Nomenclatura
+## 📁 Structure and Naming Conventions
 
 ### ⚙️ Interceptors
 
-Interceptors devem ser colocados em uma pasta `interceptors` na raiz da sua feature ou na pasta `core` se forem de uso global.
+Interceptors should be placed in an `interceptors` folder at the root of your feature or in the `core` folder if they are for global use.
 
-- **Estrutura Padrão:**
+- **Standard Structure:**
   ```
   src/
   └── core/
     └── interceptors/
-      ├── nome-do-interceptor.interceptor.ts
-      └── nome-do-interceptor.interceptor.spec.ts // Crie um arquivo de teste simples com um teste básico
+      ├── interceptor-name.interceptor.ts
+      └── interceptor-name.interceptor.spec.ts // Create a simple test file with a basic test
   ```
-- **Convenções de Nomenclatura:**
-  - **Pasta**: `kebab-case` (ex: `auth`)
-  - **Arquivo**: `kebab-case.interceptor.{ext}` (ex: `auth.interceptor.ts`)
-  - **Classe/Função**: `HttpInterceptorFn` (ex: `AuthInterceptor`)
+- **Naming Conventions:**
+  - **Folder**: `kebab-case` (e.g., `auth`)
+  - **File**: `kebab-case.interceptor.{ext}` (e.g., `auth.interceptor.ts`)
+  - **Class/Function**: `HttpInterceptorFn` (e.g., `AuthInterceptor`)
 
-## 🏗️ Angular Modern Best Practices (Angular 20) para Interceptors
+## 🏗️ Angular Modern Best Practices (Angular 20) for Interceptors
 
-Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo Angular para garantir performance, segurança e manutenibilidade.
+Always use the latest officially recommended Angular APIs and approaches to ensure performance, security, and maintainability.
 
-1.  **Comentários no Código**: Todos os comentários (linha, JSDoc, anotações) devem ser escritos em **inglês**.
+1.  **Code Comments**: All comments (inline, JSDoc, annotations) must be written in **English**.
 
-2.  **Injeção de Dependências com `inject()` (Angular 14+)**: Para um código mais limpo e testável, utilize `inject()` em vez de construtores.
+2.  **Dependency Injection with `inject()` (Angular 14+)**: For cleaner and more testable code, use `inject()` instead of constructors.
 
     ```typescript
     import { inject } from '@angular/core';
@@ -43,7 +43,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     };
     ```
 
-3.  **Interceptors Baseados em Funções (Angular 15+)**: Prefira funções para Interceptors (`HttpInterceptorFn`) para um código mais conciso e "treeshakeable". Esta é a forma recomendada a partir do Angular 15.
+3.  **Function-Based Interceptors (Angular 15+)**: Prefer functions for Interceptors (`HttpInterceptorFn`) for more concise and "treeshakeable" code. This is the recommended approach from Angular 15 onwards.
 
     ```typescript
     // auth.interceptor.ts
@@ -53,33 +53,33 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
 
     export const authInterceptor: HttpInterceptorFn = (req, next) => {
       const authService = inject(AuthService);
-      const authToken = authService.getAuthToken(); // Exemplo: Obter token de autenticação
+      const authToken = authService.getAuthToken(); // Example: Get authentication token
 
-      // Clona a requisição e adiciona o cabeçalho Authorization
+      // Clone the request and add the Authorization header
       const authReq = req.clone({
         setHeaders: {
           Authorization: `Bearer ${authToken}`
         }
       });
 
-      // Passa a requisição modificada para o próximo manipulador
+      // Pass the modified request to the next handler
       return next(authReq);
     };
     ```
 
-4.  **Imutabilidade da Requisição**: Requisições (`HttpRequest`) são imutáveis. Para modificá-las (ex: adicionar cabeçalhos, alterar URL), você deve cloná-las usando `req.clone()`.
+4.  **Request Immutability**: Requests (`HttpRequest`) are immutable. To modify them (e.g., add headers, change URL), you must clone them using `req.clone()`.
 
     ```typescript
     const modifiedReq = req.clone({
       setHeaders: {
         'X-Custom-Header': 'Value'
       },
-      url: 'nova-url'
+      url: 'new-url'
     });
     return next(modifiedReq);
     ```
 
-5.  **Manipulação de Respostas**: Interceptors também podem interceptar e modificar respostas, ou lidar com erros de resposta usando operadores RxJS.
+5.  **Response Handling**: Interceptors can also intercept and modify responses, or handle response errors using RxJS operators.
 
     ```typescript
     // error.interceptor.ts
@@ -87,7 +87,7 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     import { catchError } from 'rxjs/operators';
     import { throwError } from 'rxjs';
     import { inject } from '@angular/core';
-    import { NotificationService } from '../services/notification.service'; // Exemplo de serviço
+    import { NotificationService } from '../services/notification.service'; // Example service
 
     export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       const notificationService = inject(NotificationService);
@@ -95,24 +95,24 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
       return next(req).pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
-            // Lógica para 401 (Não Autorizado)
-            notificationService.showError('Sessão expirada. Por favor, faça login novamente.');
-            // Redirecionar para login, se necessário
+            // Logic for 401 (Unauthorized)
+            notificationService.showError('Session expired. Please log in again.');
+            // Redirect to login, if necessary
           } else if (error.status === 404) {
-            notificationService.showError('Recurso não encontrado.');
+            notificationService.showError('Resource not found.');
           } else {
-            notificationService.showError('Ocorreu um erro inesperado. Tente novamente.');
+            notificationService.showError('An unexpected error occurred. Please try again.');
           }
-          return throwError(() => error); // Propaga o erro para o subscriber original
+          return throwError(() => error); // Propagate the error to the original subscriber
         })
       );
     };
     ```
 
-6.  **Ordem dos Interceptors**: A ordem em que os interceptors são providos no seu `app.config.ts` (ou `app.module.ts` em projetos não standalone) é crucial. Interceptors são executados na ordem em que são registrados.
+6.  **Interceptor Order**: The order in which interceptors are provided in your `app.config.ts` (or `app.module.ts` in non-standalone projects) is crucial. Interceptors are executed in the order they are registered.
 
     ```typescript
-    // app.config.ts (Exemplo de registro de interceptors)
+    // app.config.ts (Interceptor registration example)
     import { ApplicationConfig } from '@angular/core';
     import { provideRouter } from '@angular/router';
     import { provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -120,39 +120,39 @@ Sempre utilize as APIs e abordagens mais recentes recomendadas oficialmente pelo
     import { routes } from './app.routes';
     import { authInterceptor } from './core/interceptors/auth.interceptor';
     import { errorInterceptor } from './core/interceptors/error.interceptor';
-    import { loadingInterceptor } from './core/interceptors/loading.interceptor'; // Exemplo
+    import { loadingInterceptor } from './core/interceptors/loading.interceptor'; // Example
 
     export const appConfig: ApplicationConfig = {
       providers: [
         provideRouter(routes),
         provideHttpClient(
           withInterceptors([
-            authInterceptor, // Executa primeiro (adiciona token)
-            loadingInterceptor, // Executa segundo (mostra/esconde loading)
-            errorInterceptor // Executa por último (trata erros)
+            authInterceptor, // Executes first (adds token)
+            loadingInterceptor, // Executes second (shows/hides loading)
+            errorInterceptor // Executes last (handles errors)
           ])
         )
       ]
     };
     ```
 
-7.  **Single Responsibility Principle (SRP)**: Cada interceptor deve ter uma única responsabilidade (ex: um para autenticação, um para tratamento de erros, um para indicadores de loading).
+7.  **Single Responsibility Principle (SRP)**: Each interceptor should have a single, well-defined responsibility (e.g., one for authentication, one for error handling, one for loading indicators).
 
-## 📚 Exemplos Modernos
+## 📚 Modern Examples
 
-### Interceptor de Autenticação (Auth Interceptor)
+### Authentication Interceptor (Auth Interceptor)
 
 ```typescript
 // auth.interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../services/auth.service'; // Assumindo que você tem um AuthService
+import { AuthService } from '../services/auth.service'; // Assuming you have an AuthService
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
-  const authToken = authService.getAuthToken(); // Método no AuthService para obter o token
+  const authToken = authService.getAuthToken(); // Method in AuthService to get the token
 
-  // Se houver um token, adiciona-o ao cabeçalho da requisição
+  // If there is a token, add it to the request header
   if (authToken) {
     const authReq = req.clone({
       setHeaders: {
@@ -162,12 +162,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(authReq);
   }
 
-  // Caso contrário, apenas passa a requisição original
+  // Otherwise, just pass the original request
   return next(req);
 };
 ```
 
-### Interceptor de Erros (Error Interceptor)
+### Error Interceptor
 
 ```typescript
 // error.interceptor.ts
@@ -176,7 +176,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NotificationService } from '../services/notification.service'; // Serviço para exibir notificações
+import { NotificationService } from '../services/notification.service'; // Service to display notifications
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
@@ -184,46 +184,46 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
-      let errorMessage = 'Ocorreu um erro inesperado.';
+      let errorMessage = 'An unexpected error occurred.';
 
       if (error.error instanceof ErrorEvent) {
-        // Erro do lado do cliente ou de rede
-        errorMessage = `Erro: ${error.error.message}`;
+        // Client-side or network error
+        errorMessage = `Error: ${error.error.message}`;
       } else {
-        // Erro retornado pelo backend
+        // Backend returned error
         switch (error.status) {
           case 400:
-            errorMessage = 'Requisição inválida.';
+            errorMessage = 'Invalid request.';
             if (error.error?.message) {
-              // Se a API retornar uma mensagem específica
+              // If the API returns a specific message
               errorMessage = error.error.message;
             }
             break;
           case 401:
-            errorMessage = 'Não autorizado. Por favor, faça login novamente.';
-            router.navigate(['/login']); // Redireciona para a tela de login
+            errorMessage = 'Unauthorized. Please log in again.';
+            router.navigate(['/login']); // Redirect to login screen
             break;
           case 403:
-            errorMessage = 'Acesso proibido.';
+            errorMessage = 'Access forbidden.';
             break;
           case 404:
-            errorMessage = 'Recurso não encontrado.';
+            errorMessage = 'Resource not found.';
             break;
           case 500:
-            errorMessage = 'Erro interno do servidor. Tente novamente mais tarde.';
+            errorMessage = 'Internal server error. Please try again later.';
             break;
           default:
             if (error.message) {
-              errorMessage = `Erro no servidor: ${error.message}`;
+              errorMessage = `Server error: ${error.message}`;
             }
             break;
         }
       }
 
-      console.error(error); // Loga o erro completo para depuração
-      notificationService.showError(errorMessage); // Exibe uma notificação amigável ao usuário
+      console.error(error); // Log the full error for debugging
+      notificationService.showError(errorMessage); // Display a friendly notification to the user
 
-      return throwError(() => error); // Propaga o erro para o subscriber original
+      return throwError(() => error); // Propagate the error to the original subscriber
     })
   );
 };
