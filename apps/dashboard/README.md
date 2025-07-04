@@ -21,7 +21,6 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do *
   - [📡 Comunicação com a API (GraphQL)](#-comunicação-com-a-api-graphql)
   - [🎨 Estilo](#-estilo)
   - [🧪 Testes](#-testes)
-  - [🐳 Docker](#-docker)
   - [🚀 Deploy](#-deploy)
   - [🧰 Boas Práticas](#-boas-práticas)
   - [👥 Autor](#-autor)
@@ -145,13 +144,6 @@ dashboard/
 
 - Testes unitários com Karma e Jasmine.
 - Arquivos de teste: `*.spec.ts`.
-
----
-
-## 🐳 Docker
-
-- O MFE é containerizado com Docker para desenvolvimento e produção.
-- Utilize o Docker Compose do monorepo para rodar o ambiente completo.
 
 ---
 

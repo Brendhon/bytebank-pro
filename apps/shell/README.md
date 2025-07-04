@@ -19,7 +19,6 @@ Este projeto é o **Shell (container principal)** do Bytebank Pro. Desenvolvido 
   - [🔐 Autenticação](#-autenticação)
   - [🎨 Estilo](#-estilo)
   - [🧪 Testes](#-testes)
-  - [🐳 Docker](#-docker)
   - [🚀 Deploy](#-deploy)
   - [🧰 Boas Práticas](#-boas-práticas)
   - [👥 Autor](#-autor)
@@ -148,13 +147,6 @@ O Shell utiliza **Module Federation** para carregar os microfrontends dinamicame
 
 - Testes unitários com Karma e Jasmine.
 - Arquivos de teste: `*.spec.ts`.
-
----
-
-## 🐳 Docker
-
-- O Shell é containerizado com Docker para desenvolvimento e produção.
-- Utilize o Docker Compose do monorepo para rodar o ambiente completo.
 
 ---
 
