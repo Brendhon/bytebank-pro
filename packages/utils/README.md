@@ -1,230 +1,90 @@
-# @bytebank-pro/utils
+# 🔧 @bytebank-pro/utils
 
-🔷 **Funções auxiliares compartilhadas para o monorepo ByteBank Pro**
+Este pacote centraliza funções utilitárias reutilizáveis para formatação de dados, validações e outras operações comuns, garantindo consistência e evitando duplicação de código em todo o monorepo Bytebank Pro.
 
-Este package centraliza todas as funções utilitárias que serão reutilizadas em todo o projeto, garantindo consistência e redução de duplicação em diferentes microfrontends e serviços.
+---
+
+## 📝 Sumário
+
+- [🔧 @bytebank-pro/utils](#-bytebank-proutils)
+  - [📝 Sumário](#-sumário)
+  - [🎯 Objetivo](#-objetivo)
+  - [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [🚀 Como Usar](#-como-usar)
+  - [🧪 Testes](#-testes)
+  - [🛠️ Desenvolvimento](#️-desenvolvimento)
+  - [🔗 Integração](#-integração)
+  - [📚 Referências](#-referências)
+  - [👥 Autor](#-autor)
+
+---
 
 ## 🎯 Objetivo
 
-Fornecer funções auxiliares para:
+Fornecer um conjunto de helpers puros e testados para tarefas como:
 
-- Formatação de dados e strings
-- Validações comuns
-- Manipulação de datas
-- Outras utilidades gerais para o projeto
+-   Formatação de datas e valores monetários.
+-   Validações de tipos de dados.
+-   Manipulação de objetos e arrays.
 
-## 📦 Estrutura
+---
+
+## 📁 Estrutura de Pastas
 
 ```
 packages/utils/
-├── index.ts            # Todas as funções utilitárias e exportações
-├── package.json        # Configurações do package
-├── tsconfig.json       # Configuração TypeScript
-└── dist/               # Arquivos compilados (gerados)
-    ├── index.js
-    └── index.d.ts
+├── index.ts          # Funções utilitárias e exportações
+├── index.spec.ts     # Testes unitários para as funções
+└── package.json
 ```
 
-## 🔷 Funções Disponíveis
-
-### Formatação de Datas
-
-```typescript
-// Formata data para formato longo: 'quinta-feira, 18/04/2025'
-export const formatDateToLong = (date: Date): string
-
-// Formata data para formato curto: '18/04/2025'
-export const formatDateToShort = (date: Date): string
-```
-
-### Formatação Monetária
-
-```typescript
-// Formata valor monetário no padrão brasileiro (R$)
-export const formatCurrency = (value: number): string
-```
-
-### Utilitários Gerais
-
-```typescript
-// Verifica se um valor é um número válido
-export const isNumber = (value: any): value is number
-
-// Converte string 'dd/mm/yyyy' para objeto Date
-export const parseDate = (dateStr: string): Date
-
-// Ordena array de objetos por propriedade de data
-export const sortByDate = <T>(arr: T[], dateKey: keyof T): T[]
-
-// Remove campos vazios de um objeto
-export const removeEmptyFields = <T>(obj: T): Partial<T>
-```
+---
 
 ## 🚀 Como Usar
 
-### Instalação
-
-O package já está disponível em todo o monorepo via workspace:
-
-```bash
-npm install @bytebank-pro/utils
-```
-
-### Importação
+Importe as funções necessárias diretamente do pacote.
 
 ```typescript
-// Importações específicas
-import { formatCurrency, formatDateToLong, isNumber } from '@bytebank-pro/utils';
+import { formatCurrency, formatDateToLong } from '@bytebank-pro/utils';
 
-// Importação geral
-import * as ByteBankUtils from '@bytebank-pro/utils';
-
-// Exemplos de uso
-const formatted = formatCurrency(2500); // R$ 2.500,00
-const dateFormatted = formatDateToLong(new Date()); // quinta-feira, 27/06/2025
-const isValidNumber = isNumber(42); // true
+const valorFormatado = formatCurrency(1234.56); // "R$ 1.234,56"
+const dataFormatada = formatDateToLong(new Date()); // "sexta-feira, 04 de julho de 2025"
 ```
 
-### Em Componentes Angular
-
-```typescript
-import { Component } from '@angular/core';
-import { formatCurrency, formatDateToShort } from '@bytebank-pro/utils';
-
-@Component({
-  selector: 'bb-dashboard',
-  template: `
-    <p>Saldo: {{ formattedValue }}</p>
-    <p>Data: {{ formattedDate }}</p>
-  `
-})
-export class DashboardComponent {
-  formattedValue = formatCurrency(1000); // R$ 1.000,00
-  formattedDate = formatDateToShort(new Date()); // 27/06/2025
-}
-```
-
-### Em Serviços
-
-```typescript
-import { Injectable } from '@angular/core';
-import { formatCurrency, sortByDate, removeEmptyFields } from '@bytebank-pro/utils';
-
-@Injectable()
-export class FinanceService {
-  getFormattedRevenue(revenue: number): string {
-    return formatCurrency(revenue);
-  }
-
-  sortTransactionsByDate(transactions: any[]) {
-    return sortByDate(transactions, 'date');
-  }
-
-  cleanFormData(formData: any) {
-    return removeEmptyFields(formData);
-  }
-}
-```
-
-## 🛠️ Scripts Disponíveis
-
-```bash
-# Build dos utilitários
-npm run build
-
-# Desenvolvimento com watch
-npm run dev
-
-# Executar testes unitários
-npm test
-
-# Executar testes em modo watch
-npm run test:watch
-
-# Executar testes com coverage
-npm run test:coverage
-
-# Limpeza dos arquivos gerados
-npm run clean
-```
-
-## 📝 Desenvolvimento
-
-### Adicionando Novas Funções
-
-1. **Edite o arquivo `index.ts`** na raiz do projeto.
-2. **Implemente as funções** seguindo os padrões existentes com JSDoc.
-3. **Exporte as funções** diretamente no mesmo arquivo:
-
-```typescript
-// index.ts
-/**
- * Descrição da nova função
- * @param param Parâmetro da função
- */
-export const novaFuncao = (param: string): string => {
-  // implementação
-  return resultado;
-};
-```
-
-### Convenções
-
-- **Funções**: camelCase (ex: formatCurrency, isNumber)
-- **Documentação**: Use JSDoc para todas as funções exportadas
-- **Tipos**: Use TypeScript para garantir tipagem forte
+---
 
 ## 🧪 Testes
 
-O projeto inclui testes unitários para todas as funções utilitárias:
+O pacote possui cobertura de testes unitários para todas as funções. Para executar os testes, utilize:
 
 ```bash
-# Executar todos os testes
-npm test
-
-# Executar testes em modo watch (útil durante desenvolvimento)
-npm run test:watch
-
-# Executar testes com relatório de cobertura
-npm run test:coverage
+npm test # Executa os testes uma vez
+npm run test:watch # Executa em modo de observação
 ```
 
-### Estrutura dos Testes
+---
 
-Os testes estão localizados em `index.spec.ts` e cobrem:
+## 🛠️ Desenvolvimento
 
-- ✅ Formatação de datas (longa e curta)
-- ✅ Formatação monetária brasileira
-- ✅ Validação de números
-- ✅ Parse de datas em string
-- ✅ Ordenação por data
-- ✅ Remoção de campos vazios
+Para adicionar novas funções, implemente a lógica em `index.ts`, adicione os testes correspondentes em `index.spec.ts` e exporte a nova função.
 
-### Executando Testes Específicos
+---
 
-```bash
-# Executar apenas testes de formatação
-npm test -- --testNamePattern="format"
+## 🔗 Integração
 
-# Executar com verbose para mais detalhes
-npm test -- --verbose
-```
+Este pacote é uma dependência em todas as **aplicações** (`apps/*`) e outros **pacotes** (`packages/*`) que necessitam de funções auxiliares, promovendo a reutilização e a padronização da lógica de negócio.
 
-## 🔗 Integração com Outros Packages
-
-Este package é utilizado por:
-
-- **Apps Angular** (ex.: shell, dashboard, transactions, settings)
-- **Package UI** (`@bytebank-pro/ui`)
-- **Bibliotecas de serviços** em cada microfrontend
-
-## 📚 Dependências
-
-- **date-fns**: Biblioteca para manipulação de datas
-- **TypeScript**: Para tipagem estática e melhor desenvolvimento
+---
 
 ## 📚 Referências
 
-- [date-fns Documentation](https://date-fns.org/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Angular Documentation](https://angular.io/docs)
+-   [Jest](https://jestjs.io/)
+-   [date-fns](https://date-fns.org/)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)

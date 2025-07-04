@@ -6,24 +6,44 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do *
 
 ---
 
-## 🚀 Stack Tecnológica
+## 📝 Sumário
 
-- **Angular 20**
-- **@angular-architects/module-federation**
-- **Tailwind CSS**
-- **Angular Signals + RxJS** para controle de estado
-- **CustomEvent** e URL Params para comunicação entre apps
-- **JWT** para autenticação (armazenado em localStorage)
-- **Apollo Client** (opcional, caso o Shell consuma a API também)
+- [📊 Dashboard MFE – Bytebank Pro](#-dashboard-mfe--bytebank-pro)
+  - [📝 Sumário](#-sumário)
+  - [✨ Visão Geral](#-visão-geral)
+  - [📦 Tecnologias](#-tecnologias)
+  - [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [🚀 Como Usar](#-como-usar)
+  - [📜 Scripts](#-scripts)
+  - [🛠️ Qualidade de Código](#️-qualidade-de-código)
+  - [🔗 Integração com o Shell](#-integração-com-o-shell)
+  - [🔌 Comunicação com o Shell](#-comunicação-com-o-shell)
+  - [📡 Comunicação com a API (GraphQL)](#-comunicação-com-a-api-graphql)
+  - [🎨 Estilo](#-estilo)
+  - [🧪 Testes](#-testes)
+  - [🐳 Docker](#-docker)
+  - [🚀 Deploy](#-deploy)
+  - [🧰 Boas Práticas](#-boas-práticas)
+  - [👥 Autor](#-autor)
 
 ---
 
-## 🧩 Objetivos do MFE
+## ✨ Visão Geral
 
-- Exibir o saldo total do usuário
-- Mostrar gráficos de entradas/saídas por categoria
-- Ser carregado pelo Shell via rota `/dashboard`
-- Utilizar dados reais via API GraphQL
+| App             | Framework | Descrição                                                                   |
+| :-------------- | :-------- | :-------------------------------------------------------------------------- |
+| **Dashboard**   | Angular   | Painel inicial com gráficos e informações financeiras do usuário.           |
+
+---
+
+## 📦 Tecnologias
+
+- **Framework**: [Angular 20](https://angular.dev/)
+- **Module Federation**: [@angular-architects/module-federation](https://github.com/angular-architects/module-federation)
+- **Estilo**: [TailwindCSS](https://tailwindcss.com/)
+- **Tipagem**: [TypeScript](https://www.typescriptlang.org/)
+- **API**: [GraphQL (Apollo Client Angular)](https://www.apollographql.com/docs/angular/)
+- **Contêineres**: [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
 
 ---
 
@@ -50,122 +70,108 @@ dashboard/
 
 ---
 
-## 🔗 Integração com o Shell
+## 🚀 Como Usar
 
-- Configurado como `remote` no Shell Angular
-- O `remoteEntry.js` é carregado via Module Federation
-- Shell chama a rota `/dashboard` que aciona o carregamento remoto
+1.  **Instalar dependências:**
+
+    ```bash
+    npm install
+    ```
+
+2.  **Iniciar o MFE (isoladamente):**
+
+    ```bash
+    npm run start
+    ```
+
+    A aplicação estará disponível em `http://localhost:4201`.
+
+3.  **Iniciar ambiente completo (com Shell e API):**
+
+    ```bash
+    npm run dev
+    ```
 
 ---
 
-### 📦 Exemplo do `module-federation.config.ts`
+## 📜 Scripts
 
-```ts
-const { withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+- `npm run start`: Inicia o servidor de desenvolvimento.
+- `npm run build`: Gera o build de produção.
+- `npm run test`: Executa os testes unitários.
+- `npm run lint`: Analisa o código com ESLint.
+- `npm run format`: Formata o código com Prettier.
 
-module.exports = withModuleFederationPlugin({
-  name: 'dashboard',
-  exposes: {
-    './Component': './src/app/app.Component.ts'
-  }
-});
-```
+---
+
+## 🛠️ Qualidade de Código
+
+- **ESLint**: Para análise estática e identificação de problemas.
+- **Prettier**: Para formatação de código consistente.
+- **Husky + lint-staged**: Para garantir a qualidade antes dos commits.
+
+---
+
+## 🔗 Integração com o Shell
+
+- Configurado como `remote` no Shell Angular.
+- O `remoteEntry.js` é carregado via Module Federation.
+- O Shell chama a rota `/dashboard` para acionar o carregamento remoto.
 
 ---
 
 ## 🔌 Comunicação com o Shell
 
-### Estratégias:
-
-- **CustomEvent** para emitir eventos como `dashboardUpdated`
-- **URL de rota**: `/dashboard` é mapeada no Shell e usada para navegação
+- **CustomEvent**: Para emitir eventos como `dashboardUpdated`.
+- **URL de Rota**: `/dashboard` é mapeada no Shell e usada para navegação.
 
 ---
 
 ## 📡 Comunicação com a API (GraphQL)
 
-- Utiliza **Apollo Client Angular** para executar queries como:
-
-```graphql
-query GetTransactionSummary {
-  getTransactionSummary {
-    balance
-    breakdown {
-      deposit
-      transfer
-      withdrawal
-      payment
-    }
-  }
-}
-```
-
+- Utiliza **Apollo Client Angular** para executar queries.
 - O JWT armazenado pelo Shell é enviado via `Authorization` no header das requisições.
 
 ---
 
 ## 🎨 Estilo
 
-- Estilizado com **Tailwind CSS**, usando os tokens de design compartilhados da pasta `packages/shared-design-tokens`
-- Padrões visuais consistentes com os outros MFEs e com o Shell
+- Estilizado com **Tailwind CSS**, usando os tokens de design compartilhados de `packages/shared-design-tokens`.
+- Padrões visuais consistentes com os outros MFEs e com o Shell.
 
 ---
 
-## 🧪 Validação e Lint
+## 🧪 Testes
 
-- ESLint com preset Angular
-- Prettier para formatação
-- Husky + lint-staged integrados ao repositório global via Turborepo
-
----
-
-## 🐳 Desenvolvimento Local
-
-```bash
-npm install
-npm run start
-```
-
-A aplicação estará disponível em:
-
-```bash
-http://localhost:4201
-```
-
-> Certifique-se de que o Shell esteja rodando para consumir o módulo remotamente.
+- Testes unitários com Karma e Jasmine.
+- Arquivos de teste: `*.spec.ts`.
 
 ---
 
-## 🐳 Docker (local)
+## 🐳 Docker
 
-Utilize o Docker Compose do monorepo para rodar o dashboard junto ao Shell, API e demais MFEs:
-
-```bash
-docker compose up
-```
+- O MFE é containerizado com Docker para desenvolvimento e produção.
+- Utilize o Docker Compose do monorepo para rodar o ambiente completo.
 
 ---
 
 ## 🚀 Deploy
 
-- Deploy separado na **Render**
-- O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública
+- Deploy individual na **Render**.
+- O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública.
 
 ---
 
-## ✅ Checklist de padrões
+## 🧰 Boas Práticas
 
-- [x] Angular 20 com Tailwind
-- [x] Apollo Client para GraphQL
-- [x] Rota única (`/dashboard`)
-- [x] Comunicação com Shell via CustomEvent
-- [x] JWT via header Authorization
-- [x] Docker local via Docker Compose
-- [x] Build pronto para deploy estático ou containerizado
+- **Componentes Standalone**: Para melhor encapsulamento e reutilização.
+- **Signals**: Para gerenciamento de estado reativo e granular.
+- **Testes Unitários**: Cobertura de testes para garantir a qualidade.
 
 ---
 
 ## 👥 Autor
 
 **Brendhon Moreira**
-[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) • [GitHub](https://github.com/Brendhon)
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)

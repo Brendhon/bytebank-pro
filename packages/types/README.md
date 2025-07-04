@@ -1,200 +1,102 @@
-# @bytebank-pro/types
+# 🔷 @bytebank-pro/types
 
-🔷 **Definições de tipos TypeScript compartilhadas para o monorepo ByteBank Pro**
+Este pacote centraliza todas as definições de tipos TypeScript (interfaces, types, enums) para garantir consistência, segurança de tipos e reutilização de código em todo o monorepo Bytebank Pro.
 
-Este package centraliza todas as interfaces, types e definições de tipos TypeScript utilizadas em todo o monorepo, garantindo consistência e reutilização de código entre os microfrontends.
+---
+
+## 📝 Sumário
+
+- [🔷 @bytebank-pro/types](#-bytebank-protypes)
+  - [📝 Sumário](#-sumário)
+  - [🎯 Objetivo](#-objetivo)
+  - [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [🚀 Como Usar](#-como-usar)
+  - [🛠️ Desenvolvimento](#️-desenvolvimento)
+    - [Convenções](#convenções)
+  - [🔗 Integração](#-integração)
+  - [📚 Referências](#-referências)
+  - [👥 Autor](#-autor)
+
+---
 
 ## 🎯 Objetivo
 
-Fornecer definições de tipos centralizadas para:
+Fornecer uma fonte única da verdade para os modelos de dados da aplicação, incluindo:
 
-- Modelos de dados da API (usuários, transações, etc.)
-- Interfaces de comunicação entre microfrontends
-- Configurações de ambiente
-- Tipos específicos da arquitetura de microfrontends
+-   **Modelos da API**: Interfaces para usuários, transações, etc.
+-   **Comunicação MFE**: Tipos para eventos e dados compartilhados entre microfrontends.
+-   **Configurações**: Tipos para ambientes e configurações de build.
 
-## 📦 Estrutura
+---
+
+## 📁 Estrutura de Pastas
 
 ```
 packages/types/src/
-├── users.ts          # Interfaces de usuários
-├── transactions.ts   # Interfaces de transações
-├── environment.ts    # Tipos de configuração de ambiente
-├── mfe.ts            # Tipos específicos de microfrontends
-└── index.ts          # Exportações principais
+├── users.ts          # Interfaces de usuários e autenticação
+├── transactions.ts   # Interfaces de transações financeiras
+├── environment.ts    # Tipos para configurações de ambiente
+├── mfe.ts            # Tipos para a arquitetura de microfrontends
+└── index.ts          # Exportador principal
 ```
 
-## 🔷 Tipos Disponíveis
-
-### Usuários (`users.ts`)
-
-```typescript
-interface IUser {
-  _id?: string;
-  name: string;
-  email: string;
-  password: string;
-  acceptPrivacy: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-```
-
-### Transações (`transactions.ts`)
-
-- `ITransaction` - Interface principal de transação
-- `TransactionType` - Tipos de transação (receita/despesa)
-- `TransactionCategory` - Categorias de transação
-- `TransactionFilters` - Filtros para busca de transações
-
-### Ambiente (`environment.ts`)
-
-- `Environment` - Configurações de ambiente
-- `ApiConfig` - Configurações da API
-- `MfeConfig` - Configurações de microfrontends
-
-### Microfrontends (`mfe.ts`)
-
-- `MfeEventData` - Tipos de dados para eventos entre MFEs
-- `MfeRoutes` - Definições de rotas dos microfrontends
-- `MfeManifest` - Manifest de configuração de MFEs
+---
 
 ## 🚀 Como Usar
 
-### Instalação
-
-O package já está disponível em todo o monorepo via workspace:
-
-```bash
-npm install @bytebank-pro/types
-```
-
-### Importação
+Importe os tipos necessários diretamente do pacote em qualquer aplicação ou biblioteca do monorepo.
 
 ```typescript
-// Importações específicas
 import { IUser, ITransaction } from '@bytebank-pro/types';
 
-// Importação geral
-import * as ByteBankTypes from '@bytebank-pro/types';
-
-// Usando os tipos
-const user: IUser = {
-  name: 'João Silva',
-  email: 'joao@bytebank.com',
-  password: 'senha123',
-  acceptPrivacy: true
-};
-```
-
-### Em Componentes Angular
-
-```typescript
-import { Component } from '@angular/core';
-import { IUser, ITransaction } from '@bytebank-pro/types';
-
-@Component({
-  selector: 'app-dashboard',
-  template: '...'
-})
-export class DashboardComponent {
-  user: IUser | null = null;
-  transactions: ITransaction[] = [];
-}
-```
-
-### Em Serviços
-
-```typescript
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IUser, ITransaction } from '@bytebank-pro/types';
-
+// Em um serviço Angular
 @Injectable()
-export class UserService {
-  getUser(id: string): Observable<IUser> {
-    // implementação
+export class TransactionService {
+  createTransaction(data: ITransaction): Observable<ITransaction> {
+    // ...
   }
+}
 
-  getUserTransactions(userId: string): Observable<ITransaction[]> {
-    // implementação
-  }
+// Em um componente
+export class ProfileComponent {
+  @Input() user: IUser;
 }
 ```
 
-## 🛠️ Scripts Disponíveis
+---
 
-```bash
-# Build dos tipos
-npm run build
+## 🛠️ Desenvolvimento
 
-# Desenvolvimento com watch
-npm run dev
-
-# Limpeza dos arquivos gerados
-npm run clean
-```
-
-## 📝 Desenvolvimento
-
-### Adicionando Novos Tipos
-
-1. **Crie o arquivo** na pasta `src/` com o nome descritivo
-2. **Defina as interfaces** seguindo os padrões existentes
-3. **Exporte no index.ts**:
-
-```typescript
-// src/index.ts
-export * from './users';
-export * from './transactions';
-export * from './nova-funcionalidade'; // Nova exportação
-```
+Para adicionar novos tipos, crie ou modifique os arquivos na pasta `src/` e exporte-os através do `index.ts`.
 
 ### Convenções
 
-- **Interfaces**: Prefixo `I` (ex: `IUser`, `ITransaction`)
-- **Types**: PascalCase (ex: `TransactionType`)
-- **Enums**: PascalCase (ex: `UserRole`)
-- **Arquivos**: kebab-case (ex: `user-settings.ts`)
+-   **Interfaces**: Use o prefixo `I` (ex: `IUser`).
+-   **Types**: Use `PascalCase` (ex: `TransactionType`).
+-   **Enums**: Use `PascalCase` (ex: `UserRole`).
+-   **Arquivos**: Use `kebab-case` (ex: `user-settings.ts`).
 
-### Estrutura dos Tipos
+---
 
-```typescript
-// Exemplo de estrutura completa
-export interface IExemplo {
-  id: string;
-  name: string;
-  optional?: boolean;
-  createdAt: Date;
-  updatedAt?: Date;
-}
+## 🔗 Integração
 
-export type ExemploStatus = 'active' | 'inactive' | 'pending';
+Este pacote é uma dependência essencial para:
 
-export enum ExemploType {
-  TYPE_A = 'type_a',
-  TYPE_B = 'type_b'
-}
-```
+-   **Aplicações** (`apps/*`): Para tipar dados de componentes, serviços e comunicação com a API.
+-   **`packages/ui`**: Para tipar as propriedades dos componentes.
+-   **`packages/utils`**: Para garantir a segurança de tipos nas funções utilitárias.
 
-## 🔄 Versionamento
-
-Este package segue o versionamento semântico:
-
-- **Major**: Mudanças que quebram compatibilidade
-- **Minor**: Adição de novos tipos sem quebrar existentes
-- **Patch**: Correções e melhorias nos tipos existentes
-
-## 🔗 Integração com Outros Packages
-
-Este package é utilizado por:
-
-- **Apps Angular** (`shell`, `dashboard`, `transactions`, `settings`)
-- **Package UI** (`@bytebank-pro/ui`)
-- **Bibliotecas de serviços** em cada microfrontend
+---
 
 ## 📚 Referências
 
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [TypeScript Best Practices](https://typescript-eslint.io/rules/)
-- [Angular TypeScript Guidelines](https://angular.dev/style-guide)
+-   [TypeScript Handbook](https://www.typescriptlang.org/docs/)
+-   [Angular Style Guide](https://angular.dev/style-guide)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)

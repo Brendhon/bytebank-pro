@@ -1,331 +1,104 @@
-# @bytebank-pro/ui
+# 🧩 @bytebank-pro/ui
 
-🎨 **Biblioteca de componentes Angular para o ByteBank Pro**
+Este pacote contém a biblioteca de componentes Angular reutilizáveis, construída com Standalone Components e estilizada com TailwindCSS, para ser usada em todas as aplicações do monorepo Bytebank Pro.
 
-Uma biblioteca moderna de componentes Angular 20+, otimizada para uso com TailwindCSS e design tokens compartilhados.
+---
+
+## 📝 Sumário
+
+- [🧩 @bytebank-pro/ui](#-bytebank-proui)
+  - [📝 Sumário](#-sumário)
+  - [🎯 Objetivo](#-objetivo)
+  - [📦 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [🚀 Como Usar](#-como-usar)
+  - [📖 Storybook](#-storybook)
+  - [🛠️ Desenvolvimento](#️-desenvolvimento)
+    - [Adicionando Novos Componentes](#adicionando-novos-componentes)
+  - [🔗 Integração](#-integração)
+  - [📚 Referências](#-referências)
+  - [👥 Autor](#-autor)
 
 ---
 
 ## 🎯 Objetivo
 
-Fornecer componentes reutilizáveis e consistentes para:
-
-- **Padronização**: UI/UX consistente em todos os microfrontends
-- **Produtividade**: Componentes prontos para uso
-- **Manutenibilidade**: Centralização das mudanças de design
-- **Acessibilidade**: Componentes acessíveis por padrão
+Fornecer um conjunto de componentes de UI consistentes, acessíveis e prontos para uso, acelerando o desenvolvimento e garantindo a padronização visual entre os microfrontends.
 
 ---
 
-## 📦 Estrutura
+## 📦 Estrutura de Pastas
 
 ```
 packages/ui/
-├── src/                  # Componentes
-│
-├── styles/               # Estilos globais
-├── .storybook/           # Configuração do Storybook
-└── public-api.ts         # Exportações principais
+├── src/                  # Código-fonte dos componentes
+├── .storybook/           # Configurações do Storybook
+└── tailwind.config.js    # Configuração do TailwindCSS
 ```
 
 ---
 
-## 🚀 Instalação
+## 🚀 Como Usar
 
-```bash
-npm install @bytebank-pro/ui
-```
-
----
-
-## 📝 Como Usar
-
-### Importação de Componentes (Standalone)
-
-A biblioteca utiliza **standalone components** do Angular, permitindo importações granulares:
+Os componentes são **standalone**, permitindo importação granular diretamente nos módulos ou outros componentes que os utilizam.
 
 ```typescript
 import { Component } from '@angular/core';
-import { ButtonComponent } from '@bytebank-pro/ui/button';
+import { ButtonComponent } from '@bytebank-pro/ui/button'; // Exemplo
 
 @Component({
-  selector: 'bb-example',
+  selector: 'app-example',
   standalone: true,
   imports: [ButtonComponent],
-  template: `<bb-button variant="primary" (buttonClick)="handleClick()">Clique aqui</bb-button>`
+  template: `<bb-button>Clique Aqui</bb-button>`
 })
-export class ExampleComponent {
-  handleClick() {
-    console.log('Botão clicado!');
-  }
-}
-```
-
-### Importação em Módulos (Legacy)
-
-```typescript
-import { NgModule } from '@angular/core';
-import { ButtonComponent } from '@bytebank-pro/ui/button';
-
-@NgModule({
-  imports: [ButtonComponent],
-  exports: [ButtonComponent]
-})
-export class SharedModule {}
-```
-
----
-
-## 🧩 Componentes Disponíveis
-
-### Button (`bb-button`)
-
-Componente de botão versátil com múltiplas variações visuais.
-
-**Uso Básico:**
-
-```html
-<bb-button variant="primary" size="md" (buttonClick)="handleClick()">Clique aqui</bb-button>
-```
-
----
-
-## 🎨 Integração com Design System
-
-A biblioteca integra com:
-
-- **@bytebank-pro/shared-design-tokens**: Cores e tipografia
-- **TailwindCSS**: Utilitários de estilo
-
-**Configuração do TailwindCSS:**
-
-Inclua a biblioteca no seu `tailwind.config.js`:
-
-```javascript
-import { tailwindTokens } from '@bytebank-pro/shared-design-tokens/tailwind.tokens';
-
-export default {
-  content: ['./src/**/*.{html,ts}'],
-  theme: {
-    extend: {
-      colors: tailwindTokens.colors
-      // ... outros tokens
-    }
-  }
-};
+export class ExampleComponent {}
 ```
 
 ---
 
 ## 📖 Storybook
 
-O **Storybook** é a principal ferramenta para desenvolvimento, documentação e testes visuais dos componentes.
+O **Storybook** é a ferramenta central para desenvolver, documentar e testar visualmente os componentes de forma isolada.
 
-### Principais Recursos
-
-- **Hot Reload**: Mudanças instantâneas durante desenvolvimento
-- **Documentação Automática**: Stories geram docs automaticamente
-- **Testes Visuais**: Validação de todas as variantes
-- **Controles Interativos**: Teste de props em tempo real
-- **Isolamento**: Componentes testados independentemente
-- **Acessibilidade**: Ferramentas integradas para testes de A11y
-
-### Quick Start
+Para iniciar o Storybook, execute:
 
 ```bash
-# Instale as dependências
-npm install
-
-# Inicie o Storybook
 npm run storybook
-
-# Acesse: http://localhost:6006
 ```
+
+Acesse em `http://localhost:6006`.
 
 ---
 
-## 🛠️ Scripts Disponíveis
+## 🛠️ Desenvolvimento
 
-```bash
-npm run build           # Build da biblioteca
-npm run watch           # Desenvolvimento com watch
-npm run storybook       # Desenvolvimento com Storybook (recomendado)
-npm run build-storybook # Build do Storybook
-npm run test            # Testes unitários
-npm run test:watch      # Testes em modo watch
-npm run lint            # Linting
-npm run clean           # Limpeza
-```
-
----
-
-## 📝 Desenvolvimento
+O desenvolvimento de novos componentes deve ser feito através do Storybook para garantir o isolamento e a documentação adequada.
 
 ### Adicionando Novos Componentes
 
-1. **Crie a estrutura** na pasta `src/`:
-
-   ```
-   src/
-   └── novo-component/
-       ├── novo-component.component.ts
-       ├── novo-component.component.css
-       ├── novo-component.component.html
-       ├── novo-component.component.spec.ts
-       └── novo-component.component.stories.ts
-   ```
-
-2. **Defina o componente**:
-
-   ```typescript
-   // novo-component.component.ts
-   import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-   @Component({
-     selector: 'bb-novo-component',
-     standalone: true,
-     templateUrl: './novo-component.component.html',
-     styleUrls: ['./novo-component.component.css'],
-     changeDetection: ChangeDetectionStrategy.OnPush
-   })
-   export class NovoComponentComponent {
-     @Input() propriedade: string = '';
-     @Output() evento = new EventEmitter<void>();
-   }
-   ```
-
-3. **Crie a Story do componente**:
-
-   ```typescript
-   // novo-component.component.stories.ts
-   import type { Meta, StoryObj } from '@storybook/angular';
-   import { argsToTemplate } from '@storybook/angular';
-   import { NovoComponentComponent } from './novo-component.component';
-
-   const meta: Meta<NovoComponentComponent> = {
-     title: 'Components/NomeDaPastaQueOComponenteEsta/NovoComponent',
-     component: NovoComponentComponent,
-     parameters: {
-       layout: 'centered',
-       docs: {
-         description: {
-           component: 'Descrição do componente e seu propósito.'
-         }
-       }
-     },
-     argTypes: {
-       propriedade: {
-         control: 'text',
-         description: 'Descrição da propriedade'
-       },
-       evento: {
-         action: 'evento emitido',
-         description: 'Evento emitido pelo componente'
-       }
-     },
-     tags: ['autodocs']
-   };
-
-   export default meta;
-   type Story = StoryObj<NovoComponentComponent>;
-
-   export const Default: Story = {
-     args: {
-       propriedade: 'valor padrão'
-     },
-     render: (args) => ({
-       props: args,
-       template: `<bb-novo-component ${argsToTemplate(args)}>Conteúdo</bb-novo-component>`
-     })
-   };
-
-   export const Variant: Story = {
-     args: {
-       propriedade: 'valor alternativo'
-     },
-     render: (args) => ({
-       props: args,
-       template: `<bb-novo-component ${argsToTemplate(args)}>Variação</bb-novo-component>`
-     })
-   };
-   ```
-
-4. **Adicione ao public-api.ts**:
-
-   ```typescript
-   // src/public-api.ts
-   export * from './novo-component';
-   ```
-
-5. **Estilos do componente**:
-
-```css
-/* import the global styles */
-@import '@styles/global.css';
-
-/* Component-specific styles */
-```
-
-6. **Teste no Storybook**:
-
-   ```bash
-   npm run storybook
-   ```
-
-   Navegue até `Components/NovoComponent` para ver e testar seu componente.
+1.  Crie a pasta do componente em `src/`.
+2.  Implemente o componente como um **Standalone Component**.
+3.  Crie um arquivo `.stories.ts` para documentar e testar as variações do componente.
+4.  Exporte o componente no `public-api.ts`.
 
 ---
 
-### Testes
+## 🔗 Integração
 
-Cada componente deve ter:
-
-- **Testes unitários** (`.spec.ts`)
-- **Story no Storybook** (documentação viva e testes visuais)
-
-**Exemplo de teste unitário:**
-
-```typescript
-// novo-component.component.spec.ts
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NovoComponentComponent } from './novo-component.component';
-
-describe('NovoComponentComponent', () => {
-  let component: NovoComponentComponent;
-  let fixture: ComponentFixture<NovoComponentComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [NovoComponentComponent]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(NovoComponentComponent);
-    component = fixture.componentInstance;
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
-```
-
----
-
-## 🔗 Integração com Microfrontends
-
-A biblioteca é utilizada por:
-
-- **Shell App**: Layout e navegação
-- **Dashboard MFE**: Visualização de dados
-- **Transactions MFE**: Formulários e tabelas
-- **Settings MFE**: Configurações
+Esta biblioteca é consumida por todas as **aplicações** (`apps/*`) que precisam de elementos de interface, garantindo que a UI seja consistente e baseada nos mesmos componentes reutilizáveis.
 
 ---
 
 ## 📚 Referências
 
 - [Angular Standalone Components](https://angular.dev/guide/components/importing)
-- [Angular Library Development](https://angular.dev/tools/libraries/creating-libraries)
 - [Storybook for Angular](https://storybook.js.org/docs/angular/get-started/introduction)
 - [TailwindCSS](https://tailwindcss.com/)
-- [Web Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)

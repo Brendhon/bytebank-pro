@@ -1,68 +1,50 @@
-# @bytebank-pro/shared-design-tokens
+# 🎨 @bytebank-pro/shared-design-tokens
 
-🎨 **Design tokens compartilhados para o sistema de design do ByteBank Pro**
+Este pacote centraliza todos os design tokens (cores, tipografia, espaçamentos, etc.) para garantir consistência visual e facilitar a manutenção em todo o monorepo Bytebank Pro.
 
-Este package centraliza todos os tokens de design (cores, tipografia, espaçamentos, etc.) utilizados em todo o monorepo ByteBank Pro, garantindo consistência visual e facilidade de manutenção.
+---
+
+## 📝 Sumário
+
+- [🎨 @bytebank-pro/shared-design-tokens](#-bytebank-proshared-design-tokens)
+  - [📝 Sumário](#-sumário)
+  - [🎯 Objetivo](#-objetivo)
+  - [📁 Estrutura de Pastas](#-estrutura-de-pastas)
+  - [🚀 Como Usar](#-como-usar)
+    - [Com TailwindCSS](#com-tailwindcss)
+  - [🛠️ Desenvolvimento](#️-desenvolvimento)
+  - [🔗 Integração](#-integração)
+  - [📚 Referências](#-referências)
+  - [👥 Autor](#-autor)
+
+---
 
 ## 🎯 Objetivo
 
-Fornecer uma fonte única da verdade para todos os elementos visuais do sistema de design:
+Fornecer uma fonte única da verdade para todos os elementos visuais do sistema de design, como cores, fontes e espaçamentos, para serem consumidos pelas aplicações e bibliotecas de componentes.
 
-- Cores padronizadas da marca ByteBank
-- Tipografia consistente
-- Tokens para integração com TailwindCSS
-- Facilitar mudanças globais de design
+---
 
-## 📦 Estrutura
+## 📁 Estrutura de Pastas
 
 ```
 packages/shared-design-tokens/
-├── colors.ts           # Paleta de cores do ByteBank
-├── typography.ts       # Configurações tipográficas
-├── tailwind.tokens.ts  # Tokens exportados para Tailwind
-├── index.ts            # Exportações principais
+├── colors.ts           # Paleta de cores
+├── typography.ts       # Configurações de tipografia
+├── tailwind.tokens.ts  # Tokens para integração com TailwindCSS
+├── index.ts            # Exportador principal
 └── package.json
 ```
 
-## 🎨 Tokens Disponíveis
-
-### Cores (`colors.ts`)
-
-#### Cores Primárias
-
-- `bytebank-blue`: #004D61 - Azul institucional
-- `bytebank-orange`: #FF5031 - Laranja de destaque
-- `bytebank-green`: #47A13B - Verde para confirmações
-
-#### Cores Neutras
-
-- `bytebank-light-green`: #E4EDE3 - Verde claro
-- `bytebank-light-gray`: #F9F9F9 - Cinza claro
-- `bytebank-gray`: #8B8B8B - Cinza médio
-- `bytebank-dark-gray`: #444444 - Cinza escuro
-- `bytebank-dark`: #212121 - Escuro principal
-
-### Tipografia (`typography.ts`)
-
-- Definições de font-family
-- Tamanhos de fonte padronizados
-- Configurações de line-height
-- Pesos de fonte (font-weight)
+---
 
 ## 🚀 Como Usar
 
-### Importação Direta
-
-```typescript
-import { colors } from '@bytebank-pro/shared-design-tokens';
-
-// Usando as cores
-const primaryColor = colors['bytebank-blue'];
-```
+Os tokens podem ser importados diretamente em arquivos TypeScript ou configurados para uso com TailwindCSS.
 
 ### Com TailwindCSS
 
-1. Importe no seu `tailwind.config.js`:
+No seu arquivo `tailwind.config.js`, importe os tokens e estenda o tema:
 
 ```javascript
 import { tailwindTokens } from '@bytebank-pro/shared-design-tokens/tailwind.tokens';
@@ -72,71 +54,44 @@ export default {
     extend: {
       colors: tailwindTokens.colors,
       fontFamily: tailwindTokens.fontFamily
-      // ... outros tokens
     }
   }
 };
 ```
 
-2. Use nas classes do Tailwind:
+Agora você pode usar as classes do Tailwind com os tokens customizados:
 
 ```html
-<div class="bg-bytebank-blue text-bytebank-light-gray">ByteBank Pro</div>
+<h1 class="text-primary font-bold">Título com Design System</h1>
+<button class="bg-accent text-white">Botão com Cor de Destaque</button>
 ```
 
-### Em Componentes Angular
+---
 
-```typescript
-import { colors } from '@bytebank-pro/shared-design-tokens';
+## 🛠️ Desenvolvimento
 
-@Component({
-  template: ` <div [style.background-color]="primaryColor">Conteúdo</div> `
-})
-export class MyComponent {
-  primaryColor = colors['bytebank-blue'];
-}
-```
+Para adicionar ou modificar tokens, edite os arquivos na raiz do pacote (`colors.ts`, `typography.ts`) e, se necessário, atualize a exportação para o Tailwind em `tailwind.tokens.ts`.
 
-## 🛠️ Scripts Disponíveis
+---
 
-```bash
-# Build dos tokens
-npm run build
+## 🔗 Integração
 
-# Desenvolvimento com watch
-npm run dev
+Este pacote é uma dependência fundamental para:
 
-# Limpeza dos arquivos gerados
-npm run clean
-```
+- **`packages/ui`**: A biblioteca de componentes utiliza esses tokens para estilização.
+- **Aplicações** (`apps/*`): As aplicações configuram o TailwindCSS para usar esses tokens, garantindo consistência visual.
 
-## 📝 Desenvolvimento
-
-### Adicionando Novos Tokens
-
-1. **Cores**: Adicione no arquivo `colors.ts`
-2. **Tipografia**: Adicione no arquivo `typography.ts`
-3. **TailwindCSS**: Exporte no `tailwind.tokens.ts`
-4. **Exportação**: Adicione no `index.ts`
-
-### Processo de Build
-
-O package utiliza TypeScript para compilar os tokens para JavaScript, gerando:
-
-- `dist/index.js` - Arquivo principal compilado
-- `dist/index.d.ts` - Definições de tipos
-- `dist/*.d.ts` - Tipos para cada arquivo
-
-## 🎨 Design System
-
-Este package é parte do sistema de design do ByteBank Pro e trabalha em conjunto com:
-
-- `@bytebank-pro/ui` - Componentes visuais
-- TailwindCSS - Framework de utilitários CSS
-- Aplicações Angular - Consumo dos tokens
+---
 
 ## 📚 Referências
 
 - [Design Tokens Community Group](https://design-tokens.github.io/community-group/)
-- [TailwindCSS Customization](https://tailwindcss.com/docs/theme)
-- [Angular Theming](https://material.angular.io/guide/theming)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs/theme)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)

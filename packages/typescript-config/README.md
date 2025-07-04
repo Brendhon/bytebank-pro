@@ -1,222 +1,94 @@
-# @bytebank-pro/typescript-config
+# ⚙️ @bytebank-pro/typescript-config
 
-⚙️ **Configurações TypeScript padronizadas para o monorepo ByteBank Pro**
+Este pacote fornece configurações TypeScript reutilizáveis e otimizadas para garantir consistência na compilação e nas regras de tipagem em todo o monorepo Bytebank Pro.
 
-Este package fornece configurações TypeScript reutilizáveis e otimizadas para todos os projetos do monorepo, garantindo consistência na compilação e nas regras de tipagem.
+---
+
+## 📝 Sumário
+
+- [⚙️ @bytebank-pro/typescript-config](#️-bytebank-protypescript-config)
+  - [📝 Sumário](#-sumário)
+  - [🎯 Objetivo](#-objetivo)
+  - [📦 Configurações Disponíveis](#-configurações-disponíveis)
+  - [🚀 Como Usar](#-como-usar)
+  - [🛠️ Desenvolvimento](#️-desenvolvimento)
+  - [🔗 Integração](#-integração)
+  - [📚 Referências](#-referências)
+  - [👥 Autor](#-autor)
+
+---
 
 ## 🎯 Objetivo
 
-Centralizar e padronizar as configurações TypeScript em todos os projetos:
+Centralizar as configurações do compilador TypeScript (`tsconfig.json`) para:
 
-- **Consistência**: Mesmas regras de compilação em todo o monorepo
-- **Manutenibilidade**: Atualizações centralizadas
-- **Otimização**: Configurações específicas para cada tipo de projeto
-- **Produtividade**: Configurações pré-testadas e otimizadas
+-   **Padronização**: Garantir que todos os projetos compilem com as mesmas regras.
+-   **Manutenibilidade**: Facilitar a atualização das configurações em um único local.
+-   **Otimização**: Fornecer configurações base otimizadas para diferentes tipos de projetos (Angular, bibliotecas, etc.).
+
+---
 
 ## 📦 Configurações Disponíveis
 
-### Base (`base.json`)
+-   **`base.json`**: Configuração fundamental com regras estritas, compartilhada por todos.
+-   **`angular.json`**: Estende a `base.json` com otimizações específicas para aplicações Angular.
+-   **`nextjs.json`**: Configuração preparada para futuros projetos Next.js.
 
-Configuração fundamental compartilhada por todos os projetos:
-
-- Configurações básicas do TypeScript
-- Regras de compilação rigorosas
-- Target e module appropriados
-- Configurações de resolução de módulos
-
-### Angular (`angular.json`)
-
-Configuração específica para projetos Angular:
-
-- Extends a configuração base
-- Configurações otimizadas para Angular
-- Suporte a decorators
-- Configurações para desenvolvimento e produção
-
-### Next.js (`nextjs.json`)
-
-Configuração para projetos Next.js (futuro uso):
-
-- Extends a configuração base
-- Configurações específicas do Next.js
-- Suporte a JSX e React
-- Otimizações para SSR/SSG
+---
 
 ## 🚀 Como Usar
 
-### Em Projetos Angular
+No `tsconfig.json` do seu projeto, estenda a configuração apropriada:
 
-Crie um `tsconfig.json` no seu projeto:
+**Para uma Aplicação Angular:**
 
 ```json
 {
   "extends": "@bytebank-pro/typescript-config/angular.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  }
 }
 ```
 
-### Para Aplicações (App-specific)
-
-```json
-{
-  "extends": "@bytebank-pro/typescript-config/angular.json",
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/my-app",
-    "types": ["node", "@angular/core"]
-  },
-  "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"]
-}
-```
-
-### Para Bibliotecas
+**Para uma Biblioteca:**
 
 ```json
 {
   "extends": "@bytebank-pro/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "composite": true
-  },
-  "include": ["src/**/*"]
-}
-```
-
-## ⚙️ Configurações Incluídas
-
-### Configurações Base
-
-```json
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM"],
-    "module": "ES2022",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "declaration": true
   }
 }
 ```
 
-### Otimizações Angular
-
-```json
-{
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "useDefineForClassFields": false,
-    "importHelpers": true,
-    "allowJs": false
-  }
-}
-```
-
-## 🔧 Regras Principais
-
-### Rigor de Tipos
-
-- `strict: true` - Todas as verificações rigorosas ativadas
-- `noImplicitAny: true` - Proíbe tipos `any` implícitos
-- `strictNullChecks: true` - Verificação rigorosa de null/undefined
-
-### Módulos e Importações
-
-- `moduleResolution: "bundler"` - Resolução moderna de módulos
-- `esModuleInterop: true` - Compatibilidade ES Module
-- `allowSyntheticDefaultImports: true` - Imports default sintéticos
-
-### Arquivos e Saída
-
-- `declaration: true` - Gera arquivos `.d.ts`
-- `sourceMap: true` - Gera source maps para debug
-- `removeComments: true` - Remove comentários do output
+---
 
 ## 🛠️ Desenvolvimento
 
-### Estrutura dos Arquivos
+Para adicionar uma nova configuração, crie um arquivo `.json`, estenda a configuração `base.json` e adicione as regras específicas. Documente o novo arquivo e seu propósito.
 
-```
-packages/typescript-config/
-├── base.json        # Configuração base
-├── angular.json     # Específica para Angular
-├── nextjs.json      # Para futuros projetos Next.js
-└── package.json     # Metadados do package
-```
-
-### Adicionando Nova Configuração
-
-1. **Crie o arquivo** com extensão `.json`
-2. **Estenda a configuração base**:
-
-```json
-{
-  "extends": "./base.json",
-  "compilerOptions": {
-    // configurações específicas
-  }
-}
-```
-
-3. **Adicione ao package.json** na seção `files`
-4. **Documente** o uso no README
-
-### Testando Configurações
-
-Para testar uma configuração:
-
-```bash
-# No projeto que usa a config
-npx tsc --noEmit --project tsconfig.json
-```
-
-## 📋 Boas Práticas
-
-### Para Apps Angular
-
-- Sempre estenda `angular.json`
-- Configure `baseUrl` e `paths` adequadamente
-- Use `types` específicos quando necessário
-
-### Para Bibliotecas
-
-- Estenda `base.json`
-- Ative `declaration: true`
-- Configure `outDir` adequadamente
-- Use `composite: true` para project references
-
-### Configurações Customizadas
-
-- Evite sobrescrever configurações rigorosas
-- Documente mudanças específicas
-- Teste adequadamente antes de aplicar
+---
 
 ## 🔗 Integração
 
-Este package é utilizado por:
+Este pacote é uma dependência de desenvolvimento em todas as **aplicações** (`apps/*`) e **pacotes** (`packages/*`), que estendem as configurações base para alinhar suas regras de compilação.
 
-- **Apps Angular**: `shell`, `dashboard`, `transactions`, `settings`
-- **Bibliotecas**: `@bytebank-pro/ui`, `@bytebank-pro/types`
-- **Packages**: `@bytebank-pro/shared-design-tokens`
+---
 
 ## 📚 Referências
 
-- [TypeScript Configuration](https://www.typescriptlang.org/tsconfig)
-- [Angular TypeScript Configuration](https://angular.dev/reference/configs/angular-compiler-options)
-- [TypeScript Compiler Options](https://www.typescriptlang.org/tsconfig#compilerOptions)
+-   [TypeScript `tsconfig.json`](https://www.typescriptlang.org/tsconfig)
+-   [Angular Compiler Options](https://angular.dev/reference/configs/angular-compiler-options)
+
+---
+
+## 👥 Autor
+
+**Brendhon Moreira**
+
+[LinkedIn](https://www.linkedin.com/in/brendhon-moreira) | [GitHub](https://github.com/Brendhon)
