@@ -83,11 +83,11 @@ export class ImgComponent implements OnInit {
 
   // Internal map for size classes
   private sizeClasses: Record<ImgSize, string> = {
-    xs: 'w-4 h-4',
-    sm: 'w-8 h-8',
-    md: 'w-16 h-16',
-    lg: 'w-32 h-32',
-    xl: 'w-48 h-48',
+    xs: 'w-4 h-auto',
+    sm: 'w-8 h-auto',
+    md: 'w-16 h-auto',
+    lg: 'w-32 h-auto',
+    xl: 'w-48 h-auto',
     full: 'w-full h-auto'
   };
 

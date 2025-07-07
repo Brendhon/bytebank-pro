@@ -1,15 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-  inject
-} from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { LOGOS, getAssetContent } from '@bytebank-pro/shared-assets';
-import { Loader2, LucideAngularModule } from 'lucide-angular';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { LOGOS } from '@bytebank-pro/shared-assets';
+import { ImgComponent } from '../img/img.component';
+
 /**
  * Defines the possible visual variants for the Logo component.
  * 'full' displays the full ByteBank logo, 'icon' displays only the icon part.
@@ -36,142 +29,75 @@ export type LogoSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'bb-logo', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule, LucideAngularModule], // Required imports for Angular and Lucide icons
+  imports: [CommonModule, ImgComponent], // Required imports
   templateUrl: './logo.component.html', // Separated template for clarity
   styleUrls: ['./logo.component.css'], // Separated styles for better organization
   changeDetection: ChangeDetectionStrategy.OnPush // OnPush for better performance
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
   /**
    * The visual variant of the logo. 'full' for the complete logo, 'icon' for just the icon.
    * @default 'full'
    */
-  @Input() variant: LogoVariant = 'full';
+  variant = input<LogoVariant>('full');
 
   /**
    * The size of the logo. 'sm', 'md', or 'lg'.
    * @default 'md'
    */
-  @Input() size: LogoSize = 'md';
+  size = input<LogoSize>('md');
 
   /**
    * Additional CSS classes to apply to the logo SVG element.
    * @default ''
    */
-  @Input() className: string = '';
+  className = input<string>('');
 
   /**
    * Custom aria-label for the logo. If not provided, a default descriptive label will be used.
    * @default undefined
    */
-  @Input() ariaLabel?: string;
+  ariaLabel = input<string>();
 
   /**
    * Indicates if the logo is purely decorative and should be hidden from screen readers.
    * When true, aria-hidden="true" and alt="" will be applied.
    * @default false
    */
-  @Input() isDecorative: boolean = false;
-
-  // Internal map for size classes, similar to the original React component
-  private sizeClasses: Record<LogoSize, string> = {
-    sm: 'w-16',
-    md: 'w-32',
-    lg: 'w-42'
-  };
-
-  // Injecting DomSanitizer to handle any potential HTML content safely
-  private sanitizer = inject(DomSanitizer);
-  private cdr = inject(ChangeDetectorRef);
-
-  /**
-   * Icon for loading state, using Lucide icons.
-   * This will be displayed while the logo is being loaded.
-   */
-  public loadingIcon = Loader2;
-
-  /**
-   * Stores the loaded and sanitized logo HTML or image path.
-   */
-  public logoHtml: SafeHtml | string = '';
-
-  /**
-   * Indicates if the logo is currently loading
-   */
-  public isLoading: boolean = true;
-
-  /**
-   * Initializes the component and performs any necessary setup.
-   * Loads and sanitizes the logo asset.
-   */
-  ngOnInit(): void {
-    this.loadLogoAsset();
-  }
-
-  /**
-   * Loads the logo asset asynchronously and updates the component state
-   */
-  private async loadLogoAsset(): Promise<void> {
-    try {
-      // Set loading state to true while fetching the logo
-      this.isLoading = true;
-
-      // Fetch the logo asset content based on the logoSrc
-      const asset = await getAssetContent(this.logoSrc);
-
-      // Depending on the asset type, set the logoHtml property
-      if (asset.type === 'svg')
-        this.logoHtml = this.sanitizer.bypassSecurityTrustHtml(asset.content);
-    } catch (error: unknown) {
-      // Fallback to direct logoSrc if loading fails
-      console.error('Error loading logo asset:', error);
-      this.logoHtml = '';
-    } finally {
-      this.isLoading = false;
-      // Trigger change detection since we're using OnPush
-      this.cdr.markForCheck();
-    }
-  }
-
-  /**
-   * Computes the appropriate alt text for the logo based on variant and accessibility settings.
-   * Returns empty string if logo is decorative, otherwise provides descriptive alt text.
-   */
-  get logoAltText(): string {
-    if (this.isDecorative) {
-      return '';
-    }
-
-    if (this.ariaLabel) {
-      return this.ariaLabel;
-    }
-
-    return this.variant === 'full'
-      ? 'ByteBank Pro - Logo da plataforma de gestão financeira'
-      : 'ByteBank Pro - Ícone da plataforma';
-  }
-
-  /**
-   * Determines if the logo should be hidden from screen readers.
-   * Returns true if the logo is decorative or has explicit aria-label.
-   */
-  get shouldHideFromScreenReaders(): boolean {
-    return this.isDecorative;
-  }
-
-  /**
-   * Computes the combined CSS classes for the SVG element, including size and any custom classes.
-   */
-  get logoClasses(): string {
-    const sizeClass = this.sizeClasses[this.size];
-    return `${sizeClass} h-auto ${this.className}`.trim();
-  }
+  isDecorative = input<boolean>(false);
 
   /**
    * Computes the source URL for the logo based on the variant.
    * Uses the LOGOS constant from shared assets with direct imports.
    */
-  get logoSrc(): string {
-    return this.variant === 'full' ? LOGOS.MAIN : LOGOS.ICON;
-  }
+  logoSrc = computed(() => (this.variant() === 'full' ? LOGOS.MAIN : LOGOS.ICON));
+
+  /**
+   * Computes the appropriate alt text for the logo based on variant and accessibility settings.
+   * Returns empty string if logo is decorative, otherwise provides descriptive alt text.
+   */
+  logoAltText = computed((): string => {
+    switch (true) {
+      // If the logo is decorative, return empty string for alt text
+      case this.isDecorative():
+        return '';
+
+      // If there is a custom aria-label, use it as alt text
+      case this.variant() === 'full':
+        return 'ByteBank Pro - Logo da plataforma de gestão financeira';
+
+      // Icon variant with custom aria-label
+      case !!this.ariaLabel():
+        return this.ariaLabel()!;
+
+      // Default case for icon variant
+      default:
+        return 'ByteBank Pro - Ícone da plataforma';
+    }
+  });
+
+  /**
+   * Computes the combined CSS classes for the SVG element, including size and any custom classes.
+   */
+  logoClasses = computed((): string => `${this.className()}`.trim());
 }

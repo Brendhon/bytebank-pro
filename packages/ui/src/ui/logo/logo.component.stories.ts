@@ -85,7 +85,7 @@ export const CustomStyling: Story = {
   render: () => ({
     template: `
       <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <bb-logo variant="full" size="md" className="opacity-75"></bb-logo>
+        <bb-logo variant="full" size="md" className="text-green-500"></bb-logo>
         <bb-logo variant="full" size="lg" className="drop-shadow-lg"></bb-logo>
         <bb-logo variant="full" size="md" className="w-24 md:w-32 lg:w-40"></bb-logo>
       </div>

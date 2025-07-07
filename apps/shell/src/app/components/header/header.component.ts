@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { LogoComponent, LogoVariant } from '@bytebank-pro/ui';
 import { AuthenticatedUserHeaderComponent } from './components/authenticated-user-header/authenticated-user-header.component';
 import { GuestActionsComponent } from './components/guest-actions/guest-actions.component';
@@ -85,33 +85,23 @@ export class HeaderComponent {
 
   /**
    * Computes the CSS classes for the main header element based on the `variant`.
-   * @returns A string of CSS classes.
    */
-  get headerClasses(): string {
+  headerClasses = computed(() => {
     const baseClasses = ''; // Global header styles defined in root CSS, so no base classes needed here.
     const variantClasses =
       this.variant() === 'guest' ? 'justify-center sm:justify-between' : 'justify-between';
     return `${baseClasses} ${variantClasses}`.trim();
-  }
-
-  /**
-   * Computes the `variant` for the `bb-logo` component based on the header `variant`.
-   * @returns The `LogoVariant` for the `bb-logo`.
-   */
-  get logoVariant(): LogoVariant {
-    return this.variant() === 'guest' ? 'icon' : 'icon'; // Always 'icon' as per original
-  }
+  });
 
   /**
    * Computes the CSS classes for the `bb-logo` component based on the header `variant`.
-   * @returns A string of CSS classes.
    */
-  get logoClasses(): string {
+  logoClasses = computed(() => {
     const visibilityClasses = 'hidden'; // Base hidden class as per original
     const responsiveDisplayClasses = this.variant() === 'guest' ? 'sm:flex' : 'md:flex'; // Responsive display as per original
     const colorClasses =
       this.variant() === 'guest' ? 'text-bytebank-green' : 'text-bytebank-orange'; // Color based on variant using design tokens
 
     return `${visibilityClasses} ${responsiveDisplayClasses} ${colorClasses}`.trim();
-  }
+  });
 }
