@@ -10,12 +10,8 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { getAssetContent } from '@bytebank-pro/shared-assets';
+import { ImgSize } from '@bytebank-pro/types';
 import { ImageOff, Loader2, LucideAngularModule } from 'lucide-angular';
-
-/**
- * Defines the possible size variants for the Image component.
- */
-export type ImgSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 /**
  * Image component for the ByteBank Pro application.
@@ -84,6 +80,7 @@ export class ImgComponent implements OnInit {
   // Internal map for size classes
   private sizeClasses: Record<ImgSize, string> = {
     xs: 'w-4 h-auto',
+    xsl: 'w-6 h-auto',
     sm: 'w-8 h-auto',
     md: 'w-16 h-auto',
     lg: 'w-32 h-auto',

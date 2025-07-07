@@ -1,6 +1,10 @@
 <header [class]="headerClasses()" data-testid="app-header">
   <div data-testid="header-left-section">
-    <bb-logo size="sm" variant="icon" [class]="logoClasses()" data-testid="header-logo"></bb-logo>
+    <div [class]="responsiveDisplayClasses()" data-testid="header-logo-container">
+      <bb-logo size="xsl" variant="icon" [className]="logoClasses()" data-testid="header-logo">
+        <span class="sr-only">Logo do ByteBank</span>
+      </bb-logo>
+    </div>
 
     @if (variant() === 'user' && pathname()) {
       <bb-menu-popover

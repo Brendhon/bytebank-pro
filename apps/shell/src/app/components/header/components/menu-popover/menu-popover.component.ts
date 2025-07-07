@@ -39,15 +39,13 @@ export class MenuPopoverComponent {
   /**
    * Returns the current active path, defaulting to '/dashboard' if `pathname` is undefined.
    */
-  get currentPath(): string {
-    return this.pathname() ?? '/dashboard';
-  }
+  currentPath = computed<string>(() => this.pathname() ?? '/dashboard');
 
   /**
    * Maps the current path to the corresponding NavItemLabel.
    * Used to determine which navigation item should be highlighted as active.
    */
-  currentNavLabel = computed<NavItemLabel>(() => getLabelFromPath(this.currentPath));
+  currentNavLabel = computed<NavItemLabel>(() => getLabelFromPath(this.currentPath()));
 
   /**
    * The icon used for the menu toggle button.

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { LOGOS } from '@bytebank-pro/shared-assets';
+import { ImgSize } from '@bytebank-pro/types';
 import { ImgComponent } from '../img/img.component';
 
 /**
@@ -8,11 +9,6 @@ import { ImgComponent } from '../img/img.component';
  * 'full' displays the full ByteBank logo, 'icon' displays only the icon part.
  */
 export type LogoVariant = 'full' | 'icon';
-
-/**
- * Defines the possible size variants for the Logo component.
- */
-export type LogoSize = 'sm' | 'md' | 'lg';
 
 /**
  * Logo component for the ByteBank Pro application.
@@ -45,7 +41,7 @@ export class LogoComponent {
    * The size of the logo. 'sm', 'md', or 'lg'.
    * @default 'md'
    */
-  size = input<LogoSize>('md');
+  size = input<ImgSize>('md');
 
   /**
    * Additional CSS classes to apply to the logo SVG element.

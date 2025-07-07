@@ -96,12 +96,14 @@ export class HeaderComponent {
   /**
    * Computes the CSS classes for the `bb-logo` component based on the header `variant`.
    */
-  logoClasses = computed(() => {
-    const visibilityClasses = 'hidden'; // Base hidden class as per original
-    const responsiveDisplayClasses = this.variant() === 'guest' ? 'sm:flex' : 'md:flex'; // Responsive display as per original
-    const colorClasses =
-      this.variant() === 'guest' ? 'text-bytebank-green' : 'text-bytebank-orange'; // Color based on variant using design tokens
+  logoClasses = computed(() =>
+    this.variant() === 'guest' ? 'text-bytebank-green' : 'text-bytebank-orange'
+  );
 
-    return `${visibilityClasses} ${responsiveDisplayClasses} ${colorClasses}`.trim();
-  });
+  /**
+   * Computes the logo variant responsive
+   */
+  responsiveDisplayClasses = computed(
+    () => `hidden ${this.variant() === 'guest' ? 'sm:flex' : 'md:flex'}`
+  );
 }

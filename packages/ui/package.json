@@ -58,6 +58,7 @@
     "@bytebank-pro/shared-assets": "*",
     "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/utils": "*",
+    "@bytebank-pro/types": "*",
     "lucide-angular": "^0.523.0",
     "rxjs": "~7.8.0"
   }
