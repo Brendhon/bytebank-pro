@@ -127,8 +127,8 @@ export class NavMenuComponent {
    */
   getColorClasses(label: string): string {
     const isActive = this.isActive(label);
-    const activeClasses = 'text-orange font-bold';
-    const inactiveClasses = 'text-dark-gray';
+    const activeClasses = 'text-bytebank-orange font-bold';
+    const inactiveClasses = 'text-bytebank-dark-gray';
     return isActive ? activeClasses : inactiveClasses;
   }
 

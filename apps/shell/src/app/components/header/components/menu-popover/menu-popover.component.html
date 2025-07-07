@@ -1,21 +1,37 @@
 <div class="flex md:hidden" data-testid="menu-popover-container">
-  <bb-popover class="relative" [attr.popoverClassName]="'p-4'" data-testid="main-menu-popover">
-    <ng-template #popoverTrigger>
-      <button
-        type="button"
-        class="popover-trigger rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
-        aria-label="Open navigation menu"
-        data-testid="menu-button"
-      >
-        <i-lucide [img]="menuIcon" [size]="40" aria-hidden="true"></i-lucide>
-      </button>
-    </ng-template>
+  <bb-popover
+    class="relative"
+    [isOpen]="isMenuOpen()"
+    (openChange)="handlePopoverOpenChange($event)"
+    [closeOnClickOutside]="true"
+    [closeOnEscape]="true"
+    ariaLabel="Navigation menu"
+    data-testid="main-menu-popover"
+  >
+    <!-- Trigger slot -->
+    <button
+      slot="trigger"
+      type="button"
+      class="rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
+      aria-label="Open navigation menu"
+      data-testid="menu-button"
+    >
+      <i-lucide
+        [img]="menuIcon"
+        class="text-bytebank-orange"
+        [size]="36"
+        aria-hidden="true"
+      ></i-lucide>
+    </button>
 
-    <bb-nav-menu
-      [current]="currentNavLabel()"
-      [className]="'flex p-0'"
-      (onNavigate)="handleNavigation($event)"
-      data-testid="nav-menu-inside-popover"
-    ></bb-nav-menu>
+    <!-- Content slot -->
+    <div slot="content" class="p-4">
+      <bb-nav-menu
+        [current]="currentNavLabel()"
+        [className]="'flex p-0'"
+        (onNavigate)="handleNavigation($event)"
+        data-testid="nav-menu-inside-popover"
+      ></bb-nav-menu>
+    </div>
   </bb-popover>
 </div>

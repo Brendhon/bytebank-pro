@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { Menu } from 'lucide-angular'; // Import specific icon
@@ -37,6 +37,11 @@ export class MenuPopoverComponent {
   onNavigate = output<string>();
 
   /**
+   * Internal signal to control the popover open/closed state.
+   */
+  private _isMenuOpen = signal<boolean>(false);
+
+  /**
    * Returns the current active path, defaulting to '/dashboard' if `pathname` is undefined.
    */
   currentPath = computed<string>(() => this.pathname() ?? '/dashboard');
@@ -54,11 +59,39 @@ export class MenuPopoverComponent {
   menuIcon = Menu;
 
   /**
+   * Returns the current state of the menu popover.
+   */
+  isMenuOpen = computed(() => this._isMenuOpen());
+
+  /**
    * Handles the navigation event emitted by the NavMenu component.
-   * Re-emits the event to the parent component.
+   * Re-emits the event to the parent component and closes the menu.
    * @param href The URL to navigate to.
    */
   handleNavigation(href: string): void {
     this.onNavigate.emit(href);
+    this.closeMenu(); // Close menu after navigation
+  }
+
+  /**
+   * Handles popover open/close state changes.
+   * @param isOpen The new open state of the popover.
+   */
+  handlePopoverOpenChange(isOpen: boolean): void {
+    this._isMenuOpen.set(isOpen);
+  }
+
+  /**
+   * Closes the menu popover.
+   */
+  closeMenu(): void {
+    this._isMenuOpen.set(false);
+  }
+
+  /**
+   * Opens the menu popover.
+   */
+  openMenu(): void {
+    this._isMenuOpen.set(true);
   }
 }
