@@ -12,6 +12,10 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [📝 Sumário](#-sumário)
   - [✨ Visão Geral](#-visão-geral)
   - [📦 Tecnologias](#-tecnologias)
+  - [🤖 Desenvolvimento com IA](#-desenvolvimento-com-ia)
+    - [🛠️ Ferramentas de IA Utilizadas](#️-ferramentas-de-ia-utilizadas)
+    - [📁 Configurações de IA](#-configurações-de-ia)
+    - [🎯 Engenharia de Prompt](#-engenharia-de-prompt)
   - [📁 Estrutura do Monorepo](#-estrutura-do-monorepo)
   - [📦 Packages Compartilhados](#-packages-compartilhados)
   - [🛠️ Qualidade de Código](#️-qualidade-de-código)
@@ -27,12 +31,12 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 A arquitetura é composta por um **Shell** (aplicação hospedeira) e três **Microfrontends (MFEs)**, cada um responsável por uma área de negócio específica.
 
-| App          | Descrição                                                    | Readme                                        |
-| :----------- | :----------------------------------------------------------- | :-------------------------------------------- |
-| **Shell**    | Orquestra os MFEs, gerencia autenticação e o layout global.  | [Ver Documentação](./apps/shell/README.md)    |
-| **Dashboard**| Exibe o painel com informações financeiras do usuário.       | [Ver Documentação](./apps/dashboard/README.md)    |
-| **Transactions**| Gerencia o cadastro, edição e listagem de transações.        | [Ver Documentação](./apps/transactions/README.md) |
-| **Settings** | Permite o gerenciamento da conta e preferências do usuário. | [Ver Documentação](./apps/settings/README.md)     |
+| App              | Descrição                                                   | Readme                                            |
+| :--------------- | :---------------------------------------------------------- | :------------------------------------------------ |
+| **Shell**        | Orquestra os MFEs, gerencia autenticação e o layout global. | [Ver Documentação](./apps/shell/README.md)        |
+| **Dashboard**    | Exibe o painel com informações financeiras do usuário.      | [Ver Documentação](./apps/dashboard/README.md)    |
+| **Transactions** | Gerencia o cadastro, edição e listagem de transações.       | [Ver Documentação](./apps/transactions/README.md) |
+| **Settings**     | Permite o gerenciamento da conta e preferências do usuário. | [Ver Documentação](./apps/settings/README.md)     |
 
 ---
 
@@ -45,6 +49,35 @@ A arquitetura é composta por um **Shell** (aplicação hospedeira) e três **Mi
 - **API**: [GraphQL (Apollo Client)](https://www.apollographql.com/docs/angular/)
 - **Contêineres**: [Docker](https://www.docker.com/) + [Docker Compose](https://docs.docker.com/compose/)
 - **Qualidade de Código**: ESLint, Prettier, Husky, lint-staged
+
+---
+
+## 🤖 Desenvolvimento com IA
+
+Este projeto também foi desenvolvido como uma oportunidade de **aprendizado e aperfeiçoamento** no uso de ferramentas de Inteligência Artificial para desenvolvimento de software. Durante todo o processo, foram utilizadas tecnologias de IA generativa para acelerar o desenvolvimento e melhorar a qualidade do código.
+
+### 🛠️ Ferramentas de IA Utilizadas
+
+- **[Cursor](https://cursor.sh/)**: IDE baseada em IA que oferece sugestões de código inteligentes e assistência contextual durante o desenvolvimento
+- **[GitHub Copilot](https://github.com/features/copilot)**: Assistente de programação que fornece autocompletar de código baseado em IA
+
+### 📁 Configurações de IA
+
+O projeto inclui configurações específicas para otimizar o uso das ferramentas de IA:
+
+- **`.cursor/`**: Contém configurações e prompts personalizados para o Cursor, incluindo regras de desenvolvimento e padrões de código específicos do projeto
+- **`.github/`**: Inclui workflows e configurações que aproveitam recursos de IA do GitHub, como sugestões de código e análise automática
+
+### 🎯 Engenharia de Prompt
+
+Uma parte fundamental do desenvolvimento foi a **engenharia de prompt** - a prática de criar e refinar prompts específicos para obter os melhores resultados das ferramentas de IA. Isso incluiu:
+
+- Definição de prompts estruturados para geração de componentes Angular
+- Criação de templates de prompt para diferentes tipos de funcionalidades
+- Refinamento contínuo baseado nos resultados obtidos
+- Documentação de prompts eficazes para reutilização futura
+
+Esta abordagem permitiu maximizar a produtividade e manter a consistência do código ao longo do desenvolvimento do projeto.
 
 ---
 
@@ -75,15 +108,15 @@ bytebank-pro/
 
 Os `packages` garantem a consistência e reutilização de código em todo o projeto.
 
-| Pacote                       | Descrição                                                      | Readme                                                          |
-| :--------------------------- | :------------------------------------------------------------- | :-------------------------------------------------------------- |
-| **`@bytebank-pro/ui`**       | Biblioteca de componentes Angular (standalone) para a UI.      | [Ver Documentação](./packages/ui/README.md)                     |
-| **`@bytebank-pro/types`**    | Define as interfaces e tipos TypeScript compartilhados.        | [Ver Documentação](./packages/types/README.md)                  |
-| **`@bytebank-pro/utils`**    | Oferece funções utilitárias comuns (formatação, validação).    | [Ver Documentação](./packages/utils/README.md)                  |
-| **`@bytebank-pro/shared-assets`** | Armazena assets compartilhados como logos, ícones e ilustrações. | [Ver Documentação](./packages/shared-assets/README.md)          |
-| **`@bytebank-pro/shared-design-tokens`** | Centraliza os design tokens (cores, tipografia) para consistência visual. | [Ver Documentação](./packages/shared-design-tokens/README.md)   |
-| **`@bytebank-pro/eslint-config`** | Disponibiliza configurações padronizadas do ESLint.            | [Ver Documentação](./packages/eslint-config/README.md)          |
-| **`@bytebank-pro/typescript-config`** | Fornece configurações base do TypeScript (`tsconfig.json`).    | [Ver Documentação](./packages/typescript-config/README.md)      |
+| Pacote                                   | Descrição                                                                 | Readme                                                        |
+| :--------------------------------------- | :------------------------------------------------------------------------ | :------------------------------------------------------------ |
+| **`@bytebank-pro/ui`**                   | Biblioteca de componentes Angular (standalone) para a UI.                 | [Ver Documentação](./packages/ui/README.md)                   |
+| **`@bytebank-pro/types`**                | Define as interfaces e tipos TypeScript compartilhados.                   | [Ver Documentação](./packages/types/README.md)                |
+| **`@bytebank-pro/utils`**                | Oferece funções utilitárias comuns (formatação, validação).               | [Ver Documentação](./packages/utils/README.md)                |
+| **`@bytebank-pro/shared-assets`**        | Armazena assets compartilhados como logos, ícones e ilustrações.          | [Ver Documentação](./packages/shared-assets/README.md)        |
+| **`@bytebank-pro/shared-design-tokens`** | Centraliza os design tokens (cores, tipografia) para consistência visual. | [Ver Documentação](./packages/shared-design-tokens/README.md) |
+| **`@bytebank-pro/eslint-config`**        | Disponibiliza configurações padronizadas do ESLint.                       | [Ver Documentação](./packages/eslint-config/README.md)        |
+| **`@bytebank-pro/typescript-config`**    | Fornece configurações base do TypeScript (`tsconfig.json`).               | [Ver Documentação](./packages/typescript-config/README.md)    |
 
 ---
 
@@ -144,8 +177,8 @@ npm run dev:api
 
 ## 🔗 Links Úteis
 
--   **API GraphQL**: A API está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api) e pode ser acessada via [Render](https://bytebank-api.onrender.com/graphql).
--   **Deploy**: As aplicações (Shell e MFEs) são implantadas individualmente na [Render](https://render.com/).
+- **API GraphQL**: A API está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api) e pode ser acessada via [Render](https://bytebank-api.onrender.com/graphql).
+- **Deploy**: As aplicações (Shell e MFEs) são implantadas individualmente na [Render](https://render.com/).
 
 ---
 
