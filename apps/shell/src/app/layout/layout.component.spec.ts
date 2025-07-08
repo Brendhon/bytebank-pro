@@ -1,35 +1,65 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Router, NavigationEnd } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { BehaviorSubject, of } from 'rxjs';
+import { take, skip } from 'rxjs/operators';
 import { LayoutComponent } from './layout.component';
+import { AuthService } from '@/core/services/auth.service';
+import { HeaderComponent } from '@/components/header/header.component';
+import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
+import { FooterComponent } from '../components/footer/footer.component';
+import { NavItemLabel } from '@/core/types/nav';
+import { IUser } from '@bytebank-pro/types';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
   let element: HTMLElement;
-  let mockRouter: jasmine.SpyObj<Router>;
-  let routerEventsSubject: Subject<any>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    routerEventsSubject = new Subject();
-    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl'], {
-      events: routerEventsSubject.asObservable(),
-      url: '/'
+    // Create spies for dependencies
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['getCurrentUser', 'logout']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+
+    // Mock router events and URL
+    const mockNavigationEnd = new NavigationEnd(1, '/dashboard', '/dashboard');
+    Object.defineProperty(routerSpy, 'events', {
+      value: of(mockNavigationEnd),
+      writable: false
+    });
+    Object.defineProperty(routerSpy, 'url', {
+      value: '/dashboard',
+      writable: false
     });
 
+    // Mock auth service with complete IUser object
+    const mockUser: IUser = {
+      _id: '1',
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password123',
+      acceptPrivacy: true
+    };
+    authServiceSpy.getCurrentUser.and.returnValue(of(mockUser));
+
     await TestBed.configureTestingModule({
-      imports: [LayoutComponent],
-      providers: [{ provide: Router, useValue: routerSpy }]
+      imports: [LayoutComponent, RouterOutlet],
+      providers: [
+        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Router, useValue: routerSpy }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);
     component = fixture.componentInstance;
-    mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     fixture.detectChanges();
-    element =
-      fixture.debugElement.query(By.css('[data-testid="layout"]'))?.nativeElement ||
-      fixture.nativeElement;
+    element = fixture.debugElement.query(By.css('[data-testid="app-header"]'))?.nativeElement;
+  });
+
+  afterEach(() => {
+    // Clean up if necessary
   });
 
   describe('Basic Functionality', () => {
@@ -37,129 +67,163 @@ describe('LayoutComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should have default properties', () => {
-      expect(component.pathname$).toBeDefined();
+    it('should render the layout structure', () => {
+      const header = fixture.debugElement.query(By.css('[data-testid="app-header"]'));
+      const mainContent = fixture.debugElement.query(By.css('[data-testid="main-content-outlet"]'));
 
-      expect(component.userName$).toBeDefined();
+      expect(header).toBeTruthy();
+
+      expect(mainContent).toBeTruthy();
     });
   });
 
-  describe('Lifecycle Methods', () => {
-    it('should initialize observables on ngOnInit', fakeAsync(() => {
-      component.ngOnInit();
+  describe('Observables Initialization', () => {
+    it('should initialize pathname$ observable', (done) => {
+      component.pathname$.pipe(take(1)).subscribe((pathname) => {
+        expect(pathname).toBeDefined();
 
-      expect(component.pathname$).toBeDefined();
-
-      expect(component.userName$).toBeDefined();
-    }));
-
-    it('should handle initial pathname from router url', () => {
-      // Create a new router spy with the desired URL
-      const routerWithCustomUrl = jasmine.createSpyObj('Router', ['navigateByUrl'], {
-        events: routerEventsSubject.asObservable(),
-        url: '/dashboard'
+        expect(typeof pathname).toBe('string');
+        done();
       });
-      (component as any).router = routerWithCustomUrl;
-
-      const initialPathname = component['getInitialPathname']();
-
-      expect(initialPathname).toBeDefined();
     });
 
-    it('should create pathname observable on navigation events', () => {
-      component.ngOnInit();
+    it('should initialize userName$ observable', (done) => {
+      component.userName$.pipe(skip(1), take(1)).subscribe((userName) => {
+        expect(userName).toBe('Test User');
+        done();
+      });
+    });
 
-      const navigationEvent = new NavigationEnd(1, '/transactions', '/transactions');
-      routerEventsSubject.next(navigationEvent);
+    it('should handle empty user name', (done) => {
+      authServiceSpy.getCurrentUser.and.returnValue(of(null));
 
-      expect(component.pathname$).toBeDefined();
+      // Recreate component to test with null user
+      fixture = TestBed.createComponent(LayoutComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+
+      component.userName$.pipe(skip(1), take(1)).subscribe((userName) => {
+        expect(userName).toBe('');
+        done();
+      });
     });
   });
 
-  describe('Navigation Methods', () => {
-    it('should handle navigation to external links', () => {
-      spyOn(window, 'open');
+  describe('Navigation Handling', () => {
+    it('should handle navigation to valid route', () => {
+      const testRoute = '/dashboard';
+      component.handleNavigation(testRoute);
 
-      component.handleNavigation('https://example.com');
-
-      expect(window.open).toHaveBeenCalledWith('https://example.com', '_blank');
+      expect(routerSpy.navigateByUrl).toHaveBeenCalledWith(testRoute);
     });
 
-    it('should handle navigation to internal links', () => {
-      component.handleNavigation('/dashboard');
-
-      expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/dashboard');
-    });
-
-    it('should handle navigation with empty link', () => {
+    it('should handle navigation to empty route', () => {
       component.handleNavigation('');
 
-      expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/');
+      expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
     });
 
-    it('should handle navigation with null link', () => {
+    it('should handle navigation to null route', () => {
       component.handleNavigation(null as any);
 
-      expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/');
+      expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
     });
   });
 
-  describe('User Actions', () => {
-    it('should handle logout action', () => {
-      spyOn(console, 'log');
-
+  describe('Logout Handling', () => {
+    it('should call auth service logout method', () => {
       component.handleLogout();
 
-      expect(console.log).toHaveBeenCalledWith('Logout clicked!');
-    });
-
-    it('should handle login action', () => {
-      spyOn(console, 'log');
-
-      component.handleLogin();
-
-      expect(console.log).toHaveBeenCalledWith('Login clicked!');
-    });
-
-    it('should handle open account action', () => {
-      spyOn(console, 'log');
-
-      component.handleOpenAccount();
-
-      expect(console.log).toHaveBeenCalledWith('Open Account clicked!');
+      expect(authServiceSpy.logout).toHaveBeenCalled();
     });
   });
 
-  describe('Async Operations', () => {
-    it('should emit user name after delay', fakeAsync(() => {
-      component.ngOnInit();
-      let emittedUserName: string | undefined;
+  describe('Template Rendering', () => {
+    it('should render header component with correct inputs', () => {
+      const header = fixture.debugElement.query(By.css('[data-testid="app-header"]'));
 
-      component.userName$.subscribe((userName) => {
-        emittedUserName = userName;
-      });
+      expect(header).toBeTruthy();
 
-      // Initially should be empty string
-      tick(0);
+      // Check if header component is rendered
+      expect(header.componentInstance).toBeDefined();
+    });
 
-      expect(emittedUserName).toBe('');
+    it('should render sidebar when pathname is available', () => {
+      const sidebar = fixture.debugElement.query(By.css('[data-testid="app-sidebar"]'));
 
-      // After delay should be the actual name
-      tick(1000);
+      expect(sidebar).toBeTruthy();
+    });
 
-      expect(emittedUserName).toBe('Jane Doe');
-    }));
+    it('should render main content area', () => {
+      const mainContent = fixture.debugElement.query(By.css('[data-testid="main-content-outlet"]'));
+
+      expect(mainContent).toBeTruthy();
+
+      expect(mainContent.nativeElement.getAttribute('role')).toBe('main');
+    });
+
+    it('should render footer component', () => {
+      const footer = fixture.debugElement.query(By.css('bb-footer'));
+
+      expect(footer).toBeTruthy();
+    });
   });
 
-  describe('Error Handling', () => {
-    it('should handle invalid navigation links gracefully', () => {
-      spyOn(window, 'open');
-      spyOn(console, 'error');
+  describe('Component Structure', () => {
+    it('should have correct CSS classes for layout', () => {
+      const rootElement = fixture.debugElement.query(By.css('.flex.flex-col.min-h-screen'));
 
-      // Should not throw errors for various invalid inputs
-      component.handleNavigation(undefined as any);
+      expect(rootElement).toBeTruthy();
+    });
 
-      expect(mockRouter.navigateByUrl).toHaveBeenCalledWith('/');
+    it('should have correct CSS classes for main content area', () => {
+      const mainContent = fixture.debugElement.query(By.css('[data-testid="main-content-outlet"]'));
+
+      expect(mainContent.nativeElement.classList).toContain('overflow-x-auto');
+
+      expect(mainContent.nativeElement.classList).toContain('w-auto');
+
+      expect(mainContent.nativeElement.classList).toContain('mx-auto');
+    });
+
+    it('should have correct CSS classes for sidebar', () => {
+      const sidebar = fixture.debugElement.query(By.css('aside'));
+
+      expect(sidebar.nativeElement.classList).toContain('hidden');
+
+      expect(sidebar.nativeElement.classList).toContain('md:flex');
+
+      expect(sidebar.nativeElement.classList).toContain('bg-white');
+
+      expect(sidebar.nativeElement.classList).toContain('p-4');
+
+      expect(sidebar.nativeElement.classList).toContain('w-48');
+    });
+  });
+
+  describe('Dependency Injection', () => {
+    it('should inject AuthService correctly', () => {
+      expect(component['authService']).toBe(authServiceSpy);
+    });
+
+    it('should inject Router correctly', () => {
+      expect(component['router']).toBe(routerSpy);
+    });
+
+    it('should inject DestroyRef correctly', () => {
+      expect(component['destroyRef']).toBeDefined();
+    });
+  });
+
+  describe('Lifecycle', () => {
+    it('should initialize observables in ngOnInit', () => {
+      expect(component.pathname$).toBeDefined();
+
+      expect(component.userName$).toBeDefined();
+    });
+
+    it('should call auth service getCurrentUser on initialization', () => {
+      expect(authServiceSpy.getCurrentUser).toHaveBeenCalled();
     });
   });
 });
