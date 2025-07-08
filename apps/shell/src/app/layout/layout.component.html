@@ -10,7 +10,7 @@
 
   <div class="flex-1 flex flex-row">
     @if (pathname$ | async; as pathname) {
-      <aside class="hidden md:flex bg-white p-4">
+      <aside class="hidden md:flex bg-white p-4 w-48">
         <bb-nav-menu
           [current]="pathname"
           (onNavigate)="handleNavigation($event)"
@@ -20,11 +20,7 @@
       </aside>
     }
 
-    <main
-      role="main"
-      class="overflow-x-auto w-auto inline-block m-auto"
-      data-testid="main-content-outlet"
-    >
+    <main role="main" class="overflow-x-auto w-auto mx-auto" data-testid="main-content-outlet">
       <router-outlet></router-outlet>
     </main>
   </div>
