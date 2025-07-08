@@ -45,7 +45,7 @@ describe('UserActionsComponent', () => {
       const testUrl = 'https://example.com';
       spyOn(component.onNavigate, 'emit');
 
-      component.handleNavigate(testUrl);
+      component.handleExternalNavigate(testUrl);
 
       expect(component.onNavigate.emit).toHaveBeenCalledWith(testUrl);
     });
@@ -101,7 +101,7 @@ describe('UserActionsComponent', () => {
     it('should call handleNavigate with github URL when called', () => {
       const spy = spyOn(component.onNavigate, 'emit');
 
-      component.handleNavigate(component.githubUrl);
+      component.handleExternalNavigate(component.githubUrl);
 
       expect(spy).toHaveBeenCalledWith(component.githubUrl);
     });
@@ -109,7 +109,7 @@ describe('UserActionsComponent', () => {
     it('should call handleNavigate with figma URL when called', () => {
       const spy = spyOn(component.onNavigate, 'emit');
 
-      component.handleNavigate(component.figmaUrl);
+      component.handleExternalNavigate(component.figmaUrl);
 
       expect(spy).toHaveBeenCalledWith(component.figmaUrl);
     });

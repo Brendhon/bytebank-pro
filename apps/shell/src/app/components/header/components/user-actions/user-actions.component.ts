@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
 import { ICONS } from '@bytebank-pro/shared-assets';
+import { IPublicLinks } from '@bytebank-pro/types';
 import { ImgComponent, PopoverComponent } from '@bytebank-pro/ui';
 import { LucideAngularModule, User } from 'lucide-angular';
+import { environment } from 'src/environments/environment';
 
 /**
  * UserActions component provides a dropdown menu with navigation links to external resources
@@ -33,13 +35,24 @@ export class UserActionsComponent {
    */
   onLogout = output<void>();
 
-  // Assuming these URLs would be provided via environment variables or a configuration service in Angular
-  // For this example, hardcoding them for direct conversion. In a real app, use environment.ts or similar.
-  githubUrl: string = 'https://github.com/Brendhon/bytebank-pro';
-  figmaUrl: string =
-    'https://www.figma.com/design/E9UFSc9LUXlL88hIvIcuLd/Modelo-Fase-1---P%C3%93S-FIAP?node-id=503-4264';
+  /**
+   * Internal signal to control the popover open/closed state.
+   */
+  private _isPopoverOpen = signal<boolean>(false);
 
-  // Icons used in the component, imported from shared assets
+  /**
+   * Returns the current state of the user actions popover.
+   */
+  isPopoverOpen = computed(() => this._isPopoverOpen());
+
+  /**
+   * Public links from environment configuration.
+   */
+  publicLinks = environment.publicLinks;
+
+  /**
+   * Icons used in the component, imported from shared assets
+   */
   icons = {
     user: User,
     github: ICONS.GITHUB,
@@ -48,16 +61,61 @@ export class UserActionsComponent {
 
   /**
    * Handles the click on a navigation link.
+   * Opens the URL in a new tab and closes the popover.
    * @param url The URL to navigate to.
    */
-  handleNavigate(url: string): void {
-    this.onNavigate.emit(url);
+  handleExternalLinkNavigate(url: string): void {
+    if (url) {
+      window.open(url, '_blank');
+      this.closePopover(); // Close popover after navigation
+    }
+  }
+
+  /**
+   * Get public link from environment
+   * @param key The key of the public link
+   * @returns The public link
+   */
+  getPublicLink(key: keyof IPublicLinks): string {
+    return this.publicLinks?.[key] || '';
+  }
+
+  /**
+   * Open public link in a new tab
+   * @param key The key of the public link
+   */
+  openPublicLink(key: keyof IPublicLinks): void {
+    this.handleExternalLinkNavigate(this.getPublicLink(key));
   }
 
   /**
    * Handles the click on the logout button.
+   * Closes the popover after logout action.
    */
   handleLogout(): void {
     this.onLogout.emit();
+    this.closePopover(); // Close popover after logout
+  }
+
+  /**
+   * Handles popover open/close state changes.
+   * @param isOpen The new open state of the popover.
+   */
+  handlePopoverOpenChange(isOpen: boolean): void {
+    this._isPopoverOpen.set(isOpen);
+  }
+
+  /**
+   * Closes the user actions popover.
+   */
+  closePopover(): void {
+    this._isPopoverOpen.set(false);
+  }
+
+  /**
+   * Opens the user actions popover.
+   */
+  openPopover(): void {
+    this._isPopoverOpen.set(true);
   }
 }

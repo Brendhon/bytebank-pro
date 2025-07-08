@@ -2,6 +2,8 @@
   position="bottom-end"
   [closeOnClickOutside]="true"
   [closeOnEscape]="true"
+  [isOpen]="isPopoverOpen()"
+  (openChange)="handlePopoverOpenChange($event)"
   data-testid="user-actions-popover"
 >
   <button
@@ -27,20 +29,20 @@
     <button
       type="button"
       class="inline-flex items-center w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md gap-2"
-      (click)="handleNavigate(githubUrl)"
+      (click)="openPublicLink('github')"
       data-testid="github-link-button"
     >
-      <bb-img [src]="icons.github" alt="Github" size="sm" className="rounded-full"></bb-img>
+      <bb-img [src]="icons.github" alt="Github" size="xsl" className="rounded-full"></bb-img>
       Github
     </button>
 
     <button
       type="button"
       class="inline-flex items-center w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md gap-2"
-      (click)="handleNavigate(figmaUrl)"
+      (click)="openPublicLink('figma')"
       data-testid="figma-link-button"
     >
-      <bb-img [src]="icons.figma" alt="Figma" size="sm" className="rounded-full"></bb-img>
+      <bb-img [src]="icons.figma" alt="Figma" size="xsl" className="rounded-full"></bb-img>
       Figma
     </button>
 
