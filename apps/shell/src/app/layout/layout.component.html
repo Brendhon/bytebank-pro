@@ -10,13 +10,14 @@
 
   <div class="flex-1 flex flex-row">
     @if (pathname$ | async; as pathname) {
-      <bb-nav-menu
-        class="hidden md:flex"
-        [current]="pathname"
-        (onNavigate)="handleNavigation($event)"
-        data-testid="app-sidebar"
-      >
-      </bb-nav-menu>
+      <aside class="hidden md:flex bg-white p-4">
+        <bb-nav-menu
+          [current]="pathname"
+          (onNavigate)="handleNavigation($event)"
+          data-testid="app-sidebar"
+        >
+        </bb-nav-menu>
+      </aside>
     }
 
     <main
