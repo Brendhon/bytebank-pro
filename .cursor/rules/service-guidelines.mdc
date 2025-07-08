@@ -1,6 +1,7 @@
 ---
-globs: '**/*.service.ts'
+globs: **/*.service.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for service development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
 # 📋 Service Creation Best Practices Guide for ByteBank Pro
 

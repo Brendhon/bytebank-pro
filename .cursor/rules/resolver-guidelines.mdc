@@ -1,6 +1,7 @@
 ---
-globs: '**/*.resolver.ts'
+globs: **/*.resolver.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for resolver development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
 # 📋 Resolver Creation Best Practices Guide for ByteBank Pro
 

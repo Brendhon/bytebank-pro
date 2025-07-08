@@ -1,6 +1,7 @@
 ---
-globs: '**/*.spec.ts'
+globs: **/*.spec.ts
 alwaysApply: false
+description: 'This guide defines the patterns and best practices for writing unit tests for Angular components, services, guards, resolvers, pipes, and directives, using Jasmine and Karma.'
 ---
 # 🧪 Angular Testing Patterns (Jasmine and Karma)
 

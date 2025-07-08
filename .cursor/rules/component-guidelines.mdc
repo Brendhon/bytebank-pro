@@ -1,6 +1,7 @@
 ---
-globs: '**/*.component.ts,**/*.component.html'
+globs: **/*.component.ts,**/*.component.html
 alwaysApply: false
+description: 'This guide outlines best practices for Angular component development in ByteBank Pro, focusing on structure, style, modern Angular features, and accessibility.'
 ---
 # 📋 Component Creation Best Practices Guide for ByteBank Pro
 

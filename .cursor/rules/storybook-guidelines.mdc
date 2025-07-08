@@ -1,6 +1,7 @@
 ---
-globs: '**/*.component.stories.ts'
+globs: **/*.component.stories.ts
 alwaysApply: false
+description: 'This document defines the patterns and recommended practices for creating and documenting components using Storybook in ByteBank Pro.'
 ---
 # 📖 Storybook Patterns
 

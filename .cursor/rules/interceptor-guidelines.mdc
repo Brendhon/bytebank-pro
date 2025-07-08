@@ -1,6 +1,7 @@
 ---
-globs: '**/*.interceptor.ts'
+globs: **/*.interceptor.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for interceptor development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
 # 📋 Interceptor Creation Best Practices Guide for ByteBank Pro
 

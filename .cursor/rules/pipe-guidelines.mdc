@@ -1,6 +1,7 @@
 ---
-globs: '**/*.pipe.ts'
+globs: **/*.pipe.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for pipe development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
 # 📋 Pipe Creation Best Practices Guide for ByteBank Pro
 

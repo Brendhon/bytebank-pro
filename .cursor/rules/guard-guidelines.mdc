@@ -1,6 +1,7 @@
 ---
-globs: '**/*.guard.ts'
+globs: **/*.guard.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for guard development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
 # 📋 Guard Creation Best Practices Guide for ByteBank Pro
 

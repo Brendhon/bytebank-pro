@@ -1,8 +1,9 @@
 ---
-globs: '**/*.directive.ts'
+globs: **/*.directive.ts
 alwaysApply: false
+description: 'This guide defines the guidelines and best practices for directive development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.'
 ---
-# 📋 Directive Creation Best Practices Guide for ByteBank Pro
+#  📋 Directive Creation Best Practices Guide for ByteBank Pro
 
 This guide defines best practices for directive development in ByteBank Pro, covering structure, style, organization, and modern Angular practices.
 
