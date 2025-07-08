@@ -1,14 +1,14 @@
+import { HeaderComponent } from '@/components/header/header.component';
 import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
+import { AuthService } from '@/core/services/auth.service';
 import { NavItemLabel } from '@/core/types/nav';
 import { getLabelFromPath } from '@/core/utils/nav';
-import { HeaderComponent } from '@/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { Observable, filter, map, startWith, delay, of } from 'rxjs';
+import { Observable, filter, map, startWith } from 'rxjs';
 import { FooterComponent } from '../components/footer/footer.component';
-import { AuthService } from '@/core/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -51,13 +51,10 @@ export class LayoutComponent implements OnInit {
    */
   private initPathname(): Observable<NavItemLabel> {
     return this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event) => {
-        const path = event.urlAfterRedirects.split('?')[0];
-        return getLabelFromPath(path);
-      }),
-      startWith(this.getInitialPathname()),
-      takeUntilDestroyed(this.destroyRef)
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd), // Filter out non-NavigationEnd events
+      map((event) => getLabelFromPath(event.urlAfterRedirects.split('?')[0])), // Get the label from the path
+      startWith(this.getInitialPathname()), // Set the initial value of the observable
+      takeUntilDestroyed(this.destroyRef) // Destroy the observable when the component is destroyed
     );
   }
 
@@ -78,8 +75,7 @@ export class LayoutComponent implements OnInit {
    * @returns The initial NavItemLabel.
    */
   private getInitialPathname(): NavItemLabel {
-    const path = this.router.url.split('?')[0];
-    return getLabelFromPath(path);
+    return getLabelFromPath(this.router.url.split('?')[0]);
   }
 
   /**

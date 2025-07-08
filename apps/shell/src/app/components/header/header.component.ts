@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { LogoComponent, LogoVariant } from '@bytebank-pro/ui';
+import { LogoComponent } from '@bytebank-pro/ui';
 import { AuthenticatedUserHeaderComponent } from './components/authenticated-user-header/authenticated-user-header.component';
 import { GuestActionsComponent } from './components/guest-actions/guest-actions.component';
 import { MenuPopoverComponent } from './components/menu-popover/menu-popover.component';

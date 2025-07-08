@@ -1,6 +1,5 @@
 import { NavItemLabel, NavMenuItem } from '@/core/types/nav';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, output, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import {
   BadgeDollarSign,
   LayoutDashboard,
@@ -25,7 +24,7 @@ import {
 @Component({
   selector: 'bb-nav-menu', // 'bb-' prefix is mandatory
   standalone: true, // Always use standalone components
-  imports: [CommonModule, LucideAngularModule], // Required imports
+  imports: [LucideAngularModule], // Required imports
   changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
   templateUrl: './nav-menu.component.html', // Separated template for clarity
   styleUrls: ['./nav-menu.component.css'] // Use CSS specific to component
@@ -59,15 +58,14 @@ export class NavMenuComponent {
   private isPendingSignal = signal<boolean>(false);
 
   /**
-   * Public getters for template access
+   * Computed signal for determining if any navigation is currently pending.
    */
-  get pendingHref() {
-    return this.pendingHrefSignal();
-  }
+  readonly isPendingComputed = computed(() => this.isPendingSignal());
 
-  get isPending() {
-    return this.isPendingSignal();
-  }
+  /**
+   * Computed signal for getting the current pending href.
+   */
+  readonly pendingHrefComputed = computed(() => this.pendingHrefSignal());
 
   /**
    * Defines the list of navigation items with their labels, hrefs, and associated Lucide icons.
@@ -93,12 +91,39 @@ export class NavMenuComponent {
    */
   handleClick(href: string): void {
     this.setPendingState(href, true);
-    // In a real Angular app, this would typically trigger router.navigate or similar,
-    // and `isPending` would be set based on router events.
     this.onNavigate.emit(href);
-    // Simulate end of transition after a short delay (for demo purposes)
-    setTimeout(() => this.setPendingState(null, false), 500);
+    setTimeout(() => this.setPendingState(null, false), 200);
   }
+
+  /**
+   * Computed signal for checking if a navigation item is currently active.
+   * @param label The label of the navigation item.
+   * @returns `true` if the item is active, `false` otherwise.
+   */
+  isActive = computed(() => (label: string): boolean => {
+    const currentValue = this.current();
+    if (!currentValue || !label) return false;
+    return currentValue === label;
+  });
+
+  /**
+   * Checks if a navigation item is currently active (matches the `current` input).
+   * @param label The label of the navigation item.
+   * @returns `true` if the item is active, `false` otherwise.
+   * @deprecated Use isActive computed signal instead
+   */
+  isActiveMethod(label: string): boolean {
+    return this.isActive()(label);
+  }
+
+  /**
+   * Computed signal for checking if an item is currently pending navigation.
+   * @param href The href to check against pending state.
+   * @returns `true` if the item is pending, `false` otherwise.
+   */
+  isPendingForHref = computed(
+    () => (href: string) => this.isPendingComputed() && this.pendingHrefComputed() === href
+  );
 
   /**
    * Sets the pending state for navigation.
@@ -111,36 +136,22 @@ export class NavMenuComponent {
   }
 
   /**
-   * Checks if a navigation item is currently active (matches the `current` input).
-   * @param label The label of the navigation item.
-   * @returns `true` if the item is active, `false` otherwise.
+   * Computed signal for getting color classes based on active state.
    */
-  isActive(label: string): boolean {
-    return this.current() === label;
-  }
-
-  /**
-   * Returns the CSS classes for the text and icon based on the active state.
-   * Applies `text-orange font-bold` if active, otherwise `text-dark-gray`.
-   * @param label The label of the navigation item.
-   * @returns A string of CSS classes.
-   */
-  getColorClasses(label: string): string {
-    const isActive = this.isActive(label);
+  getColorClasses = computed(() => (label: string) => {
+    const isActive = this.isActive()(label);
     const activeClasses = 'text-bytebank-orange font-bold';
     const inactiveClasses = 'text-bytebank-dark-gray';
     return isActive ? activeClasses : inactiveClasses;
-  }
+  });
 
   /**
-   * Returns the combined CSS classes for a navigation button.
-   * @param label The label of the navigation item.
-   * @returns A string of CSS classes.
+   * Computed signal for getting button classes.
    */
-  getButtonClasses(label: string): string {
+  getButtonClasses = computed(() => (label: string) => {
     const baseClasses =
-      'flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer';
-    const colorClasses = this.getColorClasses(label);
+      'flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer hover:opacity-70';
+    const colorClasses = this.getColorClasses()(label);
     return `${baseClasses} ${colorClasses}`;
-  }
+  });
 }

@@ -4,12 +4,12 @@
       <li class="hover:opacity-70" role="listitem">
         <button
           type="button"
-          [class]="getButtonClasses(item.label)"
+          [class]="getButtonClasses()(item.label)"
           (click)="handleClick(item.href)"
-          [attr.aria-current]="isActive(item.label) ? 'page' : null"
+          [attr.aria-current]="isActive()(item.label) ? 'page' : null"
           [attr.aria-label]="'Navigate to ' + item.label"
         >
-          @if (isPending && pendingHref === item.href) {
+          @if (isPendingComputed() && pendingHrefComputed() === item.href) {
             <div role="status" aria-live="polite" aria-label="Loading">
               <i-lucide
                 [img]="Loader2"
@@ -22,7 +22,7 @@
             <i-lucide
               [img]="item.icon"
               [size]="20"
-              [class]="getColorClasses(item.label)"
+              [class]="getColorClasses()(item.label)"
               aria-hidden="true"
             ></i-lucide>
           }

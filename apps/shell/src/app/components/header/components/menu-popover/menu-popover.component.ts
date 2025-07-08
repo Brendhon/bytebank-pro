@@ -1,11 +1,11 @@
-import { Component, ChangeDetectionStrategy, input, output, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
-import { Menu } from 'lucide-angular'; // Import specific icon
 import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
-import { PopoverComponent } from '@bytebank-pro/ui';
-import { NavItemLabel, NavMenuItemLabel } from '@/core/types/nav';
+import { NavItemLabel } from '@/core/types/nav';
 import { getLabelFromPath } from '@/core/utils/nav';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import { PopoverComponent } from '@bytebank-pro/ui';
+import { LucideAngularModule, Menu } from 'lucide-angular';
+
 /**
  * MenuPopover component provides a collapsible navigation menu, typically for smaller screens.
  * It uses a popover to display the navigation items.
@@ -28,7 +28,7 @@ export class MenuPopoverComponent {
    * The current pathname, used to determine the active navigation item.
    * @default '/dashboard' if not provided.
    */
-  pathname = input<string | undefined>(undefined);
+  pathname = input.required<string>();
 
   /**
    * Event emitted when a navigation action is requested from the NavMenu.
@@ -44,7 +44,7 @@ export class MenuPopoverComponent {
   /**
    * Returns the current active path, defaulting to '/dashboard' if `pathname` is undefined.
    */
-  currentPath = computed<string>(() => this.pathname() ?? '/dashboard');
+  currentPath = computed<string>(() => this.pathname());
 
   /**
    * Maps the current path to the corresponding NavItemLabel.

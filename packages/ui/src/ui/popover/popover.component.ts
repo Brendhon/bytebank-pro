@@ -1,18 +1,16 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  HostListener,
   input,
   output,
   signal,
-  computed,
-  inject,
-  DestroyRef,
-  ElementRef,
-  ViewChild,
-  HostListener
+  ViewChild
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type PopoverPosition =
   | 'top'
@@ -24,6 +22,24 @@ export type PopoverPosition =
   | 'bottom-start'
   | 'bottom-end';
 
+/**
+ * Popover component for displaying contextual information or actions.
+ * Provides a floating content panel that appears relative to a trigger element.
+ * Supports various positions, keyboard navigation, and accessibility features.
+ *
+ * @example
+ * ```html
+ * <bb-popover
+ *   [isOpen]="isOpen"
+ *   position="bottom-start"
+ *   [closeOnClickOutside]="true"
+ *   (openChange)="handleOpenChange($event)"
+ * >
+ *   <button slot="trigger">Open Popover</button>
+ *   <div slot="content">Popover content here</div>
+ * </bb-popover>
+ * ```
+ */
 @Component({
   selector: 'bb-popover',
   templateUrl: './popover.component.html',
@@ -40,8 +56,6 @@ export type PopoverPosition =
   }
 })
 export class PopoverComponent {
-  private destroyRef = inject(DestroyRef);
-
   // ViewChild references
   @ViewChild('popoverContent') popoverContent!: ElementRef<HTMLDivElement>;
   @ViewChild('triggerElement') triggerElement!: ElementRef<HTMLElement>;
@@ -73,21 +87,21 @@ export class PopoverComponent {
     return [baseClasses, positionClass, customClass].filter(Boolean).join(' ');
   });
 
+  constructor() {
+    effect(() => {
+      if (this.isOpen() === false) this._isOpen.set(false);
+    });
+  }
+
   /**
    * Toggle popover visibility
    */
   toggle(): void {
     if (this.disabled()) return;
 
-    const newState = !this.isOpenState();
-    this._isOpen.set(newState);
-    this.openChange.emit(newState);
-
-    if (newState) {
-      this.opened.emit();
-    } else {
-      this.closed.emit();
-    }
+    this._isOpen.set(!this.isOpenState());
+    this.openChange.emit(this._isOpen());
+    this._isOpen() ? this.opened.emit() : this.closed.emit();
   }
 
   /**
