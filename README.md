@@ -58,8 +58,8 @@ Este projeto também foi desenvolvido como uma oportunidade de **aprendizado e a
 
 ### 🛠️ Ferramentas de IA Utilizadas
 
-- **[Cursor](https://cursor.sh/)**: IDE baseada em IA que oferece sugestões de código inteligentes e assistência contextual durante o desenvolvimento
-- **[GitHub Copilot](https://github.com/features/copilot)**: Assistente de programação que fornece autocompletar de código baseado em IA
+- **[Cursor](https://cursor.sh/)**: IDE com Inteligência Artificial que sugere códigos de forma inteligente e oferece assistência contextual em tempo real, facilitando e acelerando o desenvolvimento.
+- **[GitHub Copilot](https://github.com/features/copilot)**: Ferramenta de IA que auxilia na programação, fornecendo sugestões automáticas de código e agentes inteligentes para resolver tarefas de desenvolvimento de maneira mais eficiente.
 
 ### 📁 Configurações de IA
 
