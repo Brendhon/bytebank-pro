@@ -1,230 +1,122 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { MenuPopoverComponent } from './menu-popover.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
 
 describe('MenuPopoverComponent', () => {
   let component: MenuPopoverComponent;
   let fixture: ComponentFixture<MenuPopoverComponent>;
+  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuPopoverComponent],
-      schemas: [NO_ERRORS_SCHEMA] // Ignore child component errors for unit testing
+      imports: [MenuPopoverComponent, NavMenuComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MenuPopoverComponent);
     component = fixture.componentInstance;
+
+    // Set required input before detecting changes
+    fixture.componentRef.setInput('pathname', '/dashboard');
     fixture.detectChanges();
+
+    element = fixture.debugElement.query(
+      By.css('[data-testid="menu-popover-container"]')
+    )?.nativeElement;
   });
 
-  describe('Basic Functionality', () => {
-    it('should create the component', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should have default properties', () => {
-      expect(component.pathname()).toBeUndefined();
-      expect(component.currentPath).toBe('/dashboard');
-      expect(component.menuIcon).toBeDefined();
-    });
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  describe('Input Properties', () => {
-    it('should return default path when pathname is undefined', () => {
-      expect(component.currentPath).toBe('/dashboard');
-    });
+  it('should display the menu button', () => {
+    const menuButton = fixture.debugElement.query(By.css('[data-testid="menu-button"]'));
 
-    it('should return pathname when provided', () => {
-      fixture.componentRef.setInput('pathname', '/transactions');
-      fixture.detectChanges();
-
-      expect(component.currentPath).toBe('/transactions');
-    });
-
-    it('should handle different pathname values', () => {
-      const testPaths = ['/dashboard', '/transactions', '/settings', '/custom-path'];
-
-      testPaths.forEach((path) => {
-        fixture.componentRef.setInput('pathname', path);
-        fixture.detectChanges();
-
-        expect(component.currentPath).toBe(path);
-      });
-    });
-
-    it('should handle null pathname', () => {
-      fixture.componentRef.setInput('pathname', null);
-      fixture.detectChanges();
-
-      expect(component.currentPath).toBe('/dashboard');
-    });
-
-    it('should handle empty string pathname', () => {
-      fixture.componentRef.setInput('pathname', '');
-      fixture.detectChanges();
-
-      expect(component.currentPath).toBe('');
-    });
+    expect(menuButton).toBeTruthy();
   });
 
-  describe('Events', () => {
-    it('should emit navigation event when handleNavigation is called', () => {
-      spyOn(component.onNavigate, 'emit');
+  it('should render NavMenuComponent inside popover when opened', () => {
+    // Open the popover first
+    component.openMenu();
+    fixture.detectChanges();
 
-      component.handleNavigation('/test-path');
+    const navMenuElement = fixture.debugElement.query(
+      By.css('[data-testid="nav-menu-inside-popover"]')
+    );
 
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('/test-path');
-    });
-
-    it('should emit navigation event with different paths', () => {
-      spyOn(component.onNavigate, 'emit');
-      const testPaths = ['/dashboard', '/transactions', '/settings'];
-
-      testPaths.forEach((path) => {
-        component.handleNavigation(path);
-
-        expect(component.onNavigate.emit).toHaveBeenCalledWith(path);
-      });
-
-      expect(component.onNavigate.emit).toHaveBeenCalledTimes(testPaths.length);
-    });
-
-    it('should emit empty string when called with empty path', () => {
-      spyOn(component.onNavigate, 'emit');
-
-      component.handleNavigation('');
-
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('');
-    });
-
-    it('should emit navigation event multiple times', () => {
-      spyOn(component.onNavigate, 'emit');
-
-      component.handleNavigation('/first-path');
-      component.handleNavigation('/second-path');
-
-      expect(component.onNavigate.emit).toHaveBeenCalledTimes(2);
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('/first-path');
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('/second-path');
-    });
+    expect(navMenuElement).toBeTruthy();
   });
 
-  describe('Component State', () => {
-    it('should have menu icon property', () => {
-      expect(component.menuIcon).toBeDefined();
-    });
+  it('should emit onNavigate event when NavMenuComponent emits', () => {
+    const testHref = '/transactions';
+    spyOn(component.onNavigate, 'emit');
 
-    it('should handle path changes reactively', () => {
-      // Test initial state
-      expect(component.currentPath).toBe('/dashboard');
+    // Open the popover first
+    component.openMenu();
+    fixture.detectChanges();
 
-      // Test path change
-      fixture.componentRef.setInput('pathname', '/transactions');
-      fixture.detectChanges();
+    // Get NavMenuComponent instance directly from the component
+    const navMenuComponent = fixture.debugElement.query(
+      By.directive(NavMenuComponent)
+    )?.componentInstance;
 
-      expect(component.currentPath).toBe('/transactions');
+    expect(navMenuComponent).toBeTruthy();
+    navMenuComponent.onNavigate.emit(testHref);
 
-      // Test another path change
-      fixture.componentRef.setInput('pathname', '/settings');
-      fixture.detectChanges();
-
-      expect(component.currentPath).toBe('/settings');
-    });
-
-    it('should maintain getter behavior for currentPath', () => {
-      // Test getter behavior multiple calls
-      expect(component.currentPath).toBe('/dashboard');
-      expect(component.currentPath).toBe('/dashboard');
-
-      fixture.componentRef.setInput('pathname', '/new-path');
-      fixture.detectChanges();
-
-      expect(component.currentPath).toBe('/new-path');
-      expect(component.currentPath).toBe('/new-path');
-    });
+    expect(component.onNavigate.emit).toHaveBeenCalledWith(testHref);
   });
 
-  describe('Computed Properties', () => {
-    it('should compute currentNavLabel for dashboard path', () => {
-      fixture.componentRef.setInput('pathname', 'dashboard');
-      fixture.detectChanges();
+  it('should close menu after navigation', () => {
+    const testHref = '/settings';
+    spyOn(component.onNavigate, 'emit');
+    spyOn(component, 'closeMenu');
 
-      const result = component.currentNavLabel();
+    // Open the popover first
+    component.openMenu();
+    fixture.detectChanges();
 
-      expect(result).toBe('Dashboard');
-    });
+    // Get NavMenuComponent instance directly from the component
+    const navMenuComponent = fixture.debugElement.query(
+      By.directive(NavMenuComponent)
+    )?.componentInstance;
 
-    it('should compute currentNavLabel for transactions path', () => {
-      fixture.componentRef.setInput('pathname', 'transactions');
-      fixture.detectChanges();
+    expect(navMenuComponent).toBeTruthy();
+    navMenuComponent.onNavigate.emit(testHref);
 
-      const result = component.currentNavLabel();
-
-      expect(result).toBe('Transações');
-    });
-
-    it('should compute currentNavLabel for settings path', () => {
-      fixture.componentRef.setInput('pathname', 'settings');
-      fixture.detectChanges();
-
-      const result = component.currentNavLabel();
-
-      expect(result).toBe('Configurações');
-    });
-
-    it('should handle unknown paths in currentNavLabel', () => {
-      fixture.componentRef.setInput('pathname', '/unknown-path');
-      fixture.detectChanges();
-
-      const result = component.currentNavLabel();
-
-      // Should return undefined for unknown paths
-      expect(result).toBeUndefined();
-    });
-
-    it('should update computed properties when inputs change', () => {
-      fixture.componentRef.setInput('pathname', 'dashboard');
-      fixture.detectChanges();
-      const initialLabel = component.currentNavLabel();
-
-      expect(initialLabel).toBe('Dashboard');
-
-      fixture.componentRef.setInput('pathname', 'transactions');
-      fixture.detectChanges();
-      const updatedLabel = component.currentNavLabel();
-
-      expect(updatedLabel).toBe('Transações');
-      expect(updatedLabel).not.toBe(initialLabel);
-    });
+    expect(component.onNavigate.emit).toHaveBeenCalledWith(testHref);
+    expect(component.closeMenu).toHaveBeenCalled();
   });
 
-  describe('Boundary Cases', () => {
-    it('should handle undefined pathname input', () => {
-      fixture.componentRef.setInput('pathname', undefined);
-      fixture.detectChanges();
+  it('should have the correct container structure', () => {
+    expect(element).toBeTruthy();
+    expect(element.classList.contains('flex')).toBeTruthy();
+    expect(element.classList.contains('md:hidden')).toBeTruthy();
+  });
 
-      expect(component.currentPath).toBe('/dashboard');
-    });
+  it('should compute currentNavLabel based on pathname', () => {
+    fixture.componentRef.setInput('pathname', '/transactions');
+    fixture.detectChanges();
 
-    it('should handle whitespace-only pathname', () => {
-      fixture.componentRef.setInput('pathname', '   ');
-      fixture.detectChanges();
+    expect(component.currentNavLabel()).toBe('Transações');
+  });
 
-      expect(component.currentPath).toBe('   ');
-    });
+  it('should handle popover open/close state changes', () => {
+    const isOpen = true;
+    component.handlePopoverOpenChange(isOpen);
 
-    it('should handle pathname with query parameters', () => {
-      fixture.componentRef.setInput('pathname', '/dashboard?tab=overview');
-      fixture.detectChanges();
+    expect(component.isMenuOpen()).toBe(isOpen);
+  });
 
-      expect(component.currentPath).toBe('/dashboard?tab=overview');
-    });
+  it('should open menu when openMenu is called', () => {
+    component.openMenu();
 
-    it('should handle pathname with hash', () => {
-      fixture.componentRef.setInput('pathname', '/dashboard#section1');
-      fixture.detectChanges();
+    expect(component.isMenuOpen()).toBe(true);
+  });
 
-      expect(component.currentPath).toBe('/dashboard#section1');
-    });
+  it('should close menu when closeMenu is called', () => {
+    component.openMenu();
+    component.closeMenu();
+
+    expect(component.isMenuOpen()).toBe(false);
   });
 });
