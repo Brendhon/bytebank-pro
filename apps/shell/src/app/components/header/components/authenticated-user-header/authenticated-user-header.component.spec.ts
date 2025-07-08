@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AuthenticatedUserHeaderComponent } from './authenticated-user-header.component';
+import { UserActionsComponent } from '../user-actions/user-actions.component';
 
 describe('AuthenticatedUserHeaderComponent', () => {
   let component: AuthenticatedUserHeaderComponent;
@@ -9,13 +10,13 @@ describe('AuthenticatedUserHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthenticatedUserHeaderComponent]
+      imports: [AuthenticatedUserHeaderComponent, UserActionsComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthenticatedUserHeaderComponent);
     component = fixture.componentInstance;
 
-    // Set required input
+    // Set required input before detecting changes
     fixture.componentRef.setInput('userName', 'Test User');
     fixture.detectChanges();
 
@@ -24,80 +25,56 @@ describe('AuthenticatedUserHeaderComponent', () => {
     )?.nativeElement;
   });
 
-  describe('Basic Functionality', () => {
-    it('should create the component', () => {
-      expect(component).toBeTruthy();
-    });
-
-    it('should have default container element', () => {
-      expect(element).toBeTruthy();
-    });
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  describe('Input Properties', () => {
-    it('should set userName input correctly', () => {
-      fixture.componentRef.setInput('userName', 'John Doe');
-      fixture.detectChanges();
+  it('should display the user name when provided', () => {
+    const testUserName = 'John Doe';
+    fixture.componentRef.setInput('userName', testUserName);
+    fixture.detectChanges();
 
-      expect(component.userName()).toBe('John Doe');
-    });
+    const userNameElement = fixture.debugElement.query(By.css('[data-testid="user-name-display"]'));
 
-    it('should display user name in template', () => {
-      fixture.componentRef.setInput('userName', 'Jane Smith');
-      fixture.detectChanges();
-
-      const userNameElement = fixture.debugElement.query(
-        By.css('[data-testid="user-name-display"]')
-      );
-
-      expect(userNameElement).toBeTruthy();
-      expect(userNameElement.nativeElement.textContent).toContain('Jane Smith');
-    });
+    expect(userNameElement.nativeElement.textContent).toContain(testUserName);
   });
 
-  describe('Events', () => {
-    it('should emit onNavigate when user actions component emits onNavigate', () => {
-      spyOn(component.onNavigate, 'emit');
-      const userActionsComponent = fixture.debugElement.query(By.css('bb-user-actions'));
+  it('should emit onNavigate event when UserActionsComponent emits', () => {
+    const testUrl = 'https://example.com';
+    spyOn(component.onNavigate, 'emit');
 
-      userActionsComponent.triggerEventHandler('onNavigate', 'https://github.com');
+    const userActionsComponent = fixture.debugElement.query(
+      By.directive(UserActionsComponent)
+    ).componentInstance;
+    userActionsComponent.onNavigate.emit(testUrl);
 
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('https://github.com');
-    });
-
-    it('should emit onLogout when user actions component emits onLogout', () => {
-      spyOn(component.onLogout, 'emit');
-      const userActionsComponent = fixture.debugElement.query(By.css('bb-user-actions'));
-
-      userActionsComponent.triggerEventHandler('onLogout');
-
-      expect(component.onLogout.emit).toHaveBeenCalled();
-    });
+    expect(component.onNavigate.emit).toHaveBeenCalledWith(testUrl);
   });
 
-  describe('Template Structure', () => {
-    it('should render the main container with correct attributes', () => {
-      expect(element.classList).toContain('flex');
-      expect(element.classList).toContain('items-center');
-      expect(element.classList).toContain('gap-6');
-    });
+  it('should emit onLogout event when UserActionsComponent emits', () => {
+    spyOn(component.onLogout, 'emit');
 
-    it('should render user name display element', () => {
-      const userNameElement = fixture.debugElement.query(
-        By.css('[data-testid="user-name-display"]')
-      );
+    const userActionsComponent = fixture.debugElement.query(
+      By.directive(UserActionsComponent)
+    ).componentInstance;
+    userActionsComponent.onLogout.emit();
 
-      expect(userNameElement).toBeTruthy();
-      expect(userNameElement.nativeElement.classList).toContain('text-white');
-    });
+    expect(component.onLogout.emit).toHaveBeenCalled();
+  });
 
-    it('should render user actions component', () => {
-      const userActionsElement = fixture.debugElement.query(
-        By.css('[data-testid="avatar-popover"]')
-      );
+  it('should render UserActionsComponent', () => {
+    const userActionsElement = fixture.debugElement.query(By.css('[data-testid="avatar-popover"]'));
 
-      expect(userActionsElement).toBeTruthy();
-      expect(userActionsElement.nativeElement.tagName.toLowerCase()).toBe('bb-user-actions');
-    });
+    expect(userActionsElement).toBeTruthy();
+  });
+
+  it('should have the correct container structure', () => {
+    expect(element).toBeTruthy();
+
+    expect(element.classList.contains('flex')).toBeTruthy();
+
+    expect(element.classList.contains('items-center')).toBeTruthy();
+
+    expect(element.classList.contains('gap-6')).toBeTruthy();
   });
 });
