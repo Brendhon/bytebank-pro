@@ -1,7 +1,9 @@
+import { AuthService } from '@/core/services/auth.service';
 import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IMAGES, ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { ILLUSTRATIONS, IMAGES } from '@bytebank-pro/shared-assets';
 import { ImgComponent } from '@bytebank-pro/ui';
 
 /**
@@ -39,7 +41,10 @@ interface BenefitItem {
   templateUrl: './home.component.html', // Separated template for clarity
   styleUrls: ['./home.component.css'] // Use CSS specific to component
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   /**
    * Array defining the individual benefit items to be displayed.
    */
@@ -79,6 +84,11 @@ export class HomeComponent {
    * This image is displayed on the home page.
    */
   readonly homeIllustrationSrc = ILLUSTRATIONS.HOME;
+
+  ngOnInit(): void {
+    // Redirect to dashboard if user is already logged in
+    if (this.authService.isLoggedIn) this.router.navigate(['/dashboard']);
+  }
 
   /**
    * Tracks benefit items in the ngFor loop for better performance.
