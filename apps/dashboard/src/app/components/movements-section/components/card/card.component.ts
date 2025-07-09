@@ -92,7 +92,7 @@ export class CardComponent {
   protected cardClasses = computed(() => {
     // Base classes for the card
     const baseClasses =
-      'w-[200px] h-[160px] rounded-sm text-white transition-colors flex flex-col gap-7 items-center justify-center shadow-sm text-sm font-normal rounded-sm p-7 shadow-sm';
+      'w-[200px] h-[160px] text-white transition-colors flex flex-col gap-5 items-center justify-center shadow-sm text-sm font-normal rounded-sm p-7 shadow-sm';
 
     // Variant classes, mapping to the global CSS variables via Tailwind
     const variantClasses: Record<CardVariant, string> = {

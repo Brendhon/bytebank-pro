@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CardComponent, CardVariant } from './card.component';
+import { CardComponent } from './card.component';
+import { CardVariant } from '@bytebank-pro/types';
 
 describe('CardComponent', () => {
   let component: CardComponent;

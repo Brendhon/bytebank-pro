@@ -1,7 +1,7 @@
-<div [ngClass]="cardClasses()" data-testid="card-component">
+<div [class]="cardClasses()" data-testid="card-component">
   @if (isNumber(value())) {
     <span
-      class="text-20-bold"
+      class="text-xl font-bold"
       data-testid="card-value"
       [attr.aria-label]="'Value: ' + (value() | currencyFormat)"
     >

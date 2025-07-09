@@ -5,7 +5,7 @@
 
 @layer components {
   .card {
-    @apply bg-bytebank-light-gray rounded-sm p-7 shadow-sm;
+    @apply rounded-sm p-7 shadow-sm;
     @apply text-bytebank-dark;
   }
 }
