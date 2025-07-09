@@ -1,0 +1,37 @@
+/* Card Component Styles */
+
+.card-base {
+  @apply w-[200px] h-[160px] text-white transition-colors flex flex-col gap-5 items-center justify-center text-sm font-normal rounded-sm p-7 shadow-sm;
+}
+
+.card-variant-dark {
+  @apply bg-bytebank-dark;
+}
+
+.card-variant-blue {
+  @apply bg-bytebank-blue;
+}
+
+.card-variant-green {
+  @apply bg-bytebank-green;
+}
+
+.card-variant-orange {
+  @apply bg-bytebank-orange;
+}
+
+.card-value {
+  @apply text-xl font-bold;
+}
+
+.card-loading-container {
+  @apply flex items-center justify-center;
+}
+
+.card-loader {
+  @apply animate-spin text-white;
+}
+
+.card-label {
+  @apply text-sm font-normal;
+}

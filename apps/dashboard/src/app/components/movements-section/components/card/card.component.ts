@@ -87,25 +87,13 @@ export class CardComponent {
 
   /**
    * Computes the combined CSS classes for the card's root element.
-   * This replaces the `cva` and `cn` utilities from the React component.
+   * Returns semantic class names instead of concatenating Tailwind classes.
    */
   protected cardClasses = computed(() => {
-    // Base classes for the card
-    const baseClasses =
-      'w-[200px] h-[160px] text-white transition-colors flex flex-col gap-5 items-center justify-center shadow-sm text-sm font-normal rounded-sm p-7 shadow-sm';
-
-    // Variant classes, mapping to the global CSS variables via Tailwind
-    const variantClasses: Record<CardVariant, string> = {
-      dark: 'bg-bytebank-dark',
-      blue: 'bg-bytebank-blue',
-      green: 'bg-bytebank-green',
-      orange: 'bg-bytebank-orange'
-    };
-
     const currentVariant = this.variant();
-    const selectedVariantClass = variantClasses[currentVariant] || variantClasses.dark;
+    const variantClass = `card-variant-${currentVariant}`;
+    const customClass = this.className();
 
-    // Combine all classes, including the custom className input
-    return `${baseClasses} ${selectedVariantClass} ${this.className()}`.trim();
+    return `card-base ${variantClass} ${customClass}`.trim();
   });
 }

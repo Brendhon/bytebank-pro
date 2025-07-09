@@ -3,7 +3,7 @@ const {
   withModuleFederationPlugin
 } = require('@angular-architects/module-federation/webpack');
 
-const baseConfig = withModuleFederationPlugin({
+module.exports = withModuleFederationPlugin({
   name: 'dashboard',
   filename: 'remoteEntry.js',
   exposes: {
@@ -13,5 +13,3 @@ const baseConfig = withModuleFederationPlugin({
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' })
   }
 });
-
-module.exports = baseConfig;

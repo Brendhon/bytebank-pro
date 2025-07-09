@@ -1,0 +1,5 @@
+/* Dashboard Component Styles */
+
+.dashboard-container {
+  @apply flex flex-col gap-4;
+}

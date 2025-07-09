@@ -1,20 +1,15 @@
-<div
-  class="bg-bytebank-dark text-white p-6 rounded-md shadow-md flex justify-between items-start gap-6 flex-col sm:flex-row"
-  data-testid="user-card-component"
->
+<div class="welcome-card-container" data-testid="user-card-component">
   <div>
-    <p class="text-2xl font-normal" data-testid="user-greeting">Olá, {{ name() }}! :)</p>
-    <p class="text-base mt-2" data-testid="current-date">{{ date() | dateLongFormatter }}</p>
+    <p class="user-greeting" data-testid="user-greeting">Olá, {{ name() }}! :)</p>
+    <p class="current-date" data-testid="current-date">{{ date() | dateLongFormatter }}</p>
   </div>
 
-  <div class="w-[125px] flex flex-col items-end gap-1" data-testid="balance-section">
-    <div
-      class="w-full flex items-center justify-between gap-2 text-bytebank-orange text-base font-normal"
-    >
+  <div class="balance-section" data-testid="balance-section">
+    <div class="balance-header">
       <span data-testid="balance-label">Saldo</span>
       <button
         type="button"
-        class="cursor-pointer p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bytebank-orange focus:ring-opacity-50"
+        class="toggle-balance-button"
         (click)="toggleBalanceVisibility()"
         [attr.aria-label]="isBalanceVisible() ? 'Ocultar saldo' : 'Mostrar saldo'"
         data-testid="toggle-balance-button"
@@ -37,10 +32,10 @@
       </button>
     </div>
 
-    <hr class="w-full border-bytebank-orange my-2" data-testid="balance-divider" />
+    <hr class="balance-divider" data-testid="balance-divider" />
 
-    <span class="text-sm" data-testid="account-type">{{ accountType() }}</span>
-    <span class="text-lg font-bold" data-testid="current-balance">
+    <span class="account-type" data-testid="account-type">{{ accountType() }}</span>
+    <span class="current-balance" data-testid="current-balance">
       @if (isBalanceVisible()) {
         {{ balance() | currencyFormat }}
       } @else {
