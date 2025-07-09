@@ -1,6 +1,6 @@
 <!-- Label -->
 @if (label()) {
-  <label [for]="inputId" [class]="labelClasses">
+  <label [for]="inputId" [class]="labelClasses()">
     {{ label() }}
     @if (required()) {
       <span class="text-red-500 ml-1" aria-hidden="true">*</span>
@@ -27,8 +27,8 @@
   <input
     #inputElement
     [id]="inputId"
-    [type]="effectiveInputType"
-    [class]="inputClasses"
+    [type]="effectiveInputType()"
+    [class]="inputClasses()"
     [placeholder]="placeholder()"
     [value]="value()"
     [disabled]="disabled()"
@@ -37,10 +37,10 @@
     [attr.maxlength]="maxLength()"
     [attr.minlength]="minLength()"
     [pattern]="pattern()"
-    [attr.aria-label]="computedAriaLabel"
-    [attr.aria-describedby]="computedAriaDescribedBy || null"
-    [attr.aria-invalid]="computedAriaInvalid"
-    [attr.aria-required]="computedAriaRequired"
+    [attr.aria-label]="computedAriaLabel()"
+    [attr.aria-describedby]="computedAriaDescribedBy() || null"
+    [attr.aria-invalid]="computedAriaInvalid()"
+    [attr.aria-required]="computedAriaRequired()"
     data-testid="input-field"
     (input)="handleInput($event)"
     (focus)="handleFocus($event)"
@@ -52,7 +52,7 @@
   <!-- Suffix Icons Container -->
   <div class="absolute inset-y-0 right-0">
     <!-- Success Icon -->
-    @if (showSuccessIcon) {
+    @if (showSuccessIcon()) {
       <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
@@ -65,7 +65,7 @@
     }
 
     <!-- Error Icon -->
-    @if (showErrorIcon) {
+    @if (showErrorIcon()) {
       <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
@@ -78,7 +78,7 @@
     }
 
     <!-- Custom Suffix Icon -->
-    @if (suffixIcon() && !showSuccessIcon && !showErrorIcon) {
+    @if (suffixIcon() && !showSuccessIcon() && !showErrorIcon()) {
       <div class="pr-3 h-full justify-center flex items-center">
         <lucide-angular
           size="16"
@@ -91,7 +91,7 @@
     }
 
     <!-- Password Toggle Button -->
-    @if (showPasswordButton) {
+    @if (showPasswordButton()) {
       <button
         type="button"
         class="pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200 h-full justify-center flex items-center"
@@ -112,7 +112,7 @@
 
 <!-- Helper Text -->
 @if (helperText() && variant() !== 'error' && variant() !== 'success') {
-  <p [id]="inputId + '-helper'" [class]="helperTextClasses" data-testid="helper-text">
+  <p [id]="inputId + '-helper'" [class]="helperTextClasses()" data-testid="helper-text">
     {{ helperText() }}
   </p>
 }
@@ -121,7 +121,7 @@
 @if (successMessage() && variant() === 'success') {
   <p
     [id]="inputId + '-success'"
-    [class]="helperTextClasses"
+    [class]="helperTextClasses()"
     role="status"
     aria-live="polite"
     data-testid="success-message"
@@ -134,7 +134,7 @@
 @if (errorMessage() && variant() === 'error') {
   <p
     [id]="inputId + '-error'"
-    [class]="helperTextClasses"
+    [class]="helperTextClasses()"
     role="alert"
     aria-live="assertive"
     data-testid="error-message"

@@ -6,6 +6,7 @@ import {
   input,
   output,
   signal,
+  computed,
   ViewChild
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -89,44 +90,32 @@ export class InputComponent {
   // Password visibility state
   passwordVisible = signal(false);
 
-  // Computed properties for better organization
-  get isPasswordField(): boolean {
-    return this.type() === 'password';
-  }
+  // Computed properties for better performance using computed()
+  isPasswordField = computed(() => this.type() === 'password');
 
-  get showPasswordButton(): boolean {
-    return this.isPasswordField && this.showPasswordToggle();
-  }
+  showPasswordButton = computed(() => this.isPasswordField() && this.showPasswordToggle());
 
-  get effectiveInputType(): string {
-    if (this.isPasswordField && this.passwordVisible()) {
+  effectiveInputType = computed(() => {
+    if (this.isPasswordField() && this.passwordVisible()) {
       return 'text';
     }
     return this.type();
-  }
+  });
 
-  get hasPrefix(): boolean {
-    return !!this.prefixIcon();
-  }
+  hasPrefix = computed(() => !!this.prefixIcon());
 
-  get hasSuffix(): boolean {
-    return !!this.suffixIcon() || this.showPasswordButton;
-  }
+  hasSuffix = computed(() => !!this.suffixIcon() || this.showPasswordButton());
 
-  get showSuccessIcon(): boolean {
-    return this.variant() === 'success' && !this.hasSuffix;
-  }
+  showSuccessIcon = computed(() => this.variant() === 'success' && !this.hasSuffix());
 
-  get showErrorIcon(): boolean {
-    return this.variant() === 'error' && !this.hasSuffix;
-  }
+  showErrorIcon = computed(() => this.variant() === 'error' && !this.hasSuffix());
 
   // Computed ARIA attributes
-  get computedAriaLabel(): string | undefined {
-    return this.ariaLabel() || (this.label() ? undefined : this.placeholder());
-  }
+  computedAriaLabel = computed(
+    () => this.ariaLabel() || (this.label() ? undefined : this.placeholder())
+  );
 
-  get computedAriaDescribedBy(): string {
+  computedAriaDescribedBy = computed(() => {
     const describedBy: string[] = [];
 
     if (this.ariaDescribedBy()) {
@@ -146,43 +135,39 @@ export class InputComponent {
     }
 
     return describedBy.join(' ') || '';
-  }
+  });
 
-  get computedAriaInvalid(): boolean {
-    return this.ariaInvalid() ?? this.variant() === 'error';
-  }
+  computedAriaInvalid = computed(() => this.ariaInvalid() ?? this.variant() === 'error');
 
-  get computedAriaRequired(): boolean {
-    return this.ariaRequired() ?? this.required();
-  }
+  computedAriaRequired = computed(() => this.ariaRequired() ?? this.required());
 
   // Generate unique ID for accessibility
   get inputId(): string {
     return `bb-input-${Math.random().toString(36).substring(2, 9)}`;
   }
 
-  // CSS class builders following the guidelines
-  get wrapperClasses(): string {
+  // CSS class builders optimized with computed()
+  wrapperClasses = computed(() => {
     return ['bb-input-container', this.className()].filter(Boolean).join(' ');
-  }
+  });
 
-  get inputClasses(): string {
+  inputClasses = computed(() => {
     return [
       this.baseClasses,
-      this.variantClasses,
-      this.sizeClasses,
-      this.stateClasses,
-      this.spacingClasses
+      this.variantClasses(),
+      this.sizeClasses(),
+      this.stateClasses(),
+      this.spacingClasses()
     ]
       .filter(Boolean)
       .join(' ');
-  }
+  });
 
   private get baseClasses(): string {
     return 'w-full rounded-md border transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 placeholder:text-gray-400';
   }
 
-  private get variantClasses(): string {
+  private variantClasses = computed(() => {
     const variants: Record<InputVariant, string> = {
       default:
         'border-gray-300 bg-white text-gray-900 focus:border-bytebank-blue focus:ring-bytebank-blue',
@@ -194,9 +179,9 @@ export class InputComponent {
     };
 
     return variants[this.variant()] || variants.default;
-  }
+  });
 
-  private get sizeClasses(): string {
+  private sizeClasses = computed(() => {
     const sizes: Record<InputSize, string> = {
       sm: 'px-3 py-1.5 text-sm min-h-[36px]',
       md: 'px-4 py-2 text-sm min-h-[40px]',
@@ -204,9 +189,9 @@ export class InputComponent {
     };
 
     return sizes[this.size()] || sizes.md;
-  }
+  });
 
-  private get stateClasses(): string {
+  private stateClasses = computed(() => {
     if (this.disabled()) {
       return 'opacity-60 cursor-not-allowed bg-gray-50';
     }
@@ -214,39 +199,44 @@ export class InputComponent {
       return 'bg-gray-50 cursor-default';
     }
     return '';
-  }
+  });
 
-  private get spacingClasses(): string {
+  private spacingClasses = computed(() => {
     let classes = '';
 
-    if (this.hasPrefix) {
+    if (this.hasPrefix()) {
       classes += ' pl-10';
     }
 
-    if (this.hasSuffix || this.showPasswordButton || this.showSuccessIcon || this.showErrorIcon) {
+    if (
+      this.hasSuffix() ||
+      this.showPasswordButton() ||
+      this.showSuccessIcon() ||
+      this.showErrorIcon()
+    ) {
       classes += ' pr-10';
     }
 
     return classes;
-  }
+  });
 
-  get labelClasses(): string {
+  labelClasses = computed(() => {
     const baseClasses = 'block text-base font-semibold mb-3 text-bytebank-dark-gray';
     const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
     return `${baseClasses} ${variantClasses}`;
-  }
+  });
 
-  get helperTextClasses(): string {
+  helperTextClasses = computed(() => {
     const baseClasses = 'text-xs mt-1';
     const variants: Record<InputVariant, string> = {
       default: 'text-gray-500',
       success: 'text-bytebank-green',
-      error: 'text-red-600',
+      error: 'text-bytebank-red',
       warning: 'text-bytebank-orange'
     };
 
     return `${baseClasses} ${variants[this.variant()]}`;
-  }
+  });
 
   // Event handlers following the guidelines
   handleInput(event: Event): void {
@@ -272,7 +262,7 @@ export class InputComponent {
 
   // Password visibility toggle
   togglePasswordVisibility(): void {
-    if (!this.showPasswordButton) return;
+    if (!this.showPasswordButton()) return;
 
     this.passwordVisible.set(!this.passwordVisible());
 
