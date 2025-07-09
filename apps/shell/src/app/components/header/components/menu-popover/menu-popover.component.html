@@ -1,4 +1,4 @@
-<div class="flex md:hidden" data-testid="menu-popover-container">
+<div class="menu-popover-container" data-testid="menu-popover-container">
   <bb-popover
     class="relative"
     [isOpen]="isMenuOpen()"
@@ -12,20 +12,20 @@
     <button
       slot="trigger"
       type="button"
-      class="rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange focus:ring-opacity-50"
+      class="menu-popover-trigger"
       aria-label="Open navigation menu"
       data-testid="menu-button"
     >
       <i-lucide
         [img]="menuIcon"
-        class="text-bytebank-orange"
+        class="menu-popover-icon"
         [size]="36"
         aria-hidden="true"
       ></i-lucide>
     </button>
 
     <!-- Content slot -->
-    <div slot="content" class="p-4">
+    <div slot="content" class="menu-popover-content">
       <bb-nav-menu
         [current]="currentNavLabel()"
         [className]="'flex p-0'"

@@ -10,6 +10,19 @@
   margin-top: 1.5rem;
 }
 
+/* Login form specific styles */
+.login-form {
+  @apply space-y-6;
+}
+
+.login-title {
+  @apply my-3 text-xl font-bold text-bytebank-dark text-center;
+}
+
+.login-illustration {
+  @apply hidden md:block;
+}
+
 /* Transition effects for interactive elements */
 button,
 a {

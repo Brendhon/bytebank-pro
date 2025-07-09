@@ -1,5 +1,5 @@
-<div class="flex items-center gap-6" data-testid="authenticated-user-header-container">
-  <span class="text-white" data-testid="user-name-display">{{ userName() }}</span>
+<div class="authenticated-user-container" data-testid="authenticated-user-header-container">
+  <span class="user-name-display" data-testid="user-name-display">{{ userName() }}</span>
   <bb-user-actions
     (onNavigate)="onNavigate.emit($event)"
     (onLogout)="onLogout.emit()"

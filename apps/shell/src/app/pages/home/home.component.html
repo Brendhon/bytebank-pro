@@ -1,13 +1,16 @@
 <bb-guest-layout>
-  <section class="py-10" data-testid="benefits-section">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 items-center gap-8 px-4 md:px-0">
-      <div class="flex flex-col gap-6" data-testid="benefits-text-area">
-        <h2 class="text-xl font-bold text-bytebank-dark" data-testid="benefits-main-title">
+  <section class="benefits-section" data-testid="benefits-section">
+    <div class="benefits-container">
+      <div class="benefits-text-area" data-testid="benefits-text-area">
+        <h2 class="benefits-main-title" data-testid="benefits-main-title">
           Experimente mais liberdade no controle da sua vida financeira. Crie sua conta com a gente!
         </h2>
       </div>
 
-      <div class="flex justify-center" data-testid="benefits-main-illustration-wrapper">
+      <div
+        class="benefits-main-illustration-wrapper"
+        data-testid="benefits-main-illustration-wrapper"
+      >
         <bb-img
           [src]="homeIllustrationSrc"
           size="full"
@@ -16,19 +19,16 @@
       </div>
     </div>
 
-    <div
-      class="mt-16 max-w-6xl mx-auto text-center px-4 md:px-0"
-      data-testid="benefits-grid-section"
-    >
-      <h3 class="text-2xl font-bold text-bytebank-dark mb-10" data-testid="benefits-grid-title">
+    <div class="benefits-grid-section" data-testid="benefits-grid-section">
+      <h3 class="benefits-grid-title" data-testid="benefits-grid-title">
         Vantagens do nosso banco:
       </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="benefits-grid">
         @for (item of benefits; track trackByBenefitIndex($index, item)) {
-          <div class="flex flex-col items-center gap-3">
+          <div class="benefit-item">
             <bb-img [src]="item.iconSrc" size="full" className="flex" [alt]="item.iconAlt"></bb-img>
-            <h4 class="text-bytebank-green text-sm font-semibold">{{ item.title }}</h4>
-            <p class="text-sm font-normal text-bytebank-gray">{{ item.description }}</p>
+            <h4 class="benefit-title">{{ item.title }}</h4>
+            <p class="benefit-description">{{ item.description }}</p>
           </div>
         }
       </div>

@@ -1,4 +1,4 @@
-/* 
+/*
  * guest-layout Component Styles
  * Specific styles for the component
  * Most styling should use TailwindCSS utilities when possible
@@ -16,4 +16,9 @@ main[role='main'] {
 /* Ensure proper spacing and layout for pages */
 .guest-layout-container > main {
   @apply container mx-auto;
+}
+
+/* Main content area styling */
+.guest-layout-main-content {
+  @apply overflow-x-auto w-auto inline-block m-auto;
 }

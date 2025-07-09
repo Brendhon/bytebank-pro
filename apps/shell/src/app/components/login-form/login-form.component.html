@@ -12,14 +12,14 @@
   <bb-img
     [src]="illustrationSrc"
     size="full"
-    className="hidden md:block"
+    className="login-illustration"
     alt="Ilustração do Login"
   ></bb-img>
 
-  <h2 class="my-3 text-xl font-bold text-bytebank-dark text-center">Login</h2>
+  <h2 class="login-title">Login</h2>
 
   <!-- Login Form -->
-  <form class="space-y-6" (ngSubmit)="onSubmit()" data-testid="login-form">
+  <form class="login-form" (ngSubmit)="onSubmit()" data-testid="login-form">
     <!-- Email Field -->
     <div>
       <bb-input

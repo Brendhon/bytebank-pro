@@ -1,1 +1,17 @@
-/* Layout component styles */
+/* Layout Component Styles */
+
+.layout-container {
+  @apply flex flex-col min-h-screen;
+}
+
+.layout-content {
+  @apply flex-1 flex flex-row;
+}
+
+.layout-sidebar {
+  @apply hidden md:flex bg-white p-4 w-48;
+}
+
+.layout-main {
+  @apply overflow-x-auto w-auto mx-auto p-4;
+}

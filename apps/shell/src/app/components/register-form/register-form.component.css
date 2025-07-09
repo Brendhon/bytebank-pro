@@ -11,6 +11,27 @@
   @apply ring-2 ring-bytebank-blue ring-offset-2;
 }
 
+/* Register form specific styles */
+.register-dialog {
+  @apply h-full;
+}
+
+.register-container {
+  @apply flex flex-col items-center space-y-6 p-6;
+}
+
+.register-illustration {
+  @apply hidden md:block;
+}
+
+.register-title {
+  @apply text-2xl font-bold text-gray-900 mb-2;
+}
+
+.register-form {
+  @apply w-full flex flex-col gap-4;
+}
+
 /* Loading state overlay */
 .bb-register-form-loading {
   @apply pointer-events-none opacity-60;

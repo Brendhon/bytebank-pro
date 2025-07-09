@@ -1,4 +1,4 @@
-<div class="flex flex-col min-h-screen">
+<div class="layout-container">
   <bb-header
     [variant]="'user'"
     [userName]="(userName$ | async) || ''"
@@ -8,9 +8,9 @@
     data-testid="app-header"
   ></bb-header>
 
-  <div class="flex-1 flex flex-row">
+  <div class="layout-content">
     @if (pathname$ | async; as pathname) {
-      <aside class="hidden md:flex bg-white p-4 w-48">
+      <aside class="layout-sidebar">
         <bb-nav-menu
           [current]="pathname"
           (onNavigate)="handleNavigation($event)"
@@ -20,7 +20,7 @@
       </aside>
     }
 
-    <main role="main" class="overflow-x-auto w-auto mx-auto p-4" data-testid="main-content-outlet">
+    <main role="main" class="layout-main" data-testid="main-content-outlet">
       <router-outlet></router-outlet>
     </main>
   </div>

@@ -1,6 +1,12 @@
-/* 
+/*
  * AuthenticatedUserHeader Component Styles
- * Component-specific styles should be minimal - prefer TailwindCSS utility classes
+ * All Tailwind classes are organized here using @apply directive
  */
 
-/* No custom styles needed - using TailwindCSS utilities in template */
+.authenticated-user-container {
+  @apply flex items-center gap-6;
+}
+
+.user-name-display {
+  @apply text-white;
+}

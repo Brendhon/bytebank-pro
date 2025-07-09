@@ -140,18 +140,14 @@ export class NavMenuComponent {
    */
   getColorClasses = computed(() => (label: string) => {
     const isActive = this.isActive()(label);
-    const activeClasses = 'text-bytebank-orange font-bold';
-    const inactiveClasses = 'text-bytebank-dark-gray';
-    return isActive ? activeClasses : inactiveClasses;
+    return isActive ? 'nav-menu-button-active' : 'nav-menu-button-inactive';
   });
 
   /**
    * Computed signal for getting button classes.
    */
   getButtonClasses = computed(() => (label: string) => {
-    const baseClasses =
-      'flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer hover:opacity-70';
     const colorClasses = this.getColorClasses()(label);
-    return `${baseClasses} ${colorClasses}`;
+    return `nav-menu-button ${colorClasses}`;
   });
 }

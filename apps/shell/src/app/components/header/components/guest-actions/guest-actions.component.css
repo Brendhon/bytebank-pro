@@ -1,6 +1,10 @@
 /* Guest Actions Component Styles */
 
-/* 
+/*
  * Component-specific styles for guest-actions
- * Utilize TailwindCSS utility classes in the template when possible
+ * All Tailwind classes are organized here using @apply directive
  */
+
+.guest-actions-container {
+  @apply flex gap-6;
+}

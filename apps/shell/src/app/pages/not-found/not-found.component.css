@@ -4,3 +4,20 @@
   @apply text-white text-sm font-semibold flex items-center justify-center;
   @apply bg-bytebank-orange hover:bg-bytebank-dark;
 }
+
+/* Not found page specific styles */
+.not-found-container {
+  @apply w-full text-center p-8 gap-6 flex flex-col items-center justify-center;
+}
+
+.not-found-title {
+  @apply text-2xl font-bold text-bytebank-dark;
+}
+
+.not-found-description {
+  @apply text-bytebank-dark text-base font-normal mt-2;
+}
+
+.not-found-illustration-container {
+  @apply mt-6;
+}

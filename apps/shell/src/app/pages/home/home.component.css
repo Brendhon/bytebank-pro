@@ -1,7 +1,6 @@
-/* 
+/*
  * Home Component Styles
- * Specific styles for the component
- * Most styling should use TailwindCSS utilities when possible
+ * All Tailwind classes are organized here using @apply directive
  */
 
 .home-container {
@@ -16,4 +15,49 @@ main[role='main'] {
 /* Ensure proper spacing and layout for pages */
 .home-container > main {
   @apply container mx-auto;
+}
+
+/* Home page specific styles */
+.benefits-section {
+  @apply py-10;
+}
+
+.benefits-container {
+  @apply max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 items-center gap-8 px-4 md:px-0;
+}
+
+.benefits-text-area {
+  @apply flex flex-col gap-6;
+}
+
+.benefits-main-title {
+  @apply text-xl font-bold text-bytebank-dark;
+}
+
+.benefits-main-illustration-wrapper {
+  @apply flex justify-center;
+}
+
+.benefits-grid-section {
+  @apply mt-16 max-w-6xl mx-auto text-center px-4 md:px-0;
+}
+
+.benefits-grid-title {
+  @apply text-2xl font-bold text-bytebank-dark mb-10;
+}
+
+.benefits-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center;
+}
+
+.benefit-item {
+  @apply flex flex-col items-center gap-3;
+}
+
+.benefit-title {
+  @apply text-bytebank-green text-sm font-semibold;
+}
+
+.benefit-description {
+  @apply text-sm font-normal text-bytebank-gray;
 }

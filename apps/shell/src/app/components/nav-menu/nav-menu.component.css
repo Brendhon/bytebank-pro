@@ -1,2 +1,26 @@
 /* Styles specific to NavMenu component */
-/* Using TailwindCSS utility classes in the template is preferred */
+/* All Tailwind classes are organized here using @apply directive */
+
+.nav-menu-list {
+  @apply flex flex-col gap-3;
+}
+
+.nav-menu-item {
+  @apply hover:opacity-70;
+}
+
+.nav-menu-button {
+  @apply flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer hover:opacity-70;
+}
+
+.nav-menu-button-active {
+  @apply text-bytebank-orange font-bold;
+}
+
+.nav-menu-button-inactive {
+  @apply text-bytebank-dark-gray;
+}
+
+.nav-menu-icon {
+  @apply animate-spin;
+}

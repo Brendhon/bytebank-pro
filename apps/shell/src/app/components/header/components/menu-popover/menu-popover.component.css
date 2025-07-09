@@ -1,6 +1,20 @@
-/* 
+/*
  * MenuPopover Component Styles
- * 
- * This component uses TailwindCSS utility classes for styling.
- * Component-specific styles should be minimal and only when necessary.
+ * All Tailwind classes are organized here using @apply directive
  */
+
+.menu-popover-container {
+  @apply flex md:hidden;
+}
+
+.menu-popover-trigger {
+  @apply rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-bytebank-orange focus:ring-opacity-50;
+}
+
+.menu-popover-icon {
+  @apply text-bytebank-orange;
+}
+
+.menu-popover-content {
+  @apply p-4;
+}

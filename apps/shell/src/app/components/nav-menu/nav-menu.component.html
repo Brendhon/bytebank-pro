@@ -1,7 +1,7 @@
 <nav [class]="className()" data-testid="nav-menu-component">
-  <ul class="flex flex-col gap-3" role="list">
+  <ul class="nav-menu-list" role="list">
     @for (item of navItems; track item.href) {
-      <li class="hover:opacity-70" role="listitem">
+      <li class="nav-menu-item" role="listitem">
         <button
           type="button"
           [class]="getButtonClasses()(item.label)"
@@ -14,7 +14,7 @@
               <i-lucide
                 [img]="Loader2"
                 [size]="20"
-                class="animate-spin"
+                class="nav-menu-icon"
                 aria-hidden="true"
               ></i-lucide>
             </div>

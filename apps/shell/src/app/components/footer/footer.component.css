@@ -1,12 +1,32 @@
 /* footer.component.css */
 
-/* 
+/*
  * Component-specific styles for FooterComponent
- * Most styling is handled via TailwindCSS classes in the template
+ * All Tailwind classes are organized here using @apply directive
  */
 
 footer {
   @apply p-6 flex flex-col gap-6 justify-between items-start sm:flex-row sm:items-center;
   @apply text-sm text-white;
   @apply bg-bytebank-dark;
+}
+
+.footer-contact-section {
+  @apply flex flex-col gap-2;
+}
+
+.footer-logo-section {
+  @apply flex flex-col gap-2;
+}
+
+.contact-info-title {
+  @apply text-base;
+}
+
+.contact-info-text {
+  @apply text-sm;
+}
+
+.logo-white {
+  @apply text-white;
 }
