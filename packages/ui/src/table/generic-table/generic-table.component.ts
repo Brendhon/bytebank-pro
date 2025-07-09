@@ -1,33 +1,7 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  TemplateRef,
-  input,
-  signal,
-  computed
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { TableColumn } from '@bytebank-pro/types';
 import { PaginatorComponent } from '../paginator/paginator.component';
-
-/**
- * Defines the structure for a column in a generic table component.
- * `T` is the type of the data row.
- */
-export interface TableColumn<T> {
-  /**
-   * The display label for the column header.
-   */
-  label: string;
-  /**
-   * The key of the property in the data row to access the value for this column.
-   */
-  accessor: keyof T;
-  /**
-   * An optional Angular TemplateRef to render custom content for the cell.
-   * The context provided to the template will include `{ $implicit: value, row: T, index: number }`.
-   */
-  render?: TemplateRef<any>;
-}
 
 /**
  * GenericTable component displays tabular data with customizable columns and optional pagination.

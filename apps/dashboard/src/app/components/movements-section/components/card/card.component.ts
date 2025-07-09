@@ -1,13 +1,9 @@
 import { CurrencyFormatPipe } from '@/pipes/currency-format.pipe';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { CardVariant } from '@bytebank-pro/types';
 import { isNumber } from '@bytebank-pro/utils';
 import { Loader2, LucideAngularModule } from 'lucide-angular';
-
-/**
- * Defines the possible visual variants for the Card component.
- */
-export type CardVariant = 'dark' | 'blue' | 'green' | 'orange';
 
 /**
  * Card component to display a value (e.g., currency) and a label, with different visual variants.

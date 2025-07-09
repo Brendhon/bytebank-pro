@@ -1,0 +1,32 @@
+<section
+  class="card"
+  data-testid="movements-section-container"
+  role="region"
+  aria-labelledby="movements-section-title"
+>
+  <h2
+    id="movements-section-title"
+    class="text-xl font-bold text-bytebank-dark-gray mb-6"
+    data-testid="movements-section-title"
+  >
+    Movimentações
+  </h2>
+
+  <div class="flex items-center justify-center mb-4" data-testid="movements-cards-wrapper">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4"
+      data-testid="movements-cards-grid"
+      role="list"
+      aria-label="Lista de movimentações financeiras"
+    >
+      @for (item of data(); track trackByCardKey($index, item)) {
+        <bb-card
+          [label]="item.label!"
+          [value]="item.value"
+          [variant]="asCardVariant(item.variant)!"
+          role="listitem"
+        ></bb-card>
+      }
+    </div>
+  </div>
+</section>

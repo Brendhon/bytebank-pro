@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { ButtonSize, ButtonVariant } from '@bytebank-pro/types';
 import { Loader2, LucideAngularModule } from 'lucide-angular';
 
-// Type definitions for button variants and sizes
-export type ButtonVariant = 'dark' | 'blue' | 'green' | 'orange' | 'outlineGreen' | 'outlineOrange';
+// Type definitions for button
 export type ButtonType = HTMLButtonElement['type'];
-export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'bb-button',
