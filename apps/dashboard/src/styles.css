@@ -3,13 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .card {
-    @apply rounded-sm p-7 shadow-sm;
-    @apply text-bytebank-dark;
-  }
-}
-
 @layer utilities {
   .sr-only {
     position: absolute;
