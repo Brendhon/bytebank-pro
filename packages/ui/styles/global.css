@@ -7,36 +7,6 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500;
   }
 
-  .button {
-    @apply w-[150px] h-[40px] rounded-sm relative transition-colors;
-    @apply disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer;
-    @apply text-white text-sm font-semibold flex items-center justify-center;
-  }
-
-  .button-dark {
-    @apply bg-bytebank-dark hover:bg-bytebank-dark-gray;
-  }
-
-  .button-blue {
-    @apply bg-bytebank-blue hover:bg-bytebank-dark;
-  }
-
-  .button-green {
-    @apply bg-bytebank-green hover:bg-bytebank-blue;
-  }
-
-  .button-orange {
-    @apply bg-bytebank-orange hover:bg-bytebank-dark;
-  }
-
-  .button-outline-green {
-    @apply bg-transparent border-2 border-bytebank-green text-bytebank-green hover:bg-bytebank-green hover:text-white;
-  }
-
-  .button-outline-orange {
-    @apply bg-transparent border-2 border-bytebank-orange text-bytebank-orange hover:bg-bytebank-orange hover:text-white;
-  }
-
   .content {
     @apply flex-1 flex flex-row;
   }

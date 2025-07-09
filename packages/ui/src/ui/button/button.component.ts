@@ -30,7 +30,7 @@ export class ButtonComponent {
   role = input<string | undefined>(undefined); // Custom role if needed
 
   // Loading state properties using modern input() API
-  loadingText = input<string>('Carregando...'); // Text for screen readers during loading
+  loadingText = input<string>('Loading...'); // Text for screen readers during loading
 
   // Event emitters using modern output() API
   buttonClick = output<Event>();
@@ -66,7 +66,7 @@ export class ButtonComponent {
   }
 
   private get baseClasses(): string {
-    return 'button button-base';
+    return 'button-base';
   }
 
   private get variantClasses(): string {

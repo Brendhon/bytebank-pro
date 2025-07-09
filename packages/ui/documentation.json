@@ -200,21 +200,21 @@
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
-      },
-      {
-        "name": "AllVariants",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
+      },
+      {
+        "name": "AllVariants",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "AutoClosing",
@@ -320,6 +320,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -335,16 +345,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">Conteúdo do popover</p>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
       },
       {
         "name": "Disabled",
@@ -624,7 +624,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          prefixIcon=\"mail\"\n          required=\"true\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          required=\"true\">\n        </bb-input>\n\n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "LoginForm",
@@ -740,6 +740,16 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<ToastComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -755,16 +765,6 @@
         "deprecationMessage": "",
         "type": "Meta<PopoverComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n        `\n      }\n    }\n  },\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: [\n        'top',\n        'bottom',\n        'left',\n        'right',\n        'top-start',\n        'top-end',\n        'bottom-start',\n        'bottom-end'\n      ] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<ToastComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "MiddlePage",
@@ -910,6 +910,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -925,16 +935,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
       },
       {
         "name": "preview",
@@ -1164,7 +1164,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "Warning",
@@ -1421,6 +1421,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<ToastComponent>",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<LogoComponent>",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
@@ -1434,17 +1445,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<PopoverComponent>",
         "file": "src/ui/popover/popover.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<ToastComponent>",
-        "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2428,7 +2428,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          prefixIcon=\"mail\"\n          required=\"true\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          required=\"true\">\n        </bb-input>\n\n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
         },
         {
           "name": "Medium",
@@ -2528,7 +2528,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n        \n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
         },
         {
           "name": "Warning",
@@ -2835,6 +2835,19 @@
           "kind": 183
         }
       ],
+      "src/ui/toast/toast.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ToastComponent>",
+          "file": "src/ui/toast/toast.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "src/ui/logo/logo.component.stories.ts": [
         {
           "name": "Story",
@@ -2855,19 +2868,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<PopoverComponent>",
           "file": "src/ui/popover/popover.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/toast/toast.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ToastComponent>",
-          "file": "src/ui/toast/toast.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
