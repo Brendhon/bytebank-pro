@@ -27,9 +27,9 @@
     "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/ui": "*",
     "@bytebank-pro/utils": "*",
-    "lucide-angular": "^0.523.0",
     "apollo-angular": "^11.0.0",
     "graphql": "^16.11.0",
+    "lucide-angular": "^0.523.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.15.1"
