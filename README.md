@@ -68,6 +68,7 @@ O projeto inclui configurações específicas para otimizar o uso das ferramenta
 
 - **`.cursor/`**: Contém configurações e prompts personalizados para o Cursor, incluindo regras de desenvolvimento e padrões de código específicos do projeto
 - **`.github/`**: Inclui workflows e configurações que aproveitam recursos de IA do GitHub, como sugestões de código e análise automática
+- **`GEMINI.md`**: Documentação de uso da Gemini CLI, com prompts e configurações específicas para o projeto
 
 ### 🎯 Engenharia de Prompt
 
