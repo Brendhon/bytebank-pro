@@ -60,6 +60,7 @@ Este projeto também foi desenvolvido como uma oportunidade de **aprendizado e a
 
 - **[Cursor](https://cursor.sh/)**: IDE com Inteligência Artificial que sugere códigos de forma inteligente e oferece assistência contextual em tempo real, facilitando e acelerando o desenvolvimento.
 - **[GitHub Copilot](https://github.com/features/copilot)**: Ferramenta de IA que auxilia na programação, fornecendo sugestões automáticas de código e agentes inteligentes para resolver tarefas de desenvolvimento de maneira mais eficiente.
+- **[Gemini CLI](https://github.com/google-gemini/gemini-cli)**: Ferramenta de linha de comando que conecta com ferramentas de desenvolvimento, entende código e acelera workflows. Permite consultar grandes bases de código, gerar aplicações a partir de PDFs/esboços e automatizar tarefas operacionais usando IA generativa.
 
 ### 📁 Configurações de IA
 
