@@ -30,6 +30,7 @@
     "@types/node": "^20.14.0",
     "jest": "^30.0.3",
     "ts-jest": "^29.1.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@bytebank-pro/types": "*"
   }
 }

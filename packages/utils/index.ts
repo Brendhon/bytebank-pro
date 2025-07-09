@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { IUser } from '@bytebank-pro/types';
 
 /**
  * Formata uma data para o padrão: 'quinta-feira, 18/04/2025'
@@ -58,4 +59,12 @@ export const removeEmptyFields = <T extends Record<string, any>>(obj: T): Partia
       ([_, value]) => value !== '' && value !== undefined && value !== null
     )
   ) as Partial<T>;
+};
+
+/**
+ * Get user data from localStorage
+ */
+export const getUserDataFromLocalStorage = (): IUser | null => {
+  const user = localStorage.getItem('bytebank_user');
+  return user ? JSON.parse(user) : null;
 };
