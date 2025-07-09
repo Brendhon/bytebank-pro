@@ -267,10 +267,9 @@ export const LoginForm: Story = {
           label="Email"
           type="email"
           placeholder="seu@email.com"
-          prefixIcon="mail"
           required="true">
         </bb-input>
-        
+
         <bb-input
           label="Senha"
           type="password"
@@ -293,14 +292,14 @@ export const ValidationStates: Story = {
           value="dados@corretos.com"
           successMessage="Email válido!">
         </bb-input>
-        
+
         <bb-input
           label="Campo com erro"
           variant="error"
           value="email-inválido"
           errorMessage="Por favor, insira um email válido.">
         </bb-input>
-        
+
         <bb-input
           label="Campo com aviso"
           variant="warning"

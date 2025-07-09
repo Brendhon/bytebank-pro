@@ -5,16 +5,12 @@
     role="status"
     [attr.aria-live]="variant === 'error' ? 'assertive' : 'polite'"
   >
-    <div class="flex items-center justify-center">
-      <i-lucide [img]="currentIcon" size="20" class="text-white" />
+    <div class="toast-content">
+      <i-lucide [img]="currentIcon" size="20" class="toast-icon" />
     </div>
-    <p class="text-sm flex-1">{{ message }}</p>
-    <button
-      (click)="handleClose()"
-      class="p-1 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
-      aria-label="Fechar notificação"
-    >
-      <i-lucide size="18" [img]="icons.close" class="text-white flex items-center justify-center" />
+    <p class="toast-message">{{ message }}</p>
+    <button (click)="handleClose()" class="toast-close-button" aria-label="Fechar notificação">
+      <i-lucide size="18" [img]="icons.close" class="toast-close-icon" />
     </button>
   </div>
 }

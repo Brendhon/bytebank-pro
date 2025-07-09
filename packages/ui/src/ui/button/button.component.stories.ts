@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
-import { ButtonComponent, ButtonVariant, ButtonSize } from './button.component';
+import { ButtonComponent } from './button.component';
+import { ButtonSize, ButtonVariant } from '@bytebank-pro/types';
 
 const meta: Meta<ButtonComponent> = {
   title: 'Components/UI/Button',

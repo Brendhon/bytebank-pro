@@ -3,23 +3,18 @@
   <label [for]="inputId" [class]="labelClasses()">
     {{ label() }}
     @if (required()) {
-      <span class="text-red-500 ml-1" aria-hidden="true">*</span>
+      <span class="input-required-indicator" aria-hidden="true">*</span>
     }
   </label>
 }
 
 <!-- Input Container -->
-<div class="relative">
+<div class="input-container">
   <!-- Prefix Icon -->
   @if (prefixIcon()) {
-    <div class="absolute left-0 pl-3 h-full justify-center flex items-center pointer-events-none">
-      <lucide-angular
-        size="16"
-        [name]="prefixIcon()!"
-        class="h-4 w-4 text-bytebank-blue"
-        aria-hidden="true"
-      >
-      </lucide-angular>
+    <div class="input-prefix-icon-container">
+      <i-lucide size="16" [name]="prefixIcon()!" class="input-prefix-icon" aria-hidden="true">
+      </i-lucide>
     </div>
   }
 
@@ -50,43 +45,28 @@
   />
 
   <!-- Suffix Icons Container -->
-  <div class="absolute inset-y-0 right-0">
+  <div class="input-suffix-container">
     <!-- Success Icon -->
     @if (showSuccessIcon()) {
-      <div class="pr-3 h-full justify-center flex items-center">
-        <lucide-angular
-          size="16"
-          [name]="checkIcon"
-          class="h-4 w-4 text-bytebank-green"
-          aria-hidden="true"
-        >
-        </lucide-angular>
+      <div class="input-suffix-icon-container">
+        <i-lucide size="16" [name]="checkIcon" class="input-success-icon" aria-hidden="true">
+        </i-lucide>
       </div>
     }
 
     <!-- Error Icon -->
     @if (showErrorIcon()) {
-      <div class="pr-3 h-full justify-center flex items-center">
-        <lucide-angular
-          size="16"
-          [name]="alertIcon"
-          class="h-4 w-4 text-red-500"
-          aria-hidden="true"
-        >
-        </lucide-angular>
+      <div class="input-suffix-icon-container">
+        <i-lucide size="16" [name]="alertIcon" class="input-error-icon" aria-hidden="true">
+        </i-lucide>
       </div>
     }
 
     <!-- Custom Suffix Icon -->
     @if (suffixIcon() && !showSuccessIcon() && !showErrorIcon()) {
-      <div class="pr-3 h-full justify-center flex items-center">
-        <lucide-angular
-          size="16"
-          [name]="suffixIcon()!"
-          class="h-4 w-4 text-bytebank-blue"
-          aria-hidden="true"
-        >
-        </lucide-angular>
+      <div class="input-suffix-icon-container">
+        <i-lucide size="16" [name]="suffixIcon()!" class="input-suffix-icon" aria-hidden="true">
+        </i-lucide>
       </div>
     }
 
@@ -94,17 +74,17 @@
     @if (showPasswordButton()) {
       <button
         type="button"
-        class="pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200 h-full justify-center flex items-center"
+        class="input-password-toggle-button"
         [attr.aria-label]="passwordVisible() ? 'Ocultar senha' : 'Mostrar senha'"
         data-testid="password-toggle"
         (click)="togglePasswordVisibility()"
       >
-        <lucide-angular
+        <i-lucide
           size="18"
           [name]="passwordVisible() ? eyeOffIcon : eyeIcon"
-          class="h-4 w-4 text-bytebank-blue"
+          class="input-password-toggle-icon"
         >
-        </lucide-angular>
+        </i-lucide>
       </button>
     }
   </div>

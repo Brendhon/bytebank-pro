@@ -1,9 +1,27 @@
 @import '../../../styles/global.css';
 
-/* 
+/*
  * Image component specific styles
- * Most styling is handled through Tailwind classes
+ * All Tailwind classes are organized here using @apply directive
  */
+
+/* Image loading state */
+.img-loading-container {
+  @apply flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded;
+}
+
+.img-loading-icon {
+  @apply animate-spin text-gray-400;
+}
+
+/* Image error state */
+.img-error-container {
+  @apply flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded border-2 border-dashed border-gray-300 dark:border-gray-600;
+}
+
+.img-error-icon {
+  @apply text-gray-400;
+}
 
 /* Ensure SVG content inherits size constraints */
 :host ::ng-deep svg {

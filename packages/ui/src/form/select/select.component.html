@@ -5,7 +5,7 @@
     <label [for]="selectId" [class]="labelClasses" [id]="selectId + '-label'">
       {{ label() }}
       @if (required()) {
-        <span class="text-red-500 ml-1" aria-hidden="true">*</span>
+        <span class="select-required-indicator" aria-hidden="true">*</span>
       }
     </label>
   }
@@ -28,29 +28,25 @@
     role="combobox"
     data-testid="select-trigger"
   >
-    <div class="flex items-center justify-between w-full">
+    <div class="select-trigger-content">
       <!-- Display Value / Placeholder -->
-      <div class="flex items-center flex-1 min-w-0">
+      <div class="select-display-content">
         @if (loading()) {
-          <div class="flex items-center space-x-2">
-            <div
-              class="animate-spin rounded-full h-4 w-4 border-2 border-gray-300 border-t-bytebank-blue"
-            ></div>
-            <span class="text-gray-500">Loading...</span>
+          <div class="select-loading-container">
+            <div class="select-loading-spinner"></div>
+            <span class="select-loading-text">Loading...</span>
           </div>
         } @else {
           <!-- Multiple Selection Tags -->
           @if (multiple() && selectedOptions().length > 0) {
-            <div class="flex flex-wrap gap-1 max-w-full">
+            <div class="select-tags-container">
               @for (option of selectedOptions(); track trackByOption($index, option)) {
-                <span
-                  class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-bytebank-blue text-white"
-                >
+                <span class="select-tag">
                   {{ option.label }}
                   @if (!disabled() && !readonly()) {
                     <button
                       type="button"
-                      class="ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                      class="select-tag-remove-button"
                       [attr.aria-label]="'Remove ' + option.label"
                       (click)="selectOption(option); $event.stopPropagation()"
                       data-testid="remove-option-button"
@@ -63,7 +59,14 @@
             </div>
           } @else {
             <!-- Single Selection Display -->
-            <span [class]="hasSelection() ? 'text-gray-900' : 'text-gray-500'" class="truncate">
+            <span
+              [class]="
+                hasSelection()
+                  ? 'select-display-value-selected'
+                  : 'select-display-value-placeholder'
+              "
+              class="select-display-value"
+            >
               {{ displayValue() }}
             </span>
           }
@@ -71,12 +74,12 @@
       </div>
 
       <!-- Right Side Icons -->
-      <div class="flex items-center space-x-1 ml-2 flex-shrink-0">
+      <div class="select-icons-container">
         <!-- Clear Button -->
         @if (showClearButton()) {
           <button
             type="button"
-            class="p-1 rounded hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+            class="select-clear-button"
             [attr.aria-label]="'Clear selection'"
             (click)="clear(); $event.stopPropagation()"
             data-testid="clear-button"
@@ -84,18 +87,18 @@
             <lucide-angular
               [img]="xIcon"
               [size]="iconSize - 4"
-              class="text-gray-400"
+              class="select-clear-icon"
               aria-hidden="true"
             ></lucide-angular>
           </button>
         }
 
         <!-- Dropdown Toggle Icon -->
-        <div class="pointer-events-none">
+        <div class="select-dropdown-container">
           <lucide-angular
             [img]="isOpen() ? chevronUpIcon : chevronDownIcon"
             [size]="iconSize"
-            class="text-gray-400"
+            class="select-dropdown-icon"
             aria-hidden="true"
           ></lucide-angular>
         </div>
@@ -116,25 +119,25 @@
     >
       <!-- Search Input -->
       @if (searchable()) {
-        <div class="sticky top-0 bg-white border-b border-gray-200 p-2">
+        <div class="select-search-container">
           <input
             #searchInput
             type="text"
             [placeholder]="searchPlaceholder()"
             [value]="searchTerm()"
             (input)="onSearchChange($event)"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:border-bytebank-blue"
+            class="select-search-input"
             data-testid="select-search-input"
           />
         </div>
       }
 
       <!-- Options List -->
-      <div class="py-1">
+      <div class="select-options-container">
         @if (filteredOptions().length === 0) {
           <!-- No Options Available -->
           <div
-            class="px-3 py-2 text-gray-500 text-sm"
+            class="select-no-options-message"
             role="option"
             aria-disabled="true"
             data-testid="no-options-message"
@@ -146,10 +149,8 @@
           @for (option of filteredOptions(); track trackByOption($index, option); let i = $index) {
             <div
               [class]="optionClasses"
-              [class.bg-bytebank-blue]="i === focusedOptionIndex()"
-              [class.text-white]="i === focusedOptionIndex()"
-              [class.opacity-50]="option.disabled"
-              [class.cursor-not-allowed]="option.disabled"
+              [class.select-option-focused]="i === focusedOptionIndex()"
+              [class.select-option-disabled]="option.disabled"
               [attr.aria-selected]="isOptionSelected(option)"
               [attr.aria-disabled]="option.disabled"
               role="option"
@@ -158,15 +159,17 @@
               (mouseleave)="hoveredOptionIndex.set(-1)"
               [attr.data-testid]="'select-option-' + i"
             >
-              <div class="flex items-center justify-between">
-                <span class="truncate">{{ option.label }}</span>
+              <div class="select-option-content">
+                <span class="select-option-label">{{ option.label }}</span>
 
                 <!-- Selected Indicator -->
                 @if (isOptionSelected(option)) {
                   <lucide-angular
                     [img]="checkIcon"
                     [size]="iconSize - 4"
-                    [class]="i === focusedOptionIndex() ? 'text-white' : 'text-bytebank-blue'"
+                    [class]="
+                      i === focusedOptionIndex() ? 'select-check-icon-focused' : 'select-check-icon'
+                    "
                     aria-hidden="true"
                   ></lucide-angular>
                 }

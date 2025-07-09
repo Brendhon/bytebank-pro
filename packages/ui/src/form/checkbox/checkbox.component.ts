@@ -134,9 +134,7 @@ export class CheckboxComponent {
 
   // CSS class builders following the guidelines
   get wrapperClasses(): string {
-    return ['bb-checkbox-container', 'flex', 'items-start', 'gap-2', this.className()]
-      .filter(Boolean)
-      .join(' ');
+    return ['bb-checkbox-container', this.className()].filter(Boolean).join(' ');
   }
 
   get checkboxClasses(): string {
@@ -146,53 +144,24 @@ export class CheckboxComponent {
   }
 
   private get baseClasses(): string {
-    return 'relative mt-0.5 shrink-0 rounded border-2 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
+    return 'checkbox-base';
   }
 
   private get variantClasses(): string {
-    const variants: Record<CheckboxVariant, string> = {
-      default: this.getDefaultVariantClasses(),
-      success: this.getSuccessVariantClasses(),
-      error: this.getErrorVariantClasses(),
-      warning: this.getWarningVariantClasses()
-    };
+    const isChecked = this.checked() || this.indeterminate();
+    const variant = this.variant();
 
-    return variants[this.variant()] || variants.default;
-  }
-
-  private getDefaultVariantClasses(): string {
-    if (this.checked() || this.indeterminate()) {
-      return 'border-bytebank-blue bg-bytebank-blue text-white focus:ring-bytebank-blue';
+    if (isChecked) {
+      return `checkbox-${variant}-checked`;
     }
-    return 'border-gray-300 bg-white text-gray-900 hover:border-bytebank-blue focus:ring-bytebank-blue';
-  }
-
-  private getSuccessVariantClasses(): string {
-    if (this.checked() || this.indeterminate()) {
-      return 'border-bytebank-green bg-bytebank-green text-white focus:ring-bytebank-green';
-    }
-    return 'border-gray-300 bg-white text-gray-900 hover:border-bytebank-green focus:ring-bytebank-green';
-  }
-
-  private getErrorVariantClasses(): string {
-    if (this.checked() || this.indeterminate()) {
-      return 'border-red-500 bg-red-500 text-white focus:ring-red-500';
-    }
-    return 'border-red-500 bg-white text-gray-900 hover:border-red-600 focus:ring-red-500';
-  }
-
-  private getWarningVariantClasses(): string {
-    if (this.checked() || this.indeterminate()) {
-      return 'border-bytebank-orange bg-bytebank-orange text-white focus:ring-bytebank-orange';
-    }
-    return 'border-gray-300 bg-white text-gray-900 hover:border-bytebank-orange focus:ring-bytebank-orange';
+    return `checkbox-${variant}-unchecked`;
   }
 
   private get sizeClasses(): string {
     const sizes: Record<CheckboxSize, string> = {
-      sm: 'h-4 w-4',
-      md: 'h-5 w-5',
-      lg: 'h-6 w-6'
+      sm: 'checkbox-size-sm',
+      md: 'checkbox-size-md',
+      lg: 'checkbox-size-lg'
     };
 
     return sizes[this.size()] || sizes.md;
@@ -200,28 +169,29 @@ export class CheckboxComponent {
 
   private get stateClasses(): string {
     if (this.disabled()) {
-      return 'opacity-60 cursor-not-allowed';
+      return 'checkbox-disabled';
     }
     if (this.readonly()) {
-      return 'cursor-default';
+      return 'checkbox-readonly';
     }
     return '';
   }
 
   get labelClasses(): string {
-    const baseClasses = 'text-sm font-medium cursor-pointer select-none';
-    const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
-    const disabledClasses = this.disabled() ? 'cursor-not-allowed opacity-60' : '';
+    const baseClasses = 'checkbox-label-base';
+    const variantClasses =
+      this.variant() === 'error' ? 'checkbox-label-error' : 'checkbox-label-normal';
+    const disabledClasses = this.disabled() ? 'checkbox-label-disabled' : '';
     return `${baseClasses} ${variantClasses} ${disabledClasses}`.trim();
   }
 
   get helperTextClasses(): string {
-    const baseClasses = 'text-xs mt-1';
+    const baseClasses = 'checkbox-helper-base';
     const variants: Record<CheckboxVariant, string> = {
-      default: 'text-gray-500',
-      success: 'text-bytebank-green',
-      error: 'text-red-600',
-      warning: 'text-bytebank-orange'
+      default: 'checkbox-helper-default',
+      success: 'checkbox-helper-success',
+      error: 'checkbox-helper-error',
+      warning: 'checkbox-helper-warning'
     };
 
     return `${baseClasses} ${variants[this.variant()]}`;

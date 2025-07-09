@@ -1,3 +1,34 @@
 @import '../../../styles/global.css';
 
-/* Component-specific styles - If necessary (avoid if possible) */
+/* Generic table component specific styles */
+.generic-table-container {
+  @apply flex flex-col gap-4;
+}
+
+.table-wrapper {
+  @apply overflow-x-auto bg-white border border-bytebank-gray rounded-sm;
+}
+
+.table {
+  @apply w-full;
+}
+
+.table-header {
+  @apply bg-bytebank-light-green border-b border-bytebank-gray;
+}
+
+.table-no-data-cell {
+  @apply text-center py-4;
+}
+
+.table-no-data-message {
+  @apply text-bytebank-gray;
+}
+
+.table-row {
+  @apply hover:opacity-70 transition-opacity duration-200;
+}
+
+.paginator-wrapper {
+  @apply flex justify-end;
+}

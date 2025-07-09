@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ButtonComponent, ButtonVariant, ButtonType } from './button.component';
+import { ButtonComponent, ButtonType } from './button.component';
+import { ButtonVariant } from '@bytebank-pro/types';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;

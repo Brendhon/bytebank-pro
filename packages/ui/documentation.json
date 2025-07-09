@@ -3,12 +3,12 @@
   "interfaces": [
     {
       "name": "SampleData",
-      "id": "interface-SampleData-2e5bb45c0d0d946f32b4b550635eca334def789fb67d11f1489a91d84e9f1e321f6966f7518ae2a8c3699a616fcc4c9d158b196fbf5145abf794b04c7a40bfe1",
+      "id": "interface-SampleData-382003910c3f53d572720ddcbb305817bde989636af5f58121dd06a943c602049581514649877ad778a2695f2ef61bf91f9bc4062b956e4e07f05eb17fd926a7",
       "file": "src/table/generic-table/generic-table.component.stories.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "interface",
-      "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { argsToTemplate } from '@storybook/angular';\nimport { GenericTableComponent, TableColumn } from './generic-table.component';\n\ninterface SampleData {\n  id: number;\n  name: string;\n  email: string;\n  status: 'active' | 'inactive';\n  amount: number;\n}\n\nconst sampleData: SampleData[] = [\n  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active', amount: 1500 },\n  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive', amount: 2300 },\n  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active', amount: 1200 },\n  { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active', amount: 3400 },\n  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive', amount: 890 },\n  { id: 6, name: 'David Miller', email: 'david@example.com', status: 'active', amount: 2100 },\n  { id: 7, name: 'Eva Garcia', email: 'eva@example.com', status: 'inactive', amount: 1750 },\n  { id: 8, name: 'Frank Davis', email: 'frank@example.com', status: 'active', amount: 2800 },\n  { id: 9, name: 'Grace Lee', email: 'grace@example.com', status: 'active', amount: 3200 },\n  { id: 10, name: 'Henry Taylor', email: 'henry@example.com', status: 'inactive', amount: 1950 },\n  { id: 11, name: 'Isabel Martinez', email: 'isabel@example.com', status: 'active', amount: 2650 },\n  { id: 12, name: 'Jack Anderson', email: 'jack@example.com', status: 'active', amount: 1400 }\n];\n\nconst sampleColumns: TableColumn<SampleData>[] = [\n  { label: 'ID', accessor: 'id' },\n  { label: 'Name', accessor: 'name' },\n  { label: 'Email', accessor: 'email' },\n  { label: 'Status', accessor: 'status' },\n  { label: 'Amount', accessor: 'amount' }\n];\n\nconst meta: Meta<GenericTableComponent<SampleData>> = {\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n};\n\nexport default meta;\ntype Story = StoryObj<GenericTableComponent<SampleData>>;\n\nexport const Default: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n};\n\nexport const AllVariants: Story = {\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table \n            [data]=\"data\" \n            [columns]=\"columns\" \n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table \n            [data]=\"smallData\" \n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table \n            [data]=\"[]\" \n            [columns]=\"columns\" \n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n};\n\nexport const Playground: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n};\n\nexport const WithPagination: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\" \n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const WithoutPagination: Story = {\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const EmptyState: Story = {\n  args: {\n    data: [],\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra como a tabela se comporta quando não há dados para exibir.'\n      }\n    }\n  }\n};\n\nexport const LargeDataset: Story = {\n  args: {\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `User ${i + 1}`,\n      email: `user${i + 1}@example.com`,\n      status: i % 3 === 0 ? 'inactive' : ('active' as 'active' | 'inactive'),\n      amount: Math.floor(Math.random() * 5000) + 500\n    })),\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação.'\n      }\n    }\n  }\n};\n\nexport const ResponsiveLayout: Story = {\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n};\n\nexport const WithCustomRender: Story = {\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\" \n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table \n          [data]=\"customData\" \n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n",
+      "sourceCode": "import type { Meta, StoryObj } from '@storybook/angular';\nimport { argsToTemplate } from '@storybook/angular';\nimport { GenericTableComponent } from './generic-table.component';\nimport { TableColumn } from '@bytebank-pro/types';\n\ninterface SampleData {\n  id: number;\n  name: string;\n  email: string;\n  status: 'active' | 'inactive';\n  amount: number;\n}\n\nconst sampleData: SampleData[] = [\n  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active', amount: 1500 },\n  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive', amount: 2300 },\n  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active', amount: 1200 },\n  { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active', amount: 3400 },\n  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive', amount: 890 },\n  { id: 6, name: 'David Miller', email: 'david@example.com', status: 'active', amount: 2100 },\n  { id: 7, name: 'Eva Garcia', email: 'eva@example.com', status: 'inactive', amount: 1750 },\n  { id: 8, name: 'Frank Davis', email: 'frank@example.com', status: 'active', amount: 2800 },\n  { id: 9, name: 'Grace Lee', email: 'grace@example.com', status: 'active', amount: 3200 },\n  { id: 10, name: 'Henry Taylor', email: 'henry@example.com', status: 'inactive', amount: 1950 },\n  { id: 11, name: 'Isabel Martinez', email: 'isabel@example.com', status: 'active', amount: 2650 },\n  { id: 12, name: 'Jack Anderson', email: 'jack@example.com', status: 'active', amount: 1400 }\n];\n\nconst sampleColumns: TableColumn<SampleData>[] = [\n  { label: 'ID', accessor: 'id' },\n  { label: 'Name', accessor: 'name' },\n  { label: 'Email', accessor: 'email' },\n  { label: 'Status', accessor: 'status' },\n  { label: 'Amount', accessor: 'amount' }\n];\n\nconst meta: Meta<GenericTableComponent<SampleData>> = {\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n};\n\nexport default meta;\ntype Story = StoryObj<GenericTableComponent<SampleData>>;\n\nexport const Default: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n};\n\nexport const AllVariants: Story = {\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table\n            [data]=\"data\"\n            [columns]=\"columns\"\n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table\n            [data]=\"smallData\"\n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table\n            [data]=\"[]\"\n            [columns]=\"columns\"\n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n};\n\nexport const Playground: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n};\n\nexport const WithPagination: Story = {\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\"\n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const WithoutPagination: Story = {\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n\nexport const EmptyState: Story = {\n  args: {\n    data: [],\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra como a tabela se comporta quando não há dados para exibir.'\n      }\n    }\n  }\n};\n\nexport const LargeDataset: Story = {\n  args: {\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `User ${i + 1}`,\n      email: `user${i + 1}@example.com`,\n      status: i % 3 === 0 ? 'inactive' : ('active' as 'active' | 'inactive'),\n      amount: Math.floor(Math.random() * 5000) + 500\n    })),\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação.'\n      }\n    }\n  }\n};\n\nexport const ResponsiveLayout: Story = {\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n};\n\nexport const WithCustomRender: Story = {\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\"\n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table\n          [data]=\"customData\"\n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n};\n",
       "properties": [
         {
           "name": "amount",
@@ -18,7 +18,7 @@
           "indexKey": "",
           "optional": false,
           "description": "",
-          "line": 10
+          "line": 11
         },
         {
           "name": "email",
@@ -28,7 +28,7 @@
           "indexKey": "",
           "optional": false,
           "description": "",
-          "line": 8
+          "line": 9
         },
         {
           "name": "id",
@@ -38,7 +38,7 @@
           "indexKey": "",
           "optional": false,
           "description": "",
-          "line": 6
+          "line": 7
         },
         {
           "name": "name",
@@ -48,7 +48,7 @@
           "indexKey": "",
           "optional": false,
           "description": "",
-          "line": 7
+          "line": 8
         },
         {
           "name": "status",
@@ -58,7 +58,7 @@
           "indexKey": "",
           "optional": false,
           "description": "",
-          "line": 9
+          "line": 10
         }
       ],
       "indexSignatures": [],
@@ -170,21 +170,21 @@
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/button/button.component.stories.ts",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;\">\n        <bb-button variant=\"dark\">Dark</bb-button>\n        <bb-button variant=\"blue\">Blue</bb-button>\n        <bb-button variant=\"green\">Green</bb-button>\n        <bb-button variant=\"orange\">Orange</bb-button>\n        <bb-button variant=\"outlineGreen\">Outline Green</bb-button>\n        <bb-button variant=\"outlineOrange\">Outline Orange</bb-button>\n      </div>\n    `\n  })\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table\n            [data]=\"data\"\n            [columns]=\"columns\"\n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table\n            [data]=\"smallData\"\n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table\n            [data]=\"[]\"\n            [columns]=\"columns\"\n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
+        "file": "src/ui/button/button.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;\">\n        <bb-button variant=\"dark\">Dark</bb-button>\n        <bb-button variant=\"blue\">Blue</bb-button>\n        <bb-button variant=\"green\">Green</bb-button>\n        <bb-button variant=\"orange\">Orange</bb-button>\n        <bb-button variant=\"outlineGreen\">Outline Green</bb-button>\n        <bb-button variant=\"outlineOrange\">Outline Orange</bb-button>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "AllVariants",
@@ -200,21 +200,21 @@
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
+        "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table \n            [data]=\"data\" \n            [columns]=\"columns\" \n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table \n            [data]=\"smallData\" \n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table \n            [data]=\"[]\" \n            [columns]=\"columns\" \n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
       },
       {
         "name": "AutoClosing",
@@ -280,6 +280,26 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/table/paginator/paginator.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -290,21 +310,21 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    isDecorative: false\n  }\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    alt: 'A beautiful placeholder image',\n    size: 'md'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-img ${argsToTemplate(args)}></bb-img>`\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    isDecorative: false\n  }\n}"
       },
       {
         "name": "Default",
@@ -325,26 +345,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/paginator/paginator.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
       },
       {
         "name": "Disabled",
@@ -690,6 +690,26 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<GenericTableComponent<SampleData>>",
+        "defaultValue": "{\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/table/paginator/paginator.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<PaginatorComponent>",
+        "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/button/button.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -710,21 +730,21 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<LogoComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<ImgComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Img',\n  component: ImgComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\nThe \\`bb-img\\` component is a flexible image component that can handle both internal assets through the shared assets system and external URLs. It supports SVG and standard image formats with loading states, error handling, and accessibility features.\n\n## Features\n- Support for internal assets via \\`getAssetContent\\`\n- External URL support\n- SVG and standard image format handling\n- Loading and error states\n- Configurable sizes\n- Accessibility compliant\n- Custom CSS classes support\n        `\n      }\n    }\n  },\n  argTypes: {\n    src: {\n      control: 'text',\n      description: 'The source path or URL of the image',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    alt: {\n      control: 'text',\n      description: 'Alternative text for the image',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    size: {\n      control: 'select',\n      options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],\n      description: 'The size of the image',\n      table: {\n        defaultValue: { summary: 'md' },\n        type: { summary: 'ImageSize' }\n      }\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    isDecorative: {\n      control: 'boolean',\n      description: 'Whether the image is decorative (hidden from screen readers)',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    loadingText: {\n      control: 'text',\n      description: 'Custom loading text for screen readers',\n      table: {\n        defaultValue: { summary: 'Carregando imagem...' },\n        type: { summary: 'string' }\n      }\n    },\n    errorText: {\n      control: 'text',\n      description: 'Custom error text for screen readers',\n      table: {\n        defaultValue: { summary: 'Erro ao carregar imagem' },\n        type: { summary: 'string' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<LogoComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -745,26 +765,6 @@
         "deprecationMessage": "",
         "type": "Meta<ToastComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<GenericTableComponent<SampleData>>",
-        "defaultValue": "{\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/paginator/paginator.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<PaginatorComponent>",
-        "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
       },
       {
         "name": "MiddlePage",
@@ -880,6 +880,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -890,21 +900,21 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    ariaLabel: undefined,\n    isDecorative: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-logo ${argsToTemplate(args)}></bb-logo>`\n  })\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    src: 'https://picsum.photos/200/200',\n    alt: 'Interactive playground image',\n    size: 'md',\n    className: '',\n    isDecorative: false,\n    loadingText: 'Carregando imagem...',\n    errorText: 'Erro ao carregar imagem'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-img ${argsToTemplate(args)}></bb-img>`\n  })\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    ariaLabel: undefined,\n    isDecorative: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-logo ${argsToTemplate(args)}></bb-logo>`\n  })\n}"
       },
       {
         "name": "Playground",
@@ -925,16 +935,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "preview",
@@ -1010,21 +1010,21 @@
         "name": "ResponsiveLayout",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
-      },
-      {
-        "name": "ResponsiveLayout",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/table/generic-table/generic-table.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "ResponsiveLayout",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/logo/logo.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <div class=\"md:hidden\">\n          <bb-logo variant=\"icon\" size=\"sm\"></bb-logo>\n        </div>\n        <div class=\"hidden md:block\">\n          <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        </div>\n      </div>\n    `\n  })\n}"
       },
       {
         "name": "sampleColumns",
@@ -1224,7 +1224,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\" \n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table \n          [data]=\"customData\" \n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\"\n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table\n          [data]=\"customData\"\n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithDisabledOptions",
@@ -1274,7 +1274,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithoutTitle",
@@ -1294,7 +1294,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\" \n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\"\n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
       },
       {
         "name": "WithPrefixIcon",
@@ -1366,6 +1366,28 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<GenericTableComponent<SampleData>>",
+        "file": "src/table/generic-table/generic-table.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
+        "rawtype": "StoryObj<PaginatorComponent>",
+        "file": "src/table/paginator/paginator.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ButtonComponent>",
         "file": "src/ui/button/button.component.stories.ts",
         "deprecated": false,
@@ -1388,8 +1410,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<LogoComponent>",
-        "file": "src/ui/logo/logo.component.stories.ts",
+        "rawtype": "StoryObj<ImgComponent>",
+        "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1399,8 +1421,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ImgComponent>",
-        "file": "src/ui/img/img.component.stories.ts",
+        "rawtype": "StoryObj<LogoComponent>",
+        "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1423,28 +1445,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ToastComponent>",
         "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<GenericTableComponent<SampleData>>",
-        "file": "src/table/generic-table/generic-table.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<PaginatorComponent>",
-        "file": "src/table/paginator/paginator.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2043,6 +2043,128 @@
           "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaLabel: 'Save document',\n    ariaDescribedBy: 'save-help-text'\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div>\n        <bb-button ${argsToTemplate(args)}>Save</bb-button>\n        <p id=\"save-help-text\" style=\"margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;\">\n          This will save your current document to the cloud\n        </p>\n      </div>\n    `\n  })\n}"
         }
       ],
+      "src/table/generic-table/generic-table.component.stories.ts": [
+        {
+          "name": "AllVariants",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table\n            [data]=\"data\"\n            [columns]=\"columns\"\n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table\n            [data]=\"smallData\"\n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table\n            [data]=\"[]\"\n            [columns]=\"columns\"\n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
+        },
+        {
+          "name": "EmptyState",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: [],\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra como a tabela se comporta quando não há dados para exibir.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "LargeDataset",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `User ${i + 1}`,\n      email: `user${i + 1}@example.com`,\n      status: i % 3 === 0 ? 'inactive' : ('active' as 'active' | 'inactive'),\n      amount: Math.floor(Math.random() * 5000) + 500\n    })),\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<GenericTableComponent<SampleData>>",
+          "defaultValue": "{\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        },
+        {
+          "name": "Playground",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "ResponsiveLayout",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "sampleColumns",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "TableColumn[]",
+          "defaultValue": "[\n  { label: 'ID', accessor: 'id' },\n  { label: 'Name', accessor: 'name' },\n  { label: 'Email', accessor: 'email' },\n  { label: 'Status', accessor: 'status' },\n  { label: 'Amount', accessor: 'amount' }\n]"
+        },
+        {
+          "name": "sampleData",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "SampleData[]",
+          "defaultValue": "[\n  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active', amount: 1500 },\n  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive', amount: 2300 },\n  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active', amount: 1200 },\n  { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active', amount: 3400 },\n  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive', amount: 890 },\n  { id: 6, name: 'David Miller', email: 'david@example.com', status: 'active', amount: 2100 },\n  { id: 7, name: 'Eva Garcia', email: 'eva@example.com', status: 'inactive', amount: 1750 },\n  { id: 8, name: 'Frank Davis', email: 'frank@example.com', status: 'active', amount: 2800 },\n  { id: 9, name: 'Grace Lee', email: 'grace@example.com', status: 'active', amount: 3200 },\n  { id: 10, name: 'Henry Taylor', email: 'henry@example.com', status: 'inactive', amount: 1950 },\n  { id: 11, name: 'Isabel Martinez', email: 'isabel@example.com', status: 'active', amount: 2650 },\n  { id: 12, name: 'Jack Anderson', email: 'jack@example.com', status: 'active', amount: 1400 }\n]"
+        },
+        {
+          "name": "WithCustomRender",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\"\n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table\n          [data]=\"customData\"\n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "WithoutPagination",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        },
+        {
+          "name": "WithPagination",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table\n  [data]=\"data\"\n  [columns]=\"columns\"\n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
+        }
+      ],
       "src/ui/img/img.component.stories.ts": [
         {
           "name": "AllVariants",
@@ -2245,128 +2367,6 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "{\n  args: {\n    ...Default.args,\n    message: 'Operação realizada com sucesso!',\n    variant: 'success',\n    duration: 0\n  }\n}"
-        }
-      ],
-      "src/table/generic-table/generic-table.component.stories.ts": [
-        {
-          "name": "AllVariants",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-8\">\n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Com Paginação (5 itens por página)</h3>\n          <bb-generic-table \n            [data]=\"data\" \n            [columns]=\"columns\" \n            [pageSize]=\"5\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Sem Paginação</h3>\n          <bb-generic-table \n            [data]=\"smallData\" \n            [columns]=\"columns\">\n          </bb-generic-table>\n        </div>\n        \n        <div>\n          <h3 class=\"text-lg font-medium mb-4\">Estado Vazio</h3>\n          <bb-generic-table \n            [data]=\"[]\" \n            [columns]=\"columns\" \n            [pageSize]=\"10\">\n          </bb-generic-table>\n        </div>\n      </div>\n    `,\n    props: {\n      data: sampleData,\n      smallData: sampleData.slice(0, 3),\n      columns: sampleColumns\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  })\n}"
-        },
-        {
-          "name": "EmptyState",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: [],\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra como a tabela se comporta quando não há dados para exibir.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "LargeDataset",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: Array.from({ length: 100 }, (_, i) => ({\n      id: i + 1,\n      name: `User ${i + 1}`,\n      email: `user${i + 1}@example.com`,\n      status: i % 3 === 0 ? 'inactive' : ('active' as 'active' | 'inactive'),\n      amount: Math.floor(Math.random() * 5000) + 500\n    })),\n    columns: sampleColumns,\n    pageSize: 10\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story:\n          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<GenericTableComponent<SampleData>>",
-          "defaultValue": "{\n  title: 'Components/Table/GenericTable',\n  component: GenericTableComponent,\n  parameters: {\n    layout: 'padded',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.\n\n## Quando Usar\n\n- Para exibir listas de dados estruturados\n- Quando precisar de paginação para grandes volumes de dados\n- Para criar interfaces de administração e dashboards\n- Em relatórios e visualizações de dados\n\n## Acessibilidade\n\n- Suporta navegação por teclado\n- Implementa semântica apropriada com elementos table\n- Compatível com leitores de tela\n- Mantém foco visível durante navegação\n        `\n      }\n    }\n  },\n  argTypes: {\n    data: {\n      description: 'Array of data objects to display in the table',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'T[]' },\n        defaultValue: { summary: '[]' }\n      }\n    },\n    columns: {\n      description: 'Array of column definitions with label and accessor properties',\n      control: { type: 'object' },\n      table: {\n        type: { summary: 'TableColumn<T>[]' }\n      }\n    },\n    pageSize: {\n      description: 'Number of items per page (undefined disables pagination)',\n      control: { type: 'number' },\n      table: {\n        type: { summary: 'number | undefined' },\n        defaultValue: { summary: 'undefined' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
-        },
-        {
-          "name": "Playground",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 5\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "ResponsiveLayout",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <div class=\"w-full\">\n        <bb-generic-table ${argsToTemplate(args)}></bb-generic-table>\n      </div>\n    `\n  }),\n  parameters: {\n    viewport: {\n      defaultViewport: 'mobile1'\n    },\n    docs: {\n      description: {\n        story:\n          'Visualiza como a tabela se adapta em diferentes tamanhos de tela. Use o controle de viewport para testar.'\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "sampleColumns",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "TableColumn[]",
-          "defaultValue": "[\n  { label: 'ID', accessor: 'id' },\n  { label: 'Name', accessor: 'name' },\n  { label: 'Email', accessor: 'email' },\n  { label: 'Status', accessor: 'status' },\n  { label: 'Amount', accessor: 'amount' }\n]"
-        },
-        {
-          "name": "sampleData",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "SampleData[]",
-          "defaultValue": "[\n  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active', amount: 1500 },\n  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive', amount: 2300 },\n  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active', amount: 1200 },\n  { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active', amount: 3400 },\n  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive', amount: 890 },\n  { id: 6, name: 'David Miller', email: 'david@example.com', status: 'active', amount: 2100 },\n  { id: 7, name: 'Eva Garcia', email: 'eva@example.com', status: 'inactive', amount: 1750 },\n  { id: 8, name: 'Frank Davis', email: 'frank@example.com', status: 'active', amount: 2800 },\n  { id: 9, name: 'Grace Lee', email: 'grace@example.com', status: 'active', amount: 3200 },\n  { id: 10, name: 'Henry Taylor', email: 'henry@example.com', status: 'inactive', amount: 1950 },\n  { id: 11, name: 'Isabel Martinez', email: 'isabel@example.com', status: 'active', amount: 2650 },\n  { id: 12, name: 'Jack Anderson', email: 'jack@example.com', status: 'active', amount: 1400 }\n]"
-        },
-        {
-          "name": "WithCustomRender",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div>\n        <ng-template #statusTemplate let-value let-row=\"row\">\n          <span class=\"px-2 py-1 rounded-full text-xs\" \n                [ngClass]=\"{\n                  'bg-green-100 text-green-800': value === 'active',\n                  'bg-red-100 text-red-800': value === 'inactive'\n                }\">\n            {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}\n          </span>\n        </ng-template>\n\n        <bb-generic-table \n          [data]=\"customData\" \n          [columns]=\"getCustomColumns(statusTemplate)\">\n        </bb-generic-table>\n      </div>\n    `,\n    props: {\n      customData: [\n        { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },\n        { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },\n        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'active' },\n        { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },\n        { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }\n      ],\n      getCustomColumns: (statusTemplate: any) => [\n        { label: 'ID', accessor: 'id' },\n        { label: 'Name', accessor: 'name' },\n        { label: 'Email', accessor: 'email' },\n        { label: 'Status', accessor: 'status', render: statusTemplate }\n      ]\n    }\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Renderização Customizada\n\nEsta story demonstra como usar a propriedade \\`render\\` das colunas com templates Angular para customizar a exibição dos dados:\n\n- **Status**: Exibe badges coloridos com ícones para status ativo/inativo\n\\`\\`\\`\n<!-- Uso na tabela -->\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"[{ label: 'Status', accessor: 'status', render: statusTemplate }]\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "WithoutPagination",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: sampleData.slice(0, 5),\n    columns: sampleColumns,\n    pageSize: undefined\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela sem Paginação\n\nQuando \\`pageSize\\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
-        },
-        {
-          "name": "WithPagination",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    data: sampleData,\n    columns: sampleColumns,\n    pageSize: 3\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Tabela com Paginação\n\nEsta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.\n\n\\`\\`\\`html\n<bb-generic-table \n  [data]=\"data\" \n  [columns]=\"columns\" \n  [pageSize]=\"3\">\n</bb-generic-table>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
         }
       ],
       "src/form/input/input.component.stories.ts": [
@@ -2581,6 +2581,58 @@
           "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
         }
       ],
+      "src/table/paginator/paginator.component.stories.ts": [
+        {
+          "name": "Default",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
+        },
+        {
+          "name": "FewPages",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 2,\n    totalPages: 5\n  }\n}"
+        },
+        {
+          "name": "LastPage",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 10,\n    totalPages: 10\n  }\n}"
+        },
+        {
+          "name": "meta",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Meta<PaginatorComponent>",
+          "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
+        },
+        {
+          "name": "MiddlePage",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    currentPage: 15,\n    totalPages: 30\n  }\n}"
+        }
+      ],
       "src/ui/dialog/dialog.component.stories.ts": [
         {
           "name": "Default",
@@ -2663,58 +2715,6 @@
           "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: '',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '24rem',\n    ariaLabel: 'Confirmation dialog'\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Confirmation dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <div class=\"text-center\">\n          <div class=\"w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center\">\n            <svg class=\"w-6 h-6 text-red-600\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n              <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z\"></path>\n            </svg>\n          </div>\n          <h3 class=\"text-lg font-medium text-gray-900 mb-2\">Delete Account</h3>\n          <p class=\"text-gray-600 mb-6\">\n            Are you sure you want to delete your account? This action cannot be undone.\n          </p>\n          <div class=\"flex gap-3 justify-center\">\n            <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n              Cancel\n            </button>\n            <button class=\"px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded\">\n              Delete\n            </button>\n          </div>\n        </div>\n      </bb-dialog>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: `\n### Dialog Without Header Title\n\nDemonstra um dialog sem título no cabeçalho, útil para confirmações visuais onde o conteúdo é auto-explicativo.\n\n**Características:**\n- Sem título no cabeçalho\n- Conteúdo centralizado\n- Ícone visual para comunicação rápida\n- aria-label obrigatório para acessibilidade\n\n\\`\\`\\`html\n<bb-dialog \n  [isOpen]=\"isDeleteOpen\"\n  title=\"\"\n  ariaLabel=\"Delete confirmation dialog\"\n  maxWidth=\"24rem\"\n  (close)=\"handleDeleteClose()\"\n>\n  <!-- Centered confirmation content -->\n</bb-dialog>\n\\`\\`\\`\n        `\n      }\n    }\n  }\n}"
         }
       ],
-      "src/table/paginator/paginator.component.stories.ts": [
-        {
-          "name": "Default",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 1,\n    totalPages: 10\n  }\n}"
-        },
-        {
-          "name": "FewPages",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 2,\n    totalPages: 5\n  }\n}"
-        },
-        {
-          "name": "LastPage",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 10,\n    totalPages: 10\n  }\n}"
-        },
-        {
-          "name": "meta",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Meta<PaginatorComponent>",
-          "defaultValue": "{\n  title: 'Components/Table/Paginator',\n  component: PaginatorComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'Paginator component for navigating through pages of content. Displays page numbers with ellipses for large page counts and navigation arrows.'\n      }\n    }\n  },\n  tags: ['autodocs'],\n  argTypes: {\n    currentPage: {\n      control: { type: 'number', min: 1 },\n      description: 'The current active page number'\n    },\n    totalPages: {\n      control: { type: 'number', min: 1 },\n      description: 'The total number of available pages'\n    },\n    onPageChange: {\n      action: 'pageChanged',\n      description: 'Event emitted when the page changes'\n    }\n  }\n}"
-        },
-        {
-          "name": "MiddlePage",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/table/paginator/paginator.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    currentPage: 15,\n    totalPages: 30\n  }\n}"
-        }
-      ],
       ".storybook/preview.ts": [
         {
           "name": "preview",
@@ -2770,6 +2770,32 @@
           "kind": 183
         }
       ],
+      "src/table/generic-table/generic-table.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<GenericTableComponent<SampleData>>",
+          "file": "src/table/generic-table/generic-table.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/table/paginator/paginator.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<PaginatorComponent>",
+          "file": "src/table/paginator/paginator.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "src/ui/button/button.component.stories.ts": [
         {
           "name": "Story",
@@ -2796,19 +2822,6 @@
           "kind": 183
         }
       ],
-      "src/ui/logo/logo.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<LogoComponent>",
-          "file": "src/ui/logo/logo.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/ui/img/img.component.stories.ts": [
         {
           "name": "Story",
@@ -2816,6 +2829,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ImgComponent>",
           "file": "src/ui/img/img.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/logo/logo.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<LogoComponent>",
+          "file": "src/ui/logo/logo.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -2842,32 +2868,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ToastComponent>",
           "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/table/generic-table/generic-table.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<GenericTableComponent<SampleData>>",
-          "file": "src/table/generic-table/generic-table.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/table/paginator/paginator.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<PaginatorComponent>",
-          "file": "src/table/paginator/paginator.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

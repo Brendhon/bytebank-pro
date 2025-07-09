@@ -1,1 +1,141 @@
 @import '../../../styles/global.css';
+
+/* Input wrapper classes */
+.bb-input-container {
+  @apply relative;
+}
+
+/* Input base classes */
+.input-base {
+  @apply w-full rounded-md border transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 placeholder:text-gray-400;
+}
+
+/* Input variant classes - Default */
+.input-default {
+  @apply border-gray-300 bg-white text-gray-900 focus:border-bytebank-blue focus:ring-bytebank-blue;
+}
+
+/* Input variant classes - Success */
+.input-success {
+  @apply border-bytebank-green bg-white text-gray-900 focus:border-bytebank-green focus:ring-bytebank-green;
+}
+
+/* Input variant classes - Error */
+.input-error {
+  @apply border-red-500 bg-white text-gray-900 focus:border-red-500 focus:ring-red-500;
+}
+
+/* Input variant classes - Warning */
+.input-warning {
+  @apply border-bytebank-orange bg-white text-gray-900 focus:border-bytebank-orange focus:ring-bytebank-orange;
+}
+
+/* Input size classes */
+.input-size-sm {
+  @apply px-3 py-1.5 text-sm min-h-[36px];
+}
+
+.input-size-md {
+  @apply px-4 py-2 text-sm min-h-[40px];
+}
+
+.input-size-lg {
+  @apply px-4 py-3 text-base min-h-[44px];
+}
+
+/* Input state classes */
+.input-disabled {
+  @apply opacity-60 cursor-not-allowed bg-gray-50;
+}
+
+.input-readonly {
+  @apply bg-gray-50 cursor-default;
+}
+
+/* Input spacing classes */
+.input-with-prefix {
+  @apply pl-10;
+}
+
+.input-with-suffix {
+  @apply pr-10;
+}
+
+/* Input component specific styles */
+.input-container {
+  @apply relative;
+}
+
+.input-required-indicator {
+  @apply text-red-500 ml-1;
+}
+
+.input-prefix-icon-container {
+  @apply absolute left-0 pl-3 h-full justify-center flex items-center pointer-events-none;
+}
+
+.input-prefix-icon {
+  @apply h-4 w-4 text-bytebank-blue;
+}
+
+.input-suffix-container {
+  @apply absolute inset-y-0 right-0;
+}
+
+.input-suffix-icon-container {
+  @apply pr-3 h-full justify-center flex items-center;
+}
+
+.input-success-icon {
+  @apply h-4 w-4 text-bytebank-green;
+}
+
+.input-error-icon {
+  @apply h-4 w-4 text-red-500;
+}
+
+.input-suffix-icon {
+  @apply h-4 w-4 text-bytebank-blue;
+}
+
+.input-password-toggle-button {
+  @apply pr-3 text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors duration-200 h-full justify-center flex items-center;
+}
+
+.input-password-toggle-icon {
+  @apply h-4 w-4 text-bytebank-blue;
+}
+
+/* Input label classes */
+.input-label-base {
+  @apply block text-base font-semibold mb-3 text-bytebank-dark-gray;
+}
+
+.input-label-error {
+  @apply text-red-700;
+}
+
+.input-label-normal {
+  @apply text-gray-700;
+}
+
+/* Input helper text classes */
+.input-helper-base {
+  @apply text-xs mt-1;
+}
+
+.input-helper-default {
+  @apply text-gray-500;
+}
+
+.input-helper-success {
+  @apply text-bytebank-green;
+}
+
+.input-helper-error {
+  @apply text-bytebank-red;
+}
+
+.input-helper-warning {
+  @apply text-bytebank-orange;
+}

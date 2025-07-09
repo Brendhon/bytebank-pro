@@ -5,3 +5,126 @@
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
+/* Checkbox wrapper classes */
+.bb-checkbox-container {
+  @apply flex items-start gap-2;
+}
+
+/* Checkbox base classes */
+.checkbox-base {
+  @apply relative mt-0.5 shrink-0 rounded border-2 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer;
+}
+
+/* Checkbox size classes */
+.checkbox-size-sm {
+  @apply h-4 w-4;
+}
+
+.checkbox-size-md {
+  @apply h-5 w-5;
+}
+
+.checkbox-size-lg {
+  @apply h-6 w-6;
+}
+
+/* Checkbox variant classes - Default */
+.checkbox-default-checked {
+  @apply border-bytebank-blue bg-bytebank-blue text-white focus:ring-bytebank-blue;
+}
+
+.checkbox-default-unchecked {
+  @apply border-gray-300 bg-white text-gray-900 hover:border-bytebank-blue focus:ring-bytebank-blue;
+}
+
+/* Checkbox variant classes - Success */
+.checkbox-success-checked {
+  @apply border-bytebank-green bg-bytebank-green text-white focus:ring-bytebank-green;
+}
+
+.checkbox-success-unchecked {
+  @apply border-gray-300 bg-white text-gray-900 hover:border-bytebank-green focus:ring-bytebank-green;
+}
+
+/* Checkbox variant classes - Error */
+.checkbox-error-checked {
+  @apply border-red-500 bg-red-500 text-white focus:ring-red-500;
+}
+
+.checkbox-error-unchecked {
+  @apply border-red-500 bg-white text-gray-900 hover:border-red-600 focus:ring-red-500;
+}
+
+/* Checkbox variant classes - Warning */
+.checkbox-warning-checked {
+  @apply border-bytebank-orange bg-bytebank-orange text-white focus:ring-bytebank-orange;
+}
+
+.checkbox-warning-unchecked {
+  @apply border-gray-300 bg-white text-gray-900 hover:border-bytebank-orange focus:ring-bytebank-orange;
+}
+
+/* Checkbox state classes */
+.checkbox-disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+
+.checkbox-readonly {
+  @apply cursor-default;
+}
+
+/* Checkbox component specific styles */
+.checkbox-required-indicator {
+  @apply text-red-500 ml-1;
+}
+
+.checkbox-content-wrapper {
+  @apply flex-1 min-w-0;
+}
+
+.checkbox-check-icon {
+  @apply absolute flex justify-center items-center h-full w-full;
+}
+
+.checkbox-indeterminate-icon {
+  @apply absolute flex justify-center items-center h-full w-full;
+}
+
+/* Checkbox label classes */
+.checkbox-label-base {
+  @apply text-sm font-medium cursor-pointer select-none;
+}
+
+.checkbox-label-error {
+  @apply text-red-700;
+}
+
+.checkbox-label-normal {
+  @apply text-gray-700;
+}
+
+.checkbox-label-disabled {
+  @apply cursor-not-allowed opacity-60;
+}
+
+/* Checkbox helper text classes */
+.checkbox-helper-base {
+  @apply text-xs mt-1;
+}
+
+.checkbox-helper-default {
+  @apply text-gray-500;
+}
+
+.checkbox-helper-success {
+  @apply text-bytebank-green;
+}
+
+.checkbox-helper-error {
+  @apply text-red-600;
+}
+
+.checkbox-helper-warning {
+  @apply text-bytebank-orange;
+}

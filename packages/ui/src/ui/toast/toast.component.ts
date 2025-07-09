@@ -134,25 +134,22 @@ export class ToastComponent implements OnInit, OnChanges, OnDestroy {
    * Getter for computed CSS classes based on the variant and other states.
    */
   get toastClasses(): string {
-    const baseClasses =
-      'fixed top-20 right-4 z-50 h-12 flex gap-3 rounded-md p-3 shadow-lg text-white min-w-[250px] flex-row justify-between items-center transition-all duration-200 ease-out transform';
+    const baseClasses = 'toast-base';
 
     let variantClasses = '';
     switch (this.variant) {
       case 'success':
-        variantClasses = 'bg-bytebank-green'; // Example using design token
+        variantClasses = 'toast-variant-success';
         break;
       case 'error':
-        variantClasses = 'bg-bytebank-red'; // Example using design token
+        variantClasses = 'toast-variant-error';
         break;
       case 'info':
-        variantClasses = 'bg-bytebank-blue'; // Example using design token
+        variantClasses = 'toast-variant-info';
         break;
     }
 
-    const visibilityClasses = this.isVisible
-      ? 'translate-y-0 opacity-100'
-      : 'translate-y-2 opacity-0';
+    const visibilityClasses = this.isVisible ? 'toast-visible' : 'toast-hidden';
 
     return `${baseClasses} ${variantClasses} ${visibilityClasses}`;
   }

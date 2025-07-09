@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
-import { GenericTableComponent, TableColumn } from './generic-table.component';
+import { GenericTableComponent } from './generic-table.component';
+import { TableColumn } from '@bytebank-pro/types';
 
 interface SampleData {
   id: number;
@@ -111,26 +112,26 @@ export const AllVariants: Story = {
       <div class="space-y-8">
         <div>
           <h3 class="text-lg font-medium mb-4">Com Paginação (5 itens por página)</h3>
-          <bb-generic-table 
-            [data]="data" 
-            [columns]="columns" 
+          <bb-generic-table
+            [data]="data"
+            [columns]="columns"
             [pageSize]="5">
           </bb-generic-table>
         </div>
-        
+
         <div>
           <h3 class="text-lg font-medium mb-4">Sem Paginação</h3>
-          <bb-generic-table 
-            [data]="smallData" 
+          <bb-generic-table
+            [data]="smallData"
             [columns]="columns">
           </bb-generic-table>
         </div>
-        
+
         <div>
           <h3 class="text-lg font-medium mb-4">Estado Vazio</h3>
-          <bb-generic-table 
-            [data]="[]" 
-            [columns]="columns" 
+          <bb-generic-table
+            [data]="[]"
+            [columns]="columns"
             [pageSize]="10">
           </bb-generic-table>
         </div>
@@ -189,9 +190,9 @@ export const WithPagination: Story = {
 Esta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.
 
 \`\`\`html
-<bb-generic-table 
-  [data]="data" 
-  [columns]="columns" 
+<bb-generic-table
+  [data]="data"
+  [columns]="columns"
   [pageSize]="3">
 </bb-generic-table>
 \`\`\`
@@ -220,8 +221,8 @@ export const WithoutPagination: Story = {
 Quando \`pageSize\` é undefined, a paginação é desabilitada e todos os dados são exibidos de uma vez.
 
 \`\`\`html
-<bb-generic-table 
-  [data]="data" 
+<bb-generic-table
+  [data]="data"
   [columns]="columns">
 </bb-generic-table>
 \`\`\`
@@ -308,7 +309,7 @@ export const WithCustomRender: Story = {
     template: `
       <div>
         <ng-template #statusTemplate let-value let-row="row">
-          <span class="px-2 py-1 rounded-full text-xs" 
+          <span class="px-2 py-1 rounded-full text-xs"
                 [ngClass]="{
                   'bg-green-100 text-green-800': value === 'active',
                   'bg-red-100 text-red-800': value === 'inactive'
@@ -317,8 +318,8 @@ export const WithCustomRender: Story = {
           </span>
         </ng-template>
 
-        <bb-generic-table 
-          [data]="customData" 
+        <bb-generic-table
+          [data]="customData"
           [columns]="getCustomColumns(statusTemplate)">
         </bb-generic-table>
       </div>
@@ -350,8 +351,8 @@ Esta story demonstra como usar a propriedade \`render\` das colunas com template
 - **Status**: Exibe badges coloridos com ícones para status ativo/inativo
 \`\`\`
 <!-- Uso na tabela -->
-<bb-generic-table 
-  [data]="data" 
+<bb-generic-table
+  [data]="data"
   [columns]="[{ label: 'Status', accessor: 'status', render: statusTemplate }]">
 </bb-generic-table>
 \`\`\`

@@ -40,7 +40,7 @@
       <lucide-icon
         [img]="checkIcon"
         [size]="iconSize"
-        class="absolute flex justify-center items-center h-full w-full"
+        class="checkbox-check-icon"
         [attr.aria-hidden]="true"
         data-testid="checkbox-check-icon"
       />
@@ -51,7 +51,7 @@
       <lucide-icon
         [img]="minusIcon"
         [size]="iconSize"
-        class="absolute flex justify-center items-center h-full w-full"
+        class="checkbox-indeterminate-icon"
         [attr.aria-hidden]="true"
         data-testid="checkbox-indeterminate-icon"
       />
@@ -60,13 +60,13 @@
 
   <!-- Label and content wrapper -->
   @if (label() || helperText() || errorMessage() || successMessage()) {
-    <div class="flex-1 min-w-0">
+    <div class="checkbox-content-wrapper">
       <!-- Label -->
       @if (label()) {
         <label [for]="checkboxId" [class]="labelClasses" data-testid="checkbox-label">
           {{ label() }}
           @if (required()) {
-            <span class="text-red-500 ml-1" aria-label="Required field">*</span>
+            <span class="checkbox-required-indicator" aria-label="Required field">*</span>
           }
         </label>
       }

@@ -1,13 +1,7 @@
-<div class="flex flex-col gap-4" data-testid="generic-table-container">
-  <div
-    class="overflow-x-auto bg-white border border-bytebank-gray rounded-sm"
-    data-testid="table-wrapper"
-  >
-    <table class="w-full" role="table" aria-label="Generic data table">
-      <thead
-        class="bg-bytebank-light-green border-b border-bytebank-gray"
-        data-testid="table-header"
-      >
+<div class="generic-table-container" data-testid="generic-table-container">
+  <div class="table-wrapper" data-testid="table-wrapper">
+    <table class="table" role="table" aria-label="Generic data table">
+      <thead class="table-header" data-testid="table-header">
         <tr role="row">
           @for (col of columns(); track trackByColumnIndex($index, col)) {
             <th
@@ -28,15 +22,15 @@
       <tbody data-testid="table-body">
         @if (data().length === 0) {
           <tr role="row" data-testid="no-data-row">
-            <td [attr.colSpan]="columns().length" class="text-center py-4">
-              <span class="text-bytebank-gray" data-testid="no-data-message">
+            <td [attr.colSpan]="columns().length" class="table-no-data-cell">
+              <span class="table-no-data-message" data-testid="no-data-message">
                 Nenhum dado encontrado
               </span>
             </td>
           </tr>
         } @else {
           @for (row of pagedData(); track trackByRowIndex($index, row)) {
-            <tr role="row" class="hover:opacity-70 transition-opacity duration-200">
+            <tr role="row" class="table-row">
               @for (col of columns(); track trackByColumnIndex($index, col)) {
                 <td
                   [class]="
@@ -68,7 +62,7 @@
   </div>
 
   @if (pageSize() && totalPages() > 1) {
-    <div class="flex justify-end" data-testid="paginator-wrapper">
+    <div class="paginator-wrapper" data-testid="paginator-wrapper">
       <bb-paginator
         [currentPage]="currentPage()"
         [totalPages]="totalPages()"

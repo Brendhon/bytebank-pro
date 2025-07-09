@@ -303,14 +303,15 @@ export class SelectComponent<T = any> {
   );
 
   private labelClassesComputed = computed(() => {
-    const baseClasses = 'block text-sm font-medium mb-1';
-    const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
-    const disabledClasses = this.disabled() ? 'opacity-60' : '';
+    const baseClasses = 'select-label-base';
+    const variantClasses =
+      this.variant() === 'error' ? 'select-label-error' : 'select-label-normal';
+    const disabledClasses = this.disabled() ? 'select-label-disabled' : '';
     return `${baseClasses} ${variantClasses} ${disabledClasses}`.trim();
   });
 
   private helperTextClassesComputed = computed(() => {
-    const baseClasses = 'text-xs mt-1';
+    const baseClasses = 'select-helper-base';
     const variants: Record<SelectVariant, string> = {
       default: 'text-gray-500',
       success: 'text-bytebank-green',

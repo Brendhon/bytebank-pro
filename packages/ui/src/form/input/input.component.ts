@@ -164,18 +164,15 @@ export class InputComponent {
   });
 
   private get baseClasses(): string {
-    return 'w-full rounded-md border transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 placeholder:text-gray-400';
+    return 'input-base';
   }
 
   private variantClasses = computed(() => {
     const variants: Record<InputVariant, string> = {
-      default:
-        'border-gray-300 bg-white text-gray-900 focus:border-bytebank-blue focus:ring-bytebank-blue',
-      success:
-        'border-bytebank-green bg-white text-gray-900 focus:border-bytebank-green focus:ring-bytebank-green',
-      error: 'border-red-500 bg-white text-gray-900 focus:border-red-500 focus:ring-red-500',
-      warning:
-        'border-bytebank-orange bg-white text-gray-900 focus:border-bytebank-orange focus:ring-bytebank-orange'
+      default: 'input-default',
+      success: 'input-success',
+      error: 'input-error',
+      warning: 'input-warning'
     };
 
     return variants[this.variant()] || variants.default;
@@ -183,9 +180,9 @@ export class InputComponent {
 
   private sizeClasses = computed(() => {
     const sizes: Record<InputSize, string> = {
-      sm: 'px-3 py-1.5 text-sm min-h-[36px]',
-      md: 'px-4 py-2 text-sm min-h-[40px]',
-      lg: 'px-4 py-3 text-base min-h-[44px]'
+      sm: 'input-size-sm',
+      md: 'input-size-md',
+      lg: 'input-size-lg'
     };
 
     return sizes[this.size()] || sizes.md;
@@ -193,10 +190,10 @@ export class InputComponent {
 
   private stateClasses = computed(() => {
     if (this.disabled()) {
-      return 'opacity-60 cursor-not-allowed bg-gray-50';
+      return 'input-disabled';
     }
     if (this.readonly()) {
-      return 'bg-gray-50 cursor-default';
+      return 'input-readonly';
     }
     return '';
   });
@@ -205,7 +202,7 @@ export class InputComponent {
     let classes = '';
 
     if (this.hasPrefix()) {
-      classes += ' pl-10';
+      classes += ' input-with-prefix';
     }
 
     if (
@@ -214,25 +211,25 @@ export class InputComponent {
       this.showSuccessIcon() ||
       this.showErrorIcon()
     ) {
-      classes += ' pr-10';
+      classes += ' input-with-suffix';
     }
 
     return classes;
   });
 
   labelClasses = computed(() => {
-    const baseClasses = 'block text-base font-semibold mb-3 text-bytebank-dark-gray';
-    const variantClasses = this.variant() === 'error' ? 'text-red-700' : 'text-gray-700';
+    const baseClasses = 'input-label-base';
+    const variantClasses = this.variant() === 'error' ? 'input-label-error' : 'input-label-normal';
     return `${baseClasses} ${variantClasses}`;
   });
 
   helperTextClasses = computed(() => {
-    const baseClasses = 'text-xs mt-1';
+    const baseClasses = 'input-helper-base';
     const variants: Record<InputVariant, string> = {
-      default: 'text-gray-500',
-      success: 'text-bytebank-green',
-      error: 'text-bytebank-red',
-      warning: 'text-bytebank-orange'
+      default: 'input-helper-default',
+      success: 'input-helper-success',
+      error: 'input-helper-error',
+      warning: 'input-helper-warning'
     };
 
     return `${baseClasses} ${variants[this.variant()]}`;

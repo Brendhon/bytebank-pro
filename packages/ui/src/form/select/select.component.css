@@ -1,1 +1,136 @@
 @import '../../../styles/global.css';
+
+/* Select component specific styles */
+.select-required-indicator {
+  @apply text-red-500 ml-1;
+}
+
+.select-trigger-content {
+  @apply flex items-center justify-between w-full;
+}
+
+.select-display-content {
+  @apply flex items-center flex-1 min-w-0;
+}
+
+.select-loading-container {
+  @apply flex items-center space-x-2;
+}
+
+.select-loading-spinner {
+  @apply animate-spin rounded-full h-4 w-4 border-2 border-gray-300 border-t-bytebank-blue;
+}
+
+.select-loading-text {
+  @apply text-gray-500;
+}
+
+.select-tags-container {
+  @apply flex flex-wrap gap-1 max-w-full;
+}
+
+.select-tag {
+  @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-bytebank-blue text-white;
+}
+
+.select-tag-remove-button {
+  @apply ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600;
+}
+
+.select-display-value {
+  @apply truncate;
+}
+
+.select-display-value-selected {
+  @apply text-gray-900;
+}
+
+.select-display-value-placeholder {
+  @apply text-gray-500;
+}
+
+.select-icons-container {
+  @apply flex items-center space-x-1 ml-2 flex-shrink-0;
+}
+
+.select-clear-button {
+  @apply p-1 rounded hover:bg-gray-100 focus:outline-none focus:bg-gray-100;
+}
+
+.select-clear-icon {
+  @apply text-gray-400;
+}
+
+.select-dropdown-container {
+  @apply pointer-events-none;
+}
+
+.select-dropdown-icon {
+  @apply text-gray-400;
+}
+
+.select-search-container {
+  @apply sticky top-0 bg-white border-b border-gray-200 p-2;
+}
+
+.select-search-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:border-bytebank-blue;
+}
+
+.select-options-container {
+  @apply py-1;
+}
+
+.select-no-options-message {
+  @apply px-3 py-2 text-gray-500 text-sm;
+}
+
+.select-option-selected {
+  @apply text-white;
+}
+
+.select-option-focused {
+  @apply bg-bytebank-blue text-white;
+}
+
+.select-option-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.select-option-content {
+  @apply flex items-center justify-between;
+}
+
+.select-option-label {
+  @apply truncate;
+}
+
+.select-check-icon {
+  @apply text-bytebank-blue;
+}
+
+.select-check-icon-focused {
+  @apply text-white;
+}
+
+/* Select label classes */
+.select-label-base {
+  @apply block text-sm font-medium mb-1;
+}
+
+.select-label-error {
+  @apply text-red-700;
+}
+
+.select-label-normal {
+  @apply text-gray-700;
+}
+
+.select-label-disabled {
+  @apply opacity-60;
+}
+
+/* Select helper text classes */
+.select-helper-base {
+  @apply text-xs mt-1;
+}

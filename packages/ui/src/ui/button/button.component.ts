@@ -66,7 +66,7 @@ export class ButtonComponent {
   }
 
   private get baseClasses(): string {
-    return 'inline-flex items-center justify-center rounded-md font-medium transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 relative button';
+    return 'button button-base';
   }
 
   private get variantClasses(): string {
@@ -84,9 +84,9 @@ export class ButtonComponent {
 
   private get sizeClasses(): string {
     const sizes: Record<ButtonSize, string> = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-sm',
-      lg: 'px-6 py-3 text-base'
+      sm: 'button-size-sm',
+      md: 'button-size-md',
+      lg: 'button-size-lg'
     };
 
     return sizes[this.size()] || sizes.md;
@@ -94,7 +94,7 @@ export class ButtonComponent {
 
   private get stateClasses(): string {
     if (this.disabled() || this.loading()) {
-      return 'opacity-60 cursor-not-allowed pointer-events-none';
+      return 'button-state-disabled';
     }
     return '';
   }
