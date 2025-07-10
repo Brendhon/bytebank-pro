@@ -10,7 +10,7 @@
 
 /* Transaction value styling */
 .transaction-value {
-  @apply font-semibold;
+  @apply font-semibold flex items-center justify-end;
 }
 
 .transaction-value-outflow {
