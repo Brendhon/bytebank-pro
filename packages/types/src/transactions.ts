@@ -12,8 +12,8 @@ export enum TransactionType {
 }
 
 // Types
-type TransactionDescKey = keyof typeof TransactionDesc;
-type TransactionTypeKey = keyof typeof TransactionType;
+export type TransactionDescKey = keyof typeof TransactionDesc;
+export type TransactionTypeKey = keyof typeof TransactionType;
 export type TransactionBreakdown = Record<TransactionDescKey, number>;
 
 // Interface for transaction

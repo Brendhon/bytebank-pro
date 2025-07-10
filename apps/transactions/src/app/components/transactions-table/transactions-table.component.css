@@ -1,0 +1,51 @@
+/* Transaction table container */
+.transactions-table-section {
+  @apply w-full;
+}
+
+/* Transaction type description */
+.transaction-type-desc {
+  @apply text-gray-700;
+}
+
+/* Transaction value styling */
+.transaction-value {
+  @apply font-semibold;
+}
+
+.transaction-value-outflow {
+  @apply text-bytebank-red;
+}
+
+.transaction-value-inflow {
+  @apply text-bytebank-green;
+}
+
+/* Action buttons container */
+.action-buttons-container {
+  @apply flex gap-2;
+}
+
+/* Action button styling */
+.action-button {
+  @apply cursor-pointer bg-bytebank-blue text-white w-6 h-6 rounded-full flex items-center justify-center;
+  @apply hover:bg-bytebank-blue/80 transition-colors duration-200;
+  @apply focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:ring-offset-2;
+}
+
+.action-button:focus-visible {
+  @apply ring-2 ring-bytebank-blue ring-offset-2;
+}
+
+/* Icon styling within buttons */
+.action-button-icon {
+  @apply text-white;
+}
+
+.action-button:hover {
+  @apply bg-bytebank-gray;
+}
+
+.action-button:hover .action-button-icon {
+  @apply text-white;
+}

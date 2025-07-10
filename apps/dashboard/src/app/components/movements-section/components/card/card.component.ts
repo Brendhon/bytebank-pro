@@ -1,4 +1,4 @@
-import { CurrencyFormatPipe } from '@/pipes/currency-format.pipe';
+import { CurrencyFormatPipe } from '@/core/pipes/currency-format.pipe';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { CardVariant } from '@bytebank-pro/types';

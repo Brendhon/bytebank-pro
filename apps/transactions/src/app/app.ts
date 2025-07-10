@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { TransactionsPageComponent } from './pages/transactions/transactions.component';
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [CommonModule, TransactionsPageComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

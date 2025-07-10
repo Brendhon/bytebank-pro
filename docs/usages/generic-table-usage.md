@@ -55,7 +55,73 @@ O componente `bb-paginator` é usado internamente e não precisa ser invocado di
 
 ## Renderização Customizada
 
-Para uma renderização mais complexa das células, você pode passar um `TemplateRef` na definição da coluna.
+Para uma renderização mais complexa das células, você pode usar templates customizados. O padrão recomendado é definir os templates no HTML e passá-los via método.
+
+### Padrão Recomendado: Templates Inline
+
+Este é o padrão mais eficiente e recomendado para renderização customizada:
+
+```html
+<!-- no seu template -->
+<ng-template #statusTemplate let-value let-row="row">
+  <span [ngClass]="value === 'active' ? 'text-green-500' : 'text-red-500'">
+    {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}
+  </span>
+</ng-template>
+
+<ng-template #actionTemplate let-value let-row="row">
+  <div class="flex gap-2">
+    <button class="btn-edit" (click)="onEdit(row)">
+      <i-lucide [img]="editIcon" [size]="16"></i-lucide>
+    </button>
+    <button class="btn-delete" (click)="onDelete(row)">
+      <i-lucide [img]="deleteIcon" [size]="16"></i-lucide>
+    </button>
+  </div>
+</ng-template>
+
+<bb-generic-table
+  [data]="usersWithStatus"
+  [columns]="getColumnsWithTemplates(statusTemplate, actionTemplate)"
+/>
+```
+
+```typescript
+// no seu componente.ts
+import { TemplateRef } from '@angular/core';
+import { Edit, Trash } from 'lucide-angular';
+
+export class MyComponent {
+  // Ícones para os botões de ação
+  editIcon = Edit;
+  deleteIcon = Trash;
+
+  // Método para criar colunas com templates
+  getColumnsWithTemplates(
+    statusTemplate: TemplateRef<any>,
+    actionTemplate: TemplateRef<any>
+  ): TableColumn<any>[] {
+    return [
+      { label: 'ID', accessor: 'id' },
+      { label: 'Nome', accessor: 'name' },
+      { label: 'Status', accessor: 'status', render: statusTemplate },
+      { label: 'Ações', accessor: 'id', render: actionTemplate }
+    ];
+  }
+
+  onEdit(user: any) {
+    console.log('Edit user:', user);
+  }
+
+  onDelete(user: any) {
+    console.log('Delete user:', user);
+  }
+}
+```
+
+### Padrão Alternativo: ViewChild (Menos Recomendado)
+
+Se preferir usar `@ViewChild`, você pode fazer assim:
 
 ```html
 <!-- no seu template -->
@@ -68,28 +134,104 @@ Para uma renderização mais complexa das células, você pode passar um `Templa
 
 ```typescript
 // no seu componente.ts
-import { ViewChild, TemplateRef } from '@angular/core';
+import { ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 
-// ...
+export class MyComponent implements AfterViewInit {
+  @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
 
-@ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
+  columnsWithTemplate: TableColumn<any>[] = [];
 
-ngAfterViewInit() {
-  this.columnsWithTemplate = [
-    { label: 'Nome', accessor: 'name' },
-    {
-      label: 'Status',
-      accessor: 'status',
-      render: this.statusTemplate, // Passando o template
-    },
-  ];
+  ngAfterViewInit() {
+    this.columnsWithTemplate = [
+      { label: 'Nome', accessor: 'name' },
+      {
+        label: 'Status',
+        accessor: 'status',
+        render: this.statusTemplate
+      }
+    ];
+  }
 }
 ```
 
-No template customizado, você tem acesso a duas variáveis:
+### Contexto dos Templates
 
-- `let-value`: O valor da propriedade acessada.
-- `let-row="row"`: O objeto completo da linha de dados.
+No template customizado, você tem acesso a estas variáveis:
+
+- `let-value`: O valor da propriedade acessada pela coluna
+- `let-row="row"`: O objeto completo da linha de dados
+- `let-index`: O índice da linha (opcional)
+
+### Exemplo Prático: Tabela de Transações
+
+Aqui está um exemplo completo de uma tabela de transações com renderização customizada:
+
+```html
+<!-- Templates para renderização customizada -->
+<ng-template #typeTemplate let-value let-row="row">
+  <span class="transaction-type">{{ getTransactionDesc(value) }}</span>
+</ng-template>
+
+<ng-template #valueTemplate let-value let-row="row">
+  <span [class]="getValueClasses(row.type)">
+    @if (row.type === 'outflow') { - } {{ value | currencyFormat }}
+  </span>
+</ng-template>
+
+<ng-template #actionsTemplate let-value let-row="row">
+  <div class="action-buttons">
+    <button (click)="onEdit(row)" aria-label="Editar transação">
+      <i-lucide [img]="editIcon" [size]="12"></i-lucide>
+    </button>
+    <button (click)="onDelete(row)" aria-label="Deletar transação">
+      <i-lucide [img]="deleteIcon" [size]="12"></i-lucide>
+    </button>
+  </div>
+</ng-template>
+
+<!-- Tabela com templates customizados -->
+<bb-generic-table
+  [data]="transactions"
+  [columns]="getTransactionColumns(typeTemplate, valueTemplate, actionsTemplate)"
+  [pageSize]="10"
+/>
+```
+
+```typescript
+export class TransactionsComponent {
+  editIcon = Edit;
+  deleteIcon = Trash;
+
+  getTransactionColumns(
+    typeTemplate: TemplateRef<any>,
+    valueTemplate: TemplateRef<any>,
+    actionsTemplate: TemplateRef<any>
+  ): TableColumn<ITransaction>[] {
+    return [
+      { label: 'Data', accessor: 'date' },
+      { label: 'Descrição', accessor: 'desc', render: typeTemplate },
+      { label: 'Valor', accessor: 'value', render: valueTemplate },
+      { label: 'Ações', accessor: '_id', render: actionsTemplate }
+    ];
+  }
+
+  getTransactionDesc(type: string): string {
+    return TransactionDesc[type] || type;
+  }
+
+  getValueClasses(type: string): string {
+    return type === 'outflow' ? 'text-red-600' : 'text-green-600';
+  }
+
+  onEdit(transaction: ITransaction) {
+    // Lógica de edição
+  }
+
+  onDelete(transaction: ITransaction) {
+    // Lógica de exclusão
+  }
+}
+```
 
 ## API de Propriedades
 
@@ -108,9 +250,16 @@ A interface `TableColumn` define a estrutura de cada coluna:
 ```typescript
 export interface TableColumn<T> {
   label: string; // O texto do cabeçalho da coluna
-  accessor: keyof T | string; // A chave do objeto de dados ou um caminho aninhado (ex: 'user.name')
+  accessor: keyof T; // A chave do objeto de dados
   render?: TemplateRef<any>; // Template para renderização customizada da célula
-  headerClasses?: string; // Classes CSS para o cabeçalho
-  cellClasses?: string; // Classes CSS para as células da coluna
 }
 ```
+
+## Boas Práticas
+
+1. **Use o padrão de templates inline** para melhor performance e legibilidade
+2. **Defina templates reutilizáveis** quando possível
+3. **Use ícones Lucide** com `i-lucide` e propriedade `[img]`
+4. **Mantenha acessibilidade** com `aria-label` e `data-testid`
+5. **Organize CSS** em classes semânticas ao invés de classes Tailwind inline
+6. **Use tipagem forte** com generics para melhor segurança de tipos

@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy, signal, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular';
-import { DateLongFormatterPipe } from '@/pipes/date-long-formatter.pipe';
-import { CurrencyFormatPipe } from '@/pipes/currency-format.pipe';
+import { DateLongFormatterPipe } from '@/core/pipes/date-long-formatter.pipe';
+import { CurrencyFormatPipe } from '@/core/pipes/currency-format.pipe';
 
 /**
  * WelcomeCard component displays user's greeting, current date, and account balance.

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GenericTableComponent, TableColumn } from './generic-table.component';
+import { TableColumn } from '@bytebank-pro/types';
+import { GenericTableComponent } from './generic-table.component';
 
 interface TestData {
   id: number;

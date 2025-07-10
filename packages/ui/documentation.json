@@ -200,21 +200,21 @@
         "name": "AllVariants",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
-      },
-      {
-        "name": "AllVariants",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; gap: 2rem;\">\n        <bb-logo variant=\"full\" size=\"md\"></bb-logo>\n        <bb-logo variant=\"icon\" size=\"md\"></bb-logo>\n      </div>\n    `\n  })\n}"
+      },
+      {
+        "name": "AllVariants",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"flex flex-col gap-4 items-end p-8 w-full h-screen relative\">\n        <bb-toast message=\"Mensagem de Sucesso!\" variant=\"success\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Erro!\" variant=\"error\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n        <bb-toast message=\"Mensagem de Informação!\" variant=\"info\" [show]=\"true\" [duration]=\"0\"></bb-toast>\n      </div>\n    `\n  }),\n  parameters: {\n    // Override default layout for this specific story to display all toasts\n    layout: 'padded'\n  }\n}"
       },
       {
         "name": "AutoClosing",
@@ -320,21 +320,21 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    isDecorative: false\n  }\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
       },
       {
         "name": "Default",
@@ -740,21 +740,21 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<ToastComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<LogoComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<ToastComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -910,21 +910,21 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    ariaLabel: undefined,\n    isDecorative: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-logo ${argsToTemplate(args)}></bb-logo>`\n  })\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/ui/toast/toast.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
       },
       {
         "name": "Playground",
@@ -1421,8 +1421,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<ToastComponent>",
-        "file": "src/ui/toast/toast.component.stories.ts",
+        "rawtype": "StoryObj<LogoComponent>",
+        "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1432,8 +1432,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<LogoComponent>",
-        "file": "src/ui/logo/logo.component.stories.ts",
+        "rawtype": "StoryObj<ToastComponent>",
+        "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2835,19 +2835,6 @@
           "kind": 183
         }
       ],
-      "src/ui/toast/toast.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<ToastComponent>",
-          "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/ui/logo/logo.component.stories.ts": [
         {
           "name": "Story",
@@ -2855,6 +2842,19 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<LogoComponent>",
           "file": "src/ui/logo/logo.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
+      "src/ui/toast/toast.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<ToastComponent>",
+          "file": "src/ui/toast/toast.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

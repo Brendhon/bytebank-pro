@@ -1,0 +1,58 @@
+<section class="transactions-table-section" data-testid="transactions-table-section">
+  <!-- Template for transaction type description -->
+  <ng-template #typeRenderTemplate let-value let-row="row">
+    <span class="transaction-type-desc">{{ getTransactionDesc(value) }}</span>
+  </ng-template>
+
+  <!-- Template for transaction value with conditional styling -->
+  <ng-template #valueRenderTemplate let-value let-row="row">
+    <span [class]="getValueClasses(row.type)">
+      @if (row.type === 'outflow') {
+        -
+      }
+      {{ value | currencyFormat }}
+    </span>
+  </ng-template>
+
+  <!-- Template for action buttons -->
+  <ng-template #actionsRenderTemplate let-value let-row="row">
+    <div class="action-buttons-container">
+      <button
+        [class]="getActionButtonClassName()"
+        (click)="onEdit.emit(row)"
+        aria-label="Editar transação"
+        data-testid="edit-transaction-button"
+      >
+        <i-lucide
+          [img]="icons.pencil"
+          [size]="12"
+          aria-hidden="true"
+          class="action-button-icon"
+        ></i-lucide>
+      </button>
+      <button
+        [class]="getActionButtonClassName()"
+        (click)="onDelete.emit(row)"
+        aria-label="Deletar transação"
+        data-testid="delete-transaction-button"
+      >
+        <i-lucide
+          [img]="icons.trash"
+          [size]="12"
+          aria-hidden="true"
+          class="action-button-icon"
+        ></i-lucide>
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Generic table with custom column rendering -->
+  <bb-generic-table
+    [data]="transactions"
+    [columns]="
+      getColumnsWithTemplates(typeRenderTemplate, valueRenderTemplate, actionsRenderTemplate)
+    "
+    [pageSize]="pageSize"
+    data-testid="transactions-table"
+  ></bb-generic-table>
+</section>
