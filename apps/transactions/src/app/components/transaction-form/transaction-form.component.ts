@@ -41,7 +41,7 @@ interface FormErrors {
  * Uses components from the ByteBank Pro UI library and follows modern Angular patterns.
  */
 @Component({
-  selector: 'app-transaction-form',
+  selector: 'bb-transaction-form',
   templateUrl: './transaction-form.component.html',
   styleUrls: ['./transaction-form.component.css'],
   standalone: true,

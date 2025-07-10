@@ -7,16 +7,24 @@
 </div>
 
 <bb-transactions-table
-  [transactions]="transactions"
+  [transactions]="transactions()"
   [pageSize]="5"
   (onEdit)="handleEditTransaction($event)"
   (onDelete)="handleDeleteTransaction($event)"
 ></bb-transactions-table>
 
 <!-- Transaction Form Component -->
-<app-transaction-form
+<bb-transaction-form
   [isOpen]="isDialogOpen"
   [transaction]="editingTransaction"
   (transactionSubmit)="handleTransactionSubmit($event)"
   (dialogClose)="closeDialog()"
-></app-transaction-form>
+></bb-transaction-form>
+
+<!-- Confirm Deletion Component -->
+<bb-confirm-deletion
+  [isOpen]="isDeleteDialogOpen"
+  [transaction]="transactionToDelete"
+  (confirm)="handleDeleteConfirm($event)"
+  (cancel)="handleDeleteCancel()"
+></bb-confirm-deletion>

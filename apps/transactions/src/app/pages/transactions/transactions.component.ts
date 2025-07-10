@@ -1,22 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ButtonComponent } from '@bytebank-pro/ui';
 import { TransactionsTableComponent } from '@/components/transactions-table/transactions-table.component';
 import { TransactionFormComponent } from '@/components/transaction-form/transaction-form.component';
+import { ConfirmDeletionComponent } from '@/components/confirm-deletion/confirm-deletion.component';
 import { ITransaction } from '@bytebank-pro/types';
 
 @Component({
   selector: 'bb-transactions',
   standalone: true,
-  imports: [ButtonComponent, TransactionsTableComponent, TransactionFormComponent],
+  imports: [
+    ButtonComponent,
+    TransactionsTableComponent,
+    TransactionFormComponent,
+    ConfirmDeletionComponent
+  ],
   templateUrl: './transactions.component.html'
 })
-export class TransactionsPageComponent implements OnInit {
+export class TransactionsPageComponent {
   // Dialog state
   isDialogOpen = false;
   editingTransaction: ITransaction | null = null;
 
-  // Mock data for transactions
-  transactions: ITransaction[] = [
+  // Delete confirmation dialog state
+  isDeleteDialogOpen = false;
+  transactionToDelete: ITransaction | null = null;
+
+  // Signal for transactions
+  private _transactions = signal<ITransaction[]>([
     {
       _id: '1',
       date: '2024-01-15',
@@ -105,14 +115,12 @@ export class TransactionsPageComponent implements OnInit {
       desc: 'payment',
       value: 89.9
     }
-  ];
+  ]);
+
+  // Public readonly signal for template
+  transactions = this._transactions.asReadonly();
 
   constructor() {}
-
-  ngOnInit(): void {
-    // Aqui virá a lógica para carregar os dados do transactions
-    console.log('transactions page initialized');
-  }
 
   // Dialog methods
   openDialog(): void {
@@ -144,14 +152,17 @@ export class TransactionsPageComponent implements OnInit {
 
     if (this.editingTransaction) {
       // Update existing transaction
-      const index = this.transactions.findIndex((t) => t._id === this.editingTransaction?._id);
-      if (index !== -1) {
-        this.transactions[index] = { ...transaction, _id: this.editingTransaction._id };
-      }
+      this._transactions.update((transactions) =>
+        transactions.map((t) =>
+          t._id === this.editingTransaction?._id
+            ? { ...transaction, _id: this.editingTransaction!._id }
+            : t
+        )
+      );
     } else {
       // Add new transaction
       const newTransaction = { ...transaction, _id: Date.now().toString() };
-      this.transactions.unshift(newTransaction);
+      this._transactions.update((transactions) => [newTransaction, ...transactions]);
     }
 
     this.closeDialog();
@@ -159,8 +170,47 @@ export class TransactionsPageComponent implements OnInit {
 
   // Handle delete transaction
   handleDeleteTransaction(transaction: ITransaction): void {
+    console.log('Opening delete confirmation for transaction:', transaction);
+    this.transactionToDelete = transaction;
+    this.isDeleteDialogOpen = true;
+  }
+
+  // Handle delete confirmation
+  handleDeleteConfirm(transaction: ITransaction): void {
     console.log('Deleting transaction:', transaction);
-    // Aqui virá a lógica para deletar a transação
-    // Por exemplo, mostrar um confirm dialog
+    this._transactions.update((transactions) =>
+      transactions.filter((t) => t._id !== transaction._id)
+    );
+    this.closeDeleteDialog();
+  }
+
+  // Handle delete cancellation
+  handleDeleteCancel(): void {
+    console.log('Delete cancelled');
+    this.closeDeleteDialog();
+  }
+
+  // Close delete dialog
+  closeDeleteDialog(): void {
+    this.isDeleteDialogOpen = false;
+    this.transactionToDelete = null;
+  }
+
+  // Additional methods for simulation
+  addMockTransaction(): void {
+    const mockTransaction: ITransaction = {
+      _id: Date.now().toString(),
+      date: new Date().toISOString().split('T')[0],
+      alias: 'Transação Mock',
+      type: Math.random() > 0.5 ? 'inflow' : 'outflow',
+      desc: Math.random() > 0.5 ? 'deposit' : 'payment',
+      value: Math.random() * 1000
+    };
+
+    this._transactions.update((transactions) => [mockTransaction, ...transactions]);
+  }
+
+  clearAllTransactions(): void {
+    this._transactions.set([]);
   }
 }

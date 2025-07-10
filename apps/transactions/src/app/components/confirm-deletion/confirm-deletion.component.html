@@ -1,0 +1,42 @@
+<bb-dialog
+  [isOpen]="isOpen()"
+  (close)="onCancel()"
+  [showCloseButton]="false"
+  maxWidth="40rem"
+  data-testid="confirm-deletion-dialog"
+  class="confirm-deletion-dialog"
+>
+  <div class="confirm-deletion-container">
+    <h2 class="confirm-deletion-title">Você está prestes a excluir esta transação</h2>
+
+    <p class="confirm-deletion-message">
+      Esta ação removerá permanentemente a transação "{{ getTransactionAlias() }}" do seu histórico.
+      Tem certeza de que deseja continuar?
+    </p>
+
+    <!-- Dialog Actions -->
+    <div class="dialog-actions">
+      <bb-button
+        type="button"
+        variant="dark"
+        size="md"
+        ariaLabel="Cancelar exclusão"
+        (click)="onCancel()"
+        data-testid="confirm-deletion-cancel-button"
+      >
+        Cancelar
+      </bb-button>
+
+      <bb-button
+        type="button"
+        variant="outlineOrange"
+        size="md"
+        ariaLabel="Confirmar exclusão"
+        (click)="onConfirm()"
+        data-testid="confirm-deletion-confirm-button"
+      >
+        Confirmar
+      </bb-button>
+    </div>
+  </div>
+</bb-dialog>
