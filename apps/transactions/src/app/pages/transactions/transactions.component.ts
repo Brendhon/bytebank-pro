@@ -134,6 +134,7 @@ export class TransactionsPageComponent implements OnInit {
 
   // Handle delete success
   handleDeleteSuccess(): void {
+    this.loadTransactions();
     this.closeDeleteDialog();
   }
 
