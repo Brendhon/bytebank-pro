@@ -4,6 +4,16 @@ This guide outlines best practices for Angular component development in ByteBank
 
 ## 🎨 General Guidelines
 
+### 📝 Documentation
+
+It is **mandatory** to keep the usage documentation synchronized with the components in the `packages/ui` package.
+
+- **When creating a new component:** A corresponding `component-name-usage.md` file must be created in the `docs/usages` directory.
+- **When modifying an existing component:** Any changes to its API (`@Input`, `@Output`, etc.) or behavior must be immediately reflected in its corresponding usage documentation.
+- **When deleting a component:** The corresponding usage documentation file must also be deleted.
+
+This ensures that the documentation is always a reliable source of information for all developers.
+
 ### Icons
 
 - Use only official Lucide icons via `lucide-angular`'s `i-lucide` component with the `[img]` property. Do not use custom SVGs or other icon libraries. Import only necessary icons.
