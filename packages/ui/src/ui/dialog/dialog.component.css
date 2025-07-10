@@ -9,7 +9,7 @@
 /* Dialog Backdrop - provides blur effect */
 .bb-dialog-backdrop {
   @apply fixed inset-0 bg-black/20 backdrop-blur-sm;
-  @apply flex items-center justify-center p-4;
+  @apply flex items-center justify-center p-2 sm:p-4;
   @apply transition-all duration-300 ease-in-out;
   @apply min-h-screen w-full;
   @apply overflow-y-auto;
@@ -18,21 +18,22 @@
 /* Dialog Container - the actual dialog box */
 .bb-dialog-container {
   @apply relative bg-white rounded-lg shadow-2xl;
-  @apply w-full max-w-lg mx-auto my-8;
+  @apply w-full max-w-lg mx-2 sm:mx-auto my-4 sm:my-8;
   @apply transform transition-all duration-300 ease-in-out;
   @apply border border-gray-200;
   @apply focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:ring-offset-2;
+  @apply max-h-[calc(100vh-2rem)];
 }
 
 /* Dialog Header */
 .bb-dialog-header {
-  @apply flex items-center justify-between p-6 pb-4;
+  @apply flex items-center justify-between p-4 sm:p-6 pb-3 sm:pb-4;
   @apply border-b border-gray-100;
 }
 
 /* Dialog Title */
 .bb-dialog-title {
-  @apply text-xl font-semibold text-gray-900;
+  @apply text-lg sm:text-xl font-semibold text-gray-900;
   @apply flex-1 pr-4;
 }
 
@@ -47,7 +48,7 @@
 
 /* Dialog Content */
 .bb-dialog-content {
-  @apply p-6;
+  @apply p-4;
 }
 
 /* Animation states */
@@ -57,30 +58,6 @@
 
 .bb-dialog-overlay[style*='display: none'] .bb-dialog-container {
   @apply scale-95 opacity-0;
-}
-
-/* Responsive design */
-@media (max-width: 640px) {
-  .bb-dialog-backdrop {
-    @apply p-2;
-  }
-
-  .bb-dialog-container {
-    @apply mx-2 my-4;
-    @apply max-h-[calc(100vh-2rem)];
-  }
-
-  .bb-dialog-header {
-    @apply p-4 pb-3;
-  }
-
-  .bb-dialog-content {
-    @apply p-4;
-  }
-
-  .bb-dialog-title {
-    @apply text-lg;
-  }
 }
 
 /* High contrast mode support */

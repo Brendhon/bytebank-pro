@@ -20,31 +20,16 @@
 }
 
 .confirm-deletion-title {
-  @apply text-2xl font-bold text-bytebank-dark mb-2 text-center;
+  @apply text-xl sm:text-2xl font-bold text-bytebank-dark mb-2 text-center;
 }
 
 .confirm-deletion-message {
-  @apply text-bytebank-dark text-center text-base leading-relaxed mt-4;
+  @apply text-bytebank-dark text-center text-sm sm:text-base leading-relaxed mt-4;
 }
 
 /* Dialog actions styling */
 .dialog-actions {
-  @apply flex justify-center gap-3 mt-6;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .bb-confirm-deletion-wrapper h2 {
-    @apply text-xl;
-  }
-
-  .bb-confirm-deletion-wrapper p {
-    @apply text-sm;
-  }
-
-  .dialog-actions {
-    @apply flex-col gap-2;
-  }
+  @apply flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 mt-6;
 }
 
 /* High contrast mode support */

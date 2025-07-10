@@ -25,11 +25,11 @@
 }
 
 .register-title {
-  @apply text-2xl font-bold text-gray-900 mb-2;
+  @apply text-xl sm:text-2xl font-bold text-gray-900 mb-2;
 }
 
 .register-form {
-  @apply w-full flex flex-col gap-4;
+  @apply w-full flex flex-col gap-3 sm:gap-4;
 }
 
 /* Loading state overlay */
@@ -41,17 +41,6 @@
 .bb-register-form-wrapper .bb-checkbox-container label {
   @apply text-xs leading-relaxed;
   line-height: 1.5;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .bb-register-form-wrapper form {
-    @apply space-y-3;
-  }
-
-  .bb-register-form-wrapper h2 {
-    @apply text-xl;
-  }
 }
 
 /* High contrast mode support */
