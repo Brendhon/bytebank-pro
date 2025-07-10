@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+  output,
+  signal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ITransaction, TransactionDescKey, TransactionTypeKey } from '@bytebank-pro/types';
 import {
@@ -127,6 +135,9 @@ export class TransactionFormComponent {
     { value: 'withdrawal', label: 'Saque' },
     { value: 'payment', label: 'Pagamento' }
   ];
+
+  // Effect to update form data when transaction input changes
+  private readonly transactionEffect = effect(() => this.resetForm());
 
   /**
    * Function to update errors
@@ -335,22 +346,32 @@ export class TransactionFormComponent {
    * Resets the form to initial state
    */
   private resetForm(): void {
-    this.formData.set({
+    // Get transaction data
+    const transaction = this.transaction();
+
+    // Default form data values
+    const data: FormData = {
       date: '',
       alias: '',
       type: 'inflow',
       desc: 'deposit',
       value: 0
-    });
+    };
 
-    this.formErrors.set({
-      date: '',
-      alias: '',
-      type: '',
-      desc: '',
-      value: ''
-    });
+    // If editing, set form data to transaction values
+    if (transaction) {
+      // Set form data to transaction values
+      data.date = transaction.date;
+      data.alias = transaction.alias || '';
+      data.type = transaction.type;
+      data.desc = transaction.desc;
+      data.value = transaction.value;
+    }
 
+    // Set form data
+    this.formData.set(data);
+
+    // Reset loading state
     this.isLoading.set(false);
   }
 
