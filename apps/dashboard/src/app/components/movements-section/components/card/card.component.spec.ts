@@ -210,9 +210,9 @@ describe('CardComponent', () => {
 
   describe('CSS Classes', () => {
     it('should have base CSS classes', () => {
-      expect(element.classList).toContain('w-[200px]');
+      expect(element.classList).toContain('w-52');
 
-      expect(element.classList).toContain('h-[160px]');
+      expect(element.classList).toContain('h-40');
 
       expect(element.classList).toContain('rounded-sm');
 
@@ -231,7 +231,7 @@ describe('CardComponent', () => {
 
       expect(element.classList).toContain('another-class');
 
-      expect(element.classList).toContain('w-[200px]'); // Base class should still be present
+      expect(element.classList).toContain('w-52'); // Base class should still be present
     });
   });
 
@@ -259,7 +259,7 @@ describe('CardComponent', () => {
 
       expect(classes).toContain('extra-class');
 
-      expect(classes).toContain('w-[200px]');
+      expect(classes).toContain('w-52');
     });
   });
 });

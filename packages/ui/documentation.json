@@ -300,16 +300,6 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -330,6 +320,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">Conteúdo do popover</p>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -340,11 +340,11 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">Conteúdo do popover</p>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
       },
       {
         "name": "Disabled",
@@ -720,16 +720,6 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<DialogComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -750,6 +740,16 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<PopoverComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n        `\n      }\n    }\n  },\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: [\n        'top',\n        'bottom',\n        'left',\n        'right',\n        'top-start',\n        'top-end',\n        'bottom-start',\n        'bottom-end'\n      ] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -760,11 +760,11 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
-        "type": "Meta<PopoverComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n        `\n      }\n    }\n  },\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: [\n        'top',\n        'bottom',\n        'left',\n        'right',\n        'top-start',\n        'top-end',\n        'bottom-start',\n        'bottom-end'\n      ] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+        "type": "Meta<DialogComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
       },
       {
         "name": "MiddlePage",
@@ -890,16 +890,6 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -920,6 +910,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -930,11 +930,11 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
       },
       {
         "name": "preview",
@@ -1399,17 +1399,6 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<DialogComponent>",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
         "rawtype": "StoryObj<ImgComponent>",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
@@ -1432,6 +1421,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<PopoverComponent>",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ToastComponent>",
         "file": "src/ui/toast/toast.component.stories.ts",
         "deprecated": false,
@@ -1443,8 +1443,8 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
-        "rawtype": "StoryObj<PopoverComponent>",
-        "file": "src/ui/popover/popover.component.stories.ts",
+        "rawtype": "StoryObj<DialogComponent>",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2809,19 +2809,6 @@
           "kind": 183
         }
       ],
-      "src/ui/dialog/dialog.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<DialogComponent>",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
       "src/ui/img/img.component.stories.ts": [
         {
           "name": "Story",
@@ -2848,6 +2835,19 @@
           "kind": 183
         }
       ],
+      "src/ui/popover/popover.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<PopoverComponent>",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "src/ui/toast/toast.component.stories.ts": [
         {
           "name": "Story",
@@ -2861,13 +2861,13 @@
           "kind": 183
         }
       ],
-      "src/ui/popover/popover.component.stories.ts": [
+      "src/ui/dialog/dialog.component.stories.ts": [
         {
           "name": "Story",
           "ctype": "miscellaneous",
           "subtype": "typealias",
-          "rawtype": "StoryObj<PopoverComponent>",
-          "file": "src/ui/popover/popover.component.stories.ts",
+          "rawtype": "StoryObj<DialogComponent>",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",

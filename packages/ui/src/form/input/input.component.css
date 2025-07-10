@@ -32,15 +32,15 @@
 
 /* Input size classes */
 .input-size-sm {
-  @apply px-3 py-1.5 text-sm min-h-[36px];
+  @apply px-3 py-1.5 text-sm min-h-9;
 }
 
 .input-size-md {
-  @apply px-4 py-2 text-sm min-h-[40px];
+  @apply px-4 py-2 text-sm min-h-10;
 }
 
 .input-size-lg {
-  @apply px-4 py-3 text-base min-h-[44px];
+  @apply px-4 py-3 text-base min-h-11;
 }
 
 /* Input state classes */

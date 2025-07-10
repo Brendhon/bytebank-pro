@@ -1,5 +1,5 @@
 .button {
-  @apply w-[150px] h-[40px] rounded-sm relative transition-colors;
+  @apply w-40 h-10 rounded-sm relative transition-colors;
   @apply disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer;
   @apply text-white text-sm font-semibold flex items-center justify-center;
   @apply bg-bytebank-orange hover:bg-bytebank-dark;

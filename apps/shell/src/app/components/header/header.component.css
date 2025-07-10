@@ -1,6 +1,6 @@
-/* 
+/*
  * Header Component Styles
- * 
+ *
  * Note: Most styles are handled by global CSS and TailwindCSS utility classes.
  * This file is created to follow the component guidelines but contains minimal styles.
  */
@@ -11,5 +11,5 @@ header {
   @apply px-6 flex items-center;
   @apply text-sm text-white;
   @apply bg-bytebank-dark;
-  @apply min-h-[72px];
+  @apply min-h-20;
 }

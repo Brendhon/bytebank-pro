@@ -95,7 +95,7 @@ export class GenericTableComponent<T> {
 
   /**
    * Returns the combined CSS classes for a table cell (<th> or <td>).
-   * @param baseClass - The base CSS class string (e.g., 'px-8 w-[200px] h-[50px] text-dark text-left').
+   * @param baseClass - The base CSS class string (e.g., 'px-8 w-48 h-12 text-dark text-left').
    * @param additionalClasses - Any additional CSS classes to apply.
    * @returns A single string of combined CSS classes.
    */

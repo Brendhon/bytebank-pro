@@ -278,9 +278,9 @@ export class SelectComponent<T = any> {
 
   private sizeClassesComputed = computed(() => {
     const sizes: Record<SelectSize, string> = {
-      sm: 'min-h-[32px] text-sm',
-      md: 'min-h-[40px] text-sm',
-      lg: 'min-h-[48px] text-base'
+      sm: 'min-h-8 text-sm',
+      md: 'min-h-10 text-sm',
+      lg: 'min-h-12 text-base'
     };
     return sizes[this.size()] || sizes['md'];
   });

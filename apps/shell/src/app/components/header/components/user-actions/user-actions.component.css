@@ -11,7 +11,7 @@
 }
 
 .user-menu-content {
-  @apply flex flex-col gap-2 justify-center items-center p-4 min-w-[150px];
+  @apply flex flex-col gap-2 justify-center items-center p-4 min-w-40;
 }
 
 .user-menu-button {

@@ -113,17 +113,17 @@ export const AllPositions: Story = {
           <button slot="trigger" class="px-3 py-2 bg-bytebank-blue text-white rounded text-sm">Top</button>
           <div slot="content" class="p-3 text-sm">Acima</div>
         </bb-popover>
-        
+
         <bb-popover position="bottom">
           <button slot="trigger" class="px-3 py-2 bg-bytebank-green text-white rounded text-sm">Bottom</button>
           <div slot="content" class="p-3 text-sm">Abaixo</div>
         </bb-popover>
-        
+
         <bb-popover position="left">
           <button slot="trigger" class="px-3 py-2 bg-bytebank-orange text-white rounded text-sm">Left</button>
           <div slot="content" class="p-3 text-sm">Esquerda</div>
         </bb-popover>
-        
+
         <bb-popover position="right">
           <button slot="trigger" class="px-3 py-2 bg-bytebank-red text-white rounded text-sm">Right</button>
           <div slot="content" class="p-3 text-sm">Direita</div>
@@ -153,7 +153,7 @@ export const MenuExample: Story = {
         <button slot="trigger" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
           Menu
         </button>
-        <div slot="content" class="py-2 min-w-[120px]">
+        <div slot="content" class="py-2 min-w-32">
           <button class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
             Editar
           </button>
@@ -219,7 +219,7 @@ export const Playground: Story = {
         <button slot="trigger" class="px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90">
           Playground
         </button>
-        <div slot="content" class="p-4 min-w-[200px]">
+        <div slot="content" class="p-4 min-w-52">
           <h3 class="text-sm font-medium text-gray-900 mb-2">Configurações</h3>
           <p class="text-xs text-gray-600">Use os controles para experimentar diferentes opções.</p>
         </div>

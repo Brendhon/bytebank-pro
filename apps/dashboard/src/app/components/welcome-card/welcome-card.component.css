@@ -13,7 +13,7 @@
 }
 
 .balance-section {
-  @apply w-[125px] flex flex-col items-end gap-1;
+  @apply w-32 flex flex-col items-end gap-1;
 }
 
 .balance-header {

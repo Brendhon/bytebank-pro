@@ -36,6 +36,12 @@ This ensures that the documentation is always a reliable source of information f
 - **CSS**: Use Tailwind CSS classes with `@apply` for better performance.
 - **Tailwind Classes**: Never use Tailwind classes inline in HTML templates or directly in TypeScript code. Always organize them into semantic CSS classes using `@apply` directive for better maintainability and readability. All styling logic should be centralized in the component's CSS file.
 
+### Responsive Design and Sizing
+
+- **Responsive Sizing**: Always use responsive Tailwind classes (e.g., `w-48`, `h-32`) instead of fixed pixel values (e.g., `w-[44px]`, `h-[100px]`) for better screen adaptation across different devices.
+- **Flexible Layouts**: Prefer flexible sizing that adapts to different screen sizes and orientations.
+- **Breakpoint Considerations**: Use Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`) when specific sizing adjustments are needed for different screen sizes.
+
 ---
 
 ## 🏗️ Modern Angular Practices (Angular 20)

@@ -18,7 +18,7 @@
 }
 
 .table-no-data-cell {
-  @apply text-center py-4;
+  @apply text-center p-4;
 }
 
 .table-no-data-message {

@@ -63,7 +63,7 @@ describe('InputComponent', () => {
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
 
-      expect(element.classList).toContain('min-h-[44px]');
+      expect(element.classList).toContain('min-h-11');
     });
 
     it('should set input type correctly', () => {
