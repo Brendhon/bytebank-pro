@@ -7,7 +7,7 @@ O componente `bb-select` é um controle de formulário avançado e performático
 O `SelectComponent` é standalone, permitindo sua importação direta no seu componente:
 
 ```typescript
-import { SelectComponent } from '@bytebank-pro/ui/form/select';
+import { SelectComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

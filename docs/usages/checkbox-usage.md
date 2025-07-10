@@ -7,7 +7,7 @@ O componente `bb-checkbox` é um controle de formulário versátil que permite a
 O `CheckboxComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { CheckboxComponent } from '@bytebank-pro/ui/form/checkbox';
+import { CheckboxComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

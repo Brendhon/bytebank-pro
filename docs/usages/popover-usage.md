@@ -7,7 +7,7 @@ O componente `bb-popover` é usado para exibir conteúdo flutuante em relação 
 O `PopoverComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { PopoverComponent } from '@bytebank-pro/ui/ui/popover';
+import { PopoverComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

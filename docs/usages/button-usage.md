@@ -7,7 +7,7 @@ O componente `bb-button` é um botão interativo que pode ser usado para ações
 O `ButtonComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { ButtonComponent } from '@bytebank-pro/ui/ui/button';
+import { ButtonComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

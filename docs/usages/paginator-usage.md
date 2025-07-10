@@ -7,7 +7,7 @@ O componente `bb-paginator` é usado para navegação entre páginas de conteúd
 O `PaginatorComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { PaginatorComponent } from '@bytebank-pro/ui/table/paginator';
+import { PaginatorComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

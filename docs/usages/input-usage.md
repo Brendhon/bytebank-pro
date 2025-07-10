@@ -7,7 +7,7 @@ O componente `bb-input` é um campo de entrada de formulário que oferece uma am
 O `InputComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { InputComponent } from '@bytebank-pro/ui/form/input';
+import { InputComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

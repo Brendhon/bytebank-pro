@@ -7,7 +7,7 @@ O componente `bb-dialog` é uma janela modal que pode ser usada para exibir info
 O `DialogComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { DialogComponent } from '@bytebank-pro/ui/ui/dialog';
+import { DialogComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

@@ -7,7 +7,7 @@ O componente `bb-logo` é usado para exibir o logotipo do ByteBank Pro. Ele pode
 O `LogoComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { LogoComponent } from '@bytebank-pro/ui/ui/logo';
+import { LogoComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

@@ -7,7 +7,7 @@ O componente `bb-generic-table` oferece uma maneira robusta e flexível de exibi
 O `GenericTableComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { GenericTableComponent } from '@bytebank-pro/ui/table/generic-table';
+import { GenericTableComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,

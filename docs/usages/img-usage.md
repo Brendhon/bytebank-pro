@@ -7,7 +7,7 @@ O componente `bb-img` é responsável por renderizar imagens, sejam elas SVGs do
 O `ImgComponent` é standalone, então você pode importá-lo diretamente no seu componente:
 
 ```typescript
-import { ImgComponent } from '@bytebank-pro/ui/ui/img';
+import { ImgComponent } from '@bytebank-pro/ui';
 
 @Component({
   standalone: true,
