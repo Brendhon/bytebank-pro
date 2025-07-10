@@ -5,7 +5,7 @@
     (onNavigate)="handleNavigation($event)"
     [pathname]="(pathname$ | async) || ''"
     (onLogout)="handleLogout()"
-    data-testid="app-header"
+    data-testid="bb-header"
   ></bb-header>
 
   <div class="layout-content">
@@ -14,7 +14,7 @@
         <bb-nav-menu
           [current]="pathname"
           (onNavigate)="handleNavigation($event)"
-          data-testid="app-sidebar"
+          data-testid="bb-sidebar"
         >
         </bb-nav-menu>
       </aside>

@@ -9,12 +9,12 @@ import { ButtonComponent, DialogComponent } from '@bytebank-pro/ui';
  *
  * @example
  * ```html
- * <app-confirm-deletion
+ * <bb-confirm-deletion
  *   [isOpen]="isDeleteDialogOpen"
  *   [transaction]="transactionToDelete"
  *   (confirm)="handleDeleteConfirm($event)"
  *   (cancel)="handleDeleteCancel()"
- * ></app-confirm-deletion>
+ * ></bb-confirm-deletion>
  * ```
  */
 @Component({

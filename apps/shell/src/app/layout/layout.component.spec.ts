@@ -55,7 +55,7 @@ describe('LayoutComponent', () => {
     fixture = TestBed.createComponent(LayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="app-header"]'))?.nativeElement;
+    element = fixture.debugElement.query(By.css('[data-testid="bb-header"]'))?.nativeElement;
   });
 
   afterEach(() => {
@@ -68,7 +68,7 @@ describe('LayoutComponent', () => {
     });
 
     it('should render the layout structure', () => {
-      const header = fixture.debugElement.query(By.css('[data-testid="app-header"]'));
+      const header = fixture.debugElement.query(By.css('[data-testid="bb-header"]'));
       const mainContent = fixture.debugElement.query(By.css('[data-testid="main-content-outlet"]'));
 
       expect(header).toBeTruthy();
@@ -140,7 +140,7 @@ describe('LayoutComponent', () => {
 
   describe('Template Rendering', () => {
     it('should render header component with correct inputs', () => {
-      const header = fixture.debugElement.query(By.css('[data-testid="app-header"]'));
+      const header = fixture.debugElement.query(By.css('[data-testid="bb-header"]'));
 
       expect(header).toBeTruthy();
 
@@ -149,7 +149,7 @@ describe('LayoutComponent', () => {
     });
 
     it('should render sidebar when pathname is available', () => {
-      const sidebar = fixture.debugElement.query(By.css('[data-testid="app-sidebar"]'));
+      const sidebar = fixture.debugElement.query(By.css('[data-testid="bb-sidebar"]'));
 
       expect(sidebar).toBeTruthy();
     });

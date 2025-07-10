@@ -11,7 +11,7 @@ import { Observable, filter, map, startWith } from 'rxjs';
 import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'bb-layout',
   standalone: true,
   imports: [HeaderComponent, NavMenuComponent, FooterComponent, RouterOutlet, CommonModule],
   templateUrl: './layout.component.html',

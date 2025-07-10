@@ -46,7 +46,7 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@bytebank-pro/ui/button'; // Exemplo
 
 @Component({
-  selector: 'app-example',
+  selector: 'bb-example',
   standalone: true,
   imports: [ButtonComponent],
   template: `<bb-button>Clique Aqui</bb-button>`

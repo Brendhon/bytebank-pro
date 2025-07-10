@@ -23,7 +23,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
-    const header = compiled.querySelector('[data-testid="app-header"]');
+    const header = compiled.querySelector('[data-testid="bb-header"]');
 
     expect(header).toBeTruthy();
     expect(header.classList.contains('justify-center')).toBe(true);
@@ -35,7 +35,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
-    const header = compiled.querySelector('[data-testid="app-header"]');
+    const header = compiled.querySelector('[data-testid="bb-header"]');
 
     expect(header).toBeTruthy();
     expect(header.classList.contains('justify-between')).toBe(true);

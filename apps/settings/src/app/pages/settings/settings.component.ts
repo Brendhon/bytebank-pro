@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settings-page',
+  selector: 'bb-settings-page',
   standalone: true,
   templateUrl: './settings.component.html'
 })
