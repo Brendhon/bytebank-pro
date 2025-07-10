@@ -1,10 +1,10 @@
-# Como utilizar o Select do ByteBank Pro
+# How to Use the ByteBank Pro Select
 
-O componente `bb-select` é um controle de formulário avançado e performático para seleção de opções, construído com as mais recentes práticas do Angular, incluindo Signals para um gerenciamento de estado reativo e eficiente.
+The `bb-select` component is an advanced and performant form control for selecting options, built with the latest Angular practices, including Signals for reactive and efficient state management.
 
-## Importação
+## Importing
 
-O `SelectComponent` é standalone, permitindo sua importação direta no seu componente:
+The `SelectComponent` is standalone, allowing direct import into your component:
 
 ```typescript
 import { SelectComponent } from '@bytebank-pro/ui';
@@ -17,16 +17,16 @@ import { SelectComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Para o uso básico, forneça uma lista de `options` e controle o valor selecionado com `value` e `valueChange`.
+For basic usage, provide a list of `options` and control the selected value with `value` and `valueChange`.
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 options = [
-  { value: '1', label: 'Conta Corrente' },
-  { value: '2', label: 'Conta Poupança' },
-  { value: '3', label: 'Conta Investimento' }
+  { value: '1', label: 'Checking Account' },
+  { value: '2', label: 'Savings Account' },
+  { value: '3', label: 'Investment Account' }
 ];
 selectedValue = '1';
 ```
@@ -36,21 +36,21 @@ selectedValue = '1';
   [options]="options"
   [value]="selectedValue"
   (valueChange)="selectedValue = $event"
-  placeholder="Selecione um tipo de conta"
+  placeholder="Select an account type"
 />
 ```
 
-## Seleção Múltipla
+## Multiple Selection
 
-Habilite a seleção múltipla com a propriedade `multiple`. O valor será um array.
+Enable multiple selection with the `multiple` property. The value will be an array.
 
 ```html
 <bb-select [options]="options" [multiple]="true" [(value)]="selectedValues" />
 ```
 
-## Pesquisa e Limpeza
+## Search and Clear
 
-Torne o select pesquisável com `searchable` e permita limpar a seleção com `clearable`.
+Make the select searchable with `searchable` and allow clearing the selection with `clearable`.
 
 ```html
 <bb-select
@@ -58,65 +58,65 @@ Torne o select pesquisável com `searchable` e permita limpar a seleção com `c
   [searchable]="true"
   [clearable]="true"
   [(value)]="selectedValue"
-  searchPlaceholder="Pesquisar por produto..."
+  searchPlaceholder="Search for product..."
 />
 ```
 
-## Variantes e Tamanhos
+## Variants and Sizes
 
-O componente suporta variantes de cor e tamanhos para se adaptar a diferentes contextos de UI.
+The component supports color variants and sizes to adapt to different UI contexts.
 
 ```html
-<!-- Variantes -->
+<!-- Variants -->
 <bb-select variant="success" [options]="options" />
 <bb-select variant="error" [options]="options" />
 
-<!-- Tamanhos -->
+<!-- Sizes -->
 <bb-select size="sm" [options]="options" />
 <bb-select size="lg" [options]="options" />
 ```
 
-## Labels e Textos de Ajuda
+## Labels and Helper Texts
 
-Forneça contexto adicional com `label`, `helperText`, e mensagens de validação.
+Provide additional context with `label`, `helperText`, and validation messages.
 
 ```html
-<bb-select label="Categoria" helperText="Escolha a categoria do lançamento." [options]="options" />
+<bb-select label="Category" helperText="Choose the transaction category." [options]="options" />
 
-<!-- Com mensagem de erro -->
+<!-- With error message -->
 <bb-select
   variant="error"
-  label="Categoria"
-  errorMessage="Este campo é obrigatório."
+  label="Category"
+  errorMessage="This field is required."
   [options]="options"
 />
 ```
 
-## Estado de Carregamento
+## Loading State
 
-Indique que as opções estão sendo carregadas com a propriedade `loading`.
+Indicate that options are being loaded with the `loading` property.
 
 ```html
-<bb-select [loading]="true" placeholder="Carregando dados..." />
+<bb-select [loading]="true" placeholder="Loading data..." />
 ```
 
-## Opções Agrupadas
+## Grouped Options
 
-Para uma organização mais clara, você pode agrupar as opções utilizando a propriedade `groups`.
+For clearer organization, you can group options using the `groups` property.
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 groupedOptions = [
   {
-    label: 'Contas',
+    label: 'Accounts',
     options: [
-      { value: '1', label: 'Conta Corrente' },
-      { value: '2', label: 'Conta Poupança' }
+      { value: '1', label: 'Checking Account' },
+      { value: '2', label: 'Savings Account' }
     ]
   },
   {
-    label: 'Investimentos',
-    options: [{ value: '3', label: 'Ações' }]
+    label: 'Investments',
+    options: [{ value: '3', label: 'Stocks' }]
   }
 ];
 ```
@@ -125,40 +125,40 @@ groupedOptions = [
 <bb-select [groups]="groupedOptions" [(value)]="selectedValue" />
 ```
 
-## Acessibilidade
+## Accessibility
 
-O `bb-select` é projetado para ser acessível, gerenciando atributos ARIA como `aria-expanded` e `role="combobox"`. Para cenários personalizados, utilize `ariaLabel`, `ariaLabelledBy`, e `ariaDescribedBy`.
+The `bb-select` is designed to be accessible, managing ARIA attributes such as `aria-expanded` and `role="combobox"`. For custom scenarios, use `ariaLabel`, `ariaLabelledBy`, and `ariaDescribedBy`.
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade         | Tipo (`input()`)    | Padrão               | Descrição                                                            |
-| ------------------- | ------------------- | -------------------- | -------------------------------------------------------------------- | -------------------------------- |
-| `value`             | `T                  | T[]`                 | `undefined`                                                          | O valor ou valores selecionados. |
-| `options`           | `SelectOption<T>[]` | `[]`                 | A lista de opções para o select.                                     |
-| `groups`            | `SelectGroup[]`     | `undefined`          | A lista de grupos de opções.                                         |
-| `multiple`          | `boolean`           | `false`              | Permite a seleção de múltiplos valores.                              |
-| `searchable`        | `boolean`           | `false`              | Habilita a funcionalidade de pesquisa.                               |
-| `clearable`         | `boolean`           | `false`              | Exibe um botão para limpar a seleção.                                |
-| `variant`           | `SelectVariant`     | `'default'`          | A variante de cor: `'default'`, `'success'`, `'error'`, `'warning'`. |
-| `size`              | `SelectSize`        | `'md'`               | O tamanho: `'sm'`, `'md'`, `'lg'`.                                   |
-| `disabled`          | `boolean`           | `false`              | Desabilita o select.                                                 |
-| `readonly`          | `boolean`           | `false`              | Torna o select somente leitura.                                      |
-| `loading`           | `boolean`           | `false`              | Exibe um indicador de carregamento.                                  |
-| `placeholder`       | `string`            | `'Select an option'` | O texto exibido quando nenhum valor é selecionado.                   |
-| `searchPlaceholder` | `string`            | `'Search...'`        | O placeholder para o campo de pesquisa.                              |
-| `noResultsText`     | `string`            | `'No results found'` | Texto exibido quando a pesquisa não retorna resultados.              |
-| `label`             | `string`            | `undefined`          | O texto do label associado.                                          |
-| `helperText`        | `string`            | `undefined`          | Texto de ajuda exibido abaixo do select.                             |
-| `errorMessage`      | `string`            | `undefined`          | Mensagem de erro (visível quando `variant` é `'error'`).             |
+| Property            | Type (`input()`)    | Default              | Description                                                          |
+| ------------------- | ------------------- | -------------------- | -------------------------------------------------------------------- | ----------------------------- |
+| `value`             | `T                  | T[]`                 | `undefined`                                                          | The selected value or values. |
+| `options`           | `SelectOption<T>[]` | `[]`                 | The list of options for the select.                                  |
+| `groups`            | `SelectGroup[]`     | `undefined`          | The list of option groups.                                           |
+| `multiple`          | `boolean`           | `false`              | Allows selection of multiple values.                                 |
+| `searchable`        | `boolean`           | `false`              | Enables search functionality.                                        |
+| `clearable`         | `boolean`           | `false`              | Displays a button to clear the selection.                            |
+| `variant`           | `SelectVariant`     | `'default'`          | The color variant: `'default'`, `'success'`, `'error'`, `'warning'`. |
+| `size`              | `SelectSize`        | `'md'`               | The size: `'sm'`, `'md'`, `'lg'`.                                    |
+| `disabled`          | `boolean`           | `false`              | Disables the select.                                                 |
+| `readonly`          | `boolean`           | `false`              | Makes the select read-only.                                          |
+| `loading`           | `boolean`           | `false`              | Displays a loading indicator.                                        |
+| `placeholder`       | `string`            | `'Select an option'` | The text displayed when no value is selected.                        |
+| `searchPlaceholder` | `string`            | `'Search...'`        | The placeholder for the search field.                                |
+| `noResultsText`     | `string`            | `'No results found'` | Text displayed when the search returns no results.                   |
+| `label`             | `string`            | `undefined`          | The associated label text.                                           |
+| `helperText`        | `string`            | `undefined`          | Help text displayed below the select.                                |
+| `errorMessage`      | `string`            | `undefined`          | Error message (visible when `variant` is `'error'`).                 |
 
 ### Outputs
 
-| Propriedade     | Tipo (`output()`) | Descrição                                               |
-| --------------- | ----------------- | ------------------------------------------------------- | ---------------------------------------- |
-| `valueChange`   | `T                | T[]`                                                    | Emitido quando o valor selecionado muda. |
-| `searchChange`  | `string`          | Emitido quando o termo de pesquisa muda (com debounce). |
-| `optionSelect`  | `SelectOption<T>` | Emitido quando uma opção é selecionada.                 |
-| `dropdownOpen`  | `void`            | Emitido quando o dropdown é aberto.                     |
-| `dropdownClose` | `void`            | Emitido quando o dropdown é fechado.                    |
+| Property        | Type (`output()`) | Description                                           |
+| --------------- | ----------------- | ----------------------------------------------------- | ---------------------------------------- |
+| `valueChange`   | `T                | T[]`                                                  | Emitted when the selected value changes. |
+| `searchChange`  | `string`          | Emitted when the search term changes (with debounce). |
+| `optionSelect`  | `SelectOption<T>` | Emitted when an option is selected.                   |
+| `dropdownOpen`  | `void`            | Emitted when the dropdown is opened.                  |
+| `dropdownClose` | `void`            | Emitted when the dropdown is closed.                  |

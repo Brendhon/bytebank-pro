@@ -1,10 +1,10 @@
-# Como utilizar a Tabela Genérica do ByteBank Pro
+# How to Use the ByteBank Pro Generic Table
 
-O componente `bb-generic-table` oferece uma maneira robusta e flexível de exibir dados tabulares. Ele é projetado para ser altamente reutilizável, com suporte para colunas personalizáveis, paginação e templates customizados para renderização de células.
+The `bb-generic-table` component offers a robust and flexible way to display tabular data. It is designed to be highly reusable, with support for customizable columns, pagination, and custom templates for cell rendering.
 
-## Importação
+## Importing
 
-O `GenericTableComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `GenericTableComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { GenericTableComponent } from '@bytebank-pro/ui';
@@ -17,12 +17,12 @@ import { GenericTableComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Para usar a tabela, você precisa fornecer os dados (`data`) e a definição das colunas (`columns`).
+To use the table, you need to provide the data (`data`) and the column definitions (`columns`).
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 import { TableColumn } from '@bytebank-pro/types';
 
 // ...
@@ -34,8 +34,8 @@ users = [
 
 columns: TableColumn<any>[] = [
   { label: 'ID', accessor: 'id' },
-  { label: 'Nome', accessor: 'name' },
-  { label: 'E-mail', accessor: 'email' },
+  { label: 'Name', accessor: 'name' },
+  { label: 'Email', accessor: 'email' },
 ];
 ```
 
@@ -43,29 +43,29 @@ columns: TableColumn<any>[] = [
 <bb-generic-table [data]="users" [columns]="columns" />
 ```
 
-## Paginação
+## Pagination
 
-A paginação é habilitada automaticamente quando a propriedade `pageSize` é fornecida.
+Pagination is automatically enabled when the `pageSize` property is provided.
 
 ```html
 <bb-generic-table [data]="largeDataset" [columns]="columns" [pageSize]="5" />
 ```
 
-O componente `bb-paginator` é usado internamente e não precisa ser invocado diretamente na maioria dos casos.
+The `bb-paginator` component is used internally and does not need to be invoked directly in most cases.
 
-## Renderização Customizada
+## Custom Rendering
 
-Para uma renderização mais complexa das células, você pode usar templates customizados. O padrão recomendado é definir os templates no HTML e passá-los via método.
+For more complex cell rendering, you can use custom templates. The recommended pattern is to define the templates in the HTML and pass them via a method.
 
-### Padrão Recomendado: Templates Inline
+### Recommended Pattern: Inline Templates
 
-Este é o padrão mais eficiente e recomendado para renderização customizada:
+This is the most efficient and recommended pattern for custom rendering:
 
 ```html
-<!-- no seu template -->
+<!-- in your template -->
 <ng-template #statusTemplate let-value let-row="row">
   <span [ngClass]="value === 'active' ? 'text-green-500' : 'text-red-500'">
-    {{ value === 'active' ? '✓ Ativo' : '✗ Inativo' }}
+    {{ value === 'active' ? '✓ Active' : '✗ Inactive' }}
   </span>
 </ng-template>
 
@@ -87,25 +87,25 @@ Este é o padrão mais eficiente e recomendado para renderização customizada:
 ```
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 import { TemplateRef } from '@angular/core';
 import { Edit, Trash } from 'lucide-angular';
 
 export class MyComponent {
-  // Ícones para os botões de ação
+  // Icons for the action buttons
   editIcon = Edit;
   deleteIcon = Trash;
 
-  // Método para criar colunas com templates
+  // Method to create columns with templates
   getColumnsWithTemplates(
     statusTemplate: TemplateRef<any>,
     actionTemplate: TemplateRef<any>
   ): TableColumn<any>[] {
     return [
       { label: 'ID', accessor: 'id' },
-      { label: 'Nome', accessor: 'name' },
+      { label: 'Name', accessor: 'name' },
       { label: 'Status', accessor: 'status', render: statusTemplate },
-      { label: 'Ações', accessor: 'id', render: actionTemplate }
+      { label: 'Actions', accessor: 'id', render: actionTemplate }
     ];
   }
 
@@ -119,12 +119,12 @@ export class MyComponent {
 }
 ```
 
-### Padrão Alternativo: ViewChild (Menos Recomendado)
+### Alternative Pattern: ViewChild (Less Recommended)
 
-Se preferir usar `@ViewChild`, você pode fazer assim:
+If you prefer to use `@ViewChild`, you can do it like this:
 
 ```html
-<!-- no seu template -->
+<!-- in your template -->
 <ng-template #statusTemplate let-value>
   <span [ngClass]="value === 'active' ? 'text-green-500' : 'text-red-500'"> {{ value }} </span>
 </ng-template>
@@ -133,7 +133,7 @@ Se preferir usar `@ViewChild`, você pode fazer assim:
 ```
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 import { ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 
 export class MyComponent implements AfterViewInit {
@@ -143,7 +143,7 @@ export class MyComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.columnsWithTemplate = [
-      { label: 'Nome', accessor: 'name' },
+      { label: 'Name', accessor: 'name' },
       {
         label: 'Status',
         accessor: 'status',
@@ -154,20 +154,20 @@ export class MyComponent implements AfterViewInit {
 }
 ```
 
-### Contexto dos Templates
+### Template Context
 
-No template customizado, você tem acesso a estas variáveis:
+In the custom template, you have access to these variables:
 
-- `let-value`: O valor da propriedade acessada pela coluna
-- `let-row="row"`: O objeto completo da linha de dados
-- `let-index`: O índice da linha (opcional)
+- `let-value`: The value of the property accessed by the column
+- `let-row="row"`: The complete data row object
+- `let-index`: The row index (optional)
 
-### Exemplo Prático: Tabela de Transações
+### Practical Example: Transactions Table
 
-Aqui está um exemplo completo de uma tabela de transações com renderização customizada:
+Here is a complete example of a transactions table with custom rendering:
 
 ```html
-<!-- Templates para renderização customizada -->
+<!-- Templates for custom rendering -->
 <ng-template #typeTemplate let-value let-row="row">
   <span class="transaction-type">{{ getTransactionDesc(value) }}</span>
 </ng-template>
@@ -180,16 +180,16 @@ Aqui está um exemplo completo de uma tabela de transações com renderização 
 
 <ng-template #actionsTemplate let-value let-row="row">
   <div class="action-buttons">
-    <button (click)="onEdit(row)" aria-label="Editar transação">
+    <button (click)="onEdit(row)" aria-label="Edit transaction">
       <i-lucide [img]="editIcon" [size]="12"></i-lucide>
     </button>
-    <button (click)="onDelete(row)" aria-label="Deletar transação">
+    <button (click)="onDelete(row)" aria-label="Delete transaction">
       <i-lucide [img]="deleteIcon" [size]="12"></i-lucide>
     </button>
   </div>
 </ng-template>
 
-<!-- Tabela com templates customizados -->
+<!-- Table with custom templates -->
 <bb-generic-table
   [data]="transactions"
   [columns]="getTransactionColumns(typeTemplate, valueTemplate, actionsTemplate)"
@@ -208,10 +208,10 @@ export class TransactionsComponent {
     actionsTemplate: TemplateRef<any>
   ): TableColumn<ITransaction>[] {
     return [
-      { label: 'Data', accessor: 'date' },
-      { label: 'Descrição', accessor: 'desc', render: typeTemplate },
-      { label: 'Valor', accessor: 'value', render: valueTemplate },
-      { label: 'Ações', accessor: '_id', render: actionsTemplate }
+      { label: 'Date', accessor: 'date' },
+      { label: 'Description', accessor: 'desc', render: typeTemplate },
+      { label: 'Value', accessor: 'value', render: valueTemplate },
+      { label: 'Actions', accessor: '_id', render: actionsTemplate }
     ];
   }
 
@@ -224,42 +224,42 @@ export class TransactionsComponent {
   }
 
   onEdit(transaction: ITransaction) {
-    // Lógica de edição
+    // Edit logic
   }
 
   onDelete(transaction: ITransaction) {
-    // Lógica de exclusão
+    // Delete logic
   }
 }
 ```
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade | Tipo (`input()`)   | Obrigatório | Descrição                                                                    |
-| ----------- | ------------------ | ----------- | ---------------------------------------------------------------------------- |
-| `data`      | `T[]`              | Sim         | O array de objetos de dados a serem exibidos.                                |
-| `columns`   | `TableColumn<T>[]` | Sim         | A definição das colunas, incluindo `label`, `accessor`, e `render` opcional. |
-| `pageSize`  | `number`           | Não         | O número de itens por página. Habilita a paginação se fornecido.             |
+| Property   | Type (`input()`)   | Required | Description                                                                   |
+| ---------- | ------------------ | -------- | ----------------------------------------------------------------------------- |
+| `data`     | `T[]`              | Yes      | The array of data objects to be displayed.                                    |
+| `columns`  | `TableColumn<T>[]` | Yes      | The column definitions, including `label`, `accessor`, and optional `render`. |
+| `pageSize` | `number`           | No       | The number of items per page. Enables pagination if provided.                 |
 
 ### `TableColumn<T>`
 
-A interface `TableColumn` define a estrutura de cada coluna:
+The `TableColumn` interface defines the structure of each column:
 
 ```typescript
 export interface TableColumn<T> {
-  label: string; // O texto do cabeçalho da coluna
-  accessor: keyof T; // A chave do objeto de dados
-  render?: TemplateRef<any>; // Template para renderização customizada da célula
+  label: string; // The column header text
+  accessor: keyof T; // The key of the data object
+  render?: TemplateRef<any>; // Template for custom cell rendering
 }
 ```
 
-## Boas Práticas
+## Best Practices
 
-1. **Use o padrão de templates inline** para melhor performance e legibilidade
-2. **Defina templates reutilizáveis** quando possível
-3. **Use ícones Lucide** com `i-lucide` e propriedade `[img]`
-4. **Mantenha acessibilidade** com `aria-label` e `data-testid`
-5. **Organize CSS** em classes semânticas ao invés de classes Tailwind inline
-6. **Use tipagem forte** com generics para melhor segurança de tipos
+1.  **Use the inline templates pattern** for better performance and readability
+2.  **Define reusable templates** when possible
+3.  **Use Lucide icons** with `i-lucide` and the `[img]` property
+4.  **Maintain accessibility** with `aria-label` and `data-testid`
+5.  **Organize CSS** into semantic classes instead of inline Tailwind classes
+6.  **Use strong typing** with generics for better type safety

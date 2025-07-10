@@ -1,10 +1,10 @@
-# Como utilizar o Input do ByteBank Pro
+# How to Use the ByteBank Pro Input
 
-O componente `bb-input` é um campo de entrada de formulário que oferece uma ampla gama de funcionalidades, incluindo diferentes tipos, variantes, tamanhos e ícones, tudo em conformidade com as diretrizes de design e acessibilidade do ByteBank Pro.
+The `bb-input` component is a form input field that offers a wide range of features, including different types, variants, sizes, and icons, all in compliance with ByteBank Pro's design and accessibility guidelines.
 
-## Importação
+## Importing
 
-O `InputComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `InputComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { InputComponent } from '@bytebank-pro/ui';
@@ -17,91 +17,86 @@ import { InputComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-O uso mais simples do input requer o seletor `bb-input` e o controle do valor através de `value` e `valueChange`.
+The simplest use of the input requires the `bb-input` selector and controlling the value through `value` and `valueChange`.
 
 ```html
-<bb-input [value]="inputValue" (valueChange)="inputValue = $event" placeholder="Digite seu nome" />
+<bb-input [value]="inputValue" (valueChange)="inputValue = $event" placeholder="Enter your name" />
 ```
 
-## Tipos de Input
+## Input Types
 
-O componente suporta vários tipos de HTML5, como `text`, `password`, `email`, `number`, etc.
+The component supports various HTML5 types, such as `text`, `password`, `email`, `number`, etc.
 
 ```html
-<bb-input type="email" placeholder="seu-email@exemplo.com" />
-<bb-input type="password" placeholder="Sua senha" />
+<bb-input type="email" placeholder="your-email@example.com" />
+<bb-input type="password" placeholder="Your password" />
 <bb-input type="number" placeholder="0" />
 ```
 
-### Visibilidade de Senha
+### Password Visibility
 
-Para campos do tipo `password`, você pode habilitar um botão para alternar a visibilidade da senha.
+For `password` type fields, you can enable a button to toggle password visibility.
 
 ```html
 <bb-input type="password" [showPasswordToggle]="true" />
 ```
 
-## Variantes
+## Variants
 
-As variantes de cor ajudam a comunicar o estado do input, como sucesso ou erro.
-
-```html
-<bb-input variant="default" value="Padrão" />
-<bb-input variant="success" value="Sucesso" />
-<bb-input variant="error" value="Erro" />
-<bb-input variant="warning" value="Aviso" />
-```
-
-## Tamanhos
-
-O input está disponível em três tamanhos: `sm`, `md` (padrão), e `lg`.
+Color variants help communicate the state of the input, such as success or error.
 
 ```html
-<bb-input size="sm" placeholder="Pequeno" />
-<bb-input size="md" placeholder="Médio" />
-<bb-input size="lg" placeholder="Grande" />
+<bb-input variant="default" value="Default" />
+<bb-input variant="success" value="Success" />
+<bb-input variant="error" value="Error" />
+<bb-input variant="warning" value="Warning" />
 ```
 
-## Labels e Textos de Ajuda
+## Sizes
 
-Associe um `label` e um `helperText` para fornecer contexto ao usuário.
+The input is available in three sizes: `sm`, `md` (default), and `lg`.
+
+```html
+<bb-input size="sm" placeholder="Small" />
+<bb-input size="md" placeholder="Medium" />
+<bb-input size="lg" placeholder="Large" />
+```
+
+## Labels and Helper Texts
+
+Associate a `label` and `helperText` to provide context to the user.
 
 ```html
 <bb-input
-  label="Nome de Usuário"
-  helperText="Seu nome de usuário público."
+  label="Username"
+  helperText="Your public username."
   [value]="username"
   (valueChange)="username = $event"
 />
 ```
 
-### Mensagens de Erro e Sucesso
+### Error and Success Messages
 
-Use `errorMessage` e `successMessage` para fornecer feedback de validação.
+Use `errorMessage` and `successMessage` to provide validation feedback.
 
 ```html
-<!-- Estado de Erro -->
+<!-- Error State -->
 <bb-input
   variant="error"
-  label="E-mail"
-  errorMessage="O e-mail fornecido é inválido."
-  value="email-invalido"
+  label="Email"
+  errorMessage="The provided email is invalid."
+  value="invalid-email"
 />
 
-<!-- Estado de Sucesso -->
-<bb-input
-  variant="success"
-  label="E-mail"
-  successMessage="E-mail válido!"
-  value="<!-- Import failed: example.com -->
-/>
+<!-- Success State -->
+<bb-input variant="success" label="Email" successMessage="Valid email!" value="valid@example.com" />
 ```
 
-## Ícones
+## Icons
 
-Você pode adicionar ícones de `lucide-angular` no prefixo ou sufixo do input.
+You can add `lucide-angular` icons to the prefix or suffix of the input.
 
 ```typescript
 import { Mail, User } from 'lucide-angular';
@@ -116,52 +111,52 @@ export class MyComponent {
 ```
 
 ```html
-<bb-input [prefixIcon]="userIcon" placeholder="Usuário" />
-<bb-input [suffixIcon]="mailIcon" placeholder="E-mail" />
+<bb-input [prefixIcon]="userIcon" placeholder="Username" />
+<bb-input [suffixIcon]="mailIcon" placeholder="Email" />
 ```
 
-## Acessibilidade
+## Accessibility
 
-O `bb-input` gerencia automaticamente atributos ARIA essenciais. Para casos de uso avançados, você pode usar:
+The `bb-input` automatically manages essential ARIA attributes. For advanced use cases, you can use:
 
-- `ariaLabel`: Fornece uma etiqueta acessível.
-- `ariaLabelledBy`: Associa o input a um elemento de label externo.
-- `ariaDescribedBy`: Associa o input a elementos descritivos.
+- `ariaLabel`: Provides an accessible label.
+- `ariaLabelledBy`: Associates the input with an external label element.
+- `ariaDescribedBy`: Associates the input with descriptive elements.
 
 ```html
-<span id="search-label">Pesquisar no site</span> <bb-input ariaLabelledBy="search-label" />
+<span id="search-label">Search the site</span> <bb-input ariaLabelledBy="search-label" />
 ```
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade          | Tipo (`input()`) | Padrão      | Descrição                                                            |
+| Property             | Type (`input()`) | Default     | Description                                                          |
 | -------------------- | ---------------- | ----------- | -------------------------------------------------------------------- |
-| `type`               | `InputType`      | `'text'`    | O tipo de input: `'text'`, `'password'`, `'email'`, etc.             |
-| `variant`            | `InputVariant`   | `'default'` | A variante de cor: `'default'`, `'success'`, `'error'`, `'warning'`. |
-| `size`               | `InputSize`      | `'md'`      | O tamanho: `'sm'`, `'md'`, `'lg'`.                                   |
-| `placeholder`        | `string`         | `''`        | O texto de placeholder.                                              |
-| `value`              | `string`         | `''`        | O valor do input.                                                    |
-| `disabled`           | `boolean`        | `false`     | Desabilita o input.                                                  |
-| `readonly`           | `boolean`        | `false`     | Torna o input somente leitura.                                       |
-| `required`           | `boolean`        | `false`     | Define o input como obrigatório.                                     |
-| `label`              | `string`         | `undefined` | O texto do label associado.                                          |
-| `helperText`         | `string`         | `undefined` | Texto de ajuda exibido abaixo do input.                              |
-| `errorMessage`       | `string`         | `undefined` | Mensagem de erro (visível quando `variant` é `'error'`).             |
-| `successMessage`     | `string`         | `undefined` | Mensagem de sucesso (visível quando `variant` é `'success'`).        |
-| `showPasswordToggle` | `boolean`        | `false`     | Exibe um botão para alternar a visibilidade da senha.                |
-| `prefixIcon`         | `LucideIconData` | `undefined` | Ícone a ser exibido antes do texto do input.                         |
-| `suffixIcon`         | `LucideIconData` | `undefined` | Ícone a ser exibido depois do texto do input.                        |
-| `className`          | `string`         | `''`        | Classes CSS adicionais para o container.                             |
-| `ariaLabel`          | `string`         | `undefined` | Etiqueta acessível para leitores de tela.                            |
+| `type`               | `InputType`      | `'text'`    | The input type: `'text'`, `'password'`, `'email'`, etc.              |
+| `variant`            | `InputVariant`   | `'default'` | The color variant: `'default'`, `'success'`, `'error'`, `'warning'`. |
+| `size`               | `InputSize`      | `'md'`      | The size: `'sm'`, `'md'`, `'lg'`.                                    |
+| `placeholder`        | `string`         | `''`        | The placeholder text.                                                |
+| `value`              | `string`         | `''`        | The input value.                                                     |
+| `disabled`           | `boolean`        | `false`     | Disables the input.                                                  |
+| `readonly`           | `boolean`        | `false`     | Makes the input read-only.                                           |
+| `required`           | `boolean`        | `false`     | Sets the input as required.                                          |
+| `label`              | `string`         | `undefined` | The associated label text.                                           |
+| `helperText`         | `string`         | `undefined` | Help text displayed below the input.                                 |
+| `errorMessage`       | `string`         | `undefined` | Error message (visible when `variant` is `'error'`).                 |
+| `successMessage`     | `string`         | `undefined` | Success message (visible when `variant` is `'success'`).             |
+| `showPasswordToggle` | `boolean`        | `false`     | Displays a button to toggle password visibility.                     |
+| `prefixIcon`         | `LucideIconData` | `undefined` | Icon to be displayed before the input text.                          |
+| `suffixIcon`         | `LucideIconData` | `undefined` | Icon to be displayed after the input text.                           |
+| `className`          | `string`         | `''`        | Additional CSS classes for the container.                            |
+| `ariaLabel`          | `string`         | `undefined` | Accessible label for screen readers.                                 |
 
 ### Outputs
 
-| Propriedade    | Tipo (`output()`) | Descrição                                        |
-| -------------- | ----------------- | ------------------------------------------------ |
-| `valueChange`  | `string`          | Emitido quando o valor do input muda.            |
-| `inputFocus`   | `FocusEvent`      | Emitido quando o input recebe foco.              |
-| `inputBlur`    | `FocusEvent`      | Emitido quando o input perde o foco.             |
-| `inputKeydown` | `KeyboardEvent`   | Emitido quando uma tecla é pressionada no input. |
-| `inputKeyup`   | `KeyboardEvent`   | Emitido quando uma tecla é liberada no input.    |
+| Property       | Type (`output()`) | Description                                  |
+| -------------- | ----------------- | -------------------------------------------- |
+| `valueChange`  | `string`          | Emitted when the input value changes.        |
+| `inputFocus`   | `FocusEvent`      | Emitted when the input receives focus.       |
+| `inputBlur`    | `FocusEvent`      | Emitted when the input loses focus.          |
+| `inputKeydown` | `KeyboardEvent`   | Emitted when a key is pressed on the input.  |
+| `inputKeyup`   | `KeyboardEvent`   | Emitted when a key is released on the input. |

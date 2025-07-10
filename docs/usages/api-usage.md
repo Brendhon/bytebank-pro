@@ -1,119 +1,119 @@
-# 🚀 Bytebank API GraphQL - Documentação de Uso
+# 🚀 Bytebank API GraphQL - Usage Documentation
 
-Bem-vindo à documentação de uso da API GraphQL do Bytebank. Este guia detalha como interagir com a API, incluindo todas as queries e mutations disponíveis, e os dados esperados para cada operação.
+Welcome to the Bytebank GraphQL API usage documentation. This guide details how to interact with the API, including all available queries and mutations, and the expected data for each operation.
 
-A API é construída com **Node.js**, **TypeScript**, **Apollo Server**, **Express** e **MongoDB**, oferecendo funcionalidades de autenticação de usuários e gerenciamento de transações financeiras. A autenticação é realizada via JSON Web Tokens (JWT), e as rotas protegidas são acessíveis apenas com um token válido.
+The API is built with **Node.js**, **TypeScript**, **Apollo Server**, **Express**, and **MongoDB**, offering user authentication and financial transaction management features. Authentication is performed via JSON Web Tokens (JWT), and protected routes are accessible only with a valid token.
 
-## ✨ Funcionalidades Principais
+## ✨ Key Features
 
-- **Autenticação de Usuário**: Registro e login seguros com JWT.
-- **Gerenciamento de Transações**: Operações de CRUD (Criar, Ler, Atualizar, Deletar) para transações financeiras.
-- **Resumo Financeiro**: Endpoint para obter o saldo atual e um resumo das transações.
-- **Paginação**: Suporte para paginação na listagem de transações.
-- **Segurança**: Senhas criptografadas e rotas protegidas por autenticação.
+- **User Authentication**: Secure registration and login with JWT.
+- **Transaction Management**: CRUD (Create, Read, Update, Delete) operations for financial transactions.
+- **Financial Summary**: Endpoint to get the current balance and a summary of transactions.
+- **Pagination**: Support for pagination in the transaction list.
+- **Security**: Encrypted passwords and routes protected by authentication.
 
-## 💡 Endereço da API
+## 💡 API Address
 
-A API estará disponível em `http://localhost:4000/graphql` quando executada localmente.
+The API will be available at `http://localhost:4000/graphql` when run locally.
 
-## 🔑 Autenticação
+## 🔑 Authentication
 
-A autenticação é realizada via JSON Web Tokens (JWT). Após o login ou registro, você receberá um `token` que deve ser incluído no cabeçalho `Authorization` de todas as suas requisições protegidas, no formato `Bearer <seu_token>`.
+Authentication is performed via JSON Web Tokens (JWT). After logging in or registering, you will receive a `token` that must be included in the `Authorization` header of all your protected requests, in the format `Bearer <your_token>`.
 
-Exemplo de cabeçalho de autorização:
+Example of authorization header:
 
 ```
-Authorization: Bearer seu_token_jwt_aqui
+Authorization: Bearer your_jwt_token_here
 ```
 
-## 📖 Schema GraphQL
+## 📖 GraphQL Schema
 
-A API GraphQL possui os seguintes tipos, inputs e enums:
+The GraphQL API has the following types, inputs, and enums:
 
-### Tipos
+### Types
 
-- **AuthPayload**: Retornado em operações de autenticação.
-  - `token`: `String!` - O token JWT para autenticação.
-  - `user`: `User!` - Os detalhes do usuário autenticado.
-- **User**: Representa um usuário no sistema.
-  - `_id`: `ID!` - O ID único do usuário.
-  - `acceptPrivacy`: `Boolean!` - Indica se o usuário aceitou a política de privacidade.
-  - `createdAt`: `DateTimeISO!` - Data e hora de criação do usuário (UTC).
-  - `email`: `String!` - O endereço de e-mail do usuário.
-  - `name`: `String!` - O nome do usuário.
-  - `updatedAt`: `DateTimeISO!` - Data e hora da última atualização do usuário (UTC).
-- **Transaction**: Representa uma transação financeira.
-  - `_id`: `ID!` - O ID único da transação.
-  - `alias`: `String` - Um alias opcional para a transação.
-  - `date`: `String!` - A data da transação.
-  - `desc`: `TransactionDesc!` - A descrição da transação (depósito, pagamento, transferência, saque).
-  - `type`: `TransactionType!` - O tipo da transação (entrada ou saída).
-  - `user`: `String` - O ID do usuário associado à transação.
-  - `value`: `Float!` - O valor da transação.
-- **PaginatedTransactions**: Usado para resultados paginados de transações.
-  - `hasMore`: `Boolean!` - Indica se há mais páginas de transações.
-  - `items`: `[Transaction!]!` - A lista de transações na página atual.
-  - `page`: `Float!` - O número da página atual.
-  - `total`: `Float!` - O número total de transações.
-  - `totalInPage`: `Float!` - O número de transações na página atual.
-  - `totalPages`: `Float!` - O número total de páginas.
-- **TransactionSummary**: Fornece um resumo financeiro.
-  - `balance`: `Float!` - O saldo total.
-  - `breakdown`: `TransactionSummaryBreakdown!` - Detalhamento das transações por tipo.
-- **TransactionSummaryBreakdown**: Detalha os valores por tipo de transação.
-  - `deposit`: `Float!` - Total de depósitos.
-  - `payment`: `Float!` - Total de pagamentos.
-  - `transfer`: `Float!` - Total de transferências.
-  - `withdrawal`: `Float!` - Total de saques.
-- **DateTimeISO**: Scalar para representação de data e hora em formato ISO 8601 (UTC).
+- **AuthPayload**: Returned in authentication operations.
+  - `token`: `String!` - The JWT token for authentication.
+  - `user`: `User!` - The details of the authenticated user.
+- **User**: Represents a user in the system.
+  - `_id`: `ID!` - The unique ID of the user.
+  - `acceptPrivacy`: `Boolean!` - Indicates if the user has accepted the privacy policy.
+  - `createdAt`: `DateTimeISO!` - Date and time of user creation (UTC).
+  - `email`: `String!` - The user's email address.
+  - `name`: `String!` - The user's name.
+  - `updatedAt`: `DateTimeISO!` - Date and time of the last user update (UTC).
+- **Transaction**: Represents a financial transaction.
+  - `_id`: `ID!` - The unique ID of the transaction.
+  - `alias`: `String` - An optional alias for the transaction.
+  - `date`: `String!` - The date of the transaction.
+  - `desc`: `TransactionDesc!` - The description of the transaction (deposit, payment, transfer, withdrawal).
+  - `type`: `TransactionType!` - The type of the transaction (inflow or outflow).
+  - `user`: `String` - The ID of the user associated with the transaction.
+  - `value`: `Float!` - The value of the transaction.
+- **PaginatedTransactions**: Used for paginated transaction results.
+  - `hasMore`: `Boolean!` - Indicates if there are more pages of transactions.
+  - `items`: `[Transaction!]!` - The list of transactions on the current page.
+  - `page`: `Float!` - The current page number.
+  - `total`: `Float!` - The total number of transactions.
+  - `totalInPage`: `Float!` - The number of transactions on the current page.
+  - `totalPages`: `Float!` - The total number of pages.
+- **TransactionSummary**: Provides a financial summary.
+  - `balance`: `Float!` - The total balance.
+  - `breakdown`: `TransactionSummaryBreakdown!` - Breakdown of transactions by type.
+- **TransactionSummaryBreakdown**: Details the values by transaction type.
+  - `deposit`: `Float!` - Total deposits.
+  - `payment`: `Float!` - Total payments.
+  - `transfer`: `Float!` - Total transfers.
+  - `withdrawal`: `Float!` - Total withdrawals.
+- **DateTimeISO**: Scalar for representing date and time in ISO 8601 format (UTC).
 
 ### Inputs
 
-- **LoginInput**: Usado para a operação de login.
-  - `email`: `String!` - O e-mail do usuário.
-  - `password`: `String!` - A senha do usuário.
-- **UserInput**: Usado para a operação de registro de usuário.
-  - `acceptPrivacy`: `Boolean!` - Indicação de aceitação da política de privacidade.
-  - `email`: `String!` - O e-mail do novo usuário.
-  - `name`: `String!` - O nome do novo usuário.
-  - `password`: `String!` - A senha do novo usuário.
-- **UserUpdateInput**: Usado para atualizar os dados do usuário.
-  - `acceptPrivacy`: `Boolean` - Opcional, para atualizar a aceitação da política de privacidade.
-  - `email`: `String` - Opcional, para atualizar o e-mail.
-  - `name`: `String` - Opcional, para atualizar o nome.
-  - `password`: `String` - Opcional, para atualizar a senha.
-- **TransactionInput**: Usado para criar uma nova transação.
-  - `alias`: `String` - Opcional, um alias para a transação.
-  - `date`: `String!` - A data da transação.
-  - `desc`: `TransactionDesc!` - A descrição da transação.
-  - `type`: `TransactionType!` - O tipo da transação.
-  - `user`: `String` - Opcional, o ID do usuário associado.
-  - `value`: `Float!` - O valor da transação.
-- **TransactionUpdateInput**: Usado para atualizar uma transação existente.
-  - `alias`: `String` - Opcional, para atualizar o alias.
-  - `date`: `String` - Opcional, para atualizar a data.
-  - `desc`: `TransactionDesc` - Opcional, para atualizar a descrição.
-  - `type`: `TransactionType` - Opcional, para atualizar o tipo.
-  - `value`: `Float` - Opcional, para atualizar o valor.
+- **LoginInput**: Used for the login operation.
+  - `email`: `String!` - The user's email.
+  - `password`: `String!` - The user's password.
+- **UserInput**: Used for the user registration operation.
+  - `acceptPrivacy`: `Boolean!` - Indication of acceptance of the privacy policy.
+  - `email`: `String!` - The new user's email.
+  - `name`: `String!` - The new user's name.
+  - `password`: `String!` - The new user's password.
+- **UserUpdateInput**: Used to update user data.
+  - `acceptPrivacy`: `Boolean` - Optional, to update the acceptance of the privacy policy.
+  - `email`: `String` - Optional, to update the email.
+  - `name`: `String` - Optional, to update the name.
+  - `password`: `String` - Optional, to update the password.
+- **TransactionInput**: Used to create a new transaction.
+  - `alias`: `String` - Optional, an alias for the transaction.
+  - `date`: `String!` - The date of the transaction.
+  - `desc`: `TransactionDesc!` - The description of the transaction.
+  - `type`: `TransactionType!` - The type of the transaction.
+  - `user`: `String` - Optional, the ID of the associated user.
+  - `value`: `Float!` - The value of the transaction.
+- **TransactionUpdateInput**: Used to update an existing transaction.
+  - `alias`: `String` - Optional, to update the alias.
+  - `date`: `String` - Optional, to update the date.
+  - `desc`: `TransactionDesc` - Optional, to update the description.
+  - `type`: `TransactionType` - Optional, to update the type.
+  - `value`: `Float` - Optional, to update the value.
 
 ### Enums
 
-- **TransactionDesc**: Descrição da transação.
+- **TransactionDesc**: Transaction description.
   - `deposit`
   - `payment`
   - `transfer`
   - `withdrawal`
-- **TransactionType**: Tipo da transação.
-  - `inflow` (entrada)
-  - `outflow` (saída)
+- **TransactionType**: Transaction type.
+  - `inflow`
+  - `outflow`
 
 ## 🚀 Queries
 
-As queries são usadas para buscar dados da API.
+Queries are used to fetch data from the API.
 
 ### `me`
 
-Retorna os dados do usuário autenticado.
+Returns the data of the authenticated user.
 
 ```graphql
 query {
@@ -128,12 +128,12 @@ query {
 }
 ```
 
-**Parâmetros:** Nenhum.
-**Retorno:** Um objeto `User` contendo os detalhes do usuário logado, ou `null` se não houver usuário autenticado.
+**Parameters:** None.
+**Returns:** A `User` object containing the details of the logged-in user, or `null` if there is no authenticated user.
 
 ### `transaction`
 
-Retorna uma transação específica pelo seu ID.
+Returns a specific transaction by its ID.
 
 ```graphql
 query Transaction($id: ID!) {
@@ -149,15 +149,15 @@ query Transaction($id: ID!) {
 }
 ```
 
-**Variáveis de Query:**
+**Query Variables:**
 
-- `id`: `ID!` - O ID único da transação.
+- `id`: `ID!` - The unique ID of the transaction.
 
-**Retorno:** Um objeto `Transaction` se encontrado, ou `null`.
+**Returns:** A `Transaction` object if found, or `null`.
 
 ### `transactions`
 
-Retorna uma lista paginada de transações do usuário autenticado.
+Returns a paginated list of transactions for the authenticated user.
 
 ```graphql
 query Transactions($limit: Int, $page: Int) {
@@ -180,16 +180,16 @@ query Transactions($limit: Int, $page: Int) {
 }
 ```
 
-**Variáveis de Query:**
+**Query Variables:**
 
-- `limit`: `Int` - Opcional, o número máximo de itens por página (padrão: 10).
-- `page`: `Int` - Opcional, o número da página a ser retornada (padrão: 1).
+- `limit`: `Int` - Optional, the maximum number of items per page (default: 10).
+- `page`: `Int` - Optional, the page number to be returned (default: 1).
 
-**Retorno:** Um objeto `PaginatedTransactions`.
+**Returns:** A `PaginatedTransactions` object.
 
 ### `getTransactionSummary`
 
-Retorna um resumo financeiro do usuário, incluindo saldo e detalhamento por tipo de transação.
+Returns a financial summary for the user, including balance and breakdown by transaction type.
 
 ```graphql
 query {
@@ -205,16 +205,16 @@ query {
 }
 ```
 
-**Parâmetros:** Nenhum.
-**Retorno:** Um objeto `TransactionSummary`.
+**Parameters:** None.
+**Returns:** A `TransactionSummary` object.
 
 ## 💡 Mutations
 
-As mutations são usadas para modificar dados no servidor.
+Mutations are used to modify data on the server.
 
 ### `login`
 
-Realiza o login de um usuário e retorna um token de autenticação.
+Logs in a user and returns an authentication token.
 
 ```graphql
 mutation Login($input: LoginInput!) {
@@ -229,15 +229,15 @@ mutation Login($input: LoginInput!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `input`: `LoginInput!` - Um objeto com o `email` e `password` do usuário.
+- `input`: `LoginInput!` - An object with the user's `email` and `password`.
 
-**Retorno:** Um objeto `AuthPayload` contendo o `token` JWT e os detalhes do `user`.
+**Returns:** An `AuthPayload` object containing the JWT `token` and the `user` details.
 
 ### `register`
 
-Registra um novo usuário no sistema.
+Registers a new user in the system.
 
 ```graphql
 mutation Register($input: UserInput!) {
@@ -252,15 +252,15 @@ mutation Register($input: UserInput!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `input`: `UserInput!` - Um objeto com `name`, `email`, `password` e `acceptPrivacy`.
+- `input`: `UserInput!` - An object with `name`, `email`, `password`, and `acceptPrivacy`.
 
-**Retorno:** Um objeto `AuthPayload` contendo o `token` JWT e os detalhes do `user` recém-criado.
+**Returns:** An `AuthPayload` object containing the JWT `token` and the details of the newly created `user`.
 
 ### `updateUser`
 
-Atualiza os dados do usuário autenticado.
+Updates the authenticated user's data.
 
 ```graphql
 mutation UpdateUser($input: UserUpdateInput!) {
@@ -273,15 +273,15 @@ mutation UpdateUser($input: UserUpdateInput!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `input`: `UserUpdateInput!` - Um objeto com os campos a serem atualizados (opcionais: `name`, `email`, `password`, `acceptPrivacy`).
+- `input`: `UserUpdateInput!` - An object with the fields to be updated (optional: `name`, `email`, `password`, `acceptPrivacy`).
 
-**Retorno:** O objeto `User` atualizado.
+**Returns:** The updated `User` object.
 
 ### `deleteUser`
 
-Deleta o usuário autenticado.
+Deletes the authenticated user.
 
 ```graphql
 mutation {
@@ -289,12 +289,12 @@ mutation {
 }
 ```
 
-**Parâmetros:** Nenhum.
-**Retorno:** `Boolean!` - `true` se o usuário foi deletado com sucesso, `false` caso contrário.
+**Parameters:** None.
+**Returns:** `Boolean!` - `true` if the user was successfully deleted, `false` otherwise.
 
 ### `validatePassword`
 
-Valida a senha do usuário autenticado.
+Validates the authenticated user's password.
 
 ```graphql
 mutation ValidatePassword($password: String!) {
@@ -302,15 +302,15 @@ mutation ValidatePassword($password: String!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `password`: `String!` - A senha a ser validada.
+- `password`: `String!` - The password to be validated.
 
-**Retorno:** `Boolean!` - `true` se a senha for válida, `false` caso contrário.
+**Returns:** `Boolean!` - `true` if the password is valid, `false` otherwise.
 
 ### `createTransaction`
 
-Cria uma nova transação para o usuário autenticado.
+Creates a new transaction for the authenticated user.
 
 ```graphql
 mutation CreateTransaction($input: TransactionInput!) {
@@ -326,15 +326,15 @@ mutation CreateTransaction($input: TransactionInput!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `input`: `TransactionInput!` - Um objeto com os detalhes da nova transação (`date`, `desc`, `type`, `value`, `alias` opcional, `user` opcional).
+- `input`: `TransactionInput!` - An object with the details of the new transaction (`date`, `desc`, `type`, `value`, optional `alias`, optional `user`).
 
-**Retorno:** O objeto `Transaction` criado.
+**Returns:** The created `Transaction` object.
 
 ### `updateTransaction`
 
-Atualiza uma transação existente.
+Updates an existing transaction.
 
 ```graphql
 mutation UpdateTransaction($id: ID!, $input: TransactionUpdateInput!) {
@@ -350,16 +350,16 @@ mutation UpdateTransaction($id: ID!, $input: TransactionUpdateInput!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `id`: `ID!` - O ID da transação a ser atualizada.
-- `input`: `TransactionUpdateInput!` - Um objeto com os campos a serem atualizados (opcionais: `alias`, `date`, `desc`, `type`, `value`).
+- `id`: `ID!` - The ID of the transaction to be updated.
+- `input`: `TransactionUpdateInput!` - An object with the fields to be updated (optional: `alias`, `date`, `desc`, `type`, `value`).
 
-**Retorno:** O objeto `Transaction` atualizado.
+**Returns:** The updated `Transaction` object.
 
 ### `deleteTransaction`
 
-Deleta uma transação específica pelo seu ID.
+Deletes a specific transaction by its ID.
 
 ```graphql
 mutation DeleteTransaction($id: ID!) {
@@ -367,8 +367,8 @@ mutation DeleteTransaction($id: ID!) {
 }
 ```
 
-**Variáveis de Mutation:**
+**Mutation Variables:**
 
-- `id`: `ID!` - O ID da transação a ser deletada.
+- `id`: `ID!` - The ID of the transaction to be deleted.
 
-**Retorno:** `Boolean!` - `true` se a transação foi deletada com sucesso, `false` caso contrário.
+**Returns:** `Boolean!` - `true` if the transaction was successfully deleted, `false` otherwise.

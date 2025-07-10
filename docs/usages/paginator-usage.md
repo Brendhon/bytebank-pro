@@ -1,10 +1,10 @@
-# Como utilizar o Paginator do ByteBank Pro
+# How to Use the ByteBank Pro Paginator
 
-O componente `bb-paginator` é usado para navegação entre páginas de conteúdo. Ele exibe os números das páginas, incluindo elipses (`...`) para um grande número de páginas, e setas de navegação.
+The `bb-paginator` component is used for navigation between content pages. It displays page numbers, including ellipses (`...`) for a large number of pages, and navigation arrows.
 
-## Importação
+## Importing
 
-O `PaginatorComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `PaginatorComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { PaginatorComponent } from '@bytebank-pro/ui';
@@ -17,18 +17,18 @@ import { PaginatorComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Para usar o paginador, você precisa fornecer a página atual (`currentPage`), o total de páginas (`totalPages`), e escutar o evento `onPageChange` para atualizar a página.
+To use the paginator, you need to provide the current page (`currentPage`), the total number of pages (`totalPages`), and listen to the `onPageChange` event to update the page.
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 currentPage = 1;
 totalPages = 10;
 
 handlePageChange(page: number) {
   this.currentPage = page;
-  // Lógica para buscar os dados da nova página
+  // Logic to fetch data for the new page
 }
 ```
 
@@ -40,29 +40,29 @@ handlePageChange(page: number) {
 />
 ```
 
-## Integração com a Tabela Genérica
+## Integration with Generic Table
 
-Normalmente, o `bb-paginator` é usado internamente pelo `bb-generic-table`. Você não precisa usá-lo diretamente ao trabalhar com a tabela, basta fornecer a propriedade `pageSize` para a tabela.
+Normally, `bb-paginator` is used internally by `bb-generic-table`. You do not need to use it directly when working with the table; simply provide the `pageSize` property to the table.
 
-No entanto, se você precisar de um paginador desacoplado, o uso acima é o recomendado.
+However, if you need a decoupled paginator, the usage above is recommended.
 
-## Comportamento
+## Behavior
 
-- O paginador exibe os números de página e elipses de forma inteligente para economizar espaço.
-- As setas de navegação permitem ir para a página anterior ou seguinte.
-- Os botões são desabilitados apropriadamente quando se está na primeira ou na última página.
+- The paginator intelligently displays page numbers and ellipses to save space.
+- Navigation arrows allow you to go to the previous or next page.
+- Buttons are appropriately disabled when on the first or last page.
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade   | Tipo (`input()`) | Obrigatório | Descrição                              |
-| ------------- | ---------------- | ----------- | -------------------------------------- |
-| `currentPage` | `number`         | Sim         | O número da página ativa.              |
-| `totalPages`  | `number`         | Sim         | O número total de páginas disponíveis. |
+| Property      | Type (`input()`) | Required | Description                          |
+| ------------- | ---------------- | -------- | ------------------------------------ |
+| `currentPage` | `number`         | Yes      | The active page number.              |
+| `totalPages`  | `number`         | Yes      | The total number of available pages. |
 
 ### Outputs
 
-| Propriedade    | Tipo (`output()`) | Descrição                                                    |
-| -------------- | ----------------- | ------------------------------------------------------------ |
-| `onPageChange` | `number`          | Emitido quando a página muda. Emite o novo número da página. |
+| Property       | Type (`output()`) | Description                                               |
+| -------------- | ----------------- | --------------------------------------------------------- |
+| `onPageChange` | `number`          | Emitted when the page changes. Emits the new page number. |

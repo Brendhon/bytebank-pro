@@ -1,10 +1,10 @@
-# Como utilizar o Button do ByteBank Pro
+# How to Use the ByteBank Pro Button
 
-O componente `bb-button` é um botão interativo que pode ser usado para ações em formulários, diálogos e outros elementos da interface. Ele oferece diversas variantes de estilo, tamanhos e estados, como carregamento e desabilitado.
+The `bb-button` component is an interactive button that can be used for actions in forms, dialogs, and other interface elements. It offers several style variants, sizes, and states, such as loading and disabled.
 
-## Importação
+## Importing
 
-O `ButtonComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `ButtonComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { ButtonComponent } from '@bytebank-pro/ui';
@@ -17,82 +17,82 @@ import { ButtonComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-O uso mais simples do botão envolve o seletor `bb-button` e o evento `(buttonClick)`.
+The simplest use of the button involves the `bb-button` selector and the `(buttonClick)` event.
 
 ```html
-<bb-button (buttonClick)="onSave()">Salvar</bb-button>
+<bb-button (buttonClick)="onSave()">Save</bb-button>
 ```
 
-## Variantes
+## Variants
 
-O botão possui várias variantes de cor para diferentes contextos semânticos.
+The button has several color variants for different semantic contexts.
 
 ```html
-<bb-button variant="blue">Padrão (Azul)</bb-button>
-<bb-button variant="dark">Escuro</bb-button>
-<bb-button variant="green">Verde</bb-button>
-<bb-button variant="orange">Laranja</bb-button>
-<bb-button variant="outlineGreen">Contorno Verde</bb-button>
-<bb-button variant="outlineOrange">Contorno Laranja</bb-button>
+<bb-button variant="blue">Default (Blue)</bb-button>
+<bb-button variant="dark">Dark</bb-button>
+<bb-button variant="green">Green</bb-button>
+<bb-button variant="orange">Orange</bb-button>
+<bb-button variant="outlineGreen">Outline Green</bb-button>
+<bb-button variant="outlineOrange">Outline Orange</bb-button>
 ```
 
-## Tamanhos
+## Sizes
 
-O componente está disponível em três tamanhos: `sm`, `md` (padrão), e `lg`.
+The component is available in three sizes: `sm`, `md` (default), and `lg`.
 
 ```html
-<bb-button size="sm">Pequeno</bb-button>
-<bb-button size="md">Médio</bb-button>
-<bb-button size="lg">Grande</bb-button>
+<bb-button size="sm">Small</bb-button>
+<bb-button size="md">Medium</bb-button>
+<bb-button size="lg">Large</bb-button>
 ```
 
-## Estados
+## States
 
-### Carregando (Loading)
+### Loading
 
-Use a propriedade `loading` para indicar uma ação em andamento. O botão ficará desabilitado e exibirá um ícone de carregamento.
+Use the `loading` property to indicate an ongoing action. The button will be disabled and display a loading icon.
 
 ```html
-<bb-button [loading]="isSubmitting" loadingText="Salvando...">Salvar</bb-button>
+<bb-button [loading]="isSubmitting" loadingText="Saving...">Save</bb-button>
 ```
 
-### Desabilitado
+### Disabled
 
-Use a propriedade `disabled` para desativar o botão.
+Use the `disabled` property to deactivate the button.
 
 ```html
-<bb-button [disabled]="form.invalid">Enviar</bb-button>
+<bb-button [disabled]="form.invalid">Submit</bb-button>
 ```
 
-## Acessibilidade
+## Accessibility
 
-O `bb-button` é construído com acessibilidade em mente. Para fornecer uma experiência melhor para usuários de leitores de tela, use `ariaLabel` quando o botão não tiver um texto descritivo (por exemplo, um botão de ícone).
+The `bb-button` is built with accessibility in mind. To provide a better experience for screen reader users, use `ariaLabel` when the button does not have descriptive text (e.g., an icon button).
 
 ```html
-<bb-button ariaLabel="Fechar diálogo">
-  <!-- Ícone de fechar -->
+<bb-button ariaLabel="Close dialog">
+  <!-- Close icon -->
 </bb-button>
 ```
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade   | Tipo (`input()`) | Padrão         | Descrição                                            |
+| Property      | Type (`input()`) | Default        | Description                                          |
 | ------------- | ---------------- | -------------- | ---------------------------------------------------- |
-| `type`        | `ButtonType`     | `'button'`     | O tipo do botão (`'button'`, `'submit'`, `'reset'`). |
-| `variant`     | `ButtonVariant`  | `'blue'`       | A variante de cor do botão.                          |
-| `size`        | `ButtonSize`     | `'md'`         | O tamanho do botão: `'sm'`, `'md'`, `'lg'`.          |
-| `loading`     | `boolean`        | `false`        | Exibe o estado de carregamento.                      |
-| `disabled`    | `boolean`        | `false`        | Desabilita o botão.                                  |
-| `loadingText` | `string`         | `'Loading...'` | Texto para leitores de tela durante o carregamento.  |
-| `className`   | `string`         | `''`           | Classes CSS adicionais para o botão.                 |
-| `ariaLabel`   | `string`         | `undefined`    | Etiqueta acessível para o botão.                     |
+| `type`        | `ButtonType`     | `'button'`     | The button type (`'button'`, `'submit'`, `'reset'`). |
+| `variant`     | `ButtonVariant`  | `'blue'`       | The color variant of the button.                     |
+| `size`        | `ButtonSize`     | `'md'`         | The button size: `'sm'`, `'md'`, `'lg'`.             |
+| `loading`     | `boolean`        | `false`        | Displays the loading state.                          |
+| `disabled`    | `boolean`        | `false`        | Disables the button.                                 |
+| `loadingText` | `string`         | `'Loading...'` | Text for screen readers during loading.              |
+| `className`   | `string`         | `''`           | Additional CSS classes for the button.               |
+| `ariaLabel`   | `string`         | `undefined`    | Accessible label for the button.                     |
 
 ### Outputs
 
-| Propriedade   | Tipo (`output()`) | Descrição                         |
-| ------------- | ----------------- | --------------------------------- |
-| `buttonClick` | `Event`           | Emitido quando o botão é clicado. |
+| Property      | Type (`output()`) | Description                         |
+| ------------- | ----------------- | ----------------------------------- |
+| `buttonClick` | `Event`           | Emitted when the button is clicked. |

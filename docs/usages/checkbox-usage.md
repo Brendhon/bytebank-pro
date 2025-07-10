@@ -1,10 +1,10 @@
-# Como utilizar o Checkbox do ByteBank Pro
+# How to Use the ByteBank Pro Checkbox
 
-O componente `bb-checkbox` é um controle de formulário versátil que permite aos usuários fazer uma seleção binária. Ele segue as diretrizes de design e acessibilidade do ByteBank Pro, oferecendo uma API moderna e flexível baseada em Signals.
+The `bb-checkbox` component is a versatile form control that allows users to make a binary selection. It follows ByteBank Pro's design and accessibility guidelines, offering a modern and flexible API based on Signals.
 
-## Importação
+## Importing
 
-O `CheckboxComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `CheckboxComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { CheckboxComponent } from '@bytebank-pro/ui';
@@ -17,39 +17,39 @@ import { CheckboxComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-O uso mais simples do checkbox requer apenas o seletor `bb-checkbox`. O estado é controlado pelas propriedades `checked` e `checkedChange`.
+The simplest use of the checkbox requires only the `bb-checkbox` selector. The state is controlled by the `checked` and `checkedChange` properties.
 
 ```html
 <bb-checkbox [checked]="isConfirmed" (checkedChange)="isConfirmed = $event" />
 ```
 
-## Estados
+## States
 
-### Indeterminado
+### Indeterminate
 
-Para cenários como uma seleção "selecionar todos", você pode usar o estado `indeterminate`.
+For scenarios like a "select all" selection, you can use the `indeterminate` state.
 
 ```html
 <bb-checkbox [indeterminate]="true" />
 ```
 
-### Desabilitado e Somente Leitura
+### Disabled and Read-Only
 
-Você pode desabilitar o checkbox para impedir a interação do usuário ou torná-lo somente leitura.
+You can disable the checkbox to prevent user interaction or make it read-only.
 
 ```html
-<!-- Desabilitado -->
+<!-- Disabled -->
 <bb-checkbox [disabled]="true" [checked]="true" />
 
-<!-- Somente Leitura -->
+<!-- Read-Only -->
 <bb-checkbox [readonly]="true" [checked]="false" />
 ```
 
-## Variantes
+## Variants
 
-O checkbox suporta múltiplas variantes de cor para refletir diferentes estados, como sucesso ou erro.
+The checkbox supports multiple color variants to reflect different states, such as success or error.
 
 ```html
 <bb-checkbox variant="default" [checked]="true" />
@@ -58,9 +58,9 @@ O checkbox suporta múltiplas variantes de cor para refletir diferentes estados,
 <bb-checkbox variant="warning" [checked]="true" />
 ```
 
-## Tamanhos
+## Sizes
 
-O componente está disponível em três tamanhos: `sm`, `md` (padrão), e `lg`.
+The component is available in three sizes: `sm`, `md` (default), and `lg`.
 
 ```html
 <bb-checkbox size="sm" [checked]="true" />
@@ -68,85 +68,84 @@ O componente está disponível em três tamanhos: `sm`, `md` (padrão), e `lg`.
 <bb-checkbox size="lg" [checked]="true" />
 ```
 
-## Labels e Textos de Ajuda
+## Labels and Helper Texts
 
-Para uma melhor experiência do usuário, associe um `label` e, opcionalmente, um `helperText`.
+For a better user experience, associate a `label` and, optionally, a `helperText`.
 
 ```html
 <bb-checkbox
-  label="Aceito os termos de serviço"
-  helperText="Leia os termos antes de aceitar."
+  label="I accept the terms of service"
+  helperText="Read the terms before accepting."
   [checked]="termsAccepted"
   (checkedChange)="termsAccepted = $event"
 />
 ```
 
-### Mensagens de Erro e Sucesso
+### Error and Success Messages
 
-Exiba mensagens de validação diretamente com o componente.
+Display validation messages directly with the component.
 
 ```html
-<!-- Estado de Erro -->
+<!-- Error State -->
 <bb-checkbox
   variant="error"
-  label="É necessário aceitar a política de privacidade"
-  errorMessage="Este campo é obrigatório."
+  label="You must accept the privacy policy"
+  errorMessage="This field is required."
   [checked]="false"
 />
 
-<!-- Estado de Sucesso -->
+<!-- Success State -->
 <bb-checkbox
   variant="success"
-  label="Política de privacidade aceita"
-  successMessage="Tudo certo!"
+  label="Privacy policy accepted"
+  successMessage="All set!"
   [checked]="true"
 />
 ```
 
-## Acessibilidade
+## Accessibility
 
-O componente `bb-checkbox` é construído com acessibilidade em mente. Ele gerencia automaticamente os atributos ARIA, como `aria-checked`, `aria-disabled`, e `aria-invalid`.
+The `bb-checkbox` component is built with accessibility in mind. It automatically manages ARIA attributes such as `aria-checked`, `aria-disabled`, and `aria-invalid`.
 
-Para cenários mais complexos, você pode usar as seguintes propriedades:
+For more complex scenarios, you can use the following properties:
 
-- `ariaLabel`: Fornece uma etiqueta acessível quando um `label` visual não está presente.
-- `ariaLabelledBy`: Associa o checkbox a um elemento de label externo.
-- `ariaDescribedBy`: Associa o checkbox a elementos descritivos.
+- `ariaLabel`: Provides an accessible label when a visual `label` is not present.
+- `ariaLabelledBy`: Associates the checkbox with an external label element.
+- `ariaDescribedBy`: Associates the checkbox with descriptive elements.
 
 ```html
-<span id="external-label">Notificações por E-mail</span>
-<bb-checkbox ariaLabelledBy="external-label" />
+<span id="external-label">Email Notifications</span> <bb-checkbox ariaLabelledBy="external-label" />
 ```
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade       | Tipo (`input()`)  | Padrão      | Descrição                                                            |
+| Property          | Type (`input()`)  | Default     | Description                                                          |
 | ----------------- | ----------------- | ----------- | -------------------------------------------------------------------- |
-| `checked`         | `boolean`         | `false`     | Controla o estado de seleção do checkbox.                            |
-| `indeterminate`   | `boolean`         | `false`     | Define o estado como indeterminado.                                  |
-| `variant`         | `CheckboxVariant` | `'default'` | A variante de cor: `'default'`, `'success'`, `'error'`, `'warning'`. |
-| `size`            | `CheckboxSize`    | `'md'`      | O tamanho: `'sm'`, `'md'`, `'lg'`.                                   |
-| `disabled`        | `boolean`         | `false`     | Desabilita o checkbox.                                               |
-| `readonly`        | `boolean`         | `false`     | Torna o checkbox somente leitura.                                    |
-| `required`        | `boolean`         | `false`     | Define o checkbox como obrigatório (para acessibilidade).            |
-| `label`           | `string`          | `undefined` | O texto do label associado.                                          |
-| `helperText`      | `string`          | `undefined` | Texto de ajuda exibido abaixo do label.                              |
-| `errorMessage`    | `string`          | `undefined` | Mensagem de erro (visível quando `variant` é `'error'`).             |
-| `successMessage`  | `string`          | `undefined` | Mensagem de sucesso (visível quando `variant` é `'success'`).        |
-| `className`       | `string`          | `''`        | Classes CSS adicionais para o container.                             |
-| `ariaLabel`       | `string`          | `undefined` | Etiqueta acessível para leitores de tela.                            |
-| `ariaLabelledBy`  | `string`          | `undefined` | ID do elemento que rotula o checkbox.                                |
-| `ariaDescribedBy` | `string`          | `undefined` | ID do elemento que descreve o checkbox.                              |
-| `ariaInvalid`     | `boolean`         | `undefined` | Define o estado `aria-invalid`.                                      |
-| `ariaRequired`    | `boolean`         | `undefined` | Define o estado `aria-required`.                                     |
+| `checked`         | `boolean`         | `false`     | Controls the selection state of the checkbox.                        |
+| `indeterminate`   | `boolean`         | `false`     | Sets the state to indeterminate.                                     |
+| `variant`         | `CheckboxVariant` | `'default'` | The color variant: `'default'`, `'success'`, `'error'`, `'warning'`. |
+| `size`            | `CheckboxSize`    | `'md'`      | The size: `'sm'`, `'md'`, `'lg'`.                                    |
+| `disabled`        | `boolean`         | `false`     | Disables the checkbox.                                               |
+| `readonly`        | `boolean`         | `false`     | Makes the checkbox read-only.                                        |
+| `required`        | `boolean`         | `false`     | Sets the checkbox as required (for accessibility).                   |
+| `label`           | `string`          | `undefined` | The associated label text.                                           |
+| `helperText`      | `string`          | `undefined` | Help text displayed below the label.                                 |
+| `errorMessage`    | `string`          | `undefined` | Error message (visible when `variant` is `'error'`).                 |
+| `successMessage`  | `string`          | `undefined` | Success message (visible when `variant` is `'success'`).             |
+| `className`       | `string`          | `''`        | Additional CSS classes for the container.                            |
+| `ariaLabel`       | `string`          | `undefined` | Accessible label for screen readers.                                 |
+| `ariaLabelledBy`  | `string`          | `undefined` | ID of the element that labels the checkbox.                          |
+| `ariaDescribedBy` | `string`          | `undefined` | ID of the element that describes the checkbox.                       |
+| `ariaInvalid`     | `boolean`         | `undefined` | Sets the `aria-invalid` state.                                       |
+| `ariaRequired`    | `boolean`         | `undefined` | Sets the `aria-required` state.                                      |
 
 ### Outputs
 
-| Propriedade       | Tipo (`output()`) | Descrição                                           |
-| ----------------- | ----------------- | --------------------------------------------------- |
-| `checkedChange`   | `boolean`         | Emitido quando o estado de `checked` muda.          |
-| `checkboxFocus`   | `FocusEvent`      | Emitido quando o checkbox recebe foco.              |
-| `checkboxBlur`    | `FocusEvent`      | Emitido quando o checkbox perde o foco.             |
-| `checkboxKeydown` | `KeyboardEvent`   | Emitido quando uma tecla é pressionada no checkbox. |
+| Property          | Type (`output()`) | Description                                    |
+| ----------------- | ----------------- | ---------------------------------------------- |
+| `checkedChange`   | `boolean`         | Emitted when the `checked` state changes.      |
+| `checkboxFocus`   | `FocusEvent`      | Emitted when the checkbox receives focus.      |
+| `checkboxBlur`    | `FocusEvent`      | Emitted when the checkbox loses focus.         |
+| `checkboxKeydown` | `KeyboardEvent`   | Emitted when a key is pressed on the checkbox. |

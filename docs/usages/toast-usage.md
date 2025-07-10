@@ -1,141 +1,141 @@
-# Como utilizar o ToastService no ByteBank Pro
+# How to Use the ToastService in ByteBank Pro
 
-O `ToastService` permite exibir notificações temporárias em toda a aplicação Shell de forma simples e padronizada.
+The `ToastService` allows displaying temporary notifications throughout the Shell application in a simple and standardized way.
 
-## Importante: Disponibilidade do Serviço
+## Important: Service Availability
 
-> **Nota**: O `ToastService` está disponível **apenas** no projeto **Shell**. Os Micro Frontends (MFEs) devem utilizar a abordagem de CustomEvents descrita abaixo para exibir toasts.
+> **Note**: The `ToastService` is available **only** in the **Shell** project. Micro Frontends (MFEs) must use the CustomEvents approach described below to display toasts.
 
-## Para o Shell: Uso Direto do Serviço
+## For the Shell: Direct Service Usage
 
-### Importação
+### Importing
 
 ```typescript
 import { ToastService } from '../../core/services/toast.service';
 ```
 
-### Uso Básico
+### Basic Usage
 
-Injete o serviço no seu componente usando a API moderna do Angular:
+Inject the service into your component using Angular's modern API:
 
 ```typescript
 private toast = inject(ToastService);
 ```
 
-### Exemplos de Uso
+### Usage Examples
 
-#### Exibir mensagem de sucesso:
+#### Display success message:
 
 ```typescript
-// Exibe um toast de sucesso que desaparece após 3 segundos
-this.toast.showSuccess('Operação realizada com sucesso!');
+// Displays a success toast that disappears after 3 seconds
+this.toast.showSuccess('Operation performed successfully!');
 
-// Especificar duração personalizada (em milissegundos)
-this.toast.showSuccess('Operação concluída!', 5000);
+// Specify custom duration (in milliseconds)
+this.toast.showSuccess('Operation completed!', 5000);
 ```
 
-#### Exibir mensagem de erro:
+#### Display error message:
 
 ```typescript
-// Exibe um toast de erro que desaparece após 5 segundos (padrão)
-this.toast.showError('Falha ao processar a operação.');
+// Displays an error toast that disappears after 5 seconds (default)
+this.toast.showError('Failed to process the operation.');
 ```
 
-#### Exibir mensagem informativa:
+#### Display informational message:
 
 ```typescript
-// Exibe um toast informativo que desaparece após 4 segundos (padrão)
-this.toast.showInfo('Sua sessão expira em 5 minutos.');
+// Displays an informational toast that disappears after 4 seconds (default)
+this.toast.showInfo('Your session expires in 5 minutes.');
 ```
 
-#### Fechar manualmente:
+#### Close manually:
 
 ```typescript
-// O método retorna uma função para fechar o toast manualmente
-const closeToast = this.toastService.showInfo('Processando...');
+// The method returns a function to close the toast manually
+const closeToast = this.toastService.showInfo('Processing...');
 
-// Feche o toast quando necessário
+// Close the toast when needed
 someOperation.pipe(finalize(() => closeToast())).subscribe();
 ```
 
-## Para Micro Frontends: Uso via CustomEvents
+## For Micro Frontends: Usage via CustomEvents
 
-Os MFEs devem criar um serviço próprio para utilizar CustomEvents para disparar toasts que serão exibidos pelo Shell:
+MFEs must create their own service to use CustomEvents to trigger toasts that will be displayed by the Shell:
 
-### Estrutura do evento
+### Event structure
 
 ```typescript
 interface ToastEventDetail {
   type: 'success' | 'error' | 'info';
   message: string;
-  duration?: number; // em milissegundos, opcional
+  duration?: number; // in milliseconds, optional
 }
 ```
 
-### Exemplos de Uso para MFEs
+### Usage Examples for MFEs
 
-#### Exibir mensagem de sucesso:
+#### Display success message:
 
 ```typescript
-// Evento para toast de sucesso (duração padrão: 3 segundos)
+// Event for success toast (default duration: 3 seconds)
 window.dispatchEvent(
   new CustomEvent('bytebank:toast', {
     detail: {
       type: 'success',
-      message: 'Operação realizada com sucesso!'
+      message: 'Operation performed successfully!'
     }
   })
 );
 
-// Com duração personalizada
+// With custom duration
 window.dispatchEvent(
   new CustomEvent('bytebank:toast', {
     detail: {
       type: 'success',
-      message: 'Operação concluída!',
-      duration: 5000 // 5 segundos
+      message: 'Operation completed!',
+      duration: 5000 // 5 seconds
     }
   })
 );
 ```
 
-#### Exibir mensagem de erro:
+#### Display error message:
 
 ```typescript
-// Evento para toast de erro (duração padrão: 5 segundos)
+// Event for error toast (default duration: 5 seconds)
 window.dispatchEvent(
   new CustomEvent('bytebank:toast', {
     detail: {
       type: 'error',
-      message: 'Falha ao processar a operação.'
+      message: 'Failed to process the operation.'
     }
   })
 );
 ```
 
-#### Exibir mensagem informativa:
+#### Display informational message:
 
 ```typescript
-// Evento para toast informativo (duração padrão: 4 segundos)
+// Event for informational toast (default duration: 4 seconds)
 window.dispatchEvent(
   new CustomEvent('bytebank:toast', {
     detail: {
       type: 'info',
-      message: 'Sua sessão expira em 5 minutos.'
+      message: 'Your session expires in 5 minutes.'
     }
   })
 );
 ```
 
-## Características
+## Features
 
-- Cada toast é posicionado no topo direito da tela
-- Animações suaves de entrada e saída
-- As cores seguem os design tokens do ByteBank Pro
-- Suporte para diferentes tipos: sucesso, erro e informação
-- Fechamento manual ou automático baseado em tempo
+- Each toast is positioned at the top right of the screen
+- Smooth entry and exit animations
+- Colors follow ByteBank Pro design tokens
+- Support for different types: success, error, and information
+- Manual or automatic closing based on time
 
-## Exemplo de ToastService para MFEs
+## Example ToastService for MFEs
 
 ```typescript
 @Injectable({ providedIn: 'root' })

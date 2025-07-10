@@ -1,10 +1,10 @@
-# Como utilizar o Dialog do ByteBank Pro
+# How to Use the ByteBank Pro Dialog
 
-O componente `bb-dialog` é uma janela modal que pode ser usada para exibir informações importantes, solicitar a entrada do usuário ou confirmar ações. Ele foi projetado com foco em acessibilidade, incluindo gerenciamento de foco, navegação por teclado e bloqueio de scroll da página.
+The `bb-dialog` component is a modal window that can be used to display important information, request user input, or confirm actions. It is designed with a focus on accessibility, including focus management, keyboard navigation, and page scroll locking.
 
-## Importação
+## Importing
 
-O `DialogComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `DialogComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { DialogComponent } from '@bytebank-pro/ui';
@@ -17,12 +17,12 @@ import { DialogComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Para usar o diálogo, você precisa controlar seu estado de visibilidade com a propriedade `isOpen`. O conteúdo do diálogo é projetado usando `ng-content`.
+To use the dialog, you need to control its visibility state with the `isOpen` property. The dialog content is projected using `ng-content`.
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 isDialogOpen = false;
 
 openDialog() {
@@ -35,62 +35,62 @@ closeDialog() {
 ```
 
 ```html
-<button (click)="openDialog()">Abrir Diálogo</button>
+<button (click)="openDialog()">Open Dialog</button>
 
-<bb-dialog [isOpen]="isDialogOpen" (close)="closeDialog()" title="Título do Diálogo">
-  <p>Este é o conteúdo do diálogo.</p>
+<bb-dialog [isOpen]="isDialogOpen" (close)="closeDialog()" title="Dialog Title">
+  <p>This is the content of the dialog.</p>
   <footer class="flex justify-end gap-2 mt-4">
-    <bb-button variant="outlineGreen" (click)="closeDialog()">Cancelar</bb-button>
-    <bb-button (click)="closeDialog()">Confirmar</bb-button>
+    <bb-button variant="outlineGreen" (click)="closeDialog()">Cancel</bb-button>
+    <bb-button (click)="closeDialog()">Confirm</bb-button>
   </footer>
 </bb-dialog>
 ```
 
-## Funcionalidades
+## Features
 
-### Fechamento
+### Closing
 
-O diálogo pode ser fechado de várias maneiras, que podem ser configuradas:
+The dialog can be closed in several ways, which can be configured:
 
-- **Botão de Fechar:** Exibido por padrão no canto superior direito. Controle com `[showCloseButton]="false"`.
-- **Clique no Backdrop:** Habilitado por padrão. Controle com `[closeOnBackdropClick]="false"`.
-- **Tecla Escape:** Habilitada por padrão. Controle com `[closeOnEscape]="false"`.
+- **Close Button:** Displayed by default in the upper right corner. Control with `[showCloseButton]="false"`.
+- **Backdrop Click:** Enabled by default. Control with `[closeOnBackdropClick]="false"`.
+- **Escape Key:** Enabled by default. Control with `[closeOnEscape]="false"`.
 
-### Largura Máxima
+### Maximum Width
 
-A largura máxima do diálogo pode ser ajustada com a propriedade `maxWidth`.
+The maximum width of the dialog can be adjusted with the `maxWidth` property.
 
 ```html
 <bb-dialog [isOpen]="true" maxWidth="48rem">...</bb-dialog>
 ```
 
-## Acessibilidade
+## Accessibility
 
-O `bb-dialog` implementa várias funcionalidades de acessibilidade automaticamente:
+The `bb-dialog` implements several accessibility features automatically:
 
-- **Gerenciamento de Foco:** O foco é movido para o diálogo quando ele abre e retorna ao elemento focado anteriormente quando fecha.
-- **Trap de Foco:** O foco do teclado fica preso dentro do diálogo, impedindo a interação com o conteúdo da página por baixo.
-- **ARIA Attributes:** Atributos como `aria-modal`, `aria-labelledby`, e `role="dialog"` são gerenciados automaticamente.
-- **Bloqueio de Scroll:** O scroll da página principal é desabilitado enquanto o diálogo está aberto.
+- **Focus Management:** Focus is moved to the dialog when it opens and returns to the previously focused element when it closes.
+- **Focus Trap:** Keyboard focus is trapped within the dialog, preventing interaction with the underlying page content.
+- **ARIA Attributes:** Attributes such as `aria-modal`, `aria-labelledby`, and `role="dialog"` are managed automatically.
+- **Scroll Locking:** The main page scroll is disabled while the dialog is open.
 
-Para um controle mais fino, você pode usar a propriedade `ariaLabel` para descrever o propósito do diálogo.
+For finer control, you can use the `ariaLabel` property to describe the purpose of the dialog.
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade            | Tipo (`input()`) | Padrão    | Descrição                                                               |
-| ---------------------- | ---------------- | --------- | ----------------------------------------------------------------------- |
-| `isOpen`               | `boolean`        | `false`   | Controla a visibilidade do diálogo.                                     |
-| `title`                | `string`         | `''`      | O título exibido no cabeçalho do diálogo.                               |
-| `showCloseButton`      | `boolean`        | `true`    | Exibe o botão de fechar no canto superior direito.                      |
-| `closeOnBackdropClick` | `boolean`        | `true`    | Fecha o diálogo ao clicar no backdrop (fundo).                          |
-| `closeOnEscape`        | `boolean`        | `true`    | Fecha o diálogo ao pressionar a tecla Escape.                           |
-| `maxWidth`             | `string`         | `'32rem'` | A largura máxima do diálogo (ex: '400px', '50rem').                     |
-| `ariaLabel`            | `string`         | `''`      | Uma etiqueta ARIA para o diálogo, usada se o título não for suficiente. |
+| Property               | Type (`input()`) | Default   | Description                                                        |
+| ---------------------- | ---------------- | --------- | ------------------------------------------------------------------ |
+| `isOpen`               | `boolean`        | `false`   | Controls the visibility of the dialog.                             |
+| `title`                | `string`         | `''`      | The title displayed in the dialog header.                          |
+| `showCloseButton`      | `boolean`        | `true`    | Displays the close button in the upper right corner.               |
+| `closeOnBackdropClick` | `boolean`        | `true`    | Closes the dialog when clicking on the backdrop.                   |
+| `closeOnEscape`        | `boolean`        | `true`    | Closes the dialog when pressing the Escape key.                    |
+| `maxWidth`             | `string`         | `'32rem'` | The maximum width of the dialog (e.g., '400px', '50rem').          |
+| `ariaLabel`            | `string`         | `''`      | An ARIA label for the dialog, used if the title is not sufficient. |
 
 ### Outputs
 
-| Propriedade | Tipo (`output()`) | Descrição                                       |
-| ----------- | ----------------- | ----------------------------------------------- |
-| `close`     | `void`            | Emitido quando o diálogo solicita o fechamento. |
+| Property | Type (`output()`) | Description                                    |
+| -------- | ----------------- | ---------------------------------------------- |
+| `close`  | `void`            | Emitted when the dialog requests to be closed. |

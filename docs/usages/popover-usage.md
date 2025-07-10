@@ -1,10 +1,10 @@
-# Como utilizar o Popover do ByteBank Pro
+# How to Use the ByteBank Pro Popover
 
-O componente `bb-popover` é usado para exibir conteúdo flutuante em relação a um elemento gatilho. É ideal para menus, informações contextuais ou ações secundárias.
+The `bb-popover` component is used to display floating content relative to a trigger element. It is ideal for menus, contextual information, or secondary actions.
 
-## Importação
+## Importing
 
-O `PopoverComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `PopoverComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { PopoverComponent } from '@bytebank-pro/ui';
@@ -17,12 +17,12 @@ import { PopoverComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-O popover utiliza projeção de conteúdo com `slot` para o gatilho (`trigger`) e o conteúdo (`content`). O estado de visibilidade é controlado por `isOpen` e `openChange`.
+The popover uses content projection with `slot` for the trigger and the content. The visibility state is controlled by `isOpen` and `openChange`.
 
 ```typescript
-// no seu componente.ts
+// in your component.ts
 isPopoverOpen = false;
 
 handleOpenChange(isOpen: boolean) {
@@ -32,54 +32,54 @@ handleOpenChange(isOpen: boolean) {
 
 ```html
 <bb-popover [isOpen]="isPopoverOpen" (openChange)="handleOpenChange($event)">
-  <button slot="trigger">Abrir Popover</button>
+  <button slot="trigger">Open Popover</button>
 
   <div slot="content" class="p-4">
-    <p>Este é o conteúdo do popover.</p>
+    <p>This is the content of the popover.</p>
   </div>
 </bb-popover>
 ```
 
-## Posições
+## Positions
 
-Você pode controlar a posição do popover em relação ao gatilho com a propriedade `position`.
+You can control the position of the popover relative to the trigger with the `position` property.
 
 ```html
 <bb-popover position="top-start"> ... </bb-popover>
 <bb-popover position="bottom-end"> ... </bb-popover>
 ```
 
-As posições disponíveis são: `top`, `bottom`, `left`, `right`, `top-start`, `top-end`, `bottom-start`, `bottom-end`.
+Available positions are: `top`, `bottom`, `left`, `right`, `top-start`, `top-end`, `bottom-start`, `bottom-end`.
 
-## Fechamento Automático
+## Automatic Closing
 
-O popover pode ser configurado para fechar automaticamente:
+The popover can be configured to close automatically:
 
-- **Ao clicar fora:** `[closeOnClickOutside]="true"` (padrão)
-- **Ao pressionar a tecla Escape:** `[closeOnEscape]="true"` (padrão)
+- **On click outside:** `[closeOnClickOutside]="true"` (default)
+- **On Escape key press:** `[closeOnEscape]="true"` (default)
 
-## Acessibilidade
+## Accessibility
 
-O `bb-popover` gerencia atributos ARIA como `aria-haspopup` e `aria-expanded`. O foco é gerenciado para garantir uma experiência de teclado coesa.
+The `bb-popover` manages ARIA attributes such as `aria-haspopup` and `aria-expanded`. Focus is managed to ensure a cohesive keyboard experience.
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade           | Tipo (`input()`)  | Padrão           | Descrição                                                       |
-| --------------------- | ----------------- | ---------------- | --------------------------------------------------------------- |
-| `isOpen`              | `boolean`         | `false`          | Controla a visibilidade do popover.                             |
-| `position`            | `PopoverPosition` | `'bottom-start'` | A posição do popover em relação ao gatilho.                     |
-| `offset`              | `number`          | `8`              | A distância em pixels entre o popover e o gatilho.              |
-| `disabled`            | `boolean`         | `false`          | Desabilita o popover, impedindo que ele seja aberto.            |
-| `closeOnClickOutside` | `boolean`         | `true`           | Fecha o popover ao clicar fora dele.                            |
-| `closeOnEscape`       | `boolean`         | `true`           | Fecha o popover ao pressionar a tecla Escape.                   |
-| `popoverClass`        | `string`          | `''`             | Classes CSS adicionais para o container do conteúdo do popover. |
+| Property              | Type (`input()`)  | Default          | Description                                                 |
+| --------------------- | ----------------- | ---------------- | ----------------------------------------------------------- |
+| `isOpen`              | `boolean`         | `false`          | Controls the visibility of the popover.                     |
+| `position`            | `PopoverPosition` | `'bottom-start'` | The position of the popover relative to the trigger.        |
+| `offset`              | `number`          | `8`              | The distance in pixels between the popover and the trigger. |
+| `disabled`            | `boolean`         | `false`          | Disables the popover, preventing it from being opened.      |
+| `closeOnClickOutside` | `boolean`         | `true`           | Closes the popover when clicking outside of it.             |
+| `closeOnEscape`       | `boolean`         | `true`           | Closes the popover when pressing the Escape key.            |
+| `popoverClass`        | `string`          | `''`             | Additional CSS classes for the popover content container.   |
 
 ### Outputs
 
-| Propriedade  | Tipo (`output()`) | Descrição                                     |
-| ------------ | ----------------- | --------------------------------------------- |
-| `openChange` | `boolean`         | Emitido quando o estado de visibilidade muda. |
-| `opened`     | `void`            | Emitido quando o popover é aberto.            |
-| `closed`     | `void`            | Emitido quando o popover é fechado.           |
+| Property     | Type (`output()`) | Description                                |
+| ------------ | ----------------- | ------------------------------------------ |
+| `openChange` | `boolean`         | Emitted when the visibility state changes. |
+| `opened`     | `void`            | Emitted when the popover is opened.        |
+| `closed`     | `void`            | Emitted when the popover is closed.        |

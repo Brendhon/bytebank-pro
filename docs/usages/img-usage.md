@@ -1,10 +1,10 @@
-# Como utilizar o Img do ByteBank Pro
+# How to Use the ByteBank Pro Img
 
-O componente `bb-img` é responsável por renderizar imagens, sejam elas SVGs dos assets compartilhados ou imagens de fontes externas. Ele gerencia estados de carregamento e erro, e segue as melhores práticas de acessibilidade.
+The `bb-img` component is responsible for rendering images, whether they are SVGs from shared assets or images from external sources. It manages loading and error states and follows accessibility best practices.
 
-## Importação
+## Importing
 
-O `ImgComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `ImgComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { ImgComponent } from '@bytebank-pro/ui';
@@ -17,21 +17,21 @@ import { ImgComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Para usar o componente, forneça o caminho do asset ou a URL da imagem na propriedade `src` e um texto alternativo em `alt`.
+To use the component, provide the asset path or image URL in the `src` property and alternative text in `alt`.
 
 ```html
-<!-- Imagem dos assets compartilhados -->
-<bb-img src="logo/bytebank.svg" alt="Logo do ByteBank" />
+<!-- Image from shared assets -->
+<bb-img src="logo/bytebank.svg" alt="ByteBank Logo" />
 
-<!-- Imagem de uma URL externa -->
-<bb-img src="https://picsum.photos/200" alt="Imagem aleatória" />
+<!-- Image from an external URL -->
+<bb-img src="https://picsum.photos/200" alt="Random image" />
 ```
 
-## Tamanhos
+## Sizes
 
-O componente oferece vários tamanhos predefinidos para padronização.
+The component offers several predefined sizes for standardization.
 
 ```html
 <bb-img src="logo/bytebank.svg" alt="Logo" size="sm" />
@@ -39,35 +39,35 @@ O componente oferece vários tamanhos predefinidos para padronização.
 <bb-img src="logo/bytebank.svg" alt="Logo" size="lg" />
 ```
 
-## Acessibilidade
+## Accessibility
 
-### Imagens Decorativas
+### Decorative Images
 
-Se a imagem for puramente decorativa e não transmitir nenhuma informação importante, use a propriedade `isDecorative` para escondê-la de leitores de tela.
+If the image is purely decorative and does not convey any important information, use the `isDecorative` property to hide it from screen readers.
 
 ```html
 <bb-img src="icons/background-pattern.svg" [isDecorative]="true" />
 ```
 
-Isso aplicará `aria-hidden="true"` e um `alt` vazio.
+This will apply `aria-hidden="true"` and an empty `alt`.
 
-### Estados de Carregamento e Erro
+### Loading and Error States
 
-O componente gerencia automaticamente os estados de carregamento e erro, exibindo ícones e textos apropriados para leitores de tela.
+The component automatically manages loading and error states, displaying appropriate icons and text for screen readers.
 
-- Durante o carregamento, `aria-busy="true"` é definido.
-- Em caso de erro, um ícone de erro é exibido e o `alt` é atualizado para o texto de erro.
+- During loading, `aria-busy="true"` is set.
+- In case of an error, an error icon is displayed, and the `alt` is updated to the error text.
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade    | Tipo (`input()`) | Obrigatório | Padrão                      | Descrição                                                                       |
-| -------------- | ---------------- | ----------- | --------------------------- | ------------------------------------------------------------------------------- |
-| `src`          | `string`         | Sim         | -                           | O caminho do asset (ex: `logo/bytebank.svg`) ou a URL da imagem.                |
-| `alt`          | `string`         | Não         | `''`                        | O texto alternativo para a imagem. Obrigatório se `isDecorative` for `false`.   |
-| `size`         | `ImgSize`        | Não         | `'md'`                      | O tamanho da imagem: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
-| `className`    | `string`         | Não         | `''`                        | Classes CSS adicionais para o elemento da imagem.                               |
-| `isDecorative` | `boolean`        | Não         | `false`                     | Indica se a imagem é decorativa, escondendo-a de leitores de tela.              |
-| `loadingText`  | `string`         | Não         | `'Carregando imagem...'`    | Texto para leitores de tela durante o carregamento.                             |
-| `errorText`    | `string`         | Não         | `'Erro ao carregar imagem'` | Texto para leitores de tela quando a imagem falha ao carregar.                  |
+| Property       | Type (`input()`) | Required | Default                 | Description                                                                |
+| -------------- | ---------------- | -------- | ----------------------- | -------------------------------------------------------------------------- |
+| `src`          | `string`         | Yes      | -                       | The asset path (e.g., `logo/bytebank.svg`) or the image URL.               |
+| `alt`          | `string`         | No       | `''`                    | The alternative text for the image. Required if `isDecorative` is `false`. |
+| `size`         | `ImgSize`        | No       | `'md'`                  | The image size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
+| `className`    | `string`         | No       | `''`                    | Additional CSS classes for the image element.                              |
+| `isDecorative` | `boolean`        | No       | `false`                 | Indicates if the image is decorative, hiding it from screen readers.       |
+| `loadingText`  | `string`         | No       | `'Loading image...'`    | Text for screen readers during loading.                                    |
+| `errorText`    | `string`         | No       | `'Error loading image'` | Text for screen readers when the image fails to load.                      |

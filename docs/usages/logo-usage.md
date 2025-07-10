@@ -1,10 +1,10 @@
-# Como utilizar o Logo do ByteBank Pro
+# How to Use the ByteBank Pro Logo
 
-O componente `bb-logo` é usado para exibir o logotipo do ByteBank Pro. Ele pode renderizar a versão completa do logo ou apenas o ícone, com tamanhos e classes personalizáveis.
+The `bb-logo` component is used to display the ByteBank Pro logo. It can render the full version of the logo or just the icon, with customizable sizes and classes.
 
-## Importação
+## Importing
 
-O `LogoComponent` é standalone, então você pode importá-lo diretamente no seu componente:
+The `LogoComponent` is standalone, so you can import it directly into your component:
 
 ```typescript
 import { LogoComponent } from '@bytebank-pro/ui';
@@ -17,29 +17,29 @@ import { LogoComponent } from '@bytebank-pro/ui';
 export class MyComponent {}
 ```
 
-## Uso Básico
+## Basic Usage
 
-Por padrão, o componente renderiza o logo completo no tamanho médio.
+By default, the component renders the full logo in the medium size.
 
 ```html
 <bb-logo />
 ```
 
-## Variantes
+## Variants
 
-Existem duas variantes: `full` (padrão) e `icon`.
+There are two variants: `full` (default) and `icon`.
 
 ```html
-<!-- Logo completo -->
+<!-- Full logo -->
 <bb-logo variant="full" />
 
-<!-- Apenas o ícone -->
+<!-- Icon only -->
 <bb-logo variant="icon" />
 ```
 
-## Tamanhos
+## Sizes
 
-O logo está disponível em vários tamanhos predefinidos.
+The logo is available in several predefined sizes.
 
 ```html
 <bb-logo size="sm" />
@@ -47,28 +47,28 @@ O logo está disponível em vários tamanhos predefinidos.
 <bb-logo size="lg" />
 ```
 
-## Acessibilidade
+## Accessibility
 
-O componente gera automaticamente um texto alternativo descritivo. Se o logo for puramente decorativo, use a propriedade `isDecorative`.
+The component automatically generates a descriptive alternative text. If the logo is purely decorative, use the `isDecorative` property.
 
 ```html
 <bb-logo [isDecorative]="true" />
 ```
 
-Você também pode fornecer um `ariaLabel` personalizado para o ícone.
+You can also provide a custom `ariaLabel` for the icon.
 
 ```html
-<bb-logo variant="icon" ariaLabel="Ir para a página inicial" />
+<bb-logo variant="icon" ariaLabel="Go to homepage" />
 ```
 
-## API de Propriedades
+## Property API
 
 ### Inputs
 
-| Propriedade    | Tipo (`input()`) | Padrão      | Descrição                                                                     |
-| -------------- | ---------------- | ----------- | ----------------------------------------------------------------------------- |
-| `variant`      | `LogoVariant`    | `'full'`    | A variante do logo: `'full'` ou `'icon'`.                                     |
-| `size`         | `ImgSize`        | `'md'`      | O tamanho do logo: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
-| `className`    | `string`         | `''`        | Classes CSS adicionais para o elemento do logo.                               |
-| `ariaLabel`    | `string`         | `undefined` | Um `aria-label` personalizado.                                                |
-| `isDecorative` | `boolean`        | `false`     | Indica se o logo é decorativo, escondendo-o de leitores de tela.              |
+| Property       | Type (`input()`) | Default     | Description                                                               |
+| -------------- | ---------------- | ----------- | ------------------------------------------------------------------------- |
+| `variant`      | `LogoVariant`    | `'full'`    | The logo variant: `'full'` or `'icon'`.                                   |
+| `size`         | `ImgSize`        | `'md'`      | The logo size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
+| `className`    | `string`         | `''`        | Additional CSS classes for the logo element.                              |
+| `ariaLabel`    | `string`         | `undefined` | A custom `aria-label`.                                                    |
+| `isDecorative` | `boolean`        | `false`     | Indicates if the logo is decorative, hiding it from screen readers.       |
