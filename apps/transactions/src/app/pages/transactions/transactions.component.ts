@@ -14,7 +14,8 @@ import { ITransaction } from '@bytebank-pro/types';
     TransactionFormComponent,
     ConfirmDeletionComponent
   ],
-  templateUrl: './transactions.component.html'
+  templateUrl: './transactions.component.html',
+  styleUrls: ['./transactions.component.css']
 })
 export class TransactionsPageComponent {
   // Dialog state

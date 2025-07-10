@@ -40,7 +40,8 @@ This ensures that the documentation is always a reliable source of information f
 
 - **Responsive Sizing**: Always use responsive Tailwind classes (e.g., `w-48`, `h-32`) instead of fixed pixel values (e.g., `w-[44px]`, `h-[100px]`) for better screen adaptation across different devices.
 - **Flexible Layouts**: Prefer flexible sizing that adapts to different screen sizes and orientations.
-- **Breakpoint Considerations**: Use Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`) when specific sizing adjustments are needed for different screen sizes.
+- **Breakpoint Considerations**: **Always prioritize Tailwind's responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`) over custom `@media` queries for responsive design.** Use these prefixes when specific sizing adjustments are needed for different screen sizes.
+- **Media Queries**: Only use custom `@media` queries for non-standard responsive behaviors (e.g., `prefers-contrast: high`, `prefers-reduced-motion`, print styles) that cannot be achieved with Tailwind's responsive utilities.
 
 ---
 

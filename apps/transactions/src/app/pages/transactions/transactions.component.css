@@ -1,0 +1,28 @@
+/* Transactions page component styles */
+
+/* Card container styling */
+.card {
+  @apply bg-bytebank-light-gray rounded-sm p-4 sm:p-7 shadow-md;
+}
+
+/* Page header container */
+.page-header {
+  @apply flex flex-col gap-4 items-start sm:flex-row sm:justify-between sm:items-center sm:gap-0;
+}
+
+/* Page title */
+.page-title {
+  @apply text-xl sm:text-2xl font-semibold;
+}
+
+/* Main content section */
+.main-content {
+  @apply flex flex-col gap-6;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    @apply border-2 border-gray-900;
+  }
+}

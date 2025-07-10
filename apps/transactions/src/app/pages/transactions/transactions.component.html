@@ -1,17 +1,22 @@
-<!-- Header with action button -->
-<div class="mb-6 flex justify-between items-center">
-  <h1 class="text-2xl font-bold text-gray-900">Transações</h1>
-  <bb-button variant="green" (buttonClick)="openDialog()" ariaLabel="Cadastrar nova transação">
-    + Nova Transação
-  </bb-button>
-</div>
+<main>
+  <section class="card">
+    <div class="main-content">
+      <header class="page-header">
+        <h1 class="page-title">Histórico</h1>
+        <bb-button variant="blue" (buttonClick)="openDialog()" ariaLabel="Cadastrar nova transação">
+          Nova Transação
+        </bb-button>
+      </header>
 
-<bb-transactions-table
-  [transactions]="transactions()"
-  [pageSize]="5"
-  (onEdit)="handleEditTransaction($event)"
-  (onDelete)="handleDeleteTransaction($event)"
-></bb-transactions-table>
+      <bb-transactions-table
+        [transactions]="transactions()"
+        [pageSize]="5"
+        (onEdit)="handleEditTransaction($event)"
+        (onDelete)="handleDeleteTransaction($event)"
+      ></bb-transactions-table>
+    </div>
+  </section>
+</main>
 
 <!-- Transaction Form Component -->
 <bb-transaction-form
