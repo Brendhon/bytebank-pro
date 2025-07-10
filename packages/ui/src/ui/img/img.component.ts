@@ -85,6 +85,10 @@ export class ImgComponent implements OnInit {
     md: 'w-16 h-auto',
     lg: 'w-32 h-auto',
     xl: 'w-48 h-auto',
+    '2xl': 'w-64 h-auto',
+    '3xl': 'w-96 h-auto',
+    '4xl': 'w-128 h-auto',
+    '5xl': 'w-160 h-auto',
     full: 'w-full h-auto'
   };
 

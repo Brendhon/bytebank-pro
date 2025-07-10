@@ -65,10 +65,10 @@ You can also provide a custom `ariaLabel` for the icon.
 
 ### Inputs
 
-| Property       | Type (`input()`) | Default     | Description                                                               |
-| -------------- | ---------------- | ----------- | ------------------------------------------------------------------------- |
-| `variant`      | `LogoVariant`    | `'full'`    | The logo variant: `'full'` or `'icon'`.                                   |
-| `size`         | `ImgSize`        | `'md'`      | The logo size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
-| `className`    | `string`         | `''`        | Additional CSS classes for the logo element.                              |
-| `ariaLabel`    | `string`         | `undefined` | A custom `aria-label`.                                                    |
-| `isDecorative` | `boolean`        | `false`     | Indicates if the logo is decorative, hiding it from screen readers.       |
+| Property       | Type (`input()`) | Default     | Description                                                                                                   |
+| -------------- | ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------- |
+| `variant`      | `LogoVariant`    | `'full'`    | The logo variant: `'full'` or `'icon'`.                                                                       |
+| `size`         | `ImgSize`        | `'md'`      | The logo size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`, `'full'`. |
+| `className`    | `string`         | `''`        | Additional CSS classes for the logo element.                                                                  |
+| `ariaLabel`    | `string`         | `undefined` | A custom `aria-label`.                                                                                        |
+| `isDecorative` | `boolean`        | `false`     | Indicates if the logo is decorative, hiding it from screen readers.                                           |

@@ -62,12 +62,12 @@ The component automatically manages loading and error states, displaying appropr
 
 ### Inputs
 
-| Property       | Type (`input()`) | Required | Default                 | Description                                                                |
-| -------------- | ---------------- | -------- | ----------------------- | -------------------------------------------------------------------------- |
-| `src`          | `string`         | Yes      | -                       | The asset path (e.g., `logo/bytebank.svg`) or the image URL.               |
-| `alt`          | `string`         | No       | `''`                    | The alternative text for the image. Required if `isDecorative` is `false`. |
-| `size`         | `ImgSize`        | No       | `'md'`                  | The image size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'full'`. |
-| `className`    | `string`         | No       | `''`                    | Additional CSS classes for the image element.                              |
-| `isDecorative` | `boolean`        | No       | `false`                 | Indicates if the image is decorative, hiding it from screen readers.       |
-| `loadingText`  | `string`         | No       | `'Loading image...'`    | Text for screen readers during loading.                                    |
-| `errorText`    | `string`         | No       | `'Error loading image'` | Text for screen readers when the image fails to load.                      |
+| Property       | Type (`input()`) | Required | Default                 | Description                                                                                                    |
+| -------------- | ---------------- | -------- | ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `src`          | `string`         | Yes      | -                       | The asset path (e.g., `logo/bytebank.svg`) or the image URL.                                                   |
+| `alt`          | `string`         | No       | `''`                    | The alternative text for the image. Required if `isDecorative` is `false`.                                     |
+| `size`         | `ImgSize`        | No       | `'md'`                  | The image size: `'xs'`, `'xsl'`, `'sm'`, `'md'`, `'lg'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`, `'full'`. |
+| `className`    | `string`         | No       | `''`                    | Additional CSS classes for the image element.                                                                  |
+| `isDecorative` | `boolean`        | No       | `false`                 | Indicates if the image is decorative, hiding it from screen readers.                                           |
+| `loadingText`  | `string`         | No       | `'Loading image...'`    | Text for screen readers during loading.                                                                        |
+| `errorText`    | `string`         | No       | `'Error loading image'` | Text for screen readers when the image fails to load.                                                          |

@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogComponent, ButtonComponent } from '@bytebank-pro/ui';
+import { ButtonComponent } from '@bytebank-pro/ui';
 import { TransactionsTableComponent } from '@/components/transactions-table/transactions-table.component';
+import { TransactionFormComponent } from '@/components/transaction-form/transaction-form.component';
 import { ITransaction } from '@bytebank-pro/types';
 
 @Component({
   selector: 'bb-transactions',
   standalone: true,
-  imports: [DialogComponent, ButtonComponent, TransactionsTableComponent],
+  imports: [ButtonComponent, TransactionsTableComponent, TransactionFormComponent],
   templateUrl: './transactions.component.html'
 })
 export class TransactionsPageComponent implements OnInit {
   // Dialog state
   isDialogOpen = false;
+  editingTransaction: ITransaction | null = null;
 
   // Mock data for transactions
   transactions: ITransaction[] = [
@@ -119,6 +121,7 @@ export class TransactionsPageComponent implements OnInit {
 
   closeDialog(): void {
     this.isDialogOpen = false;
+    this.editingTransaction = null; // Reset editing state
   }
 
   // Transaction methods
@@ -131,8 +134,27 @@ export class TransactionsPageComponent implements OnInit {
   // Handle edit transaction
   handleEditTransaction(transaction: ITransaction): void {
     console.log('Editing transaction:', transaction);
-    // Aqui virá a lógica para editar a transação
-    // Por exemplo, abrir o dialog com os dados preenchidos
+    this.editingTransaction = transaction;
+    this.openDialog();
+  }
+
+  // Handle transaction submit (create or update)
+  handleTransactionSubmit(transaction: ITransaction): void {
+    console.log('Transaction submitted:', transaction);
+
+    if (this.editingTransaction) {
+      // Update existing transaction
+      const index = this.transactions.findIndex((t) => t._id === this.editingTransaction?._id);
+      if (index !== -1) {
+        this.transactions[index] = { ...transaction, _id: this.editingTransaction._id };
+      }
+    } else {
+      // Add new transaction
+      const newTransaction = { ...transaction, _id: Date.now().toString() };
+      this.transactions.unshift(newTransaction);
+    }
+
+    this.closeDialog();
   }
 
   // Handle delete transaction

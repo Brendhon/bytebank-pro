@@ -13,83 +13,10 @@
   (onDelete)="handleDeleteTransaction($event)"
 ></bb-transactions-table>
 
-<!-- Transaction Dialog -->
-<bb-dialog
+<!-- Transaction Form Component -->
+<app-transaction-form
   [isOpen]="isDialogOpen"
-  (close)="closeDialog()"
-  title="Nova Transação"
-  maxWidth="32rem"
-  ariaLabel="Dialog para cadastrar nova transação"
->
-  <form class="space-y-4">
-    <!-- Description Field -->
-    <div>
-      <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
-        Descrição
-      </label>
-      <input
-        id="description"
-        type="text"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="Digite a descrição da transação"
-      />
-    </div>
-
-    <!-- Amount Field -->
-    <div>
-      <label for="amount" class="block text-sm font-medium text-gray-700 mb-1"> Valor </label>
-      <input
-        id="amount"
-        type="number"
-        step="0.01"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-        placeholder="0,00"
-      />
-    </div>
-
-    <!-- Type Field -->
-    <div>
-      <label for="type" class="block text-sm font-medium text-gray-700 mb-1"> Tipo </label>
-      <select
-        id="type"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-      >
-        <option value="">Selecione o tipo</option>
-        <option value="income">Entrada</option>
-        <option value="expense">Saída</option>
-      </select>
-    </div>
-
-    <!-- Category Field -->
-    <div>
-      <label for="category" class="block text-sm font-medium text-gray-700 mb-1"> Categoria </label>
-      <select
-        id="category"
-        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-      >
-        <option value="">Selecione a categoria</option>
-        <option value="salary">Salário</option>
-        <option value="food">Alimentação</option>
-        <option value="transport">Transporte</option>
-        <option value="entertainment">Entretenimento</option>
-        <option value="health">Saúde</option>
-        <option value="education">Educação</option>
-        <option value="other">Outros</option>
-      </select>
-    </div>
-  </form>
-
-  <!-- Dialog Actions -->
-  <footer class="flex justify-end gap-2 mt-6">
-    <bb-button
-      variant="outlineGreen"
-      (buttonClick)="closeDialog()"
-      ariaLabel="Cancelar cadastro de transação"
-    >
-      Cancelar
-    </bb-button>
-    <bb-button variant="green" (buttonClick)="saveTransaction()" ariaLabel="Salvar transação">
-      Salvar
-    </bb-button>
-  </footer>
-</bb-dialog>
+  [transaction]="editingTransaction"
+  (transactionSubmit)="handleTransactionSubmit($event)"
+  (dialogClose)="closeDialog()"
+></app-transaction-form>

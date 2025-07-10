@@ -1,0 +1,135 @@
+<bb-dialog
+  [isOpen]="isOpen()"
+  (close)="onDialogClose()"
+  [showCloseButton]="false"
+  maxWidth="32rem"
+  data-testid="transaction-dialog"
+  class="transaction-dialog"
+>
+  <div class="transaction-container">
+    <h2 class="transaction-title">{{ getDialogTitle() }}</h2>
+
+    <!-- Transaction Form -->
+    <form
+      class="transaction-form"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      data-testid="transaction-form"
+    >
+      <!-- Alias Field (Optional) -->
+      <bb-input
+        label="Alias (opcional)"
+        type="text"
+        [value]="formData().alias"
+        [variant]="aliasVariant()"
+        [errorMessage]="formErrors().alias"
+        placeholder="Digite um apelido para a transação"
+        [required]="false"
+        [disabled]="isLoading()"
+        ariaLabel="Digite um apelido para a transação"
+        (valueChange)="onAliasChange($event)"
+        data-testid="alias-input"
+      />
+
+      <!-- Description and Type Row -->
+      <div class="transaction-form-row">
+        <bb-select
+          label="Descrição"
+          [value]="formData().desc"
+          [variant]="descVariant()"
+          [errorMessage]="formErrors().desc"
+          [options]="transactionDescriptions"
+          [required]="true"
+          [disabled]="isLoading()"
+          placeholder="Descrição"
+          ariaLabel="Selecione a descrição da transação"
+          (valueChange)="onDescChange($event)"
+          data-testid="desc-select"
+        />
+
+        <bb-select
+          label="Tipo"
+          [value]="formData().type"
+          [variant]="typeVariant()"
+          [errorMessage]="formErrors().type"
+          [options]="transactionTypes"
+          [required]="true"
+          [disabled]="true"
+          placeholder="Tipo"
+          ariaLabel="Tipo da transação"
+          (valueChange)="onTypeChange($event)"
+          data-testid="type-select"
+        />
+      </div>
+
+      <!-- Value and Date Row -->
+      <div class="transaction-form-row">
+        <bb-input
+          label="Valor"
+          type="number"
+          [value]="formData().value.toString()"
+          [variant]="valueVariant()"
+          [errorMessage]="formErrors().value"
+          [prefixIcon]="dollarIcon"
+          placeholder="Digite o valor da transação"
+          [required]="true"
+          [disabled]="isLoading()"
+          step="0.01"
+          min="0.01"
+          ariaLabel="Digite o valor da transação"
+          (valueChange)="onValueChange(+$event)"
+          data-testid="value-input"
+        />
+
+        <bb-input
+          label="Data"
+          type="text"
+          [value]="formData().date"
+          [variant]="dateVariant()"
+          [errorMessage]="formErrors().date"
+          [prefixIcon]="calendarIcon"
+          placeholder="dd/mm/yyyy"
+          [required]="true"
+          [disabled]="isLoading()"
+          ariaLabel="Selecione a data da transação"
+          (valueChange)="onDateChange($event)"
+          data-testid="date-input"
+        />
+      </div>
+
+      <bb-img
+        [src]="illustration"
+        alt="Transaction Illustration"
+        size="2xl"
+        className="mx-auto"
+      ></bb-img>
+
+      <!-- Dialog Actions -->
+      <div class="dialog-actions">
+        <bb-button
+          type="button"
+          variant="dark"
+          size="md"
+          [disabled]="isLoading()"
+          ariaLabel="Cancelar"
+          (click)="onDialogClose()"
+          data-testid="transaction-cancel-button"
+        >
+          Cancelar
+        </bb-button>
+
+        <bb-button
+          type="submit"
+          variant="blue"
+          size="md"
+          [disabled]="!isFormValid() || isLoading()"
+          [loading]="isLoading()"
+          ariaLabel="Salvar"
+          data-testid="transaction-submit-button"
+        >
+          {{ getSubmitButtonText() }}
+        </bb-button>
+      </div>
+    </form>
+  </div>
+</bb-dialog>

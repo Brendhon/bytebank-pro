@@ -1,0 +1,66 @@
+/* Component-specific styles for transaction form */
+
+/* Focus management for accessibility */
+.bb-transaction-form-wrapper {
+  @apply outline-none;
+}
+
+/* Enhanced focus styles for form elements */
+.bb-transaction-form-wrapper input:focus,
+.bb-transaction-form-wrapper select:focus,
+.bb-transaction-form-wrapper button:focus {
+  @apply ring-2 ring-bytebank-blue ring-offset-2;
+}
+
+/* Transaction form specific styles */
+.transaction-dialog {
+  @apply h-full;
+}
+
+.transaction-container {
+  @apply flex flex-col items-center space-y-6 p-6;
+}
+
+.transaction-title {
+  @apply text-2xl font-bold text-bytebank-dark mb-2;
+}
+
+.transaction-form {
+  @apply w-full flex flex-col gap-6;
+}
+
+.transaction-form-row {
+  @apply grid gap-4 grid-cols-1 md:grid-cols-2;
+}
+
+/* Loading state overlay */
+.bb-transaction-form-loading {
+  @apply pointer-events-none opacity-60;
+}
+
+/* Dialog actions styling */
+.dialog-actions {
+  @apply flex justify-center gap-2 mt-6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .bb-transaction-form-wrapper form {
+    @apply space-y-3;
+  }
+
+  .bb-transaction-form-wrapper h2 {
+    @apply text-xl;
+  }
+
+  .dialog-actions {
+    @apply flex-col gap-2;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bb-transaction-form-wrapper {
+    @apply border-2 border-gray-900;
+  }
+}
