@@ -63,33 +63,6 @@ export class TransactionsTableComponent {
     trash: Trash
   };
 
-  /**
-   * Base columns configuration for the `bb-generic-table`.
-   * Templates are defined inline in the template HTML.
-   */
-  private baseColumns: TableColumn<ITransaction>[] = [
-    {
-      label: 'Data',
-      accessor: 'date'
-    },
-    {
-      label: 'Alias',
-      accessor: 'alias'
-    },
-    {
-      label: 'Descrição',
-      accessor: 'desc'
-    },
-    {
-      label: 'Valor',
-      accessor: 'value'
-    },
-    {
-      label: 'Ações',
-      accessor: '_id'
-    }
-  ];
-
   // Provide TransactionDesc constant to the template for lookup
   protected readonly TransactionDesc = TransactionDesc;
 
