@@ -1,14 +1,6 @@
 import { CurrencyFormatPipe } from '@/core/pipes/currency-format.pipe';
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, TemplateRef } from '@angular/core';
 import {
   ITransaction,
   TableColumn,
@@ -17,7 +9,7 @@ import {
   TransactionTypeKey
 } from '@bytebank-pro/types';
 import { GenericTableComponent } from '@bytebank-pro/ui';
-import { LucideAngularModule, Pencil, Trash } from 'lucide-angular'; // Import specific icons
+import { LucideAngularModule, Pencil, Trash } from 'lucide-angular';
 
 /**
  * TransactionTable component displays a list of financial transactions in a table format.
@@ -35,41 +27,36 @@ import { LucideAngularModule, Pencil, Trash } from 'lucide-angular'; // Import s
  * ```
  */
 @Component({
-  selector: 'bb-transactions-table', // 'bb-' prefix is mandatory
-  standalone: true, // Always use standalone components
-  imports: [
-    CommonModule,
-    GenericTableComponent,
-    LucideAngularModule,
-    CurrencyFormatPipe // Needed for currency formatting within template
-  ], // All required child components and modules
-  changeDetection: ChangeDetectionStrategy.OnPush, // OnPush for better performance
-  templateUrl: './transactions-table.component.html', // Separated template for clarity
-  styleUrls: ['./transactions-table.component.css'] // Added CSS file for organized styling
+  selector: 'bb-transactions-table',
+  standalone: true,
+  imports: [CommonModule, GenericTableComponent, LucideAngularModule, CurrencyFormatPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './transactions-table.component.html',
+  styleUrls: ['./transactions-table.component.css']
 })
-export class TransactionsTableComponent implements OnInit {
+export class TransactionsTableComponent {
   /**
    * The array of `ITransaction` objects to display in the table.
    */
-  @Input({ required: true }) transactions: ITransaction[] = [];
+  transactions = input.required<ITransaction[]>();
 
   /**
    * The number of transactions to display per page. If omitted, pagination is disabled.
    * @default 10
    */
-  @Input() pageSize: number | undefined = 10;
+  pageSize = input<number>(10);
 
   /**
    * Event emitted when the "Edit" button for a transaction is clicked.
    * Emits the `ITransaction` object to be edited.
    */
-  @Output() onEdit = new EventEmitter<ITransaction>();
+  onEdit = output<ITransaction>();
 
   /**
    * Event emitted when the "Delete" button for a transaction is clicked.
    * Emits the `ITransaction` object to be deleted.
    */
-  @Output() onDelete = new EventEmitter<ITransaction>();
+  onDelete = output<ITransaction>();
 
   icons = {
     pencil: Pencil,
@@ -112,8 +99,8 @@ export class TransactionsTableComponent implements OnInit {
    * @param type The transaction type key.
    * @returns The transaction description or the original type if not found.
    */
-  getTransactionDesc(type: any): string {
-    return TransactionDesc[type as TransactionDescKey] || type;
+  getTransactionDesc(type: TransactionDescKey): string {
+    return TransactionDesc[type] || type;
   }
 
   /**
@@ -154,14 +141,6 @@ export class TransactionsTableComponent implements OnInit {
         render: actionsTemplate
       }
     ];
-  }
-
-  /**
-   * Lifecycle hook called after component's view and child views are initialized.
-   * No longer needed since columns are defined statically.
-   */
-  ngOnInit(): void {
-    // Columns are now defined statically, no initialization needed
   }
 
   /**
