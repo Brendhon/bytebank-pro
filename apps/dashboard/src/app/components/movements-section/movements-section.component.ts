@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, input, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './components/card/card.component';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CardProps, CardVariant } from '@bytebank-pro/types';
+import { CardComponent } from './components/card/card.component';
 
 /**
  * MovementsSection component displays a titled section containing a grid of cards
