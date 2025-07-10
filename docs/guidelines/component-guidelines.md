@@ -8,11 +8,11 @@ This guide outlines best practices for Angular component development in ByteBank
 
 These requirements apply **exclusively** to components within the `@bytebank-pro/ui` package:
 
-- **When creating a new component in `@bytebank-pro/ui`:** You must create a corresponding `component-name-usage.md` file in the `docs/usages` directory.
-- **When modifying an existing component in `@bytebank-pro/ui`:** Any changes to its API (`@Input`, `@Output`, etc.) or behavior must be immediately reflected in its corresponding usage documentation.
-- **When deleting a component from `@bytebank-pro/ui`:** The corresponding usage documentation file must also be deleted.
+- **When creating a new component in `@bytebank-pro/ui`:** You must create a corresponding usage documentation file named after the component's selector. For example, if your component selector is `bb-button`, the documentation file must be `docs/usages/bb-button-usage.md`.
+- **When modifying an existing component in `@bytebank-pro/ui`:** Any changes to its API (`@Input`, `@Output`, etc.) or behavior must be immediately reflected in the usage documentation file that matches the component's selector (e.g., for selector `bb-button`, update `docs/usages/bb-button-usage.md`).
+- **When deleting a component from `@bytebank-pro/ui`:** The usage documentation file with the same selector name must also be deleted (e.g., if deleting a component with selector `bb-button`, also delete `docs/usages/bb-button-usage.md`).
 
-This ensures that the documentation for the `@bytebank-pro/ui` package is always accurate and up to date.
+This ensures that the documentation for each component in the `@bytebank-pro/ui` package is always accurate, up to date, and directly associated with the component's selector.
 
 ### 📝 Documentation
 

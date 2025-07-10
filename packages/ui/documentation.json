@@ -114,7 +114,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-4 p-4\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Acima</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Abaixo</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Esquerda</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Direita</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as posições básicas disponíveis para o popover.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-4 p-4\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Acima</div>\n        </bb-popover>\n\n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Abaixo</div>\n        </bb-popover>\n\n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Esquerda</div>\n        </bb-popover>\n\n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Direita</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as posições básicas disponíveis para o popover.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "AllSizes",
@@ -237,6 +237,46 @@
         "defaultValue": "{\n  render: () => ({\n    template: `\n      <div style=\"display: flex; flex-direction: column; gap: 1rem;\">\n        <bb-logo variant=\"full\" size=\"md\" className=\"text-green-500\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"lg\" className=\"drop-shadow-lg\"></bb-logo>\n        <bb-logo variant=\"full\" size=\"md\" className=\"w-24 md:w-32 lg:w-40\"></bb-logo>\n      </div>\n    `\n  })\n}"
       },
       {
+        "name": "Date",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    helperText: 'Selecione sua data de nascimento'\n  }\n}"
+      },
+      {
+        "name": "DateWithCustomIcon",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    suffixIcon: Calendar,\n    helperText: 'Selecione sua data de nascimento'\n  }\n}"
+      },
+      {
+        "name": "DateWithError",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    variant: 'error',\n    errorMessage: 'Data inválida. Digite uma data válida no formato dd/mm/aaaa'\n  }\n}"
+      },
+      {
+        "name": "DateWithSuccess",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/form/input/input.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    variant: 'success',\n    value: '1990-01-15',\n    successMessage: 'Data válida!'\n  }\n}"
+      },
+      {
         "name": "Decorative",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -264,7 +304,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome'\n  }\n}"
       },
       {
         "name": "Default",
@@ -310,6 +350,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -337,16 +387,6 @@
         "defaultValue": "{\n  args: {\n    message: 'Esta é uma notificação padrão.',\n    variant: 'info',\n    show: true,\n    duration: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-toast ${argsToTemplate(args)}></bb-toast>`\n  })\n}"
       },
       {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Default Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          This is a generic dialog component that can contain any content.\n        </p>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Confirm\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
-      },
-      {
         "name": "Disabled",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -354,7 +394,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    disabled: true\n  }\n}"
       },
       {
         "name": "Disabled",
@@ -404,7 +444,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: Mail\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'Digite seu email',\n    prefixIcon: Mail\n  }\n}"
       },
       {
         "name": "EmptyState",
@@ -434,7 +474,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'error',\n    label: 'Campo com erro',\n    value: 'dados-incorretos',\n    errorMessage: 'Por favor, verifique os dados informados.'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'error',\n    errorMessage: 'Nome é obrigatório'\n  }\n}"
       },
       {
         "name": "Error",
@@ -544,7 +584,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'lg'\n  }\n}"
       },
       {
         "name": "Large",
@@ -620,16 +660,6 @@
         "name": "LoginForm",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          required=\"true\">\n        </bb-input>\n\n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
-      },
-      {
-        "name": "LoginForm",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -644,7 +674,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    size: 'md',\n    label: 'Tamanho médio',\n    placeholder: 'Input médio (padrão)'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'md'\n  }\n}"
       },
       {
         "name": "MenuExample",
@@ -654,7 +684,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50\">\n          Menu\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[120px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Editar\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Compartilhar\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50\">\n            Excluir\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Exemplo de uso como menu de ações contextuais.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50\">\n          Menu\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-32\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Editar\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Compartilhar\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50\">\n            Excluir\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Exemplo de uso como menu de ações contextuais.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "meta",
@@ -674,7 +704,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Meta<InputComponent>",
-        "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
+        "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features. Date inputs now include automatic calendar icon and improved validation.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search', 'date'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'select',\n      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],\n      description: 'Icon to display before the input'\n    },\n    suffixIcon: {\n      control: 'select',\n      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],\n      description: 'Icon to display after the input'\n    }\n  }\n}"
       },
       {
         "name": "meta",
@@ -730,6 +760,16 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<DialogComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -755,16 +795,6 @@
         "deprecationMessage": "",
         "type": "Meta<ToastComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Toast', //\n  component: ToastComponent, //\n  parameters: {\n    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context\n    docs: {\n      description: {\n        component:\n          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //\n      }\n    }\n  },\n  decorators: [\n    componentWrapperDecorator(\n      (story) => `\n      <div style=\"position: relative; height: 150px;\">\n      ${story}\n      </div>`\n    )\n  ],\n  argTypes: {\n    message: {\n      control: 'text',\n      description: 'A mensagem a ser exibida no toast.',\n      defaultValue: 'Esta é uma mensagem de notificação.'\n    },\n    variant: {\n      control: 'select',\n      options: ['success', 'error', 'info'],\n      description: 'Define a variação visual do toast.',\n      defaultValue: 'info'\n    },\n    show: {\n      control: 'boolean',\n      description: 'Controla a visibilidade do toast.',\n      defaultValue: true\n    },\n    duration: {\n      control: 'number',\n      description:\n        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',\n      defaultValue: 0\n    },\n    toastClose: {\n      action: 'toastClosed',\n      description: 'Evento emitido quando o toast é fechado.'\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<DialogComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Dialog',\n  component: DialogComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Dialog fornece uma interface modal para exibir conteúdo sobreposto, incluindo formulários de login, registro, confirmações e outros conteúdos de overlay. Oferece suporte a blur de fundo, gerenciamento de foco e acessibilidade.\n\n## Quando Usar\n\n- Para formulários de login e registro\n- Para confirmações de ações importantes\n- Para exibir conteúdo que requer atenção imediata do usuário\n- Para modais com conteúdo customizado\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Tab, Escape)\n- Implementa aria-label e aria-labelledby apropriados\n- Gerencia foco automaticamente quando aberto/fechado\n- Suporta fechamento via tecla Escape\n        `\n      }\n    }\n  },\n  argTypes: {\n    isOpen: {\n      control: 'boolean',\n      description: 'Controls whether the dialog is visible',\n      table: {\n        defaultValue: { summary: 'false' },\n        type: { summary: 'boolean' }\n      }\n    },\n    title: {\n      control: 'text',\n      description: 'Title displayed in the dialog header',\n      table: {\n        defaultValue: { summary: '\"\"' },\n        type: { summary: 'string' }\n      }\n    },\n    showCloseButton: {\n      control: 'boolean',\n      description: 'Whether to show the close button in the header',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnBackdropClick: {\n      control: 'boolean',\n      description: 'Whether clicking the backdrop closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    closeOnEscape: {\n      control: 'boolean',\n      description: 'Whether pressing escape closes the dialog',\n      table: {\n        defaultValue: { summary: 'true' },\n        type: { summary: 'boolean' }\n      }\n    },\n    maxWidth: {\n      control: 'text',\n      description: 'Maximum width of the dialog container',\n      table: {\n        defaultValue: { summary: '32rem' },\n        type: { summary: 'string' }\n      }\n    },\n    ariaLabel: {\n      control: 'text',\n      description: 'Custom aria-label for the dialog',\n      table: {\n        type: { summary: 'string' }\n      }\n    },\n    close: {\n      action: 'close',\n      description: 'Event emitted when dialog is closed',\n      table: {\n        disable: true\n      }\n    }\n  }\n}"
       },
       {
         "name": "MiddlePage",
@@ -824,7 +854,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: '25'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: 'Digite sua idade'\n  }\n}"
       },
       {
         "name": "OutlineGreen",
@@ -854,7 +884,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true,\n    helperText: 'A senha deve ter pelo menos 8 caracteres'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true\n  }\n}"
       },
       {
         "name": "Playground",
@@ -900,6 +930,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -914,7 +954,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-52\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Playground",
@@ -925,16 +965,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    message: 'Mensagem customizável do Toast.',\n    variant: 'info',\n    show: true,\n    duration: 5000\n  }\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    isOpen: true,\n    title: 'Playground Dialog',\n    showCloseButton: true,\n    closeOnBackdropClick: true,\n    closeOnEscape: true,\n    maxWidth: '32rem',\n    ariaLabel: ''\n  },\n  render: (args) => ({\n    props: {\n      ...args,\n      dialogOpen: signal(args.isOpen),\n      handleClose: () => {\n        console.log('Dialog closed');\n      }\n    },\n    template: `\n      <bb-dialog \n        [isOpen]=\"dialogOpen()\"\n        [title]=\"title\"\n        [showCloseButton]=\"showCloseButton\"\n        [closeOnBackdropClick]=\"closeOnBackdropClick\"\n        [closeOnEscape]=\"closeOnEscape\"\n        [maxWidth]=\"maxWidth\"\n        [ariaLabel]=\"ariaLabel\"\n        (close)=\"handleClose()\"\n      >\n        <p class=\"text-gray-600 mb-4\">\n          Use the controls panel to experiment with all dialog properties and see how they affect the component behavior.\n        </p>\n        <div class=\"bg-gray-50 p-4 rounded mb-4\">\n          <h4 class=\"font-medium mb-2\">Current Settings:</h4>\n          <ul class=\"text-sm text-gray-600 space-y-1\">\n            <li>Show Close Button: {{ showCloseButton ? 'Yes' : 'No' }}</li>\n            <li>Close on Backdrop: {{ closeOnBackdropClick ? 'Yes' : 'No' }}</li>\n            <li>Close on Escape: {{ closeOnEscape ? 'Yes' : 'No' }}</li>\n            <li>Max Width: {{ maxWidth }}</li>\n          </ul>\n        </div>\n        <div class=\"flex gap-3 justify-end\">\n          <button class=\"px-4 py-2 text-gray-600 hover:bg-gray-100 rounded\">\n            Cancel\n          </button>\n          <button class=\"px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded\">\n            Apply\n          </button>\n        </div>\n      </bb-dialog>\n    `\n  })\n}"
       },
       {
         "name": "preview",
@@ -964,7 +994,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    readonly: true,\n    value: 'João Silva'\n  }\n}"
       },
       {
         "name": "ReadonlyState",
@@ -994,7 +1024,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Campo obrigatório',\n    placeholder: 'Este campo é obrigatório',\n    required: true,\n    helperText: 'Este campo deve ser preenchido'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    required: true\n  }\n}"
       },
       {
         "name": "ResponsiveLayout",
@@ -1054,7 +1084,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'search',\n    label: 'Buscar',\n    placeholder: 'Digite para buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
       },
       {
         "name": "SearchableSelect",
@@ -1094,7 +1124,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'sm'\n  }\n}"
       },
       {
         "name": "Small",
@@ -1114,7 +1144,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'success',\n    label: 'Campo válido',\n    value: 'Dados corretos',\n    successMessage: 'Perfeito! Os dados estão corretos.'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'success',\n    successMessage: 'Nome válido!'\n  }\n}"
       },
       {
         "name": "Success",
@@ -1157,16 +1187,6 @@
         "defaultValue": "{\n  args: {\n    variant: 'blue',\n    ariaPressed: false,\n    ariaLabel: 'Toggle notifications'\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-button ${argsToTemplate(args)}>🔔 Notifications</bb-button>`\n  })\n}"
       },
       {
-        "name": "ValidationStates",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
-      },
-      {
         "name": "Warning",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -1174,7 +1194,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'warning',\n    helperText: 'Este campo é opcional'\n  }\n}"
       },
       {
         "name": "Warning",
@@ -1244,17 +1264,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    helperText: 'Utilizaremos este email para entrar em contato'\n  }\n}"
-      },
-      {
-        "name": "WithLabel",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/form/input/input.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Nome completo',\n    placeholder: 'Digite seu nome completo'\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    helperText: 'Digite seu nome completo'\n  }\n}"
       },
       {
         "name": "WithoutCloseButton",
@@ -1304,7 +1314,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: UserRoundIcon\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Email',\n    placeholder: 'Digite seu email',\n    prefixIcon: Mail\n  }\n}"
       },
       {
         "name": "WithSuffixIcon",
@@ -1314,7 +1324,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
+        "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Website',\n    placeholder: 'Digite a URL',\n    suffixIcon: Link\n  }\n}"
       },
       {
         "name": "WithValue",
@@ -1410,6 +1420,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<DialogComponent>",
+        "file": "src/ui/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<LogoComponent>",
         "file": "src/ui/logo/logo.component.stories.ts",
         "deprecated": false,
@@ -1434,17 +1455,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<ToastComponent>",
         "file": "src/ui/toast/toast.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<DialogComponent>",
-        "file": "src/ui/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -1858,7 +1868,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-4 p-4\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Acima</div>\n        </bb-popover>\n        \n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Abaixo</div>\n        </bb-popover>\n        \n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Esquerda</div>\n        </bb-popover>\n        \n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Direita</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as posições básicas disponíveis para o popover.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"grid grid-cols-4 gap-4 p-4\">\n        <bb-popover position=\"top\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-blue text-white rounded text-sm\">Top</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Acima</div>\n        </bb-popover>\n\n        <bb-popover position=\"bottom\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-green text-white rounded text-sm\">Bottom</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Abaixo</div>\n        </bb-popover>\n\n        <bb-popover position=\"left\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-orange text-white rounded text-sm\">Left</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Esquerda</div>\n        </bb-popover>\n\n        <bb-popover position=\"right\">\n          <button slot=\"trigger\" class=\"px-3 py-2 bg-bytebank-red text-white rounded text-sm\">Right</button>\n          <div slot=\"content\" class=\"p-3 text-sm\">Direita</div>\n        </bb-popover>\n      </div>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Demonstra todas as posições básicas disponíveis para o popover.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "Default",
@@ -1888,7 +1898,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50\">\n          Menu\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-[120px]\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Editar\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Compartilhar\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50\">\n            Excluir\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Exemplo de uso como menu de ações contextuais.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    closeOnClickOutside: true,\n    closeOnEscape: true\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50\">\n          Menu\n        </button>\n        <div slot=\"content\" class=\"py-2 min-w-32\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Editar\n          </button>\n          <button class=\"w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100\">\n            Compartilhar\n          </button>\n          <hr class=\"my-1\">\n          <button class=\"w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50\">\n            Excluir\n          </button>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Exemplo de uso como menu de ações contextuais.'\n      }\n    }\n  }\n}"
         },
         {
           "name": "meta",
@@ -1908,7 +1918,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-[200px]\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
+          "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-52\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
         }
       ],
       "src/ui/button/button.component.stories.ts": [
@@ -2371,6 +2381,46 @@
       ],
       "src/form/input/input.component.stories.ts": [
         {
+          "name": "Date",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/form/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    helperText: 'Selecione sua data de nascimento'\n  }\n}"
+        },
+        {
+          "name": "DateWithCustomIcon",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/form/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    suffixIcon: Calendar,\n    helperText: 'Selecione sua data de nascimento'\n  }\n}"
+        },
+        {
+          "name": "DateWithError",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/form/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    variant: 'error',\n    errorMessage: 'Data inválida. Digite uma data válida no formato dd/mm/aaaa'\n  }\n}"
+        },
+        {
+          "name": "DateWithSuccess",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/form/input/input.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "{\n  args: {\n    type: 'date',\n    label: 'Data de nascimento',\n    placeholder: 'dd/mm/yyyy',\n    variant: 'success',\n    value: '1990-01-15',\n    successMessage: 'Data válida!'\n  }\n}"
+        },
+        {
           "name": "Default",
           "ctype": "miscellaneous",
           "subtype": "variable",
@@ -2378,7 +2428,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    placeholder: 'Digite seu nome'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome'\n  }\n}"
         },
         {
           "name": "Disabled",
@@ -2388,7 +2438,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Campo desabilitado',\n    placeholder: 'Este campo está desabilitado',\n    disabled: true,\n    value: 'Valor desabilitado'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    disabled: true\n  }\n}"
         },
         {
           "name": "Email",
@@ -2398,7 +2448,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    prefixIcon: Mail\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'email',\n    label: 'Email',\n    placeholder: 'Digite seu email',\n    prefixIcon: Mail\n  }\n}"
         },
         {
           "name": "Error",
@@ -2408,7 +2458,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    variant: 'error',\n    label: 'Campo com erro',\n    value: 'dados-incorretos',\n    errorMessage: 'Por favor, verifique os dados informados.'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'error',\n    errorMessage: 'Nome é obrigatório'\n  }\n}"
         },
         {
           "name": "Large",
@@ -2418,17 +2468,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    size: 'lg',\n    label: 'Tamanho grande',\n    placeholder: 'Input grande'\n  }\n}"
-        },
-        {
-          "name": "LoginForm",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/form/input/input.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-4 w-80\">\n        <bb-input\n          label=\"Email\"\n          type=\"email\"\n          placeholder=\"seu@email.com\"\n          required=\"true\">\n        </bb-input>\n\n        <bb-input\n          label=\"Senha\"\n          type=\"password\"\n          placeholder=\"Digite sua senha\"\n          showPasswordToggle=\"true\"\n          required=\"true\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'lg'\n  }\n}"
         },
         {
           "name": "Medium",
@@ -2438,7 +2478,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    size: 'md',\n    label: 'Tamanho médio',\n    placeholder: 'Input médio (padrão)'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'md'\n  }\n}"
         },
         {
           "name": "meta",
@@ -2448,7 +2488,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Meta<InputComponent>",
-          "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the start'\n    },\n    suffixIcon: {\n      control: 'object',\n      description: 'LucideIconData object for icon to show at the end'\n    },\n    className: {\n      control: 'text',\n      description: 'Additional CSS classes'\n    }\n  },\n  args: {\n    type: 'text',\n    variant: 'default',\n    size: 'md',\n    placeholder: 'Digite algo...',\n    value: '',\n    disabled: false,\n    readonly: false,\n    required: false,\n    showPasswordToggle: false\n  },\n  tags: ['autodocs']\n}"
+          "defaultValue": "{\n  title: 'Components/Form/Input',\n  component: InputComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component:\n          'A versatile input component with support for different variants, sizes, icons, and accessibility features. Date inputs now include automatic calendar icon and improved validation.'\n      }\n    }\n  },\n  argTypes: {\n    type: {\n      control: 'select',\n      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search', 'date'],\n      description: 'The input type'\n    },\n    variant: {\n      control: 'select',\n      options: ['default', 'success', 'error', 'warning'],\n      description: 'Visual variant of the input'\n    },\n    size: {\n      control: 'select',\n      options: ['sm', 'md', 'lg'],\n      description: 'Size of the input'\n    },\n    placeholder: {\n      control: 'text',\n      description: 'Placeholder text'\n    },\n    value: {\n      control: 'text',\n      description: 'Input value'\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Whether the input is disabled'\n    },\n    readonly: {\n      control: 'boolean',\n      description: 'Whether the input is readonly'\n    },\n    required: {\n      control: 'boolean',\n      description: 'Whether the input is required'\n    },\n    label: {\n      control: 'text',\n      description: 'Label text'\n    },\n    helperText: {\n      control: 'text',\n      description: 'Helper text below the input'\n    },\n    errorMessage: {\n      control: 'text',\n      description: 'Error message (shown when variant is error)'\n    },\n    successMessage: {\n      control: 'text',\n      description: 'Success message (shown when variant is success)'\n    },\n    showPasswordToggle: {\n      control: 'boolean',\n      description: 'Show password toggle button (for password inputs)'\n    },\n    prefixIcon: {\n      control: 'select',\n      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],\n      description: 'Icon to display before the input'\n    },\n    suffixIcon: {\n      control: 'select',\n      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],\n      description: 'Icon to display after the input'\n    }\n  }\n}"
         },
         {
           "name": "Number",
@@ -2458,7 +2498,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: '25'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'number',\n    label: 'Idade',\n    placeholder: 'Digite sua idade'\n  }\n}"
         },
         {
           "name": "Password",
@@ -2468,7 +2508,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true,\n    helperText: 'A senha deve ter pelo menos 8 caracteres'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'password',\n    label: 'Senha',\n    placeholder: 'Digite sua senha',\n    showPasswordToggle: true\n  }\n}"
         },
         {
           "name": "Readonly",
@@ -2478,7 +2518,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Campo somente leitura',\n    readonly: true,\n    value: 'Este valor não pode ser editado'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    readonly: true,\n    value: 'João Silva'\n  }\n}"
         },
         {
           "name": "Required",
@@ -2488,7 +2528,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Campo obrigatório',\n    placeholder: 'Este campo é obrigatório',\n    required: true,\n    helperText: 'Este campo deve ser preenchido'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    required: true\n  }\n}"
         },
         {
           "name": "Search",
@@ -2498,7 +2538,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    type: 'search',\n    placeholder: 'Buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'search',\n    label: 'Buscar',\n    placeholder: 'Digite para buscar...',\n    prefixIcon: SearchIcon\n  }\n}"
         },
         {
           "name": "Small",
@@ -2508,7 +2548,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    size: 'sm',\n    label: 'Tamanho pequeno',\n    placeholder: 'Input pequeno'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    size: 'sm'\n  }\n}"
         },
         {
           "name": "Success",
@@ -2518,17 +2558,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    variant: 'success',\n    label: 'Campo válido',\n    value: 'Dados corretos',\n    successMessage: 'Perfeito! Os dados estão corretos.'\n  }\n}"
-        },
-        {
-          "name": "ValidationStates",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/form/input/input.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  render: () => ({\n    template: `\n      <div class=\"space-y-6 w-80\">\n        <bb-input\n          label=\"Campo válido\"\n          variant=\"success\"\n          value=\"dados@corretos.com\"\n          successMessage=\"Email válido!\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com erro\"\n          variant=\"error\"\n          value=\"email-inválido\"\n          errorMessage=\"Por favor, insira um email válido.\">\n        </bb-input>\n\n        <bb-input\n          label=\"Campo com aviso\"\n          variant=\"warning\"\n          value=\"exemplo@teste.com\"\n          helperText=\"Certifique-se de que este email está correto.\">\n        </bb-input>\n      </div>\n    `\n  })\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'success',\n    successMessage: 'Nome válido!'\n  }\n}"
         },
         {
           "name": "Warning",
@@ -2538,7 +2568,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    variant: 'warning',\n    label: 'Campo com aviso',\n    value: 'dados-atenção',\n    helperText: 'Atenção: verifique se os dados estão corretos.'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    variant: 'warning',\n    helperText: 'Este campo é opcional'\n  }\n}"
         },
         {
           "name": "WithHelperText",
@@ -2548,17 +2578,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Email',\n    placeholder: 'seu@email.com',\n    helperText: 'Utilizaremos este email para entrar em contato'\n  }\n}"
-        },
-        {
-          "name": "WithLabel",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/form/input/input.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Nome completo',\n    placeholder: 'Digite seu nome completo'\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Nome',\n    placeholder: 'Digite seu nome',\n    helperText: 'Digite seu nome completo'\n  }\n}"
         },
         {
           "name": "WithPrefixIcon",
@@ -2568,7 +2588,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Usuário',\n    placeholder: 'Digite seu usuário',\n    prefixIcon: UserRoundIcon\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Email',\n    placeholder: 'Digite seu email',\n    prefixIcon: Mail\n  }\n}"
         },
         {
           "name": "WithSuffixIcon",
@@ -2578,7 +2598,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "{\n  args: {\n    label: 'Website',\n    placeholder: 'https://exemplo.com',\n    suffixIcon: Link\n  }\n}"
+          "defaultValue": "{\n  args: {\n    type: 'text',\n    label: 'Website',\n    placeholder: 'Digite a URL',\n    suffixIcon: Link\n  }\n}"
         }
       ],
       "src/table/paginator/paginator.component.stories.ts": [
@@ -2822,6 +2842,19 @@
           "kind": 183
         }
       ],
+      "src/ui/dialog/dialog.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<DialogComponent>",
+          "file": "src/ui/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "src/ui/logo/logo.component.stories.ts": [
         {
           "name": "Story",
@@ -2855,19 +2888,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<ToastComponent>",
           "file": "src/ui/toast/toast.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/dialog/dialog.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<DialogComponent>",
-          "file": "src/ui/dialog/dialog.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
@@ -3006,6 +3026,46 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
+        "name": "Date",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/form/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DateWithCustomIcon",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/form/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DateWithError",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/form/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "DateWithSuccess",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/form/input/input.component.stories.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
         "name": "Default",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -3047,16 +3107,6 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "Large",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/form/input/input.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "LoginForm",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -3156,16 +3206,6 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "ValidationStates",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/form/input/input.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
         "name": "Warning",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -3177,16 +3217,6 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "WithHelperText",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/form/input/input.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "WithLabel",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { InputComponent } from './input.component';
-import { Link, Mail, SearchIcon, UserRoundIcon } from 'lucide-angular';
+import { Link, Mail, SearchIcon, UserRoundIcon, Calendar } from 'lucide-angular';
 
 const meta: Meta<InputComponent> = {
   title: 'Components/Form/Input',
@@ -10,14 +10,14 @@ const meta: Meta<InputComponent> = {
     docs: {
       description: {
         component:
-          'A versatile input component with support for different variants, sizes, icons, and accessibility features.'
+          'A versatile input component with support for different variants, sizes, icons, and accessibility features. Date inputs now include automatic calendar icon and improved validation.'
       }
     }
   },
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search'],
+      options: ['text', 'password', 'email', 'number', 'tel', 'url', 'search', 'date'],
       description: 'The input type'
     },
     variant: {
@@ -71,129 +71,44 @@ const meta: Meta<InputComponent> = {
       description: 'Show password toggle button (for password inputs)'
     },
     prefixIcon: {
-      control: 'object',
-      description: 'LucideIconData object for icon to show at the start'
+      control: 'select',
+      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],
+      description: 'Icon to display before the input'
     },
     suffixIcon: {
-      control: 'object',
-      description: 'LucideIconData object for icon to show at the end'
-    },
-    className: {
-      control: 'text',
-      description: 'Additional CSS classes'
+      control: 'select',
+      options: ['UserRoundIcon', 'Mail', 'SearchIcon', 'Link', 'Calendar'],
+      description: 'Icon to display after the input'
     }
-  },
-  args: {
-    type: 'text',
-    variant: 'default',
-    size: 'md',
-    placeholder: 'Digite algo...',
-    value: '',
-    disabled: false,
-    readonly: false,
-    required: false,
-    showPasswordToggle: false
-  },
-  tags: ['autodocs']
+  }
 };
 
 export default meta;
 type Story = StoryObj<InputComponent>;
 
-// Default story
 export const Default: Story = {
   args: {
+    type: 'text',
+    label: 'Nome',
     placeholder: 'Digite seu nome'
   }
 };
 
-// With label
-export const WithLabel: Story = {
+export const WithPrefixIcon: Story = {
   args: {
-    label: 'Nome completo',
-    placeholder: 'Digite seu nome completo'
-  }
-};
-
-// With helper text
-export const WithHelperText: Story = {
-  args: {
+    type: 'text',
     label: 'Email',
-    placeholder: 'seu@email.com',
-    helperText: 'Utilizaremos este email para entrar em contato'
-  }
-};
-
-// Required field
-export const Required: Story = {
-  args: {
-    label: 'Campo obrigatório',
-    placeholder: 'Este campo é obrigatório',
-    required: true,
-    helperText: 'Este campo deve ser preenchido'
-  }
-};
-
-// Different sizes
-export const Small: Story = {
-  args: {
-    size: 'sm',
-    label: 'Tamanho pequeno',
-    placeholder: 'Input pequeno'
-  }
-};
-
-export const Medium: Story = {
-  args: {
-    size: 'md',
-    label: 'Tamanho médio',
-    placeholder: 'Input médio (padrão)'
-  }
-};
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
-    label: 'Tamanho grande',
-    placeholder: 'Input grande'
-  }
-};
-
-// Different variants
-export const Success: Story = {
-  args: {
-    variant: 'success',
-    label: 'Campo válido',
-    value: 'Dados corretos',
-    successMessage: 'Perfeito! Os dados estão corretos.'
-  }
-};
-
-export const Error: Story = {
-  args: {
-    variant: 'error',
-    label: 'Campo com erro',
-    value: 'dados-incorretos',
-    errorMessage: 'Por favor, verifique os dados informados.'
-  }
-};
-
-export const Warning: Story = {
-  args: {
-    variant: 'warning',
-    label: 'Campo com aviso',
-    value: 'dados-atenção',
-    helperText: 'Atenção: verifique se os dados estão corretos.'
-  }
-};
-
-// Different input types
-export const Email: Story = {
-  args: {
-    type: 'email',
-    label: 'Email',
-    placeholder: 'seu@email.com',
+    placeholder: 'Digite seu email',
     prefixIcon: Mail
+  }
+};
+
+export const WithSuffixIcon: Story = {
+  args: {
+    type: 'text',
+    label: 'Website',
+    placeholder: 'Digite a URL',
+    suffixIcon: Link
   }
 };
 
@@ -202,8 +117,16 @@ export const Password: Story = {
     type: 'password',
     label: 'Senha',
     placeholder: 'Digite sua senha',
-    showPasswordToggle: true,
-    helperText: 'A senha deve ter pelo menos 8 caracteres'
+    showPasswordToggle: true
+  }
+};
+
+export const Email: Story = {
+  args: {
+    type: 'email',
+    label: 'Email',
+    placeholder: 'Digite seu email',
+    prefixIcon: Mail
   }
 };
 
@@ -211,102 +134,149 @@ export const Number: Story = {
   args: {
     type: 'number',
     label: 'Idade',
-    placeholder: '25'
+    placeholder: 'Digite sua idade'
   }
 };
 
 export const Search: Story = {
   args: {
     type: 'search',
-    placeholder: 'Buscar...',
+    label: 'Buscar',
+    placeholder: 'Digite para buscar...',
     prefixIcon: SearchIcon
   }
 };
 
-// With icons
-export const WithPrefixIcon: Story = {
+export const Success: Story = {
   args: {
-    label: 'Usuário',
-    placeholder: 'Digite seu usuário',
-    prefixIcon: UserRoundIcon
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    variant: 'success',
+    successMessage: 'Nome válido!'
   }
 };
 
-export const WithSuffixIcon: Story = {
+export const Error: Story = {
   args: {
-    label: 'Website',
-    placeholder: 'https://exemplo.com',
-    suffixIcon: Link
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    variant: 'error',
+    errorMessage: 'Nome é obrigatório'
   }
 };
 
-// States
+export const Warning: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    variant: 'warning',
+    helperText: 'Este campo é opcional'
+  }
+};
+
 export const Disabled: Story = {
   args: {
-    label: 'Campo desabilitado',
-    placeholder: 'Este campo está desabilitado',
-    disabled: true,
-    value: 'Valor desabilitado'
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    disabled: true
   }
 };
 
 export const Readonly: Story = {
   args: {
-    label: 'Campo somente leitura',
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
     readonly: true,
-    value: 'Este valor não pode ser editado'
+    value: 'João Silva'
   }
 };
 
-// Complex examples
-export const LoginForm: Story = {
-  render: () => ({
-    template: `
-      <div class="space-y-4 w-80">
-        <bb-input
-          label="Email"
-          type="email"
-          placeholder="seu@email.com"
-          required="true">
-        </bb-input>
-
-        <bb-input
-          label="Senha"
-          type="password"
-          placeholder="Digite sua senha"
-          showPasswordToggle="true"
-          required="true">
-        </bb-input>
-      </div>
-    `
-  })
+export const Required: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    required: true
+  }
 };
 
-export const ValidationStates: Story = {
-  render: () => ({
-    template: `
-      <div class="space-y-6 w-80">
-        <bb-input
-          label="Campo válido"
-          variant="success"
-          value="dados@corretos.com"
-          successMessage="Email válido!">
-        </bb-input>
+export const WithHelperText: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    helperText: 'Digite seu nome completo'
+  }
+};
 
-        <bb-input
-          label="Campo com erro"
-          variant="error"
-          value="email-inválido"
-          errorMessage="Por favor, insira um email válido.">
-        </bb-input>
+export const Small: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    size: 'sm'
+  }
+};
 
-        <bb-input
-          label="Campo com aviso"
-          variant="warning"
-          value="exemplo@teste.com"
-          helperText="Certifique-se de que este email está correto.">
-        </bb-input>
-      </div>
-    `
-  })
+export const Medium: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    size: 'md'
+  }
+};
+
+export const Large: Story = {
+  args: {
+    type: 'text',
+    label: 'Nome',
+    placeholder: 'Digite seu nome',
+    size: 'lg'
+  }
+};
+
+export const Date: Story = {
+  args: {
+    type: 'date',
+    label: 'Data de nascimento',
+    placeholder: 'dd/mm/yyyy',
+    helperText: 'Selecione sua data de nascimento'
+  }
+};
+
+export const DateWithCustomIcon: Story = {
+  args: {
+    type: 'date',
+    label: 'Data de nascimento',
+    placeholder: 'dd/mm/yyyy',
+    suffixIcon: Calendar,
+    helperText: 'Selecione sua data de nascimento'
+  }
+};
+
+export const DateWithError: Story = {
+  args: {
+    type: 'date',
+    label: 'Data de nascimento',
+    placeholder: 'dd/mm/yyyy',
+    variant: 'error',
+    errorMessage: 'Data inválida. Digite uma data válida no formato dd/mm/aaaa'
+  }
+};
+
+export const DateWithSuccess: Story = {
+  args: {
+    type: 'date',
+    label: 'Data de nascimento',
+    placeholder: 'dd/mm/yyyy',
+    variant: 'success',
+    value: '1990-01-15',
+    successMessage: 'Data válida!'
+  }
 };

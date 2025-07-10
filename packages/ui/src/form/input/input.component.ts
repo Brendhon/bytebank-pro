@@ -21,7 +21,15 @@ import {
 
 // Type definitions for input variants and states
 export type InputVariant = 'default' | 'success' | 'error' | 'warning';
-export type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+export type InputType =
+  | 'text'
+  | 'password'
+  | 'email'
+  | 'number'
+  | 'tel'
+  | 'url'
+  | 'search'
+  | 'date';
 export type InputSize = 'sm' | 'md' | 'lg';
 
 @Component({
@@ -93,6 +101,8 @@ export class InputComponent {
   // Computed properties for better performance using computed()
   isPasswordField = computed(() => this.type() === 'password');
 
+  isDateField = computed(() => this.type() === 'date');
+
   showPasswordButton = computed(() => this.isPasswordField() && this.showPasswordToggle());
 
   effectiveInputType = computed(() => {
@@ -104,11 +114,14 @@ export class InputComponent {
 
   hasPrefix = computed(() => !!this.prefixIcon());
 
-  hasSuffix = computed(() => !!this.suffixIcon() || this.showPasswordButton());
+  hasSuffix = computed<boolean>(
+    () =>
+      !!this.suffixIcon() || this.showPasswordButton() || (this.isDateField() && !this.suffixIcon())
+  );
 
-  showSuccessIcon = computed(() => this.variant() === 'success' && !this.hasSuffix());
+  showSuccessIcon = computed<boolean>(() => this.variant() === 'success' && !this.hasSuffix());
 
-  showErrorIcon = computed(() => this.variant() === 'error' && !this.hasSuffix());
+  showErrorIcon = computed<boolean>(() => this.variant() === 'error' && !this.hasSuffix());
 
   // Computed ARIA attributes
   computedAriaLabel = computed(
@@ -238,7 +251,14 @@ export class InputComponent {
   // Event handlers following the guidelines
   handleInput(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.valueChange.emit(target.value);
+    let value = target.value;
+
+    // Special handling for date inputs
+    if (this.isDateField()) {
+      value = this.validateAndFormatDateInput(value);
+    }
+
+    this.valueChange.emit(value);
   }
 
   handleFocus(event: FocusEvent): void {
@@ -250,11 +270,60 @@ export class InputComponent {
   }
 
   handleKeydown(event: KeyboardEvent): void {
+    // Prevent non-numeric input for date fields (except allowed characters)
+    if (this.isDateField()) {
+      this.handleDateKeydown(event);
+    }
+
     this.inputKeydown.emit(event);
   }
 
   handleKeyup(event: KeyboardEvent): void {
     this.inputKeyup.emit(event);
+  }
+
+  // Date input specific validation and formatting
+  private validateAndFormatDateInput(value: string): string {
+    // Remove any non-digit characters except hyphens
+    const cleaned = value.replace(/[^\d-]/g, '');
+
+    // Ensure proper date format YYYY-MM-DD
+    if (cleaned.length > 10) {
+      return cleaned.substring(0, 10);
+    }
+
+    return cleaned;
+  }
+
+  private handleDateKeydown(event: KeyboardEvent): void {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'Tab',
+      'Escape',
+      'Enter',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowUp',
+      'ArrowDown',
+      'Home',
+      'End'
+    ];
+
+    const key = event.key;
+
+    // Allow allowed keys
+    if (allowedKeys.includes(key)) {
+      return;
+    }
+
+    // Allow digits and hyphens
+    if (/[\d-]/.test(key)) {
+      return;
+    }
+
+    // Prevent all other keys
+    event.preventDefault();
   }
 
   // Password visibility toggle
