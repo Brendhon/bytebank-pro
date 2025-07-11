@@ -1,6 +1,8 @@
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
@@ -11,6 +13,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { MfeToastListenerService } from './core/services/mfe-toast-listener.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideAppInitializer(() => inject(MfeToastListenerService).initializeEventListener()),
     {
       provide: APOLLO_OPTIONS,
       useFactory: (httpLink: HttpLink) => {

@@ -169,9 +169,10 @@ export class AuthService {
    * Ends the user session
    */
   logout(): void {
-    console.log('Logout successful');
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
+    // Clear localStorage
+    localStorage.clear();
+
+    // Update the current user to null
     this._currentUser.next(null);
 
     // Clear Apollo cache

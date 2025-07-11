@@ -2,6 +2,7 @@ import { ConfirmDeletionComponent } from '@/components/confirm-deletion/confirm-
 import { TransactionFormComponent } from '@/components/transaction-form/transaction-form.component';
 import { TransactionsTableComponent } from '@/components/transactions-table/transactions-table.component';
 import { PaginatedTransactions } from '@/core/models/transaction.model';
+import { MfeToastService } from '@/core/services/mfe-toast.service';
 import { TransactionsService } from '@/core/services/transactions.service';
 import {
   ChangeDetectionStrategy,
@@ -31,6 +32,7 @@ import { first } from 'rxjs';
 export class TransactionsPageComponent implements OnInit {
   // Inject dependencies
   private readonly transactionsService = inject(TransactionsService);
+  private readonly toastService = inject(MfeToastService);
 
   // Dialog state
   isDialogOpen = signal(false);
@@ -61,7 +63,10 @@ export class TransactionsPageComponent implements OnInit {
       .subscribe({
         next: (paginatedTransactions: PaginatedTransactions) =>
           this._transactions.set(paginatedTransactions.items),
-        error: (error) => console.error('Error loading transactions:', error)
+        error: (error) => {
+          console.error('Error loading transactions:', error);
+          this.toastService.showError('Falha ao carregar transações. Recarregue a página.');
+        }
       });
   }
 
@@ -100,7 +105,10 @@ export class TransactionsPageComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => this.handleTransactionSuccess(),
-          error: (error) => console.error('Error updating transaction:', error)
+          error: (error) => {
+            console.error('Error updating transaction:', error);
+            this.toastService.showError('Falha ao atualizar transação. Tente novamente.');
+          }
         });
     } else {
       // Create new transaction
@@ -109,7 +117,10 @@ export class TransactionsPageComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => this.handleTransactionSuccess(),
-          error: (error) => console.error('Error creating transaction:', error)
+          error: (error) => {
+            console.error('Error creating transaction:', error);
+            this.toastService.showError('Falha ao criar transação. Tente novamente.');
+          }
         });
     }
   }
@@ -118,6 +129,7 @@ export class TransactionsPageComponent implements OnInit {
   handleTransactionSuccess(): void {
     this.loadTransactions();
     this.closeDialog();
+    this.toastService.showSuccess('Transação salva com sucesso!');
   }
 
   // Handle delete transaction
@@ -133,7 +145,10 @@ export class TransactionsPageComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => this.handleDeleteSuccess(),
-        error: (error) => console.error('Error deleting transaction:', error)
+        error: (error) => {
+          console.error('Error deleting transaction:', error);
+          this.toastService.showError('Falha ao excluir transação. Tente novamente.');
+        }
       });
   }
 
@@ -146,6 +161,7 @@ export class TransactionsPageComponent implements OnInit {
   handleDeleteSuccess(): void {
     this.loadTransactions();
     this.closeDeleteDialog();
+    this.toastService.showSuccess('Transação excluída com sucesso!');
   }
 
   // Close delete dialog
