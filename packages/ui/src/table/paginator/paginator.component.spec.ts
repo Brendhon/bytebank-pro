@@ -82,60 +82,60 @@ describe('PaginatorComponent', () => {
 
   describe('Events', () => {
     it('should emit onPageChange when handlePageClick is called with valid page', () => {
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       component.handlePageClick(3);
 
-      expect(component.onPageChange.emit).toHaveBeenCalledWith(3);
+      expect(component.pageChange.emit).toHaveBeenCalledWith(3);
     });
 
     it('should not emit onPageChange when handlePageClick is called with ellipsis', () => {
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       component.handlePageClick('...');
 
-      expect(component.onPageChange.emit).not.toHaveBeenCalled();
+      expect(component.pageChange.emit).not.toHaveBeenCalled();
     });
 
     it('should not emit onPageChange when clicking current page', () => {
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       component.handlePageClick(1);
 
-      expect(component.onPageChange.emit).not.toHaveBeenCalled();
+      expect(component.pageChange.emit).not.toHaveBeenCalled();
     });
 
     it('should emit onPageChange when previous button is clicked', () => {
       fixture.componentRef.setInput('currentPage', 3);
       fixture.detectChanges();
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       const previousButton = fixture.debugElement.query(
         By.css('[data-testid="previous-page-button"]')
       );
       previousButton.nativeElement.click();
 
-      expect(component.onPageChange.emit).toHaveBeenCalledWith(2);
+      expect(component.pageChange.emit).toHaveBeenCalledWith(2);
     });
 
     it('should emit onPageChange when next button is clicked', () => {
       fixture.componentRef.setInput('currentPage', 3);
       fixture.detectChanges();
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       const nextButton = fixture.debugElement.query(By.css('[data-testid="next-page-button"]'));
       nextButton.nativeElement.click();
 
-      expect(component.onPageChange.emit).toHaveBeenCalledWith(4);
+      expect(component.pageChange.emit).toHaveBeenCalledWith(4);
     });
 
     it('should emit onPageChange when page button is clicked', () => {
-      spyOn(component.onPageChange, 'emit');
+      spyOn(component.pageChange, 'emit');
 
       const pageButton = fixture.debugElement.query(By.css('[data-testid="page-button-2"]'));
       pageButton.nativeElement.click();
 
-      expect(component.onPageChange.emit).toHaveBeenCalledWith(2);
+      expect(component.pageChange.emit).toHaveBeenCalledWith(2);
     });
   });
 
