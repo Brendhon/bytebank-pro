@@ -3,28 +3,4 @@ import storybook from 'eslint-plugin-storybook';
 
 import angular from '@bytebank-pro/eslint-config/angular';
 
-export default [
-  ...angular,
-  {
-    files: ['**/*.ts'],
-    rules: {
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'bb',
-          style: 'kebab-case'
-        }
-      ],
-      '@angular-eslint/directive-selector': [
-        'error',
-        {
-          type: 'attribute',
-          prefix: 'bb',
-          style: 'camelCase'
-        }
-      ]
-    }
-  },
-  ...storybook.configs['flat/recommended']
-];
+export default [...angular, ...storybook.configs['flat/recommended']];

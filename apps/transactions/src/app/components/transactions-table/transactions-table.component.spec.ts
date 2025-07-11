@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { ITransaction, TransactionDescKey, TransactionTypeKey } from '@bytebank-pro/types';
 import { GenericTableComponent } from '@bytebank-pro/ui';
 import { TransactionsTableComponent } from './transactions-table.component';
+import { TemplateRef } from '@angular/core';
 
 describe('TransactionsTableComponent', () => {
   let component: TransactionsTableComponent;
@@ -58,9 +58,9 @@ describe('TransactionsTableComponent', () => {
     });
 
     it('should have output emitters defined', () => {
-      expect(component.onEdit).toBeDefined();
+      expect(component.edit).toBeDefined();
 
-      expect(component.onDelete).toBeDefined();
+      expect(component.delete).toBeDefined();
     });
 
     it('should have icons defined', () => {
@@ -160,10 +160,10 @@ describe('TransactionsTableComponent', () => {
 
     describe('getColumnsWithTemplates', () => {
       it('should return correct columns configuration', () => {
-        const typeTemplate = {} as any;
-        const valueTemplate = {} as any;
-        const actionsTemplate = {} as any;
-        const dateTemplate = {} as any;
+        const typeTemplate = {} as TemplateRef<unknown>;
+        const valueTemplate = {} as TemplateRef<unknown>;
+        const actionsTemplate = {} as TemplateRef<unknown>;
+        const dateTemplate = {} as TemplateRef<unknown>;
 
         const result = component.getColumnsWithTemplates(
           typeTemplate,
@@ -212,26 +212,26 @@ describe('TransactionsTableComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should emit onEdit event when edit button is clicked', () => {
-      spyOn(component.onEdit, 'emit');
+    it('should emit edit event when edit button is clicked', () => {
+      spyOn(component.edit, 'emit');
       const editButton = element.querySelector(
         '[data-testid="edit-transaction-button"]'
       ) as HTMLElement;
 
       editButton?.click();
 
-      expect(component.onEdit.emit).toHaveBeenCalledWith(mockTransactions[0]);
+      expect(component.edit.emit).toHaveBeenCalledWith(mockTransactions[0]);
     });
 
-    it('should emit onDelete event when delete button is clicked', () => {
-      spyOn(component.onDelete, 'emit');
+    it('should emit delete event when delete button is clicked', () => {
+      spyOn(component.delete, 'emit');
       const deleteButton = element.querySelector(
         '[data-testid="delete-transaction-button"]'
       ) as HTMLElement;
 
       deleteButton?.click();
 
-      expect(component.onDelete.emit).toHaveBeenCalledWith(mockTransactions[0]);
+      expect(component.delete.emit).toHaveBeenCalledWith(mockTransactions[0]);
     });
   });
 
@@ -334,11 +334,11 @@ describe('TransactionsTableComponent', () => {
       const transactionWithNullValues = {
         _id: '4',
         date: '2024-01-18',
-        alias: null as any,
+        alias: undefined,
         type: 'outflow' as TransactionTypeKey,
         desc: 'payment' as TransactionDescKey,
         value: 0,
-        user: null as any
+        user: undefined
       };
 
       fixture.componentRef.setInput('transactions', [transactionWithNullValues]);

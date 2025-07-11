@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "./src",
-      "prefix": "app",
+      "prefix": "bb",
       "architect": {
         "build": {
           "builder": "ngx-build-plus:browser",

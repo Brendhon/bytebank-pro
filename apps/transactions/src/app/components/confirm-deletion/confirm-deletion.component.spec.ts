@@ -37,40 +37,40 @@ describe('ConfirmDeletionComponent', () => {
     });
 
     it('should initialize with output emitters', () => {
-      expect(component.confirm).toBeDefined();
-      expect(component.cancel).toBeDefined();
+      expect(component.deletionConfirmed).toBeDefined();
+      expect(component.deletionCancelled).toBeDefined();
     });
   });
 
   describe('Dialog Management', () => {
     beforeEach(() => {
-      spyOn(component.cancel, 'emit');
+      spyOn(component.deletionCancelled, 'emit');
     });
 
-    it('should emit cancel event when onCancel is called', () => {
+    it('should emit deletionCancelled event when onCancel is called', () => {
       component.onCancel();
 
-      expect(component.cancel.emit).toHaveBeenCalled();
+      expect(component.deletionCancelled.emit).toHaveBeenCalled();
     });
 
-    it('should emit confirm event with transaction when onConfirm is called', () => {
+    it('should emit deletionConfirmed event with transaction when onConfirm is called', () => {
       fixture.componentRef.setInput('transaction', mockTransaction);
-      spyOn(component.confirm, 'emit');
+      spyOn(component.deletionConfirmed, 'emit');
       fixture.detectChanges();
 
       component.onConfirm();
 
-      expect(component.confirm.emit).toHaveBeenCalledWith(mockTransaction);
+      expect(component.deletionConfirmed.emit).toHaveBeenCalledWith(mockTransaction);
     });
 
-    it('should not emit confirm event when no transaction is set', () => {
+    it('should not emit deletionConfirmed event when no transaction is set', () => {
       fixture.componentRef.setInput('transaction', null);
-      spyOn(component.confirm, 'emit');
+      spyOn(component.deletionConfirmed, 'emit');
       fixture.detectChanges();
 
       component.onConfirm();
 
-      expect(component.confirm.emit).not.toHaveBeenCalled();
+      expect(component.deletionConfirmed.emit).not.toHaveBeenCalled();
     });
   });
 
@@ -116,11 +116,13 @@ describe('ConfirmDeletionComponent', () => {
       const compiled = fixture.nativeElement;
 
       const cancelButton = compiled.querySelector('[data-testid="confirm-deletion-cancel-button"]');
+
       expect(cancelButton?.getAttribute('ariaLabel')).toBe('Cancelar exclusão');
 
       const confirmButton = compiled.querySelector(
         '[data-testid="confirm-deletion-confirm-button"]'
       );
+
       expect(confirmButton?.getAttribute('ariaLabel')).toBe('Confirmar exclusão');
     });
 
@@ -138,11 +140,13 @@ describe('ConfirmDeletionComponent', () => {
       const compiled = fixture.nativeElement;
 
       const cancelButton = compiled.querySelector('[data-testid="confirm-deletion-cancel-button"]');
+
       expect(cancelButton?.getAttribute('variant')).toBe('dark');
 
       const confirmButton = compiled.querySelector(
         '[data-testid="confirm-deletion-confirm-button"]'
       );
+
       expect(confirmButton?.getAttribute('variant')).toBe('outlineOrange');
     });
   });

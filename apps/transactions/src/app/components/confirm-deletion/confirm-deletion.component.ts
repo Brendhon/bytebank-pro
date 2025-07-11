@@ -43,12 +43,12 @@ export class ConfirmDeletionComponent {
    * Event emitted when the user confirms the deletion.
    * Emits the transaction that should be deleted.
    */
-  confirm = output<ITransaction>();
+  deletionConfirmed = output<ITransaction>();
 
   /**
    * Event emitted when the user cancels the deletion.
    */
-  cancel = output<void>();
+  deletionCancelled = output<void>();
 
   /**
    * Handles the confirmation action.
@@ -56,16 +56,16 @@ export class ConfirmDeletionComponent {
    */
   onConfirm(): void {
     if (this.transaction()) {
-      this.confirm.emit(this.transaction()!);
+      this.deletionConfirmed.emit(this.transaction()!);
     }
   }
 
   /**
    * Handles the cancellation action.
-   * Emits cancel event and closes the dialog.
+   * Emits deletionCancelled event and closes the dialog.
    */
   onCancel(): void {
-    this.cancel.emit();
+    this.deletionCancelled.emit();
   }
 
   /**

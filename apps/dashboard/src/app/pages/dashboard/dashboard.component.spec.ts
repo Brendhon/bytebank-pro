@@ -46,16 +46,19 @@ describe('DashboardPageComponent', () => {
 
   it('should render welcome card component', () => {
     const welcomeCard = fixture.nativeElement.querySelector('bb-welcome-card');
+
     expect(welcomeCard).toBeTruthy();
   });
 
   it('should render movements section component', () => {
     const movementsSection = fixture.nativeElement.querySelector('bb-movements-section');
+
     expect(movementsSection).toBeTruthy();
   });
 
   it('should have proper accessibility attributes', () => {
     const mainElement = fixture.nativeElement.querySelector('main');
+
     expect(mainElement).toBeTruthy();
     expect(mainElement.getAttribute('role')).toBe('main');
     expect(mainElement.getAttribute('aria-label')).toBe('Dashboard principal do ByteBank');

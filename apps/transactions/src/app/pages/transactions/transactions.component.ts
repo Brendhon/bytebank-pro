@@ -1,6 +1,7 @@
 import { ConfirmDeletionComponent } from '@/components/confirm-deletion/confirm-deletion.component';
 import { TransactionFormComponent } from '@/components/transaction-form/transaction-form.component';
 import { TransactionsTableComponent } from '@/components/transactions-table/transactions-table.component';
+import { PaginatedTransactions } from '@/core/models/transaction.model';
 import { TransactionsService } from '@/core/services/transactions.service';
 import {
   ChangeDetectionStrategy,
@@ -8,8 +9,7 @@ import {
   OnInit,
   computed,
   inject,
-  signal,
-  DestroyRef
+  signal
 } from '@angular/core';
 import { ITransaction } from '@bytebank-pro/types';
 import { ButtonComponent } from '@bytebank-pro/ui';
@@ -59,7 +59,8 @@ export class TransactionsPageComponent implements OnInit {
       .loadTransactions()
       .pipe(first())
       .subscribe({
-        next: (paginatedTransactions: any) => this._transactions.set(paginatedTransactions.items),
+        next: (paginatedTransactions: PaginatedTransactions) =>
+          this._transactions.set(paginatedTransactions.items),
         error: (error) => console.error('Error loading transactions:', error)
       });
   }

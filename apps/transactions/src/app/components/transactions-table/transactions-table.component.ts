@@ -21,8 +21,8 @@ import { LucideAngularModule, Pencil, Trash } from 'lucide-angular';
  * <bb-transactions-table
  * [transactions]="myTransactions"
  * [pageSize]="5"
- * (onEdit)="handleEditTransaction($event)"
- * (onDelete)="handleDeleteTransaction($event)"
+ * (edit)="handleEditTransaction($event)"
+ * (delete)="handleDeleteTransaction($event)"
  * ></bb-transactions-table>
  * ```
  */
@@ -50,13 +50,13 @@ export class TransactionsTableComponent {
    * Event emitted when the "Edit" button for a transaction is clicked.
    * Emits the `ITransaction` object to be edited.
    */
-  onEdit = output<ITransaction>();
+  edit = output<ITransaction>();
 
   /**
    * Event emitted when the "Delete" button for a transaction is clicked.
    * Emits the `ITransaction` object to be deleted.
    */
-  onDelete = output<ITransaction>();
+  delete = output<ITransaction>();
 
   icons = {
     pencil: Pencil,
@@ -85,10 +85,10 @@ export class TransactionsTableComponent {
    * @returns Array of columns with render templates
    */
   getColumnsWithTemplates(
-    typeTemplate: TemplateRef<any>,
-    valueTemplate: TemplateRef<any>,
-    actionsTemplate: TemplateRef<any>,
-    dateTemplate: TemplateRef<any>
+    typeTemplate: TemplateRef<unknown>,
+    valueTemplate: TemplateRef<unknown>,
+    actionsTemplate: TemplateRef<unknown>,
+    dateTemplate: TemplateRef<unknown>
   ): TableColumn<ITransaction>[] {
     return [
       {

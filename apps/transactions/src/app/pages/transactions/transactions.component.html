@@ -11,8 +11,8 @@
       <bb-transactions-table
         [transactions]="transactions()"
         [pageSize]="5"
-        (onEdit)="handleEditTransaction($event)"
-        (onDelete)="handleDeleteTransaction($event)"
+        (edit)="handleEditTransaction($event)"
+        (delete)="handleDeleteTransaction($event)"
       ></bb-transactions-table>
     </div>
   </section>
@@ -30,6 +30,6 @@
 <bb-confirm-deletion
   [isOpen]="isDeleteDialogOpen()"
   [transaction]="transactionToDelete()"
-  (confirm)="handleDeleteConfirm($event)"
-  (cancel)="handleDeleteCancel()"
+  (deletionConfirmed)="handleDeleteConfirm($event)"
+  (deletionCancelled)="handleDeleteCancel()"
 ></bb-confirm-deletion>

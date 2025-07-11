@@ -338,6 +338,7 @@ describe('TransactionsPageComponent', () => {
   describe('Template Integration', () => {
     it('should display "Nova Transação" button', () => {
       const button = element.querySelector('bb-button');
+
       expect(button).toBeTruthy();
     });
 
@@ -358,6 +359,7 @@ describe('TransactionsPageComponent', () => {
       const transactionsTable = fixture.debugElement.query(
         By.directive(TransactionsTableComponent)
       );
+
       expect(transactionsTable).toBeTruthy();
     });
 
@@ -368,7 +370,7 @@ describe('TransactionsPageComponent', () => {
       );
       const transactionToEdit = mockTransactions[0];
 
-      transactionsTable?.componentInstance.onEdit.emit(transactionToEdit);
+      transactionsTable?.componentInstance.edit.emit(transactionToEdit);
 
       expect(handleEditSpy).toHaveBeenCalledWith(transactionToEdit);
     });
@@ -380,7 +382,7 @@ describe('TransactionsPageComponent', () => {
       );
       const transactionToDelete = mockTransactions[0];
 
-      transactionsTable?.componentInstance.onDelete.emit(transactionToDelete);
+      transactionsTable?.componentInstance.delete.emit(transactionToDelete);
 
       expect(handleDeleteSpy).toHaveBeenCalledWith(transactionToDelete);
     });
