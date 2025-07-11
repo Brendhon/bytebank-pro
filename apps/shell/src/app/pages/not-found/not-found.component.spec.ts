@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
-
-import { NotFoundComponent } from './not-found.component';
-import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
-import { ImgComponent } from '@bytebank-pro/ui';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
 import { AuthService } from '@/core/services/auth.service';
 import { ToastService } from '@/core/services/toast.service';
+import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
+import { By } from '@angular/platform-browser';
+import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ImgComponent } from '@bytebank-pro/ui';
+import { NotFoundComponent } from './not-found.component';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
   let fixture: ComponentFixture<NotFoundComponent>;
-  let element: HTMLElement;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let toastServiceSpy: jasmine.SpyObj<ToastService>;
 
@@ -47,9 +45,6 @@ describe('NotFoundComponent', () => {
     fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="not-found-illustration"]')
-    )?.nativeElement;
   });
 
   it('should create the component', () => {

@@ -8,7 +8,7 @@ import { authInterceptor } from './auth.interceptor';
 describe('authInterceptor', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
-  let authServiceMock: any;
+  let authServiceMock: { token: string | null };
 
   beforeEach(() => {
     // Create mock AuthService with configurable token property

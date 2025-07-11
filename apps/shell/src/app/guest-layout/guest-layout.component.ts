@@ -7,14 +7,7 @@ import { AuthService } from '@/core/services/auth.service';
 import { ToastService } from '@/core/services/toast.service';
 import { LoginFormData, RegisterFormData } from '@/core/types/form';
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  inject,
-  OnInit,
-  signal
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router'; // For routing
 import { catchError, Observable, of } from 'rxjs';
@@ -45,7 +38,7 @@ import { catchError, Observable, of } from 'rxjs';
   templateUrl: './guest-layout.component.html', // Separated template for clarity
   styleUrls: ['./guest-layout.component.css'] // Use CSS specific to component
 })
-export class GuestLayoutComponent implements OnInit {
+export class GuestLayoutComponent {
   // Inject services
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -61,12 +54,6 @@ export class GuestLayoutComponent implements OnInit {
    * Signal to control the visibility of the login modal.
    */
   isLoginOpen = signal(false);
-
-  /**
-   * Lifecycle hook called after component initialization.
-   * Ensures initial state setup.
-   */
-  ngOnInit(): void {}
 
   /**
    * Handles the submission of the login form.
@@ -123,7 +110,7 @@ export class GuestLayoutComponent implements OnInit {
    * @param error The error object
    * @returns An Observable of null to continue the rxjs chain
    */
-  private handleError(error: any, message: string): Observable<null> {
+  private handleError(error: Error, message: string): Observable<null> {
     // Get the error message or use a default one
     const errorMessage = message || 'Ocorreu um erro. Tente novamente.';
 

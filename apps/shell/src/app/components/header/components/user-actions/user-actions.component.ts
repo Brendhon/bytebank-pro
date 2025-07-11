@@ -64,7 +64,7 @@ export class UserActionsComponent {
    * Opens the URL in a new tab and closes the popover.
    * @param url The URL to navigate to.
    */
-  handleExternalLinkNavigate(url: string): void {
+  handleExternalLinkNavigate(url: string | null): void {
     if (url) {
       window.open(url, '_blank');
       this.closePopover(); // Close popover after navigation

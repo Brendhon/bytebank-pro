@@ -93,10 +93,9 @@ export class HomeComponent implements OnInit {
   /**
    * Tracks benefit items in the ngFor loop for better performance.
    * @param index The index of the item.
-   * @param item The benefit item itself.
    * @returns A unique identifier for the item (its index).
    */
-  trackByBenefitIndex(index: number, item: BenefitItem): number {
+  trackByBenefitIndex(index: number): number {
     return index;
   }
 }

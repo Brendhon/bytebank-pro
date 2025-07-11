@@ -31,16 +31,19 @@ describe('ToastService', () => {
 
     it('should return a function from showSuccess', () => {
       const result = service.showSuccess('Test message');
+
       expect(typeof result).toBe('function');
     });
 
     it('should return a function from showError', () => {
       const result = service.showError('Test message');
+
       expect(typeof result).toBe('function');
     });
 
     it('should return a function from showInfo', () => {
       const result = service.showInfo('Test message');
+
       expect(typeof result).toBe('function');
     });
   });
@@ -48,31 +51,37 @@ describe('ToastService', () => {
   describe('Method Signatures', () => {
     it('should accept message parameter in showSuccess', () => {
       const closeFn = service.showSuccess('Test message');
+
       expect(typeof closeFn).toBe('function');
     });
 
     it('should accept message and duration parameters in showSuccess', () => {
       const closeFn = service.showSuccess('Test message', 5000);
+
       expect(typeof closeFn).toBe('function');
     });
 
     it('should accept message parameter in showError', () => {
       const closeFn = service.showError('Test message');
+
       expect(typeof closeFn).toBe('function');
     });
 
     it('should accept message and duration parameters in showError', () => {
       const closeFn = service.showError('Test message', 7000);
+
       expect(typeof closeFn).toBe('function');
     });
 
     it('should accept message parameter in showInfo', () => {
       const closeFn = service.showInfo('Test message');
+
       expect(typeof closeFn).toBe('function');
     });
 
     it('should accept message and duration parameters in showInfo', () => {
       const closeFn = service.showInfo('Test message', 6000);
+
       expect(typeof closeFn).toBe('function');
     });
   });

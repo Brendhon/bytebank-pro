@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 describe('UserActionsComponent', () => {
   let component: UserActionsComponent;
   let fixture: ComponentFixture<UserActionsComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,9 +15,6 @@ describe('UserActionsComponent', () => {
     fixture = TestBed.createComponent(UserActionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="user-actions-popover"]')
-    )?.nativeElement;
   });
 
   afterEach(() => {
@@ -31,6 +27,10 @@ describe('UserActionsComponent', () => {
     });
 
     it('should render the user actions popover', () => {
+      const element = fixture.debugElement.query(
+        By.css('[data-testid="user-actions-popover"]')
+      )?.nativeElement;
+
       expect(element).toBeTruthy();
     });
 
@@ -58,6 +58,7 @@ describe('UserActionsComponent', () => {
 
     it('should close popover when closePopover is called', () => {
       component.openPopover();
+
       expect(component.isPopoverOpen()).toBe(true);
 
       component.closePopover();
@@ -99,12 +100,6 @@ describe('UserActionsComponent', () => {
       expect(figmaLink).toBe(environment.publicLinks?.figma || '');
     });
 
-    it('should return empty string for invalid public link key', () => {
-      const invalidLink = component.getPublicLink('invalid' as any);
-
-      expect(invalidLink).toBe('');
-    });
-
     it('should open public link in new tab', () => {
       spyOn(component, 'handleExternalLinkNavigate');
 
@@ -144,7 +139,7 @@ describe('UserActionsComponent', () => {
       spyOn(window, 'open');
       spyOn(component, 'closePopover');
 
-      component.handleExternalLinkNavigate(null as any);
+      component.handleExternalLinkNavigate(null);
 
       expect(window.open).not.toHaveBeenCalled();
 

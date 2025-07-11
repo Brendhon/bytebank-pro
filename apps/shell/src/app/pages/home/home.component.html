@@ -24,7 +24,7 @@
         Vantagens do nosso banco:
       </h3>
       <div class="benefits-grid">
-        @for (item of benefits; track trackByBenefitIndex($index, item)) {
+        @for (item of benefits; track trackByBenefitIndex($index)) {
           <div class="benefit-item">
             <bb-img [src]="item.iconSrc" size="full" className="flex" [alt]="item.iconAlt"></bb-img>
             <h4 class="benefit-title">{{ item.title }}</h4>

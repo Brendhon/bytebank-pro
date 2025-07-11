@@ -1,12 +1,10 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavMenuComponent } from './nav-menu.component';
-import { NavItemLabel } from '@/core/types/nav';
 
 describe('NavMenuComponent', () => {
   let component: NavMenuComponent;
   let fixture: ComponentFixture<NavMenuComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,9 +16,6 @@ describe('NavMenuComponent', () => {
     // Set required input before calling detectChanges to avoid NG0950 error
     fixture.componentRef.setInput('current', 'Dashboard');
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="nav-menu-component"]')
-    )?.nativeElement;
   });
 
   afterEach(() => {
@@ -33,6 +28,10 @@ describe('NavMenuComponent', () => {
     });
 
     it('should render the navigation menu', () => {
+      const element = fixture.debugElement.query(
+        By.css('[data-testid="nav-menu-component"]')
+      )?.nativeElement;
+
       expect(element).toBeTruthy();
     });
 
@@ -51,6 +50,10 @@ describe('NavMenuComponent', () => {
     it('should apply custom className to nav element', () => {
       fixture.componentRef.setInput('className', 'custom-nav-class');
       fixture.detectChanges();
+
+      const element = fixture.debugElement.query(
+        By.css('[data-testid="nav-menu-component"]')
+      )?.nativeElement;
 
       expect(element.classList).toContain('custom-nav-class');
     });
@@ -131,7 +134,7 @@ describe('NavMenuComponent', () => {
     });
 
     it('should return false for isActive when current is null', () => {
-      fixture.componentRef.setInput('current', null as any);
+      fixture.componentRef.setInput('current', null);
       fixture.detectChanges();
 
       expect(component.isActive()('Dashboard')).toBe(false);

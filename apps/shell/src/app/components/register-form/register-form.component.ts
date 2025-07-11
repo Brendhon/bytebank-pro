@@ -165,6 +165,7 @@ export class RegisterFormComponent {
     this.isLoading.set(true);
 
     // Extract RegisterFormData from FormData (remove passwordConfirmation)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { passwordConfirmation, ...registerData } = this.formData();
 
     // Emit the registration data

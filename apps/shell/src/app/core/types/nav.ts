@@ -1,3 +1,5 @@
+import { LucideIconData } from 'lucide-angular';
+
 /**
  * Defines possible labels for navigation items.
  */
@@ -9,7 +11,7 @@ export type NavItemLabel = 'Dashboard' | 'Transações' | 'Configurações';
 export interface NavMenuItem {
   label: NavItemLabel;
   href: string;
-  icon: any; // Type for Lucide icon
+  icon: LucideIconData;
 }
 
 export enum NavMenuItemLabel {

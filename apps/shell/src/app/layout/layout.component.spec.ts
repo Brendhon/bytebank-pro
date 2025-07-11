@@ -1,20 +1,15 @@
+import { AuthService } from '@/core/services/auth.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
-import { take, skip } from 'rxjs/operators';
-import { LayoutComponent } from './layout.component';
-import { AuthService } from '@/core/services/auth.service';
-import { HeaderComponent } from '@/components/header/header.component';
-import { NavMenuComponent } from '@/components/nav-menu/nav-menu.component';
-import { FooterComponent } from '../components/footer/footer.component';
-import { NavItemLabel } from '@/core/types/nav';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { IUser } from '@bytebank-pro/types';
+import { of } from 'rxjs';
+import { skip, take } from 'rxjs/operators';
+import { LayoutComponent } from './layout.component';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
-  let element: HTMLElement;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let routerSpy: jasmine.SpyObj<Router>;
 
@@ -55,7 +50,6 @@ describe('LayoutComponent', () => {
     fixture = TestBed.createComponent(LayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="bb-header"]'))?.nativeElement;
   });
 
   afterEach(() => {
@@ -124,7 +118,7 @@ describe('LayoutComponent', () => {
     });
 
     it('should handle navigation to null route', () => {
-      component.handleNavigation(null as any);
+      component.handleNavigation(null);
 
       expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
     });

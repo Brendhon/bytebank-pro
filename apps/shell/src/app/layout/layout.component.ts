@@ -82,7 +82,7 @@ export class LayoutComponent implements OnInit {
    * Handles navigation actions, redirecting to internal or external links.
    * @param link The URL or path to navigate to.
    */
-  handleNavigation(link: string): void {
+  handleNavigation(link: string | null): void {
     this.router.navigateByUrl(link || '/');
   }
 

@@ -140,15 +140,7 @@ describe('HomeComponent', () => {
   });
 
   it('should return correct index from trackByBenefitIndex', () => {
-    const mockItem = {
-      iconSrc: 'test-icon',
-      iconAlt: 'Test icon',
-      iconWidth: 60,
-      title: 'Test title',
-      description: 'Test description'
-    };
-
-    const result = component.trackByBenefitIndex(2, mockItem);
+    const result = component.trackByBenefitIndex(2);
 
     expect(result).toBe(2);
   });

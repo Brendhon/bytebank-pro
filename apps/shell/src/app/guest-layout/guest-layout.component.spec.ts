@@ -15,7 +15,6 @@ import { LoginFormData, RegisterFormData } from '@/core/types/form';
 describe('GuestLayoutComponent', () => {
   let component: GuestLayoutComponent;
   let fixture: ComponentFixture<GuestLayoutComponent>;
-  let element: HTMLElement;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let toastServiceSpy: jasmine.SpyObj<ToastService>;
   let routerSpy: jasmine.SpyObj<Router>;
@@ -44,9 +43,6 @@ describe('GuestLayoutComponent', () => {
     fixture = TestBed.createComponent(GuestLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="guest-layout-container"]')
-    )?.nativeElement;
   });
 
   it('should create the component', () => {
@@ -180,7 +176,7 @@ describe('GuestLayoutComponent', () => {
   it('should not navigate when login returns null user', () => {
     const loginData: LoginFormData = { email: 'test@example.com', password: 'password' };
 
-    authServiceSpy.login.and.returnValue(of(null as any));
+    authServiceSpy.login.and.returnValue(of(null));
 
     component.onLoginSubmit(loginData);
 
@@ -197,7 +193,7 @@ describe('GuestLayoutComponent', () => {
       acceptPrivacy: true
     };
 
-    authServiceSpy.register.and.returnValue(of(null as any));
+    authServiceSpy.register.and.returnValue(of(null));
 
     component.onRegisterSubmit(registerData);
 
@@ -212,11 +208,13 @@ describe('GuestLayoutComponent', () => {
 
   it('should render header component', () => {
     const headerElement = fixture.debugElement.query(By.css('[data-testid="guest-layout-header"]'));
+
     expect(headerElement).toBeTruthy();
   });
 
   it('should render footer component', () => {
     const footerElement = fixture.debugElement.query(By.css('[data-testid="guest-layout-footer"]'));
+
     expect(footerElement).toBeTruthy();
   });
 
@@ -224,6 +222,7 @@ describe('GuestLayoutComponent', () => {
     const mainElement = fixture.debugElement.query(
       By.css('[data-testid="guest-layout-main-content"]')
     );
+
     expect(mainElement).toBeTruthy();
   });
 
@@ -231,6 +230,7 @@ describe('GuestLayoutComponent', () => {
     const loginFormElement = fixture.debugElement.query(
       By.css('[data-testid="guest-layout-login-form"]')
     );
+
     expect(loginFormElement).toBeTruthy();
   });
 
@@ -238,6 +238,7 @@ describe('GuestLayoutComponent', () => {
     const registerFormElement = fixture.debugElement.query(
       By.css('[data-testid="guest-layout-register-form"]')
     );
+
     expect(registerFormElement).toBeTruthy();
   });
 });

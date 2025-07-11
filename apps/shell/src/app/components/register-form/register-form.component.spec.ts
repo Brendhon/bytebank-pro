@@ -1,12 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { RegisterFormComponent } from './register-form.component';
 import { RegisterFormData } from '@/core/types/form';
 
 describe('RegisterFormComponent', () => {
   let component: RegisterFormComponent;
   let fixture: ComponentFixture<RegisterFormComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +17,6 @@ describe('RegisterFormComponent', () => {
     // Set required input
     fixture.componentRef.setInput('isOpen', false);
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="register-dialog"]'))?.nativeElement;
   });
 
   it('should create the component', () => {

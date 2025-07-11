@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { LoginFormComponent } from './login-form.component';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,7 +14,6 @@ describe('LoginFormComponent', () => {
     component = fixture.componentInstance;
     fixture.componentRef.setInput('isOpen', false);
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('bb-dialog'))?.nativeElement;
   });
 
   describe('Basic Functionality', () => {

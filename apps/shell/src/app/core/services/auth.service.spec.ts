@@ -1,12 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { Apollo } from 'apollo-angular';
-import { of } from 'rxjs';
 
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
-  let apolloSpy: jasmine.SpyObj<Apollo>;
 
   beforeEach(() => {
     // Create Apollo mock
@@ -17,7 +15,6 @@ describe('AuthService', () => {
     });
 
     service = TestBed.inject(AuthService);
-    apolloSpy = TestBed.inject(Apollo) as jasmine.SpyObj<Apollo>;
   });
 
   it('should be created', () => {

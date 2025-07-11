@@ -51,7 +51,7 @@ export class AuthService {
    * Logs in the user using the GraphQL API
    * @returns Observable that emits StoredUser on success
    */
-  login(email: string, password: string): Observable<StoredUser> {
+  login(email: string, password: string): Observable<StoredUser | null> {
     if (!email || !password) {
       return throwError(() => new Error('Email and password are required'));
     }
@@ -95,7 +95,7 @@ export class AuthService {
    * Registers a new user using the GraphQL API
    * @returns Observable that emits StoredUser on success
    */
-  register(name: string, email: string, password: string): Observable<StoredUser> {
+  register(name: string, email: string, password: string): Observable<StoredUser | null> {
     if (!name || !email || !password) {
       return throwError(() => new Error('Name, email, and password are required'));
     }
