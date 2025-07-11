@@ -531,7 +531,7 @@ export const WithPageChangeEvent: Story = {
       columns: sampleColumns,
       lastPageChange: null,
       onPageChange(page: number) {
-        (this as any).lastPageChange = `Página ${page} selecionada`;
+        this['lastPageChange'] = `Página ${page} selecionada`;
         // Em uma implementação real, aqui você faria a chamada para o servidor
         console.log('Page changed to:', page);
       }

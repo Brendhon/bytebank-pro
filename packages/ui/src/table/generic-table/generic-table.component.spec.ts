@@ -168,12 +168,14 @@ describe('GenericTableComponent', () => {
         fixture.detectChanges();
 
         const firstPageData = component.pagedData();
+
         expect(firstPageData.length).toBe(2);
         expect(firstPageData).toEqual([mockData[0], mockData[1]]);
 
         // Navigate to second page
         component.onPageChange(2);
         const secondPageData = component.pagedData();
+
         expect(secondPageData.length).toBe(1);
         expect(secondPageData).toEqual([mockData[2]]);
       });
@@ -194,6 +196,7 @@ describe('GenericTableComponent', () => {
         fixture.detectChanges();
 
         const pagedData = component.pagedData();
+
         expect(pagedData).toEqual(mockData); // Data should be returned as-is
       });
 
@@ -206,6 +209,7 @@ describe('GenericTableComponent', () => {
         component.onPageChange(3);
 
         const pagedData = component.pagedData();
+
         expect(pagedData).toEqual(mockData); // Data should still be returned as-is
         expect(component.currentPage()).toBe(3);
       });
