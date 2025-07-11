@@ -126,6 +126,9 @@ export class SelectComponent<T = any> {
   private searchDebounceTime = 300;
   private searchTimeout: any;
 
+  // Click outside listener for closing dropdown
+  private clickOutsideListener?: (event: Event) => void;
+
   // Performance optimization: Generate IDs only once using signals
   private readonly _selectId = signal(`bb-select-${Math.random().toString(36).substring(2, 9)}`);
 
@@ -246,61 +249,29 @@ export class SelectComponent<T = any> {
 
   // CSS class builders following the guidelines - optimized with computed signals
   private wrapperClassesComputed = computed(() =>
-    ['bb-select-container', 'relative', this.className()].filter(Boolean).join(' ')
+    ['bb-select-container', this.className()].filter(Boolean).join(' ')
   );
 
-  private selectClassesComputed = computed(() =>
-    [
-      this.baseClassesComputed(),
-      this.variantClassesComputed(),
-      this.sizeClassesComputed(),
-      this.stateClassesComputed()
-    ]
-      .filter(Boolean)
-      .join(' ')
-  );
+  private selectClassesComputed = computed(() => {
+    const baseClass = 'bb-select-trigger';
+    const variantClass = `bb-select-trigger-${this.variant()}`;
+    const sizeClass = `bb-select-size-${this.size()}`;
 
-  private baseClassesComputed = computed(
-    () =>
-      'relative w-full cursor-pointer rounded-md border bg-white px-3 py-2 text-left shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
-  );
-
-  private variantClassesComputed = computed(() => {
-    const variants: Record<SelectVariant, string> = {
-      default:
-        'border-gray-300 hover:border-bytebank-blue focus:border-bytebank-blue focus:ring-bytebank-blue',
-      success: 'border-bytebank-green focus:border-bytebank-green focus:ring-bytebank-green',
-      error: 'border-red-500 focus:border-red-500 focus:ring-red-500',
-      warning: 'border-bytebank-orange focus:border-bytebank-orange focus:ring-bytebank-orange'
-    };
-    return variants[this.variant()] || variants['default'];
-  });
-
-  private sizeClassesComputed = computed(() => {
-    const sizes: Record<SelectSize, string> = {
-      sm: 'min-h-8 text-sm',
-      md: 'min-h-10 text-sm',
-      lg: 'min-h-12 text-base'
-    };
-    return sizes[this.size()] || sizes['md'];
-  });
-
-  private stateClassesComputed = computed(() => {
+    let stateClass = 'bb-select-trigger-normal';
     if (this.disabled()) {
-      return 'bg-gray-100 text-gray-500 cursor-not-allowed';
+      stateClass = 'bb-select-trigger-disabled';
+    } else if (this.readonly()) {
+      stateClass = 'bb-select-trigger-readonly';
     }
-    if (this.readonly()) {
-      return 'bg-gray-50 cursor-default';
-    }
-    return 'text-gray-900';
+
+    return [baseClass, variantClass, sizeClass, stateClass].join(' ');
   });
 
-  private dropdownClassesComputed = computed(() =>
-    [
-      'absolute z-50 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
-      this.sizeClassesComputed()
-    ].join(' ')
-  );
+  private dropdownClassesComputed = computed(() => {
+    const baseClass = 'bb-select-dropdown';
+    const sizeClass = `bb-select-size-${this.size()}`;
+    return [baseClass, sizeClass].join(' ');
+  });
 
   private labelClassesComputed = computed(() => {
     const baseClasses = 'select-label-base';
@@ -312,13 +283,8 @@ export class SelectComponent<T = any> {
 
   private helperTextClassesComputed = computed(() => {
     const baseClasses = 'select-helper-base';
-    const variants: Record<SelectVariant, string> = {
-      default: 'text-gray-500',
-      success: 'text-bytebank-green',
-      error: 'text-red-600',
-      warning: 'text-bytebank-orange'
-    };
-    return `${baseClasses} ${variants[this.variant()]}`;
+    const variantClass = `select-helper-${this.variant()}`;
+    return `${baseClasses} ${variantClass}`;
   });
 
   private iconSizeComputed = computed(() => {
@@ -356,7 +322,7 @@ export class SelectComponent<T = any> {
   }
 
   get optionClasses(): string {
-    return 'relative cursor-pointer select-none py-2 px-3 text-gray-900 hover:bg-gray-100';
+    return 'select-option';
   }
 
   // Event handlers following the guidelines
@@ -463,6 +429,9 @@ export class SelectComponent<T = any> {
     this.isOpen.set(true);
     this.dropdownOpen.emit();
 
+    // Add click outside listener
+    this.addClickOutsideListener();
+
     // Focus first option or search input
     setTimeout(() => {
       if (this.searchable() && this.searchInput?.nativeElement) {
@@ -482,6 +451,9 @@ export class SelectComponent<T = any> {
     this.searchTerm.set('');
     this.focusedOptionIndex.set(-1);
     this.dropdownClose.emit();
+
+    // Remove click outside listener
+    this.removeClickOutsideListener();
   }
 
   clear(): void {
@@ -575,10 +547,44 @@ export class SelectComponent<T = any> {
     }, this.searchDebounceTime);
   }
 
+  // Click outside listener management
+  private addClickOutsideListener(): void {
+    // Remove existing listener if any
+    this.removeClickOutsideListener();
+
+    // Create new listener
+    this.clickOutsideListener = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const selectElement = this.selectElement?.nativeElement;
+      const dropdownElement = this.dropdown?.nativeElement;
+
+      // Check if click is outside both select trigger and dropdown
+      if (selectElement && dropdownElement) {
+        const isOutsideSelect = !selectElement.contains(target);
+        const isOutsideDropdown = !dropdownElement.contains(target);
+
+        if (isOutsideSelect && isOutsideDropdown) {
+          this.close();
+        }
+      }
+    };
+
+    // Add listener with capture to ensure it runs before other click handlers
+    document.addEventListener('click', this.clickOutsideListener, true);
+  }
+
+  private removeClickOutsideListener(): void {
+    if (this.clickOutsideListener) {
+      document.removeEventListener('click', this.clickOutsideListener, true);
+      this.clickOutsideListener = undefined;
+    }
+  }
+
   // Cleanup method for proper resource management
   ngOnDestroy(): void {
     if (this.searchTimeout) {
       clearTimeout(this.searchTimeout);
     }
+    this.removeClickOutsideListener();
   }
 }

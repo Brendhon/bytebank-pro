@@ -51,7 +51,7 @@
                       (click)="selectOption(option); $event.stopPropagation()"
                       data-testid="remove-option-button"
                     >
-                      <lucide-angular [img]="xIcon" [size]="12" aria-hidden="true"></lucide-angular>
+                      <i-lucide [img]="xIcon" [size]="12" aria-hidden="true"></i-lucide>
                     </button>
                   }
                 </span>
@@ -84,23 +84,23 @@
             (click)="clear(); $event.stopPropagation()"
             data-testid="clear-button"
           >
-            <lucide-angular
+            <i-lucide
               [img]="xIcon"
               [size]="iconSize - 4"
               class="select-clear-icon"
               aria-hidden="true"
-            ></lucide-angular>
+            ></i-lucide>
           </button>
         }
 
         <!-- Dropdown Toggle Icon -->
         <div class="select-dropdown-container">
-          <lucide-angular
+          <i-lucide
             [img]="isOpen() ? chevronUpIcon : chevronDownIcon"
             [size]="iconSize"
             class="select-dropdown-icon"
             aria-hidden="true"
-          ></lucide-angular>
+          ></i-lucide>
         </div>
       </div>
     </div>
@@ -149,7 +149,6 @@
           @for (option of filteredOptions(); track trackByOption($index, option); let i = $index) {
             <div
               [class]="optionClasses"
-              [class.select-option-focused]="i === focusedOptionIndex()"
               [class.select-option-disabled]="option.disabled"
               [attr.aria-selected]="isOptionSelected(option)"
               [attr.aria-disabled]="option.disabled"
@@ -164,14 +163,14 @@
 
                 <!-- Selected Indicator -->
                 @if (isOptionSelected(option)) {
-                  <lucide-angular
+                  <i-lucide
                     [img]="checkIcon"
                     [size]="iconSize - 4"
                     [class]="
                       i === focusedOptionIndex() ? 'select-check-icon-focused' : 'select-check-icon'
                     "
                     aria-hidden="true"
-                  ></lucide-angular>
+                  ></i-lucide>
                 }
               </div>
             </div>
@@ -183,7 +182,7 @@
 
   <!-- Helper Text / Error Message / Success Message -->
   @if (helperText() || errorMessage() || successMessage()) {
-    <div class="mt-1">
+    <div class="select-helper-container">
       @if (variant() === 'error' && errorMessage()) {
         <p
           [id]="selectId + '-error'"

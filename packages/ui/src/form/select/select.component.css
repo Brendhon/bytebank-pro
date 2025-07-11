@@ -1,10 +1,119 @@
 @import '../../../styles/global.css';
 
 /* Select component specific styles */
+
+/* Container classes */
+.bb-select-container {
+  @apply relative;
+}
+
+.bb-select-container.disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+
+.bb-select-container.readonly {
+  @apply cursor-default;
+}
+
+/* Select trigger classes */
+.bb-select-trigger {
+  @apply relative w-full cursor-pointer rounded-md border bg-white px-3 py-2 text-left shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.bb-select-trigger-default {
+  @apply border-gray-300 hover:border-bytebank-blue focus:border-bytebank-blue focus:ring-bytebank-blue;
+}
+
+.bb-select-trigger-success {
+  @apply border-bytebank-green focus:border-bytebank-green focus:ring-bytebank-green;
+}
+
+.bb-select-trigger-error {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+.bb-select-trigger-warning {
+  @apply border-bytebank-orange focus:border-bytebank-orange focus:ring-bytebank-orange;
+}
+
+.bb-select-trigger-disabled {
+  @apply bg-gray-100 text-gray-500 cursor-not-allowed;
+}
+
+.bb-select-trigger-readonly {
+  @apply bg-gray-50 cursor-default;
+}
+
+.bb-select-trigger-normal {
+  @apply text-gray-900;
+}
+
+/* Size classes */
+.bb-select-size-sm {
+  @apply min-h-8 text-sm;
+}
+
+.bb-select-size-md {
+  @apply min-h-10 text-sm;
+}
+
+.bb-select-size-lg {
+  @apply min-h-12 text-sm;
+}
+
+/* Dropdown classes */
+.bb-select-dropdown {
+  @apply absolute z-50 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
+
+/* Label classes */
+.select-label-base {
+  @apply block text-sm font-medium mb-1;
+}
+
+.select-label-error {
+  @apply text-bytebank-red;
+}
+
+.select-label-normal {
+  @apply text-gray-700;
+}
+
+.select-label-disabled {
+  @apply opacity-60;
+}
+
+/* Helper text classes */
+.select-helper-container {
+  @apply mt-1;
+}
+
+.select-helper-base {
+  @apply text-xs;
+}
+
+.select-helper-default {
+  @apply text-gray-500;
+}
+
+.select-helper-success {
+  @apply text-bytebank-green;
+}
+
+.select-helper-error {
+  @apply text-red-600;
+}
+
+.select-helper-warning {
+  @apply text-bytebank-orange;
+}
+
+/* Required indicator */
 .select-required-indicator {
   @apply text-red-500 ml-1;
 }
 
+/* Trigger content */
 .select-trigger-content {
   @apply flex items-center justify-between w-full;
 }
@@ -13,6 +122,7 @@
   @apply flex items-center flex-1 min-w-0;
 }
 
+/* Loading states */
 .select-loading-container {
   @apply flex items-center space-x-2;
 }
@@ -25,6 +135,7 @@
   @apply text-gray-500;
 }
 
+/* Tags for multiple selection */
 .select-tags-container {
   @apply flex flex-wrap gap-1 max-w-full;
 }
@@ -37,6 +148,7 @@
   @apply ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600;
 }
 
+/* Display values */
 .select-display-value {
   @apply truncate;
 }
@@ -49,6 +161,7 @@
   @apply text-gray-500;
 }
 
+/* Icons container */
 .select-icons-container {
   @apply flex items-center space-x-1 ml-2 flex-shrink-0;
 }
@@ -69,6 +182,7 @@
   @apply text-gray-400;
 }
 
+/* Search functionality */
 .select-search-container {
   @apply sticky top-0 bg-white border-b border-gray-200 p-2;
 }
@@ -77,6 +191,7 @@
   @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bytebank-blue focus:border-bytebank-blue;
 }
 
+/* Options container */
 .select-options-container {
   @apply py-1;
 }
@@ -85,12 +200,9 @@
   @apply px-3 py-2 text-gray-500 text-sm;
 }
 
-.select-option-selected {
-  @apply text-white;
-}
-
-.select-option-focused {
-  @apply bg-bytebank-blue text-white;
+/* Option classes */
+.select-option {
+  @apply relative cursor-pointer select-none py-2 px-3 text-gray-900 hover:bg-gray-100;
 }
 
 .select-option-disabled {
@@ -111,26 +223,4 @@
 
 .select-check-icon-focused {
   @apply text-white;
-}
-
-/* Select label classes */
-.select-label-base {
-  @apply block text-sm font-medium mb-1;
-}
-
-.select-label-error {
-  @apply text-red-700;
-}
-
-.select-label-normal {
-  @apply text-gray-700;
-}
-
-.select-label-disabled {
-  @apply opacity-60;
-}
-
-/* Select helper text classes */
-.select-helper-base {
-  @apply text-xs mt-1;
 }
