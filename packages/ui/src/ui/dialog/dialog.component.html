@@ -1,5 +1,14 @@
 <!-- Dialog Overlay with Backdrop Blur -->
-<div class="bb-dialog-backdrop" (click)="onBackdropClick($event)" data-testid="dialog-backdrop">
+<div
+  class="bb-dialog-backdrop"
+  (click)="onBackdropClick($event)"
+  (keydown.enter)="onBackdropClick($any($event))"
+  (keydown.space)="onBackdropClick($any($event))"
+  tabindex="0"
+  role="button"
+  [attr.aria-label]="'Close dialog'"
+  data-testid="dialog-backdrop"
+>
   <!-- Dialog Container -->
   <div
     #dialogElement
@@ -27,6 +36,8 @@
             class="bb-dialog-close-button bb-focus-ring"
             [attr.aria-label]="closeButtonAriaLabel()"
             (click)="onCloseClick()"
+            (keydown.enter)="onCloseClick()"
+            (keydown.space)="onCloseClick()"
             data-testid="dialog-close-button"
           >
             <i-lucide [img]="xIcon" [size]="20" aria-hidden="true"></i-lucide>

@@ -83,9 +83,9 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Handle backdrop click
+   * Handle backdrop click or keyboard interaction
    */
-  onBackdropClick(event: MouseEvent): void {
+  onBackdropClick(event: MouseEvent | KeyboardEvent): void {
     if (this.closeOnBackdropClick() && event.target === event.currentTarget) {
       this.handleClose();
     }
