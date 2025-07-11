@@ -9,7 +9,7 @@
     @if (variant() === 'user' && pathname()) {
       <bb-menu-popover
         [pathname]="pathname()!"
-        (onNavigate)="onNavigate.emit($event)"
+        (navigate)="navigate.emit($event)"
         data-testid="header-menu-popover"
       ></bb-menu-popover>
     }
@@ -18,16 +18,16 @@
   <div data-testid="header-right-actions">
     @if (variant() === 'guest') {
       <bb-guest-actions
-        (onOpenAccount)="onOpenAccount.emit()"
-        (onLogin)="onLogin.emit()"
+        (openAccount)="openAccount.emit()"
+        (login)="login.emit()"
         data-testid="guest-actions"
       ></bb-guest-actions>
     } @else {
       @if (userName()) {
         <bb-authenticated-user-header
           [userName]="userName()!"
-          (onNavigate)="onNavigate.emit($event)"
-          (onLogout)="onLogout.emit()"
+          (navigate)="navigate.emit($event)"
+          (logout)="logout.emit()"
           data-testid="user-actions"
         ></bb-authenticated-user-header>
       }

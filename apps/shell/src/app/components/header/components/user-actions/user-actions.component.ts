@@ -28,12 +28,12 @@ export class UserActionsComponent {
    * Event emitted when a navigation link (Github, Figma, Storybook) is clicked.
    * Emits the URL to navigate to.
    */
-  onNavigate = output<string>();
+  navigate = output<string>();
 
   /**
    * Event emitted when the "Sair" (Logout) button is clicked.
    */
-  onLogout = output<void>();
+  logout = output<void>();
 
   /**
    * Internal signal to control the popover open/closed state.
@@ -93,7 +93,7 @@ export class UserActionsComponent {
    * Closes the popover after logout action.
    */
   handleLogout(): void {
-    this.onLogout.emit();
+    this.logout.emit();
     this.closePopover(); // Close popover after logout
   }
 

@@ -28,9 +28,8 @@
     <div slot="content" class="menu-popover-content">
       <bb-nav-menu
         [current]="currentNavLabel()"
-        [className]="'flex p-0'"
-        (onNavigate)="handleNavigation($event)"
-        data-testid="nav-menu-inside-popover"
+        (navigate)="handleNavigation($event)"
+        className="menu-popover-nav-menu"
       ></bb-nav-menu>
     </div>
   </bb-popover>

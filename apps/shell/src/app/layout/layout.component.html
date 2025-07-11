@@ -2,9 +2,9 @@
   <bb-header
     [variant]="'user'"
     [userName]="(userName$ | async) || ''"
-    (onNavigate)="handleNavigation($event)"
+    (navigate)="handleNavigation($event)"
     [pathname]="(pathname$ | async) || ''"
-    (onLogout)="handleLogout()"
+    (logout)="handleLogout()"
     data-testid="bb-header"
   ></bb-header>
 
@@ -13,7 +13,7 @@
       <aside class="layout-sidebar">
         <bb-nav-menu
           [current]="pathname"
-          (onNavigate)="handleNavigation($event)"
+          (navigate)="handleNavigation($event)"
           data-testid="bb-sidebar"
         >
         </bb-nav-menu>

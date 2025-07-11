@@ -39,7 +39,7 @@ export class NavMenuComponent {
    * Event emitted when a navigation item is clicked.
    * Emits the `href` of the clicked item.
    */
-  onNavigate = output<string>();
+  navigate = output<string>();
 
   /**
    * Additional CSS classes to apply to the top-level `nav` element.
@@ -91,7 +91,7 @@ export class NavMenuComponent {
    */
   handleClick(href: string): void {
     this.setPendingState(href, true);
-    this.onNavigate.emit(href);
+    this.navigate.emit(href);
     setTimeout(() => this.setPendingState(null, false), 200);
   }
 

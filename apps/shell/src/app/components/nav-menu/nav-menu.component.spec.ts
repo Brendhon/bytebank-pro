@@ -147,12 +147,12 @@ describe('NavMenuComponent', () => {
 
   describe('Navigation Events', () => {
     it('should emit onNavigate when navigation item is clicked', () => {
-      spyOn(component.onNavigate, 'emit');
+      spyOn(component.navigate, 'emit');
 
       const dashboardButton = fixture.debugElement.queryAll(By.css('button'))[0];
       dashboardButton.nativeElement.click();
 
-      expect(component.onNavigate.emit).toHaveBeenCalledWith('/dashboard');
+      expect(component.navigate.emit).toHaveBeenCalledWith('/dashboard');
     });
 
     it('should emit correct href for each navigation item', () => {
@@ -162,7 +162,7 @@ describe('NavMenuComponent', () => {
       buttons.forEach((button, index) => {
         // Reset the spy for each iteration to avoid "already spied upon" error
         jasmine.getEnv().allowRespy(true);
-        const emitSpy = spyOn(component.onNavigate, 'emit');
+        const emitSpy = spyOn(component.navigate, 'emit');
         button.nativeElement.click();
 
         expect(emitSpy).toHaveBeenCalledWith(expectedHrefs[index]);

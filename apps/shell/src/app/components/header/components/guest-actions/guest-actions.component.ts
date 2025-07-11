@@ -22,10 +22,10 @@ export class GuestActionsComponent {
   /**
    * Event emitted when the "Abrir conta" button is clicked.
    */
-  onOpenAccount = output<void>();
+  openAccount = output<void>();
 
   /**
    * Event emitted when the "Já tenho conta" button is clicked.
    */
-  onLogin = output<void>();
+  login = output<void>();
 }

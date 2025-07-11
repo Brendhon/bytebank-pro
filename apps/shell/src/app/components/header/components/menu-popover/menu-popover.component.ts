@@ -34,7 +34,7 @@ export class MenuPopoverComponent {
    * Event emitted when a navigation action is requested from the NavMenu.
    * Emits the `href` of the clicked navigation item.
    */
-  onNavigate = output<string>();
+  navigate = output<string>();
 
   /**
    * Internal signal to control the popover open/closed state.
@@ -69,7 +69,7 @@ export class MenuPopoverComponent {
    * @param href The URL to navigate to.
    */
   handleNavigation(href: string): void {
-    this.onNavigate.emit(href);
+    this.navigate.emit(href);
     this.closeMenu(); // Close menu after navigation
   }
 

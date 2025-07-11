@@ -1,8 +1,8 @@
 <div class="authenticated-user-container" data-testid="authenticated-user-header-container">
   <span class="user-name-display" data-testid="user-name-display">{{ userName() }}</span>
   <bb-user-actions
-    (onNavigate)="onNavigate.emit($event)"
-    (onLogout)="onLogout.emit()"
+    (navigate)="navigate.emit($event)"
+    (logout)="logout.emit()"
     data-testid="avatar-popover"
   ></bb-user-actions>
 </div>

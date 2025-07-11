@@ -66,22 +66,22 @@ export class HeaderComponent {
   /**
    * Output event emitted when the "Login" action is triggered in 'guest' mode.
    */
-  onLogin = output<void>();
+  login = output<void>();
 
   /**
    * Output event emitted when the "Open Account" action is triggered in 'guest' mode.
    */
-  onOpenAccount = output<void>();
+  openAccount = output<void>();
 
   /**
    * Output event emitted when a navigation action is triggered (e.g., from MenuPopover or UserActions).
    */
-  onNavigate = output<string>();
+  navigate = output<string>();
 
   /**
    * Output event emitted when the "Logout" action is triggered in 'user' mode.
    */
-  onLogout = output<void>();
+  logout = output<void>();
 
   /**
    * Computes the CSS classes for the main header element based on the `variant`.

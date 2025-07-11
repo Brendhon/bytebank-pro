@@ -149,12 +149,12 @@ describe('UserActionsComponent', () => {
 
   describe('Events', () => {
     it('should emit onLogout when logout button is clicked', () => {
-      spyOn(component.onLogout, 'emit');
+      spyOn(component.logout, 'emit');
       spyOn(component, 'closePopover');
 
       component.handleLogout();
 
-      expect(component.onLogout.emit).toHaveBeenCalled();
+      expect(component.logout.emit).toHaveBeenCalled();
 
       expect(component.closePopover).toHaveBeenCalled();
     });

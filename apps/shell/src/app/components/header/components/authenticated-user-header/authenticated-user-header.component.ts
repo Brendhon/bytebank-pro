@@ -33,10 +33,10 @@ export class AuthenticatedUserHeaderComponent {
    * Event emitted when a navigation action is requested.
    * Emits the URL to navigate to.
    */
-  onNavigate = output<string>();
+  navigate = output<string>();
 
   /**
    * Event emitted when a logout action is requested.
    */
-  onLogout = output<void>();
+  logout = output<void>();
 }
