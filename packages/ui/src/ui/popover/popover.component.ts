@@ -136,6 +136,15 @@ export class PopoverComponent {
   }
 
   /**
+   * Handle keyboard events on trigger (wrapper for template)
+   */
+  onTriggerKeydownTemplate(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggle();
+  }
+
+  /**
    * Handle keyboard events on trigger
    */
   @HostListener('keydown.enter', ['$event'])

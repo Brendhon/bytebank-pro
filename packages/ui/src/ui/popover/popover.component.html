@@ -4,6 +4,9 @@
     #triggerElement
     class="bb-popover-trigger"
     (click)="onTriggerClick($event)"
+    (keydown.enter)="onTriggerKeydownTemplate($event)"
+    (keydown.space)="onTriggerKeydownTemplate($event)"
+    tabindex="0"
     [attr.aria-expanded]="isOpenState()"
     [attr.aria-label]="ariaLabel() || 'Open menu'"
     [attr.aria-disabled]="disabled()"
