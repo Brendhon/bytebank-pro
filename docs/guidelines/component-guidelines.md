@@ -4,32 +4,6 @@ This guide outlines best practices for Angular component development in ByteBank
 
 ## 🎨 General Guidelines
 
-### 📝 Usage Documentation and Storybook – Specific to `@bytebank-pro/ui` Package
-
-These requirements apply **exclusively** to components within the `@bytebank-pro/ui` package:
-
-- **When creating a new component in `@bytebank-pro/ui`:**
-
-  - You must create a corresponding usage documentation file named after the component's selector. For example, if your component selector is `bb-button`, the documentation file must be `docs/usages/bb-button-usage.md`.
-  - You must also create a Storybook story file for the component in the same folder as the component itself, following the pattern `button.component.stories.ts` (e.g., for `bb-button`, create `src/button/button.component.stories.ts`).
-
-- **When modifying an existing component in `@bytebank-pro/ui`:**
-
-  - Any changes to its API (`@Input`, `@Output`, etc.) or behavior must be immediately reflected in the usage documentation file that matches the component's selector (e.g., for selector `bb-button`, update `docs/usages/bb-button-usage.md`).
-  - You must also update the Storybook story file in the component's folder (e.g., `src/button/button.component.stories.ts`) to reflect the new or changed API, usage, or behavior.
-
-- **When deleting a component from `@bytebank-pro/ui`:**
-  - The usage documentation file with the same selector name must also be deleted (e.g., if deleting a component with selector `bb-button`, also delete `docs/usages/bb-button-usage.md`).
-  - The Storybook story file in the component's folder must also be deleted (e.g., if deleting `bb-button`, also delete `src/button/button.component.stories.ts`).
-
-**Example:**  
-If you create, update, or delete a component with selector `bb-button`, you must perform the same action for both:
-
-- The usage documentation file: `docs/usages/bb-button-usage.md`
-- The Storybook story file: `src/button/button.component.stories.ts`
-
-This ensures that both the documentation and interactive examples for each component in the `@bytebank-pro/ui` package are always accurate, up to date, and directly associated with the component's selector.
-
 ### 📝 Documentation
 
 - **When using existing components:** Always consult the usage documentation in `docs/usages` to understand the correct API and implementation patterns. For example, if creating a logo component that uses `bb-img`, check the `bb-img-usage.md` file for proper usage guidelines.
@@ -51,6 +25,11 @@ This ensures that the documentation is always a reliable source of information f
 - **Style File**: Use a separate CSS file for component-specific styles (`styleUrls`). Avoid global styles.
 - **CSS**: Use Tailwind CSS classes with `@apply` for better performance.
 - **Tailwind Classes**: Never use Tailwind classes inline in HTML templates or directly in TypeScript code. Always organize them into semantic CSS classes using `@apply` directive for better maintainability and readability. All styling logic should be centralized in the component's CSS file.
+
+### ✅ Unit Testing
+
+- **Test File**: Every component must have a corresponding test file (`component-name.component.spec.ts`) in the same directory.
+- **Testing Guidelines**: All tests must adhere to the practices outlined in the [Testing Guidelines](./testing-guidelines.md).
 
 ### Responsive Design and Sizing
 
