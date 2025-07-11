@@ -35,13 +35,3 @@
 ## Testing Guidelines
 
 @docs/guidelines/testing-guidelines.md
-
-# Usages
-
-## API Usage
-
-@docs/usages/api-usage.md
-
-## Toast Usage
-
-@docs/usages/toast-usage.md
