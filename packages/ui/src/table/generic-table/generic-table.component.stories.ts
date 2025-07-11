@@ -45,7 +45,7 @@ const meta: Meta<GenericTableComponent<SampleData>> = {
         component: `
 ## Descrição
 
-O GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional e estados de carregamento.
+O GenericTable é um componente de tabela reutilizável que permite exibir dados tabulares de forma organizada e flexível. Suporta colunas customizáveis, paginação opcional (client-side e server-side) e estados de carregamento.
 
 ## Quando Usar
 
@@ -53,6 +53,18 @@ O GenericTable é um componente de tabela reutilizável que permite exibir dados
 - Quando precisar de paginação para grandes volumes de dados
 - Para criar interfaces de administração e dashboards
 - Em relatórios e visualizações de dados
+
+## Tipos de Paginação
+
+### Client-side Pagination
+- **Uso**: Para datasets pequenos a médios (até 1000 itens)
+- **Comportamento**: Todos os dados são carregados de uma vez e paginados localmente
+- **Configuração**: Não forneça \`totalItems\`
+
+### Server-side Pagination
+- **Uso**: Para grandes volumes de dados
+- **Comportamento**: Dados são paginados no servidor, apenas a página atual é carregada
+- **Configuração**: Forneça \`totalItems\` e escute o evento \`pageChange\`
 
 ## Acessibilidade
 
@@ -85,6 +97,14 @@ O GenericTable é um componente de tabela reutilizável que permite exibir dados
       control: { type: 'number' },
       table: {
         type: { summary: 'number | undefined' },
+        defaultValue: { summary: '10' }
+      }
+    },
+    totalItems: {
+      description: 'Total number of items available (for server-side pagination)',
+      control: { type: 'number' },
+      table: {
+        type: { summary: 'number | undefined' },
         defaultValue: { summary: 'undefined' }
       }
     }
@@ -112,11 +132,21 @@ export const AllVariants: Story = {
     template: `
       <div class="space-y-8">
         <div>
-          <h3 class="text-lg font-medium mb-4">Com Paginação (5 itens por página)</h3>
+          <h3 class="text-lg font-medium mb-4">Client-side Pagination (5 itens por página)</h3>
           <bb-generic-table
             [data]="data"
             [columns]="columns"
             [pageSize]="5">
+          </bb-generic-table>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-medium mb-4">Server-side Pagination (totalItems: 50, pageSize: 5)</h3>
+          <bb-generic-table
+            [data]="serverData"
+            [columns]="columns"
+            [pageSize]="5"
+            [totalItems]="50">
           </bb-generic-table>
         </div>
 
@@ -140,6 +170,7 @@ export const AllVariants: Story = {
     `,
     props: {
       data: sampleData,
+      serverData: sampleData.slice(0, 5), // Simula dados de uma página do servidor
       smallData: sampleData.slice(0, 3),
       columns: sampleColumns
     }
@@ -147,7 +178,8 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Demonstra todas as variações visuais do componente GenericTable lado a lado.'
+        story:
+          'Demonstra todas as variações visuais do componente GenericTable lado a lado, incluindo paginação client-side e server-side.'
       }
     }
   }
@@ -157,7 +189,8 @@ export const Playground: Story = {
   args: {
     data: sampleData,
     columns: sampleColumns,
-    pageSize: 5
+    pageSize: 5,
+    totalItems: undefined
   },
   render: (args) => ({
     props: args,
@@ -166,13 +199,14 @@ export const Playground: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Use os controles abaixo para experimentar diferentes configurações do componente.'
+        story:
+          'Use os controles abaixo para experimentar diferentes configurações do componente, incluindo paginação client-side e server-side.'
       }
     }
   }
 };
 
-export const WithPagination: Story = {
+export const ClientSidePagination: Story = {
   args: {
     data: sampleData,
     columns: sampleColumns,
@@ -186,9 +220,15 @@ export const WithPagination: Story = {
     docs: {
       description: {
         story: `
-### Tabela com Paginação
+### Paginação Client-side
 
-Esta story demonstra o uso da tabela com paginação habilitada, útil para grandes volumes de dados.
+Esta story demonstra o uso da tabela com paginação client-side, onde todos os dados são carregados de uma vez e paginados localmente.
+
+**Características:**
+- Todos os dados são carregados de uma vez
+- Paginação acontece no frontend
+- Ideal para datasets pequenos a médios (até 1000 itens)
+- Não requer \`totalItems\`
 
 \`\`\`html
 <bb-generic-table
@@ -196,6 +236,66 @@ Esta story demonstra o uso da tabela com paginação habilitada, útil para gran
   [columns]="columns"
   [pageSize]="3">
 </bb-generic-table>
+\`\`\`
+        `
+      }
+    }
+  }
+};
+
+export const ServerSidePagination: Story = {
+  args: {
+    data: sampleData.slice(0, 5), // Simula dados de uma página do servidor
+    columns: sampleColumns,
+    pageSize: 10,
+    totalItems: 50
+  },
+  render: (args) => ({
+    props: args,
+    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Paginação Server-side
+
+Esta story demonstra o uso da tabela com paginação server-side, onde apenas a página atual é carregada e o total de itens é fornecido separadamente.
+
+**Características:**
+- Apenas a página atual é carregada
+- Paginação acontece no servidor
+- Ideal para grandes volumes de dados
+- Requer \`totalItems\` para calcular o número total de páginas
+- Emite evento \`pageChange\` para carregar novas páginas
+
+\`\`\`html
+<bb-generic-table
+  [data]="currentPageData"
+  [columns]="columns"
+  [pageSize]="5"
+  [totalItems]="50"
+  (pageChange)="handlePageChange($event)">
+</bb-generic-table>
+\`\`\`
+
+**Implementação no componente pai:**
+\`\`\`typescript
+export class TransactionListComponent {
+  transactions = signal<ITransaction[]>([]);
+  totalItems = signal<number>(0);
+
+  loadTransactions(page: number = 1) {
+    this.transactionService.getTransactions(page).subscribe(response => {
+      this.transactions.set(response.data);
+      this.totalItems.set(response.total);
+    });
+  }
+
+  handlePageChange(page: number) {
+    this.loadTransactions(page);
+  }
+}
 \`\`\`
         `
       }
@@ -272,7 +372,53 @@ export const LargeDataset: Story = {
     docs: {
       description: {
         story:
-          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação.'
+          'Demonstra o comportamento da tabela com um grande volume de dados (100 registros) e paginação client-side.'
+      }
+    }
+  }
+};
+
+export const LargeDatasetServerSide: Story = {
+  args: {
+    data: Array.from({ length: 10 }, (_, i) => ({
+      id: i + 1,
+      name: `User ${i + 1}`,
+      email: `user${i + 1}@example.com`,
+      status: i % 3 === 0 ? 'inactive' : ('active' as 'active' | 'inactive'),
+      amount: Math.floor(Math.random() * 5000) + 500
+    })),
+    columns: sampleColumns,
+    pageSize: 10,
+    totalItems: 1000
+  },
+  render: (args) => ({
+    props: args,
+    template: `<bb-generic-table ${argsToTemplate(args)}></bb-generic-table>`
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Dataset Grande com Paginação Server-side
+
+Demonstra o comportamento da tabela com um grande volume de dados (1000 registros) usando paginação server-side.
+
+**Características:**
+- Apenas 10 registros são carregados por vez
+- Total de 1000 itens disponíveis no servidor
+- 100 páginas no total
+- Performance otimizada para grandes volumes de dados
+
+\`\`\`html
+<bb-generic-table
+  [data]="currentPageData"
+  [columns]="columns"
+  [pageSize]="10"
+  [totalItems]="1000"
+  (pageChange)="handlePageChange($event)">
+</bb-generic-table>
+\`\`\`
+        `
       }
     }
   }
@@ -356,6 +502,69 @@ Esta story demonstra como usar a propriedade \`render\` das colunas com template
   [data]="data"
   [columns]="[{ label: 'Status', accessor: 'status', render: statusTemplate }]">
 </bb-generic-table>
+\`\`\`
+        `
+      }
+    }
+  }
+};
+
+export const WithPageChangeEvent: Story = {
+  render: () => ({
+    template: `
+      <div>
+        <div class="mb-4 p-4 bg-gray-100 rounded">
+          <p class="text-sm"><strong>Evento pageChange:</strong> {{ lastPageChange || 'Nenhum evento emitido' }}</p>
+        </div>
+
+        <bb-generic-table
+          [data]="data"
+          [columns]="columns"
+          [pageSize]="3"
+          [totalItems]="12"
+          (pageChange)="onPageChange($event)">
+        </bb-generic-table>
+      </div>
+    `,
+    props: {
+      data: sampleData.slice(0, 3),
+      columns: sampleColumns,
+      lastPageChange: null,
+      onPageChange(page: number) {
+        (this as any).lastPageChange = `Página ${page} selecionada`;
+        // Em uma implementação real, aqui você faria a chamada para o servidor
+        console.log('Page changed to:', page);
+      }
+    }
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: `
+### Evento pageChange
+
+Esta story demonstra como capturar o evento \`pageChange\` para implementar paginação server-side.
+
+**Características:**
+- Mostra o último evento de mudança de página
+- Simula a integração com um serviço de backend
+- Demonstra como implementar paginação server-side
+
+\`\`\`typescript
+export class TransactionListComponent {
+  lastPageChange: string | null = null;
+
+  onPageChange(page: number) {
+    this.lastPageChange = \`Página \${page} selecionada\`;
+    this.loadTransactions(page);
+  }
+
+  loadTransactions(page: number) {
+    this.transactionService.getTransactions(page).subscribe(response => {
+      this.transactions.set(response.data);
+    });
+  }
+}
 \`\`\`
         `
       }

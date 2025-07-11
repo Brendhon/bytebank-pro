@@ -87,7 +87,7 @@ O componente Dialog fornece uma interface modal para exibir conteúdo sobreposto
         type: { summary: 'string' }
       }
     },
-    close: {
+    dialogClose: {
       action: 'close',
       description: 'Event emitted when dialog is closed',
       table: {
@@ -119,7 +119,7 @@ export const Default: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -164,7 +164,7 @@ export const LoginForm: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -179,9 +179,9 @@ export const LoginForm: Story = {
             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
-            <input 
+            <input
               id="email"
-              type="email" 
+              type="email"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email"
             />
@@ -190,9 +190,9 @@ export const LoginForm: Story = {
             <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
-            <input 
+            <input
               id="password"
-              type="password" 
+              type="password"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             />
@@ -220,7 +220,7 @@ export const LoginForm: Story = {
         story: `
 ### Login Form Dialog
 
-Esta variante demonstra como usar o Dialog para formulários de autenticação. 
+Esta variante demonstra como usar o Dialog para formulários de autenticação.
 Note que o fechamento por clique no backdrop está desabilitado para evitar perda acidental de dados.
 
 **Características:**
@@ -230,7 +230,7 @@ Note que o fechamento por clique no backdrop está desabilitado para evitar perd
 - Inclui link para recuperação de senha
 
 \`\`\`html
-<bb-dialog 
+<bb-dialog
   [isOpen]="isLoginOpen"
   title="Login to ByteBank"
   [closeOnBackdropClick]="false"
@@ -265,7 +265,7 @@ export const RegisterForm: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -281,9 +281,9 @@ export const RegisterForm: Story = {
               <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">
                 First Name
               </label>
-              <input 
+              <input
                 id="firstName"
-                type="text" 
+                type="text"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="John"
               />
@@ -292,9 +292,9 @@ export const RegisterForm: Story = {
               <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">
                 Last Name
               </label>
-              <input 
+              <input
                 id="lastName"
-                type="text" 
+                type="text"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Doe"
               />
@@ -304,9 +304,9 @@ export const RegisterForm: Story = {
             <label for="regEmail" class="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
-            <input 
+            <input
               id="regEmail"
-              type="email" 
+              type="email"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="john.doe@example.com"
             />
@@ -315,9 +315,9 @@ export const RegisterForm: Story = {
             <label for="regPassword" class="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
-            <input 
+            <input
               id="regPassword"
-              type="password" 
+              type="password"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Create a strong password"
             />
@@ -326,9 +326,9 @@ export const RegisterForm: Story = {
             <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">
               Confirm Password
             </label>
-            <input 
+            <input
               id="confirmPassword"
-              type="password" 
+              type="password"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your password"
             />
@@ -361,7 +361,7 @@ Utiliza um layout responsivo em grade para otimizar o espaço.
 - Botão de ação diferenciado (verde para registro)
 
 \`\`\`html
-<bb-dialog 
+<bb-dialog
   [isOpen]="isRegisterOpen"
   title="Create Account"
   [closeOnBackdropClick]="false"
@@ -396,7 +396,7 @@ export const WithoutTitle: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -443,7 +443,7 @@ Demonstra um dialog sem título no cabeçalho, útil para confirmações visuais
 - aria-label obrigatório para acessibilidade
 
 \`\`\`html
-<bb-dialog 
+<bb-dialog
   [isOpen]="isDeleteOpen"
   title=""
   ariaLabel="Delete confirmation dialog"
@@ -478,7 +478,7 @@ export const WithoutCloseButton: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -528,7 +528,7 @@ export const NoBackdropClose: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"
@@ -578,7 +578,7 @@ export const Playground: Story = {
       }
     },
     template: `
-      <bb-dialog 
+      <bb-dialog
         [isOpen]="dialogOpen()"
         [title]="title"
         [showCloseButton]="showCloseButton"

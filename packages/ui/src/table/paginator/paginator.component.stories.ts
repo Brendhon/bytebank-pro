@@ -23,7 +23,7 @@ const meta: Meta<PaginatorComponent> = {
       control: { type: 'number', min: 1 },
       description: 'The total number of available pages'
     },
-    onPageChange: {
+    pageChange: {
       action: 'pageChanged',
       description: 'Event emitted when the page changes'
     }
