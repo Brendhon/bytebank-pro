@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ITransaction } from '@bytebank-pro/types';
 
 import { ConfirmDeletionComponent } from './confirm-deletion.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 describe('ConfirmDeletionComponent', () => {
   let component: ConfirmDeletionComponent;
@@ -19,7 +19,7 @@ describe('ConfirmDeletionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConfirmDeletionComponent, NoopAnimationsModule]
+      imports: [ConfirmDeletionComponent, BrowserModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ConfirmDeletionComponent);

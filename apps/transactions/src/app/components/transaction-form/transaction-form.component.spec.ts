@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { ITransaction } from '@bytebank-pro/types';
 
 import { TransactionFormComponent } from './transaction-form.component';
@@ -19,7 +19,7 @@ describe('TransactionFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransactionFormComponent, NoopAnimationsModule]
+      imports: [TransactionFormComponent, BrowserModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TransactionFormComponent);

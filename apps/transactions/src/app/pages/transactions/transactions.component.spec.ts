@@ -55,6 +55,9 @@ describe('TransactionsPageComponent', () => {
       'deleteTransaction'
     ]);
 
+    // Configure default return value for loadTransactions to prevent errors during component initialization
+    transactionsServiceSpy.loadTransactions.and.returnValue(of(mockPaginatedTransactions));
+
     await TestBed.configureTestingModule({
       imports: [
         TransactionsPageComponent,
@@ -90,8 +93,9 @@ describe('TransactionsPageComponent', () => {
       expect(component.editingTransaction()).toBe(null);
       expect(component.isDeleteDialogOpen()).toBe(false);
       expect(component.transactionToDelete()).toBe(null);
-      expect(component.transactions()).toEqual([]);
-      expect(component.hasTransactions()).toBe(false);
+      // Transactions are loaded automatically in ngOnInit, so they will contain the mock data
+      expect(component.transactions()).toEqual(mockTransactions);
+      expect(component.hasTransactions()).toBe(true);
     });
   });
 

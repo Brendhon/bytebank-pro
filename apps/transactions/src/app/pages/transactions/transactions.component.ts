@@ -58,12 +58,12 @@ export class TransactionsPageComponent implements OnInit {
    */
   private loadTransactions(): void {
     this.transactionsService
-      .loadTransactions()
+      .loadTransactions(10, 1)
       .pipe(first())
       .subscribe({
         next: (paginatedTransactions: PaginatedTransactions) =>
           this._transactions.set(paginatedTransactions.items),
-        error: (error) => {
+        error: (error: Error) => {
           console.error('Error loading transactions:', error);
           this.toastService.showError('Falha ao carregar transações. Recarregue a página.');
         }
@@ -105,7 +105,7 @@ export class TransactionsPageComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => this.handleTransactionSuccess(),
-          error: (error) => {
+          error: (error: Error) => {
             console.error('Error updating transaction:', error);
             this.toastService.showError('Falha ao atualizar transação. Tente novamente.');
           }
@@ -117,7 +117,7 @@ export class TransactionsPageComponent implements OnInit {
         .pipe(first())
         .subscribe({
           next: () => this.handleTransactionSuccess(),
-          error: (error) => {
+          error: (error: Error) => {
             console.error('Error creating transaction:', error);
             this.toastService.showError('Falha ao criar transação. Tente novamente.');
           }
@@ -145,7 +145,7 @@ export class TransactionsPageComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => this.handleDeleteSuccess(),
-        error: (error) => {
+        error: (error: Error) => {
           console.error('Error deleting transaction:', error);
           this.toastService.showError('Falha ao excluir transação. Tente novamente.');
         }

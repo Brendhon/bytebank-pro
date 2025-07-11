@@ -1,18 +1,18 @@
-import { Injectable, inject } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
 import { ITransaction } from '@bytebank-pro/types';
+import { Apollo, MutationResult } from 'apollo-angular';
+import { ApolloQueryResult } from '@apollo/client';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import {
-  GET_TRANSACTIONS_QUERY,
   CREATE_TRANSACTION_MUTATION,
-  UPDATE_TRANSACTION_MUTATION,
-  DELETE_TRANSACTION_MUTATION
+  DELETE_TRANSACTION_MUTATION,
+  GET_TRANSACTIONS_QUERY,
+  UPDATE_TRANSACTION_MUTATION
 } from '../graphql/transactions.queries';
 import {
+  PaginatedTransactions,
   TransactionInput,
-  TransactionUpdateInput,
-  PaginatedTransactions
+  TransactionUpdateInput
 } from '../models/transaction.model';
 
 @Injectable({
@@ -60,13 +60,16 @@ export class TransactionsService {
         fetchPolicy: 'network-only'
       })
       .pipe(
-        map((result) => {
-          const paginatedTransactions = result.data.transactions;
+        map((result: ApolloQueryResult<{ transactions: PaginatedTransactions }>) => {
+          const paginatedTransactions = result.data?.transactions;
+
+          if (!paginatedTransactions) throw new Error('Failed to load transactions');
+
           this._transactions.next(paginatedTransactions.items);
           this._loading.next(false);
           return paginatedTransactions;
         }),
-        catchError((error) => {
+        catchError((error: Error) => {
           console.error('Error loading transactions:', error);
           this._loading.next(false);
           return throwError(() => new Error(error.message || 'Error loading transactions'));
@@ -90,7 +93,7 @@ export class TransactionsService {
         }
       })
       .pipe(
-        map((result) => {
+        map((result: MutationResult<{ createTransaction: ITransaction }>) => {
           const createdTransaction = result.data?.createTransaction;
           if (!createdTransaction) {
             throw new Error('Failed to create transaction');
@@ -103,7 +106,7 @@ export class TransactionsService {
 
           return createdTransaction;
         }),
-        catchError((error) => {
+        catchError((error: Error) => {
           console.error('Error creating transaction:', error);
           this._loading.next(false);
           return throwError(() => new Error(error.message || 'Error creating transaction'));
@@ -129,7 +132,7 @@ export class TransactionsService {
         }
       })
       .pipe(
-        map((result) => {
+        map((result: MutationResult<{ updateTransaction: ITransaction }>) => {
           const updatedTransaction = result.data?.updateTransaction;
           if (!updatedTransaction) {
             throw new Error('Failed to update transaction');
@@ -137,7 +140,7 @@ export class TransactionsService {
 
           // Update local state
           const currentTransactions = this._transactions.getValue();
-          const updatedTransactions = currentTransactions.map((t) =>
+          const updatedTransactions = currentTransactions.map((t: ITransaction) =>
             t._id === id ? updatedTransaction : t
           );
           this._transactions.next(updatedTransactions);
@@ -145,7 +148,7 @@ export class TransactionsService {
 
           return updatedTransaction;
         }),
-        catchError((error) => {
+        catchError((error: Error) => {
           console.error('Error updating transaction:', error);
           this._loading.next(false);
           return throwError(() => new Error(error.message || 'Error updating transaction'));
@@ -167,7 +170,7 @@ export class TransactionsService {
         variables: { id }
       })
       .pipe(
-        map((result) => {
+        map((result: MutationResult<{ deleteTransaction: boolean }>) => {
           const success = result.data?.deleteTransaction;
           if (!success) {
             throw new Error('Failed to delete transaction');
@@ -175,13 +178,15 @@ export class TransactionsService {
 
           // Update local state
           const currentTransactions = this._transactions.getValue();
-          const filteredTransactions = currentTransactions.filter((t) => t._id !== id);
+          const filteredTransactions = currentTransactions.filter(
+            (t: ITransaction) => t._id !== id
+          );
           this._transactions.next(filteredTransactions);
           this._loading.next(false);
 
           return success;
         }),
-        catchError((error) => {
+        catchError((error: Error) => {
           console.error('Error deleting transaction:', error);
           this._loading.next(false);
           return throwError(() => new Error(error.message || 'Error deleting transaction'));
