@@ -1,7 +1,7 @@
 /* Card Component Styles */
 
 .card-base {
-  @apply w-52 h-40 text-white transition-colors flex flex-col gap-5 items-center justify-center text-sm font-normal rounded-sm p-7 shadow-sm;
+  @apply w-52 h-40 text-white transition-colors flex flex-col gap-5 items-center justify-center text-sm font-normal rounded-md p-7 shadow-sm;
 }
 
 .card-variant-dark {

@@ -214,7 +214,7 @@ describe('CardComponent', () => {
 
       expect(element.classList).toContain('h-40');
 
-      expect(element.classList).toContain('rounded-sm');
+      expect(element.classList).toContain('rounded-md');
 
       expect(element.classList).toContain('text-white');
 
