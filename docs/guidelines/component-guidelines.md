@@ -30,6 +30,17 @@ This ensures that the documentation is always a reliable source of information f
 
 - **Test File**: Every component must have a corresponding test file (`component-name.component.spec.ts`) in the same directory.
 - **Testing Guidelines**: All tests must adhere to the practices outlined in the [Testing Guidelines](./testing-guidelines.md).
+- **Test Validation**: After any change to a component or its dependencies, you must run all related tests to ensure that the component continues to function as expected. To run the test for a specific component (for example, `input.component.spec.ts`), use the following command:
+
+  ```
+  npm run test -- --include="**/input.component.spec.ts"
+  ```
+
+  This command should be executed in the root of the project where the component is located. For example, if the `input` component is inside `packages/ui`, you must run the command in the `packages/ui` directory. Never consider a change complete until all tests pass successfully.
+
+#### ⚠️ AI Test Modification Policy
+
+- **No Automated Test Changes**: The AI must never modify, create, or remove any test files or test code without explicit user permission. All test-related changes must be directly requested and authorized by the user.
 
 ### Responsive Design and Sizing
 

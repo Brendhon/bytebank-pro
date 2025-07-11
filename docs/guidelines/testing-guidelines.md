@@ -7,14 +7,14 @@ This guide defines the patterns and best practices for writing unit tests for An
 - Tests and comments within the code must be written in English.
 - Focus on basic and essential unit tests for each type of Angular construct, avoiding integration or e2e tests in this guide.
 - Use Jasmine and Karma for test execution.
-- Tests can be run with the command `npm run test` from the project root.
-- To test a specific file (e.g., `input.component.spec.ts`), run:
+- To run all tests in a project, use the command `npm run test` from the root of that specific project.
+- To run the test for a specific file (for example, `input.component.spec.ts`), use the following command:
 
   ```bash
   npm run test -- --include="**/input.component.spec.ts"
   ```
 
-  This command should be executed in the `packages/ui` folder (or at the project root, depending on your configuration), where the tests are located.
+  > **Important:** This command must be executed in the root directory of the project where the component is located. For example, if the `input` component is inside `packages/ui`, you must run the command in the `packages/ui` directory. The command will only work if executed in the correct project root.
 
 - **Use `data-testid` for test selectors** to ensure robustness against DOM changes.
 - **Add a blank line before each `expect`** to improve readability.
