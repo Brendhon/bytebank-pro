@@ -2,7 +2,15 @@ import { ConfirmDeletionComponent } from '@/components/confirm-deletion/confirm-
 import { TransactionFormComponent } from '@/components/transaction-form/transaction-form.component';
 import { TransactionsTableComponent } from '@/components/transactions-table/transactions-table.component';
 import { TransactionsService } from '@/core/services/transactions.service';
-import { Component, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+  DestroyRef
+} from '@angular/core';
 import { ITransaction } from '@bytebank-pro/types';
 import { ButtonComponent } from '@bytebank-pro/ui';
 import { first } from 'rxjs';
@@ -17,25 +25,27 @@ import { first } from 'rxjs';
     ConfirmDeletionComponent
   ],
   templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css']
+  styleUrls: ['./transactions.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransactionsPageComponent implements OnInit {
+  // Inject dependencies
+  private readonly transactionsService = inject(TransactionsService);
+
   // Dialog state
-  isDialogOpen = false;
-  editingTransaction: ITransaction | null = null;
+  isDialogOpen = signal(false);
+  editingTransaction = signal<ITransaction | null>(null);
 
   // Delete confirmation dialog state
-  isDeleteDialogOpen = false;
-  transactionToDelete: ITransaction | null = null;
+  isDeleteDialogOpen = signal(false);
+  transactionToDelete = signal<ITransaction | null>(null);
 
   // Signal for transactions
-  private _transactions = signal<ITransaction[]>([]);
-  transactions = this._transactions.asReadonly();
+  private readonly _transactions = signal<ITransaction[]>([]);
+  readonly transactions = this._transactions.asReadonly();
 
-  // Loading state
-  loading = signal(false);
-
-  constructor(private transactionsService: TransactionsService) {}
+  // Computed values
+  readonly hasTransactions = computed(() => this.transactions().length > 0);
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -45,31 +55,28 @@ export class TransactionsPageComponent implements OnInit {
    * Loads transactions from the service
    */
   private loadTransactions(): void {
-    this.loading.set(true);
-
     this.transactionsService
       .loadTransactions()
       .pipe(first())
       .subscribe({
-        next: (paginatedTransactions) => this._transactions.set(paginatedTransactions.items),
-        error: (error) => console.error('Error loading transactions:', error),
-        complete: () => this.loading.set(false)
+        next: (paginatedTransactions: any) => this._transactions.set(paginatedTransactions.items),
+        error: (error) => console.error('Error loading transactions:', error)
       });
   }
 
   // Dialog methods
   openDialog(): void {
-    this.isDialogOpen = true;
+    this.isDialogOpen.set(true);
   }
 
   closeDialog(): void {
-    this.isDialogOpen = false;
-    this.editingTransaction = null; // Reset editing state
+    this.isDialogOpen.set(false);
+    this.editingTransaction.set(null); // Reset editing state
   }
 
   // Handle edit transaction
   handleEditTransaction(transaction: ITransaction): void {
-    this.editingTransaction = transaction;
+    this.editingTransaction.set(transaction);
     this.openDialog();
   }
 
@@ -83,10 +90,12 @@ export class TransactionsPageComponent implements OnInit {
       value: transaction.value
     };
 
-    if (this.editingTransaction) {
+    const currentEditingTransaction = this.editingTransaction();
+
+    if (currentEditingTransaction) {
       // Update existing transaction
       this.transactionsService
-        .updateTransaction(this.editingTransaction._id!, transactionToSave)
+        .updateTransaction(currentEditingTransaction._id!, transactionToSave)
         .pipe(first())
         .subscribe({
           next: () => this.handleTransactionSuccess(),
@@ -112,8 +121,8 @@ export class TransactionsPageComponent implements OnInit {
 
   // Handle delete transaction
   handleDeleteTransaction(transaction: ITransaction): void {
-    this.transactionToDelete = transaction;
-    this.isDeleteDialogOpen = true;
+    this.transactionToDelete.set(transaction);
+    this.isDeleteDialogOpen.set(true);
   }
 
   // Handle delete confirmation
@@ -140,7 +149,7 @@ export class TransactionsPageComponent implements OnInit {
 
   // Close delete dialog
   closeDeleteDialog(): void {
-    this.isDeleteDialogOpen = false;
-    this.transactionToDelete = null;
+    this.isDeleteDialogOpen.set(false);
+    this.transactionToDelete.set(null);
   }
 }
