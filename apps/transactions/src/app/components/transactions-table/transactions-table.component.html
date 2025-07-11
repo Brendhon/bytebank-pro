@@ -48,11 +48,20 @@
     </div>
   </ng-template>
 
+  <ng-template #dateRenderTemplate let-value let-row="row">
+    <span class="transaction-date">{{ value | date: 'dd/MM/yyyy' }}</span>
+  </ng-template>
+
   <!-- Generic table with custom column rendering -->
   <bb-generic-table
     [data]="transactions()"
     [columns]="
-      getColumnsWithTemplates(typeRenderTemplate, valueRenderTemplate, actionsRenderTemplate)
+      getColumnsWithTemplates(
+        typeRenderTemplate,
+        valueRenderTemplate,
+        actionsRenderTemplate,
+        dateRenderTemplate
+      )
     "
     [pageSize]="pageSize()"
     data-testid="transactions-table"

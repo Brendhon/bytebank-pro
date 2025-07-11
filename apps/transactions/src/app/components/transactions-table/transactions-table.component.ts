@@ -87,12 +87,14 @@ export class TransactionsTableComponent {
   getColumnsWithTemplates(
     typeTemplate: TemplateRef<any>,
     valueTemplate: TemplateRef<any>,
-    actionsTemplate: TemplateRef<any>
+    actionsTemplate: TemplateRef<any>,
+    dateTemplate: TemplateRef<any>
   ): TableColumn<ITransaction>[] {
     return [
       {
         label: 'Data',
-        accessor: 'date'
+        accessor: 'date',
+        render: dateTemplate
       },
       {
         label: 'Alias',
