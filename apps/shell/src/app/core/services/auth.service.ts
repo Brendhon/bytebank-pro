@@ -154,13 +154,12 @@ export class AuthService {
         map((result) => result.data?.me || null),
         catchError((error) => {
           console.error('Error fetching current user:', error);
+
           // If authentication error, log out
-          if (
-            error.message.includes('not authenticated') ||
-            error.message.includes('unauthorized')
-          ) {
+          const message = error.message.toLowerCase();
+          if (message.includes('not authenticated') || message.includes('unauthorized'))
             this.logout();
-          }
+
           return throwError(() => error);
         })
       );
