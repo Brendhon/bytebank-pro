@@ -235,8 +235,11 @@ export class TransactionFormComponent {
     // Emit the transaction data
     this.transactionSubmit.emit(transactionData);
 
-    // Reset loading state after a short delay (parent component should handle this)
-    setTimeout(() => this.isLoading.set(false), 1000);
+    // Reset form and close dialog
+    setTimeout(() => {
+      this.resetForm();
+      this.onDialogClose();
+    }, 1000);
   }
 
   /**
