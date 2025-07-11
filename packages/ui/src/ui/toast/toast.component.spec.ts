@@ -41,7 +41,7 @@ describe('ToastComponent', () => {
 
     expect(element).toBeTruthy();
     expect(component.isVisible).toBeTrue();
-    expect(element!.classList).toContain('opacity-100');
+    expect(element!.classList).toContain('toast-visible');
   });
 
   it('should not be visible when show is false', () => {
@@ -70,7 +70,7 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-green');
+      expect(element!.classList).toContain('toast-variant-success');
     });
 
     it('should apply error variant classes correctly', () => {
@@ -79,7 +79,7 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-red');
+      expect(element!.classList).toContain('toast-variant-error');
     });
 
     it('should apply info variant classes correctly', () => {
@@ -88,7 +88,7 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(element!.classList).toContain('bg-bytebank-blue');
+      expect(element!.classList).toContain('toast-variant-info');
     });
   });
 

@@ -116,18 +116,18 @@ describe('DialogComponent', () => {
 
   describe('Events', () => {
     it('should emit close event when close button is clicked', () => {
-      spyOn(component.close, 'emit');
+      spyOn(component.dialogClose, 'emit');
       fixture.componentRef.setInput('isOpen', true);
       fixture.detectChanges();
 
       const closeButton = fixture.debugElement.query(By.css('[data-testid="dialog-close-button"]'));
       closeButton.nativeElement.click();
 
-      expect(component.close.emit).toHaveBeenCalled();
+      expect(component.dialogClose.emit).toHaveBeenCalled();
     });
 
     it('should emit close event when backdrop is clicked', () => {
-      spyOn(component.close, 'emit');
+      spyOn(component.dialogClose, 'emit');
       fixture.componentRef.setInput('isOpen', true);
       fixture.componentRef.setInput('closeOnBackdropClick', true);
       fixture.detectChanges();
@@ -135,11 +135,11 @@ describe('DialogComponent', () => {
       const backdrop = fixture.debugElement.query(By.css('[data-testid="dialog-backdrop"]'));
       backdrop.nativeElement.click();
 
-      expect(component.close.emit).toHaveBeenCalled();
+      expect(component.dialogClose.emit).toHaveBeenCalled();
     });
 
     it('should not emit close event when backdrop is clicked and closeOnBackdropClick is false', () => {
-      spyOn(component.close, 'emit');
+      spyOn(component.dialogClose, 'emit');
       fixture.componentRef.setInput('isOpen', true);
       fixture.componentRef.setInput('closeOnBackdropClick', false);
       fixture.detectChanges();
@@ -147,11 +147,11 @@ describe('DialogComponent', () => {
       const backdrop = fixture.debugElement.query(By.css('[data-testid="dialog-backdrop"]'));
       backdrop.nativeElement.click();
 
-      expect(component.close.emit).not.toHaveBeenCalled();
+      expect(component.dialogClose.emit).not.toHaveBeenCalled();
     });
 
     it('should emit close event when escape key is pressed', () => {
-      spyOn(component.close, 'emit');
+      spyOn(component.dialogClose, 'emit');
       fixture.componentRef.setInput('isOpen', true);
       fixture.componentRef.setInput('closeOnEscape', true);
       fixture.detectChanges();
@@ -159,11 +159,11 @@ describe('DialogComponent', () => {
       const event = new KeyboardEvent('keydown', { key: 'Escape' });
       document.dispatchEvent(event);
 
-      expect(component.close.emit).toHaveBeenCalled();
+      expect(component.dialogClose.emit).toHaveBeenCalled();
     });
 
     it('should not emit close event when escape key is pressed and closeOnEscape is false', () => {
-      spyOn(component.close, 'emit');
+      spyOn(component.dialogClose, 'emit');
       fixture.componentRef.setInput('isOpen', true);
       fixture.componentRef.setInput('closeOnEscape', false);
       fixture.detectChanges();
@@ -171,7 +171,7 @@ describe('DialogComponent', () => {
       const event = new KeyboardEvent('keydown', { key: 'Escape' });
       document.dispatchEvent(event);
 
-      expect(component.close.emit).not.toHaveBeenCalled();
+      expect(component.dialogClose.emit).not.toHaveBeenCalled();
     });
   });
 

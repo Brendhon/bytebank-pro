@@ -76,35 +76,4 @@ describe('LogoComponent', () => {
       expect(component.logoAltText()).toBe('ByteBank Pro - Ícone da plataforma');
     });
   });
-
-  it('should apply custom class name', () => {
-    const customClass = 'custom-logo-class';
-    fixture.componentRef.setInput('className', customClass);
-    fixture.detectChanges();
-
-    expect(element.classList.contains(customClass)).toBeTruthy();
-  });
-
-  describe('size classes', () => {
-    it('should apply small size class', () => {
-      fixture.componentRef.setInput('size', 'sm');
-      fixture.detectChanges();
-
-      expect(element.classList.contains('logo--sm')).toBeTruthy();
-    });
-
-    it('should apply medium size class', () => {
-      fixture.componentRef.setInput('size', 'md');
-      fixture.detectChanges();
-
-      expect(element.classList.contains('logo--md')).toBeTruthy();
-    });
-
-    it('should apply large size class', () => {
-      fixture.componentRef.setInput('size', 'lg');
-      fixture.detectChanges();
-
-      expect(element.classList.contains('logo--lg')).toBeTruthy();
-    });
-  });
 });

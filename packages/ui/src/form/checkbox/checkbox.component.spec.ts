@@ -82,7 +82,7 @@ describe('CheckboxComponent', () => {
 
       const visualCheckbox = fixture.debugElement.query(By.css('[data-testid="checkbox-visual"]'));
 
-      expect(visualCheckbox.nativeElement.classList).toContain('border-red-500');
+      expect(visualCheckbox.nativeElement.classList).toContain('checkbox-error-unchecked');
     });
 
     it('should update size correctly', () => {

@@ -42,7 +42,7 @@ describe('InputComponent', () => {
       fixture.componentRef.setInput('variant', 'error');
       fixture.detectChanges();
 
-      expect(element.classList).toContain('border-red-500');
+      expect(element.classList).toContain('input-error');
     });
 
     it('should handle disabled state', () => {
@@ -63,7 +63,7 @@ describe('InputComponent', () => {
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
 
-      expect(element.classList).toContain('min-h-11');
+      expect(element.classList).toContain('input-size-lg');
     });
 
     it('should set input type correctly', () => {

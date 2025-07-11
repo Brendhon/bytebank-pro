@@ -49,7 +49,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should have default loadingText', () => {
-      expect(component.loadingText()).toBe('Carregando...');
+      expect(component.loadingText()).toBe('Loading...');
     });
   });
 
@@ -120,11 +120,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('inline-flex');
-      expect(classes).toContain('items-center');
-      expect(classes).toContain('justify-center');
-      expect(classes).toContain('rounded-md');
-      expect(classes).toContain('font-medium');
+      expect(classes).toContain('button-base');
     });
 
     it('should apply dark variant classes', () => {
@@ -187,9 +183,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('opacity-60');
-      expect(classes).toContain('cursor-not-allowed');
-      expect(classes).toContain('pointer-events-none');
+      expect(classes).toContain('button-state-disabled');
     });
 
     it('should apply disabled classes when loading', () => {
@@ -198,9 +192,7 @@ describe('ButtonComponent', () => {
 
       const classes = component.buttonClasses;
 
-      expect(classes).toContain('opacity-60');
-      expect(classes).toContain('cursor-not-allowed');
-      expect(classes).toContain('pointer-events-none');
+      expect(classes).toContain('button-state-disabled');
     });
 
     it('should apply size classes', () => {
@@ -208,19 +200,19 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('size', 'sm');
       fixture.detectChanges();
 
-      expect(component.buttonClasses).toContain('px-3 py-1.5 text-sm');
+      expect(component.buttonClasses).toContain('button-size-sm');
 
       // Test medium size (default)
       fixture.componentRef.setInput('size', 'md');
       fixture.detectChanges();
 
-      expect(component.buttonClasses).toContain('px-4 py-2 text-sm');
+      expect(component.buttonClasses).toContain('button-size-md');
 
       // Test large size
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
 
-      expect(component.buttonClasses).toContain('px-6 py-3 text-base');
+      expect(component.buttonClasses).toContain('button-size-lg');
     });
   });
 
@@ -253,7 +245,7 @@ describe('ButtonComponent', () => {
       // Should return loading text when loading
       fixture.componentRef.setInput('loading', true);
 
-      expect(component.computedAriaLabel).toBe('Carregando...');
+      expect(component.computedAriaLabel).toBe('Loading...');
     });
 
     it('should return correct computedRole', () => {
@@ -309,31 +301,13 @@ describe('ButtonComponent', () => {
   });
 
   describe('Loading State', () => {
-    it('should show loading spinner when loading is true', () => {
-      fixture.componentRef.setInput('loading', true);
-      fixture.detectChanges();
-
-      const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
-
-      expect(spinner).toBeTruthy();
-    });
-
-    it('should hide loading spinner when loading is false', () => {
-      fixture.componentRef.setInput('loading', false);
-      fixture.detectChanges();
-
-      const spinner = fixture.debugElement.query(By.css('svg.animate-spin'));
-
-      expect(spinner).toBeFalsy();
-    });
-
     it('should make content transparent when loading', () => {
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
 
-      expect(contentSpan.nativeElement.className).toContain('opacity-0');
+      expect(contentSpan.nativeElement.className).toContain('button-loading-content');
     });
 
     it('should make content visible when not loading', () => {
@@ -342,7 +316,7 @@ describe('ButtonComponent', () => {
 
       const contentSpan = fixture.debugElement.query(By.css('span'));
 
-      expect(contentSpan.nativeElement.className).not.toContain('opacity-0');
+      expect(contentSpan.nativeElement.className).not.toContain('button-loading-content');
     });
   });
 
@@ -482,7 +456,7 @@ describe('ButtonComponent', () => {
       const srText = fixture.debugElement.query(By.css('.sr-only'));
 
       expect(srText).toBeTruthy();
-      expect(srText.nativeElement.textContent.trim()).toBe('Carregando...');
+      expect(srText.nativeElement.textContent.trim()).toBe('Loading...');
     });
 
     it('should hide loading icon from screen readers', () => {

@@ -52,7 +52,7 @@ describe('ImgComponent', () => {
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
 
-      expect(component.imageClasses()).toContain('w-32 h-32');
+      expect(component.imageClasses()).toContain('w-32 h-auto');
     });
 
     it('should handle decorative images correctly', () => {
@@ -82,10 +82,10 @@ describe('ImgComponent', () => {
 
     it('should apply different size variants correctly', () => {
       const sizes: Array<{ size: string; expectedClass: string }> = [
-        { size: 'xs', expectedClass: 'w-4 h-4' },
-        { size: 'sm', expectedClass: 'w-8 h-8' },
-        { size: 'md', expectedClass: 'w-16 h-16' },
-        { size: 'xl', expectedClass: 'w-48 h-48' },
+        { size: 'xs', expectedClass: 'w-4 h-auto' },
+        { size: 'sm', expectedClass: 'w-8 h-auto' },
+        { size: 'md', expectedClass: 'w-16 h-auto' },
+        { size: 'xl', expectedClass: 'w-48 h-auto' },
         { size: 'full', expectedClass: 'w-full h-auto' }
       ];
 
