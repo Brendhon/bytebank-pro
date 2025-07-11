@@ -10,7 +10,8 @@ import {
   input,
   output,
   signal,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Check, ChevronDown, ChevronUp, LucideAngularModule, X } from 'lucide-angular';
@@ -19,7 +20,7 @@ import { Check, ChevronDown, ChevronUp, LucideAngularModule, X } from 'lucide-an
 export type SelectVariant = 'default' | 'success' | 'error' | 'warning';
 export type SelectSize = 'sm' | 'md' | 'lg';
 
-export interface SelectOption<T = any> {
+export interface SelectOption<T = unknown> {
   value: T;
   label: string;
   disabled?: boolean;
@@ -58,7 +59,7 @@ export interface SelectGroup {
     '[attr.role]': '"combobox"'
   }
 })
-export class SelectComponent<T = any> {
+export class SelectComponent<T = unknown> implements OnDestroy {
   private destroyRef = inject(DestroyRef);
 
   // Core select properties using modern input() API
@@ -124,7 +125,7 @@ export class SelectComponent<T = any> {
 
   // Performance optimization: Search debouncing
   private searchDebounceTime = 300;
-  private searchTimeout: any;
+  private searchTimeout: NodeJS.Timeout | undefined;
 
   // Click outside listener for closing dropdown
   private clickOutsideListener?: (event: Event) => void;
@@ -490,10 +491,11 @@ export class SelectComponent<T = any> {
   }
 
   isOptionSelected(option: SelectOption<T>): boolean {
-    return this.selectedValuesSet().has(option.value as any);
+    const selectedSet = this.selectedValuesSet();
+    return selectedSet.has(option.value as never);
   }
 
-  trackByOption(index: number, option: SelectOption<T>): any {
+  trackByOption(index: number, option: SelectOption<T>): T {
     return option.value;
   }
 
@@ -545,6 +547,28 @@ export class SelectComponent<T = any> {
       this.searchChange.emit(searchTerm);
       this.focusedOptionIndex.set(0);
     }, this.searchDebounceTime);
+  }
+
+  // Keyboard event handlers for accessibility
+  onTagKeydown(event: KeyboardEvent, option: SelectOption<T>): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.selectOption(option);
+    }
+  }
+
+  onClearKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.clear();
+    }
+  }
+
+  onOptionKeydown(event: KeyboardEvent, option: SelectOption<T>): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.selectOption(option);
+    }
   }
 
   // Click outside listener management

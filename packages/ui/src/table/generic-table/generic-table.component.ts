@@ -109,7 +109,7 @@ export class GenericTableComponent<T> {
    * @param item The item itself.
    * @returns A unique identifier for the item.
    */
-  trackByRowIndex = (index: number, item: T): number => index;
+  trackByRowIndex = (index: number): number => index;
 
   /**
    * Track function for column items in the columns array.
@@ -117,5 +117,5 @@ export class GenericTableComponent<T> {
    * @param column The column object.
    * @returns A unique identifier for the column.
    */
-  trackByColumnIndex = (index: number, column: TableColumn<T>): number => index;
+  trackByColumnIndex = (index: number): number => index;
 }

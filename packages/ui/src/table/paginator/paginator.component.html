@@ -2,7 +2,7 @@
   <button
     type="button"
     [class]="getArrowButtonClasses()"
-    (click)="onPageChange.emit(currentPage() - 1)"
+    (click)="pageChange.emit(currentPage() - 1)"
     [disabled]="currentPage() === 1"
     [attr.aria-label]="'Previous page'"
     [attr.aria-disabled]="currentPage() === 1 ? 'true' : 'false'"
@@ -29,7 +29,7 @@
   <button
     type="button"
     [class]="getArrowButtonClasses()"
-    (click)="onPageChange.emit(currentPage() + 1)"
+    (click)="pageChange.emit(currentPage() + 1)"
     [disabled]="currentPage() === totalPages()"
     [attr.aria-label]="'Next page'"
     [attr.aria-disabled]="currentPage() === totalPages() ? 'true' : 'false'"

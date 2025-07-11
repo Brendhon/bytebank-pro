@@ -39,7 +39,7 @@ export class PaginatorComponent {
    * Event emitted when the page changes.
    * Emits the new page number.
    */
-  onPageChange = output<number>();
+  pageChange = output<number>();
 
   /**
    * Provides the `isNumber` utility function to the template.
@@ -98,7 +98,7 @@ export class PaginatorComponent {
   handlePageClick(page: number | string): void {
     const currentPage = this.currentPage();
     if (this.isNumber(page) && page !== currentPage) {
-      this.onPageChange.emit(page as number);
+      this.pageChange.emit(page as number);
     }
   }
 

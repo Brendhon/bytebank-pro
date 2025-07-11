@@ -12,7 +12,6 @@ interface TestData {
 describe('GenericTableComponent', () => {
   let component: GenericTableComponent<TestData>;
   let fixture: ComponentFixture<GenericTableComponent<TestData>>;
-  let element: HTMLElement;
 
   const mockData: TestData[] = [
     { id: 1, name: 'Item 1', value: 100 },
@@ -33,9 +32,6 @@ describe('GenericTableComponent', () => {
 
     fixture = TestBed.createComponent(GenericTableComponent<TestData>);
     component = fixture.componentInstance;
-    element = fixture.debugElement.query(
-      By.css('[data-testid="generic-table-container"]')
-    ).nativeElement;
 
     // Set required inputs using signal inputs
     fixture.componentRef.setInput('data', mockData);
@@ -269,13 +265,13 @@ describe('GenericTableComponent', () => {
 
   describe('Track Functions', () => {
     it('should return correct index for trackByRowIndex', () => {
-      const result = component.trackByRowIndex(0, mockData[0]);
+      const result = component.trackByRowIndex(0);
 
       expect(result).toBe(0);
     });
 
     it('should return correct index for trackByColumnIndex', () => {
-      const result = component.trackByColumnIndex(1, mockColumns[1]);
+      const result = component.trackByColumnIndex(1);
 
       expect(result).toBe(1);
     });

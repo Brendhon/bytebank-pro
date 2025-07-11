@@ -3,7 +3,7 @@
     <table class="table" role="table" aria-label="Generic data table">
       <thead class="table-header" data-testid="table-header">
         <tr role="row">
-          @for (col of columns(); track trackByColumnIndex($index, col)) {
+          @for (col of columns(); track trackByColumnIndex($index)) {
             <th
               [attr.scope]="'col'"
               [class]="
@@ -26,9 +26,9 @@
             </td>
           </tr>
         } @else {
-          @for (row of pagedData(); track trackByRowIndex($index, row)) {
+          @for (row of pagedData(); track trackByRowIndex($index)) {
             <tr role="row" class="table-row">
-              @for (col of columns(); track trackByColumnIndex($index, col)) {
+              @for (col of columns(); track trackByColumnIndex($index)) {
                 <td
                   [class]="
                     getCellClasses(
@@ -63,7 +63,7 @@
       <bb-paginator
         [currentPage]="currentPage()"
         [totalPages]="totalPages()"
-        (onPageChange)="onPageChange($event)"
+        (pageChange)="onPageChange($event)"
       ></bb-paginator>
     </div>
   }

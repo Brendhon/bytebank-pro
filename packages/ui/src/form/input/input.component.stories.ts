@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { Calendar, Link, Mail, SearchIcon } from 'lucide-angular';
 import { InputComponent } from './input.component';
-import { Link, Mail, SearchIcon, UserRoundIcon, Calendar } from 'lucide-angular';
 
 const meta: Meta<InputComponent> = {
   title: 'Components/Form/Input',

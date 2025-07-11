@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
   let fixture: ComponentFixture<PaginatorComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -21,9 +20,6 @@ describe('PaginatorComponent', () => {
     fixture.componentRef.setInput('totalPages', 10);
 
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="paginator-component"]')
-    ).nativeElement;
   });
 
   describe('Basic Functionality', () => {

@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectComponent, SelectOption } from './select.component';
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 describe('SelectComponent', () => {
@@ -35,6 +34,7 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
 
     const triggerElement = fixture.debugElement.query(By.css('[data-testid="select-trigger"]'));
+
     expect(triggerElement.nativeElement.textContent.trim()).toContain('Choose an option');
   });
 
@@ -49,6 +49,7 @@ describe('SelectComponent', () => {
     expect(component.isOpen()).toBeTruthy();
 
     const dropdown = fixture.debugElement.query(By.css('[data-testid="select-dropdown"]'));
+
     expect(dropdown).toBeTruthy();
   });
 
@@ -74,6 +75,7 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
 
     const clearButton = fixture.debugElement.query(By.css('[data-testid="clear-button"]'));
+
     expect(clearButton).toBeTruthy();
   });
 
@@ -98,6 +100,7 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
 
     const triggerElement = fixture.debugElement.query(By.css('[data-testid="select-trigger"]'));
+
     expect(triggerElement.nativeElement.getAttribute('tabindex')).toBe('-1');
 
     triggerElement.nativeElement.click();

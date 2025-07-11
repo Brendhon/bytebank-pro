@@ -207,16 +207,19 @@ describe('ButtonComponent', () => {
       // Test small size
       fixture.componentRef.setInput('size', 'sm');
       fixture.detectChanges();
+
       expect(component.buttonClasses).toContain('px-3 py-1.5 text-sm');
 
       // Test medium size (default)
       fixture.componentRef.setInput('size', 'md');
       fixture.detectChanges();
+
       expect(component.buttonClasses).toContain('px-4 py-2 text-sm');
 
       // Test large size
       fixture.componentRef.setInput('size', 'lg');
       fixture.detectChanges();
+
       expect(component.buttonClasses).toContain('px-6 py-3 text-base');
     });
   });
@@ -228,11 +231,13 @@ describe('ButtonComponent', () => {
 
       // Should not be interactive when disabled
       fixture.componentRef.setInput('disabled', true);
+
       expect(component.isInteractive).toBe(false);
 
       // Should not be interactive when loading
       fixture.componentRef.setInput('disabled', false);
       fixture.componentRef.setInput('loading', true);
+
       expect(component.isInteractive).toBe(false);
     });
 
@@ -242,10 +247,12 @@ describe('ButtonComponent', () => {
 
       // Should return custom aria label
       fixture.componentRef.setInput('ariaLabel', 'Custom label');
+
       expect(component.computedAriaLabel).toBe('Custom label');
 
       // Should return loading text when loading
       fixture.componentRef.setInput('loading', true);
+
       expect(component.computedAriaLabel).toBe('Carregando...');
     });
 
@@ -255,6 +262,7 @@ describe('ButtonComponent', () => {
 
       // Should return custom role
       fixture.componentRef.setInput('role', 'switch');
+
       expect(component.computedRole).toBe('switch');
     });
   });
@@ -472,6 +480,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const srText = fixture.debugElement.query(By.css('.sr-only'));
+
       expect(srText).toBeTruthy();
       expect(srText.nativeElement.textContent.trim()).toBe('Carregando...');
     });
@@ -481,6 +490,7 @@ describe('ButtonComponent', () => {
       fixture.detectChanges();
 
       const loadingIcon = fixture.debugElement.query(By.css('i-lucide'));
+
       expect(loadingIcon.nativeElement.getAttribute('aria-hidden')).toBe('true');
     });
   });

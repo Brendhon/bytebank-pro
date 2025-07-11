@@ -36,7 +36,7 @@ handlePageChange(page: number) {
 <bb-paginator
   [currentPage]="currentPage"
   [totalPages]="totalPages"
-  (onPageChange)="handlePageChange($event)"
+  (pageChange)="handlePageChange($event)"
 />
 ```
 
@@ -63,6 +63,6 @@ However, if you need a decoupled paginator, the usage above is recommended.
 
 ### Outputs
 
-| Property       | Type (`output()`) | Description                                               |
-| -------------- | ----------------- | --------------------------------------------------------- |
-| `onPageChange` | `number`          | Emitted when the page changes. Emits the new page number. |
+| Property     | Type (`output()`) | Description                                               |
+| ------------ | ----------------- | --------------------------------------------------------- |
+| `pageChange` | `number`          | Emitted when the page changes. Emits the new page number. |

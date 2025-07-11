@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
 import { GenericTableComponent } from './generic-table.component';
 import { TableColumn } from '@bytebank-pro/types';
+import { TemplateRef } from '@angular/core';
 
 interface SampleData {
   id: number;
@@ -332,7 +333,7 @@ export const WithCustomRender: Story = {
         { id: 4, name: 'Alice Brown', email: 'alice@example.com', status: 'active' },
         { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', status: 'inactive' }
       ],
-      getCustomColumns: (statusTemplate: any) => [
+      getCustomColumns: (statusTemplate: TemplateRef<unknown>) => [
         { label: 'ID', accessor: 'id' },
         { label: 'Name', accessor: 'name' },
         { label: 'Email', accessor: 'email' },

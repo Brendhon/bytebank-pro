@@ -49,6 +49,7 @@
                       class="select-tag-remove-button"
                       [attr.aria-label]="'Remove ' + option.label"
                       (click)="selectOption(option); $event.stopPropagation()"
+                      (keydown)="onTagKeydown($event, option)"
                       data-testid="remove-option-button"
                     >
                       <i-lucide [img]="xIcon" [size]="12" aria-hidden="true"></i-lucide>
@@ -82,6 +83,7 @@
             class="select-clear-button"
             [attr.aria-label]="'Clear selection'"
             (click)="clear(); $event.stopPropagation()"
+            (keydown)="onClearKeydown($event)"
             data-testid="clear-button"
           >
             <i-lucide
@@ -140,6 +142,7 @@
             class="select-no-options-message"
             role="option"
             aria-disabled="true"
+            aria-selected="false"
             data-testid="no-options-message"
           >
             {{ searchTerm() ? noResultsText() : noOptionsText() }}
@@ -152,8 +155,10 @@
               [class.select-option-disabled]="option.disabled"
               [attr.aria-selected]="isOptionSelected(option)"
               [attr.aria-disabled]="option.disabled"
+              [attr.tabindex]="option.disabled ? '-1' : '0'"
               role="option"
               (click)="selectOption(option)"
+              (keydown)="onOptionKeydown($event, option)"
               (mouseenter)="hoveredOptionIndex.set(i)"
               (mouseleave)="hoveredOptionIndex.set(-1)"
               [attr.data-testid]="'select-option-' + i"

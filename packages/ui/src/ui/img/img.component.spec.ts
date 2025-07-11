@@ -1,12 +1,10 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { ImgComponent } from './img.component';
 
 describe('ImgComponent', () => {
   let component: ImgComponent;
   let fixture: ComponentFixture<ImgComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,8 +16,6 @@ describe('ImgComponent', () => {
     // Set required input before calling detectChanges to avoid NG0950 error
     fixture.componentRef.setInput('src', 'test-image.jpg');
     fixture.detectChanges();
-    // Element for the root component container
-    element = fixture.debugElement.nativeElement;
   });
 
   describe('Basic Functionality', () => {

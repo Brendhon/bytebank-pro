@@ -41,7 +41,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy {
   ariaLabel = input<string>('');
 
   // Outputs
-  close = output<void>();
+  dialogClose = output<void>();
 
   // Internal state
   private focusedElementBeforeOpen: HTMLElement | null = null;
@@ -142,7 +142,7 @@ export class DialogComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private handleClose(): void {
     this.allowBodyScroll();
-    this.close.emit();
+    this.dialogClose.emit();
     this.restoreFocus();
   }
 

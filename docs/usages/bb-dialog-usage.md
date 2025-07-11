@@ -37,7 +37,7 @@ closeDialog() {
 ```html
 <button (click)="openDialog()">Open Dialog</button>
 
-<bb-dialog [isOpen]="isDialogOpen" (close)="closeDialog()" title="Dialog Title">
+<bb-dialog [isOpen]="isDialogOpen" (dialogClose)="closeDialog()" title="Dialog Title">
   <p>This is the content of the dialog.</p>
   <footer class="flex justify-end gap-2 mt-4">
     <bb-button variant="outlineGreen" (click)="closeDialog()">Cancel</bb-button>
@@ -91,6 +91,6 @@ For finer control, you can use the `ariaLabel` property to describe the purpose 
 
 ### Outputs
 
-| Property | Type (`output()`) | Description                                    |
-| -------- | ----------------- | ---------------------------------------------- |
-| `close`  | `void`            | Emitted when the dialog requests to be closed. |
+| Property      | Type (`output()`) | Description                                    |
+| ------------- | ----------------- | ---------------------------------------------- |
+| `dialogClose` | `void`            | Emitted when the dialog requests to be closed. |

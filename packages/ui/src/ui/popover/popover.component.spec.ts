@@ -55,7 +55,6 @@ describe('PopoverComponent', () => {
   let fixture: ComponentFixture<PopoverComponent>;
   let hostComponent: TestHostComponent;
   let hostFixture: ComponentFixture<TestHostComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -65,9 +64,6 @@ describe('PopoverComponent', () => {
     fixture = TestBed.createComponent(PopoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(
-      By.css('[data-testid="popover-container"]')
-    )?.nativeElement;
 
     hostFixture = TestBed.createComponent(TestHostComponent);
     hostComponent = hostFixture.componentInstance;
