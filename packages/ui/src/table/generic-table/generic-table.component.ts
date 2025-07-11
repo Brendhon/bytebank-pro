@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { TableColumn } from '@bytebank-pro/types';
 import { PaginatorComponent } from '../paginator/paginator.component';
 
@@ -7,23 +7,37 @@ import { PaginatorComponent } from '../paginator/paginator.component';
  * GenericTable component displays tabular data with customizable columns and optional pagination.
  * It supports displaying a message when no data is found.
  *
+ * The component supports both client-side and server-side pagination:
+ * - Client-side: When `totalItems` is not provided, pagination is calculated based on the data length
+ * - Server-side: When `totalItems` is provided, pagination is calculated based on the total items count
+ *
  * @template T - The type of data rows in the table.
  * @example
  * ```html
+ * <!-- Client-side pagination -->
  * <bb-generic-table
  * [data]="myTransactions"
  * [columns]="transactionColumns"
  * [pageSize]="10"
  * ></bb-generic-table>
  *
- * * // myTransactions = [{ id: 1, description: 'Buy', amount: 100 }];
+ * <!-- Server-side pagination -->
+ * <bb-generic-table
+ * [data]="myTransactions"
+ * [columns]="transactionColumns"
+ * [pageSize]="10"
+ * [totalItems]="totalTransactionCount"
+ * (pageChange)="handlePageChange($event)"
+ * ></bb-generic-table>
+ *
+ * // myTransactions = [{ id: 1, description: 'Buy', amount: 100 }];
  * // transactionColumns = [
  * //   { label: 'ID', accessor: 'id' },
  * //   { label: 'Description', accessor: 'description' },
  * //   { label: 'Amount', accessor: 'amount', render: myAmountTemplateRef } // For custom rendering
  * // ];
  *
- * * // <ng-template #myAmountTemplateRef let-value let-row="row">
+ * // <ng-template #myAmountTemplateRef let-value let-row="row">
  * //   <span [ngStyle]="{ color: value > 0 ? 'green' : 'red' }">{{ value | currency }}</span>
  * // </ng-template>
  * ```
@@ -54,23 +68,46 @@ export class GenericTableComponent<T> {
   pageSize = input<number | undefined>(10);
 
   /**
+   * The total number of items available (for server-side pagination).
+   * When provided, pagination is calculated based on this value instead of the data length.
+   * When not provided, pagination is calculated based on the data length (client-side pagination).
+   */
+  totalItems = input<number | undefined>(undefined);
+
+  /**
    * The current page number for pagination. Initialized to 1.
    */
   currentPage = signal(1);
 
   /**
+   * Event emitted when the page changes.
+   * Emits the new page number for server-side pagination handling.
+   */
+  pageChange = output<number>();
+
+  /**
    * Calculates the total number of pages based on the data length and page size.
    * If `pageSize` is not defined, returns 1.
+   * If `totalItems` is provided, uses that value for calculation (server-side pagination).
+   * Otherwise, uses the data length for calculation (client-side pagination).
    */
   totalPages = computed(() => {
     const size = this.pageSize();
     if (!size) return 1;
-    return Math.ceil(this.data().length / size);
+
+    const total = this.totalItems();
+    const dataLength = this.data().length;
+
+    // Use totalItems if provided (server-side pagination), otherwise use data length (client-side pagination)
+    const itemsCount = total !== undefined ? total : dataLength;
+
+    return Math.ceil(itemsCount / size);
   });
 
   /**
    * Returns the data subset for the current page.
-   * This acts as the memoized `pagedData` from the React component.
+   * For client-side pagination: returns the sliced data based on current page and page size.
+   * For server-side pagination: returns the data as-is (data is already paginated by the server).
    */
   pagedData = computed(() => {
     const size = this.pageSize();
@@ -79,6 +116,13 @@ export class GenericTableComponent<T> {
 
     if (!size) return dataArray;
 
+    // If totalItems is provided, this is server-side pagination
+    // The data is already paginated by the server, so return it as-is
+    if (this.totalItems() !== undefined) {
+      return dataArray;
+    }
+
+    // Client-side pagination: slice the data based on current page
     const start = (current - 1) * size;
     const end = start + size;
     return dataArray.slice(start, end);
@@ -86,11 +130,12 @@ export class GenericTableComponent<T> {
 
   /**
    * Handles the page change event from the Paginator component.
-   * Updates the `currentPage`.
+   * Updates the `currentPage` and emits the `pageChange` event for server-side pagination.
    * @param page The new page number.
    */
   onPageChange(page: number): void {
     this.currentPage.set(page);
+    this.pageChange.emit(page);
   }
 
   /**

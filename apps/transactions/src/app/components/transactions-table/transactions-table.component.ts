@@ -16,11 +16,26 @@ import { LucideAngularModule, Pencil, Trash } from 'lucide-angular';
  * It provides custom rendering for transaction types, values (with conditional colors), and action buttons (edit/delete).
  * It uses the `bb-generic-table` component for its base table structure.
  *
+ * The component supports both client-side and server-side pagination:
+ * - Client-side: When `totalItems` is not provided, pagination is calculated based on the transactions length
+ * - Server-side: When `totalItems` is provided, pagination is calculated based on the total items count
+ *
  * @example
  * ```html
+ * <!-- Client-side pagination -->
  * <bb-transactions-table
  * [transactions]="myTransactions"
  * [pageSize]="5"
+ * (edit)="handleEditTransaction($event)"
+ * (delete)="handleDeleteTransaction($event)"
+ * ></bb-transactions-table>
+ *
+ * <!-- Server-side pagination -->
+ * <bb-transactions-table
+ * [transactions]="myTransactions"
+ * [pageSize]="10"
+ * [totalItems]="totalTransactionCount"
+ * (pageChange)="handlePageChange($event)"
  * (edit)="handleEditTransaction($event)"
  * (delete)="handleDeleteTransaction($event)"
  * ></bb-transactions-table>
@@ -47,6 +62,13 @@ export class TransactionsTableComponent {
   pageSize = input<number>(10);
 
   /**
+   * The total number of transactions available (for server-side pagination).
+   * When provided, pagination is calculated based on this value instead of the transactions length.
+   * When not provided, pagination is calculated based on the transactions length (client-side pagination).
+   */
+  totalItems = input<number | undefined>(undefined);
+
+  /**
    * Event emitted when the "Edit" button for a transaction is clicked.
    * Emits the `ITransaction` object to be edited.
    */
@@ -57,6 +79,12 @@ export class TransactionsTableComponent {
    * Emits the `ITransaction` object to be deleted.
    */
   delete = output<ITransaction>();
+
+  /**
+   * Event emitted when the page changes.
+   * Emits the new page number for server-side pagination handling.
+   */
+  pageChange = output<number>();
 
   icons = {
     pencil: Pencil,
@@ -82,6 +110,7 @@ export class TransactionsTableComponent {
    * @param typeTemplate Template for transaction type description
    * @param valueTemplate Template for transaction value with styling
    * @param actionsTemplate Template for action buttons
+   * @param dateTemplate Template for transaction date
    * @returns Array of columns with render templates
    */
   getColumnsWithTemplates(

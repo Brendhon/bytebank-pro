@@ -64,6 +64,8 @@
       )
     "
     [pageSize]="pageSize()"
+    [totalItems]="totalItems()"
+    (pageChange)="pageChange.emit($event)"
     data-testid="transactions-table"
   ></bb-generic-table>
 </section>

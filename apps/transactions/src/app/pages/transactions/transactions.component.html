@@ -10,7 +10,9 @@
 
       <bb-transactions-table
         [transactions]="transactions()"
-        [pageSize]="5"
+        [pageSize]="pageSize()"
+        [totalItems]="totalItems()"
+        (pageChange)="handlePageChange($event)"
         (edit)="handleEditTransaction($event)"
         (delete)="handleDeleteTransaction($event)"
       ></bb-transactions-table>

@@ -42,6 +42,16 @@ export class TransactionsPageComponent implements OnInit {
   isDeleteDialogOpen = signal(false);
   transactionToDelete = signal<ITransaction | null>(null);
 
+  // Pagination state
+  private readonly _currentPage = signal<number>(1);
+  readonly currentPage = this._currentPage.asReadonly();
+
+  private readonly _totalItems = signal<number>(0);
+  readonly totalItems = this._totalItems.asReadonly();
+
+  private readonly _pageSize = signal<number>(10);
+  readonly pageSize = this._pageSize.asReadonly();
+
   // Signal for transactions
   private readonly _transactions = signal<ITransaction[]>([]);
   readonly transactions = this._transactions.asReadonly();
@@ -54,20 +64,37 @@ export class TransactionsPageComponent implements OnInit {
   }
 
   /**
-   * Loads transactions from the service
+   * Loads transactions from the service with pagination
+   * @param page Page number (default: current page)
+   * @param pageSize Page size (default: current page size)
    */
-  private loadTransactions(): void {
+  private loadTransactions(page?: number, pageSize?: number): void {
+    const targetPage = page ?? this.currentPage();
+    const targetPageSize = pageSize ?? this.pageSize();
+
     this.transactionsService
-      .loadTransactions(10, 1)
+      .loadTransactions(targetPageSize, targetPage)
       .pipe(first())
       .subscribe({
-        next: (paginatedTransactions: PaginatedTransactions) =>
-          this._transactions.set(paginatedTransactions.items),
+        next: (paginatedTransactions: PaginatedTransactions) => {
+          this._transactions.set(paginatedTransactions.items);
+          this._totalItems.set(paginatedTransactions.total);
+          this._currentPage.set(paginatedTransactions.page);
+        },
         error: (error: Error) => {
           console.error('Error loading transactions:', error);
           this.toastService.showError('Falha ao carregar transações. Recarregue a página.');
         }
       });
+  }
+
+  /**
+   * Handles page change from the transactions table
+   * @param newPage The new page number
+   */
+  handlePageChange(newPage: number): void {
+    this._currentPage.set(newPage);
+    this.loadTransactions(newPage);
   }
 
   // Dialog methods
@@ -127,7 +154,8 @@ export class TransactionsPageComponent implements OnInit {
 
   // Handle transaction success
   handleTransactionSuccess(): void {
-    this.loadTransactions();
+    // Reload current page to show updated data
+    this.loadTransactions(this.currentPage());
     this.closeDialog();
     this.toastService.showSuccess('Transação salva com sucesso!');
   }
@@ -159,7 +187,8 @@ export class TransactionsPageComponent implements OnInit {
 
   // Handle delete success
   handleDeleteSuccess(): void {
-    this.loadTransactions();
+    // Reload current page to show updated data
+    this.loadTransactions(this.currentPage());
     this.closeDeleteDialog();
     this.toastService.showSuccess('Transação excluída com sucesso!');
   }

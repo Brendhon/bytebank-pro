@@ -48,12 +48,10 @@ describe('GenericTableComponent', () => {
 
     it('should have default properties', () => {
       expect(component.currentPage()).toBe(1);
-
       expect(component.pageSize()).toBe(10);
-
       expect(component.data()).toEqual(mockData);
-
       expect(component.columns()).toEqual(mockColumns);
+      expect(component.totalItems()).toBeUndefined();
     });
   });
 
@@ -79,7 +77,6 @@ describe('GenericTableComponent', () => {
       fixture.detectChanges();
 
       expect(component.pageSize()).toBe(5);
-
       expect(component.totalPages()).toBe(1); // 3 items with pageSize 5
     });
 
@@ -88,10 +85,26 @@ describe('GenericTableComponent', () => {
       fixture.detectChanges();
 
       expect(component.pageSize()).toBeUndefined();
-
       expect(component.totalPages()).toBe(1);
-
       expect(component.pagedData()).toEqual(mockData);
+    });
+
+    it('should handle totalItems input for server-side pagination', () => {
+      fixture.componentRef.setInput('totalItems', 25);
+      fixture.componentRef.setInput('pageSize', 5);
+      fixture.detectChanges();
+
+      expect(component.totalItems()).toBe(25);
+      expect(component.totalPages()).toBe(5); // 25 items with pageSize 5
+    });
+
+    it('should handle undefined totalItems for client-side pagination', () => {
+      fixture.componentRef.setInput('totalItems', undefined);
+      fixture.componentRef.setInput('pageSize', 2);
+      fixture.detectChanges();
+
+      expect(component.totalItems()).toBeUndefined();
+      expect(component.totalPages()).toBe(2); // 3 items with pageSize 2
     });
   });
 
@@ -117,9 +130,7 @@ describe('GenericTableComponent', () => {
       const firstRowCells = tableRows[0].queryAll(By.css('td'));
 
       expect(firstRowCells[0].nativeElement.textContent.trim()).toBe('1');
-
       expect(firstRowCells[1].nativeElement.textContent.trim()).toBe('Item 1');
-
       expect(firstRowCells[2].nativeElement.textContent.trim()).toBe('100');
     });
 
@@ -130,7 +141,6 @@ describe('GenericTableComponent', () => {
       const noDataMessage = fixture.debugElement.query(By.css('[data-testid="no-data-message"]'));
 
       expect(noDataMessage).toBeTruthy();
-
       expect(noDataMessage.nativeElement.textContent.trim()).toBe('Nenhum dado encontrado');
     });
 
@@ -145,31 +155,60 @@ describe('GenericTableComponent', () => {
   });
 
   describe('Pagination', () => {
-    it('should calculate total pages correctly', () => {
-      fixture.componentRef.setInput('pageSize', 2);
-      fixture.detectChanges();
+    describe('Client-side Pagination', () => {
+      it('should calculate total pages correctly based on data length', () => {
+        fixture.componentRef.setInput('pageSize', 2);
+        fixture.detectChanges();
 
-      expect(component.totalPages()).toBe(2); // 3 items with pageSize 2
+        expect(component.totalPages()).toBe(2); // 3 items with pageSize 2
+      });
+
+      it('should return correct paged data for client-side pagination', () => {
+        fixture.componentRef.setInput('pageSize', 2);
+        fixture.detectChanges();
+
+        const firstPageData = component.pagedData();
+        expect(firstPageData.length).toBe(2);
+        expect(firstPageData).toEqual([mockData[0], mockData[1]]);
+
+        // Navigate to second page
+        component.onPageChange(2);
+        const secondPageData = component.pagedData();
+        expect(secondPageData.length).toBe(1);
+        expect(secondPageData).toEqual([mockData[2]]);
+      });
     });
 
-    it('should return correct paged data', () => {
-      fixture.componentRef.setInput('pageSize', 2);
-      fixture.detectChanges();
+    describe('Server-side Pagination', () => {
+      it('should calculate total pages correctly based on totalItems', () => {
+        fixture.componentRef.setInput('totalItems', 25);
+        fixture.componentRef.setInput('pageSize', 5);
+        fixture.detectChanges();
 
-      const firstPageData = component.pagedData();
+        expect(component.totalPages()).toBe(5); // 25 items with pageSize 5
+      });
 
-      expect(firstPageData.length).toBe(2);
+      it('should return data as-is for server-side pagination', () => {
+        fixture.componentRef.setInput('totalItems', 25);
+        fixture.componentRef.setInput('pageSize', 5);
+        fixture.detectChanges();
 
-      expect(firstPageData).toEqual([mockData[0], mockData[1]]);
+        const pagedData = component.pagedData();
+        expect(pagedData).toEqual(mockData); // Data should be returned as-is
+      });
 
-      // Navigate to second page
-      component.onPageChange(2);
+      it('should handle page changes without slicing data for server-side pagination', () => {
+        fixture.componentRef.setInput('totalItems', 25);
+        fixture.componentRef.setInput('pageSize', 5);
+        fixture.detectChanges();
 
-      const secondPageData = component.pagedData();
+        // Change page
+        component.onPageChange(3);
 
-      expect(secondPageData.length).toBe(1);
-
-      expect(secondPageData).toEqual([mockData[2]]);
+        const pagedData = component.pagedData();
+        expect(pagedData).toEqual(mockData); // Data should still be returned as-is
+        expect(component.currentPage()).toBe(3);
+      });
     });
 
     it('should show paginator when pageSize is set and has multiple pages', () => {
@@ -207,10 +246,21 @@ describe('GenericTableComponent', () => {
   });
 
   describe('Events', () => {
-    it('should handle page change correctly', () => {
+    it('should handle page change correctly and emit pageChange event', () => {
+      spyOn(component.pageChange, 'emit');
+
       component.onPageChange(2);
 
       expect(component.currentPage()).toBe(2);
+      expect(component.pageChange.emit).toHaveBeenCalledWith(2);
+    });
+
+    it('should emit pageChange event when page changes', () => {
+      spyOn(component.pageChange, 'emit');
+
+      component.onPageChange(3);
+
+      expect(component.pageChange.emit).toHaveBeenCalledWith(3);
     });
   });
 
@@ -239,7 +289,6 @@ describe('GenericTableComponent', () => {
       const table = fixture.debugElement.query(By.css('table'));
 
       expect(table.nativeElement.getAttribute('role')).toBe('table');
-
       expect(table.nativeElement.getAttribute('aria-label')).toBe('Generic data table');
     });
 

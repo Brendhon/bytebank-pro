@@ -1,265 +1,220 @@
-# How to Use the ByteBank Pro Generic Table
+# 📊 bb-generic-table Usage Guide
 
-The `bb-generic-table` component offers a robust and flexible way to display tabular data. It is designed to be highly reusable, with support for customizable columns, pagination, and custom templates for cell rendering.
+The `bb-generic-table` component displays tabular data with customizable columns and optional pagination. It supports both client-side and server-side pagination patterns.
 
-## Importing
+## 🎯 Basic Usage
 
-The `GenericTableComponent` is standalone, so you can import it directly into your component:
-
-```typescript
-import { GenericTableComponent } from '@bytebank-pro/ui';
-
-@Component({
-  standalone: true,
-  imports: [GenericTableComponent]
-  // ...
-})
-export class MyComponent {}
-```
-
-## Basic Usage
-
-To use the table, you need to provide the data (`data`) and the column definitions (`columns`).
-
-```typescript
-// in your component.ts
-import { TableColumn } from '@bytebank-pro/types';
-
-// ...
-
-users = [
-  { id: 1, name: 'Alice', email: 'alice@email.com' },
-  { id: 2, name: 'Bob', email: 'bob@email.com' },
-];
-
-columns: TableColumn<any>[] = [
-  { label: 'ID', accessor: 'id' },
-  { label: 'Name', accessor: 'name' },
-  { label: 'Email', accessor: 'email' },
-];
-```
+### Client-side Pagination
 
 ```html
-<bb-generic-table [data]="users" [columns]="columns" />
-```
-
-## Pagination
-
-Pagination is automatically enabled when the `pageSize` property is provided.
-
-```html
-<bb-generic-table [data]="largeDataset" [columns]="columns" [pageSize]="5" />
-```
-
-The `bb-paginator` component is used internally and does not need to be invoked directly in most cases.
-
-## Custom Rendering
-
-For more complex cell rendering, you can use custom templates. The recommended pattern is to define the templates in the HTML and pass them via a method.
-
-### Recommended Pattern: Inline Templates
-
-This is the most efficient and recommended pattern for custom rendering:
-
-```html
-<!-- in your template -->
-<ng-template #statusTemplate let-value let-row="row">
-  <span [ngClass]="value === 'active' ? 'text-green-500' : 'text-red-500'">
-    {{ value === 'active' ? '✓ Active' : '✗ Inactive' }}
-  </span>
-</ng-template>
-
-<ng-template #actionTemplate let-value let-row="row">
-  <div class="flex gap-2">
-    <button class="btn-edit" (click)="onEdit(row)">
-      <i-lucide [img]="editIcon" [size]="16"></i-lucide>
-    </button>
-    <button class="btn-delete" (click)="onDelete(row)">
-      <i-lucide [img]="deleteIcon" [size]="16"></i-lucide>
-    </button>
-  </div>
-</ng-template>
-
-<bb-generic-table
-  [data]="usersWithStatus"
-  [columns]="getColumnsWithTemplates(statusTemplate, actionTemplate)"
-/>
-```
-
-```typescript
-// in your component.ts
-import { TemplateRef } from '@angular/core';
-import { Edit, Trash } from 'lucide-angular';
-
-export class MyComponent {
-  // Icons for the action buttons
-  editIcon = Edit;
-  deleteIcon = Trash;
-
-  // Method to create columns with templates
-  getColumnsWithTemplates(
-    statusTemplate: TemplateRef<any>,
-    actionTemplate: TemplateRef<any>
-  ): TableColumn<any>[] {
-    return [
-      { label: 'ID', accessor: 'id' },
-      { label: 'Name', accessor: 'name' },
-      { label: 'Status', accessor: 'status', render: statusTemplate },
-      { label: 'Actions', accessor: 'id', render: actionTemplate }
-    ];
-  }
-
-  onEdit(user: any) {
-    console.log('Edit user:', user);
-  }
-
-  onDelete(user: any) {
-    console.log('Delete user:', user);
-  }
-}
-```
-
-### Alternative Pattern: ViewChild (Less Recommended)
-
-If you prefer to use `@ViewChild`, you can do it like this:
-
-```html
-<!-- in your template -->
-<ng-template #statusTemplate let-value>
-  <span [ngClass]="value === 'active' ? 'text-green-500' : 'text-red-500'"> {{ value }} </span>
-</ng-template>
-
-<bb-generic-table [data]="usersWithStatus" [columns]="columnsWithTemplate" />
-```
-
-```typescript
-// in your component.ts
-import { ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
-
-export class MyComponent implements AfterViewInit {
-  @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
-
-  columnsWithTemplate: TableColumn<any>[] = [];
-
-  ngAfterViewInit() {
-    this.columnsWithTemplate = [
-      { label: 'Name', accessor: 'name' },
-      {
-        label: 'Status',
-        accessor: 'status',
-        render: this.statusTemplate
-      }
-    ];
-  }
-}
-```
-
-### Template Context
-
-In the custom template, you have access to these variables:
-
-- `let-value`: The value of the property accessed by the column
-- `let-row="row"`: The complete data row object
-- `let-index`: The row index (optional)
-
-### Practical Example: Transactions Table
-
-Here is a complete example of a transactions table with custom rendering:
-
-```html
-<!-- Templates for custom rendering -->
-<ng-template #typeTemplate let-value let-row="row">
-  <span class="transaction-type">{{ getTransactionDesc(value) }}</span>
-</ng-template>
-
-<ng-template #valueTemplate let-value let-row="row">
-  <span [class]="getValueClasses(row.type)">
-    @if (row.type === 'outflow') { - } {{ value | currencyFormat }}
-  </span>
-</ng-template>
-
-<ng-template #actionsTemplate let-value let-row="row">
-  <div class="action-buttons">
-    <button (click)="onEdit(row)" aria-label="Edit transaction">
-      <i-lucide [img]="editIcon" [size]="12"></i-lucide>
-    </button>
-    <button (click)="onDelete(row)" aria-label="Delete transaction">
-      <i-lucide [img]="deleteIcon" [size]="12"></i-lucide>
-    </button>
-  </div>
-</ng-template>
-
-<!-- Table with custom templates -->
 <bb-generic-table
   [data]="transactions"
-  [columns]="getTransactionColumns(typeTemplate, valueTemplate, actionsTemplate)"
+  [columns]="transactionColumns"
   [pageSize]="10"
-/>
+></bb-generic-table>
 ```
 
-```typescript
-export class TransactionsComponent {
-  editIcon = Edit;
-  deleteIcon = Trash;
+### Server-side Pagination
 
-  getTransactionColumns(
-    typeTemplate: TemplateRef<any>,
-    valueTemplate: TemplateRef<any>,
-    actionsTemplate: TemplateRef<any>
-  ): TableColumn<ITransaction>[] {
-    return [
-      { label: 'Date', accessor: 'date' },
-      { label: 'Description', accessor: 'desc', render: typeTemplate },
-      { label: 'Value', accessor: 'value', render: valueTemplate },
-      { label: 'Actions', accessor: '_id', render: actionsTemplate }
-    ];
-  }
-
-  getTransactionDesc(type: string): string {
-    return TransactionDesc[type] || type;
-  }
-
-  getValueClasses(type: string): string {
-    return type === 'outflow' ? 'text-red-600' : 'text-green-600';
-  }
-
-  onEdit(transaction: ITransaction) {
-    // Edit logic
-  }
-
-  onDelete(transaction: ITransaction) {
-    // Delete logic
-  }
-}
+```html
+<bb-generic-table
+  [data]="transactions"
+  [columns]="transactionColumns"
+  [pageSize]="10"
+  [totalItems]="totalTransactionCount"
+  (pageChange)="handlePageChange($event)"
+></bb-generic-table>
 ```
 
-## Property API
+## 📋 API Reference
 
 ### Inputs
 
-| Property   | Type (`input()`)   | Required | Description                                                                   |
-| ---------- | ------------------ | -------- | ----------------------------------------------------------------------------- |
-| `data`     | `T[]`              | Yes      | The array of data objects to be displayed.                                    |
-| `columns`  | `TableColumn<T>[]` | Yes      | The column definitions, including `label`, `accessor`, and optional `render`. |
-| `pageSize` | `number`           | No       | The number of items per page. Enables pagination if provided.                 |
+| Input        | Type                  | Required | Default     | Description                                                                        |
+| ------------ | --------------------- | -------- | ----------- | ---------------------------------------------------------------------------------- |
+| `data`       | `T[]`                 | ✅       | -           | Array of data objects to display in the table                                      |
+| `columns`    | `TableColumn<T>[]`    | ✅       | -           | Array defining table columns with labels, accessors, and optional render templates |
+| `pageSize`   | `number \| undefined` | ❌       | `10`        | Number of items per page. If not provided, pagination is disabled                  |
+| `totalItems` | `number \| undefined` | ❌       | `undefined` | Total number of items available (for server-side pagination)                       |
 
-### `TableColumn<T>`
+### Outputs
 
-The `TableColumn` interface defines the structure of each column:
+| Output       | Type     | Description                                                                                     |
+| ------------ | -------- | ----------------------------------------------------------------------------------------------- |
+| `pageChange` | `number` | Emitted when the page changes. Provides the new page number for server-side pagination handling |
+
+## 🏗️ Column Configuration
+
+### Basic Column
 
 ```typescript
-export interface TableColumn<T> {
-  label: string; // The column header text
-  accessor: keyof T; // The key of the data object
-  render?: TemplateRef<any>; // Template for custom cell rendering
+{
+  label: 'ID',
+  accessor: 'id'
 }
 ```
 
-## Best Practices
+### Column with Custom Rendering
 
-1.  **Use the inline templates pattern** for better performance and readability
-2.  **Define reusable templates** when possible
-3.  **Use Lucide icons** with `i-lucide` and the `[img]` property
-4.  **Maintain accessibility** with `aria-label` and `data-testid`
-5.  **Organize CSS** into semantic classes instead of inline Tailwind classes
-6.  **Use strong typing** with generics for better type safety
+```typescript
+{
+  label: 'Amount',
+  accessor: 'amount',
+  render: amountTemplateRef
+}
+```
+
+### Template for Custom Rendering
+
+```html
+<ng-template #amountTemplateRef let-value let-row="row">
+  <span [ngClass]="value > 0 ? 'text-green-600' : 'text-red-600'"> {{ value | currency }} </span>
+</ng-template>
+```
+
+## 📄 Pagination Modes
+
+### Client-side Pagination
+
+When `totalItems` is not provided, the component calculates pagination based on the data length:
+
+- **Use case**: Small to medium datasets that can be loaded entirely
+- **Behavior**: Data is sliced locally based on current page and page size
+- **Performance**: Good for datasets under 1000 items
+
+```typescript
+// Component logic
+const transactions = [
+  { id: 1, description: 'Deposit', amount: 100 },
+  { id: 2, description: 'Withdrawal', amount: -50 }
+  // ... more items
+];
+
+const columns = [
+  { label: 'ID', accessor: 'id' },
+  { label: 'Description', accessor: 'description' },
+  { label: 'Amount', accessor: 'amount' }
+];
+```
+
+### Server-side Pagination
+
+When `totalItems` is provided, the component expects the server to handle pagination:
+
+- **Use case**: Large datasets that need to be paginated on the server
+- **Behavior**: Data is already paginated by the server, component just displays current page
+- **Performance**: Optimal for large datasets
+
+```typescript
+// Component logic
+const transactions = [
+  /* current page data */
+];
+const totalTransactionCount = 1500; // Total items from server
+
+const handlePageChange = (page: number) => {
+  // Fetch new page data from server
+  this.loadTransactions(page);
+};
+```
+
+## 🎨 Styling
+
+The component uses semantic CSS classes organized in the component's CSS file. All styling follows the ByteBank Pro design system.
+
+### CSS Classes
+
+- `.generic-table-container` - Main container
+- `.table-wrapper` - Table wrapper
+- `.table` - Main table element
+- `.table-header` - Table header section
+- `.table-row` - Table row
+- `.table-no-data-cell` - Cell for "no data" message
+- `.table-no-data-message` - "No data" message text
+- `.paginator-wrapper` - Paginator container
+
+## ♿ Accessibility
+
+- Uses semantic `<table>` structure with proper `role` attributes
+- Includes `aria-label` for screen readers
+- Maintains proper tab order for keyboard navigation
+- Provides clear "no data" messaging
+
+## 🧪 Testing
+
+The component includes data-testid attributes for testing:
+
+- `data-testid="generic-table-container"`
+- `data-testid="table-wrapper"`
+- `data-testid="table-header"`
+- `data-testid="table-body"`
+- `data-testid="no-data-row"`
+- `data-testid="no-data-message"`
+- `data-testid="paginator-wrapper"`
+
+## 📝 Examples
+
+### Complete Transaction Table
+
+```typescript
+// Component
+export class TransactionListComponent {
+  transactions = signal<ITransaction[]>([]);
+  totalItems = signal<number>(0);
+  currentPage = signal(1);
+
+  loadTransactions(page: number = 1) {
+    // Fetch paginated data from server
+    this.transactionService.getTransactions(page).subscribe((response) => {
+      this.transactions.set(response.data);
+      this.totalItems.set(response.total);
+      this.currentPage.set(page);
+    });
+  }
+
+  handlePageChange(page: number) {
+    this.loadTransactions(page);
+  }
+}
+```
+
+```html
+<!-- Template -->
+<bb-generic-table
+  [data]="transactions()"
+  [columns]="getColumnsWithTemplates(
+    typeTemplate,
+    valueTemplate,
+    actionsTemplate,
+    dateTemplate
+  )"
+  [pageSize]="10"
+  [totalItems]="totalItems()"
+  (pageChange)="handlePageChange($event)"
+></bb-generic-table>
+
+<ng-template #typeTemplate let-value> {{ getTransactionDesc(value) }} </ng-template>
+
+<ng-template #valueTemplate let-value let-row="row">
+  <span [ngClass]="getValueClasses(row.type)"> {{ value | currency }} </span>
+</ng-template>
+
+<ng-template #actionsTemplate let-value let-row="row">
+  <button (click)="editTransaction(row)" class="action-button">
+    <i-lucide name="pencil" class="w-4 h-4"></i-lucide>
+  </button>
+  <button (click)="deleteTransaction(row)" class="action-button">
+    <i-lucide name="trash" class="w-4 h-4"></i-lucide>
+  </button>
+</ng-template>
+
+<ng-template #dateTemplate let-value> {{ value | date:'short' }} </ng-template>
+```
+
+## ⚠️ Important Notes
+
+1. **Data Consistency**: For server-side pagination, ensure the `data` array contains only the current page items
+2. **Total Items**: Always provide accurate `totalItems` count for server-side pagination
+3. **Page Size**: The `pageSize` should match the server's page size configuration
+4. **Performance**: Use server-side pagination for datasets larger than 1000 items
+5. **State Management**: Handle page state in the parent component for server-side pagination
