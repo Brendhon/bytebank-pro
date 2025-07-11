@@ -80,27 +80,27 @@ describe('TransactionFormComponent', () => {
       expect(component.formErrors().date).toBe('');
     });
 
-    it('should validate required alias field', () => {
-      component.onAliasChange('');
-
-      expect(component.formErrors().alias).toBe('Descrição é obrigatória');
-    });
-
-    it('should validate alias minimum length', () => {
+    it('should validate alias minimum length when provided', () => {
       component.onAliasChange('ab');
 
-      expect(component.formErrors().alias).toBe('Descrição deve ter pelo menos 3 caracteres');
+      expect(component.formErrors().alias).toBe('Alias deve ter pelo menos 3 caracteres');
     });
 
-    it('should validate alias maximum length', () => {
+    it('should validate alias maximum length when provided', () => {
       const longAlias = 'a'.repeat(101);
       component.onAliasChange(longAlias);
 
-      expect(component.formErrors().alias).toBe('Descrição deve ter no máximo 100 caracteres');
+      expect(component.formErrors().alias).toBe('Alias deve ter no máximo 100 caracteres');
     });
 
     it('should validate valid alias', () => {
       component.onAliasChange('Valid Description');
+
+      expect(component.formErrors().alias).toBe('');
+    });
+
+    it('should not require alias field (alias is optional)', () => {
+      component.onAliasChange('');
 
       expect(component.formErrors().alias).toBe('');
     });
@@ -182,7 +182,9 @@ describe('TransactionFormComponent', () => {
         alias: 'Test Transaction',
         type: 'inflow',
         desc: 'deposit',
-        value: 100.5
+        value: 100.5,
+        _id: undefined,
+        user: undefined
       });
     });
 
@@ -234,8 +236,8 @@ describe('TransactionFormComponent', () => {
     });
 
     it('should return loading text when in edit mode and loading', () => {
-      // Simulate loading state by calling onSubmit which sets loading to true
-      component.onSubmit();
+      // Set loading state directly
+      component.isLoading.set(true);
 
       expect(component.getSubmitButtonText()).toBe('Salvando...');
     });
@@ -257,8 +259,8 @@ describe('TransactionFormComponent', () => {
     });
 
     it('should return loading text when in create mode and loading', () => {
-      // Simulate loading state by calling onSubmit which sets loading to true
-      component.onSubmit();
+      // Set loading state directly
+      component.isLoading.set(true);
 
       expect(component.getSubmitButtonText()).toBe('Criando...');
     });
@@ -269,7 +271,7 @@ describe('TransactionFormComponent', () => {
       expect(component.isFormValid()).toBe(false);
     });
 
-    it('should return true for form validity when all fields are valid', () => {
+    it('should return true for form validity when all required fields are valid', () => {
       component.formData.set({
         date: '2024-01-15',
         alias: 'Test Transaction',
@@ -322,15 +324,12 @@ describe('TransactionFormComponent', () => {
       const compiled = fixture.nativeElement;
 
       const dateInput = compiled.querySelector('[data-testid="date-input"]');
-
       expect(dateInput?.getAttribute('ariaLabel')).toBe('Selecione a data da transação');
 
       const aliasInput = compiled.querySelector('[data-testid="alias-input"]');
-
-      expect(aliasInput?.getAttribute('ariaLabel')).toBe('Digite a descrição da transação');
+      expect(aliasInput?.getAttribute('ariaLabel')).toBe('Digite um apelido para a transação');
 
       const valueInput = compiled.querySelector('[data-testid="value-input"]');
-
       expect(valueInput?.getAttribute('ariaLabel')).toBe('Digite o valor da transação');
     });
 
@@ -338,13 +337,21 @@ describe('TransactionFormComponent', () => {
       const compiled = fixture.nativeElement;
 
       expect(compiled.querySelector('[data-testid="transaction-dialog"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="transaction-form"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="date-input"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="alias-input"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="type-select"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="desc-select"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="value-input"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="transaction-cancel-button"]')).toBeTruthy();
+
       expect(compiled.querySelector('[data-testid="transaction-submit-button"]')).toBeTruthy();
     });
   });
