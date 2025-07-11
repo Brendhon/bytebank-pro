@@ -324,12 +324,15 @@ describe('TransactionFormComponent', () => {
       const compiled = fixture.nativeElement;
 
       const dateInput = compiled.querySelector('[data-testid="date-input"]');
+
       expect(dateInput?.getAttribute('ariaLabel')).toBe('Selecione a data da transação');
 
       const aliasInput = compiled.querySelector('[data-testid="alias-input"]');
+
       expect(aliasInput?.getAttribute('ariaLabel')).toBe('Digite um apelido para a transação');
 
       const valueInput = compiled.querySelector('[data-testid="value-input"]');
+
       expect(valueInput?.getAttribute('ariaLabel')).toBe('Digite o valor da transação');
     });
 

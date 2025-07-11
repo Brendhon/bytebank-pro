@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ITransaction } from '@bytebank-pro/types';
+import { Apollo } from 'apollo-angular';
 
 import { ConfirmDeletionComponent } from './confirm-deletion.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,12 +19,20 @@ describe('ConfirmDeletionComponent', () => {
   };
 
   beforeEach(async () => {
+    // Create Apollo mock
+    const apolloSpy = jasmine.createSpyObj('Apollo', ['mutate', 'query']);
+
     await TestBed.configureTestingModule({
-      imports: [ConfirmDeletionComponent, BrowserModule]
+      imports: [ConfirmDeletionComponent, BrowserModule],
+      providers: [{ provide: Apollo, useValue: apolloSpy }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ConfirmDeletionComponent);
     component = fixture.componentInstance;
+
+    // Set required inputs before any test
+    fixture.componentRef.setInput('isOpen', false);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
