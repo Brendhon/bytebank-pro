@@ -1,0 +1,6 @@
+---
+globs: packages/ui/src/**/*.component.ts,packages/ui/src/**/*.component.html
+alwaysApply: false
+description: 'This guide outlines specific best practices for Angular components within the @bytebank-pro/ui package.'
+---
+@docs/guidelines/ui-component-guidelines.md

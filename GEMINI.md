@@ -4,6 +4,10 @@
 
 @docs/guidelines/component-guidelines.md
 
+## UI Component Guidelines
+
+@docs/guidelines/ui-component-guidelines.md
+
 ## Directive Guidelines
 
 @docs/guidelines/directive-guidelines.md
