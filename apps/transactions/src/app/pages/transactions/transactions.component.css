@@ -12,7 +12,7 @@
 
 /* Page title */
 .page-title {
-  @apply text-xl sm:text-2xl font-semibold;
+  @apply text-lg sm:text-xl font-bold text-bytebank-dark-gray;
 }
 
 /* Main content section */
