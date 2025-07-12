@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IUser } from '@bytebank-pro/types';
 import { first } from 'rxjs';
 import { MfeToastService } from '../../core/services/mfe-toast.service';
+import { MfeUserUpdateService } from '../../core/services/mfe-user-update.service';
 import { SettingsService, UserUpdateInput } from '../../core/services/settings.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class SettingsPageComponent implements OnInit {
   // Inject dependencies
   private readonly settingsService = inject(SettingsService);
   private readonly toastService = inject(MfeToastService);
+  private readonly userUpdateService = inject(MfeUserUpdateService);
   private readonly router = inject(Router);
 
   // User data from service
@@ -103,6 +105,8 @@ export class SettingsPageComponent implements OnInit {
           if (success) {
             this.currentUser.set(null);
             this.toastService.showSuccess('Conta excluída com sucesso!');
+            // Notify Shell about user deletion
+            this.userUpdateService.notifyUserDeleted();
             this.router.navigate(['/login']);
           }
         },
@@ -134,6 +138,8 @@ export class SettingsPageComponent implements OnInit {
         next: (updatedUser: IUser) => {
           this.currentUser.set(updatedUser);
           this.toastService.showSuccess('Dados da conta atualizados com sucesso!');
+          // Notify Shell about user update
+          this.userUpdateService.notifyUserUpdated(updatedUser);
         },
         error: (error: Error) => {
           console.error('Erro ao atualizar dados da conta:', error);

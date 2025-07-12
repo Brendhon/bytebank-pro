@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { MfeToastListenerService } from './core/services/mfe-toast-listener.service';
+import { MfeUserUpdateListenerService } from './core/services/mfe-user-update-listener.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,13 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
-    provideAppInitializer(() => inject(MfeToastListenerService).initializeEventListener()),
+    provideAppInitializer(() => {
+      const toastListener = inject(MfeToastListenerService);
+      const userUpdateListener = inject(MfeUserUpdateListenerService);
+
+      toastListener.initializeEventListener();
+      userUpdateListener.initializeEventListener();
+    }),
     {
       provide: APOLLO_OPTIONS,
       useFactory: (httpLink: HttpLink) => {

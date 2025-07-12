@@ -197,6 +197,14 @@ export class AuthService {
   }
 
   /**
+   * Updates the stored user data (public method for MFE communication)
+   * @param user - The updated user data to store
+   */
+  updateStoredUser(user: StoredUser): void {
+    this.setUser(user);
+  }
+
+  /**
    * Loads the user from localStorage
    */
   private loadUserFromStorage(): void {
