@@ -13,7 +13,7 @@
 }
 
 .account-form-title {
-  @apply text-xl font-bold text-gray-800;
+  @apply text-xl font-bold text-bytebank-dark-gray;
 }
 
 .account-form-illustration {
