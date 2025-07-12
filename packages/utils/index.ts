@@ -1,6 +1,6 @@
+import { StoredUser } from '@bytebank-pro/types';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { IUser } from '@bytebank-pro/types';
 
 /**
  * Formata uma data para o padrão: 'quinta-feira, 18/04/2025'
@@ -64,7 +64,42 @@ export const removeEmptyFields = <T extends Record<string, any>>(obj: T): Partia
 /**
  * Get user data from localStorage
  */
-export const getUserDataFromLocalStorage = (): IUser | null => {
+export const getUserDataFromLocalStorage = (): StoredUser | null => {
   const user = localStorage.getItem('bytebank_user');
   return user ? JSON.parse(user) : null;
+};
+
+/**
+ * Store user data in localStorage
+ */
+export const storeUserDataInLocalStorage = (user: StoredUser): void => {
+  localStorage.setItem('bytebank_user', JSON.stringify(user));
+};
+
+/**
+ * Remove user data from localStorage
+ */
+export const removeUserDataFromLocalStorage = (): void => {
+  localStorage.removeItem('bytebank_user');
+};
+
+/**
+ * Set token in localStorage
+ */
+export const setTokenInLocalStorage = (token: string): void => {
+  localStorage.setItem('bytebank_auth_token', token);
+};
+
+/**
+ * Get token from localStorage
+ */
+export const getTokenFromLocalStorage = (): string | null => {
+  return localStorage.getItem('bytebank_auth_token');
+};
+
+/**
+ * Remove token from localStorage
+ */
+export const removeTokenFromLocalStorage = (): void => {
+  localStorage.removeItem('bytebank_auth_token');
 };

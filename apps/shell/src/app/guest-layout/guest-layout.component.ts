@@ -2,7 +2,6 @@ import { FooterComponent } from '@/components/footer/footer.component';
 import { HeaderComponent } from '@/components/header/header.component';
 import { LoginFormComponent } from '@/components/login-form/login-form.component';
 import { RegisterFormComponent } from '@/components/register-form/register-form.component';
-import { StoredUser } from '@/core/models/user.model';
 import { AuthService } from '@/core/services/auth.service';
 import { ToastService } from '@/core/services/toast.service';
 import { LoginFormData, RegisterFormData } from '@/core/types/form';
@@ -10,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router'; // For routing
+import { StoredUser } from '@bytebank-pro/types';
 import { catchError, Observable, of } from 'rxjs';
 
 /**

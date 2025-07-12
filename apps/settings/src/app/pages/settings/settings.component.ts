@@ -1,10 +1,10 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
 import { AccountFormComponent } from '@/components/account-form/account-form.component';
-import { IUser } from '@bytebank-pro/types';
-import { SettingsService, UserUpdateInput } from '../../core/services/settings.service';
-import { MfeToastService } from '../../core/services/mfe-toast.service';
-import { first } from 'rxjs';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { IUser } from '@bytebank-pro/types';
+import { first } from 'rxjs';
+import { MfeToastService } from '../../core/services/mfe-toast.service';
+import { SettingsService, UserUpdateInput } from '../../core/services/settings.service';
 
 @Component({
   selector: 'bb-settings-page',

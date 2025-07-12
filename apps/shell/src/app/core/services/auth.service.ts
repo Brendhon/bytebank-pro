@@ -1,20 +1,24 @@
 import { Injectable, inject } from '@angular/core';
-import { IUser } from '@bytebank-pro/types';
+import { IUser, StoredUser } from '@bytebank-pro/types';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { LOGIN_MUTATION, ME_QUERY, REGISTER_MUTATION } from '../graphql/auth.queries';
 import { AuthPayload, LoginInput, RegisterInput } from '../models/auth.model';
-import { StoredUser } from '../models/user.model';
 import { Router } from '@angular/router';
+import {
+  getTokenFromLocalStorage,
+  getUserDataFromLocalStorage,
+  removeTokenFromLocalStorage,
+  removeUserDataFromLocalStorage,
+  setTokenInLocalStorage,
+  storeUserDataInLocalStorage
+} from '@bytebank-pro/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly TOKEN_KEY = 'bytebank_auth_token';
-  private readonly USER_KEY = 'bytebank_user';
-
   private apollo = inject(Apollo);
   private router = inject(Router);
 
@@ -170,7 +174,8 @@ export class AuthService {
    */
   logout(): void {
     // Clear localStorage
-    localStorage.clear();
+    removeUserDataFromLocalStorage();
+    removeTokenFromLocalStorage();
 
     // Update the current user to null
     this._currentUser.next(null);
@@ -186,8 +191,8 @@ export class AuthService {
    * Stores user data in localStorage and updates the BehaviorSubject
    */
   private setUser(user: StoredUser): void {
-    localStorage.setItem(this.TOKEN_KEY, user.token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+    setTokenInLocalStorage(user.token);
+    storeUserDataInLocalStorage(user);
     this._currentUser.next(user);
   }
 
@@ -195,13 +200,12 @@ export class AuthService {
    * Loads the user from localStorage
    */
   private loadUserFromStorage(): void {
-    const storedToken = localStorage.getItem(this.TOKEN_KEY);
-    const storedUser = localStorage.getItem(this.USER_KEY);
+    const storedToken = getTokenFromLocalStorage();
+    const storedUser = getUserDataFromLocalStorage();
 
     if (storedToken && storedUser) {
       try {
-        const user = JSON.parse(storedUser) as StoredUser;
-        this._currentUser.next(user);
+        this._currentUser.next(storedUser);
       } catch (error) {
         console.error('Error loading user from localStorage', error);
         this.logout();
