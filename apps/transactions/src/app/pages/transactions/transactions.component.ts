@@ -81,10 +81,7 @@ export class TransactionsPageComponent implements OnInit {
           this._totalItems.set(paginatedTransactions.total);
           this._currentPage.set(paginatedTransactions.page);
         },
-        error: (error: Error) => {
-          console.error('Error loading transactions:', error);
-          this.toastService.showError('Falha ao carregar transações. Recarregue a página.');
-        }
+        error: (error: Error) => console.error('Error loading transactions:', error)
       });
   }
 
