@@ -1,0 +1,64 @@
+/* Account Form Component Styles */
+
+.card {
+  @apply bg-bytebank-light-gray rounded-sm p-7 shadow-md;
+}
+
+.account-form-content {
+  @apply flex flex-col gap-6 sm:flex-row;
+}
+
+.account-form-header {
+  @apply flex flex-col gap-4 mb-4;
+}
+
+.account-form-title {
+  @apply text-xl font-bold text-gray-800;
+}
+
+.account-form-illustration {
+  @apply w-full max-w-md mx-auto sm:mx-0;
+}
+
+.account-form-fields {
+  @apply flex flex-col gap-4 w-full md:max-w-sm;
+}
+
+.account-form-actions {
+  @apply flex flex-col justify-between items-center mt-6 sm:flex-row gap-4;
+}
+
+/* Delete Modal Styles */
+.delete-modal-actions {
+  @apply flex flex-col justify-center items-center mt-4 sm:flex-row gap-4;
+}
+
+.delete-modal-content {
+  @apply flex flex-col gap-4;
+}
+
+.delete-modal-description {
+  @apply text-gray-700 max-w-md text-center md:text-left;
+}
+
+/* Loading State */
+
+.bb-account-form-loading {
+  @apply opacity-50 pointer-events-none;
+}
+
+/* Responsive Design */
+
+@media (max-width: 640px) {
+  .account-form-content {
+    @apply flex-col;
+  }
+
+  .account-form-actions {
+    @apply flex-col;
+  }
+
+  .account-form-illustration {
+    @apply w-full max-w-xs;
+  }
+}

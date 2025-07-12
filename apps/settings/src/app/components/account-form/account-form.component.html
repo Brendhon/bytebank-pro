@@ -1,0 +1,114 @@
+<div class="card account-form-content">
+  <div class="account-form-header">
+    <h2 class="account-form-title">Minha conta</h2>
+
+    <bb-img
+      [src]="illustration"
+      [alt]="'Ilustração de configurações'"
+      size="3xl"
+      class="account-form-illustration"
+    />
+  </div>
+
+  <div class="account-form-fields">
+    <bb-input
+      label="Nome"
+      placeholder="Digite seu nome completo"
+      [variant]="nameVariant()"
+      [errorMessage]="formErrors().name"
+      [prefixIcon]="userIcon"
+      [value]="formData().name"
+      (valueChange)="onNameChange($event)"
+    />
+
+    <bb-input
+      label="Email"
+      placeholder="Digite seu email"
+      type="email"
+      [disabled]="true"
+      [variant]="emailVariant()"
+      [errorMessage]="formErrors().email"
+      [prefixIcon]="mailIcon"
+      [value]="formData().email"
+      (valueChange)="onEmailChange($event)"
+    />
+
+    <bb-input
+      label="Senha"
+      placeholder="Digite sua senha atual"
+      type="password"
+      [variant]="passwordVariant()"
+      [errorMessage]="formErrors().password"
+      [prefixIcon]="lockIcon"
+      [value]="formData().password"
+      (valueChange)="onPasswordChange($event)"
+    />
+
+    <bb-input
+      label="Nova senha"
+      placeholder="Digite sua nova senha"
+      type="password"
+      [variant]="newPasswordVariant()"
+      [errorMessage]="formErrors().newPassword"
+      [prefixIcon]="lockIcon"
+      [value]="formData().newPassword"
+      (valueChange)="onNewPasswordChange($event)"
+      [showPasswordToggle]="true"
+    />
+
+    <bb-input
+      label="Confirme sua senha"
+      placeholder="Repita sua nova senha"
+      type="password"
+      [variant]="confirmPasswordVariant()"
+      [errorMessage]="formErrors().confirmPassword"
+      [prefixIcon]="lockIcon"
+      [value]="formData().confirmPassword"
+      (valueChange)="onConfirmPasswordChange($event)"
+      [showPasswordToggle]="true"
+    />
+
+    <div class="account-form-actions">
+      <bb-button variant="orange" (buttonClick)="openDeleteModal()">
+        {{ getDeleteButtonText() }}
+      </bb-button>
+
+      <bb-button variant="blue" [loading]="isLoading()" (buttonClick)="onSubmit()">
+        {{ getSubmitButtonText() }}
+      </bb-button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Account Modal -->
+<bb-dialog
+  [isOpen]="isDeleteModalOpen()"
+  title="Você está prestes a excluir sua conta"
+  (dialogClose)="closeDeleteModal()"
+>
+  <div class="delete-modal-content">
+    <p class="delete-modal-description">
+      Esta ação removerá permanentemente sua conta e todos os dados associados a ela. Tem certeza de
+      que deseja continuar?
+    </p>
+
+    <bb-input
+      label="Confirme com sua senha"
+      placeholder="Digite sua senha"
+      type="password"
+      [prefixIcon]="lockIcon"
+      [value]="deletePassword()"
+      (valueChange)="onDeletePasswordChange($event)"
+      [showPasswordToggle]="true"
+      [errorMessage]="deletePassword() && deletePassword().length < 6 ? 'Senha inválida' : ''"
+    />
+
+    <div class="delete-modal-actions">
+      <bb-button variant="dark" (buttonClick)="closeDeleteModal()"> Cancelar </bb-button>
+
+      <bb-button variant="orange" [disabled]="isDeleteDisabled()" (buttonClick)="onDeleteAccount()">
+        Confirmar
+      </bb-button>
+    </div>
+  </div>
+</bb-dialog>

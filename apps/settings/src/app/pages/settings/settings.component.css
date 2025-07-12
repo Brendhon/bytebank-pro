@@ -1,0 +1,182 @@
+/* Settings Page Styles */
+
+.settings-page-container {
+  @apply max-w-6xl mx-auto p-6;
+}
+
+.settings-header {
+  @apply mb-8 text-center;
+}
+
+.settings-title {
+  @apply text-3xl font-bold text-gray-800 mb-2;
+}
+
+.settings-description {
+  @apply text-gray-600 text-lg;
+}
+
+.settings-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.settings-card {
+  @apply bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden;
+}
+
+.card-header {
+  @apply p-6 border-b border-gray-200;
+}
+
+.card-title {
+  @apply text-xl font-semibold text-gray-800 mb-2;
+}
+
+.card-description {
+  @apply text-gray-600 text-sm;
+}
+
+.card-content {
+  @apply p-6;
+}
+
+/* User Info Styles */
+.user-info {
+  @apply flex items-center mb-4;
+}
+
+.user-avatar {
+  @apply w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4;
+}
+
+.avatar-text {
+  @apply text-white font-semibold text-lg;
+}
+
+.user-details {
+  @apply flex-1;
+}
+
+.user-name {
+  @apply text-lg font-semibold text-gray-800;
+}
+
+.user-email {
+  @apply text-gray-600 text-sm;
+}
+
+.edit-button {
+  @apply w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+}
+
+/* Financial Summary Styles */
+.financial-summary {
+  @apply space-y-3;
+}
+
+.summary-item {
+  @apply flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0;
+}
+
+.summary-label {
+  @apply text-gray-600 text-sm;
+}
+
+.summary-value {
+  @apply font-semibold text-gray-800;
+}
+
+.summary-value.positive {
+  @apply text-green-600;
+}
+
+.summary-value.negative {
+  @apply text-red-600;
+}
+
+/* Preferences Styles */
+.preferences-list {
+  @apply space-y-4;
+}
+
+.preference-item {
+  @apply flex justify-between items-center py-2;
+}
+
+.preference-label {
+  @apply text-gray-700 text-sm;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  @apply relative inline-block w-12 h-6;
+}
+
+.toggle-switch input {
+  @apply opacity-0 w-0 h-0;
+}
+
+.toggle-switch label {
+  @apply absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-gray-300 rounded-full transition-colors duration-200;
+}
+
+.toggle-switch label:before {
+  @apply absolute content-[''] h-4 w-4 left-1 bottom-1 bg-white rounded-full transition-transform duration-200;
+}
+
+.toggle-switch input:checked + label {
+  @apply bg-blue-500;
+}
+
+.toggle-switch input:checked + label:before {
+  @apply transform translate-x-6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .settings-grid {
+    @apply grid-cols-1;
+  }
+
+  .settings-header {
+    @apply text-left;
+  }
+
+  .settings-title {
+    @apply text-2xl;
+  }
+}
+
+/* Focus States */
+.edit-button:focus {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+.toggle-switch input:focus + label {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Hover Effects */
+.settings-card:hover {
+  @apply shadow-lg transition-shadow duration-200;
+}
+
+/* Animation for card entrance */
+.settings-card {
+  @apply animate-fade-in;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}

@@ -1,21 +1,6 @@
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <div class="p-4 bg-white shadow rounded-lg">
-    <h2 class="text-lg font-semibold mb-2">Saldo Total</h2>
-    <p class="text-3xl font-bold text-primary-600">R$ 15.750,00</p>
-  </div>
-
-  <div class="p-4 bg-white shadow rounded-lg">
-    <h2 class="text-lg font-semibold mb-2">Entradas do Mês</h2>
-    <p class="text-3xl font-bold text-green-600">R$ 8.320,00</p>
-  </div>
-
-  <div class="p-4 bg-white shadow rounded-lg">
-    <h2 class="text-lg font-semibold mb-2">Saídas do Mês</h2>
-    <p class="text-3xl font-bold text-red-600">R$ 3.150,00</p>
-  </div>
-
-  <div class="col-span-1 md:col-span-2 lg:col-span-3 p-4 bg-white shadow rounded-lg">
-    <h2 class="text-lg font-semibold mb-4">Resumo por Categoria</h2>
-    <p class="text-gray-500">Os gráficos serão implementados em breve</p>
-  </div>
-</div>
+<!-- Account Form Dialog -->
+<bb-account-form
+  [user]="currentUser()"
+  (accountUpdate)="handleAccountUpdate($event)"
+  (accountDelete)="handleAccountDelete($event)"
+/>
