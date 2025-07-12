@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit {
    * This method is used to set the initial value of the userName observable.
    */
   private initUserName(): Observable<string> {
-    return this.authService.getCurrentUser().pipe(
+    return this.authService.currentUser$?.pipe(
       map((user) => user?.name || ''),
       startWith(''),
       takeUntilDestroyed(this.destroyRef)
