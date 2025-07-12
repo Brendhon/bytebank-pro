@@ -73,6 +73,7 @@ describe('MfeUserUpdateService', () => {
       service.notifyUserUpdated(mockUser);
 
       const callArgs = dispatchEventSpy.calls.mostRecent().args[0];
+
       expect(callArgs).toBeInstanceOf(CustomEvent);
       expect(callArgs.type).toBe('bytebank:user-update');
       expect(callArgs.detail).toEqual({
@@ -85,6 +86,7 @@ describe('MfeUserUpdateService', () => {
       service.notifyUserDeleted();
 
       const callArgs = dispatchEventSpy.calls.mostRecent().args[0];
+
       expect(callArgs).toBeInstanceOf(CustomEvent);
       expect(callArgs.type).toBe('bytebank:user-update');
       expect(callArgs.detail).toEqual({

@@ -136,6 +136,7 @@ describe('MfeToastService', () => {
       service.showSuccess(message);
 
       const callArgs = dispatchEventSpy.calls.mostRecent().args[0];
+
       expect(callArgs).toBeInstanceOf(CustomEvent);
       expect(callArgs.type).toBe('bytebank:toast');
       expect(callArgs.detail).toEqual({

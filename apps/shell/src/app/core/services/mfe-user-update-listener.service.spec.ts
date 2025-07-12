@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { IUser, StoredUser } from '@bytebank-pro/types';
+import { IUser } from '@bytebank-pro/types';
 import { AuthService } from './auth.service';
 import { MfeUserUpdateListenerService } from './mfe-user-update-listener.service';
 
@@ -113,8 +113,8 @@ describe('MfeUserUpdateListenerService', () => {
     });
 
     it('should not update user if current user is null', () => {
-      // Mock AuthService to return null user
-      (authService.user as any) = null;
+      // Mock AuthService to return null user using a spy
+      spyOnProperty(authService, 'user', 'get').and.returnValue(null);
 
       const mockUser: IUser = {
         _id: '123',

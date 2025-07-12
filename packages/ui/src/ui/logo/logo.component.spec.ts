@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { LOGOS } from '@bytebank-pro/shared-assets';
 import { ImgComponent } from '../img/img.component';
 import { LogoComponent } from './logo.component';
@@ -7,7 +6,6 @@ import { LogoComponent } from './logo.component';
 describe('LogoComponent', () => {
   let component: LogoComponent;
   let fixture: ComponentFixture<LogoComponent>;
-  let element: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +15,6 @@ describe('LogoComponent', () => {
     fixture = TestBed.createComponent(LogoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    element = fixture.debugElement.query(By.css('[data-testid="logo"]'))?.nativeElement;
   });
 
   it('should create the component', () => {
