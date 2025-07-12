@@ -1,6 +1,6 @@
 <!-- Account Form Dialog -->
 <bb-account-form
   [user]="currentUser()"
-  (accountUpdate)="handleAccountUpdate($event)"
+  (accountUpdate)="handleAccountUpdate($event.userData, $event.password)"
   (accountDelete)="handleAccountDelete($event)"
 />

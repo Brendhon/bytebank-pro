@@ -92,13 +92,13 @@ export class AccountFormComponent {
   deletePassword = signal('');
 
   // Event emitters using modern output() API
-  accountUpdate = output<Partial<IUser>>();
+  accountUpdate = output<{ userData: Partial<IUser>; password: string }>();
   accountDelete = output<string>();
 
   // Computed properties for form validation
   isFormValid = computed(() => {
     const data = this.formData();
-    return Boolean(data.name && data.email);
+    return Boolean(data.name && data.email && data.password);
   });
 
   isPasswordFormValid = computed(() => {
@@ -209,7 +209,7 @@ export class AccountFormComponent {
     }
 
     // Emit the account data
-    this.accountUpdate.emit(accountData);
+    this.accountUpdate.emit({ userData: accountData, password: this.formData().password });
 
     // Reset form and close dialog
     setTimeout(() => {

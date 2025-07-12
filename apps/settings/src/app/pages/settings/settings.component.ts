@@ -51,9 +51,11 @@ export class SettingsPageComponent implements OnInit {
 
   /**
    * Handles account update from the form
+   * @param userData - The user data to update
+   * @param password - The password to validate
    */
-  handleAccountUpdate(userData: Partial<IUser>): void {
-    this.updateUserData(userData);
+  handleAccountUpdate(userData: Partial<IUser>, password: string): void {
+    this.validatePassword(password, () => this.updateUserData(userData));
   }
 
   /**
@@ -78,8 +80,12 @@ export class SettingsPageComponent implements OnInit {
       .validatePassword(password)
       .pipe(first())
       .subscribe({
-        next: (isValid: boolean) => isValid && callback(),
-        error: () => this.toastService.showError('Senha inválida. Tente novamente.')
+        next: (isValid: boolean) =>
+          isValid ? callback() : this.toastService.showError('Senha inválida. Tente novamente.'),
+        error: (error: Error) => {
+          console.error('Erro ao validar senha:', error);
+          this.toastService.showError('Erro ao validar senha. Tente novamente.');
+        }
       });
   }
 

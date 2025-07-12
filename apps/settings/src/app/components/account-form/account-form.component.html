@@ -34,6 +34,19 @@
     />
 
     <bb-input
+      label="Senha"
+      placeholder="Digite sua senha atual"
+      type="password"
+      [required]="true"
+      [variant]="passwordVariant()"
+      [errorMessage]="formErrors().password"
+      [prefixIcon]="lockIcon"
+      [value]="formData().password"
+      (valueChange)="onPasswordChange($event)"
+      [showPasswordToggle]="true"
+    />
+
+    <bb-input
       label="Nova senha"
       placeholder="Digite sua nova senha"
       type="password"
@@ -62,7 +75,12 @@
         {{ getDeleteButtonText() }}
       </bb-button>
 
-      <bb-button variant="blue" [loading]="isLoading()" (buttonClick)="onSubmit()">
+      <bb-button
+        variant="blue"
+        [loading]="isLoading()"
+        (buttonClick)="onSubmit()"
+        [disabled]="!isFormValid()"
+      >
         {{ getSubmitButtonText() }}
       </bb-button>
     </div>
