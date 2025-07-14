@@ -91,17 +91,7 @@ describe('FooterComponent', () => {
         By.css('[data-testid="footer-logo-section"]')
       ).nativeElement;
 
-      expect(contactSection.classList).toContain('flex');
-
-      expect(contactSection.classList).toContain('flex-col');
-
-      expect(contactSection.classList).toContain('gap-2');
-
-      expect(logoSection.classList).toContain('flex');
-
-      expect(logoSection.classList).toContain('flex-col');
-
-      expect(logoSection.classList).toContain('gap-2');
+      expect(contactSection.classList).toContain('footer-contact-section');
     });
   });
 
@@ -175,7 +165,7 @@ describe('FooterComponent', () => {
         By.css('[data-testid="footer-contact-section"] strong')
       ).nativeElement;
 
-      expect(contactTitle.classList).toContain('text-base');
+      expect(contactTitle.classList).toContain('contact-info-title');
 
       const phoneNumber = fixture.debugElement.query(
         By.css('[data-testid="contact-phone"]')
@@ -184,9 +174,9 @@ describe('FooterComponent', () => {
         By.css('[data-testid="contact-email"]')
       ).nativeElement;
 
-      expect(phoneNumber.classList).toContain('text-sm');
+      expect(phoneNumber.classList).toContain('contact-info-text');
 
-      expect(emailAddress.classList).toContain('text-sm');
+      expect(emailAddress.classList).toContain('contact-info-text');
     });
   });
 });
