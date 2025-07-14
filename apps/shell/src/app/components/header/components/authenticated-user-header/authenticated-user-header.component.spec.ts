@@ -71,10 +71,6 @@ describe('AuthenticatedUserHeaderComponent', () => {
   it('should have the correct container structure', () => {
     expect(element).toBeTruthy();
 
-    expect(element.classList.contains('flex')).toBeTruthy();
-
-    expect(element.classList.contains('items-center')).toBeTruthy();
-
-    expect(element.classList.contains('gap-6')).toBeTruthy();
+    expect(element.classList.contains('authenticated-user-container')).toBeTruthy();
   });
 });
