@@ -1,41 +1,41 @@
 # MFE User Update Integration
 
-Este documento explica como funciona a integração de atualização de dados do usuário entre Micro Frontends (MFEs) e o Shell usando CustomEvents.
+This document explains how the user data update integration between Micro Frontends (MFEs) and the Shell works using CustomEvents.
 
-## Arquitetura
+## Architecture
 
 ```
 Settings MFE → CustomEvent → Shell → AuthService → localStorage
 ```
 
-## Componentes
+## Components
 
 ### 1. MfeUserUpdateService (Settings MFE)
 
-Localizado em: `apps/settings/src/app/core/services/mfe-user-update.service.ts`
+Located at: `apps/settings/src/app/core/services/mfe-user-update.service.ts`
 
-Responsável por disparar CustomEvents para o Shell atualizar os dados do usuário no localStorage.
+Responsible for dispatching CustomEvents for the Shell to update the user data in localStorage.
 
-**Métodos disponíveis:**
+**Available methods:**
 
-- `notifyUserUpdated(user: IUser)` - Notifica atualização de dados do usuário
-- `notifyUserDeleted()` - Notifica exclusão da conta do usuário
+- `notifyUserUpdated(user: IUser)` - Notifies of user data updates
+- `notifyUserDeleted()` - Notifies of user account deletion
 
 ### 2. MfeUserUpdateListenerService (Shell)
 
-Localizado em: `apps/shell/src/app/core/services/mfe-user-update-listener.service.ts`
+Located at: `apps/shell/src/app/core/services/mfe-user-update-listener.service.ts`
 
-Responsável por escutar CustomEvents dos MFEs e atualizar o AuthService.
+Responsible for listening to CustomEvents from MFEs and updating the AuthService.
 
 ### 3. AuthService (Shell)
 
-Localizado em: `apps/shell/src/app/core/services/auth.service.ts`
+Located at: `apps/shell/src/app/core/services/auth.service.ts`
 
-Serviço principal que gerencia o estado do usuário e localStorage.
+The main service that manages the user state and localStorage.
 
-## Como Usar
+## How to Use
 
-### No Settings MFE
+### In the Settings MFE
 
 ```typescript
 import { MfeUserUpdateService } from '@/core/services/mfe-user-update.service';
@@ -44,20 +44,20 @@ export class SettingsComponent {
   private readonly userUpdateService = inject(MfeUserUpdateService);
 
   handleUserUpdate(updatedUser: IUser): void {
-    // Após atualizar com sucesso na API
+    // After successfully updating in the API
     this.userUpdateService.notifyUserUpdated(updatedUser);
   }
 
   handleUserDeletion(): void {
-    // Após deletar com sucesso na API
+    // After successfully deleting in the API
     this.userUpdateService.notifyUserDeleted();
   }
 }
 ```
 
-### Evento CustomEvent
+### CustomEvent Event
 
-O MfeUserUpdateService dispara eventos com a seguinte estrutura:
+The MfeUserUpdateService dispatches events with the following structure:
 
 ```typescript
 interface UserUpdateEventDetail {
@@ -66,7 +66,7 @@ interface UserUpdateEventDetail {
 }
 ```
 
-Evento disparado para atualização:
+Event dispatched for an update:
 
 ```typescript
 window.dispatchEvent(
@@ -79,7 +79,7 @@ window.dispatchEvent(
 );
 ```
 
-Evento disparado para exclusão:
+Event dispatched for a deletion:
 
 ```typescript
 window.dispatchEvent(
@@ -92,61 +92,61 @@ window.dispatchEvent(
 );
 ```
 
-## Integração Atual
+## Current Integration
 
 ### Settings MFE
 
-O componente `SettingsPageComponent` já está integrado com o MfeUserUpdateService e notifica o Shell sobre:
+The `SettingsPageComponent` component is already integrated with the MfeUserUpdateService and notifies the Shell about:
 
-- ✅ Atualização de dados do usuário (nome, email, senha)
-- ✅ Exclusão da conta do usuário
+- ✅ User data updates (name, email, password)
+- ✅ User account deletion
 
 ### Shell
 
-O `MfeUserUpdateListenerService` é inicializado automaticamente no componente principal do Shell (`App`) e escuta eventos do Settings MFE.
+The `MfeUserUpdateListenerService` is automatically initialized in the Shell's main component (`App`) and listens for events from the Settings MFE.
 
-## Comportamento
+## Behavior
 
-### Atualização de Usuário
+### User Update
 
-1. **Settings MFE** atualiza os dados via API
-2. **Settings MFE** dispara evento `userUpdated` com novos dados
-3. **Shell** recebe o evento e atualiza o localStorage
-4. **Shell** preserva o token de autenticação
-5. **Shell** atualiza apenas nome e email no StoredUser
+1. **Settings MFE** updates the data via API
+2. **Settings MFE** dispatches a `userUpdated` event with the new data
+3. **Shell** receives the event and updates localStorage
+4. **Shell** preserves the authentication token
+5. **Shell** updates only the name and email in the StoredUser
 
-### Exclusão de Usuário
+### User Deletion
 
-1. **Settings MFE** deleta a conta via API
-2. **Settings MFE** dispara evento `userDeleted`
-3. **Shell** recebe o evento e executa logout
-4. **Shell** limpa localStorage e redireciona para login
+1. **Settings MFE** deletes the account via API
+2. **Settings MFE** dispatches a `userDeleted` event
+3. **Shell** receives the event and performs a logout
+4. **Shell** clears localStorage and redirects to the login page
 
-## Vantagens
+## Advantages
 
-1. **Sincronização**: Dados do usuário ficam sincronizados entre MFE e Shell
-2. **Consistência**: localStorage sempre reflete os dados mais recentes
-3. **Desacoplamento**: MFEs não precisam conhecer a implementação do AuthService
-4. **Segurança**: Token de autenticação é preservado durante atualizações
-5. **Manutenibilidade**: Mudanças no AuthService são aplicadas automaticamente
+1. **Synchronization**: User data remains synchronized between the MFE and the Shell
+2. **Consistency**: localStorage always reflects the most recent data
+3. **Decoupling**: MFEs do not need to know the implementation of the AuthService
+4. **Security**: The authentication token is preserved during updates
+5. **Maintainability**: Changes in the AuthService are applied automatically
 
-## Exemplo de Uso Completo
+## Complete Usage Example
 
 ```typescript
-// No Settings MFE
+// In the Settings MFE
 this.settingsService.updateUser(userData).subscribe({
   next: (updatedUser: IUser) => {
     this.currentUser.set(updatedUser);
-    this.toastService.showSuccess('Dados atualizados com sucesso!');
+    this.toastService.showSuccess('Data updated successfully!');
 
-    // Notificar Shell sobre a atualização
+    // Notify the Shell about the update
     this.userUpdateService.notifyUserUpdated(updatedUser);
   },
   error: (error) => {
-    console.error('Erro:', error);
-    this.toastService.showError('Falha ao atualizar dados.');
+    console.error('Error:', error);
+    this.toastService.showError('Failed to update data.');
   }
 });
 ```
 
-O localStorage do Shell será atualizado automaticamente através do mecanismo de CustomEvents, mantendo a sincronização entre os dados.
+The Shell's localStorage will be updated automatically through the CustomEvents mechanism, maintaining data synchronization.

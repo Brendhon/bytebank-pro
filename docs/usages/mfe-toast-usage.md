@@ -1,22 +1,22 @@
 # MFE Toast Integration
 
-Este documento explica como funciona a integração de toast entre Micro Frontends (MFEs) e o Shell usando CustomEvents.
+This document explains how the toast integration between Micro Frontends (MFEs) and the Shell works using CustomEvents.
 
-## Arquitetura
+## Architecture
 
 ```
 MFE (Transactions) → CustomEvent → Shell → ToastService → ToastComponent
 ```
 
-## Componentes
+## Components
 
 ### 1. MfeToastService (MFE)
 
-Localizado em: `apps/transactions/src/app/core/services/mfe-toast.service.ts`
+Located at: `apps/transactions/src/app/core/services/mfe-toast.service.ts`
 
-Responsável por disparar CustomEvents para o Shell exibir toasts.
+Responsible for dispatching CustomEvents for the Shell to display toasts.
 
-**Métodos disponíveis:**
+**Available methods:**
 
 - `showSuccess(message: string, duration?: number)`
 - `showError(message: string, duration?: number)`
@@ -24,19 +24,19 @@ Responsável por disparar CustomEvents para o Shell exibir toasts.
 
 ### 2. MfeToastListenerService (Shell)
 
-Localizado em: `apps/shell/src/app/core/services/mfe-toast-listener.service.ts`
+Located at: `apps/shell/src/app/core/services/mfe-toast-listener.service.ts`
 
-Responsável por escutar CustomEvents dos MFEs e chamar o ToastService.
+Responsible for listening to CustomEvents from MFEs and calling the ToastService.
 
 ### 3. ToastService (Shell)
 
-Localizado em: `apps/shell/src/app/core/services/toast.service.ts`
+Located at: `apps/shell/src/app/core/services/toast.service.ts`
 
-Serviço principal que exibe os toasts usando o ToastComponent.
+The main service that displays toasts using the ToastComponent.
 
-## Como Usar
+## How to Use
 
-### No MFE (Transactions)
+### In the MFE (Transactions)
 
 ```typescript
 import { MfeToastService } from '@/core/services/mfe-toast.service';
@@ -58,9 +58,9 @@ export class MyComponent {
 }
 ```
 
-### Evento CustomEvent
+### CustomEvent Event
 
-O MfeToastService dispara eventos com a seguinte estrutura:
+The MfeToastService dispatches events with the following structure:
 
 ```typescript
 interface ToastEventDetail {
@@ -70,7 +70,7 @@ interface ToastEventDetail {
 }
 ```
 
-Evento disparado:
+Event dispatched:
 
 ```typescript
 window.dispatchEvent(
@@ -84,35 +84,35 @@ window.dispatchEvent(
 );
 ```
 
-## Integração Atual
+## Current Integration
 
 ### Transactions MFE
 
-O componente `TransactionsPageComponent` já está integrado com o MfeToastService e exibe toasts para:
+The `TransactionsPageComponent` component is already integrated with the MfeToastService and displays toasts for:
 
-- ✅ Criação de transação bem-sucedida
-- ✅ Atualização de transação bem-sucedida
-- ✅ Exclusão de transação bem-sucedida
-- ❌ Erro ao criar transação
-- ❌ Erro ao atualizar transação
-- ❌ Erro ao excluir transação
-- ❌ Erro ao carregar transações
+- ✅ Successful transaction creation
+- ✅ Successful transaction update
+- ✅ Successful transaction deletion
+- ❌ Error creating transaction
+- ❌ Error updating transaction
+- ❌ Error deleting transaction
+- ❌ Error loading transactions
 
 ### Shell
 
-O `MfeToastListenerService` é inicializado automaticamente no componente principal do Shell (`App`) e escuta eventos de todos os MFEs.
+The `MfeToastListenerService` is automatically initialized in the Shell's main component (`App`) and listens for events from all MFEs.
 
-## Vantagens
+## Advantages
 
-1. **Reutilização**: O ToastComponent é reutilizado em todos os MFEs
-2. **Consistência**: Todos os toasts seguem o mesmo padrão visual
-3. **Desacoplamento**: MFEs não precisam conhecer a implementação do toast
-4. **Manutenibilidade**: Mudanças no toast são aplicadas automaticamente em todos os MFEs
+1. **Reusability**: The ToastComponent is reused across all MFEs
+2. **Consistency**: All toasts follow the same visual pattern
+3. **Decoupling**: MFEs do not need to know the toast implementation
+4. **Maintainability**: Changes to the toast are automatically applied to all MFEs
 
-## Exemplo de Uso Completo
+## Complete Usage Example
 
 ```typescript
-// No MFE
+// In the MFE
 this.transactionsService.createTransaction(data).subscribe({
   next: () => {
     this.toastService.showSuccess('Transaction created successfully!');
@@ -125,4 +125,4 @@ this.transactionsService.createTransaction(data).subscribe({
 });
 ```
 
-O toast será exibido no Shell automaticamente através do mecanismo de CustomEvents.
+The toast will be displayed in the Shell automatically through the CustomEvents mechanism.

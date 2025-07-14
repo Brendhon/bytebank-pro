@@ -239,13 +239,13 @@ export const DynamicState: Story = {
 
 ---
 
-## 4. Documentação no Storybook
+## 4. Documentation in Storybook
 
-Uma documentação clara e completa é crucial para a usabilidade do Design System.
+Clear and complete documentation is crucial for the usability of the Design System.
 
-### A. Documentação do Componente (Meta Level)
+### A. Component Documentation (Meta Level)
 
-Utilize `parameters.docs.description.component` na `meta` da story para descrever o propósito, casos de uso e considerações de acessibilidade do componente.
+Use `parameters.docs.description.component` in the story's `meta` to describe the component's purpose, use cases, and accessibility considerations.
 
 ```typescript
 const meta: Meta<ComponenteComponent> = {
@@ -254,21 +254,21 @@ const meta: Meta<ComponenteComponent> = {
     docs: {
       description: {
         component: `
-## Descrição
+## Description
 
-O componente Button fornece uma interface clicável para ações em formulários, diálogos e outros elementos da UI.
+The Button component provides a clickable interface for actions in forms, dialogs, and other UI elements.
 
-## Quando Usar
+## When to Use
 
-- Para ações primárias em formulários ou cards
-- Para acionar uma função ou navegação
-- Para confirmar ou cancelar operações
+- For primary actions in forms or cards
+- To trigger a function or navigation
+- To confirm or cancel operations
 
-## Acessibilidade
+## Accessibility
 
-- Suporta navegação por teclado
-- Implementa aria-disabled quando desativado
-- Mantém contraste adequado em todos os estados
+- Supports keyboard navigation
+- Implements aria-disabled when deactivated
+- Maintains adequate contrast in all states
         `
       }
     }
@@ -276,9 +276,9 @@ O componente Button fornece uma interface clicável para ações em formulários
 };
 ```
 
-### B. Documentação das Stories Individuais
+### B. Individual Story Documentation
 
-Para stories específicas que necessitam de mais contexto, use `parameters.docs.description.story`. Inclua exemplos de código relevantes no formato Markdown.
+For specific stories that need more context, use `parameters.docs.description.story`. Include relevant code examples in Markdown format.
 
 ````typescript
 export const WithIcon: Story = {
@@ -289,10 +289,10 @@ export const WithIcon: Story = {
     docs: {
       description: {
         story: `
-### Botão com Ícone
+### Button with Icon
 
-Esta variante combina texto e ícone para melhor comunicação visual.
-O ícone deve sempre reforçar a mensagem do texto, nunca contradizê-la.
+This variant combines text and an icon for better visual communication.
+The icon should always reinforce the text's message, never contradict it.
 
 ```html
 <bb-button variant="primary">

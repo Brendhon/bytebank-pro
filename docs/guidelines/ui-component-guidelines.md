@@ -4,6 +4,8 @@ These requirements apply **exclusively** to components within the `@bytebank-pro
 
 ### 📝 Usage Documentation and Storybook
 
+- **Language**: All documentation, including usage files (`*.md`) and Storybook stories (`*.stories.ts`), must be written in **English**. This includes all descriptions, comments, and examples.
+
 - **When creating a new component in `@bytebank-pro/ui`:**
 
   - You must create a corresponding usage documentation file named after the component's selector. For example, if your component selector is `bb-button`, the documentation file must be `docs/usages/bb-button-usage.md`.
