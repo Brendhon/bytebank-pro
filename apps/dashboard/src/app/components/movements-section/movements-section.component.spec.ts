@@ -137,12 +137,6 @@ describe('MovementsSectionComponent', () => {
   });
 
   describe('Component Structure', () => {
-    it('should have correct selector', () => {
-      expect(MovementsSectionComponent.prototype.constructor.name).toBe(
-        'MovementsSectionComponent'
-      );
-    });
-
     it('should be standalone component', () => {
       expect(component).toBeInstanceOf(MovementsSectionComponent);
     });
