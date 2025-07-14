@@ -1,10 +1,10 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { BehaviorSubject, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { skip, take } from 'rxjs/operators';
 import { IUser, StoredUser } from '@bytebank-pro/types';
-import { AuthPayload, LoginInput, RegisterInput } from '../models/auth.model';
+import { AuthPayload } from '../models/auth.model';
 
 import { AuthService } from './auth.service';
 
@@ -85,21 +85,21 @@ describe('AuthService', () => {
 
     it('should return current user when logged in', () => {
       // Simulate logged in user
-      (service as any)._currentUser.next(mockStoredUser);
+      service.setUser(mockStoredUser);
 
       expect(service.user).toEqual(mockStoredUser);
     });
 
     it('should return true for isLoggedIn when user exists', () => {
       // Simulate logged in user
-      (service as any)._currentUser.next(mockStoredUser);
+      service.setUser(mockStoredUser);
 
       expect(service.isLoggedIn).toBeTrue();
     });
 
     it('should return token when user exists', () => {
       // Simulate logged in user
-      (service as any)._currentUser.next(mockStoredUser);
+      service.setUser(mockStoredUser);
 
       expect(service.token).toBe('mock-token-123');
     });
@@ -125,7 +125,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should throw error when email is missing', (done) => {
+    it('should throw error when email is missing and password is valid in login', (done) => {
       service.login('', 'password123').subscribe({
         next: () => done.fail('Should have thrown error'),
         error: (error) => {
@@ -135,7 +135,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should throw error when password is missing', (done) => {
+    it('should throw error when password is missing and email is valid in login', (done) => {
       service.login('test@example.com', '').subscribe({
         next: () => done.fail('Should have thrown error'),
         error: (error) => {
@@ -157,7 +157,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should handle Apollo mutation error', (done) => {
+    it('should handle Apollo mutation error when login fails', (done) => {
       const errorMessage = 'Network error';
       apolloSpy.mutate.and.returnValue(throwError(() => new Error(errorMessage)));
 
@@ -206,7 +206,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should throw error when email is missing', (done) => {
+    it('should throw error when email is missing in registration', (done) => {
       service.register('Test User', '', 'password123').subscribe({
         next: () => done.fail('Should have thrown error'),
         error: (error) => {
@@ -216,7 +216,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should throw error when password is missing', (done) => {
+    it('should throw error when password is missing and email is valid in registration', (done) => {
       service.register('Test User', 'test@example.com', '').subscribe({
         next: () => done.fail('Should have thrown error'),
         error: (error) => {
@@ -238,7 +238,7 @@ describe('AuthService', () => {
       });
     });
 
-    it('should handle Apollo mutation error', (done) => {
+    it('should handle Apollo mutation error when registration fails', (done) => {
       const errorMessage = 'Registration error';
       apolloSpy.mutate.and.returnValue(throwError(() => new Error(errorMessage)));
 
@@ -348,7 +348,7 @@ describe('AuthService', () => {
   describe('logout', () => {
     it('should clear user data and redirect', () => {
       // Set up a logged in user
-      (service as any)._currentUser.next(mockStoredUser);
+      service.setUser(mockStoredUser);
 
       service.logout();
 
@@ -393,14 +393,14 @@ describe('AuthService', () => {
           error: undefined
         })
       );
-      spyOn(service as any, 'setUserFromIUser');
+      spyOn(service, 'setUserFromIUser');
 
       service.validateUser();
       tick();
 
       expect(apolloSpy.query).toHaveBeenCalled();
 
-      expect((service as any).setUserFromIUser).toHaveBeenCalledWith(mockIUser);
+      expect(service.setUserFromIUser).toHaveBeenCalledWith(mockIUser);
     }));
 
     it('should logout when validation fails', fakeAsync(() => {
@@ -445,7 +445,7 @@ describe('AuthService', () => {
       });
 
       // Simulate user login
-      (service as any)._currentUser.next(mockStoredUser);
+      service.setUser(mockStoredUser);
     });
 
     it('should emit null when user logs out', (done) => {
@@ -457,7 +457,7 @@ describe('AuthService', () => {
       });
 
       // Simulate user logout
-      (service as any)._currentUser.next(null);
+      service.setUser(null);
     });
   });
 });

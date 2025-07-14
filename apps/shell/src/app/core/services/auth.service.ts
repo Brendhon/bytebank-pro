@@ -190,13 +190,15 @@ export class AuthService {
   /**
    * Stores user data in localStorage and updates the BehaviorSubject
    */
-  private setUser(user: StoredUser): void {
-    setTokenInLocalStorage(user.token);
-    storeUserDataInLocalStorage(user);
+  public setUser(user: StoredUser | null): void {
+    if (user) {
+      setTokenInLocalStorage(user.token);
+      storeUserDataInLocalStorage(user);
+    }
     this._currentUser.next(user);
   }
 
-  private setUserFromIUser(user: IUser): void {
+  public setUserFromIUser(user: IUser): void {
     const storedUser: StoredUser = {
       _id: user._id!,
       name: user.name,

@@ -220,6 +220,7 @@ describe('SettingsPageComponent', () => {
       expect(toastService.showSuccess).toHaveBeenCalledWith(
         'Dados da conta atualizados com sucesso!'
       );
+
       expect(userUpdateService.notifyUserUpdated).toHaveBeenCalledWith(updatedUser);
     });
 

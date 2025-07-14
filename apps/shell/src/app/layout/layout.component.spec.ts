@@ -2,7 +2,7 @@ import { AuthService } from '@/core/services/auth.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { IUser } from '@bytebank-pro/types';
+import { IUser, StoredUser } from '@bytebank-pro/types';
 import { BehaviorSubject, of } from 'rxjs';
 import { skip, take } from 'rxjs/operators';
 import { LayoutComponent } from './layout.component';
@@ -12,11 +12,11 @@ describe('LayoutComponent', () => {
   let fixture: ComponentFixture<LayoutComponent>;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let routerSpy: jasmine.SpyObj<Router>;
-  let currentUserSubject: BehaviorSubject<any>;
+  let currentUserSubject: BehaviorSubject<StoredUser | null>;
 
   beforeEach(async () => {
     // Create BehaviorSubject for currentUser$
-    currentUserSubject = new BehaviorSubject<any>(null);
+    currentUserSubject = new BehaviorSubject<StoredUser | null>(null);
 
     // Create spies for dependencies
     authServiceSpy = jasmine.createSpyObj(

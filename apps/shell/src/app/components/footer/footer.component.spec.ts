@@ -87,9 +87,6 @@ describe('FooterComponent', () => {
       const contactSection = fixture.debugElement.query(
         By.css('[data-testid="footer-contact-section"]')
       ).nativeElement;
-      const logoSection = fixture.debugElement.query(
-        By.css('[data-testid="footer-logo-section"]')
-      ).nativeElement;
 
       expect(contactSection.classList).toContain('footer-contact-section');
     });
