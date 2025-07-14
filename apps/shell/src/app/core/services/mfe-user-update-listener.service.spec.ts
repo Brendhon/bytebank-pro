@@ -10,18 +10,20 @@ describe('MfeUserUpdateListenerService', () => {
   let removeEventListenerSpy: jasmine.Spy;
 
   beforeEach(() => {
-    const authServiceSpy = jasmine.createSpyObj(
-      'AuthService',
-      ['updateStoredUser', 'logout', 'user'],
-      {
-        user: {
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['updateStoredUser', 'logout']);
+
+    // Configure the user property as a getter with default value
+    Object.defineProperty(authServiceSpy, 'user', {
+      configurable: true,
+      get: function () {
+        return {
           _id: '123',
           name: 'Current User',
           email: 'current@example.com',
           token: 'current-token'
-        }
+        };
       }
-    );
+    });
 
     TestBed.configureTestingModule({
       providers: [MfeUserUpdateListenerService, { provide: AuthService, useValue: authServiceSpy }]
