@@ -21,6 +21,12 @@ describe('WelcomeCardComponent', () => {
   });
 
   describe('Input Properties', () => {
+    beforeEach(() => {
+      // Set required inputs before testing
+      fixture.componentRef.setInput('name', 'Test User');
+      fixture.componentRef.setInput('balance', 1000);
+    });
+
     it('should have default account type', () => {
       expect(component.accountType()).toBe('Conta Corrente');
     });
@@ -42,9 +48,29 @@ describe('WelcomeCardComponent', () => {
       expect(component.accountType).toBeDefined();
       expect(component.date).toBeDefined();
     });
+
+    it('should accept custom account type', () => {
+      fixture.componentRef.setInput('accountType', 'Conta Poupança');
+      fixture.detectChanges();
+
+      expect(component.accountType()).toBe('Conta Poupança');
+    });
+
+    it('should accept custom date', () => {
+      const customDate = new Date('2024-01-15');
+      fixture.componentRef.setInput('date', customDate);
+      fixture.detectChanges();
+
+      expect(component.date()).toEqual(customDate);
+    });
   });
 
   describe('Balance Visibility', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('name', 'Test User');
+      fixture.componentRef.setInput('balance', 1000);
+    });
+
     it('should initialize with balance hidden', () => {
       expect(component.isBalanceVisible()).toBe(false);
     });
@@ -93,6 +119,11 @@ describe('WelcomeCardComponent', () => {
   });
 
   describe('Template Integration', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('name', 'Test User');
+      fixture.componentRef.setInput('balance', 1000);
+    });
+
     it('should render component without errors', () => {
       fixture.detectChanges();
 
@@ -101,17 +132,29 @@ describe('WelcomeCardComponent', () => {
 
     it('should have proper component structure', () => {
       fixture.detectChanges();
-      const componentElement = fixture.nativeElement.querySelector('bb-welcome-card');
+      const componentElement = fixture.nativeElement.querySelector(
+        '[data-testid="user-card-component"]'
+      );
 
       expect(componentElement).toBeTruthy();
+    });
+
+    it('should display user name', () => {
+      fixture.componentRef.setInput('name', 'João Silva');
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.textContent).toContain('João Silva');
+    });
+
+    it('should display account type', () => {
+      fixture.componentRef.setInput('accountType', 'Conta Poupança');
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.textContent).toContain('Conta Poupança');
     });
   });
 
   describe('Component Structure', () => {
-    it('should have correct selector', () => {
-      expect(component.constructor.name).toBe('WelcomeCardComponent');
-    });
-
     it('should be standalone component', () => {
       expect(component).toBeInstanceOf(WelcomeCardComponent);
     });
@@ -124,13 +167,30 @@ describe('WelcomeCardComponent', () => {
     it('should have toggle method', () => {
       expect(typeof component.toggleBalanceVisibility).toBe('function');
     });
+
+    it('should have isBalanceVisible signal', () => {
+      expect(component.isBalanceVisible).toBeDefined();
+      expect(typeof component.isBalanceVisible).toBe('function');
+    });
   });
 
   describe('Accessibility', () => {
+    beforeEach(() => {
+      fixture.componentRef.setInput('name', 'Test User');
+      fixture.componentRef.setInput('balance', 1000);
+    });
+
     it('should have proper component structure for accessibility', () => {
       fixture.detectChanges();
 
       expect(fixture.nativeElement).toBeTruthy();
+    });
+
+    it('should have toggle button for balance visibility', () => {
+      fixture.detectChanges();
+      const toggleButton = fixture.nativeElement.querySelector('button');
+
+      expect(toggleButton).toBeTruthy();
     });
   });
 });
