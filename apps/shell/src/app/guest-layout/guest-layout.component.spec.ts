@@ -9,7 +9,7 @@ import { HeaderComponent } from '@/components/header/header.component';
 import { FooterComponent } from '@/components/footer/footer.component';
 import { LoginFormComponent } from '@/components/login-form/login-form.component';
 import { RegisterFormComponent } from '@/components/register-form/register-form.component';
-import { StoredUser } from '@/core/models/user.model';
+import { StoredUser } from '@bytebank-pro/types';
 import { LoginFormData, RegisterFormData } from '@/core/types/form';
 
 describe('GuestLayoutComponent', () => {

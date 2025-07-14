@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { IUser } from '@bytebank-pro/types';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { skip, take } from 'rxjs/operators';
 import { LayoutComponent } from './layout.component';
 
@@ -12,10 +12,20 @@ describe('LayoutComponent', () => {
   let fixture: ComponentFixture<LayoutComponent>;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
   let routerSpy: jasmine.SpyObj<Router>;
+  let currentUserSubject: BehaviorSubject<any>;
 
   beforeEach(async () => {
+    // Create BehaviorSubject for currentUser$
+    currentUserSubject = new BehaviorSubject<any>(null);
+
     // Create spies for dependencies
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['getCurrentUser', 'logout']);
+    authServiceSpy = jasmine.createSpyObj(
+      'AuthService',
+      ['getCurrentUser', 'logout', 'validateUser'],
+      {
+        currentUser$: currentUserSubject.asObservable()
+      }
+    );
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
     // Mock router events and URL
@@ -82,6 +92,15 @@ describe('LayoutComponent', () => {
     });
 
     it('should initialize userName$ observable', (done) => {
+      // Set a mock user in the BehaviorSubject
+      const mockUser = {
+        _id: '1',
+        name: 'Test User',
+        email: 'test@example.com',
+        token: 'mock-token'
+      };
+      currentUserSubject.next(mockUser);
+
       component.userName$.pipe(skip(1), take(1)).subscribe((userName) => {
         expect(userName).toBe('Test User');
         done();
@@ -89,14 +108,15 @@ describe('LayoutComponent', () => {
     });
 
     it('should handle empty user name', (done) => {
-      authServiceSpy.getCurrentUser.and.returnValue(of(null));
+      // Set null user in the BehaviorSubject
+      currentUserSubject.next(null);
 
       // Recreate component to test with null user
       fixture = TestBed.createComponent(LayoutComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
 
-      component.userName$.pipe(skip(1), take(1)).subscribe((userName) => {
+      component.userName$.pipe(take(1)).subscribe((userName) => {
         expect(userName).toBe('');
         done();
       });
@@ -165,7 +185,7 @@ describe('LayoutComponent', () => {
 
   describe('Component Structure', () => {
     it('should have correct CSS classes for layout', () => {
-      const rootElement = fixture.debugElement.query(By.css('.flex.flex-col.min-h-screen'));
+      const rootElement = fixture.debugElement.query(By.css('.layout-container'));
 
       expect(rootElement).toBeTruthy();
     });
@@ -173,25 +193,13 @@ describe('LayoutComponent', () => {
     it('should have correct CSS classes for main content area', () => {
       const mainContent = fixture.debugElement.query(By.css('[data-testid="main-content-outlet"]'));
 
-      expect(mainContent.nativeElement.classList).toContain('overflow-x-auto');
-
-      expect(mainContent.nativeElement.classList).toContain('w-auto');
-
-      expect(mainContent.nativeElement.classList).toContain('mx-auto');
+      expect(mainContent.nativeElement.classList).toContain('layout-main');
     });
 
     it('should have correct CSS classes for sidebar', () => {
       const sidebar = fixture.debugElement.query(By.css('aside'));
 
-      expect(sidebar.nativeElement.classList).toContain('hidden');
-
-      expect(sidebar.nativeElement.classList).toContain('md:flex');
-
-      expect(sidebar.nativeElement.classList).toContain('bg-white');
-
-      expect(sidebar.nativeElement.classList).toContain('p-4');
-
-      expect(sidebar.nativeElement.classList).toContain('w-48');
+      expect(sidebar.nativeElement.classList).toContain('layout-sidebar');
     });
   });
 
@@ -216,8 +224,8 @@ describe('LayoutComponent', () => {
       expect(component.userName$).toBeDefined();
     });
 
-    it('should call auth service getCurrentUser on initialization', () => {
-      expect(authServiceSpy.getCurrentUser).toHaveBeenCalled();
+    it('should call auth service validateUser on initialization', () => {
+      expect(authServiceSpy.validateUser).toHaveBeenCalled();
     });
   });
 });

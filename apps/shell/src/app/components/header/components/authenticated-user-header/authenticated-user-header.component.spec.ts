@@ -39,27 +39,27 @@ describe('AuthenticatedUserHeaderComponent', () => {
     expect(userNameElement.nativeElement.textContent).toContain(testUserName);
   });
 
-  it('should emit onNavigate event when UserActionsComponent emits', () => {
+  it('should emit navigate event when UserActionsComponent emits', () => {
     const testUrl = 'https://example.com';
-    spyOn(component.onNavigate, 'emit');
+    spyOn(component.navigate, 'emit');
 
     const userActionsComponent = fixture.debugElement.query(
       By.directive(UserActionsComponent)
     ).componentInstance;
-    userActionsComponent.onNavigate.emit(testUrl);
+    userActionsComponent.navigate.emit(testUrl);
 
-    expect(component.onNavigate.emit).toHaveBeenCalledWith(testUrl);
+    expect(component.navigate.emit).toHaveBeenCalledWith(testUrl);
   });
 
-  it('should emit onLogout event when UserActionsComponent emits', () => {
-    spyOn(component.onLogout, 'emit');
+  it('should emit logout event when UserActionsComponent emits', () => {
+    spyOn(component.logout, 'emit');
 
     const userActionsComponent = fixture.debugElement.query(
       By.directive(UserActionsComponent)
     ).componentInstance;
-    userActionsComponent.onLogout.emit();
+    userActionsComponent.logout.emit();
 
-    expect(component.onLogout.emit).toHaveBeenCalled();
+    expect(component.logout.emit).toHaveBeenCalled();
   });
 
   it('should render UserActionsComponent', () => {

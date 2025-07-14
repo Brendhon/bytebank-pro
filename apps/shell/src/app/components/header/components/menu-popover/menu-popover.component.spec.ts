@@ -47,9 +47,9 @@ describe('MenuPopoverComponent', () => {
     expect(navMenuElement).toBeTruthy();
   });
 
-  it('should emit onNavigate event when NavMenuComponent emits', () => {
+  it('should emit navigate event when NavMenuComponent emits', () => {
     const testHref = '/transactions';
-    spyOn(component.onNavigate, 'emit');
+    spyOn(component.navigate, 'emit');
 
     // Open the popover first
     component.openMenu();
@@ -61,14 +61,14 @@ describe('MenuPopoverComponent', () => {
     )?.componentInstance;
 
     expect(navMenuComponent).toBeTruthy();
-    navMenuComponent.onNavigate.emit(testHref);
+    navMenuComponent.navigate.emit(testHref);
 
-    expect(component.onNavigate.emit).toHaveBeenCalledWith(testHref);
+    expect(component.navigate.emit).toHaveBeenCalledWith(testHref);
   });
 
   it('should close menu after navigation', () => {
     const testHref = '/settings';
-    spyOn(component.onNavigate, 'emit');
+    spyOn(component.navigate, 'emit');
     spyOn(component, 'closeMenu');
 
     // Open the popover first
@@ -81,9 +81,9 @@ describe('MenuPopoverComponent', () => {
     )?.componentInstance;
 
     expect(navMenuComponent).toBeTruthy();
-    navMenuComponent.onNavigate.emit(testHref);
+    navMenuComponent.navigate.emit(testHref);
 
-    expect(component.onNavigate.emit).toHaveBeenCalledWith(testHref);
+    expect(component.navigate.emit).toHaveBeenCalledWith(testHref);
     expect(component.closeMenu).toHaveBeenCalled();
   });
 

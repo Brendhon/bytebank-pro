@@ -32,8 +32,8 @@ describe('GuestActionsComponent', () => {
   });
 
   describe('Events', () => {
-    it('should emit onOpenAccount when open account button is clicked', () => {
-      spyOn(component.onOpenAccount, 'emit');
+    it('should emit openAccount when open account button is clicked', () => {
+      spyOn(component.openAccount, 'emit');
 
       const openAccountButton = fixture.debugElement.query(
         By.css('[data-testid="open-account-button"] button')
@@ -41,11 +41,11 @@ describe('GuestActionsComponent', () => {
       openAccountButton.click();
       fixture.detectChanges();
 
-      expect(component.onOpenAccount.emit).toHaveBeenCalled();
+      expect(component.openAccount.emit).toHaveBeenCalled();
     });
 
-    it('should emit onLogin when login button is clicked', () => {
-      spyOn(component.onLogin, 'emit');
+    it('should emit login when login button is clicked', () => {
+      spyOn(component.login, 'emit');
 
       const loginButton = fixture.debugElement.query(
         By.css('[data-testid="login-button"] button')
@@ -53,7 +53,7 @@ describe('GuestActionsComponent', () => {
       loginButton.click();
       fixture.detectChanges();
 
-      expect(component.onLogin.emit).toHaveBeenCalled();
+      expect(component.login.emit).toHaveBeenCalled();
     });
   });
 
