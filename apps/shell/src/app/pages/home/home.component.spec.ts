@@ -63,14 +63,14 @@ describe('HomeComponent', () => {
 
   it('should display all benefit items', () => {
     const benefitItems = fixture.debugElement.queryAll(
-      By.css('[data-testid="benefits-grid-section"] .grid > div')
+      By.css('[data-testid="benefits-grid-section"] .benefits-grid .benefit-item')
     );
 
     expect(benefitItems.length).toBe(4);
   });
 
   it('should display correct benefit titles', () => {
-    const benefitTitles = fixture.debugElement.queryAll(By.css('h4'));
+    const benefitTitles = fixture.debugElement.queryAll(By.css('.benefit-title'));
 
     expect(benefitTitles[0].nativeElement.textContent).toContain('Conta e cartão gratuitos');
 
@@ -82,7 +82,7 @@ describe('HomeComponent', () => {
   });
 
   it('should display correct benefit descriptions', () => {
-    const benefitDescriptions = fixture.debugElement.queryAll(By.css('p'));
+    const benefitDescriptions = fixture.debugElement.queryAll(By.css('.benefit-description'));
 
     expect(benefitDescriptions[0].nativeElement.textContent).toContain(
       'Nossa conta é digital, sem custo fixo'

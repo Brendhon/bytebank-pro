@@ -17,10 +17,6 @@ describe('UserActionsComponent', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
-    // Clean up if necessary
-  });
-
   describe('Basic Functionality', () => {
     it('should create the component', () => {
       expect(component).toBeTruthy();
@@ -178,7 +174,7 @@ describe('UserActionsComponent', () => {
 
       expect(userIcon).toBeTruthy();
 
-      expect(userIcon.nativeElement.classList).toContain('text-bytebank-orange');
+      expect(userIcon.nativeElement.classList).toContain('user-actions-icon');
 
       expect(userIcon.nativeElement.getAttribute('aria-hidden')).toBe('true');
     });
@@ -199,7 +195,7 @@ describe('UserActionsComponent', () => {
 
       expect(menuContent).toBeTruthy();
 
-      expect(menuContent.nativeElement.classList).toContain('flex');
+      expect(menuContent.nativeElement.classList).toContain('user-menu-content');
     });
 
     it('should render Github link button when popover is open', () => {
@@ -236,11 +232,7 @@ describe('UserActionsComponent', () => {
 
       expect(divider).toBeTruthy();
 
-      expect(divider.nativeElement.classList).toContain('w-full');
-
-      expect(divider.nativeElement.classList).toContain('my-2');
-
-      expect(divider.nativeElement.classList).toContain('border-gray-200');
+      expect(divider.nativeElement.classList).toContain('user-menu-divider');
     });
 
     it('should render logout button when popover is open', () => {
