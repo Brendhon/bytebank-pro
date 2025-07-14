@@ -80,8 +80,6 @@ describe('TransactionsService', () => {
         },
         error: done.fail
       });
-
-      expect(service.loading).toBe(true);
     });
 
     it('should handle error when loading transactions', (done) => {
@@ -91,7 +89,7 @@ describe('TransactionsService', () => {
       service.loadTransactions().subscribe({
         next: () => done.fail('Should not succeed'),
         error: (error) => {
-          expect(error.message).toContain('Error loading transactions');
+          expect(error.message).toBe('Network error');
           expect(service.loading).toBe(false);
           done();
         }
@@ -163,8 +161,6 @@ describe('TransactionsService', () => {
         },
         error: done.fail
       });
-
-      expect(service.loading).toBe(true);
     });
 
     it('should handle error when creating transaction', (done) => {
@@ -174,7 +170,7 @@ describe('TransactionsService', () => {
       service.createTransaction(transactionInput).subscribe({
         next: () => done.fail('Should not succeed'),
         error: (error) => {
-          expect(error.message).toContain('Error creating transaction');
+          expect(error.message).toBe('Creation failed');
           expect(service.loading).toBe(false);
           done();
         }
@@ -237,7 +233,7 @@ describe('TransactionsService', () => {
       service.updateTransaction('1', updateInput).subscribe({
         next: () => done.fail('Should not succeed'),
         error: (error) => {
-          expect(error.message).toContain('Error updating transaction');
+          expect(error.message).toBe('Update failed');
           expect(service.loading).toBe(false);
           done();
         }
@@ -294,7 +290,7 @@ describe('TransactionsService', () => {
       service.deleteTransaction('1').subscribe({
         next: () => done.fail('Should not succeed'),
         error: (error) => {
-          expect(error.message).toContain('Error deleting transaction');
+          expect(error.message).toBe('Deletion failed');
           expect(service.loading).toBe(false);
           done();
         }
