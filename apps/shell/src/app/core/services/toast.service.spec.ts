@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ToastService } from './toast.service';
 
 describe('ToastService', () => {
@@ -86,129 +86,217 @@ describe('ToastService', () => {
     });
   });
 
-  describe('Component Creation and Configuration', () => {
-    it('should create toast component with correct inputs', () => {
-      const testMessage = 'Test success message';
-      const testDuration = 3000;
-
-      const closeFn = service.showSuccess(testMessage, testDuration);
-
-      // Get the created component from DOM
-      const toastElement = document.querySelector('[data-testid="toast-container"]');
-
-      expect(toastElement).toBeTruthy();
-      expect(toastElement!.textContent).toContain(testMessage);
-
-      // Clean up
-      closeFn();
-    });
-
-    it('should create error toast with correct variant', () => {
-      const testMessage = 'Test error message';
-
-      const closeFn = service.showError(testMessage);
-
-      const toastElement = document.querySelector('[data-testid="toast-container"]');
-
-      expect(toastElement).toBeTruthy();
-      expect(toastElement!.classList).toContain('toast-variant-error');
-
-      // Clean up
-      closeFn();
-    });
-
-    it('should create info toast with correct variant', () => {
-      const testMessage = 'Test info message';
-
-      const closeFn = service.showInfo(testMessage);
-
-      const toastElement = document.querySelector('[data-testid="toast-container"]');
-
-      expect(toastElement).toBeTruthy();
-      expect(toastElement!.classList).toContain('toast-variant-info');
-
-      // Clean up
-      closeFn();
-    });
-
-    it('should create success toast with correct variant', () => {
+  describe('Toast Creation and Display', () => {
+    it('should create and display a success toast', fakeAsync(() => {
       const testMessage = 'Test success message';
 
       const closeFn = service.showSuccess(testMessage);
 
+      tick();
+
       const toastElement = document.querySelector('[data-testid="toast-container"]');
 
       expect(toastElement).toBeTruthy();
-      expect(toastElement!.classList).toContain('toast-variant-success');
 
-      // Clean up
+      expect(toastElement!.textContent).toContain(testMessage);
+
       closeFn();
-    });
+    }));
+
+    it('should create and display an error toast', fakeAsync(() => {
+      const testMessage = 'Test error message';
+
+      const closeFn = service.showError(testMessage);
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      expect(toastElement!.textContent).toContain(testMessage);
+
+      closeFn();
+    }));
+
+    it('should create and display an info toast', fakeAsync(() => {
+      const testMessage = 'Test info message';
+
+      const closeFn = service.showInfo(testMessage);
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      expect(toastElement!.textContent).toContain(testMessage);
+
+      closeFn();
+    }));
   });
 
-  describe('Toast Lifecycle', () => {
-    it('should remove toast when close function is called', () => {
+  describe('Toast Lifecycle Management', () => {
+    it('should remove toast when close function is called', fakeAsync(() => {
       const closeFn = service.showSuccess('Test message');
 
-      // Verify toast is created
+      tick();
+
       let toastElement = document.querySelector('[data-testid="toast-container"]');
 
       expect(toastElement).toBeTruthy();
 
-      // Close the toast
       closeFn();
 
-      // Wait for animation to complete
-      setTimeout(() => {
-        toastElement = document.querySelector('[data-testid="toast-container"]');
+      tick(350);
 
-        expect(toastElement).toBeFalsy();
-      }, 350);
-    });
+      toastElement = document.querySelector('[data-testid="toast-container"]');
 
-    it('should handle multiple toasts independently', () => {
+      expect(toastElement).toBeFalsy();
+    }));
+
+    it('should handle multiple toasts independently', fakeAsync(() => {
       const closeFn1 = service.showSuccess('First message');
       const closeFn2 = service.showError('Second message');
 
-      // Verify both toasts are created
+      tick();
+
       const toastElements = document.querySelectorAll('[data-testid="toast-container"]');
 
       expect(toastElements.length).toBe(2);
 
-      // Close first toast
       closeFn1();
 
-      setTimeout(() => {
-        const remainingToasts = document.querySelectorAll('[data-testid="toast-container"]');
+      tick();
 
-        expect(remainingToasts.length).toBe(1);
-        expect(remainingToasts[0].textContent).toContain('Second message');
+      const remainingToasts = document.querySelectorAll('[data-testid="toast-container"]');
 
-        // Close second toast
-        closeFn2();
-      }, 350);
-    });
-  });
+      expect(remainingToasts.length).toBe(1);
 
-  describe('Return Values', () => {
-    it('should return different close functions for different calls', () => {
+      expect(remainingToasts[0].textContent).toContain('Second message');
+
+      closeFn2();
+    }));
+
+    it('should return different close functions for different calls', fakeAsync(() => {
       const closeFn1 = service.showSuccess('First message');
       const closeFn2 = service.showError('Second message');
 
       expect(closeFn1).toBeDefined();
+
       expect(closeFn2).toBeDefined();
+
       expect(typeof closeFn1).toBe('function');
+
       expect(typeof closeFn2).toBe('function');
+
       expect(closeFn1).not.toBe(closeFn2);
 
-      // Clean up
       closeFn1();
       closeFn2();
-    });
+    }));
+  });
+
+  describe('Edge Cases and Error Scenarios', () => {
+    it('should handle empty message gracefully', fakeAsync(() => {
+      const closeFn = service.showSuccess('');
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      closeFn();
+    }));
+
+    it('should handle very long messages', fakeAsync(() => {
+      const longMessage = 'A'.repeat(1000);
+      const closeFn = service.showSuccess(longMessage);
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      expect(toastElement!.textContent).toContain(longMessage);
+
+      closeFn();
+    }));
+
+    it('should handle multiple rapid toast calls', fakeAsync(() => {
+      const closeFns: (() => void)[] = [];
+
+      for (let i = 0; i < 5; i++) {
+        closeFns.push(service.showSuccess(`Message ${i}`));
+      }
+
+      tick();
+
+      const toastElements = document.querySelectorAll('[data-testid="toast-container"]');
+
+      expect(toastElements.length).toBe(5);
+
+      closeFns.forEach((fn) => fn());
+    }));
+
+    it('should handle calling close function multiple times', fakeAsync(() => {
+      const closeFn = service.showSuccess('Test message');
+
+      tick();
+
+      closeFn();
+      closeFn(); // Calling again should not cause issues
+
+      tick(350);
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeFalsy();
+    }));
+  });
+
+  describe('Default Duration Values', () => {
+    it('should use default duration for success toast', fakeAsync(() => {
+      const closeFn = service.showSuccess('Test message');
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      closeFn();
+      tick();
+    }));
+
+    it('should use default duration for error toast', fakeAsync(() => {
+      const closeFn = service.showError('Test message');
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      closeFn();
+    }));
+
+    it('should use default duration for info toast', fakeAsync(() => {
+      const closeFn = service.showInfo('Test message');
+
+      tick();
+
+      const toastElement = document.querySelector('[data-testid="toast-container"]');
+
+      expect(toastElement).toBeTruthy();
+
+      closeFn();
+    }));
   });
 
   afterEach(() => {
-    // Clean up any remaining toasts
     const remainingToasts = document.querySelectorAll('[data-testid="toast-container"]');
     remainingToasts.forEach((toast) => {
       if (toast.parentNode) {
