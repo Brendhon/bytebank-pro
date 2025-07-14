@@ -40,9 +40,7 @@ describe('MenuPopoverComponent', () => {
     component.openMenu();
     fixture.detectChanges();
 
-    const navMenuElement = fixture.debugElement.query(
-      By.css('[data-testid="nav-menu-inside-popover"]')
-    );
+    const navMenuElement = fixture.debugElement.query(By.css('[data-testid="nav-menu-component"]'));
 
     expect(navMenuElement).toBeTruthy();
   });
@@ -89,8 +87,8 @@ describe('MenuPopoverComponent', () => {
 
   it('should have the correct container structure', () => {
     expect(element).toBeTruthy();
-    expect(element.classList.contains('flex')).toBeTruthy();
-    expect(element.classList.contains('md:hidden')).toBeTruthy();
+    // Check if the element has the menu-popover-container class
+    expect(element.classList.contains('menu-popover-container')).toBeTruthy();
   });
 
   it('should compute currentNavLabel based on pathname', () => {
