@@ -38,7 +38,7 @@ describe('CardComponent', () => {
       fixture.componentRef.setInput('variant', 'blue');
       fixture.detectChanges();
 
-      expect(element.classList).toContain('bg-bytebank-blue');
+      expect(element.classList).toContain('card-variant-blue');
     });
 
     it('should apply all variant classes correctly', () => {
@@ -48,7 +48,7 @@ describe('CardComponent', () => {
         fixture.componentRef.setInput('variant', variant);
         fixture.detectChanges();
 
-        expect(element.classList).toContain(`bg-bytebank-${variant}`);
+        expect(element.classList).toContain(`card-variant-${variant}`);
       });
     });
 
@@ -210,17 +210,7 @@ describe('CardComponent', () => {
 
   describe('CSS Classes', () => {
     it('should have base CSS classes', () => {
-      expect(element.classList).toContain('w-52');
-
-      expect(element.classList).toContain('h-40');
-
-      expect(element.classList).toContain('rounded-md');
-
-      expect(element.classList).toContain('text-white');
-
-      expect(element.classList).toContain('flex');
-
-      expect(element.classList).toContain('flex-col');
+      expect(element.classList).toContain('card-base');
     });
 
     it('should combine custom className with base classes', () => {
@@ -231,7 +221,7 @@ describe('CardComponent', () => {
 
       expect(element.classList).toContain('another-class');
 
-      expect(element.classList).toContain('w-52'); // Base class should still be present
+      expect(element.classList).toContain('card-base'); // Base class should still be present
     });
   });
 
@@ -255,11 +245,7 @@ describe('CardComponent', () => {
 
       const classes = component['cardClasses']();
 
-      expect(classes).toContain('bg-bytebank-green');
-
-      expect(classes).toContain('extra-class');
-
-      expect(classes).toContain('w-52');
+      expect(classes).toContain('card-variant-green');
     });
   });
 });

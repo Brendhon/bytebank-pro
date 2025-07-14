@@ -23,7 +23,7 @@ describe('DashboardPageComponent', () => {
   });
 
   it('should have initial user data', () => {
-    expect(component.userName()).toBe('João Silva');
+    expect(component.userName).toBe('Desconhecido');
     expect(component.balance()).toBe(15750.0);
     expect(component.currentDate()).toBeInstanceOf(Date);
   });
