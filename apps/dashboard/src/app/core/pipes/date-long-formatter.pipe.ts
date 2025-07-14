@@ -20,10 +20,6 @@ export class DateLongFormatterPipe implements PipeTransform {
    * @returns The formatted date string or empty string if value is null/undefined.
    */
   transform(value: Date | null | undefined): string {
-    if (value === null || value === undefined) {
-      return '';
-    }
-
-    return formatDateToLong(value);
+    return value && !isNaN(value.getTime()) ? formatDateToLong(value) : '';
   }
 }

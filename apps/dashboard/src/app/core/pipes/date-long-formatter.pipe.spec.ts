@@ -80,7 +80,7 @@ describe('DateLongFormatterPipe', () => {
       // formatDateToLong should handle invalid dates, so we test the pipe behavior
       const result = pipe.transform(invalidDate);
 
-      expect(result).toBe(formatDateToLong(invalidDate));
+      expect(result).toBe('');
     });
 
     it('should handle date with timezone correctly', () => {
