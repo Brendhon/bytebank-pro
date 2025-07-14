@@ -7,7 +7,7 @@
     [attr.aria-label]="'Toast notification: ' + message()"
   >
     <div class="toast-content">
-      <i-lucide [img]="currentIcon" size="20" class="toast-icon" aria-hidden="true" />
+      <i-lucide [img]="currentIcon()" size="20" class="toast-icon" aria-hidden="true" />
     </div>
     <p class="toast-message">{{ message() }}</p>
     <button

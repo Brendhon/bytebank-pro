@@ -13,7 +13,6 @@ import {
 import {
   LucideAngularModule,
   LucideCheckCircle,
-  LucideIconData,
   LucideInfo,
   LucideX,
   LucideXCircle
@@ -24,7 +23,7 @@ export type ToastVariant = 'success' | 'error' | 'info';
 /**
  * Toast component for displaying notification messages to users.
  *
- * AIDEV-NOTE: After making ANY changes to this component, update the `docs/toast_usage.md` file with usage examples and documentation.
+ * AIDEV-NOTE: After making ANY changes to this component, update the `docs/usages/bb-toast-usage.md` file with usage examples and documentation.
  *
  * @example
  * ```html
@@ -97,11 +96,9 @@ export class ToastComponent implements OnInit, OnDestroy {
   private readonly durationEffect = effect(() => this.isVisible() && this.setupAutoClose());
 
   /**
-   * Getter to obtain the Lucide icon corresponding to the variant.
+   * Computed property to obtain the Lucide icon corresponding to the variant.
    */
-  get currentIcon(): LucideIconData {
-    return this.icons[this.variant()];
-  }
+  currentIcon = computed(() => this.icons[this.variant()]);
 
   /**
    * Computed CSS classes based on the variant and visibility state.
