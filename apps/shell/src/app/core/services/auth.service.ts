@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { IUser, StoredUser } from '@bytebank-pro/types';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, first, map } from 'rxjs/operators';
 import { LOGIN_MUTATION, ME_QUERY, REGISTER_MUTATION } from '../graphql/auth.queries';
 import { AuthPayload, LoginInput, RegisterInput } from '../models/auth.model';
 import { Router } from '@angular/router';
@@ -196,6 +196,17 @@ export class AuthService {
     this._currentUser.next(user);
   }
 
+  private setUserFromIUser(user: IUser): void {
+    const storedUser: StoredUser = {
+      _id: user._id!,
+      name: user.name,
+      email: user.email,
+      token: this.token
+    };
+
+    this.setUser(storedUser);
+  }
+
   /**
    * Updates the stored user data (public method for MFE communication)
    * @param user - The updated user data to store
@@ -219,5 +230,17 @@ export class AuthService {
         this.logout();
       }
     }
+  }
+
+  /**
+   * Validates the user token
+   */
+  validateUser(): void {
+    this.getCurrentUser()
+      .pipe(first())
+      .subscribe({
+        next: (user) => (user ? this.setUserFromIUser(user) : this.logout()),
+        error: () => this.logout()
+      });
   }
 }

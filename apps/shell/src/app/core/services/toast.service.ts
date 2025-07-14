@@ -59,12 +59,11 @@ export class ToastService {
       environmentInjector: this.injector
     });
 
-    // Configure toast properties
-    const toastInstance = toastComponentRef.instance;
-    toastInstance.message = message;
-    toastInstance.variant = variant;
-    toastInstance.duration = duration;
-    toastInstance.show = true;
+    // Configure toast properties using the new input functions
+    toastComponentRef.setInput('message', message);
+    toastComponentRef.setInput('variant', variant);
+    toastComponentRef.setInput('duration', duration);
+    toastComponentRef.setInput('show', true);
 
     // Append the toast to the DOM
     document.body.appendChild(toastComponentRef.location.nativeElement);
@@ -82,7 +81,7 @@ export class ToastService {
 
     // Return a function to manually close the toast
     return () => {
-      toastInstance.show = false;
+      toastComponentRef.setInput('show', false);
       setTimeout(() => this.removeToast(toastComponentRef), 300); // Allow animation to complete
     };
   }

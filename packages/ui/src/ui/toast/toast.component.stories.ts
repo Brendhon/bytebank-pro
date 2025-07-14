@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, componentWrapperDecorator } from '@storybook/angular';
-import { ToastComponent } from './toast.component'; //
+import { ToastComponent } from './toast.component';
 
 const meta: Meta<ToastComponent> = {
-  title: 'Components/UI/Toast', //
-  component: ToastComponent, //
+  title: 'Components/UI/Toast',
+  component: ToastComponent,
   parameters: {
-    layout: 'fullscreen', // Toast is positioned, so fullscreen might be better for context
+    layout: 'fullscreen',
     docs: {
       description: {
         component:
-          'Um componente de notificação que exibe mensagens temporárias ao usuário, com suporte a diferentes tipos de variantes (sucesso, erro, informação) e fechamento automático ou manual.' //
+          'A notification component that displays temporary messages to users, with support for different variant types (success, error, info) and automatic or manual closing.'
       }
     }
   },
@@ -25,40 +25,40 @@ const meta: Meta<ToastComponent> = {
   argTypes: {
     message: {
       control: 'text',
-      description: 'A mensagem a ser exibida no toast.',
-      defaultValue: 'Esta é uma mensagem de notificação.'
+      description: 'The message to be displayed in the toast.',
+      defaultValue: 'This is a notification message.'
     },
     variant: {
       control: 'select',
       options: ['success', 'error', 'info'],
-      description: 'Define a variação visual do toast.',
+      description: 'Defines the visual variant of the toast.',
       defaultValue: 'info'
     },
     show: {
       control: 'boolean',
-      description: 'Controla a visibilidade do toast.',
+      description: 'Controls the visibility of the toast.',
       defaultValue: true
     },
     duration: {
       control: 'number',
       description:
-        'Duração em milissegundos para o toast fechar automaticamente. 0 para não fechar.',
+        'Duration in milliseconds for the toast to close automatically. 0 for no auto close.',
       defaultValue: 0
     },
     toastClose: {
       action: 'toastClosed',
-      description: 'Evento emitido quando o toast é fechado.'
+      description: 'Event emitted when the toast is closed.'
     }
   },
   tags: ['autodocs']
 };
 
 export default meta;
-type Story = StoryObj<ToastComponent>; //
+type Story = StoryObj<ToastComponent>;
 
 export const Default: Story = {
   args: {
-    message: 'Esta é uma notificação padrão.',
+    message: 'This is a default notification.',
     variant: 'info',
     show: true,
     duration: 0
@@ -72,7 +72,7 @@ export const Default: Story = {
 export const Success: Story = {
   args: {
     ...Default.args,
-    message: 'Operação realizada com sucesso!',
+    message: 'Operation completed successfully!',
     variant: 'success',
     duration: 0
   }
@@ -81,7 +81,7 @@ export const Success: Story = {
 export const Error: Story = {
   args: {
     ...Default.args,
-    message: 'Ocorreu um erro ao processar a solicitação.',
+    message: 'An error occurred while processing the request.',
     variant: 'error'
   }
 };
@@ -89,7 +89,7 @@ export const Error: Story = {
 export const Info: Story = {
   args: {
     ...Default.args,
-    message: 'Informação importante para o usuário.',
+    message: 'Important information for the user.',
     variant: 'info'
   }
 };
@@ -97,7 +97,7 @@ export const Info: Story = {
 export const AutoClosing: Story = {
   args: {
     ...Default.args,
-    message: 'Este toast fechará em 3 segundos.',
+    message: 'This toast will close in 3 seconds.',
     variant: 'success',
     duration: 3000
   }
@@ -107,21 +107,20 @@ export const AllVariants: Story = {
   render: () => ({
     template: `
       <div class="flex flex-col gap-4 items-end p-8 w-full h-screen relative">
-        <bb-toast message="Mensagem de Sucesso!" variant="success" [show]="true" [duration]="0"></bb-toast>
-        <bb-toast message="Mensagem de Erro!" variant="error" [show]="true" [duration]="0"></bb-toast>
-        <bb-toast message="Mensagem de Informação!" variant="info" [show]="true" [duration]="0"></bb-toast>
+        <bb-toast message="Success Message!" variant="success" [show]="true" [duration]="0"></bb-toast>
+        <bb-toast message="Error Message!" variant="error" [show]="true" [duration]="0"></bb-toast>
+        <bb-toast message="Info Message!" variant="info" [show]="true" [duration]="0"></bb-toast>
       </div>
     `
   }),
   parameters: {
-    // Override default layout for this specific story to display all toasts
     layout: 'padded'
   }
 };
 
 export const Playground: Story = {
   args: {
-    message: 'Mensagem customizável do Toast.',
+    message: 'Customizable Toast message.',
     variant: 'info',
     show: true,
     duration: 5000

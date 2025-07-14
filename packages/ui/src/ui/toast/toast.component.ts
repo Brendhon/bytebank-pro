@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  Output,
-  SimpleChanges
+  computed,
+  effect,
+  input,
+  output,
+  signal
 } from '@angular/core';
 import {
   LucideAngularModule,
@@ -16,7 +17,7 @@ import {
   LucideInfo,
   LucideX,
   LucideXCircle
-} from 'lucide-angular'; // Import specific icons
+} from 'lucide-angular';
 
 export type ToastVariant = 'success' | 'error' | 'info';
 
@@ -41,103 +42,77 @@ export type ToastVariant = 'success' | 'error' | 'info';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css'],
   standalone: true,
-  imports: [CommonModule, LucideAngularModule]
+  imports: [CommonModule, LucideAngularModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastComponent implements OnInit, OnChanges, OnDestroy {
+export class ToastComponent implements OnInit, OnDestroy {
   /**
    * The message to be displayed in the toast.
    */
-  @Input() message: string = '';
+  message = input.required<string>();
+
   /**
    * The visual variant of the toast (success, error, info).
    * @default 'info'
    */
-  @Input() variant: ToastVariant = 'info';
+  variant = input<ToastVariant>('info');
+
   /**
    * Controls the visibility of the toast.
    * @default true
    */
-  @Input() show: boolean = true;
+  show = input<boolean>(true);
+
   /**
    * Duration in milliseconds for the toast to close automatically.
    * Set to 0 to not auto close.
    * @default 0
    */
-  @Input() duration: number = 0; // Default to 0 (no auto close)
+  duration = input<number>(0);
 
   /**
    * Event emitted when the toast is closed.
    */
-  @Output() toastClose = new EventEmitter<void>();
+  toastClose = output<void>();
 
-  isVisible: boolean = false;
-  private autoCloseTimeout: NodeJS.Timeout | null = null; // Timeout for auto close
+  isVisible = signal<boolean>(false);
+  private autoCloseTimeout: NodeJS.Timeout | null = null;
 
   // Icon mapping
   readonly icons = {
     success: LucideCheckCircle,
     error: LucideXCircle,
     info: LucideInfo,
-    close: LucideX // Icon for the close button
+    close: LucideX
   };
+
+  // Effect to handle show input changes
+  private readonly showEffect = effect(() => {
+    const shouldShow = this.show();
+    this.isVisible.set(shouldShow);
+    shouldShow ? this.setupAutoClose() : this.clearAutoCloseTimeout();
+  });
+
+  // Effect to handle duration input changes
+  private readonly durationEffect = effect(() => this.isVisible() && this.setupAutoClose());
 
   /**
    * Getter to obtain the Lucide icon corresponding to the variant.
    */
   get currentIcon(): LucideIconData {
-    return this.icons[this.variant];
-  }
-
-  ngOnInit(): void {
-    this.isVisible = this.show;
-    this.setupAutoClose();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['show']) {
-      this.isVisible = changes['show'].currentValue;
-      this.setupAutoClose();
-    }
-    if (changes['duration'] && this.isVisible) {
-      this.setupAutoClose();
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.clearAutoCloseTimeout();
+    return this.icons[this.variant()];
   }
 
   /**
-   * Closes the toast and emits the `toastClose` event.
+   * Computed CSS classes based on the variant and visibility state.
    */
-  handleClose(): void {
-    this.isVisible = false;
-    this.clearAutoCloseTimeout();
-    this.toastClose.emit();
-  }
-
-  private setupAutoClose(): void {
-    this.clearAutoCloseTimeout();
-    if (this.isVisible && this.duration > 0) {
-      this.autoCloseTimeout = setTimeout(() => this.handleClose(), this.duration);
-    }
-  }
-
-  private clearAutoCloseTimeout(): void {
-    if (this.autoCloseTimeout) {
-      clearTimeout(this.autoCloseTimeout);
-      this.autoCloseTimeout = null;
-    }
-  }
-
-  /**
-   * Getter for computed CSS classes based on the variant and other states.
-   */
-  get toastClasses(): string {
+  toastClasses = computed(() => {
     const baseClasses = 'toast-base';
+    const variant = this.variant();
+    const isVisible = this.isVisible();
 
     let variantClasses = '';
-    switch (this.variant) {
+    switch (variant) {
       case 'success':
         variantClasses = 'toast-variant-success';
         break;
@@ -149,8 +124,39 @@ export class ToastComponent implements OnInit, OnChanges, OnDestroy {
         break;
     }
 
-    const visibilityClasses = this.isVisible ? 'toast-visible' : 'toast-hidden';
+    const visibilityClasses = isVisible ? 'toast-visible' : 'toast-hidden';
 
     return `${baseClasses} ${variantClasses} ${visibilityClasses}`;
+  });
+
+  ngOnInit(): void {
+    // Initial setup is handled by effects
+  }
+
+  ngOnDestroy(): void {
+    this.clearAutoCloseTimeout();
+  }
+
+  /**
+   * Closes the toast and emits the `toastClose` event.
+   */
+  handleClose(): void {
+    this.isVisible.set(false);
+    this.clearAutoCloseTimeout();
+    this.toastClose.emit();
+  }
+
+  private setupAutoClose(): void {
+    this.clearAutoCloseTimeout();
+    if (this.isVisible() && this.duration() > 0) {
+      this.autoCloseTimeout = setTimeout(() => this.handleClose(), this.duration());
+    }
+  }
+
+  private clearAutoCloseTimeout(): void {
+    if (this.autoCloseTimeout) {
+      clearTimeout(this.autoCloseTimeout);
+      this.autoCloseTimeout = null;
+    }
   }
 }

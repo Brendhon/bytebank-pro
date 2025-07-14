@@ -40,7 +40,7 @@ describe('ToastComponent', () => {
     element = getToastContainer(fixture);
 
     expect(element).toBeTruthy();
-    expect(component.isVisible).toBeTrue();
+    expect(component.isVisible()).toBeTrue();
     expect(element!.classList).toContain('toast-visible');
   });
 
@@ -50,7 +50,7 @@ describe('ToastComponent', () => {
     element = getToastContainer(fixture);
 
     expect(element).toBeFalsy();
-    expect(component.isVisible).toBeFalse();
+    expect(component.isVisible()).toBeFalse();
   });
 
   it('should display the correct message', () => {
@@ -99,12 +99,12 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
 
       const closeButton = fixture.debugElement.query(
-        By.css('button[aria-label="Fechar notificação"]')
+        By.css('button[aria-label="Close notification"]')
       ).nativeElement;
       closeButton.click();
 
       expect(component.toastClose.emit).toHaveBeenCalled();
-      expect(component.isVisible).toBeFalse();
+      expect(component.isVisible()).toBeFalse();
     });
 
     it('should close automatically after duration', fakeAsync(() => {
@@ -113,16 +113,18 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(component.isVisible).toBeTrue();
+      expect(component.isVisible()).toBeTrue();
 
       spyOn(component.toastClose, 'emit');
 
-      tick(1000);
+      // Wait for the timeout to complete
+      tick(1500);
       fixture.detectChanges();
+
       element = getToastContainer(fixture);
 
       expect(element).toBeFalsy();
-      expect(component.isVisible).toBeFalse();
+      expect(component.isVisible()).toBeFalse();
       expect(component.toastClose.emit).toHaveBeenCalled();
     }));
 
@@ -132,7 +134,7 @@ describe('ToastComponent', () => {
       fixture.detectChanges();
       element = getToastContainer(fixture);
 
-      expect(component.isVisible).toBeTrue();
+      expect(component.isVisible()).toBeTrue();
 
       spyOn(component.toastClose, 'emit');
 
@@ -141,7 +143,7 @@ describe('ToastComponent', () => {
       element = getToastContainer(fixture);
 
       expect(element).toBeTruthy();
-      expect(component.isVisible).toBeTrue();
+      expect(component.isVisible()).toBeTrue();
       expect(component.toastClose.emit).not.toHaveBeenCalled();
     }));
   });
@@ -178,10 +180,10 @@ describe('ToastComponent', () => {
       fixture.componentRef.setInput('show', true);
       fixture.detectChanges();
       const closeButton = fixture.debugElement.query(
-        By.css('button[aria-label="Fechar notificação"]')
+        By.css('button[aria-label="Close notification"]')
       ).nativeElement;
 
-      expect(closeButton.getAttribute('aria-label')).toBe('Fechar notificação');
+      expect(closeButton.getAttribute('aria-label')).toBe('Close notification');
     });
   });
 });

@@ -1,16 +1,22 @@
-@if (isVisible) {
+@if (isVisible()) {
   <div
-    [ngClass]="toastClasses"
+    [ngClass]="toastClasses()"
     data-testid="toast-container"
     role="status"
-    [attr.aria-live]="variant === 'error' ? 'assertive' : 'polite'"
+    [attr.aria-live]="variant() === 'error' ? 'assertive' : 'polite'"
+    [attr.aria-label]="'Toast notification: ' + message()"
   >
     <div class="toast-content">
-      <i-lucide [img]="currentIcon" size="20" class="toast-icon" />
+      <i-lucide [img]="currentIcon" size="20" class="toast-icon" aria-hidden="true" />
     </div>
-    <p class="toast-message">{{ message }}</p>
-    <button (click)="handleClose()" class="toast-close-button" aria-label="Fechar notificação">
-      <i-lucide size="18" [img]="icons.close" class="toast-close-icon" />
+    <p class="toast-message">{{ message() }}</p>
+    <button
+      (click)="handleClose()"
+      class="toast-close-button"
+      aria-label="Close notification"
+      type="button"
+    >
+      <i-lucide size="18" [img]="icons.close" class="toast-close-icon" aria-hidden="true" />
     </button>
   </div>
 }

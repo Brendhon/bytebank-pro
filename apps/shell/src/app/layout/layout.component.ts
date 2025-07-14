@@ -38,6 +38,9 @@ export class LayoutComponent implements OnInit {
    * Initializes observables for pathname and user name.
    */
   ngOnInit(): void {
+    // Validate user
+    this.authService.validateUser();
+
     // Initialize pathname observable based on the current router state
     this.pathname$ = this.initPathname();
 
