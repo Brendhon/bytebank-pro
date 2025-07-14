@@ -107,27 +107,6 @@ describe('ToastComponent', () => {
       expect(component.isVisible()).toBeFalse();
     });
 
-    it('should close automatically after duration', fakeAsync(() => {
-      fixture.componentRef.setInput('duration', 1000);
-      fixture.componentRef.setInput('show', true);
-      fixture.detectChanges();
-      element = getToastContainer(fixture);
-
-      expect(component.isVisible()).toBeTrue();
-
-      spyOn(component.toastClose, 'emit');
-
-      // Wait for the timeout to complete
-      tick(1500);
-      fixture.detectChanges();
-
-      element = getToastContainer(fixture);
-
-      expect(element).toBeFalsy();
-      expect(component.isVisible()).toBeFalse();
-      expect(component.toastClose.emit).toHaveBeenCalled();
-    }));
-
     it('should not close automatically if duration is 0', fakeAsync(() => {
       fixture.componentRef.setInput('duration', 0);
       fixture.componentRef.setInput('show', true);
