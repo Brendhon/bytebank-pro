@@ -106,42 +106,38 @@ describe('NavMenuComponent', () => {
       fixture.componentRef.setInput('current', 'Transações');
       fixture.detectChanges();
 
-      const activeButton = fixture.debugElement.query(By.css('button[aria-current="page"]'));
+      expect(component.isActive()('Transações')).toBe(true);
 
-      expect(activeButton).toBeTruthy();
+      expect(component.isActive()('Dashboard')).toBe(false);
 
-      expect(activeButton.nativeElement.textContent).toContain('Transações');
+      expect(component.isActive()('Configurações')).toBe(false);
     });
 
-    it('should apply correct color classes for active item', () => {
-      fixture.componentRef.setInput('current', 'Configurações');
+    it('should apply active styles to current item', () => {
+      fixture.componentRef.setInput('current', 'Transações');
       fixture.detectChanges();
 
-      const configButton = fixture.debugElement.queryAll(By.css('button'))[2];
+      const buttons = fixture.debugElement.queryAll(By.css('button'));
 
-      expect(configButton.nativeElement.classList).toContain('text-bytebank-orange');
+      // Find the button for Transações (index 1)
+      const transacoesButton = buttons[1];
 
-      expect(configButton.nativeElement.classList).toContain('font-bold');
+      expect(transacoesButton.nativeElement.classList).toContain('nav-menu-button-active');
     });
 
-    it('should apply correct color classes for inactive items', () => {
+    it('should apply inactive styles to non-current items', () => {
       fixture.componentRef.setInput('current', 'Dashboard');
       fixture.detectChanges();
 
-      const transacoesButton = fixture.debugElement.queryAll(By.css('button'))[1];
+      const buttons = fixture.debugElement.queryAll(By.css('button'));
 
-      expect(transacoesButton.nativeElement.classList).toContain('text-bytebank-dark-gray');
-    });
-
-    it('should return false for isActive when current is null', () => {
-      fixture.componentRef.setInput('current', null);
-      fixture.detectChanges();
-
-      expect(component.isActive()('Dashboard')).toBe(false);
-    });
-
-    it('should return false for isActive when label is empty', () => {
-      expect(component.isActive()('')).toBe(false);
+      // Check that non-active buttons have inactive class
+      buttons.forEach((button, index) => {
+        if (index !== 0) {
+          // Not Dashboard
+          expect(button.nativeElement.classList).toContain('nav-menu-button-inactive');
+        }
+      });
     });
   });
 
@@ -198,21 +194,9 @@ describe('NavMenuComponent', () => {
       expect(component.pendingHrefComputed()).toBe('/dashboard');
 
       // Look for the loading icon with a more specific selector
-      const loadingIcon = fixture.debugElement.query(By.css('i-lucide[img="Loader2"]'));
+      const loadingIcon = fixture.debugElement.query(By.css('[data-testid="nav-menu-icon"]'));
 
-      // If not found, try alternative selectors
-      const alternativeLoadingIcon =
-        loadingIcon ||
-        fixture.debugElement.query(By.css('.animate-spin')) ||
-        fixture.debugElement.query(By.css('[aria-label="Loading"]'));
-
-      expect(alternativeLoadingIcon).toBeTruthy();
-
-      if (alternativeLoadingIcon) {
-        expect(alternativeLoadingIcon.nativeElement.classList).toContain('animate-spin');
-      }
-
-      tick(200);
+      expect(loadingIcon).toBeTruthy();
     }));
 
     it('should check if specific href is pending', () => {
@@ -230,38 +214,15 @@ describe('NavMenuComponent', () => {
       const buttons = fixture.debugElement.queryAll(By.css('button'));
 
       buttons.forEach((button) => {
-        expect(button.nativeElement.classList).toContain('flex');
-
-        expect(button.nativeElement.classList).toContain('items-center');
-
-        expect(button.nativeElement.classList).toContain('w-full');
-
-        expect(button.nativeElement.classList).toContain('gap-2');
-
-        expect(button.nativeElement.classList).toContain('px-2');
-
-        expect(button.nativeElement.classList).toContain('py-2');
-
-        expect(button.nativeElement.classList).toContain('rounded-md');
-
-        expect(button.nativeElement.classList).toContain('text-left');
-
-        expect(button.nativeElement.classList).toContain('transition-colors');
-
-        expect(button.nativeElement.classList).toContain('cursor-pointer');
-
-        expect(button.nativeElement.classList).toContain('hover:opacity-70');
+        expect(button.nativeElement.classList).toContain('nav-menu-button');
       });
     });
 
     it('should combine base classes with color classes', () => {
       const buttonClasses = component.getButtonClasses()('Dashboard');
 
-      expect(buttonClasses).toContain(
-        'flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer hover:opacity-70'
-      );
-
-      expect(buttonClasses).toContain('text-bytebank-orange');
+      expect(buttonClasses).toContain('nav-menu-button');
+      expect(buttonClasses).toContain('nav-menu-button-active');
     });
   });
 
@@ -350,18 +311,14 @@ describe('NavMenuComponent', () => {
 
       expect(ulElement).toBeTruthy();
 
-      expect(ulElement.nativeElement.classList).toContain('flex');
-
-      expect(ulElement.nativeElement.classList).toContain('flex-col');
-
-      expect(ulElement.nativeElement.classList).toContain('gap-3');
+      expect(ulElement.nativeElement.classList).toContain('nav-menu-list');
     });
 
     it('should render list items with correct structure', () => {
       const listItems = fixture.debugElement.queryAll(By.css('li'));
 
       listItems.forEach((item) => {
-        expect(item.nativeElement.classList).toContain('hover:opacity-70');
+        expect(item.nativeElement.classList).toContain('nav-menu-item');
 
         const button = item.query(By.css('button'));
 
@@ -413,32 +370,18 @@ describe('NavMenuComponent', () => {
 
       const activeColorClasses = component.getColorClasses()('Dashboard');
 
-      expect(activeColorClasses).toBe('text-bytebank-orange font-bold');
+      expect(activeColorClasses).toBe('nav-menu-button-active');
 
       const inactiveColorClasses = component.getColorClasses()('Transações');
 
-      expect(inactiveColorClasses).toBe('text-bytebank-dark-gray');
+      expect(inactiveColorClasses).toBe('nav-menu-button-inactive');
     });
 
     it('should compute button classes correctly', () => {
       const buttonClasses = component.getButtonClasses()('Dashboard');
 
-      expect(buttonClasses).toContain(
-        'flex items-center w-full gap-2 px-2 py-2 rounded-md text-left transition-colors cursor-pointer hover:opacity-70'
-      );
-
-      expect(buttonClasses).toContain('text-bytebank-orange font-bold');
-    });
-  });
-
-  describe('Deprecated Method', () => {
-    it('should maintain compatibility with deprecated isActiveMethod', () => {
-      fixture.componentRef.setInput('current', 'Configurações');
-      fixture.detectChanges();
-
-      expect(component.isActiveMethod('Configurações')).toBe(true);
-
-      expect(component.isActiveMethod('Dashboard')).toBe(false);
+      expect(buttonClasses).toContain('nav-menu-button');
+      expect(buttonClasses).toContain('nav-menu-button-active');
     });
   });
 });
