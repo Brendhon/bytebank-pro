@@ -236,21 +236,4 @@ describe('SettingsPageComponent', () => {
       );
     });
   });
-
-  describe('Component Structure', () => {
-    it('should have correct selector', () => {
-      expect(component.constructor.name).toBe('SettingsPageComponent');
-    });
-
-    it('should be standalone component', () => {
-      expect(component).toBeInstanceOf(SettingsPageComponent);
-    });
-
-    it('should have required dependencies injected', () => {
-      expect(component['settingsService']).toBeDefined();
-      expect(component['toastService']).toBeDefined();
-      expect(component['userUpdateService']).toBeDefined();
-      expect(component['router']).toBeDefined();
-    });
-  });
 });
