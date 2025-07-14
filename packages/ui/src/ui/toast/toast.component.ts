@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit,
   computed,
   effect,
   input,
@@ -44,7 +43,7 @@ export type ToastVariant = 'success' | 'error' | 'info';
   imports: [CommonModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastComponent implements OnInit, OnDestroy {
+export class ToastComponent implements OnDestroy {
   /**
    * The message to be displayed in the toast.
    */
@@ -125,10 +124,6 @@ export class ToastComponent implements OnInit, OnDestroy {
 
     return `${baseClasses} ${variantClasses} ${visibilityClasses}`;
   });
-
-  ngOnInit(): void {
-    // Initial setup is handled by effects
-  }
 
   ngOnDestroy(): void {
     this.clearAutoCloseTimeout();

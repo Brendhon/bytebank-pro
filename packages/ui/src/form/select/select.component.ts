@@ -3,10 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  DestroyRef,
   ElementRef,
   HostListener,
-  inject,
   input,
   output,
   signal,
@@ -60,8 +58,6 @@ export interface SelectGroup {
   }
 })
 export class SelectComponent<T = unknown> implements OnDestroy {
-  private destroyRef = inject(DestroyRef);
-
   // Core select properties using modern input() API
   value = input<T | T[] | undefined>(undefined);
   options = input<SelectOption<T>[]>([]);

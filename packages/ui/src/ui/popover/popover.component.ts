@@ -87,11 +87,7 @@ export class PopoverComponent {
     return [baseClasses, positionClass, customClass].filter(Boolean).join(' ');
   });
 
-  constructor() {
-    effect(() => {
-      if (this.isOpen() === false) this._isOpen.set(false);
-    });
-  }
+  private readonly isOpenEffect = effect(() => !this.isOpen() && this._isOpen.set(false));
 
   /**
    * Toggle popover visibility

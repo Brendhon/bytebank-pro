@@ -1,12 +1,8 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector } from '@angular/core';
-import { ToastComponent } from '@bytebank-pro/ui';
+import { TestBed } from '@angular/core/testing';
 import { ToastService } from './toast.service';
 
 describe('ToastService', () => {
   let service: ToastService;
-  let appRef: ApplicationRef;
-  let injector: EnvironmentInjector;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,8 +10,6 @@ describe('ToastService', () => {
     }).compileComponents();
 
     service = TestBed.inject(ToastService);
-    appRef = TestBed.inject(ApplicationRef);
-    injector = TestBed.inject(EnvironmentInjector);
   });
 
   it('should create the service', () => {
@@ -101,6 +95,7 @@ describe('ToastService', () => {
 
       // Get the created component from DOM
       const toastElement = document.querySelector('[data-testid="toast-container"]');
+
       expect(toastElement).toBeTruthy();
       expect(toastElement!.textContent).toContain(testMessage);
 
@@ -114,6 +109,7 @@ describe('ToastService', () => {
       const closeFn = service.showError(testMessage);
 
       const toastElement = document.querySelector('[data-testid="toast-container"]');
+
       expect(toastElement).toBeTruthy();
       expect(toastElement!.classList).toContain('toast-variant-error');
 
@@ -127,6 +123,7 @@ describe('ToastService', () => {
       const closeFn = service.showInfo(testMessage);
 
       const toastElement = document.querySelector('[data-testid="toast-container"]');
+
       expect(toastElement).toBeTruthy();
       expect(toastElement!.classList).toContain('toast-variant-info');
 
@@ -140,6 +137,7 @@ describe('ToastService', () => {
       const closeFn = service.showSuccess(testMessage);
 
       const toastElement = document.querySelector('[data-testid="toast-container"]');
+
       expect(toastElement).toBeTruthy();
       expect(toastElement!.classList).toContain('toast-variant-success');
 
@@ -154,6 +152,7 @@ describe('ToastService', () => {
 
       // Verify toast is created
       let toastElement = document.querySelector('[data-testid="toast-container"]');
+
       expect(toastElement).toBeTruthy();
 
       // Close the toast
@@ -162,6 +161,7 @@ describe('ToastService', () => {
       // Wait for animation to complete
       setTimeout(() => {
         toastElement = document.querySelector('[data-testid="toast-container"]');
+
         expect(toastElement).toBeFalsy();
       }, 350);
     });
@@ -172,6 +172,7 @@ describe('ToastService', () => {
 
       // Verify both toasts are created
       const toastElements = document.querySelectorAll('[data-testid="toast-container"]');
+
       expect(toastElements.length).toBe(2);
 
       // Close first toast
@@ -179,6 +180,7 @@ describe('ToastService', () => {
 
       setTimeout(() => {
         const remainingToasts = document.querySelectorAll('[data-testid="toast-container"]');
+
         expect(remainingToasts.length).toBe(1);
         expect(remainingToasts[0].textContent).toContain('Second message');
 
