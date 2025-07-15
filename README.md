@@ -1,7 +1,5 @@
 # 💻 Bytebank Pro – Microfrontends
 
-[![Render](https://img.shields.io/badge/Render-API-blue?style=for-the-badge&logo=render&logoColor=white)](https://bytebank-api.onrender.com/graphql)
-
 Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, desenvolvidos como parte do Tech Challenge da pós-graduação em Engenharia de Front-end (FIAP). O projeto utiliza **Turborepo** para orquestrar um monorepo com aplicações Angular independentes, promovendo escalabilidade, manutenção e desempenho.
 
 ---
@@ -22,7 +20,11 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [🔌 Comunicação entre Microfrontends](#-comunicação-entre-microfrontends)
   - [🐳 Desenvolvimento com Docker](#-desenvolvimento-com-docker)
   - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
+  - [� Implantação (Deploy)](#-implantação-deploy)
   - [🔗 Links Úteis](#-links-úteis)
+  - [💡 Melhorias Futuras](#-melhorias-futuras)
+    - [🤖 Melhorias com Inteligência Artificial](#-melhorias-com-inteligência-artificial)
+    - [🛠️ Melhorias de Desenvolvimento](#️-melhorias-de-desenvolvimento)
   - [👥 Autor](#-autor)
 
 ---

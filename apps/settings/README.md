@@ -29,9 +29,9 @@ Este microfrontend é carregado dinamicamente pelo Shell (Angular) através do *
 
 ## ✨ Visão Geral
 
-| App             | Framework | Descrição                                      |
-| :-------------- | :-------- | :--------------------------------------------- |
-| **Settings**    | Angular   | Tela de preferências e gerenciamento de conta. |
+| App          | Framework | Descrição                                      |
+| :----------- | :-------- | :--------------------------------------------- |
+| **Settings** | Angular   | Tela de preferências e gerenciamento de conta. |
 
 ---
 
@@ -149,7 +149,7 @@ settings/
 
 ## 🚀 Deploy
 
-- Deploy individual na **Render**.
+- Deploy individual na **Vercel**.
 - O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública.
 
 ---

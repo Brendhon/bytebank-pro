@@ -27,8 +27,8 @@ Este projeto é o **Shell (container principal)** do Bytebank Pro. Desenvolvido 
 
 ## ✨ Visão Geral
 
-| App     | Framework | Descrição                                                                   |
-| :------ | :-------- | :-------------------------------------------------------------------------- |
+| App       | Framework | Descrição                                                                   |
+| :-------- | :-------- | :-------------------------------------------------------------------------- |
 | **Shell** | Angular   | App principal (container) responsável pela orquestração dos microfrontends. |
 
 ---
@@ -152,7 +152,7 @@ O Shell utiliza **Module Federation** para carregar os microfrontends dinamicame
 
 ## 🚀 Deploy
 
-- Deploy individual na **Render**.
+- Deploy individual na **Vercel**.
 - O build de produção é otimizado para servir como uma aplicação estática.
 
 ---
