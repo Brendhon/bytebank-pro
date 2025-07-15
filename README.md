@@ -177,10 +177,26 @@ npm run dev:api
 
 ---
 
+## 🚀 Implantação (Deploy)
+
+As aplicações de frontend (Shell e Microfrontends) são implantadas na **[Vercel](https://vercel.com/)**. A Vercel foi escolhida por sua integração nativa com monorepos e otimizações específicas para **Turborepo**.
+
+**Principais Vantagens:**
+
+- **Builds Otimizados:** A Vercel detecta o Turborepo e utiliza seu cache de builds, acelerando o processo.
+- **Deploy Inteligente com `turbo-ignore`:** A Vercel pode ignorar o build de uma aplicação se nenhuma alteração relevante for detectada, economizando tempo e recursos.
+
+**Estratégia de Deploy:**
+
+- Cada aplicação na pasta `apps/` é configurada como um projeto independente na Vercel, apontando para o mesmo repositório Git.
+- O comando de build para cada projeto utiliza o filtro do Turborepo (ex: `turbo build --filter=dashboard`).
+
+---
+
 ## 🔗 Links Úteis
 
-- **API GraphQL**: A API está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api) e pode ser acessada via [Render](https://bytebank-api.onrender.com/graphql).
-- **Deploy**: As aplicações (Shell e MFEs) são implantadas individualmente na [Render](https://render.com/).
+- **API GraphQL**: A API continua hospedada no **[Render](https://render.com/)** e está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api). Você pode acessá-la publicamente [aqui](https://bytebank-api.onrender.com/graphql).
+- **Plataforma de Deploy (Frontend)**: As aplicações são implantadas na **[Vercel](https://vercel.com/)**.
 
 ---
 
