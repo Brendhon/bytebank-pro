@@ -20,7 +20,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [🔌 Comunicação entre Microfrontends](#-comunicação-entre-microfrontends)
   - [🐳 Desenvolvimento com Docker](#-desenvolvimento-com-docker)
   - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
-  - [� Implantação (Deploy)](#-implantação-deploy)
+  - [🚀 Implantação (Deploy)](#-implantação-deploy)
   - [🔗 Links Úteis](#-links-úteis)
   - [💡 Melhorias Futuras](#-melhorias-futuras)
     - [🤖 Melhorias com Inteligência Artificial](#-melhorias-com-inteligência-artificial)
@@ -197,7 +197,7 @@ As aplicações de frontend (Shell e Microfrontends) são implantadas na **[Verc
 
 ## 🔗 Links Úteis
 
-- **API GraphQL**: A API continua hospedada no **[Render](https://render.com/)** e está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api). Você pode acessá-la publicamente [aqui](https://bytebank-api.onrender.com/graphql).
+- **API GraphQL**: A API hospedada no **[Render](https://render.com/)** está disponível em um [repositório separado](https://github.com/Brendhon/bytebank-api). Você pode acessá-la publicamente [aqui](https://bytebank-api.onrender.com/graphql).
 - **Plataforma de Deploy (Frontend)**: As aplicações são implantadas na **[Vercel](https://vercel.com/)**.
 
 ---
