@@ -9,7 +9,6 @@ import {
   input
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { getAssetContent } from '@bytebank-pro/shared-assets';
 import { ImgSize } from '@bytebank-pro/types';
 import { ImageOff, Loader2, LucideAngularModule } from 'lucide-angular';
 
@@ -118,11 +117,6 @@ export class ImgComponent implements OnInit {
   public hasError: boolean = false;
 
   /**
-   * Indicates if the loaded content is SVG
-   */
-  public isSvg: boolean = false;
-
-  /**
    * Initializes the component and loads the image.
    */
   ngOnInit(): void {
@@ -132,46 +126,21 @@ export class ImgComponent implements OnInit {
   /**
    * Loads the image asset asynchronously and updates the component state
    */
-  private async loadImage(): Promise<void> {
+  private loadImage(): void {
     try {
       this.isLoading = true;
       this.hasError = false;
 
-      const srcValue = this.src();
-
-      // Check if it's an external URL or asset path
-      if (this.isExternalUrl(srcValue)) {
-        // For external URLs, use standard img src
-        this.imageContent = srcValue;
-        this.isSvg = false;
-      } else {
-        // For internal assets, use getAssetContent
-        const asset = await getAssetContent(srcValue);
-
-        if (asset.type === 'svg') {
-          this.imageContent = this.sanitizer.bypassSecurityTrustHtml(asset.content);
-          this.isSvg = true;
-        } else {
-          this.imageContent = srcValue;
-          this.isSvg = false;
-        }
-      }
+      // Para assets locais, usar src diretamente
+      this.imageContent = this.src();
     } catch (error: unknown) {
       console.error('Error loading image:', error);
       this.hasError = true;
       this.imageContent = '';
     } finally {
       this.isLoading = false;
-      // Trigger change detection since we're using OnPush
       this.cdr.markForCheck();
     }
-  }
-
-  /**
-   * Checks if the provided source is an external URL
-   */
-  private isExternalUrl(src: string): boolean {
-    return src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//');
   }
 
   /**

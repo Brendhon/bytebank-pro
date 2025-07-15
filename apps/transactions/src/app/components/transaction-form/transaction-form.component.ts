@@ -18,7 +18,8 @@ import {
   SelectComponent
 } from '@bytebank-pro/ui';
 import { Calendar, DollarSign, FileText, LucideAngularModule } from 'lucide-angular';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
+const { ILLUSTRATIONS } = ASSETS;
 
 interface FormData {
   date: string;

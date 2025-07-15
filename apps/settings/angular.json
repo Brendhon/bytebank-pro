@@ -20,11 +20,6 @@
                 "glob": "**/*",
                 "input": "./public",
                 "output": "."
-              },
-              {
-                "glob": "**/*",
-                "input": "../../packages/shared-assets/assets",
-                "output": "/assets/"
               }
             ],
             "styles": ["./src/styles.css"],
@@ -41,11 +36,6 @@
                   "glob": "**/*",
                   "input": "./public",
                   "output": "."
-                },
-                {
-                  "glob": "**/*",
-                  "input": "./node_modules/@bytebank-pro/shared-assets/dist/assets",
-                  "output": "/assets/"
                 }
               ],
               "budgets": [
@@ -108,11 +98,6 @@
               {
                 "glob": "**/*",
                 "input": "./public"
-              },
-              {
-                "glob": "**/*",
-                "input": "../../packages/shared-assets/assets",
-                "output": "/assets/"
               }
             ],
             "styles": ["./src/styles.css"]

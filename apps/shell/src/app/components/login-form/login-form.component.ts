@@ -2,7 +2,7 @@ import { LoginFormData } from '@/core/types/form';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { ButtonComponent, DialogComponent, ImgComponent, InputComponent } from '@bytebank-pro/ui';
 import { Mail, LucideAngularModule } from 'lucide-angular';
 
@@ -32,7 +32,7 @@ export class LoginFormComponent {
   readonly mailIcon = Mail;
 
   // Icon to page illustration. This image is displayed on the page.
-  readonly illustrationSrc = ILLUSTRATIONS.LOGIN;
+  readonly illustrationSrc = ASSETS.ILLUSTRATIONS.LOGIN;
 
   // Dialog state - controlled externally
   isOpen = input.required<boolean>();

@@ -31,22 +31,11 @@
   </div>
 }
 
-<!-- SVG content -->
-@else if (isSvg && imageContent) {
-  <div
-    [class]="imageClasses()"
-    [innerHTML]="imageContent"
-    [attr.alt]="imageAltText()"
-    [attr.aria-hidden]="shouldHideFromScreenReaders()"
-    role="img"
-    data-testid="img-svg"
-  ></div>
-}
-
 <!-- Standard image -->
-@else if (!isSvg && imageContent) {
+@else if (src()) {
   <img
-    [src]="imageContent"
+    [src]="src()"
+    style="color: red"
     [alt]="imageAltText()"
     [class]="imageClasses()"
     [attr.aria-hidden]="shouldHideFromScreenReaders()"

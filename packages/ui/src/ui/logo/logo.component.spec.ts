@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LOGOS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { ImgComponent } from '../img/img.component';
 import { LogoComponent } from './logo.component';
+const { LOGOS } = ASSETS;
 
 describe('LogoComponent', () => {
   let component: LogoComponent;

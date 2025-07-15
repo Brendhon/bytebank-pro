@@ -21,7 +21,8 @@
     "baseUrl": "./",
     "paths": {
       "ui": ["./dist"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@/assets/*": ["src/assets/*"]
     },
     "lib": ["ES2022", "dom"]
   },

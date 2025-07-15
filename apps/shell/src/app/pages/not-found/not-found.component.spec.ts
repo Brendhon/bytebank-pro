@@ -5,7 +5,7 @@ import { AuthService } from '@/core/services/auth.service';
 import { ToastService } from '@/core/services/toast.service';
 import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
 import { By } from '@angular/platform-browser';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { ImgComponent } from '@bytebank-pro/ui';
 import { NotFoundComponent } from './not-found.component';
 
@@ -87,7 +87,7 @@ describe('NotFoundComponent', () => {
   });
 
   it('should have the correct image source', () => {
-    expect(component.imageSrc).toBe(ILLUSTRATIONS.ERROR_404);
+    expect(component.imageSrc).toBe(ASSETS.ILLUSTRATIONS.ERROR_404);
   });
 
   it('should have router link to home page', () => {

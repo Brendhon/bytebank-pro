@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { LOGOS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { ImgSize } from '@bytebank-pro/types';
 import { ImgComponent } from '../img/img.component';
 
@@ -66,7 +66,7 @@ export class LogoComponent {
    * Computes the source URL for the logo based on the variant.
    * Uses the LOGOS constant from shared assets with direct imports.
    */
-  logoSrc = computed(() => (this.variant() === 'full' ? LOGOS.MAIN : LOGOS.ICON));
+  logoSrc = computed(() => (this.variant() === 'full' ? ASSETS.LOGOS.MAIN : ASSETS.LOGOS.ICON));
 
   /**
    * Computes the appropriate alt text for the logo based on variant and accessibility settings.

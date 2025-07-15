@@ -100,7 +100,6 @@ bytebank-pro/
     ├── ui/             # Biblioteca de componentes Angular
     ├── types/          # Definições de tipos TypeScript
     ├── utils/          # Funções utilitárias compartilhadas
-    ├── shared-assets/  # Assets (ícones, logos, ilustrações)
     ├── eslint-config/  # Configurações de ESLint
     ├── typescript-config/ # Configurações de TypeScript
     └── shared-design-tokens/ # Design tokens (cores, fontes)
@@ -117,7 +116,6 @@ Os `packages` garantem a consistência e reutilização de código em todo o pro
 | **`@bytebank-pro/ui`**                   | Biblioteca de componentes Angular (standalone) para a UI.                 | [Ver Documentação](./packages/ui/README.md)                   |
 | **`@bytebank-pro/types`**                | Define as interfaces e tipos TypeScript compartilhados.                   | [Ver Documentação](./packages/types/README.md)                |
 | **`@bytebank-pro/utils`**                | Oferece funções utilitárias comuns (formatação, validação).               | [Ver Documentação](./packages/utils/README.md)                |
-| **`@bytebank-pro/shared-assets`**        | Armazena assets compartilhados como logos, ícones e ilustrações.          | [Ver Documentação](./packages/shared-assets/README.md)        |
 | **`@bytebank-pro/shared-design-tokens`** | Centraliza os design tokens (cores, tipografia) para consistência visual. | [Ver Documentação](./packages/shared-design-tokens/README.md) |
 | **`@bytebank-pro/eslint-config`**        | Disponibiliza configurações padronizadas do ESLint.                       | [Ver Documentação](./packages/eslint-config/README.md)        |
 | **`@bytebank-pro/typescript-config`**    | Fornece configurações base do TypeScript (`tsconfig.json`).               | [Ver Documentação](./packages/typescript-config/README.md)    |

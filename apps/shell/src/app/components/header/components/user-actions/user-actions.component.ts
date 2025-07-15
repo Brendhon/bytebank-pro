@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
-import { ICONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { IPublicLinks } from '@bytebank-pro/types';
 import { ImgComponent, PopoverComponent } from '@bytebank-pro/ui';
 import { LucideAngularModule, User } from 'lucide-angular';
@@ -53,10 +53,10 @@ export class UserActionsComponent {
   /**
    * Icons used in the component, imported from shared assets
    */
-  icons = {
+  readonly icons = {
     user: User,
-    github: ICONS.GITHUB,
-    figma: ICONS.FIGMA
+    github: ASSETS.ICONS.GITHUB,
+    figma: ASSETS.ICONS.FIGMA
   };
 
   /**
