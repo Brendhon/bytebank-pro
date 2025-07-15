@@ -360,6 +360,16 @@
         "name": "Default",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">Conteúdo do popover</p>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
+      },
+      {
+        "name": "Default",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -375,16 +385,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    isDecorative: false\n  }\n}"
-      },
-      {
-        "name": "Default",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Click me\n        </button>\n        <div slot=\"content\" class=\"p-4\">\n          <p class=\"text-sm text-gray-700\">Conteúdo do popover</p>\n        </div>\n      </bb-popover>\n    `\n  })\n}"
       },
       {
         "name": "Default",
@@ -780,6 +780,16 @@
         "name": "meta",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Meta<PopoverComponent>",
+        "defaultValue": "{\n  title: 'Components/UI/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n        `\n      }\n    }\n  },\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: [\n        'top',\n        'bottom',\n        'left',\n        'right',\n        'top-start',\n        'top-end',\n        'bottom-start',\n        'bottom-end'\n      ] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
+      },
+      {
+        "name": "meta",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -795,16 +805,6 @@
         "deprecationMessage": "",
         "type": "Meta<LogoComponent>",
         "defaultValue": "{\n  title: 'Components/UI/Logo',\n  component: LogoComponent,\n  parameters: {\n    layout: 'centered',\n    badges: ['stable', 'accessible']\n  },\n  argTypes: {\n    variant: {\n      options: ['full', 'icon'],\n      control: { type: 'radio' }\n    },\n    size: {\n      options: ['sm', 'md', 'lg'],\n      control: { type: 'radio' }\n    },\n    className: {\n      control: { type: 'text' }\n    },\n    ariaLabel: {\n      control: { type: 'text' }\n    },\n    isDecorative: {\n      control: { type: 'boolean' }\n    }\n  },\n  tags: ['autodocs']\n}"
-      },
-      {
-        "name": "meta",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Meta<PopoverComponent>",
-        "defaultValue": "{\n  title: 'Components/UI/Popover',\n  component: PopoverComponent,\n  parameters: {\n    layout: 'centered',\n    docs: {\n      description: {\n        component: `\n## Descrição\n\nO componente Popover fornece uma sobreposição contextual que aparece próxima a um elemento de gatilho. É útil para exibir informações adicionais, menus ou controles.\n\n## Quando Usar\n\n- Para menus de contexto e dropdowns\n- Para exibir informações adicionais sobre um elemento\n- Para tooltips complexos com conteúdo interativo\n\n## Acessibilidade\n\n- Suporta navegação por teclado (Enter/Space para abrir, Escape para fechar)\n- Implementa foco adequado no conteúdo do popover\n- Permite fechamento ao clicar fora (configurável)\n        `\n      }\n    }\n  },\n  argTypes: {\n    position: {\n      description: 'Define a posição do popover em relação ao elemento trigger',\n      options: [\n        'top',\n        'bottom',\n        'left',\n        'right',\n        'top-start',\n        'top-end',\n        'bottom-start',\n        'bottom-end'\n      ] as PopoverPosition[],\n      control: { type: 'select' },\n      table: {\n        defaultValue: { summary: 'bottom-start' }\n      }\n    },\n    disabled: {\n      description: 'Desabilita a abertura do popover',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'false' }\n      }\n    },\n    closeOnClickOutside: {\n      description: 'Determina se o popover deve fechar ao clicar fora dele',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    closeOnEscape: {\n      description: 'Determina se o popover deve fechar ao pressionar Escape',\n      control: { type: 'boolean' },\n      table: {\n        defaultValue: { summary: 'true' }\n      }\n    },\n    offset: {\n      description: 'Distância em pixels entre o trigger e o popover',\n      control: { type: 'number', min: 0, max: 50, step: 1 },\n      table: {\n        defaultValue: { summary: '8' }\n      }\n    }\n  },\n  tags: ['autodocs']\n}"
       },
       {
         "name": "meta",
@@ -950,6 +950,16 @@
         "name": "Playground",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-52\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
+      },
+      {
+        "name": "Playground",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -965,16 +975,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "{\n  args: {\n    variant: 'full',\n    size: 'md',\n    className: '',\n    ariaLabel: undefined,\n    isDecorative: false\n  },\n  render: (args) => ({\n    props: args,\n    template: `<bb-logo ${argsToTemplate(args)}></bb-logo>`\n  })\n}"
-      },
-      {
-        "name": "Playground",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/ui/popover/popover.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "{\n  args: {\n    position: 'bottom-start',\n    disabled: false,\n    closeOnClickOutside: true,\n    closeOnEscape: true,\n    offset: 8\n  },\n  render: (args) => ({\n    props: args,\n    template: `\n      <bb-popover ${argsToTemplate(args)}>\n        <button slot=\"trigger\" class=\"px-4 py-2 bg-bytebank-blue text-white rounded-lg hover:bg-bytebank-blue/90\">\n          Playground\n        </button>\n        <div slot=\"content\" class=\"p-4 min-w-52\">\n          <h3 class=\"text-sm font-medium text-gray-900 mb-2\">Configurações</h3>\n          <p class=\"text-xs text-gray-600\">Use os controles para experimentar diferentes opções.</p>\n        </div>\n      </bb-popover>\n    `\n  }),\n  parameters: {\n    docs: {\n      description: {\n        story: 'Use os controles abaixo para experimentar diferentes configurações do popover.'\n      }\n    }\n  }\n}"
       },
       {
         "name": "Playground",
@@ -1450,6 +1450,17 @@
         "name": "Story",
         "ctype": "miscellaneous",
         "subtype": "typealias",
+        "rawtype": "StoryObj<PopoverComponent>",
+        "file": "src/ui/popover/popover.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "kind": 183
+      },
+      {
+        "name": "Story",
+        "ctype": "miscellaneous",
+        "subtype": "typealias",
         "rawtype": "StoryObj<ImgComponent>",
         "file": "src/ui/img/img.component.stories.ts",
         "deprecated": false,
@@ -1463,17 +1474,6 @@
         "subtype": "typealias",
         "rawtype": "StoryObj<LogoComponent>",
         "file": "src/ui/logo/logo.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "description": "",
-        "kind": 183
-      },
-      {
-        "name": "Story",
-        "ctype": "miscellaneous",
-        "subtype": "typealias",
-        "rawtype": "StoryObj<PopoverComponent>",
-        "file": "src/ui/popover/popover.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "description": "",
@@ -2902,6 +2902,19 @@
           "kind": 183
         }
       ],
+      "src/ui/popover/popover.component.stories.ts": [
+        {
+          "name": "Story",
+          "ctype": "miscellaneous",
+          "subtype": "typealias",
+          "rawtype": "StoryObj<PopoverComponent>",
+          "file": "src/ui/popover/popover.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "kind": 183
+        }
+      ],
       "src/ui/img/img.component.stories.ts": [
         {
           "name": "Story",
@@ -2922,19 +2935,6 @@
           "subtype": "typealias",
           "rawtype": "StoryObj<LogoComponent>",
           "file": "src/ui/logo/logo.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "description": "",
-          "kind": 183
-        }
-      ],
-      "src/ui/popover/popover.component.stories.ts": [
-        {
-          "name": "Story",
-          "ctype": "miscellaneous",
-          "subtype": "typealias",
-          "rawtype": "StoryObj<PopoverComponent>",
-          "file": "src/ui/popover/popover.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "description": "",
