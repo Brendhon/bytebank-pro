@@ -117,6 +117,11 @@ export class ImgComponent implements OnInit {
   public hasError: boolean = false;
 
   /**
+   * Indicates if the image is an SVG that should be rendered inline
+   */
+  public isSvg: boolean = false;
+
+  /**
    * Initializes the component and loads the image.
    */
   ngOnInit(): void {
@@ -126,13 +131,18 @@ export class ImgComponent implements OnInit {
   /**
    * Loads the image asset asynchronously and updates the component state
    */
-  private loadImage(): void {
+  private async loadImage(): Promise<void> {
     try {
       this.isLoading = true;
       this.hasError = false;
 
-      // Para assets locais, usar src diretamente
-      this.imageContent = this.src();
+      const srcValue = this.src();
+
+      // Check if it's an SVG file
+      this.isSvg = srcValue.toLowerCase().endsWith('.svg');
+
+      // Load the image content
+      this.isSvg ? await this.loadSvgInline(srcValue) : (this.imageContent = srcValue);
     } catch (error: unknown) {
       console.error('Error loading image:', error);
       this.hasError = true;
@@ -140,6 +150,28 @@ export class ImgComponent implements OnInit {
     } finally {
       this.isLoading = false;
       this.cdr.markForCheck();
+    }
+  }
+
+  /**
+   * Loads SVG content as inline HTML for color inheritance
+   */
+  private async loadSvgInline(svgPath: string): Promise<void> {
+    try {
+      // Try to fetch the SVG content
+      const response = await fetch(svgPath);
+      if (response.ok) {
+        const svgContent = await response.text();
+        this.imageContent = this.sanitizer.bypassSecurityTrustHtml(svgContent);
+      } else {
+        // Fallback to regular img src if fetch fails
+        this.imageContent = svgPath;
+        this.isSvg = false;
+      }
+    } catch (error) {
+      // Fallback to regular img src if fetch fails
+      this.imageContent = svgPath;
+      this.isSvg = false;
     }
   }
 

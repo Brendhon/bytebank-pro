@@ -61,6 +61,26 @@ You can also provide a custom `ariaLabel` for the icon.
 <bb-logo variant="icon" ariaLabel="Go to homepage" />
 ```
 
+## Colors
+
+The logo component now supports color inheritance for SVGs. You can apply any Tailwind color class to change the logo color:
+
+```html
+<!-- Red logo -->
+<bb-logo variant="full" size="md" className="text-red-500"></bb-logo>
+
+<!-- Blue logo -->
+<bb-logo variant="icon" size="sm" className="text-blue-600"></bb-logo>
+
+<!-- Green logo -->
+<bb-logo variant="full" size="lg" className="text-green-500"></bb-logo>
+
+<!-- Purple logo -->
+<bb-logo variant="icon" size="md" className="text-purple-600"></bb-logo>
+```
+
+The SVG will inherit the color from the `className` property, allowing for dynamic color changes based on your design system.
+
 ## Property API
 
 ### Inputs

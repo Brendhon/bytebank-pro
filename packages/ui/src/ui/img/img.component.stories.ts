@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
 import { ImgComponent } from './img.component';
+import { sizes } from '@bytebank-pro/types';
 
 const meta: Meta<ImgComponent> = {
   title: 'Components/UI/Img',
@@ -41,7 +42,7 @@ The \`bb-img\` component is a flexible image component that can handle both inte
     },
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', 'full'],
+      options: sizes,
       description: 'The size of the image',
       table: {
         defaultValue: { summary: 'md' },

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate } from '@storybook/angular';
 import { LogoComponent } from './logo.component';
+import { sizes } from '@bytebank-pro/types';
 
 const meta: Meta<LogoComponent> = {
   title: 'Components/UI/Logo',
@@ -15,7 +16,7 @@ const meta: Meta<LogoComponent> = {
       control: { type: 'radio' }
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: sizes,
       control: { type: 'radio' }
     },
     className: {
@@ -132,4 +133,34 @@ export const InContext: Story = {
       </div>
     `
   })
+};
+
+export const WithColors: Story = {
+  render: () => ({
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <h3 class="text-lg font-semibold mb-2">Logo com Cores</h3>
+        <div class="flex gap-4 items-center flex-wrap">
+          <bb-logo variant="full" size="md" className="text-red-500"></bb-logo>
+          <bb-logo variant="full" size="md" className="text-blue-600"></bb-logo>
+          <bb-logo variant="full" size="md" className="text-green-500"></bb-logo>
+          <bb-logo variant="full" size="md" className="text-purple-600"></bb-logo>
+        </div>
+        <div class="flex gap-4 items-center flex-wrap">
+          <bb-logo variant="icon" size="md" className="text-red-500"></bb-logo>
+          <bb-logo variant="icon" size="md" className="text-blue-600"></bb-logo>
+          <bb-logo variant="icon" size="md" className="text-green-500"></bb-logo>
+          <bb-logo variant="icon" size="md" className="text-purple-600"></bb-logo>
+        </div>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Demonstra como aplicar cores ao logo usando classes CSS. O SVG agora herda as cores corretamente.'
+      }
+    }
+  }
 };
