@@ -184,6 +184,26 @@ npm run dev:api
 
 ---
 
+## 💡 Melhorias Futuras
+
+Este projeto está em constante evolução. Abaixo estão algumas ideias e sugestões para futuras melhorias, tanto com o uso de Inteligência Artificial quanto com práticas de desenvolvimento convencionais:
+
+### 🤖 Melhorias com Inteligência Artificial
+
+- **Validação de Padrões de Código com IA**: Utilizar IAs como o Gemini CLI para analisar Pull Requests e verificar se o código segue os padrões e diretrizes definidos no `GEMINI.md`. Isso pode incluir a verificação de nomes de componentes, uso de services, e a estrutura geral do código.
+- **Geração de Testes Unitários**: Automatizar a criação de testes unitários para novos componentes e serviços, garantindo que a cobertura de testes seja mantida e que os testes sigam as melhores práticas.
+- **Otimização de Performance com Análise de IA**: Usar ferramentas de IA para analisar o bundle final das aplicações e sugerir otimizações de performance, como a identificação de "dead code" ou a sugestão de "lazy loading" para módulos específicos.
+- **Tradução Automatizada de Documentação**: Utilizar IA para traduzir a documentação do projeto para outros idiomas, tornando-o mais acessível para a comunidade global.
+
+### 🛠️ Melhorias de Desenvolvimento
+
+- **Testes End-to-End (E2E)**: Implementar testes E2E com ferramentas como o Cypress ou Playwright para simular a jornada do usuário e garantir a integração entre os microfrontends.
+- **Monitoramento e Observabilidade**: Integrar ferramentas de monitoramento (ex: Sentry, Datadog) para capturar erros em tempo real e analisar a performance das aplicações em produção.
+- **Design System Tokens**: Expandir o uso de design tokens para incluir espaçamentos, tamanhos de fontes e outros elementos de design, garantindo uma consistência visual ainda maior.
+- **Storybook para Documentação de Design Patterns**: Utilizar o Storybook para documentar não apenas componentes, mas também "design patterns" e "recipes" de como combinar componentes para criar layouts e funcionalidades complexas.
+
+---
+
 ## 👥 Autor
 
 **Brendhon Moreira**
