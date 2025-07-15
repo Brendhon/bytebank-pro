@@ -1,23 +1,32 @@
-// apps/shell/src/assets/assets.config.ts
+import { environment } from 'src/environments/environment';
+
+/**
+ * Builds an asset URL that works both locally and in the shell.
+ * @param assetPath - The path to the asset.
+ * @returns The full asset URL.
+ */
+const buildAssetUrl = (assetPath: string): string =>
+  environment.baseUrl ? `${environment.baseUrl}${assetPath}` : assetPath;
+
 export const ASSETS = {
   ILLUSTRATIONS: {
-    HOME: '/assets/illustrations/home.svg',
-    ERROR_404: '/assets/illustrations/404.svg',
-    LOGIN: '/assets/illustrations/login.svg',
-    REGISTER: '/assets/illustrations/register.svg'
+    HOME: buildAssetUrl('/assets/illustrations/home.svg'),
+    ERROR_404: buildAssetUrl('/assets/illustrations/404.svg'),
+    LOGIN: buildAssetUrl('/assets/illustrations/login.svg'),
+    REGISTER: buildAssetUrl('/assets/illustrations/register.svg')
   },
   IMAGES: {
-    BOX: '/assets/images/box.png',
-    WITHDRAWAL: '/assets/images/withdrawal.png',
-    STAR: '/assets/images/star.png',
-    DEVICES: '/assets/images/devices.png'
+    BOX: buildAssetUrl('/assets/images/box.png'),
+    WITHDRAWAL: buildAssetUrl('/assets/images/withdrawal.png'),
+    STAR: buildAssetUrl('/assets/images/star.png'),
+    DEVICES: buildAssetUrl('/assets/images/devices.png')
   },
   ICONS: {
-    GITHUB: '/assets/icons/github.svg',
-    FIGMA: '/assets/icons/figma.svg'
+    GITHUB: buildAssetUrl('/assets/icons/github.svg'),
+    FIGMA: buildAssetUrl('/assets/icons/figma.svg')
   },
   LOGOS: {
-    MAIN: '/assets/logos/logo.svg',
-    ICON: '/assets/logos/icon.svg'
+    MAIN: buildAssetUrl('/assets/logos/logo.svg'),
+    ICON: buildAssetUrl('/assets/logos/icon.svg')
   }
 } as const;
