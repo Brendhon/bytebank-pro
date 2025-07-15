@@ -31,12 +31,12 @@
   </div>
 }
 
-<!-- SVG content -->
+<!-- SVG inline rendering for color inheritance -->
 @else if (isSvg && imageContent) {
   <div
     [class]="imageClasses()"
     [innerHTML]="imageContent"
-    [attr.alt]="imageAltText()"
+    [attr.aria-label]="imageAltText()"
     [attr.aria-hidden]="shouldHideFromScreenReaders()"
     role="img"
     data-testid="img-svg"
@@ -44,9 +44,9 @@
 }
 
 <!-- Standard image -->
-@else if (!isSvg && imageContent) {
+@else if (src()) {
   <img
-    [src]="imageContent"
+    [src]="src()"
     [alt]="imageAltText()"
     [class]="imageClasses()"
     [attr.aria-hidden]="shouldHideFromScreenReaders()"

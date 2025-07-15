@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { IUser } from '@bytebank-pro/types';
 import { ButtonComponent, DialogComponent, ImgComponent, InputComponent } from '@bytebank-pro/ui';
 import { Mail, User, Lock, Trash2, LucideAngularModule } from 'lucide-angular';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 
 interface FormData {
   name: string;
@@ -118,7 +118,7 @@ export class AccountFormComponent {
   );
 
   // Illustration
-  readonly illustration = ILLUSTRATIONS.SETTINGS;
+  readonly illustration = ASSETS.ILLUSTRATIONS.SETTINGS;
 
   // Effect to update form data when user input changes
   private readonly userEffect = effect(() => this.resetForm());

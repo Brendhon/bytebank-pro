@@ -55,7 +55,6 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/platform-browser-dynamic": "^20.0.0",
     "@angular/router": "^20.0.0",
-    "@bytebank-pro/shared-assets": "*",
     "@bytebank-pro/shared-design-tokens": "*",
     "@bytebank-pro/utils": "*",
     "@bytebank-pro/types": "*",

@@ -51,7 +51,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "../../packages/shared-assets/assets",
+                "input": "src/assets",
                 "output": "/assets/"
               }
             ]

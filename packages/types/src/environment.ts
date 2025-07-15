@@ -8,6 +8,7 @@ export interface IPublicLinks {
 export interface IEnvironment {
   production: boolean;
   apiUrl: string;
+  baseUrl?: string;
   mfeRegistry?: IMfeRegistry;
   publicLinks?: IPublicLinks;
 }

@@ -2,7 +2,7 @@ import { RegisterFormData } from '@/core/types/form';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ILLUSTRATIONS } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import {
   ButtonComponent,
   CheckboxComponent,
@@ -55,7 +55,7 @@ export class RegisterFormComponent {
   readonly eyeOffIcon = EyeOff;
 
   // Icon to page illustration. This image is displayed on the page.
-  readonly illustrationSrc = ILLUSTRATIONS.REGISTER;
+  readonly illustrationSrc = ASSETS.ILLUSTRATIONS.REGISTER;
 
   // Dialog state - controlled externally
   isOpen = input.required<boolean>();

@@ -23,7 +23,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "../../packages/shared-assets/assets",
+                "input": "./src/assets",
                 "output": "/assets/"
               }
             ],
@@ -44,7 +44,7 @@
                 },
                 {
                   "glob": "**/*",
-                  "input": "./node_modules/@bytebank-pro/shared-assets/dist/assets",
+                  "input": "./src/assets",
                   "output": "/assets/"
                 }
               ],
@@ -108,6 +108,11 @@
               {
                 "glob": "**/*",
                 "input": "./public"
+              },
+              {
+                "glob": "**/*",
+                "input": "./src/assets",
+                "output": "/assets/"
               }
             ],
             "styles": ["./src/styles.css"]

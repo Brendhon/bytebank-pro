@@ -9,7 +9,6 @@ import {
   input
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { getAssetContent } from '@bytebank-pro/shared-assets';
 import { ImgSize } from '@bytebank-pro/types';
 import { ImageOff, Loader2, LucideAngularModule } from 'lucide-angular';
 
@@ -118,7 +117,7 @@ export class ImgComponent implements OnInit {
   public hasError: boolean = false;
 
   /**
-   * Indicates if the loaded content is SVG
+   * Indicates if the image is an SVG that should be rendered inline
    */
   public isSvg: boolean = false;
 
@@ -139,39 +138,41 @@ export class ImgComponent implements OnInit {
 
       const srcValue = this.src();
 
-      // Check if it's an external URL or asset path
-      if (this.isExternalUrl(srcValue)) {
-        // For external URLs, use standard img src
-        this.imageContent = srcValue;
-        this.isSvg = false;
-      } else {
-        // For internal assets, use getAssetContent
-        const asset = await getAssetContent(srcValue);
+      // Check if it's an SVG file
+      this.isSvg = srcValue.toLowerCase().endsWith('.svg');
 
-        if (asset.type === 'svg') {
-          this.imageContent = this.sanitizer.bypassSecurityTrustHtml(asset.content);
-          this.isSvg = true;
-        } else {
-          this.imageContent = srcValue;
-          this.isSvg = false;
-        }
-      }
+      // Load the image content
+      this.isSvg ? await this.loadSvgInline(srcValue) : (this.imageContent = srcValue);
     } catch (error: unknown) {
       console.error('Error loading image:', error);
       this.hasError = true;
       this.imageContent = '';
     } finally {
       this.isLoading = false;
-      // Trigger change detection since we're using OnPush
       this.cdr.markForCheck();
     }
   }
 
   /**
-   * Checks if the provided source is an external URL
+   * Loads SVG content as inline HTML for color inheritance
    */
-  private isExternalUrl(src: string): boolean {
-    return src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//');
+  private async loadSvgInline(svgPath: string): Promise<void> {
+    try {
+      // Try to fetch the SVG content
+      const response = await fetch(svgPath);
+      if (response.ok) {
+        const svgContent = await response.text();
+        this.imageContent = this.sanitizer.bypassSecurityTrustHtml(svgContent);
+      } else {
+        // Fallback to regular img src if fetch fails
+        this.imageContent = svgPath;
+        this.isSvg = false;
+      }
+    } catch (error) {
+      // Fallback to regular img src if fetch fails
+      this.imageContent = svgPath;
+      this.isSvg = false;
+    }
   }
 
   /**

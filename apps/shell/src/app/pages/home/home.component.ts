@@ -3,7 +3,7 @@ import { GuestLayoutComponent } from '@/guest-layout/guest-layout.component';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ILLUSTRATIONS, IMAGES } from '@bytebank-pro/shared-assets';
+import { ASSETS } from '@/assets/assets.config';
 import { ImgComponent } from '@bytebank-pro/ui';
 
 /**
@@ -50,28 +50,28 @@ export class HomeComponent implements OnInit {
    */
   benefits: BenefitItem[] = [
     {
-      iconSrc: IMAGES.BOX,
+      iconSrc: ASSETS.IMAGES.BOX,
       iconAlt: 'Gift box icon',
       iconWidth: 60,
       title: 'Conta e cartão gratuitos',
       description: 'Nossa conta é digital, sem custo fixo e sem tarifa de manutenção.'
     },
     {
-      iconSrc: IMAGES.WITHDRAWAL,
+      iconSrc: ASSETS.IMAGES.WITHDRAWAL,
       iconAlt: 'Hand withdrawing money icon',
       iconWidth: 60,
       title: 'Saques sem custo',
       description: 'Você pode sacar gratuitamente 4x por mês de qualquer Banco 24h.'
     },
     {
-      iconSrc: IMAGES.STAR,
+      iconSrc: ASSETS.IMAGES.STAR,
       iconAlt: 'Star icon',
       iconWidth: 60,
       title: 'Programa de pontos',
       description: 'Acumule pontos com compras no crédito sem pagar mensalidade!'
     },
     {
-      iconSrc: IMAGES.DEVICES,
+      iconSrc: ASSETS.IMAGES.DEVICES,
       iconAlt: 'Mobile devices icon',
       iconWidth: 60,
       title: 'Seguro Dispositivos',
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
    * Icon to home page illustration.
    * This image is displayed on the home page.
    */
-  readonly homeIllustrationSrc = ILLUSTRATIONS.HOME;
+  readonly homeIllustrationSrc = ASSETS.ILLUSTRATIONS.HOME;
 
   ngOnInit(): void {
     // Redirect to dashboard if user is already logged in
