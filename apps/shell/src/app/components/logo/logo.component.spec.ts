@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ASSETS } from '@/assets/assets.config';
-import { ImgComponent } from '../img/img.component';
+import { ImgComponent } from '@bytebank-pro/ui';
 import { LogoComponent } from './logo.component';
 const { LOGOS } = ASSETS;
 

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { ASSETS } from '@/assets/assets.config';
 import { ImgSize } from '@bytebank-pro/types';
-import { ImgComponent } from '../img/img.component';
+import { ImgComponent } from '@bytebank-pro/ui';
 
 /**
  * Defines the possible visual variants for the Logo component.

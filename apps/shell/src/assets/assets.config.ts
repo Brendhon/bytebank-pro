@@ -15,5 +15,9 @@ export const ASSETS = {
   ICONS: {
     GITHUB: '/assets/icons/github.svg',
     FIGMA: '/assets/icons/figma.svg'
+  },
+  LOGOS: {
+    MAIN: '/assets/logos/logo.svg',
+    ICON: '/assets/logos/icon.svg'
   }
 } as const;

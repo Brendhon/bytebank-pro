@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LogoComponent } from '@bytebank-pro/ui';
+import { LogoComponent } from '../logo/logo.component';
 
 /**
  * Footer component for the ByteBank Pro application.
