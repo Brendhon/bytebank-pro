@@ -1,4 +1,4 @@
-import { StoredUser } from '@bytebank-pro/types';
+import { IEnvironment, StoredUser } from '@bytebank-pro/types';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -103,3 +103,12 @@ export const getTokenFromLocalStorage = (): string | null => {
 export const removeTokenFromLocalStorage = (): void => {
   localStorage.removeItem('bytebank_auth_token');
 };
+
+/**
+ * Builds an asset URL that works both locally and in the shell.
+ * @param env - The environment.
+ * @param path - The path to the asset.
+ * @returns The full asset URL.
+ */
+export const buildAssetUrl = (env: IEnvironment, path: string): string =>
+  env.baseUrl ? `${env.baseUrl}${path}` : path;
