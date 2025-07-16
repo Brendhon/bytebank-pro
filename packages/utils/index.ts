@@ -14,9 +14,12 @@ export const formatDateToLong = (date: Date): string => {
  * Formata uma data para o padrão: '18/04/2025'
  * @param date Date padrão
  */
-export const formatDateToShort = (date: Date | string): string => {
+export const formatDateToShort = (
+  date: Date | string,
+  dateFormat: string = 'dd/MM/yyyy'
+): string => {
   if (typeof date == 'string') date = parseDate(date);
-  return format(date, 'dd/MM/yyyy', { locale: ptBR });
+  return format(date, dateFormat, { locale: ptBR });
 };
 
 /**

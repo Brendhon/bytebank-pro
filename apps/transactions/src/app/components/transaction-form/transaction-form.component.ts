@@ -19,6 +19,7 @@ import {
 } from '@bytebank-pro/ui';
 import { Calendar, DollarSign, FileText, LucideAngularModule } from 'lucide-angular';
 import { ASSETS } from '@/assets/assets.config';
+import { formatDateToShort, parseDate } from '@bytebank-pro/utils';
 const { ILLUSTRATIONS } = ASSETS;
 
 interface FormData {
@@ -365,7 +366,7 @@ export class TransactionFormComponent {
     // If editing, set form data to transaction values
     if (transaction) {
       // Set form data to transaction values
-      data.date = transaction.date;
+      data.date = formatDateToShort(transaction.date, 'yyyy-MM-dd');
       data.alias = transaction.alias || '';
       data.type = transaction.type;
       data.desc = transaction.desc;
