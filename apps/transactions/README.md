@@ -152,6 +152,11 @@ transactions/
 - Deploy individual na **Vercel**.
 - O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública.
 
+### URLs de Acesso
+
+- **Desenvolvimento (Local):** `http://localhost:4202`
+- **Produção (Vercel):** `https://bytebank-pro-transactions.vercel.app`
+
 ---
 
 ## 🧰 Boas Práticas

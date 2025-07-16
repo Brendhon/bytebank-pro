@@ -155,6 +155,16 @@ O Shell utiliza **Module Federation** para carregar os microfrontends dinamicame
 - Deploy individual na **Vercel**.
 - O build de produção é otimizado para servir como uma aplicação estática.
 
+### URLs de Acesso
+
+- **Desenvolvimento (Local):** `http://localhost:4200`
+- **Produção (Vercel):** `https://bytebank-pro-shell.vercel.app`
+
+### URLs da API
+
+- **Desenvolvimento (Local):** `http://localhost:3000/graphql`
+- **Produção (Render):** `https://bytebank-api.onrender.com/graphql`
+
 ---
 
 ## 🧰 Boas Práticas

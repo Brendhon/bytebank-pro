@@ -152,6 +152,11 @@ dashboard/
 - Deploy individual na **Vercel**.
 - O `remoteEntry.js` é acessado diretamente pelo Shell via URL pública.
 
+### URLs de Acesso
+
+- **Desenvolvimento (Local):** `http://localhost:4201`
+- **Produção (Vercel):** `https://bytebank-pro-dashboard.vercel.app`
+
 ---
 
 ## 🧰 Boas Práticas
