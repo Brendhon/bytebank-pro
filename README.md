@@ -2,11 +2,23 @@
 
 Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, desenvolvidos como parte do Tech Challenge da pós-graduação em Engenharia de Front-end (FIAP). O projeto utiliza **Turborepo** para orquestrar um monorepo com aplicações Angular independentes, promovendo escalabilidade, manutenção e desempenho.
 
+## 🚀 URLs de Acesso
+
+- **Desenvolvimento (Local):** `http://localhost:4200`
+- **Produção (Vercel):** `https://bytebank-pro.vercel.app`
+
+### URLs da API
+
+- **Desenvolvimento (Local):** `http://localhost:3000/graphql`
+- **Produção (Render):** `https://bytebank-api.onrender.com/graphql`
+
 ---
 
 ## 📝 Sumário
 
 - [💻 Bytebank Pro – Microfrontends](#-bytebank-pro--microfrontends)
+  - [🚀 URLs de Acesso](#-urls-de-acesso)
+    - [URLs da API](#urls-da-api)
   - [📝 Sumário](#-sumário)
   - [✨ Visão Geral](#-visão-geral)
   - [📦 Tecnologias](#-tecnologias)
@@ -21,6 +33,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [🐳 Desenvolvimento com Docker](#-desenvolvimento-com-docker)
   - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
   - [🚀 Implantação (Deploy)](#-implantação-deploy)
+    - [URL Final do Projeto](#url-final-do-projeto)
   - [🔗 Links Úteis](#-links-úteis)
   - [💡 Melhorias Futuras](#-melhorias-futuras)
     - [🤖 Melhorias com Inteligência Artificial](#-melhorias-com-inteligência-artificial)
@@ -180,6 +193,10 @@ npm run dev:api
 ## 🚀 Implantação (Deploy)
 
 As aplicações de frontend (Shell e Microfrontends) são implantadas na **[Vercel](https://vercel.com/)**. A Vercel foi escolhida por sua integração nativa com monorepos e otimizações específicas para **Turborepo**.
+
+### URL Final do Projeto
+
+O projeto final pode ser acessado em: `https://bytebank-pro.vercel.app/`
 
 **Principais Vantagens:**
 
