@@ -5,7 +5,7 @@
 }
 
 .account-form-content {
-  @apply flex flex-col gap-6 sm:flex-row;
+  @apply flex flex-col gap-6 lg:flex-row;
 }
 
 .account-form-header {
@@ -17,7 +17,7 @@
 }
 
 .account-form-illustration {
-  @apply w-full max-w-md mx-auto sm:mx-0;
+  @apply w-full mx-auto sm:mx-0 hidden sm:block;
 }
 
 .account-form-fields {
