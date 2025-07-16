@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { ITransaction } from '@bytebank-pro/types';
 import { ButtonComponent } from '@bytebank-pro/ui';
+import { formatDateToShort } from '@bytebank-pro/utils';
 import { first } from 'rxjs';
 
 @Component({
@@ -114,7 +115,7 @@ export class TransactionsPageComponent implements OnInit {
   handleTransactionSubmit(transaction: ITransaction): void {
     const transactionToSave = {
       ...(transaction.alias && { alias: transaction.alias }),
-      date: transaction.date,
+      date: formatDateToShort(transaction.date),
       desc: transaction.desc,
       type: transaction.type,
       value: transaction.value

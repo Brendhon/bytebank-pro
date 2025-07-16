@@ -14,7 +14,8 @@ export const formatDateToLong = (date: Date): string => {
  * Formata uma data para o padrão: '18/04/2025'
  * @param date Date padrão
  */
-export const formatDateToShort = (date: Date): string => {
+export const formatDateToShort = (date: Date | string): string => {
+  if (typeof date == 'string') date = parseDate(date);
   return format(date, 'dd/MM/yyyy', { locale: ptBR });
 };
 
@@ -35,7 +36,14 @@ export const isNumber = (value: any): value is number => typeof value === 'numbe
 
 // Parse date from string format 'dd/mm/yyyy' to Date object
 export const parseDate = (dateStr: string) => {
-  const [day, month, year] = dateStr.split('/').map(Number);
+  let day = 0;
+  let month = 0;
+  let year = 0;
+
+  dateStr.includes('/')
+    ? ([day, month, year] = dateStr.split('/').map(Number))
+    : ([year, month, day] = dateStr.split('-').map(Number));
+
   return new Date(year, month - 1, day); // month é 0-based
 };
 
