@@ -3,5 +3,5 @@ import { IEnvironment } from '@bytebank-pro/types';
 export const environment: IEnvironment = {
   production: true,
   apiUrl: 'https://bytebank-api.onrender.com/graphql',
-  baseUrl: 'http://localhost:4203' // URL base do MFE settings
+  baseUrl: 'https://bytebank-pro-settings.vercel.app' // URL base do MFE settings
 };
