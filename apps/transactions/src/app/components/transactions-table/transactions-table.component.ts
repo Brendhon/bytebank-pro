@@ -1,4 +1,5 @@
 import { CurrencyFormatPipe } from '@/core/pipes/currency-format.pipe';
+import { DateFormatterPipe } from '@/core/pipes/date-formatter.pipe';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output, TemplateRef } from '@angular/core';
 import {
@@ -44,7 +45,13 @@ import { LucideAngularModule, Pencil, Trash } from 'lucide-angular';
 @Component({
   selector: 'bb-transactions-table',
   standalone: true,
-  imports: [CommonModule, GenericTableComponent, LucideAngularModule, CurrencyFormatPipe],
+  imports: [
+    CommonModule,
+    GenericTableComponent,
+    LucideAngularModule,
+    CurrencyFormatPipe,
+    DateFormatterPipe
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './transactions-table.component.html',
   styleUrls: ['./transactions-table.component.css']

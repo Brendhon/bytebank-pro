@@ -49,7 +49,7 @@
   </ng-template>
 
   <ng-template #dateRenderTemplate let-value let-row="row">
-    <span class="transaction-date">{{ value | date: 'dd/MM/yyyy' }}</span>
+    <span class="transaction-date">{{ value | dateFormatter }}</span>
   </ng-template>
 
   <!-- Generic table with custom column rendering -->
