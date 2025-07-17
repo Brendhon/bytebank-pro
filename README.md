@@ -2,18 +2,16 @@
 
 Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, desenvolvidos como parte do Tech Challenge da pós-graduação em Engenharia de Front-end (FIAP). O projeto utiliza **Turborepo** para orquestrar um monorepo com aplicações Angular independentes, promovendo escalabilidade, manutenção e desempenho.
 
-## 🚀 URLs de Acesso
-
-- **Deploy:** [https://bytebank-pro.vercel.app](https://bytebank-pro.vercel.app)
-- **API GraphQL:** [https://bytebank-api.onrender.com/graphql](https://bytebank-api.onrender.com/graphql)
-
----
+<div style="max-width: 300px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+  <img src="./assets/bytebank-pro.png" alt="Bytebank Pro" style="max-width: 100%; display: block; margin: 0 auto; border-radius: 10px;" />
+</div>
 
 ## 📝 Sumário
 
 - [💻 Bytebank Pro – Microfrontends](#-bytebank-pro--microfrontends)
-  - [🚀 URLs de Acesso](#-urls-de-acesso)
   - [📝 Sumário](#-sumário)
+  - [📄 Desafio Original](#-desafio-original)
+  - [🚀 URLs de Acesso](#-urls-de-acesso)
   - [✨ Visão Geral](#-visão-geral)
   - [📦 Tecnologias](#-tecnologias)
   - [🤖 Desenvolvimento com IA](#-desenvolvimento-com-ia)
@@ -33,6 +31,21 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
     - [🤖 Melhorias com Inteligência Artificial](#-melhorias-com-inteligência-artificial)
     - [🛠️ Melhorias de Desenvolvimento](#️-melhorias-de-desenvolvimento)
   - [👥 Autor](#-autor)
+
+---
+
+## 📄 Desafio Original
+
+O documento contendo os requisitos e objetivos do desafio original da pós-tech está disponível para consulta:
+
+📌 [**POSTECH - Front-end - Tech Challenge - Fase 2**](./assets/POSTECH%20-%20Tech%20Challenge%20-%20Fase%202.pdf)
+
+---
+
+## 🚀 URLs de Acesso
+
+- **Deploy:** [https://bytebank-pro.vercel.app](https://bytebank-pro.vercel.app)
+- **API GraphQL:** [https://bytebank-api.onrender.com/graphql](https://bytebank-api.onrender.com/graphql)
 
 ---
 
