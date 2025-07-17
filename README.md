@@ -4,13 +4,8 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 ## 🚀 URLs de Acesso
 
-- **Desenvolvimento (Local):** `http://localhost:4200`
-- **Produção (Vercel):** `https://bytebank-pro.vercel.app`
-
-### URLs da API
-
-- **Desenvolvimento (Local):** `http://localhost:3000/graphql`
-- **Produção (Render):** `https://bytebank-api.onrender.com/graphql`
+- **Deploy:** [https://bytebank-pro.vercel.app](https://bytebank-pro.vercel.app)
+- **API GraphQL:** [https://bytebank-api.onrender.com/graphql](https://bytebank-api.onrender.com/graphql)
 
 ---
 
@@ -18,7 +13,6 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
 
 - [💻 Bytebank Pro – Microfrontends](#-bytebank-pro--microfrontends)
   - [🚀 URLs de Acesso](#-urls-de-acesso)
-    - [URLs da API](#urls-da-api)
   - [📝 Sumário](#-sumário)
   - [✨ Visão Geral](#-visão-geral)
   - [📦 Tecnologias](#-tecnologias)
