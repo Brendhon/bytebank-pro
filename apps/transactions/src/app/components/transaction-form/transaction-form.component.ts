@@ -1,3 +1,4 @@
+import { ASSETS } from '@/assets/assets.config';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -17,10 +18,8 @@ import {
   InputComponent,
   SelectComponent
 } from '@bytebank-pro/ui';
+import { formatDateToShort } from '@bytebank-pro/utils';
 import { Calendar, DollarSign, FileText, LucideAngularModule } from 'lucide-angular';
-import { ASSETS } from '@/assets/assets.config';
-import { formatDateToShort, parseDate } from '@bytebank-pro/utils';
-const { ILLUSTRATIONS } = ASSETS;
 
 interface FormData {
   date: string;
@@ -122,7 +121,7 @@ export class TransactionFormComponent {
   };
 
   // Illustration
-  readonly illustration = ILLUSTRATIONS.TRANSACTION;
+  readonly illustration = ASSETS.ILLUSTRATIONS.TRANSACTION;
 
   // Transaction type options
   readonly transactionTypes = [

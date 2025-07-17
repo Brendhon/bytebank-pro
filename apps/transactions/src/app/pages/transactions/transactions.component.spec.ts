@@ -159,7 +159,7 @@ describe('TransactionsPageComponent', () => {
   describe('Transaction Creation', () => {
     it('should create new transaction successfully', () => {
       const newTransaction: ITransaction = {
-        date: '2024-01-17',
+        date: '17/01/2024',
         alias: 'New Transaction',
         type: 'inflow',
         desc: 'deposit',
@@ -173,7 +173,7 @@ describe('TransactionsPageComponent', () => {
       component.handleTransactionSubmit(newTransaction);
 
       expect(transactionsServiceSpy.createTransaction).toHaveBeenCalledWith({
-        date: '2024-01-17',
+        date: '17/01/2024',
         alias: 'New Transaction',
         type: 'inflow',
         desc: 'deposit',
@@ -185,7 +185,7 @@ describe('TransactionsPageComponent', () => {
       const consoleSpy = spyOn(console, 'error');
       const error = new Error('Failed to create transaction');
       const newTransaction: ITransaction = {
-        date: '2024-01-17',
+        date: '17/01/2024',
         type: 'inflow',
         desc: 'deposit',
         value: 1000
@@ -203,7 +203,7 @@ describe('TransactionsPageComponent', () => {
     it('should update existing transaction successfully', () => {
       const transactionToUpdate = mockTransactions[0];
       const updatedData: ITransaction = {
-        date: '2024-01-18',
+        date: '18/01/2024',
         alias: 'Updated Transaction',
         type: 'outflow',
         desc: 'payment',
@@ -220,7 +220,7 @@ describe('TransactionsPageComponent', () => {
       component.handleTransactionSubmit(updatedData);
 
       expect(transactionsServiceSpy.updateTransaction).toHaveBeenCalledWith('1', {
-        date: '2024-01-18',
+        date: '18/01/2024',
         alias: 'Updated Transaction',
         type: 'outflow',
         desc: 'payment',
@@ -233,7 +233,7 @@ describe('TransactionsPageComponent', () => {
       const error = new Error('Failed to update transaction');
       const transactionToUpdate = mockTransactions[0];
       const updatedData: ITransaction = {
-        date: '2024-01-18',
+        date: '18/01/2024',
         type: 'outflow',
         desc: 'payment',
         value: 200
