@@ -5,7 +5,7 @@
 }
 
 .account-form-content {
-  @apply flex flex-col gap-6 lg:flex-row;
+  @apply flex flex-col lg:flex-row;
 }
 
 .account-form-header {

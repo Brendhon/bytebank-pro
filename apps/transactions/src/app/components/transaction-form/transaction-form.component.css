@@ -18,7 +18,7 @@
 }
 
 .transaction-container {
-  @apply flex flex-col items-center space-y-6 p-6;
+  @apply flex flex-col items-center sm:space-y-6 p-2 sm:p-4;
 }
 
 .transaction-title {
@@ -40,7 +40,11 @@
 
 /* Dialog actions styling */
 .dialog-actions {
-  @apply flex flex-col sm:flex-row justify-center gap-2 mt-6;
+  @apply flex flex-col-reverse sm:flex-row justify-center gap-2 mt-6;
+}
+
+.transaction-illustration {
+  @apply hidden sm:block mx-auto;
 }
 
 /* High contrast mode support */

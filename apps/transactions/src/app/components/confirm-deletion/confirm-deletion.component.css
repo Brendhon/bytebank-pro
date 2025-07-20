@@ -29,7 +29,7 @@
 
 /* Dialog actions styling */
 .dialog-actions {
-  @apply flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 mt-6;
+  @apply flex flex-col-reverse sm:flex-row justify-center gap-2 sm:gap-3 mt-6;
 }
 
 /* High contrast mode support */

@@ -16,7 +16,7 @@
   }
 
   .dialog-actions {
-    @apply pt-4 flex items-center justify-center gap-8 sm:flex-row flex-col w-full;
+    @apply pt-4 flex items-center justify-center gap-8 sm:flex-row flex-col-reverse w-full;
   }
 }
 

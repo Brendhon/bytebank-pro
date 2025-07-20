@@ -20,7 +20,7 @@
 }
 
 .login-illustration {
-  @apply hidden md:block;
+  @apply hidden sm:block;
 }
 
 /* Transition effects for interactive elements */
