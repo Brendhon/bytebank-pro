@@ -22,6 +22,7 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [📦 Packages Compartilhados](#-packages-compartilhados)
   - [🛠️ Qualidade de Código](#️-qualidade-de-código)
   - [🔌 Comunicação entre Microfrontends](#-comunicação-entre-microfrontends)
+  - [📋 Pré-requisitos](#-pré-requisitos)
   - [🐳 Desenvolvimento com Docker](#-desenvolvimento-com-docker)
   - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
   - [🚀 Implantação (Deploy)](#-implantação-deploy)
@@ -157,6 +158,16 @@ A comunicação é feita através de duas estratégias principais:
 
 ---
 
+## 📋 Pré-requisitos
+
+Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
+
+- **[Git](https://git-scm.com/)**: Para controle de versão do código.
+- **[Node.js](https://nodejs.org/)**: Recomenda-se a versão 22 ou superior.
+- **[Docker](https://www.docker.com/)**: Essencial para gerenciar o ambiente de desenvolvimento. Recomendamos o uso do [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+---
+
 ## 🐳 Desenvolvimento com Docker
 
 O ambiente de desenvolvimento é gerenciado com **Docker Compose**, que orquestra a API GraphQL e o banco de dados MongoDB.
@@ -171,25 +182,32 @@ npm run dev:api
 
 ## 🚀 Instruções de Desenvolvimento
 
-1.  **Instale as dependências:**
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/Brendhon/bytebank-pro.git
+    cd bytebank-pro
+    ```
+
+2.  **Instale as dependências:**
 
     ```bash
     npm install
     ```
 
-2.  **Inicie o ambiente completo (API + MFEs):**
+3.  **Inicie o ambiente completo (API + MFEs):**
 
     ```bash
     npm run dev
     ```
 
-3.  **Para iniciar apenas os microfrontends:**
+4.  **Para iniciar apenas os microfrontends:**
 
     ```bash
     npm run dev:front
     ```
 
-4.  **Para parar o ambiente Docker:**
+5.  **Para parar o ambiente Docker:**
 
     ```bash
     npm run dev:stop
