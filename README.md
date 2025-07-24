@@ -23,9 +23,8 @@ Este repositório reúne a estrutura dos **microfrontends do Bytebank Pro**, des
   - [🛠️ Qualidade de Código](#️-qualidade-de-código)
   - [🔌 Comunicação entre Microfrontends](#-comunicação-entre-microfrontends)
   - [📋 Pré-requisitos](#-pré-requisitos)
-  - [🐳 Desenvolvimento com Docker](#-desenvolvimento-com-docker)
-  - [🚀 Instruções de Desenvolvimento](#-instruções-de-desenvolvimento)
-  - [🚀 Implantação (Deploy)](#-implantação-deploy)
+  - [🚀 Ambiente de Desenvolvimento](#-ambiente-de-desenvolvimento)
+  - [☁️ Implantação (Deploy)](#️-implantação-deploy)
     - [URL Final do Projeto](#url-final-do-projeto)
   - [🔗 Links Úteis](#-links-úteis)
   - [💡 Melhorias Futuras](#-melhorias-futuras)
@@ -215,7 +214,7 @@ Para configurar e executar o projeto localmente, siga os passos abaixo. O ambien
 
 ---
 
-## 🚀 Implantação (Deploy)
+## ☁️ Implantação (Deploy)
 
 As aplicações de frontend (Shell e Microfrontends) são implantadas na **[Vercel](https://vercel.com/)**. A Vercel foi escolhida por sua integração nativa com monorepos e otimizações específicas para **Turborepo**.
 
