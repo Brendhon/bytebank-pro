@@ -168,19 +168,9 @@ Antes de começar, garanta que você tenha as seguintes ferramentas instaladas:
 
 ---
 
-## 🐳 Desenvolvimento com Docker
+## 🚀 Ambiente de Desenvolvimento
 
-O ambiente de desenvolvimento é gerenciado com **Docker Compose**, que orquestra a API GraphQL e o banco de dados MongoDB.
-
-Para subir o ambiente da API, execute:
-
-```bash
-npm run dev:api
-```
-
----
-
-## 🚀 Instruções de Desenvolvimento
+Para configurar e executar o projeto localmente, siga os passos abaixo. O ambiente é gerenciado com **Docker Compose** para a API e **Turborepo** para os microfrontends.
 
 1.  **Clone o repositório:**
 
@@ -195,20 +185,30 @@ npm run dev:api
     npm install
     ```
 
-3.  **Inicie o ambiente completo (API + MFEs):**
+3.  **Inicie o ambiente de desenvolvimento:**
 
-    ```bash
-    npm run dev
-    ```
+    - **Ambiente Completo (API + MFEs):**
+      Para subir a API GraphQL (com Docker) e todas as aplicações de frontend, execute:
 
-4.  **Para iniciar apenas os microfrontends:**
+      ```bash
+      npm run dev
+      ```
 
-    ```bash
-    npm run dev:front
-    ```
+    - **Apenas os Microfrontends:**
+      Se a API já estiver em execução ou se você estiver usando uma API remota, inicie apenas os MFEs:
 
-5.  **Para parar o ambiente Docker:**
+      ```bash
+      npm run dev:front
+      ```
 
+    - **Apenas a API (Docker):**
+      Para iniciar somente a API GraphQL e o banco de dados MongoDB com Docker, use:
+      ```bash
+      npm run dev:api
+      ```
+
+4.  **Parando o ambiente Docker:**
+    Para derrubar os contêineres da API, execute:
     ```bash
     npm run dev:stop
     ```
