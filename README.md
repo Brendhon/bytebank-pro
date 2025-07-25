@@ -214,7 +214,7 @@ Para configurar e executar o projeto localmente, siga os passos abaixo. O ambien
     ```
 
 5.  **Configuração de Variáveis de Ambiente:**
-    Para alterar as variáveis de ambiente dos projetos Angular, acesse a pasta `src/environments` dentro de cada projeto:
+    Para alterar as variáveis de ambiente dos projetos Angular (caso necessário), acesse a pasta `src/environments` dentro de cada projeto:
 
     ```bash
     # Exemplo para o projeto principal
