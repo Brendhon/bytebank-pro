@@ -200,7 +200,7 @@ export class AccountFormComponent {
     // Create account update object
     const accountData: Partial<IUser> = {
       name: this.formData().name,
-      email: this.formData().email
+      email: this.user()?.email || this.formData().email
     };
 
     // Add password if provided
