@@ -208,9 +208,25 @@ Para configurar e executar o projeto localmente, siga os passos abaixo. O ambien
 
 4.  **Parando o ambiente Docker:**
     Para derrubar os contêineres da API, execute:
+
     ```bash
     npm run dev:stop
     ```
+
+5.  **Configuração de Variáveis de Ambiente:**
+    Para alterar as variáveis de ambiente dos projetos Angular, acesse a pasta `src/environments` dentro de cada projeto:
+
+    ```bash
+    # Exemplo para o projeto principal
+    cd apps/shell/src/environments
+
+    # Exemplo para outros microfrontends
+    cd apps/dashboard/src/environments
+    cd apps/transactions/src/environments
+    cd apps/settings/src/environments
+    ```
+
+    Os arquivos `environment.development.ts` (desenvolvimento) e `environment.ts` (produção) contêm as configurações específicas de cada aplicação.
 
 ---
 
