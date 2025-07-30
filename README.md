@@ -47,6 +47,8 @@ O documento contendo os requisitos e objetivos do desafio original da pós-tech 
 - **Deploy:** [https://bytebank-pro.vercel.app](https://bytebank-pro.vercel.app)
 - **API GraphQL:** [https://bytebank-api.onrender.com/graphql](https://bytebank-api.onrender.com/graphql)
 
+> ⚠️ **Nota Importante sobre a API:** A API GraphQL está hospedada no Render utilizando o plano gratuito. Devido às limitações deste plano, a API pode demorar alguns segundos para responder na primeira requisição após um período de inatividade (quando o serviço "dorme"). As requisições subsequentes serão mais rápidas. Esta é uma limitação conhecida do plano gratuito do Render e não afeta a funcionalidade da aplicação.
+
 ---
 
 ## ✨ Visão Geral
